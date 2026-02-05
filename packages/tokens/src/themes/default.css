@@ -1,0 +1,12 @@
+/**
+ * Theme: Default (Light Mode)
+ * 
+ * Aktivuje light mode Foundation tokeny
+ */
+
+@import '../foundation/light/border.css';
+@import '../foundation/light/feedback.css';
+@import '../foundation/light/interaction.css';
+@import '../foundation/light/surface.css';
+@import '../foundation/light/text.css';
+@import '../foundation/light/background.css';

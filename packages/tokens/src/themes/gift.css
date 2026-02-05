@@ -1,0 +1,18 @@
+/**
+ * Theme: Gift
+ * 
+ * Speciální theme - zatím placeholder
+ * TODO: Definovat gift theme tokeny
+ */
+
+@import '../foundation/light/border.css';
+@import '../foundation/light/feedback.css';
+@import '../foundation/light/interaction.css';
+@import '../foundation/light/surface.css';
+@import '../foundation/light/text.css';
+@import '../foundation/light/background.css';
+
+/* Gift theme overrides */
+:root {
+  /* TODO: Add gift-specific overrides */
+}

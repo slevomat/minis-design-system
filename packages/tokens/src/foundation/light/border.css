@@ -1,0 +1,12 @@
+/**
+ * Foundation / Light Mode - Border Colors
+ */
+
+:root {
+  --color-border: #cbccce;
+  --color-border-focus: #00b2e5;
+  --color-border-invalid: #e8472a;
+  --color-border-strong: #616266;
+  --color-border-subtle: #e3e4e6;
+  --color-border-valid: #1aad17;
+}

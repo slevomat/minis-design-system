@@ -1,0 +1,14 @@
+/**
+ * Foundation / Light Mode - Feedback Colors
+ */
+
+:root {
+  --color-feedback-error: #d2381d;
+  --color-feedback-error-light: #ffefec;
+  --color-feedback-info: #006eb9;
+  --color-feedback-info-light: #e6f7fc;
+  --color-feedback-success: #088107;
+  --color-feedback-success-light: #e9fce9;
+  --color-feedback-warning: #ffa400;
+  --color-feedback-warning-light: #fff3e0;
+}

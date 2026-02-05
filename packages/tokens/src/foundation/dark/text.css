@@ -1,0 +1,16 @@
+/**
+ * Foundation / Dark Mode - Text Colors
+ */
+
+:root {
+  /* Accent Text */
+  --color-text-accent-attention: #ffd666;
+  --color-text-accent-danger: #f37b5f;
+  --color-text-accent-link: #00b2e5;
+  --color-text-accent-link-hover: #008cc7;
+  --color-text-accent-positive: #66dd66;
+
+  /* Primary & Secondary Text */
+  --color-text-primary: #f1f3f5;
+  --color-text-secondary: #8f8f8f;
+}

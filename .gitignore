@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.turbo/
+.vite/
+storybook-static/
+*.log
+.DS_Store
+.env
+.env.local
+coverage/

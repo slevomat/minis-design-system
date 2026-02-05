@@ -1,0 +1,22 @@
+{
+  "name": "@minis/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./foundation": "./dist/foundation.css",
+    "./foundation/light": "./dist/foundation/light.css",
+    "./foundation/dark": "./dist/foundation/dark.css",
+    "./layout": "./dist/layout.css",
+    "./breakpoints": "./dist/breakpoints.css",
+    "./themes/default": "./dist/themes/default.css",
+    "./themes/gift": "./dist/themes/gift.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js"
+  }
+}

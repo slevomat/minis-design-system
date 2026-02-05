@@ -1,0 +1,22 @@
+/**
+ * Mini*S Design Tokens - Main Entry
+ * 
+ * Imports Foundation (light mode), Layout, and Breakpoints
+ * For dark mode, import './foundation/dark.css' instead
+ */
+
+/* Foundation - Light Mode */
+@import './foundation/light/border.css';
+@import './foundation/light/feedback.css';
+@import './foundation/light/interaction.css';
+@import './foundation/light/surface.css';
+@import './foundation/light/text.css';
+@import './foundation/light/background.css';
+
+/* Layout */
+@import './layout/spacing.css';
+@import './layout/border.css';
+@import './layout/elevation.css';
+
+/* Breakpoints */
+@import './breakpoints/breakpoints.css';

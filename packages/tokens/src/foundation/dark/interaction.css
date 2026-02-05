@@ -1,0 +1,45 @@
+/**
+ * Foundation / Dark Mode - Interaction Colors
+ */
+
+:root {
+  /* CTA Buy */
+  --color-interaction-cta-buy-accent: #ffffff;
+  --color-interaction-cta-buy-border: #088107;
+  --color-interaction-cta-buy-surface: #088107;
+  --color-interaction-cta-buy-hover-accent: #ffffff;
+  --color-interaction-cta-buy-hover-border: #136110;
+  --color-interaction-cta-buy-hover-surface: #136110;
+
+  /* Danger */
+  --color-interaction-danger-accent: #f37b5f;
+  --color-interaction-danger-border: #f37b5f;
+  --color-interaction-danger-surface: rgba(255, 255, 255, 0);
+  --color-interaction-danger-hover-accent: #f37b5f;
+  --color-interaction-danger-hover-border: #f37b5f;
+  --color-interaction-danger-hover-surface: #5c0a0a;
+
+  /* Primary */
+  --color-interaction-primary-accent: #ffffff;
+  --color-interaction-primary-border: #006eb9;
+  --color-interaction-primary-surface: #006eb9;
+  --color-interaction-primary-hover-accent: #ffffff;
+  --color-interaction-primary-hover-border: #005685;
+  --color-interaction-primary-hover-surface: #005685;
+
+  /* Secondary */
+  --color-interaction-secondary-accent: #ffffff;
+  --color-interaction-secondary-border: #cbccce;
+  --color-interaction-secondary-surface: #51585d;
+  --color-interaction-secondary-hover-accent: #ffffff;
+  --color-interaction-secondary-hover-border: #8f8f8f;
+  --color-interaction-secondary-hover-surface: #363b3e;
+
+  /* Tertiary */
+  --color-interaction-tertiary-accent: #00b2e5;
+  --color-interaction-tertiary-border: rgba(255, 255, 255, 0);
+  --color-interaction-tertiary-surface: rgba(255, 255, 255, 0);
+  --color-interaction-tertiary-hover-accent: #00b2e5;
+  --color-interaction-tertiary-hover-border: #8f8f8f;
+  --color-interaction-tertiary-hover-surface: #333333;
+}

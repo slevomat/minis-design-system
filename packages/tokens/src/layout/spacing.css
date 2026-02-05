@@ -1,0 +1,29 @@
+/**
+ * Layout - Spacing
+ * Responsive spacing tokens
+ */
+
+:root {
+  /* Basic Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* Inset (Padding) */
+  --spacing-inset-xs: 4px;
+  --spacing-inset-sm: 8px;
+  --spacing-inset-md: 12px;
+  --spacing-inset-lg: 16px;
+  --spacing-inset-xl: 24px;
+
+  /* Stack (Margin) */
+  --spacing-stack-xs: 4px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 24px;
+  --spacing-stack-xl: 32px;
+}
