@@ -16,6 +16,10 @@ minis-design-system/
     └── examples/        # Working code examples
 ```
 
+### Related: Figma Plugins
+
+Figma plugins for Mini*S design-to-code workflow: [github.com/slevomat/figma-plugins](https://github.com/slevomat/figma-plugins)
+
 ## 🚀 Quick Start
 
 ```bash
