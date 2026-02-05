@@ -65,6 +65,8 @@ pnpm add @minis/components
 
 ## 🔄 Workflow: Figma → Code
 
+To export Tokens, use Mini*S tokens exporter from [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins). 
+
 ### 1. Update Tokens
 ```bash
 # Export CSS from Figma
