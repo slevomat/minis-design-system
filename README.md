@@ -1,6 +1,6 @@
 # Mini*S Design System
 
-Modern Web Components design system built with Lit + TypeScript.
+Modern Web Components design system built with Lit + TypeScript, designed for **AI-agent readiness** with structured prompts and instructions for seamless AI-assisted development.
 
 ## 🏗️ Project Structure
 
@@ -9,8 +9,11 @@ minis-design-system/
 ├── packages/
 │   ├── tokens/          # Design tokens (CSS)
 │   └── components/      # Web Components (Lit)
-└── apps/
-    └── storybook/       # Documentation
+├── apps/
+│   └── storybook/       # Interactive documentation
+└── docs/
+    ├── ai-prompts/      # AI agent instructions & prompts
+    └── examples/        # Working code examples
 ```
 
 ## 🚀 Quick Start
@@ -123,14 +126,53 @@ Build static docs:
 pnpm build-storybook
 ```
 
-## 🤖 AI-Powered Prototyping
+### Docs Structure
 
-See `docs/ai-prompts/` for AI-friendly component documentation:
-- **Components** - Individual UI elements
-- **Patterns** - Composable UI patterns
-- **Templates** - Full page layouts
+```
+docs/
+├── ai-prompts/              # AI agent instructions & prompts
+│   ├── index.md             # Main entry point for AI tools
+│   ├── getting-started.md   # Quick start guide for AI agents
+│   ├── components/          # Component-specific AI instructions
+│   │   ├── README.md        # Components overview
+│   │   └── button.md        # Button component prompt
+│   ├── patterns/            # Composable UI patterns
+│   │   └── README.md        # Patterns overview
+│   └── templates/           # Full page layout templates
+│       └── README.md        # Templates overview
+└── examples/                # Working code examples
+    └── simple-landing.html  # Example landing page
+```
 
-Perfect for use with Cursor, Claude Code, and other AI tools.
+## 🤖 AI-Agent Readiness
+
+Mini*S is designed with **AI-first documentation** - structured prompts and instruction sets that enable AI agents (Cursor, Claude Code, GitHub Copilot, etc.) to generate consistent, design-system-compliant code.
+
+### AI Prompts Library (`docs/ai-prompts/`)
+
+- **Components** - Individual UI elements with props, variants, and usage examples
+- **Patterns** - Composable UI patterns combining multiple components
+- **Templates** - Full page layouts and structures
+
+### How AI Agents Use Mini*S
+
+1. **Load context** - AI reads the relevant `.md` instruction file
+2. **Understand tokens** - AI learns available design tokens and CSS variables
+3. **Generate code** - AI produces code that follows Mini*S conventions
+4. **Stay consistent** - All generated code uses the same token system
+
+### Example AI Workflow
+
+```
+# In Cursor or Claude Code
+"Create a login form using Mini*S components and tokens"
+
+# AI will:
+# 1. Reference docs/ai-prompts/components/
+# 2. Use @minis/tokens CSS variables
+# 3. Generate <minis-button> and other components
+# 4. Follow established patterns
+```
 
 ## 📄 License
 
