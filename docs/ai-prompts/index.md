@@ -7,6 +7,7 @@ Complete guide for using Mini*S with AI code generation tools (Cursor, Claude Co
 ### 📦 Components
 Individual UI elements with props and variants.
 
+- [Alert](./components/alert.md) - Contextual feedback: notice, success, error, warning
 - [Button](./components/button.md) - Primary actions, variants, sizes, icon support, counter pill
 - [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
 

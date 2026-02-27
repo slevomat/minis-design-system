@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/web-components';
+import { html } from 'lit';
 
 const preview: Preview = {
   decorators: [
@@ -9,7 +10,17 @@ const preview: Preview = {
       } else {
         document.documentElement.removeAttribute('data-mode');
       }
-      return story();
+      return html`
+        <div style="
+          background: var(--color-background);
+          color: var(--color-text-primary);
+          padding: 24px;
+          min-height: 100%;
+          box-sizing: border-box;
+        ">
+          ${story()}
+        </div>
+      `;
     },
   ],
   parameters: {

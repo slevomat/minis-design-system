@@ -1,4 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
+import { html } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+
+/** Wrap a raw HTML string so Storybook docs can render it correctly. */
+const r = (s: string) => html`${unsafeHTML(s)}`;
 
 const meta: Meta = {
   title: 'Design Tokens',
@@ -35,7 +40,7 @@ const hr = `<hr style="border:none;border-top:1px solid var(--color-border,#cbcc
 
 export const Overview: Story = {
   name: 'Overview',
-  render: () => `
+  render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Design Tokens</h1>
       <p>Design tokens are the atomic values of our design system — named entities that store visual attributes. They create a <strong>single source of truth</strong> for colors, typography, spacing, and other design decisions across all platforms.</p>
@@ -76,12 +81,12 @@ export const Overview: Story = {
   border-radius: var(--border-radius-md);
 }</code></pre>
     </div>
-  `,
+  `),
 };
 
 export const Colors: Story = {
   name: 'Colors',
-  render: () => `
+  render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Colors — Foundation Tokens</h1>
       <p>These are the <strong>semantic color tokens</strong> you should use in product code. They automatically adapt to the active theme (Classic / Gift) and mode (Light / Dark).</p>
@@ -157,12 +162,12 @@ export const Colors: Story = {
         </tbody>
       </table>
     </div>
-  `,
+  `),
 };
 
 export const Palette: Story = {
   name: 'Color Palette',
-  render: () => `
+  render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Color Palette — Primitives</h1>
       <p>Raw OKLCH color primitives. These form the foundation of all semantic tokens. <strong>Do not use these directly in product code</strong> — use Foundation tokens instead.</p>
@@ -296,12 +301,12 @@ export const Palette: Story = {
         ${paletteRow('--color-core-transparent', 'oklch(1 0 0 / 0)')}
       </tbody></table>
     </div>
-  `,
+  `),
 };
 
 export const Spacing: Story = {
   name: 'Spacing & Layout',
-  render: () => `
+  render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Spacing &amp; Layout</h1>
 
@@ -387,12 +392,12 @@ export const Spacing: Story = {
         </tbody>
       </table>
     </div>
-  `,
+  `),
 };
 
 export const Typography: Story = {
   name: 'Typography',
-  render: () => `
+  render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Typography Tokens</h1>
 
@@ -447,5 +452,133 @@ export const Typography: Story = {
         </tbody>
       </table>
     </div>
-  `,
+  `),
+};
+
+export const TextStyles: Story = {
+  name: 'Text Styles',
+  render: () => r(`
+    <div style="max-width:860px;font-family:var(--typography-font-family-sans,Inter,sans-serif);line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:32px;font-weight:600;margin:0 0 8px">Text Styles</h1>
+      <p style="font-size:16px;font-weight:400;margin:0 0 40px;color:var(--color-text-secondary,#666)">Composite text styles combining size, weight, and line-height. Responsive sizes change at breakpoints.</p>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Poster</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Big and even bigger typography elements. Usually claims.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec (desktop)</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="${td}"><strong>Mega poster</strong></td>
+            <td style="${td}"><code>--typography-mega-poster-size</code></td>
+            <td style="${td}">40px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">32px tablet · 24px mobile</span></td>
+            <td style="${td}"><span style="font-size:var(--typography-mega-poster-size,40px);font-weight:600;line-height:1.25;display:block">Mega poster</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Poster</strong></td>
+            <td style="${td}"><code>--typography-poster-size</code></td>
+            <td style="${td}">32px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">32px tablet · 24px mobile</span></td>
+            <td style="${td}"><span style="font-size:var(--typography-poster-size,32px);font-weight:600;line-height:1.25;display:block">Poster</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Headlines</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Structural headings for sections and content hierarchy.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec (desktop)</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="${td}"><strong>Heading / large</strong></td>
+            <td style="${td}"><code>--typography-heading-large-size</code></td>
+            <td style="${td}">24px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">24px tablet · 20px mobile</span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-large-size,24px);font-weight:600;line-height:1.25;display:block">Heading large</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Heading / medium</strong></td>
+            <td style="${td}"><code>--typography-heading-medium-size</code></td>
+            <td style="${td}">20px / 1.33 / medium<br><span style="color:var(--color-text-secondary,#666);font-size:12px">20px tablet · 18px mobile</span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-medium-size,20px);font-weight:500;line-height:1.33;display:block">Heading medium</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Heading / small</strong></td>
+            <td style="${td}"><code>--typography-heading-small-size</code></td>
+            <td style="${td}">18px / 1.38 / medium<br><span style="color:var(--color-text-secondary,#666);font-size:12px">18px tablet · 16px mobile</span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-small-size,18px);font-weight:500;line-height:1.38;display:block">Heading small</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Body</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Main group for all readable text. Same size across all breakpoints.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Tokens</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="${td}"><strong>Body / default</strong></td>
+            <td style="${td}"><code>--typography-size-md</code></td>
+            <td style="${td}">16px / 1.5 / regular</td>
+            <td style="${td}"><span style="font-size:var(--typography-size-md,16px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Body / small</strong></td>
+            <td style="${td}"><code>--typography-size-sm</code></td>
+            <td style="${td}">14px / 1.5 / regular</td>
+            <td style="${td}"><span style="font-size:var(--typography-size-sm,14px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Caption</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Small text for UI elements like pills, labels, descriptions. Same size across all breakpoints.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Tokens</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="${td}"><strong>Caption / S</strong></td>
+            <td style="${td}"><code>--typography-size-sm</code></td>
+            <td style="${td}">14px / 1.5 / regular</td>
+            <td style="${td}"><span style="font-size:var(--typography-size-sm,14px);font-weight:400;line-height:1.5;display:block">Caption small text</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Caption / XS</strong></td>
+            <td style="${td}"><code>--typography-size-xs</code></td>
+            <td style="${td}">12px / 1.33 / regular</td>
+            <td style="${td}"><span style="font-size:var(--typography-size-xs,12px);font-weight:400;line-height:1.33;display:block">Caption extra small text</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Caption / XXS</strong></td>
+            <td style="${td}"><code>--typography-size-2xs</code></td>
+            <td style="${td}">10px / 1.4 / regular</td>
+            <td style="${td}"><span style="font-size:var(--typography-size-2xs,10px);font-weight:400;line-height:1.4;display:block">Caption extra extra small text</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 16px">Usage</h2>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;font-size:13px"><code>/* Poster */
+.claim { font-size: var(--typography-poster-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+
+/* Heading / large */
+h1 { font-size: var(--typography-heading-large-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+
+/* Heading / medium */
+h2 { font-size: var(--typography-heading-medium-size); font-weight: var(--typography-weight-medium); line-height: 1.33; }
+
+/* Body / default */
+p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-regular); line-height: 1.5; }
+
+/* Caption */
+.label { font-size: var(--typography-size-xs); font-weight: var(--typography-weight-regular); line-height: 1.33; }</code></pre>
+    </div>
+  `),
 };

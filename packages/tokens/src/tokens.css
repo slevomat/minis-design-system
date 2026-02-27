@@ -493,6 +493,12 @@
   --container-narrow-padding: var(--linear-sp-linear-8);
   --container-narrow-width: 100000px;
   --elevation-none: 0px;
+  /* Typography composite — desktop (default) */
+  --typography-mega-poster-size: var(--typography-size-4xl); /* 40px */
+  --typography-poster-size: var(--typography-size-3xl);      /* 32px */
+  --typography-heading-large-size: var(--typography-size-2xl); /* 24px */
+  --typography-heading-medium-size: var(--typography-size-xl); /* 20px */
+  --typography-heading-small-size: var(--typography-size-lg);  /* 18px */
 }
 
 @media (max-width: 408px) {
@@ -504,6 +510,12 @@
     --spacing-layout-xl: var(--linear-sp-linear-8);
     --container-padding: var(--linear-sp-linear-2);
     --container-narrow-padding: var(--linear-sp-linear-2);
+    /* Typography composite — mobile */
+    --typography-mega-poster-size: var(--typography-size-2xl); /* 24px */
+    --typography-poster-size: var(--typography-size-2xl);      /* 24px */
+    --typography-heading-large-size: var(--typography-size-xl); /* 20px */
+    --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
+    --typography-heading-small-size: var(--typography-size-md);  /* 16px */
   }
 }
 
@@ -516,6 +528,12 @@
     --spacing-layout-xl: var(--linear-sp-linear-8);
     --container-padding: var(--linear-sp-linear-2);
     --container-narrow-padding: var(--linear-sp-linear-2);
+    /* Typography composite — mobile */
+    --typography-mega-poster-size: var(--typography-size-2xl); /* 24px */
+    --typography-poster-size: var(--typography-size-2xl);      /* 24px */
+    --typography-heading-large-size: var(--typography-size-xl); /* 20px */
+    --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
+    --typography-heading-small-size: var(--typography-size-md);  /* 16px */
   }
 }
 
@@ -528,6 +546,12 @@
     --spacing-layout-xl: var(--linear-sp-linear-12);
     --container-padding: var(--linear-sp-linear-4);
     --container-narrow-padding: var(--linear-sp-linear-4);
+    /* Typography composite — tablet */
+    --typography-mega-poster-size: var(--typography-size-3xl); /* 32px */
+    --typography-poster-size: var(--typography-size-3xl);      /* 32px */
+    --typography-heading-large-size: var(--typography-size-2xl); /* 24px */
+    --typography-heading-medium-size: var(--typography-size-xl); /* 20px */
+    --typography-heading-small-size: var(--typography-size-lg);  /* 18px */
   }
 }
 
