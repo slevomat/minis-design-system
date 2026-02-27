@@ -1,6 +1,17 @@
 import type { Preview } from '@storybook/web-components';
 
 const preview: Preview = {
+  decorators: [
+    (story, context) => {
+      const theme = context.globals.theme || 'light';
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-mode', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-mode');
+      }
+      return story();
+    },
+  ],
   parameters: {
     options: {
       storySort: {
@@ -13,19 +24,7 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-    backgrounds: {
-      default: 'light',
-      values: [
-        {
-          name: 'light',
-          value: '#FFFFFF',
-        },
-        {
-          name: 'dark',
-          value: '#000000',
-        },
-      ],
-    },
+    backgrounds: { disable: true },
   },
   globalTypes: {
     theme: {

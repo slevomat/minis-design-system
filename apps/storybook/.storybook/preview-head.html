@@ -2,15 +2,42 @@
 <link rel="stylesheet" href="/tokens/tokens.css">
 
 <script>
-  // Theme switcher: toggle data-theme attribute on <html>
-  const channel = window.__STORYBOOK_ADDONS_CHANNEL__;
-
-  if (channel) {
-    channel.on('updateGlobals', ({ globals }) => {
-      const theme = globals.theme || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-    });
+  function applyTheme(theme) {
+    sessionStorage.setItem('minis-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-mode', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-mode');
+    }
   }
+
+  // Apply persisted theme immediately (before channel fires), so docs pages
+  // get the right theme on initial paint without waiting for setGlobals.
+  applyTheme(sessionStorage.getItem('minis-theme') || 'light');
+
+  // Wait for Storybook channel to be available
+  const waitForChannel = setInterval(() => {
+    const channel = window.__STORYBOOK_ADDONS_CHANNEL__;
+    if (!channel) return;
+    clearInterval(waitForChannel);
+
+    // Apply initial theme when globals are first set (page load / docs page)
+    channel.on('setGlobals', ({ globals }) => {
+      applyTheme(globals.theme || 'light');
+    });
+
+    // Apply on toolbar click
+    channel.on('globalsUpdated', ({ globals }) => {
+      applyTheme(globals.theme || 'light');
+    });
+
+    // Re-apply after docs page renders (docs iframe re-mounts)
+    channel.on('docsRendered', () => {
+      // Re-read current globals from the last known state
+      const stored = sessionStorage.getItem('minis-theme');
+      if (stored) applyTheme(stored);
+    });
+  }, 50);
 </script>
 
 <style>
