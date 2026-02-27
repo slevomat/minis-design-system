@@ -610,6 +610,14 @@
   --alert-padding-y: var(--spacing-layout-xs);
   --alert-gap: var(--spacing-layout-xs);
 
+  /* Message */
+  --message-surface: var(--color-surface-primary);
+  --message-border: var(--color-border);
+  --message-border-radius: var(--border-radius-md);
+  --message-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.08), 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  --message-padding: var(--linear-sp-linear-2);
+  --message-gap: var(--linear-sp-linear-2);
+
   /* Input */
   --input-border: var(--color-border);
   --input-border-hover: var(--color-border-focus);
