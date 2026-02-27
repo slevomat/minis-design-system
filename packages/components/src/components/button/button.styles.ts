@@ -188,17 +188,19 @@ export const buttonStyles = css`
   }
 
   /* =====================
-     COUNTER PILL
+     COUNTER PILL WRAPPERS
+     Pill sizing/appearance is owned by <minis-pill-counter>.
+     Button only controls placement.
      ===================== */
 
-  /* Inline pill (icon + label variant) — sits after text with extra left gap */
+  /* Inline pill (icon + label) — extra left gap before the pill */
   .pill-wrapper {
     display: inline-flex;
     align-items: center;
     padding-left: var(--fibonachi-sp-fib-5, 8px);
   }
 
-  /* Floating pill (icon-only variant) — absolute top-right corner */
+  /* Floating pill (icon-only) — absolute top-right corner */
   .pill-wrapper--floating {
     position: absolute;
     top: var(--pixel-px-3, 3px);
@@ -206,32 +208,9 @@ export const buttonStyles = css`
     padding-left: 0;
   }
 
-  /* Small size: floating pill offset is tighter */
+  /* sm button: tighter floating offset */
   :host([size="sm"]) .pill-wrapper--floating {
     top: var(--pixel-px-2, 2px);
     right: var(--pixel-px-2, 2px);
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--pixel-px-15, 15px);
-    padding: var(--pixel-px-2, 2px) var(--pixel-px-4, 4px);
-    border-radius: var(--radius-radius-full, 9999px);
-    background: var(--color-core-white, #fff);
-    color: var(--color-text-primary, #000);
-    font-family: Arial, sans-serif;
-    font-size: var(--pixel-px-12, 12px);
-    font-weight: var(--typography-weight-bold, 700);
-    line-height: var(--pixel-px-11, 11px);
-  }
-
-  /* Small pill for floating (icon-only) variant */
-  .pill-wrapper--floating .pill {
-    min-width: var(--pixel-px-11, 11px);
-    padding: var(--pixel-px-2, 2px) var(--pixel-px-2, 2px);
-    font-size: var(--pixel-px-10, 10px);
-    line-height: var(--pixel-px-8, 8px);
   }
 `;

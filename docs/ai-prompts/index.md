@@ -7,7 +7,8 @@ Complete guide for using Mini*S with AI code generation tools (Cursor, Claude Co
 ### 📦 Components
 Individual UI elements with props and variants.
 
-- [Button](./components/button.md) - Primary actions, variants, states
+- [Button](./components/button.md) - Primary actions, variants, sizes, icon support, counter pill
+- [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
 
 [→ All Components](./components/README.md)
 
@@ -69,4 +70,4 @@ All components/patterns/templates use Mini*S tokens:
 
 ---
 
-**Last updated:** 2025-01-23
+**Last updated:** 2026-02-27

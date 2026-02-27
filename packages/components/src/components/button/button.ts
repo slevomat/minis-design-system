@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { buttonStyles } from './button.styles.js';
+import '../pill-counter/pill-counter.js';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'cta-buy' | 'transparent';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -71,10 +72,16 @@ export class MinisButton extends LitElement {
         <slot name="icon"></slot>
         ${!this.iconOnly ? html`<slot></slot>` : ''}
         ${hasCounter && !this.iconOnly
-          ? html`<span class="pill-wrapper"><span class="pill">${this.counter}</span></span>`
+          ? html`
+              <span class="pill-wrapper">
+                <minis-pill-counter size="sm">${this.counter}</minis-pill-counter>
+              </span>`
           : ''}
         ${hasCounter && this.iconOnly
-          ? html`<span class="pill-wrapper pill-wrapper--floating"><span class="pill">${this.counter}</span></span>`
+          ? html`
+              <span class="pill-wrapper pill-wrapper--floating">
+                <minis-pill-counter size="xs">${this.counter}</minis-pill-counter>
+              </span>`
           : ''}
       </button>
     `;
