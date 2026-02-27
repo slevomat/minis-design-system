@@ -1,0 +1,608 @@
+/**
+ * Minis Design System - Global Tokens
+ * Generated from Figma Variables
+ * Export date: 2026-02-27T15:37:05.947Z
+ */
+
+/* ========================================
+   PRIMITIVES (Hidden in Figma Library)
+   ======================================== */
+
+:root {
+  /* .Primitives */
+  --color-black-a-black-a10: oklch(0 0 0 / 0.1);
+  --color-black-a-black-a100: var(--color-core-black);
+  --color-black-a-black-a5: oklch(0 0 0 / 0.05);
+  --color-black-a-black-a60: oklch(0 0 0 / 0.6);
+  --color-blue-25: oklch(0.34 0.08 239);
+  /* Heritage reference: .Heritage/Color/blue/blue-c */
+  --color-blue-35: oklch(0.43 0.1 242);
+  /* Heritage reference: .Heritage/Color/blue/blue-t */
+  --color-blue-45: oklch(0.53 0.14 249);
+  --color-blue-55: oklch(0.61 0.13 237);
+  /* Heritage reference: .Heritage/Color/blue/blue-h */
+  --color-blue-65: oklch(0.71 0.14 227);
+  --color-blue-75: oklch(0.8 0.13 228);
+  /* Heritage reference: .Heritage/Color/blue/blue-l */
+  --color-blue-85: oklch(0.83 0.09 221);
+  /* Heritage reference: .Heritage/Color/calendar/calendar-blue-2 */
+  --color-blue-90: oklch(0.88 0.07 218);
+  /* Heritage reference: .Heritage/Color/blue/blue-bgl */
+  --color-blue-95: oklch(0.97 0.02 217);
+  --color-blue-99: oklch(0.99 0 265);
+  --color-core-black: oklch(0 0 0);
+  --color-core-transparent: oklch(1 0 0 / 0);
+  --color-core-white: oklch(1 0 0);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-food */
+  --color-gold-25: oklch(0.56 0.12 111);
+  /* Heritage reference: .Heritage/Color/uncategorized/gold */
+  --color-gold-35: oklch(0.61 0.12 83);
+  /* Heritage reference: .Heritage/Color/premium club/color-premium */
+  --color-gold-45: oklch(0.67 0.13 78);
+  --color-gold-55: oklch(0.75 0.12 84);
+  --color-gold-65: oklch(0.84 0.13 93);
+  --color-gold-75: oklch(0.89 0.11 94);
+  --color-gold-85: oklch(0.93 0.07 91);
+  --color-gold-95: oklch(0.98 0.02 89);
+  --color-green-25: oklch(0.36 0.11 142);
+  /* Heritage reference: .Heritage/Color/green/green-c */
+  --color-green-35: oklch(0.43 0.13 142);
+  /* Heritage reference: .Heritage/Color/green/green-d */
+  --color-green-45: oklch(0.52 0.17 143);
+  /* Heritage reference: .Heritage/Color/green/green-t */
+  --color-green-48: oklch(0.55 0.18 143);
+  --color-green-55: oklch(0.65 0.21 143);
+  /* Heritage reference: .Heritage/Color/green/green-h */
+  --color-green-65: oklch(0.68 0.23 143);
+  --color-green-75: oklch(0.8 0.19 144);
+  --color-green-85: oklch(0.87 0.14 144);
+  /* Heritage reference: .Heritage/Color/messages/message-success-bg */
+  --color-green-95: oklch(0.97 0.03 145);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-primary */
+  --color-grey-10: oklch(0.23 0.01 275);
+  /* Heritage reference: .Heritage/Color/uncategorized/color-text */
+  --color-grey-20: oklch(0.32 0 0);
+  /* Heritage reference: .Heritage/Color/dark mode/color-dark-background-secondary */
+  --color-grey-25: oklch(0.35 0.01 234);
+  --color-grey-30: oklch(0.41 0.01 275);
+  /* Heritage reference: .Heritage/Color/dark mode/color-dark-border */
+  --color-grey-35: oklch(0.46 0.01 239);
+  /* Heritage reference: .Heritage/Color/dark mode/color-dark-hover */
+  --color-grey-40: oklch(0.5 0.01 275);
+  /* Heritage reference: .Heritage/Color/grey/grey-t */
+  --color-grey-50: oklch(0.53 0.01 286);
+  /* Heritage reference: .Heritage/Color/grey/grey-tl */
+  --color-grey-60: oklch(0.65 0 0);
+  --color-grey-70: oklch(0.73 0 146);
+  /* Heritage reference: .Heritage/Color/grey/grey-h */
+  --color-grey-80: oklch(0.85 0 265);
+  /* Heritage reference: .Heritage/Color/grey/grey-l */
+  --color-grey-90: oklch(0.92 0 265);
+  /* Heritage reference: .Heritage/Color/grey/grey-bg */
+  --color-grey-95: oklch(0.96 0 248);
+  /* for ultra-light backgrounds */
+  --color-grey-98: oklch(0.99 0 265);
+  --color-orange-25: oklch(0.42 0.14 37);
+  --color-orange-35: oklch(0.52 0.18 35);
+  /* Heritage reference: .Heritage/Color/uncategorized/gift-orange */
+  --color-orange-45: oklch(0.59 0.19 38);
+  /* Heritage reference: .Heritage/Color/uncategorized/orange */
+  --color-orange-55: oklch(0.66 0.16 55);
+  /* Heritage reference: .Heritage/Color/uncategorized/yellow-icon */
+  --color-orange-65: oklch(0.76 0.16 70);
+  /* Heritage reference: .Heritage/Color/uncategorized/yellow */
+  --color-orange-75: oklch(0.77 0.16 65);
+  --color-orange-85: oklch(0.84 0.1 60);
+  --color-orange-95: oklch(0.94 0.03 62);
+  --color-pink-25: oklch(0.39 0.13 15);
+  --color-pink-35: oklch(0.47 0.16 11);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-beauty */
+  --color-pink-45: oklch(0.56 0.2 20);
+  --color-pink-55: oklch(0.63 0.2 11);
+  /* Heritage reference: .Heritage/Color/uncategorized/pink */
+  --color-pink-65: oklch(0.69 0.2 17);
+  --color-pink-75: oklch(0.78 0.14 9);
+  --color-pink-85: oklch(0.85 0.08 6);
+  --color-pink-90: oklch(0.92 0.05 3);
+  --color-pink-95: oklch(0.97 0.02 4);
+  --color-purple-15: oklch(0.2 0.1 279);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-goods */
+  --color-purple-20: oklch(0.27 0.13 277);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-practical */
+  --color-purple-25: oklch(0.27 0.13 292);
+  --color-purple-35: oklch(0.39 0.22 287);
+  /* Heritage reference: .Heritage/Color/purple */
+  --color-purple-45: oklch(0.47 0.25 286);
+  --color-purple-55: oklch(0.54 0.24 291);
+  --color-purple-65: oklch(0.62 0.21 295);
+  --color-purple-75: oklch(0.72 0.17 297);
+  --color-purple-80: oklch(0.76 0.14 298);
+  --color-purple-85: oklch(0.82 0.1 299);
+  --color-purple-95: oklch(0.94 0.03 300);
+  --color-red-15: oklch(0.31 0.11 27);
+  --color-red-25: oklch(0.37 0.14 30);
+  /* Heritage reference: .Heritage/Color/map-colors/color-map-default */
+  --color-red-35: oklch(0.45 0.17 29);
+  /* Heritage reference: .Heritage/Color/uncategorized/red-bg */
+  --color-red-40: oklch(0.5 0.2 29);
+  /* Heritage reference: .Heritage/Color/uncategorized/red */
+  --color-red-45: oklch(0.57 0.19 32);
+  --color-red-55: oklch(0.63 0.2 33);
+  --color-red-65: oklch(0.66 0.19 33);
+  --color-red-75: oklch(0.71 0.15 34);
+  --color-red-85: oklch(0.83 0.08 36);
+  /* Heritage reference: .Heritage/Color/messages/message-warning-bg */
+  --color-red-95: oklch(0.96 0.02 30);
+  --color-white-a-white-a10: oklch(1 0 0 / 0.1);
+  --color-white-a-white-a100: var(--color-core-white);
+  --color-white-a-white-a5: oklch(1 0 0 / 0.05);
+  --color-yellow-25: oklch(0.55 0.12 75);
+  --color-yellow-35: oklch(0.68 0.14 74);
+  --color-yellow-45: oklch(0.79 0.17 70);
+  /* Heritage reference: .Heritage/Color/uncategorized/yellow-alert */
+  --color-yellow-55: oklch(0.83 0.17 81);
+  /* Heritage reference: .Heritage/Color/premium club/color-premium-text */
+  --color-yellow-65: oklch(0.86 0.16 84);
+  --color-yellow-75: oklch(0.89 0.14 89);
+  --color-yellow-85: oklch(0.94 0.1 96);
+  /* Heritage reference: .Heritage/Color/messages/message-info-bg */
+  --color-yellow-95: oklch(0.97 0.03 79);
+}
+
+:root {
+  /* .Scales */
+  --blur-blur-10: 10px;
+  --fibonachi-sp-fib-0: 0px;
+  --fibonachi-sp-fib-1: 1px;
+  --fibonachi-sp-fib-2: 2px;
+  --fibonachi-sp-fib-3: 3px;
+  --fibonachi-sp-fib-4: 5px;
+  --fibonachi-sp-fib-5: 8px;
+  --fibonachi-sp-fib-6: 13px;
+  --fibonachi-sp-fib-7: 21px;
+  --fibonachi-sp-fib-8: 34px;
+  --fibonachi-sp-fib-9: 55px;
+  --fibonachi-sp-fib-10: 89px;
+  --fibonachi-sp-fib-11: 144px;
+  --linear-sp-linear-0: 0px;
+  --linear-sp-linear-1: 4px;
+  --linear-sp-linear-2: 8px;
+  --linear-sp-linear-3: 12px;
+  --linear-sp-linear-4: 16px;
+  --linear-sp-linear-5: 20px;
+  --linear-sp-linear-6: 24px;
+  --linear-sp-linear-7: 28px;
+  --linear-sp-linear-8: 32px;
+  --linear-sp-linear-9: 36px;
+  --linear-sp-linear-10: 40px;
+  --linear-sp-linear-12: 48px;
+  --linear-sp-linear-14: 56px;
+  --linear-sp-linear-16: 64px;
+  --linear-sp-linear-18: 72px;
+  --pixel-px-0: 0px;
+  --pixel-px-1: 1px;
+  --pixel-px-2: 2px;
+  --pixel-px-3: 3px;
+  --pixel-px-4: 4px;
+  --pixel-px-5: 5px;
+  --pixel-px-6: 6px;
+  --pixel-px-7: 7px;
+  --pixel-px-8: 8px;
+  --pixel-px-9: 9px;
+  --pixel-px-10: 10px;
+  --pixel-px-11: 11px;
+  --pixel-px-12: 12px;
+  --pixel-px-13: 13px;
+  --pixel-px-14: 14px;
+  --pixel-px-16: 16px;
+  --pixel-px-18: 18px;
+  --pixel-px-20: 20px;
+  --pixel-px-22: 22px;
+  --pixel-px-24: 24px;
+  --pixel-px-26: 26px;
+  --pixel-px-28: 28px;
+  --pixel-px-30: 30px;
+  --pixel-px-32: 32px;
+  --pixel-px-40: 40px;
+  --pixel-px-48: 48px;
+  --radius-radius-0: 0px;
+  --radius-radius-2: 2px;
+  --radius-radius-4: 4px;
+  --radius-radius-8: 8px;
+  --radius-radius-12: 12px;
+  --radius-radius-16: 16px;
+  --radius-radius-24: 24px;
+  --radius-radius-32: 32px;
+  --radius-radius-full: 9999px;
+}
+
+:root {
+  /* Breakpoints */
+  --breakpoint-2xs: 360px;
+  --breakpoint-xs: 408px;
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1008px;
+  --breakpoint-xl: 1256px;
+  --breakpoint-2xl: 1480px;
+  --breakpoint-3xl: 1920px;
+  --breakpoint-4xl: 2560px;
+}
+
+:root {
+  /* Typography */
+  --typography-font-family-sans: Inter;
+  --typography-font-family-mono: SF Mono;
+  --typography-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --typography-line-height-percentage-100%: 1;
+  --typography-line-height-percentage-125%: 1.25;
+  --typography-line-height-percentage-130%: 1.3;
+  --typography-line-height-percentage-133%: 1.33;
+  --typography-line-height-percentage-138%: 1.38;
+  --typography-line-height-percentage-140%: 1.4;
+  --typography-line-height-percentage-143%: 1.43;
+  --typography-line-height-percentage-150%: 1.5;
+  --typography-line-height-percentage-157%: 1.57;
+  --typography-size-2xs: var(--pixel-px-10);
+  --typography-size-xs: var(--linear-sp-linear-3);
+  --typography-size-xs-plus: var(--fibonachi-sp-fib-6);
+  --typography-size-sm: var(--pixel-px-14);
+  --typography-size-md: var(--linear-sp-linear-4);
+  --typography-size-lg: var(--pixel-px-18);
+  --typography-size-xl: var(--linear-sp-linear-5);
+  --typography-size-2xl: var(--linear-sp-linear-6);
+  --typography-size-3xl: var(--linear-sp-linear-8);
+  --typography-size-4xl: var(--linear-sp-linear-10);
+  --typography-spacing-normal: 0px;
+  --typography-spacing-tight: -0.16px;
+  --typography-spacing-tighter: -0.32px;
+  --typography-spacing-wide: 0.4px;
+  --typography-spacing-wider: 0.8px;
+  --typography-weight-light: 300;
+  --typography-weight-regular: 400;
+  --typography-weight-medium: 500;
+  --typography-weight-semibold: 600;
+  --typography-weight-bold: 700;
+  --typography-weight-black: 900;
+}
+
+/* ========================================
+   SCHEMAS (Foundation colour mode schemas)
+   ======================================== */
+
+:root {
+  /* Schema - Classic (Light) */
+  --schemas-classic-interaction-primary-accent: var(--color-core-white);
+  --schemas-classic-interaction-primary-border: var(--color-blue-45);
+  --schemas-classic-interaction-primary-surface: var(--color-blue-45);
+  --schemas-classic-interaction-primary-hover-accent: var(--color-core-white);
+  --schemas-classic-interaction-primary-hover-border: var(--color-blue-35);
+  --schemas-classic-interaction-primary-hover-surface: var(--color-blue-35);
+  --schemas-classic-text-accent-link: var(--color-interaction-primary-surface);
+  --schemas-classic-text-accent-link-hover: var(--color-interaction-primary-hover-surface);
+  --schemas-classic-background: var(--color-blue-99);
+  --schemas-classic-surface-faded: var(--color-grey-95);
+  --schemas-classic-surface-primary: var(--color-core-white);
+
+  /* Schema - Gift (Light) */
+  --schemas-gift-interaction-primary-accent: var(--color-core-black);
+  --schemas-gift-interaction-primary-border: var(--schemas-gift-interaction-primary-surface);
+  --schemas-gift-interaction-primary-surface: var(--color-yellow-45);
+  --schemas-gift-interaction-primary-hover-accent: var(--color-core-white);
+  --schemas-gift-interaction-primary-hover-border: var(--schemas-gift-interaction-primary-hover-surface);
+  --schemas-gift-interaction-primary-hover-surface: var(--color-yellow-35);
+  --schemas-gift-text-accent-link: var(--schemas-gift-interaction-primary-surface);
+  --schemas-gift-text-accent-link-hover: var(--schemas-gift-interaction-primary-hover-surface);
+  --schemas-gift-background: var(--color-core-white);
+  --schemas-gift-surface-faded: var(--color-grey-95);
+  --schemas-gift-surface-primary: var(--color-core-white);
+}
+
+/* ========================================
+   THEME — default: Classic
+   ======================================== */
+
+:root {
+  --theme-interaction-primary-accent: var(--schemas-classic-interaction-primary-accent);
+  --theme-interaction-primary-border: var(--schemas-classic-interaction-primary-border);
+  --theme-interaction-primary-surface: var(--schemas-classic-interaction-primary-surface);
+  --theme-interaction-primary-hover-accent: var(--schemas-classic-interaction-primary-hover-accent);
+  --theme-interaction-primary-hover-border: var(--schemas-classic-interaction-primary-hover-border);
+  --theme-interaction-primary-hover-surface: var(--schemas-classic-interaction-primary-hover-surface);
+  --theme-surface-faded: var(--schemas-classic-surface-faded);
+  --theme-surface-primary: var(--schemas-classic-surface-primary);
+  --theme-text-accent-link: var(--schemas-classic-text-accent-link);
+  --theme-text-accent-link-hover: var(--schemas-classic-text-accent-link-hover);
+  --theme-background: var(--schemas-classic-background);
+}
+
+[data-theme="gift"] {
+  --theme-interaction-primary-accent: var(--schemas-gift-interaction-primary-accent);
+  --theme-interaction-primary-border: var(--schemas-gift-interaction-primary-border);
+  --theme-interaction-primary-surface: var(--schemas-gift-interaction-primary-surface);
+  --theme-interaction-primary-hover-accent: var(--schemas-gift-interaction-primary-hover-accent);
+  --theme-interaction-primary-hover-border: var(--schemas-gift-interaction-primary-hover-border);
+  --theme-interaction-primary-hover-surface: var(--schemas-gift-interaction-primary-hover-surface);
+  --theme-surface-faded: var(--schemas-gift-surface-faded);
+  --theme-surface-primary: var(--schemas-gift-surface-primary);
+  --theme-text-accent-link: var(--schemas-gift-text-accent-link);
+  --theme-text-accent-link-hover: var(--schemas-gift-text-accent-link-hover);
+  --theme-background: var(--schemas-gift-background);
+}
+
+/* ========================================
+   FOUNDATION — Light mode (default)
+   ======================================== */
+
+:root {
+  --color-border: var(--color-grey-80);
+  --color-border-focus: var(--color-blue-65);
+  --color-border-invalid: var(--color-red-55);
+  --color-border-strong: var(--color-grey-40);
+  --color-border-subtle: var(--color-grey-90);
+  --color-border-valid: var(--color-green-55);
+  --color-feedback-error: var(--color-red-45);
+  --color-feedback-error-light: var(--color-red-95);
+  --color-feedback-info: var(--color-blue-45);
+  --color-feedback-info-light: var(--color-blue-95);
+  --color-feedback-success: var(--color-green-45);
+  --color-feedback-success-light: var(--color-green-95);
+  --color-feedback-warning: var(--color-yellow-45);
+  --color-feedback-warning-light: var(--color-yellow-95);
+  --color-interaction-cta-buy-accent: var(--color-core-white);
+  --color-interaction-cta-buy-border: var(--color-green-45);
+  --color-interaction-cta-buy-surface: var(--color-green-45);
+  --color-interaction-cta-buy-hover-accent: var(--color-core-white);
+  --color-interaction-cta-buy-hover-border: var(--color-green-35);
+  --color-interaction-cta-buy-hover-surface: var(--color-green-35);
+  --color-interaction-danger-accent: var(--color-red-45);
+  --color-interaction-danger-border: var(--color-interaction-danger-accent);
+  --color-interaction-danger-surface: var(--color-core-white);
+  --color-interaction-danger-hover-accent: var(--color-red-35);
+  --color-interaction-danger-hover-border: var(--color-interaction-danger-hover-accent);
+  --color-interaction-danger-hover-surface: var(--color-red-95);
+  --color-interaction-primary-accent: var(--theme-interaction-primary-accent);
+  --color-interaction-primary-border: var(--theme-interaction-primary-surface);
+  --color-interaction-primary-surface: var(--theme-interaction-primary-surface);
+  --color-interaction-primary-hover-accent: var(--color-core-white);
+  --color-interaction-primary-hover-border: var(--color-blue-35);
+  --color-interaction-primary-hover-surface: var(--color-blue-35);
+  --color-interaction-secondary-accent: var(--color-core-black);
+  --color-interaction-secondary-border: var(--color-grey-80);
+  --color-interaction-secondary-surface: var(--color-core-white);
+  --color-interaction-secondary-hover-accent: var(--color-core-black);
+  --color-interaction-secondary-hover-border: var(--color-grey-80);
+  --color-interaction-secondary-hover-surface: var(--color-blue-95);
+  --color-interaction-tertiary-accent: var(--theme-interaction-primary-surface);
+  --color-interaction-tertiary-border: var(--color-core-transparent);
+  --color-interaction-tertiary-surface: var(--color-core-transparent);
+  --color-interaction-tertiary-hover-accent: var(--color-interaction-primary-hover-surface);
+  --color-interaction-tertiary-hover-border: var(--color-grey-80);
+  --color-interaction-tertiary-hover-surface: var(--color-blue-95);
+  --color-interaction-transparent-accent: var(--color-core-white);
+  --color-interaction-transparent-border: var(--color-core-white);
+  --color-interaction-transparent-surface: var(--color-black-a-black-a60);
+  --color-interaction-transparent-hover-accent: var(--color-core-black);
+  --color-interaction-transparent-hover-border: var(--color-interaction-transparent-hover-surface);
+  --color-interaction-transparent-hover-surface: var(--color-blue-95);
+  --color-surface-faded: var(--theme-surface-faded);
+  --color-surface-primary: var(--theme-surface-primary);
+  --color-text-accent-attention: var(--color-yellow-25);
+  --color-text-accent-danger: var(--color-red-45);
+  --color-text-accent-link: var(--theme-text-accent-link);
+  --color-text-accent-link-hover: var(--theme-text-accent-link-hover);
+  --color-text-accent-positive: var(--color-green-45);
+  --color-text-primary: var(--color-core-black);
+  --color-text-secondary: var(--color-grey-50);
+  /* Page background */
+  --color-background: var(--theme-background);
+}
+
+/* ========================================
+   FOUNDATION — Dark mode
+   ======================================== */
+
+[data-mode="dark"] {
+  /* Schema overrides for dark mode */
+  --schemas-classic-interaction-primary-accent: var(--color-core-white);
+  --schemas-classic-interaction-primary-border: var(--color-blue-45);
+  --schemas-classic-interaction-primary-surface: var(--color-blue-45);
+  --schemas-classic-interaction-primary-hover-accent: var(--color-core-white);
+  --schemas-classic-interaction-primary-hover-border: var(--color-blue-35);
+  --schemas-classic-interaction-primary-hover-surface: var(--color-blue-35);
+  --schemas-classic-text-accent-link: var(--color-blue-65);
+  --schemas-classic-text-accent-link-hover: var(--color-blue-75);
+  --schemas-classic-background: var(--color-core-black);
+  --schemas-classic-surface-faded: var(--color-grey-10);
+  --schemas-classic-surface-primary: var(--color-grey-20);
+
+  --schemas-gift-interaction-primary-accent: var(--color-core-black);
+  --schemas-gift-interaction-primary-surface: var(--color-yellow-45);
+  --schemas-gift-interaction-primary-hover-accent: var(--color-core-black);
+  --schemas-gift-interaction-primary-hover-surface: var(--color-yellow-35);
+  --schemas-gift-background: var(--color-core-black);
+  --schemas-gift-surface-faded: var(--color-grey-10);
+  --schemas-gift-surface-primary: var(--color-grey-20);
+
+  --color-border: var(--color-grey-60);
+  --color-border-focus: var(--color-blue-65);
+  --color-border-invalid: var(--color-red-75);
+  --color-border-strong: var(--color-grey-80);
+  --color-border-subtle: var(--color-grey-35);
+  --color-border-valid: var(--color-green-75);
+  --color-feedback-error: var(--color-red-65);
+  --color-feedback-error-light: var(--color-surface-faded);
+  --color-feedback-info: var(--color-blue-65);
+  --color-feedback-info-light: var(--color-surface-faded);
+  --color-feedback-success: var(--color-green-65);
+  --color-feedback-success-light: var(--color-surface-faded);
+  --color-feedback-warning: var(--color-yellow-65);
+  --color-feedback-warning-light: var(--color-surface-faded);
+  --color-interaction-cta-buy-accent: var(--color-core-white);
+  --color-interaction-cta-buy-border: var(--color-green-45);
+  --color-interaction-cta-buy-surface: var(--color-green-45);
+  --color-interaction-cta-buy-hover-accent: var(--color-core-white);
+  --color-interaction-cta-buy-hover-border: var(--color-green-35);
+  --color-interaction-cta-buy-hover-surface: var(--color-green-35);
+  --color-interaction-danger-accent: var(--color-red-85);
+  --color-interaction-danger-border: var(--color-interaction-danger-accent);
+  --color-interaction-danger-surface: var(--color-core-transparent);
+  --color-interaction-danger-hover-accent: var(--color-red-75);
+  --color-interaction-danger-hover-border: var(--color-interaction-danger-hover-accent);
+  --color-interaction-danger-hover-surface: var(--color-red-15);
+  --color-interaction-secondary-accent: var(--color-core-white);
+  --color-interaction-secondary-border: var(--color-grey-80);
+  --color-interaction-secondary-surface: var(--color-grey-35);
+  --color-interaction-secondary-hover-accent: var(--color-core-white);
+  --color-interaction-secondary-hover-border: var(--color-grey-60);
+  --color-interaction-secondary-hover-surface: var(--color-grey-25);
+  --color-interaction-tertiary-accent: var(--theme-text-accent-link);
+  --color-interaction-tertiary-border: var(--color-core-transparent);
+  --color-interaction-tertiary-surface: var(--color-core-transparent);
+  --color-interaction-tertiary-hover-accent: var(--theme-text-accent-link-hover);
+  --color-interaction-tertiary-hover-border: var(--color-grey-60);
+  --color-interaction-tertiary-hover-surface: var(--color-grey-20);
+  --color-text-accent-attention: var(--color-yellow-75);
+  --color-text-accent-danger: var(--color-red-85);
+  --color-text-accent-positive: var(--color-green-75);
+  --color-text-primary: var(--color-grey-95);
+  --color-text-secondary: var(--color-grey-60);
+}
+
+/* ========================================
+   LAYOUT (responsive — default breakpoint)
+   ======================================== */
+
+:root {
+  --border-radius-none: var(--radius-radius-0);
+  --border-radius-sm: var(--radius-radius-4);
+  --border-radius-md: var(--radius-radius-8);
+  --border-radius-lg: var(--radius-radius-12);
+  --border-radius-xl: var(--radius-radius-16);
+  --border-radius-full: var(--radius-radius-full);
+  --border-width-none: var(--pixel-px-0);
+  --border-width-thin: var(--pixel-px-1);
+  --spacing-layout-none: var(--linear-sp-linear-0);
+  --spacing-layout-xs: var(--linear-sp-linear-2);
+  --spacing-layout-sm: var(--linear-sp-linear-4);
+  --spacing-layout-md: var(--linear-sp-linear-6);
+  --spacing-layout-lg: var(--linear-sp-linear-8);
+  --spacing-layout-xl: var(--linear-sp-linear-12);
+  --container-padding: var(--linear-sp-linear-8);
+  --container-width: 100000px;
+  --container-narrow-padding: var(--linear-sp-linear-8);
+  --container-narrow-width: 100000px;
+  --elevation-none: 0px;
+}
+
+@media (max-width: 408px) {
+  :root {
+    --spacing-layout-xs: var(--linear-sp-linear-1);
+    --spacing-layout-sm: var(--linear-sp-linear-3);
+    --spacing-layout-md: var(--linear-sp-linear-4);
+    --spacing-layout-lg: var(--linear-sp-linear-5);
+    --spacing-layout-xl: var(--linear-sp-linear-8);
+    --container-padding: var(--linear-sp-linear-2);
+    --container-narrow-padding: var(--linear-sp-linear-2);
+  }
+}
+
+@media (min-width: 409px) and (max-width: 599px) {
+  :root {
+    --spacing-layout-xs: var(--linear-sp-linear-1);
+    --spacing-layout-sm: var(--linear-sp-linear-3);
+    --spacing-layout-md: var(--linear-sp-linear-4);
+    --spacing-layout-lg: var(--linear-sp-linear-5);
+    --spacing-layout-xl: var(--linear-sp-linear-8);
+    --container-padding: var(--linear-sp-linear-2);
+    --container-narrow-padding: var(--linear-sp-linear-2);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  :root {
+    --spacing-layout-xs: var(--linear-sp-linear-2);
+    --spacing-layout-sm: var(--linear-sp-linear-4);
+    --spacing-layout-md: var(--linear-sp-linear-6);
+    --spacing-layout-lg: var(--linear-sp-linear-8);
+    --spacing-layout-xl: var(--linear-sp-linear-12);
+    --container-padding: var(--linear-sp-linear-4);
+    --container-narrow-padding: var(--linear-sp-linear-4);
+  }
+}
+
+/* ========================================
+   COMPONENT TOKENS
+   ======================================== */
+
+:root {
+  /* Button */
+  --button-border-radius: var(--border-radius-sm);
+  --button-border-width: var(--border-width-thin);
+  --button-padding-x: var(--linear-sp-linear-3);
+  --button-padding-y: var(--linear-sp-linear-2);
+  --button-gap-elements: var(--linear-sp-linear-1);
+  --button-small-padding-x: var(--linear-sp-linear-2);
+  --button-small-padding-y: var(--fibonachi-sp-fib-3);
+  --button-large-padding-x: var(--linear-sp-linear-4);
+  --button-large-padding-y: var(--linear-sp-linear-3);
+  --button-primary-border: var(--color-interaction-primary-border);
+  --button-primary-surface: var(--color-interaction-primary-surface);
+  --button-primary-text: var(--color-interaction-primary-accent);
+  --button-primary-hover-border: var(--color-interaction-primary-hover-border);
+  --button-primary-hover-surface: var(--color-interaction-primary-hover-surface);
+  --button-primary-hover-text: var(--color-interaction-primary-hover-accent);
+  --button-secondary-border: var(--color-interaction-secondary-border);
+  --button-secondary-surface: var(--color-interaction-secondary-surface);
+  --button-secondary-text: var(--color-interaction-secondary-accent);
+  --button-secondary-hover-border: var(--color-interaction-secondary-hover-border);
+  --button-secondary-hover-surface: var(--color-interaction-secondary-hover-surface);
+  --button-secondary-hover-text: var(--color-interaction-secondary-hover-accent);
+  --button-tertiary-border: var(--color-interaction-tertiary-border);
+  --button-tertiary-surface: var(--color-interaction-tertiary-surface);
+  --button-tertiary-text: var(--color-interaction-tertiary-accent);
+  --button-tertiary-hover-border: var(--color-interaction-tertiary-hover-border);
+  --button-tertiary-hover-surface: var(--color-interaction-tertiary-hover-surface);
+  --button-tertiary-hover-text: var(--color-interaction-tertiary-hover-accent);
+  --button-danger-border: var(--color-interaction-danger-border);
+  --button-danger-surface: var(--color-interaction-danger-surface);
+  --button-danger-text: var(--color-interaction-danger-accent);
+  --button-danger-hover-border: var(--color-interaction-danger-hover-border);
+  --button-danger-hover-surface: var(--color-interaction-danger-hover-surface);
+  --button-danger-hover-text: var(--color-interaction-danger-hover-accent);
+  --button-cta-buy-border: var(--color-interaction-cta-buy-border);
+  --button-cta-buy-surface: var(--color-interaction-cta-buy-surface);
+  --button-cta-buy-text: var(--color-interaction-cta-buy-accent);
+  --button-cta-buy-hover-border: var(--color-interaction-cta-buy-hover-border);
+  --button-cta-buy-hover-surface: var(--color-interaction-cta-buy-hover-surface);
+  --button-cta-buy-hover-text: var(--color-interaction-cta-buy-hover-accent);
+  --button-transparent-border: var(--color-interaction-transparent-border);
+  --button-transparent-surface: var(--color-interaction-transparent-surface);
+  --button-transparent-text: var(--color-interaction-transparent-accent);
+  --button-transparent-hover-border: var(--color-interaction-transparent-hover-border);
+  --button-transparent-hover-surface: var(--color-interaction-transparent-hover-surface);
+  --button-transparent-hover-text: var(--color-interaction-transparent-hover-accent);
+
+  /* Alert */
+  --alert-color-border: var(--color-feedback-info);
+  --alert-color-surface: var(--color-feedback-info-light);
+  --alert-error-color-border: var(--color-feedback-error);
+  --alert-error-color-surface: var(--color-feedback-error-light);
+  --alert-sucess-color-border: var(--color-feedback-success);
+  --alert-sucess-color-surface: var(--color-feedback-success-light);
+  --alert-warning-color-border: var(--color-feedback-warning);
+  --alert-warning-color-surface: var(--color-feedback-warning-light);
+  --alert-padding-x: var(--spacing-layout-xs);
+  --alert-padding-y: var(--spacing-layout-xs);
+  --alert-gap: var(--spacing-layout-xs);
+
+  /* Input */
+  --input-border: var(--color-border);
+  --input-border-hover: var(--color-border-focus);
+  --input-border-invalid: var(--color-border-invalid);
+  --input-border-valid: var(--color-border-valid);
+  --input-label: var(--color-text-primary);
+  --input-placeholder: var(--color-text-secondary);
+  --input-surface: var(--color-surface-primary);
+  --input-value: var(--color-text-primary);
+}

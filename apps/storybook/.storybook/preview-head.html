@@ -1,23 +1,13 @@
-<!-- Load Base Tokens (Layout, Breakpoints) -->
-<link rel="stylesheet" href="/tokens/layout.css">
-<link rel="stylesheet" href="/tokens/breakpoints.css">
-
-<!-- Load Foundation (theme will be switched dynamically) -->
-<link rel="stylesheet" href="/tokens/foundation/light.css" id="foundation-theme">
+<!-- Load Design Tokens -->
+<link rel="stylesheet" href="/tokens/tokens.css">
 
 <script>
-  // Theme switcher logic
+  // Theme switcher: toggle data-theme attribute on <html>
   const channel = window.__STORYBOOK_ADDONS_CHANNEL__;
 
   if (channel) {
     channel.on('updateGlobals', ({ globals }) => {
       const theme = globals.theme || 'light';
-      const themeLink = document.getElementById('foundation-theme');
-
-      if (themeLink) {
-        themeLink.href = `/tokens/foundation/${theme}.css`;
-      }
-      
       document.documentElement.setAttribute('data-theme', theme);
     });
   }

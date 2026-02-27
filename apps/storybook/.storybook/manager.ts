@@ -6,7 +6,7 @@ const theme = create({
 
   // Branding
   brandTitle: 'Mini*S Design System',
-  brandUrl: 'https://www.slevomat.cz',
+  brandUrl: '?path=/',
   // brandImage: '/minis-logo.svg', // Můžete přidat logo, pokud máte
 
   // Barvy UI

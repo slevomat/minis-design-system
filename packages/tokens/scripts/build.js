@@ -36,80 +36,13 @@ function concatenateCSS(dir, outputFile) {
   console.log(`✓ Built ${path.relative(distDir, outputFile)}`);
 }
 
-// Build Foundation - Light mode
-concatenateCSS(
-  path.join(srcDir, 'foundation/light'),
-  path.join(distDir, 'foundation/light.css')
-);
+// Copy the canonical tokens.css (Figma export) as the main output
+const tokensSrc = path.join(srcDir, 'tokens.css');
+fs.copyFileSync(tokensSrc, path.join(distDir, 'index.css'));
+console.log('✓ Built index.css (from tokens.css)');
 
-// Build Foundation - Dark mode
-concatenateCSS(
-  path.join(srcDir, 'foundation/dark'),
-  path.join(distDir, 'foundation/dark.css')
-);
-
-// Build foundation index (references light/dark)
-const foundationIndex = `/**
- * Foundation Tokens
- * 
- * Import light or dark mode:
- * @import './light.css';
- * @import './dark.css';
- */
-
-/* Default to light mode */
-@import './light.css';
-`;
-
-fs.writeFileSync(
-  path.join(distDir, 'foundation.css'),
-  foundationIndex.trim()
-);
-console.log('✓ Built foundation.css');
-
-// Build Layout
-concatenateCSS(
-  path.join(srcDir, 'layout'),
-  path.join(distDir, 'layout.css')
-);
-
-// Copy breakpoints
-const breakpointsPath = path.join(srcDir, 'breakpoints/breakpoints.css');
-if (fs.existsSync(breakpointsPath)) {
-  fs.copyFileSync(
-    breakpointsPath,
-    path.join(distDir, 'breakpoints.css')
-  );
-  console.log('✓ Built breakpoints.css');
-}
-
-// Copy theme files
-const themes = ['default.css', 'gift.css'];
-themes.forEach(theme => {
-  const srcPath = path.join(srcDir, 'themes', theme);
-  if (fs.existsSync(srcPath)) {
-    fs.copyFileSync(srcPath, path.join(distDir, 'themes', theme));
-    console.log(`✓ Built themes/${theme}`);
-  }
-});
-
-// Build main index.css
-const indexContent = `/**
- * Mini*S Design Tokens
- * Complete token system with default (light) theme
- */
-
-/* Foundation (Light mode by default) */
-@import './foundation/light.css';
-
-/* Layout Tokens */
-@import './layout.css';
-
-/* Breakpoints */
-@import './breakpoints.css';
-`;
-
-fs.writeFileSync(path.join(distDir, 'index.css'), indexContent.trim());
-console.log('✓ Built index.css');
+// Also expose it as tokens.css for direct import
+fs.copyFileSync(tokensSrc, path.join(distDir, 'tokens.css'));
+console.log('✓ Built tokens.css');
 
 console.log('\n✅ Token build complete!');
