@@ -470,9 +470,16 @@
 }
 
 /* ========================================
-   LAYOUT (responsive — default breakpoint)
+   LAYOUT (mobile-first — mirrors Figma Layout collection modes)
+
+   Breakpoint tiers (matching Figma modes 2xs / xs / sm / md / xl):
+     base  : ≤ 407px    (2xs/xs)  — smallest spacing, small type
+     sm    : 408–767px  (sm)      — medium spacing, small type
+     md    : 768–1255px (md/lg)   — medium spacing, large type
+     xl    : ≥ 1256px   (xl+)     — large container-padding, largest mega-poster
    ======================================== */
 
+/* Base — 2xs/xs (≤ 407px) */
 :root {
   --border-radius-none: var(--radius-radius-0);
   --border-radius-sm: var(--radius-radius-4);
@@ -483,75 +490,58 @@
   --border-width-none: var(--pixel-px-0);
   --border-width-thin: var(--pixel-px-1);
   --spacing-layout-none: var(--linear-sp-linear-0);
-  --spacing-layout-xs: var(--linear-sp-linear-2);
-  --spacing-layout-sm: var(--linear-sp-linear-4);
-  --spacing-layout-md: var(--linear-sp-linear-6);
-  --spacing-layout-lg: var(--linear-sp-linear-8);
-  --spacing-layout-xl: var(--linear-sp-linear-12);
-  --container-padding: var(--linear-sp-linear-8);
+  --spacing-layout-xs:   var(--linear-sp-linear-1); /*  4px */
+  --spacing-layout-sm:   var(--linear-sp-linear-3); /* 12px */
+  --spacing-layout-md:   var(--linear-sp-linear-4); /* 16px */
+  --spacing-layout-lg:   var(--linear-sp-linear-5); /* 20px */
+  --spacing-layout-xl:   var(--linear-sp-linear-8); /* 32px */
+  --container-padding:         var(--linear-sp-linear-2); /*  8px */
+  --container-narrow-padding:  var(--linear-sp-linear-2); /*  8px */
   --container-width: 100000px;
-  --container-narrow-padding: var(--linear-sp-linear-8);
   --container-narrow-width: 100000px;
   --elevation-none: 0px;
-  /* Typography composite — desktop (default) */
-  --typography-mega-poster-size: var(--typography-size-4xl); /* 40px */
-  --typography-poster-size: var(--typography-size-3xl);      /* 32px */
-  --typography-heading-large-size: var(--typography-size-2xl); /* 24px */
-  --typography-heading-medium-size: var(--typography-size-xl); /* 20px */
-  --typography-heading-small-size: var(--typography-size-lg);  /* 18px */
+  /* Typography composite — 2xs/xs (small) */
+  --typography-mega-poster-size:  var(--typography-size-2xl); /* 24px */
+  --typography-poster-size:       var(--typography-size-2xl); /* 24px */
+  --typography-heading-large-size:  var(--typography-size-xl); /* 20px */
+  --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
+  --typography-heading-small-size:  var(--typography-size-md); /* 16px */
 }
 
-@media (max-width: 408px) {
+/* sm tier — 408px–767px */
+@media (min-width: 408px) {
   :root {
-    --spacing-layout-xs: var(--linear-sp-linear-1);
-    --spacing-layout-sm: var(--linear-sp-linear-3);
-    --spacing-layout-md: var(--linear-sp-linear-4);
-    --spacing-layout-lg: var(--linear-sp-linear-5);
-    --spacing-layout-xl: var(--linear-sp-linear-8);
-    --container-padding: var(--linear-sp-linear-2);
-    --container-narrow-padding: var(--linear-sp-linear-2);
-    /* Typography composite — mobile */
-    --typography-mega-poster-size: var(--typography-size-2xl); /* 24px */
-    --typography-poster-size: var(--typography-size-2xl);      /* 24px */
-    --typography-heading-large-size: var(--typography-size-xl); /* 20px */
-    --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
-    --typography-heading-small-size: var(--typography-size-md);  /* 16px */
+    --spacing-layout-xs:  var(--linear-sp-linear-2); /*  8px */
+    --spacing-layout-sm:  var(--linear-sp-linear-4); /* 16px */
+    --spacing-layout-md:  var(--linear-sp-linear-6); /* 24px */
+    --spacing-layout-lg:  var(--linear-sp-linear-8); /* 32px */
+    --spacing-layout-xl:  var(--linear-sp-linear-12); /* 48px */
+    --container-padding:        var(--linear-sp-linear-4); /* 16px */
+    --container-narrow-padding: var(--linear-sp-linear-4); /* 16px */
+    /* Typography stays small through sm tier */
   }
 }
 
-@media (min-width: 409px) and (max-width: 599px) {
+/* md tier — 768px–1255px */
+@media (min-width: 768px) {
   :root {
-    --spacing-layout-xs: var(--linear-sp-linear-1);
-    --spacing-layout-sm: var(--linear-sp-linear-3);
-    --spacing-layout-md: var(--linear-sp-linear-4);
-    --spacing-layout-lg: var(--linear-sp-linear-5);
-    --spacing-layout-xl: var(--linear-sp-linear-8);
-    --container-padding: var(--linear-sp-linear-2);
-    --container-narrow-padding: var(--linear-sp-linear-2);
-    /* Typography composite — mobile */
-    --typography-mega-poster-size: var(--typography-size-2xl); /* 24px */
-    --typography-poster-size: var(--typography-size-2xl);      /* 24px */
-    --typography-heading-large-size: var(--typography-size-xl); /* 20px */
-    --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
-    --typography-heading-small-size: var(--typography-size-md);  /* 16px */
+    /* Spacing same as sm */
+    /* Typography jumps up */
+    --typography-mega-poster-size:  var(--typography-size-3xl); /* 32px */
+    --typography-poster-size:       var(--typography-size-3xl); /* 32px */
+    --typography-heading-large-size:  var(--typography-size-2xl); /* 24px */
+    --typography-heading-medium-size: var(--typography-size-xl);  /* 20px */
+    --typography-heading-small-size:  var(--typography-size-lg);  /* 18px */
   }
 }
 
-@media (min-width: 600px) and (max-width: 767px) {
+/* xl tier — 1256px+ */
+@media (min-width: 1256px) {
   :root {
-    --spacing-layout-xs: var(--linear-sp-linear-2);
-    --spacing-layout-sm: var(--linear-sp-linear-4);
-    --spacing-layout-md: var(--linear-sp-linear-6);
-    --spacing-layout-lg: var(--linear-sp-linear-8);
-    --spacing-layout-xl: var(--linear-sp-linear-12);
-    --container-padding: var(--linear-sp-linear-4);
-    --container-narrow-padding: var(--linear-sp-linear-4);
-    /* Typography composite — tablet */
-    --typography-mega-poster-size: var(--typography-size-3xl); /* 32px */
-    --typography-poster-size: var(--typography-size-3xl);      /* 32px */
-    --typography-heading-large-size: var(--typography-size-2xl); /* 24px */
-    --typography-heading-medium-size: var(--typography-size-xl); /* 20px */
-    --typography-heading-small-size: var(--typography-size-lg);  /* 18px */
+    --container-padding:        var(--linear-sp-linear-8); /* 32px */
+    --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
+    --typography-mega-poster-size: var(--typography-size-4xl); /* 40px */
+    /* poster stays at 32px, headings unchanged */
   }
 }
 

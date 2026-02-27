@@ -349,21 +349,72 @@ export const Spacing: Story = {
         </tbody>
       </table>
 
-      <h2>Breakpoints</h2>
+      <h2>Breakpoints &amp; Layout Tiers</h2>
+      <p>The <strong>Layout collection</strong> in Figma uses named modes (2xs → 4xl) to define responsive values. In CSS, these collapse into <strong>4 media-query tiers</strong> where values actually change. The toolbar Viewport switcher simulates these tiers.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead>
+        <thead><tr>
+          <th style="${th}">CSS Tier</th>
+          <th style="${th}">Figma modes</th>
+          <th style="${th}">Media query</th>
+          <th style="${th}">--spacing-layout-<br>xs / sm / md / lg / xl</th>
+          <th style="${th}">--container-<br>padding</th>
+          <th style="${th}">Type scale<br>(heading-large / mega-poster)</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="${td}"><strong>2xs / xs</strong><br><span style="font-size:12px;color:var(--color-text-secondary,#666)">Mobile smallest</span></td>
+            <td style="${td}"><code>2xs</code> · <code>xs</code></td>
+            <td style="${td}"><code>max-width: 407px</code></td>
+            <td style="${td}">4 / 12 / 16 / 20 / 32px</td>
+            <td style="${td}">8px</td>
+            <td style="${td}">20px / 24px</td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>sm</strong><br><span style="font-size:12px;color:var(--color-text-secondary,#666)">Mobile – Tablet</span></td>
+            <td style="${td}"><code>sm</code></td>
+            <td style="${td}"><code>min-width: 408px</code> – <code>767px</code></td>
+            <td style="${td}">8 / 16 / 24 / 32 / 48px</td>
+            <td style="${td}">16px</td>
+            <td style="${td}">20px / 24px</td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>md / lg</strong><br><span style="font-size:12px;color:var(--color-text-secondary,#666)">Desktop</span></td>
+            <td style="${td}"><code>md</code> · <code>lg</code></td>
+            <td style="${td}"><code>min-width: 768px</code> – <code>1255px</code></td>
+            <td style="${td}">8 / 16 / 24 / 32 / 48px</td>
+            <td style="${td}">16px</td>
+            <td style="${td}">24px / 32px ↑</td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>xl → 4xl</strong><br><span style="font-size:12px;color:var(--color-text-secondary,#666)">Wide desktop</span></td>
+            <td style="${td}"><code>xl</code> · <code>2xl</code> · <code>3xl</code> · <code>4xl</code></td>
+            <td style="${td}"><code>min-width: 1256px</code></td>
+            <td style="${td}">8 / 16 / 24 / 32 / 48px</td>
+            <td style="${td}">32px ↑</td>
+            <td style="${td}">24px / 40px ↑</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>All Breakpoint Tokens</h2>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Token</th><th style="${th}">Value</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
             ['--breakpoint-2xs', '360px'],
-            ['--breakpoint-xs', '408px'],
-            ['--breakpoint-sm', '600px'],
-            ['--breakpoint-md', '768px'],
-            ['--breakpoint-lg', '1008px'],
-            ['--breakpoint-xl', '1256px'],
+            ['--breakpoint-xs',  '408px'],
+            ['--breakpoint-sm',  '600px'],
+            ['--breakpoint-md',  '768px'],
+            ['--breakpoint-lg',  '1008px'],
+            ['--breakpoint-xl',  '1256px'],
             ['--breakpoint-2xl', '1480px'],
             ['--breakpoint-3xl', '1920px'],
             ['--breakpoint-4xl', '2560px'],
-          ].map(([token, val]) => `<tr><td style="${td}"><code>${token}</code></td><td style="${td}">${val}</td></tr>`).join('')}
+          ].map(([token, val]) => `<tr>
+            <td style="${td}"><code>${token}</code></td>
+            <td style="${td}">${val}</td>
+            <td style="${td}"><div style="height:8px;background:var(--color-interaction-primary-surface,#006eb9);width:calc(${val} / 2560px * 100%);border-radius:2px;min-width:2px;max-width:100%"></div></td>
+          </tr>`).join('')}
         </tbody>
       </table>
 
@@ -467,18 +518,18 @@ export const TextStyles: Story = {
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Poster</h2>
       <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Big and even bigger typography elements. Usually claims.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec (desktop)</th><th style="${th}">Preview</th></tr></thead>
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           <tr>
             <td style="${td}"><strong>Mega poster</strong></td>
             <td style="${td}"><code>--typography-mega-poster-size</code></td>
-            <td style="${td}">40px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">32px tablet · 24px mobile</span></td>
+            <td style="${td}"><span data-live-spec="--typography-mega-poster-size" data-weight="600" data-lh="1.25"></span></td>
             <td style="${td}"><span style="font-size:var(--typography-mega-poster-size,40px);font-weight:600;line-height:1.25;display:block">Mega poster</span></td>
           </tr>
           <tr>
             <td style="${td}"><strong>Poster</strong></td>
             <td style="${td}"><code>--typography-poster-size</code></td>
-            <td style="${td}">32px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">32px tablet · 24px mobile</span></td>
+            <td style="${td}"><span data-live-spec="--typography-poster-size" data-weight="600" data-lh="1.25"></span></td>
             <td style="${td}"><span style="font-size:var(--typography-poster-size,32px);font-weight:600;line-height:1.25;display:block">Poster</span></td>
           </tr>
         </tbody>
@@ -489,28 +540,64 @@ export const TextStyles: Story = {
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Headlines</h2>
       <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Structural headings for sections and content hierarchy.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec (desktop)</th><th style="${th}">Preview</th></tr></thead>
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           <tr>
             <td style="${td}"><strong>Heading / large</strong></td>
             <td style="${td}"><code>--typography-heading-large-size</code></td>
-            <td style="${td}">24px / 1.25 / semibold<br><span style="color:var(--color-text-secondary,#666);font-size:12px">24px tablet · 20px mobile</span></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-large-size" data-weight="600" data-lh="1.25"></span></td>
             <td style="${td}"><span style="font-size:var(--typography-heading-large-size,24px);font-weight:600;line-height:1.25;display:block">Heading large</span></td>
           </tr>
           <tr>
             <td style="${td}"><strong>Heading / medium</strong></td>
             <td style="${td}"><code>--typography-heading-medium-size</code></td>
-            <td style="${td}">20px / 1.33 / medium<br><span style="color:var(--color-text-secondary,#666);font-size:12px">20px tablet · 18px mobile</span></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-medium-size" data-weight="500" data-lh="1.33"></span></td>
             <td style="${td}"><span style="font-size:var(--typography-heading-medium-size,20px);font-weight:500;line-height:1.33;display:block">Heading medium</span></td>
           </tr>
           <tr>
             <td style="${td}"><strong>Heading / small</strong></td>
             <td style="${td}"><code>--typography-heading-small-size</code></td>
-            <td style="${td}">18px / 1.38 / medium<br><span style="color:var(--color-text-secondary,#666);font-size:12px">18px tablet · 16px mobile</span></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-small-size" data-weight="500" data-lh="1.38"></span></td>
             <td style="${td}"><span style="font-size:var(--typography-heading-small-size,18px);font-weight:500;line-height:1.38;display:block">Heading small</span></td>
           </tr>
         </tbody>
       </table>
+
+      <script>
+        (function() {
+          var WEIGHT_NAMES = { '600': 'semibold', '500': 'medium', '400': 'regular' };
+          function updateSpecs() {
+            var spans = document.querySelectorAll('[data-live-spec]');
+            spans.forEach(function(el) {
+              var prop = el.getAttribute('data-live-spec');
+              var weight = el.getAttribute('data-weight') || '400';
+              var lh = el.getAttribute('data-lh') || '1.5';
+              var val = getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
+              el.textContent = val + ' / ' + lh + ' / ' + (WEIGHT_NAMES[weight] || weight);
+            });
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateSpecs);
+          } else {
+            updateSpecs();
+          }
+          // Re-run when the viewport-tokens style tag changes (toolbar switch)
+          function attachObserver() {
+            var vtEl = document.getElementById('minis-viewport-tokens');
+            if (vtEl) {
+              new MutationObserver(updateSpecs).observe(vtEl, { childList: true, subtree: true, characterData: true });
+            } else {
+              // Watch head for the style element to appear, then attach
+              var headObs = new MutationObserver(function() {
+                var el = document.getElementById('minis-viewport-tokens');
+                if (el) { headObs.disconnect(); new MutationObserver(updateSpecs).observe(el, { childList: true, subtree: true, characterData: true }); }
+              });
+              headObs.observe(document.head, { childList: true });
+            }
+          }
+          attachObserver();
+        })();
+      </script>
 
       ${hr}
 
