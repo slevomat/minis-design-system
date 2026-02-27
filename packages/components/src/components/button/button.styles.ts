@@ -3,140 +3,235 @@ import { css } from 'lit';
 export const buttonStyles = css`
   :host {
     display: inline-block;
+    position: relative;
   }
 
   button {
-    /* Reset */
-    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--button-gap-elements, 4px);
+    position: relative;
+
+    font-family: var(--typography-font-family-sans, 'SF Pro Display', sans-serif);
+    font-size: var(--typography-size-sm, 14px);
+    font-weight: var(--typography-weight-semibold, 600);
+    line-height: var(--pixel-px-20, 20px);
+    white-space: nowrap;
+
     cursor: pointer;
-    outline: none;
-    text-decoration: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    
-    /* Layout Tokens */
-    border-radius: var(--border-radius-md, 8px);
-    border: var(--border-width-medium, 2px) solid transparent;
-    
-    /* Transition */
-    transition: all 150ms ease;
+    text-decoration: none;
+    outline: none;
+
+    border-style: solid;
+    border-width: var(--button-border-width, 1px);
+    border-radius: var(--button-border-radius, 4px);
+
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease,
+      box-shadow 150ms ease;
   }
 
-  /* Sizes */
+  /* =====================
+     SIZES
+     ===================== */
+
+  /* Small */
   :host([size="sm"]) button {
-    font-size: 14px;
-    padding: var(--spacing-inset-xs, 4px) var(--spacing-inset-sm, 8px);
+    padding: var(--button-small-padding-y, 3px) var(--button-small-padding-x, 8px);
   }
 
+  :host([size="sm"][icon-only]) button {
+    padding: var(--button-small-padding-y, 3px);
+  }
+
+  /* Default (md) */
   :host([size="md"]) button {
-    font-size: 16px;
-    padding: var(--spacing-inset-sm, 8px) var(--spacing-inset-md, 12px);
+    padding: var(--button-padding-y, 8px) var(--button-padding-x, 12px);
   }
 
+  :host([size="md"][icon-only]) button {
+    padding: var(--button-padding-y, 8px);
+  }
+
+  /* Large */
   :host([size="lg"]) button {
-    font-size: 18px;
-    padding: var(--spacing-inset-md, 12px) var(--spacing-inset-lg, 16px);
+    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
   }
 
-  /* Variant: Primary */
+  :host([size="lg"][icon-only]) button {
+    padding: var(--button-large-padding-y, 12px);
+  }
+
+  /* Icon sizing per size */
+  :host([size="sm"]) ::slotted([slot="icon"]) {
+    width: var(--pixel-px-16, 16px);
+    height: var(--pixel-px-16, 16px);
+    flex-shrink: 0;
+  }
+
+  :host([size="md"]) ::slotted([slot="icon"]),
+  :host([size="lg"]) ::slotted([slot="icon"]) {
+    width: var(--pixel-px-24, 24px);
+    height: var(--pixel-px-24, 24px);
+    flex-shrink: 0;
+  }
+
+  /* =====================
+     VARIANTS
+     ===================== */
+
+  /* Primary */
   :host([variant="primary"]) button {
-    background: var(--color-interaction-primary-surface, #006eb9);
-    color: var(--color-interaction-primary-accent, #ffffff);
-    border-color: var(--color-interaction-primary-border, #006eb9);
+    background: var(--button-primary-surface);
+    color: var(--button-primary-text);
+    border-color: var(--button-primary-border);
   }
 
   :host([variant="primary"]) button:hover:not(:disabled) {
-    background: var(--color-interaction-primary-hover-surface, #005685);
-    color: var(--color-interaction-primary-hover-accent, #ffffff);
-    border-color: var(--color-interaction-primary-hover-border, #005685);
+    background: var(--button-primary-hover-surface);
+    color: var(--button-primary-hover-text);
+    border-color: var(--button-primary-hover-border);
+    box-shadow:
+      0px 4px 8px 0px rgba(0, 71, 120, 0.12),
+      0px 12px 12px 0px rgba(0, 71, 120, 0.06),
+      0px 20px 20px 0px rgba(0, 71, 120, 0.06),
+      0px 32px 32px 0px rgba(0, 71, 120, 0.02),
+      0px 40px 40px 0px rgba(0, 71, 120, 0.02);
   }
 
-  /* Variant: Secondary */
+  /* Secondary */
   :host([variant="secondary"]) button {
-    background: var(--color-interaction-secondary-surface, #ffffff);
-    color: var(--color-interaction-secondary-accent, #000000);
-    border-color: var(--color-interaction-secondary-border, #cbccce);
+    background: var(--button-secondary-surface);
+    color: var(--button-secondary-text);
+    border-color: var(--button-secondary-border);
   }
 
   :host([variant="secondary"]) button:hover:not(:disabled) {
-    background: var(--color-interaction-secondary-hover-surface, #e6f7fc);
-    color: var(--color-interaction-secondary-hover-accent, #000000);
-    border-color: var(--color-interaction-secondary-hover-border, #cbccce);
+    background: var(--button-secondary-hover-surface);
+    color: var(--button-secondary-hover-text);
+    border-color: var(--button-secondary-hover-border);
   }
 
-  /* Variant: Tertiary */
+  /* Tertiary */
   :host([variant="tertiary"]) button {
-    background: var(--color-interaction-tertiary-surface, transparent);
-    color: var(--color-interaction-tertiary-accent, #006eb9);
-    border-color: var(--color-interaction-tertiary-border, transparent);
+    background: var(--button-tertiary-surface);
+    color: var(--button-tertiary-text);
+    border-color: var(--button-tertiary-border);
   }
 
   :host([variant="tertiary"]) button:hover:not(:disabled) {
-    background: var(--color-interaction-tertiary-hover-surface, #e6f7fc);
-    color: var(--color-interaction-tertiary-hover-accent, #005685);
-    border-color: var(--color-interaction-tertiary-hover-border, #cbccce);
+    background: var(--button-tertiary-hover-surface);
+    color: var(--button-tertiary-hover-text);
+    border-color: var(--button-tertiary-hover-border);
   }
 
-  /* Variant: Danger */
+  /* Danger */
   :host([variant="danger"]) button {
-    background: var(--color-interaction-danger-surface, #ffffff);
-    color: var(--color-interaction-danger-accent, #d2381d);
-    border-color: var(--color-interaction-danger-border, #d2381d);
+    background: var(--button-danger-surface);
+    color: var(--button-danger-text);
+    border-color: var(--button-danger-border);
   }
 
   :host([variant="danger"]) button:hover:not(:disabled) {
-    background: var(--color-interaction-danger-hover-surface, #ffefec);
-    color: var(--color-interaction-danger-hover-accent, #a1150e);
-    border-color: var(--color-interaction-danger-hover-border, #a1150e);
+    background: var(--button-danger-hover-surface);
+    color: var(--button-danger-hover-text);
+    border-color: var(--button-danger-hover-border);
   }
 
-  /* Variant: CTA Buy */
+  /* CTA Buy */
   :host([variant="cta-buy"]) button {
-    background: var(--color-interaction-cta-buy-surface, #088107);
-    color: var(--color-interaction-cta-buy-accent, #ffffff);
-    border-color: var(--color-interaction-cta-buy-border, #088107);
+    background: var(--button-cta-buy-surface);
+    color: var(--button-cta-buy-text);
+    border-color: var(--button-cta-buy-border);
   }
 
   :host([variant="cta-buy"]) button:hover:not(:disabled) {
-    background: var(--color-interaction-cta-buy-hover-surface, #136110);
-    color: var(--color-interaction-cta-buy-hover-accent, #ffffff);
-    border-color: var(--color-interaction-cta-buy-hover-border, #136110);
+    background: var(--button-cta-buy-hover-surface);
+    color: var(--button-cta-buy-hover-text);
+    border-color: var(--button-cta-buy-hover-border);
   }
 
-  /* Disabled State */
+  /* Transparent */
+  :host([variant="transparent"]) button {
+    background: var(--button-transparent-surface);
+    color: var(--button-transparent-text);
+    border-color: var(--button-transparent-border);
+    backdrop-filter: blur(var(--blur-blur-10, 10px));
+  }
+
+  :host([variant="transparent"]) button:hover:not(:disabled) {
+    background: var(--button-transparent-hover-surface);
+    color: var(--button-transparent-hover-text);
+    border-color: var(--button-transparent-hover-border);
+  }
+
+  /* =====================
+     DISABLED
+     ===================== */
+
   button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  /* Focus State */
+  /* =====================
+     FOCUS
+     ===================== */
+
   button:focus-visible {
-    outline: 2px solid var(--color-border-focus, #00b2e5);
+    outline: 2px solid var(--color-border-focus);
     outline-offset: 2px;
   }
 
-  /* Loading State */
-  :host([loading]) button {
-    position: relative;
-    color: transparent;
+  /* =====================
+     COUNTER PILL
+     ===================== */
+
+  /* Inline pill (icon + label variant) — sits after text with extra left gap */
+  .pill-wrapper {
+    display: inline-flex;
+    align-items: center;
+    padding-left: var(--fibonachi-sp-fib-5, 8px);
   }
 
-  .spinner {
+  /* Floating pill (icon-only variant) — absolute top-right corner */
+  .pill-wrapper--floating {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    border: 2px solid currentColor;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
+    top: var(--pixel-px-3, 3px);
+    right: var(--pixel-px-3, 3px);
+    padding-left: 0;
   }
 
-  @keyframes spin {
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
+  /* Small size: floating pill offset is tighter */
+  :host([size="sm"]) .pill-wrapper--floating {
+    top: var(--pixel-px-2, 2px);
+    right: var(--pixel-px-2, 2px);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--pixel-px-15, 15px);
+    padding: var(--pixel-px-2, 2px) var(--pixel-px-4, 4px);
+    border-radius: var(--radius-radius-full, 9999px);
+    background: var(--color-core-white, #fff);
+    color: var(--color-text-primary, #000);
+    font-family: Arial, sans-serif;
+    font-size: var(--pixel-px-12, 12px);
+    font-weight: var(--typography-weight-bold, 700);
+    line-height: var(--pixel-px-11, 11px);
+  }
+
+  /* Small pill for floating (icon-only) variant */
+  .pill-wrapper--floating .pill {
+    min-width: var(--pixel-px-11, 11px);
+    padding: var(--pixel-px-2, 2px) var(--pixel-px-2, 2px);
+    font-size: var(--pixel-px-10, 10px);
+    line-height: var(--pixel-px-8, 8px);
   }
 `;
