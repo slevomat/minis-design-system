@@ -100,6 +100,38 @@ All Mini*S components use the `minis-` prefix:
 <minis-button variant="primary">Click me</minis-button>
 ```
 
+## Figma MCP Integration
+
+You can connect Figma directly to Claude Code to reference live designs in your prompts. This enables extracting tokens, generating components, and syncing code with designs.
+
+### Setup
+
+```bash
+# 1. Install Claude Code CLI (if not already installed)
+brew install --cask claude-code
+
+# 2. Add the Figma MCP server (one-time, applies to all projects)
+claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user
+```
+
+Then in a Claude Code session: type `/mcp` → select **Figma** → **Authenticate**.
+
+### Usage
+
+1. In Figma, right-click any frame or component → **Copy link to selection**
+2. Paste the URL into your Claude Code prompt
+
+```
+# Generate a Lit component from a Figma frame
+"Generate a Lit web component for this design using Mini*S tokens: https://www.figma.com/..."
+
+# Extract tokens
+"Extract all color tokens from this Figma file and list which ones are missing from our @minis/tokens package: https://www.figma.com/..."
+
+# Component sync check
+"Compare this Figma button design with our minis-button component and suggest what needs updating: https://www.figma.com/..."
+```
+
 ## Next Steps
 
 1. Browse [Component Library](./components/README.md)

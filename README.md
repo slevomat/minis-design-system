@@ -20,6 +20,42 @@ minis-design-system/
 
 Figma plugins for Mini*S design-to-code workflow: [github.com/slevomat/figma-plugins](https://github.com/slevomat/figma-plugins)
 
+## 🔗 Figma MCP — AI Design Integration
+
+Connect Figma directly to Claude Code so you can reference live designs in AI prompts — extract tokens, generate components, and keep code in sync with design without manual copy-paste.
+
+### Setup
+
+**1. Install Claude Code CLI**
+```bash
+brew install --cask claude-code
+```
+
+**2. Add the Figma MCP server**
+```bash
+claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user
+```
+
+**3. Authenticate**
+- Start a Claude Code session: `claude`
+- Type `/mcp` → select **Figma** → **Authenticate** → **Allow Access** in the browser
+- Type `/mcp` again to confirm "Connected to figma"
+
+### Example prompts
+
+```
+# Extract design tokens from a Figma file
+"Extract all color and spacing tokens from this Figma file and compare with our existing tokens: https://www.figma.com/..."
+
+# Generate a component from a Figma frame
+"Generate a Lit web component for this button variant: https://www.figma.com/..."
+
+# Sync check
+"What CSS variables are missing in our tokens to match this design: https://www.figma.com/..."
+```
+
+> Tip: In Figma, right-click any frame or component → **Copy link to selection** to get the URL.
+
 ## 🚀 Quick Start
 
 ```bash
