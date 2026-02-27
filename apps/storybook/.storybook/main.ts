@@ -1,8 +1,8 @@
 import type { StorybookConfig } from '@storybook/web-components-vite';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
-    '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|ts|tsx)',
     '../../../packages/components/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
@@ -17,6 +17,16 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag',
+  },
+  staticDirs: [
+    { from: '../../../packages/tokens/dist', to: '/tokens' },
+  ],
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      esbuild: {
+        target: 'es2020',
+      },
+    });
   },
 };
 

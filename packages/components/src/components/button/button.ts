@@ -8,6 +8,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 /**
  * Mini*S Button Component
  * 
+ * 
  * @slot - Button content
  * @csspart button - The button element
  * 

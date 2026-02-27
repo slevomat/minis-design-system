@@ -2,6 +2,11 @@ import type { Preview } from '@storybook/web-components';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Introduction', 'Design Tokens', 'Contributing', 'Components'],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
