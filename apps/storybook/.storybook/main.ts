@@ -20,6 +20,7 @@ const config: StorybookConfig = {
   },
   staticDirs: [
     { from: '../../../packages/tokens/dist', to: '/tokens' },
+    '../public',
   ],
   async viteFinal(config) {
     return mergeConfig(config, {

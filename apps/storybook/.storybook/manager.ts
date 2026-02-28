@@ -5,9 +5,9 @@ const theme = create({
   base: 'light',
 
   // Branding
-  brandTitle: 'Mini*S Design System',
+  brandTitle: '',
   brandUrl: '?path=/',
-  // brandImage: '/minis-logo.svg', // Můžete přidat logo, pokud máte
+  brandImage: '/brand.svg?v=5',
 
   // Barvy UI
   colorPrimary: '#E5007A', // Slevomat růžová
