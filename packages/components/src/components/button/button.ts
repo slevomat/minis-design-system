@@ -61,7 +61,7 @@ export class MinisButton extends LitElement {
   type: 'button' | 'submit' | 'reset' = 'button';
 
   render() {
-    const hasCounter = this.counter !== null && this.counter !== undefined;
+    const hasCounter = !!this.counter;
 
     return html`
       <button
