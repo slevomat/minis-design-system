@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import paletteData from './palette-data.json';
 
 /** Wrap a raw HTML string so Storybook docs can render it correctly. */
 const r = (s: string) => html`${unsafeHTML(s)}`;
@@ -25,8 +26,29 @@ const sw = (v: string) =>
 const colorRow = (v: string, label: string) =>
   `<tr><td style="${td}"><div style="display:flex;align-items:center">${sw(v)}<code>${v}</code></div></td><td style="${td}">${label}</td></tr>`;
 
-const paletteRow = (v: string, val: string) =>
-  `<tr><td style="${td}"><code>${v}</code></td><td style="${td}"><div style="display:flex;align-items:center"><span style="display:inline-block;width:32px;height:24px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:3px;margin-right:8px;flex-shrink:0"></span><code style="font-size:.8em;color:var(--color-text-secondary,#6b6b70)">${val}</code></div></td></tr>`;
+type PaletteEntry = { hex: string | null; oklch: string | null; heritage: string };
+const pd = paletteData as unknown as Record<string, PaletteEntry>;
+
+const paletteRow = (v: string) => {
+  const entry = pd[v];
+  const hex = entry?.hex ?? '—';
+  const oklch = entry?.oklch ?? '—';
+  const heritage = entry?.heritage
+    ? `<span style="display:inline-block;margin-top:4px;font-size:.75em;color:var(--color-text-secondary,#6b6b70);font-style:italic">${entry.heritage}</span>`
+    : '';
+  return `<tr>
+    <td style="${td}"><code>${v}</code>${heritage}</td>
+    <td style="${td}">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="display:inline-block;width:32px;height:24px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:3px;flex-shrink:0"></span>
+        <div>
+          <code style="display:block;font-size:.8em;color:var(--color-text-secondary,#6b6b70)">${oklch}</code>
+          <code style="display:block;font-size:.8em;color:var(--color-text-secondary,#6b6b70)">${hex}</code>
+        </div>
+      </div>
+    </td>
+  </tr>`;
+};
 
 const interactionRow = (label: string, surface: string, border: string, accent: string) =>
   `<tr>
@@ -63,7 +85,7 @@ export const Overview: Story = {
       <table style="${ts}">
         <thead><tr><th style="${th}">Layer</th><th style="${th}">Example</th><th style="${th}">Description</th></tr></thead>
         <tbody>
-          <tr><td style="${td}"><strong>Primitives</strong></td><td style="${td}"><code>--color-blue-45</code></td><td style="${td}">Raw OKLCH palette values. Never use directly in product code.</td></tr>
+          <tr><td style="${td}"><strong>Primitives</strong></td><td style="${td}"><code>--color-blue-45</code></td><td style="${td}">Raw palette values (OKLCH + HEX). Never use directly in product code.</td></tr>
           <tr><td style="${td}"><strong>Foundation</strong></td><td style="${td}"><code>--color-interaction-primary-surface</code></td><td style="${td}">Semantic tokens — what to use in product code. Auto-switch on theme change.</td></tr>
           <tr><td style="${td}"><strong>Component</strong></td><td style="${td}"><code>--button-primary-surface</code></td><td style="${td}">Component-scoped tokens that reference Foundation layer.</td></tr>
         </tbody>
@@ -170,135 +192,136 @@ export const Palette: Story = {
   render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Color Palette — Primitives</h1>
-      <p>Raw OKLCH color primitives. These form the foundation of all semantic tokens. <strong>Do not use these directly in product code</strong> — use Foundation tokens instead.</p>
+      <p>Raw color primitives. These form the foundation of all semantic tokens. <strong>Do not use these directly in product code</strong> — use Foundation tokens instead.</p>
+      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">Each row shows both the OKLCH value (used at runtime) and the HEX equivalent. Italic text below a token name is the legacy Heritage reference.</p>
 
       <h2>Blue</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-blue-25', 'oklch(0.34 0.08 239)')}
-        ${paletteRow('--color-blue-35', 'oklch(0.43 0.1 242)')}
-        ${paletteRow('--color-blue-45', 'oklch(0.53 0.14 249)')}
-        ${paletteRow('--color-blue-55', 'oklch(0.61 0.13 237)')}
-        ${paletteRow('--color-blue-65', 'oklch(0.71 0.14 227)')}
-        ${paletteRow('--color-blue-75', 'oklch(0.8 0.13 228)')}
-        ${paletteRow('--color-blue-85', 'oklch(0.83 0.09 221)')}
-        ${paletteRow('--color-blue-90', 'oklch(0.88 0.07 218)')}
-        ${paletteRow('--color-blue-95', 'oklch(0.97 0.02 217)')}
-        ${paletteRow('--color-blue-99', 'oklch(0.99 0 265)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-blue-25')}
+        ${paletteRow('--color-blue-35')}
+        ${paletteRow('--color-blue-45')}
+        ${paletteRow('--color-blue-55')}
+        ${paletteRow('--color-blue-65')}
+        ${paletteRow('--color-blue-75')}
+        ${paletteRow('--color-blue-85')}
+        ${paletteRow('--color-blue-90')}
+        ${paletteRow('--color-blue-95')}
+        ${paletteRow('--color-blue-99')}
       </tbody></table>
 
       <h2>Green</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-green-25', 'oklch(0.36 0.11 142)')}
-        ${paletteRow('--color-green-35', 'oklch(0.43 0.13 142)')}
-        ${paletteRow('--color-green-45', 'oklch(0.52 0.17 143)')}
-        ${paletteRow('--color-green-48', 'oklch(0.55 0.18 143)')}
-        ${paletteRow('--color-green-55', 'oklch(0.65 0.21 143)')}
-        ${paletteRow('--color-green-65', 'oklch(0.68 0.23 143)')}
-        ${paletteRow('--color-green-75', 'oklch(0.8 0.19 144)')}
-        ${paletteRow('--color-green-85', 'oklch(0.87 0.14 144)')}
-        ${paletteRow('--color-green-95', 'oklch(0.97 0.03 145)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-green-25')}
+        ${paletteRow('--color-green-35')}
+        ${paletteRow('--color-green-45')}
+        ${paletteRow('--color-green-48')}
+        ${paletteRow('--color-green-55')}
+        ${paletteRow('--color-green-65')}
+        ${paletteRow('--color-green-75')}
+        ${paletteRow('--color-green-85')}
+        ${paletteRow('--color-green-95')}
       </tbody></table>
 
       <h2>Grey</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-grey-10', 'oklch(0.23 0.01 275)')}
-        ${paletteRow('--color-grey-20', 'oklch(0.32 0 0)')}
-        ${paletteRow('--color-grey-25', 'oklch(0.35 0.01 234)')}
-        ${paletteRow('--color-grey-30', 'oklch(0.41 0.01 275)')}
-        ${paletteRow('--color-grey-35', 'oklch(0.46 0.01 239)')}
-        ${paletteRow('--color-grey-40', 'oklch(0.5 0.01 275)')}
-        ${paletteRow('--color-grey-50', 'oklch(0.53 0.01 286)')}
-        ${paletteRow('--color-grey-60', 'oklch(0.65 0 0)')}
-        ${paletteRow('--color-grey-70', 'oklch(0.73 0 146)')}
-        ${paletteRow('--color-grey-80', 'oklch(0.85 0 265)')}
-        ${paletteRow('--color-grey-90', 'oklch(0.92 0 265)')}
-        ${paletteRow('--color-grey-95', 'oklch(0.96 0 248)')}
-        ${paletteRow('--color-grey-98', 'oklch(0.99 0 265)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-grey-10')}
+        ${paletteRow('--color-grey-20')}
+        ${paletteRow('--color-grey-25')}
+        ${paletteRow('--color-grey-30')}
+        ${paletteRow('--color-grey-35')}
+        ${paletteRow('--color-grey-40')}
+        ${paletteRow('--color-grey-50')}
+        ${paletteRow('--color-grey-60')}
+        ${paletteRow('--color-grey-70')}
+        ${paletteRow('--color-grey-80')}
+        ${paletteRow('--color-grey-90')}
+        ${paletteRow('--color-grey-95')}
+        ${paletteRow('--color-grey-98')}
       </tbody></table>
 
       <h2>Red</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-red-15', 'oklch(0.31 0.11 27)')}
-        ${paletteRow('--color-red-25', 'oklch(0.37 0.14 30)')}
-        ${paletteRow('--color-red-35', 'oklch(0.45 0.17 29)')}
-        ${paletteRow('--color-red-40', 'oklch(0.5 0.2 29)')}
-        ${paletteRow('--color-red-45', 'oklch(0.57 0.19 32)')}
-        ${paletteRow('--color-red-55', 'oklch(0.63 0.2 33)')}
-        ${paletteRow('--color-red-65', 'oklch(0.66 0.19 33)')}
-        ${paletteRow('--color-red-75', 'oklch(0.71 0.15 34)')}
-        ${paletteRow('--color-red-85', 'oklch(0.83 0.08 36)')}
-        ${paletteRow('--color-red-95', 'oklch(0.96 0.02 30)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-red-15')}
+        ${paletteRow('--color-red-25')}
+        ${paletteRow('--color-red-35')}
+        ${paletteRow('--color-red-40')}
+        ${paletteRow('--color-red-45')}
+        ${paletteRow('--color-red-55')}
+        ${paletteRow('--color-red-65')}
+        ${paletteRow('--color-red-75')}
+        ${paletteRow('--color-red-85')}
+        ${paletteRow('--color-red-95')}
       </tbody></table>
 
       <h2>Yellow</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-yellow-25', 'oklch(0.55 0.12 75)')}
-        ${paletteRow('--color-yellow-35', 'oklch(0.68 0.14 74)')}
-        ${paletteRow('--color-yellow-45', 'oklch(0.79 0.17 70)')}
-        ${paletteRow('--color-yellow-55', 'oklch(0.83 0.17 81)')}
-        ${paletteRow('--color-yellow-65', 'oklch(0.86 0.16 84)')}
-        ${paletteRow('--color-yellow-75', 'oklch(0.89 0.14 89)')}
-        ${paletteRow('--color-yellow-85', 'oklch(0.94 0.1 96)')}
-        ${paletteRow('--color-yellow-95', 'oklch(0.97 0.03 79)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-yellow-25')}
+        ${paletteRow('--color-yellow-35')}
+        ${paletteRow('--color-yellow-45')}
+        ${paletteRow('--color-yellow-55')}
+        ${paletteRow('--color-yellow-65')}
+        ${paletteRow('--color-yellow-75')}
+        ${paletteRow('--color-yellow-85')}
+        ${paletteRow('--color-yellow-95')}
       </tbody></table>
 
       <h2>Gold</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-gold-25', 'oklch(0.56 0.12 111)')}
-        ${paletteRow('--color-gold-35', 'oklch(0.61 0.12 83)')}
-        ${paletteRow('--color-gold-45', 'oklch(0.67 0.13 78)')}
-        ${paletteRow('--color-gold-55', 'oklch(0.75 0.12 84)')}
-        ${paletteRow('--color-gold-65', 'oklch(0.84 0.13 93)')}
-        ${paletteRow('--color-gold-75', 'oklch(0.89 0.11 94)')}
-        ${paletteRow('--color-gold-85', 'oklch(0.93 0.07 91)')}
-        ${paletteRow('--color-gold-95', 'oklch(0.98 0.02 89)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-gold-25')}
+        ${paletteRow('--color-gold-35')}
+        ${paletteRow('--color-gold-45')}
+        ${paletteRow('--color-gold-55')}
+        ${paletteRow('--color-gold-65')}
+        ${paletteRow('--color-gold-75')}
+        ${paletteRow('--color-gold-85')}
+        ${paletteRow('--color-gold-95')}
       </tbody></table>
 
       <h2>Orange</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-orange-25', 'oklch(0.42 0.14 37)')}
-        ${paletteRow('--color-orange-35', 'oklch(0.52 0.18 35)')}
-        ${paletteRow('--color-orange-45', 'oklch(0.59 0.19 38)')}
-        ${paletteRow('--color-orange-55', 'oklch(0.66 0.16 55)')}
-        ${paletteRow('--color-orange-65', 'oklch(0.76 0.16 70)')}
-        ${paletteRow('--color-orange-75', 'oklch(0.77 0.16 65)')}
-        ${paletteRow('--color-orange-85', 'oklch(0.84 0.1 60)')}
-        ${paletteRow('--color-orange-95', 'oklch(0.94 0.03 62)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-orange-25')}
+        ${paletteRow('--color-orange-35')}
+        ${paletteRow('--color-orange-45')}
+        ${paletteRow('--color-orange-55')}
+        ${paletteRow('--color-orange-65')}
+        ${paletteRow('--color-orange-75')}
+        ${paletteRow('--color-orange-85')}
+        ${paletteRow('--color-orange-95')}
       </tbody></table>
 
       <h2>Pink</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-pink-25', 'oklch(0.39 0.13 15)')}
-        ${paletteRow('--color-pink-35', 'oklch(0.47 0.16 11)')}
-        ${paletteRow('--color-pink-45', 'oklch(0.56 0.2 20)')}
-        ${paletteRow('--color-pink-55', 'oklch(0.63 0.2 11)')}
-        ${paletteRow('--color-pink-65', 'oklch(0.69 0.2 17)')}
-        ${paletteRow('--color-pink-75', 'oklch(0.78 0.14 9)')}
-        ${paletteRow('--color-pink-85', 'oklch(0.85 0.08 6)')}
-        ${paletteRow('--color-pink-90', 'oklch(0.92 0.05 3)')}
-        ${paletteRow('--color-pink-95', 'oklch(0.97 0.02 4)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-pink-25')}
+        ${paletteRow('--color-pink-35')}
+        ${paletteRow('--color-pink-45')}
+        ${paletteRow('--color-pink-55')}
+        ${paletteRow('--color-pink-65')}
+        ${paletteRow('--color-pink-75')}
+        ${paletteRow('--color-pink-85')}
+        ${paletteRow('--color-pink-90')}
+        ${paletteRow('--color-pink-95')}
       </tbody></table>
 
       <h2>Purple</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-purple-15', 'oklch(0.2 0.1 279)')}
-        ${paletteRow('--color-purple-20', 'oklch(0.27 0.13 277)')}
-        ${paletteRow('--color-purple-25', 'oklch(0.27 0.13 292)')}
-        ${paletteRow('--color-purple-35', 'oklch(0.39 0.22 287)')}
-        ${paletteRow('--color-purple-45', 'oklch(0.47 0.25 286)')}
-        ${paletteRow('--color-purple-55', 'oklch(0.54 0.24 291)')}
-        ${paletteRow('--color-purple-65', 'oklch(0.62 0.21 295)')}
-        ${paletteRow('--color-purple-75', 'oklch(0.72 0.17 297)')}
-        ${paletteRow('--color-purple-80', 'oklch(0.76 0.14 298)')}
-        ${paletteRow('--color-purple-85', 'oklch(0.82 0.1 299)')}
-        ${paletteRow('--color-purple-95', 'oklch(0.94 0.03 300)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-purple-15')}
+        ${paletteRow('--color-purple-20')}
+        ${paletteRow('--color-purple-25')}
+        ${paletteRow('--color-purple-35')}
+        ${paletteRow('--color-purple-45')}
+        ${paletteRow('--color-purple-55')}
+        ${paletteRow('--color-purple-65')}
+        ${paletteRow('--color-purple-75')}
+        ${paletteRow('--color-purple-80')}
+        ${paletteRow('--color-purple-85')}
+        ${paletteRow('--color-purple-95')}
       </tbody></table>
 
       <h2>Core</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Value</th></tr></thead><tbody>
-        ${paletteRow('--color-core-black', 'oklch(0 0 0)')}
-        ${paletteRow('--color-core-white', 'oklch(1 0 0)')}
-        ${paletteRow('--color-core-transparent', 'oklch(1 0 0 / 0)')}
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+        ${paletteRow('--color-core-black')}
+        ${paletteRow('--color-core-white')}
+        ${paletteRow('--color-core-transparent')}
       </tbody></table>
     </div>
   `),

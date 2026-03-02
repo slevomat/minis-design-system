@@ -45,26 +45,30 @@ console.log('✓ Built index.css (from tokens.css)');
 fs.copyFileSync(tokensSrc, path.join(distDir, 'tokens.css'));
 console.log('✓ Built tokens.css');
 
-// Generate tokens.rgb.css from tokens.rgb.json (HEX/rgba values, same CSS variable names)
-const rgbJsonPath = path.join(__dirname, '../../../tokens.rgb.json');
-if (fs.existsSync(rgbJsonPath)) {
-  const rgbJson = JSON.parse(fs.readFileSync(rgbJsonPath, 'utf-8'));
-
-  function collectTokens(node, results = []) {
-    if (node && typeof node === 'object') {
-      if ('cssName' in node && 'value' in node) {
-        results.push({ cssName: node.cssName, value: node.value });
-      } else {
-        for (const child of Object.values(node)) {
-          collectTokens(child, results);
-        }
+// Collect all leaf tokens from a JSON tree into an ordered array: { cssName, value, comment? }
+function collectTokens(node, results = []) {
+  if (node && typeof node === 'object') {
+    if ('cssName' in node && 'value' in node) {
+      results.push({ cssName: node.cssName, value: node.value, comment: node.comment });
+    } else {
+      for (const child of Object.values(node)) {
+        collectTokens(child, results);
       }
     }
-    return results;
   }
+  return results;
+}
 
-  const tokens = collectTokens(rgbJson);
-  const declarations = tokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n');
+// Generate tokens.rgb.css + palette-data.json from tokens.rgb.json and tokens.json
+const rgbJsonPath = path.join(__dirname, '../../../tokens.rgb.json');
+const oklchJsonPath = path.join(__dirname, '../../../tokens.json');
+
+if (fs.existsSync(rgbJsonPath)) {
+  const rgbJson = JSON.parse(fs.readFileSync(rgbJsonPath, 'utf-8'));
+  const rgbTokens = collectTokens(rgbJson);
+
+  // tokens.rgb.css
+  const declarations = rgbTokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n');
   const css = [
     '/**',
     ' * Minis Design System - Global Tokens (HEX/RGB)',
@@ -77,11 +81,31 @@ if (fs.existsSync(rgbJsonPath)) {
     '}',
     '',
   ].join('\n');
-
   fs.writeFileSync(path.join(distDir, 'tokens.rgb.css'), css);
   console.log('✓ Built tokens.rgb.css');
+
+  // palette-data.json — joins OKLCH values + heritage comments from tokens.json
+  if (fs.existsSync(oklchJsonPath)) {
+    const oklchJson = JSON.parse(fs.readFileSync(oklchJsonPath, 'utf-8'));
+    const oklchMap = new Map(collectTokens(oklchJson).map(t => [t.cssName, t]));
+
+    const palette = {};
+    for (const { cssName, value: hex, comment: rgbComment } of rgbTokens) {
+      const oklchEntry = oklchMap.get(cssName);
+      const rawHeritage = rgbComment || (oklchEntry && oklchEntry.comment) || '';
+      palette[cssName] = {
+        hex,
+        oklch: oklchEntry ? oklchEntry.value : null,
+        heritage: rawHeritage.replace(/^Heritage reference:\s*/i, ''),
+      };
+    }
+
+    const paletteJsonPath = path.join(__dirname, '../../../apps/storybook/stories/palette-data.json');
+    fs.writeFileSync(paletteJsonPath, JSON.stringify(palette, null, 2));
+    console.log('✓ Built apps/storybook/stories/palette-data.json');
+  }
 } else {
-  console.warn('⚠ tokens.rgb.json not found, skipping tokens.rgb.css');
+  console.warn('⚠ tokens.rgb.json not found, skipping tokens.rgb.css and palette-data.json');
 }
 
 console.log('\n✅ Token build complete!');
