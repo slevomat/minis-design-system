@@ -343,6 +343,21 @@ export const Palette: Story = {
         ${paletteRow('--color-core-transparent')}
       </tbody></table>
 
+      <h2>Black Alpha</h2>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-black-a-black-a5')}
+        ${paletteRow('--color-black-a-black-a10')}
+        ${paletteRow('--color-black-a-black-a60')}
+        ${paletteRow('--color-black-a-black-a100')}
+      </tbody></table>
+
+      <h2>White Alpha</h2>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-white-a-white-a5')}
+        ${paletteRow('--color-white-a-white-a10')}
+        ${paletteRow('--color-white-a-white-a100')}
+      </tbody></table>
+
       <script>
         (function() {
           document.addEventListener('click', function(e) {
