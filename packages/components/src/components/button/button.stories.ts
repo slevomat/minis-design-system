@@ -143,7 +143,7 @@ export const CounterPill: Story = {
       <minis-button variant="cta-buy" icon-only counter="3">${iconCart}</minis-button>
       <minis-button variant="primary" icon-only counter="12">${iconStar}</minis-button>
 
-      <!-- Sizes with counter -->
+      <!-- Sizes with counter (sm button → sm pill, md/lg button → md pill) -->
       <minis-button variant="cta-buy" size="sm" counter="5">${iconCart} Small</minis-button>
       <minis-button variant="cta-buy" size="lg" counter="5">${iconCart} Big</minis-button>
     </div>

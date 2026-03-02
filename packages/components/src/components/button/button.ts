@@ -54,7 +54,7 @@ export class MinisButton extends LitElement {
   iconOnly = false;
 
   /** Show a counter pill badge. Set to a number string, e.g. counter="3" */
-  @property({ type: String })
+  @property({ type: String, reflect: true })
   counter: string | null = null;
 
   @property({ type: String })
@@ -74,13 +74,13 @@ export class MinisButton extends LitElement {
         ${hasCounter && !this.iconOnly
           ? html`
               <span class="pill-wrapper">
-                <minis-pill-counter size="sm">${this.counter}</minis-pill-counter>
+                <minis-pill-counter size=${this.size === 'sm' ? 'sm' : 'md'}>${this.counter}</minis-pill-counter>
               </span>`
           : ''}
         ${hasCounter && this.iconOnly
           ? html`
               <span class="pill-wrapper pill-wrapper--floating">
-                <minis-pill-counter size="xs">${this.counter}</minis-pill-counter>
+                <minis-pill-counter size=${this.size === 'sm' ? 'xs' : 'sm'}>${this.counter}</minis-pill-counter>
               </span>`
           : ''}
       </button>

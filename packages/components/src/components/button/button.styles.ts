@@ -213,4 +213,9 @@ export const buttonStyles = css`
     top: var(--pixel-px-2, 2px);
     right: var(--pixel-px-2, 2px);
   }
+
+  /* Icon-only + counter: dim the icon so the pill reads clearly */
+  :host([icon-only][counter]) ::slotted([slot="icon"]) {
+    opacity: 0.75;
+  }
 `;

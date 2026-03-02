@@ -11,6 +11,7 @@ export const pillCounterStyles = css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     border-radius: var(--radius-radius-full, 9999px);
     background: var(--pill-counter-bg, var(--color-core-white, #fff));
     color: var(--pill-counter-color, var(--color-text-primary, #000));
@@ -21,30 +22,31 @@ export const pillCounterStyles = css`
     text-align: center;
   }
 
-  /* Default size — general use */
+  /* Default size — general use · 15×15px min, pill on overflow */
   :host([size="md"]) .pill,
   :host(:not([size])) .pill {
+    height: var(--pixel-px-15, 15px);
     min-width: var(--pixel-px-15, 15px);
-    padding: var(--pixel-px-2, 2px) var(--pixel-px-4, 4px);
+    padding: 0 var(--pixel-px-4, 4px);
     font-size: var(--pixel-px-12, 12px);
+    line-height: var(--pixel-px-15, 15px);
+  }
+
+  /* sm — md/lg button with icon + label · 11×11px min, pill on overflow */
+  :host([size="sm"]) .pill {
+    height: var(--pixel-px-11, 11px);
+    min-width: var(--pixel-px-11, 11px);
+    padding: 0 var(--pixel-px-2, 2px);
+    font-size: var(--pixel-px-10, 10px);
     line-height: var(--pixel-px-11, 11px);
   }
 
-  /* sm — for icon + label buttons */
-  :host([size="sm"]) .pill {
-    min-width: var(--pixel-px-11, 11px);
-    padding-top: var(--pixel-px-2, 2px);
-    padding-bottom: var(--pixel-px-1, 1px);
-    font-size: var(--pixel-px-10, 10px);
-    line-height: var(--pixel-px-8, 8px);
-  }
-
-  /* xs — for icon-only buttons */
+  /* xs — sm button or icon-only button · 8×8px min, pill on overflow */
   :host([size="xs"]) .pill {
+    height: var(--pixel-px-8, 8px);
     min-width: var(--pixel-px-8, 8px);
-    padding-top: var(--pixel-px-1, 1px);
-    padding-bottom: var(--pixel-px-1, 1px);
+    padding: 0 var(--pixel-px-1, 1px);
     font-size: var(--pixel-px-8, 8px);
-    line-height: var(--pixel-px-6, 6px);
+    line-height: var(--pixel-px-8, 8px);
   }
 `;
