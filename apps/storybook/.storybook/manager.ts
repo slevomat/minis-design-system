@@ -7,7 +7,7 @@ const theme = create({
   // Branding
   brandTitle: '',
   brandUrl: '?path=/',
-  brandImage: '/brand.svg?v=5',
+  brandImage: './brand.svg?v=5',
 
   // Barvy UI
   colorPrimary: '#E5007A', // Slevomat růžová
