@@ -501,11 +501,11 @@
   --container-narrow-width: 100000px;
   --elevation-none: 0px;
   /* Typography composite — 2xs/xs (small) */
-  --typography-mega-poster-size:  var(--typography-size-2xl); /* 24px */
-  --typography-poster-size:       var(--typography-size-2xl); /* 24px */
-  --typography-heading-large-size:  var(--typography-size-xl); /* 20px */
-  --typography-heading-medium-size: var(--typography-size-lg); /* 18px */
-  --typography-heading-small-size:  var(--typography-size-md); /* 16px */
+  --typography-heading-2xl-size: var(--typography-size-2xl); /* 24px */
+  --typography-heading-xl-size:  var(--typography-size-2xl); /* 24px */
+  --typography-heading-lg-size:  var(--typography-size-xl);  /* 20px */
+  --typography-heading-md-size:  var(--typography-size-lg);  /* 18px */
+  --typography-heading-sm-size:  var(--typography-size-md);  /* 16px */
 }
 
 /* sm tier — 408px–767px */
@@ -527,11 +527,11 @@
   :root {
     /* Spacing same as sm */
     /* Typography jumps up */
-    --typography-mega-poster-size:  var(--typography-size-3xl); /* 32px */
-    --typography-poster-size:       var(--typography-size-3xl); /* 32px */
-    --typography-heading-large-size:  var(--typography-size-2xl); /* 24px */
-    --typography-heading-medium-size: var(--typography-size-xl);  /* 20px */
-    --typography-heading-small-size:  var(--typography-size-lg);  /* 18px */
+    --typography-heading-2xl-size: var(--typography-size-3xl); /* 32px */
+    --typography-heading-xl-size:  var(--typography-size-3xl); /* 32px */
+    --typography-heading-lg-size:  var(--typography-size-2xl); /* 24px */
+    --typography-heading-md-size:  var(--typography-size-xl);  /* 20px */
+    --typography-heading-sm-size:  var(--typography-size-lg);  /* 18px */
   }
 }
 
@@ -540,8 +540,8 @@
   :root {
     --container-padding:        var(--linear-sp-linear-8); /* 32px */
     --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
-    --typography-mega-poster-size: var(--typography-size-4xl); /* 40px */
-    /* poster stays at 32px, headings unchanged */
+    --typography-heading-2xl-size: var(--typography-size-4xl); /* 40px */
+    /* heading/xl stays at 32px, heading/lg–sm unchanged */
   }
 }
 

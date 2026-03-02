@@ -593,50 +593,40 @@ export const TextStyles: Story = {
 
       ${hr}
 
-      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Poster</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Big and even bigger typography elements. Usually claims.</p>
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Headings</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">All heading sizes from 2XL (large claims) down to SM. Responsive — sizes change at breakpoints.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           <tr>
-            <td style="${td}"><strong>Mega poster</strong></td>
-            <td style="${td}"><code>--typography-mega-poster-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-mega-poster-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-mega-poster-size,40px);font-weight:600;line-height:1.25;display:block">Mega poster</span></td>
+            <td style="${td}"><strong>Heading / 2XL</strong></td>
+            <td style="${td}"><code>--typography-heading-2xl-size</code></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-2xl-size" data-weight="600" data-lh="1.25"></span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-2xl-size,40px);font-weight:600;line-height:1.25;display:block">Heading 2XL</span></td>
           </tr>
           <tr>
-            <td style="${td}"><strong>Poster</strong></td>
-            <td style="${td}"><code>--typography-poster-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-poster-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-poster-size,32px);font-weight:600;line-height:1.25;display:block">Poster</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      ${hr}
-
-      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Headlines</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Structural headings for sections and content hierarchy.</p>
-      <table style="${ts}">
-        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
-        <tbody>
-          <tr>
-            <td style="${td}"><strong>Heading / large</strong></td>
-            <td style="${td}"><code>--typography-heading-large-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-large-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-large-size,24px);font-weight:600;line-height:1.25;display:block">Heading large</span></td>
+            <td style="${td}"><strong>Heading / XL</strong></td>
+            <td style="${td}"><code>--typography-heading-xl-size</code></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-xl-size" data-weight="600" data-lh="1.25"></span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-xl-size,32px);font-weight:600;line-height:1.25;display:block">Heading XL</span></td>
           </tr>
           <tr>
-            <td style="${td}"><strong>Heading / medium</strong></td>
-            <td style="${td}"><code>--typography-heading-medium-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-medium-size" data-weight="500" data-lh="1.33"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-medium-size,20px);font-weight:500;line-height:1.33;display:block">Heading medium</span></td>
+            <td style="${td}"><strong>Heading / LG</strong></td>
+            <td style="${td}"><code>--typography-heading-lg-size</code></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-lg-size" data-weight="600" data-lh="1.25"></span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-lg-size,24px);font-weight:600;line-height:1.25;display:block">Heading LG</span></td>
           </tr>
           <tr>
-            <td style="${td}"><strong>Heading / small</strong></td>
-            <td style="${td}"><code>--typography-heading-small-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-small-size" data-weight="500" data-lh="1.38"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-small-size,18px);font-weight:500;line-height:1.38;display:block">Heading small</span></td>
+            <td style="${td}"><strong>Heading / MD</strong></td>
+            <td style="${td}"><code>--typography-heading-md-size</code></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-md-size" data-weight="500" data-lh="1.33"></span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-md-size,20px);font-weight:500;line-height:1.33;display:block">Heading MD</span></td>
+          </tr>
+          <tr>
+            <td style="${td}"><strong>Heading / SM</strong></td>
+            <td style="${td}"><code>--typography-heading-sm-size</code></td>
+            <td style="${td}"><span data-live-spec="--typography-heading-sm-size" data-weight="500" data-lh="1.38"></span></td>
+            <td style="${td}"><span style="font-size:var(--typography-heading-sm-size,18px);font-weight:500;line-height:1.38;display:block">Heading SM</span></td>
           </tr>
         </tbody>
       </table>
@@ -730,14 +720,20 @@ export const TextStyles: Story = {
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 16px">Usage</h2>
-      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;font-size:13px"><code>/* Poster */
-.claim { font-size: var(--typography-poster-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;font-size:13px"><code>/* Heading / 2XL — large claims */
+.claim { font-size: var(--typography-heading-2xl-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
 
-/* Heading / large */
-h1 { font-size: var(--typography-heading-large-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+/* Heading / XL */
+h1 { font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
 
-/* Heading / medium */
-h2 { font-size: var(--typography-heading-medium-size); font-weight: var(--typography-weight-medium); line-height: 1.33; }
+/* Heading / LG */
+h2 { font-size: var(--typography-heading-lg-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+
+/* Heading / MD */
+h3 { font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-medium); line-height: 1.33; }
+
+/* Heading / SM */
+h4 { font-size: var(--typography-heading-sm-size); font-weight: var(--typography-weight-medium); line-height: 1.38; }
 
 /* Body / default */
 p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-regular); line-height: 1.5; }
