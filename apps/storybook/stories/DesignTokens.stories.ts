@@ -48,6 +48,12 @@ const paletteRow = (v: string) => {
   const heritage = entry?.heritage
     ? `<div style="margin-top:3px;font-size:.73em;color:var(--color-text-secondary,#6b6b70);font-style:italic">${entry.heritage}</div>`
     : '';
+  // When the hex field is already an rgba()/rgb() value (e.g. alpha tokens), show it
+  // with the correct label and skip the separate rgb row (it would be identical).
+  const hexVal = entry?.hex ?? null;
+  const isAlpha = hexVal !== null && (hexVal.startsWith('rgba(') || hexVal.startsWith('rgb('));
+  const hexRow = isAlpha ? copyRow('rgba', hexVal) : copyRow('hex', hexVal);
+  const rgbRow = isAlpha ? '' : copyRow('rgb', entry?.rgb ?? null);
   return `<tr>
     <td style="${td}">
       <div style="display:flex;align-items:center;gap:6px">
@@ -61,8 +67,8 @@ const paletteRow = (v: string) => {
         <span style="display:inline-block;width:72px;height:58px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:4px;flex-shrink:0"></span>
         <div style="display:flex;flex-direction:column;justify-content:center;min-height:58px">
           ${copyRow('oklch', entry?.oklch ?? null)}
-          ${copyRow('hex', entry?.hex ?? null)}
-          ${copyRow('rgb', entry?.rgb ?? null)}
+          ${hexRow}
+          ${rgbRow}
         </div>
       </div>
     </td>
