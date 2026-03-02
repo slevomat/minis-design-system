@@ -26,24 +26,43 @@ const sw = (v: string) =>
 const colorRow = (v: string, label: string) =>
   `<tr><td style="${td}"><div style="display:flex;align-items:center">${sw(v)}<code>${v}</code></div></td><td style="${td}">${label}</td></tr>`;
 
-type PaletteEntry = { hex: string | null; oklch: string | null; heritage: string };
+type PaletteEntry = { hex: string | null; rgb: string | null; oklch: string | null; heritage: string };
 const pd = paletteData as unknown as Record<string, PaletteEntry>;
+
+const copyBtn = (value: string) =>
+  `<button onclick="navigator.clipboard.writeText(${JSON.stringify(value)}).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='⎘',1200)})"
+    title="Copy ${value}"
+    style="margin-left:6px;padding:1px 5px;font-size:.7em;border:1px solid var(--color-border,#cbccce);border-radius:3px;background:var(--color-surface-faded,#f5f5f5);color:var(--color-text-secondary,#666);cursor:pointer;vertical-align:middle;line-height:1.4;flex-shrink:0">⎘</button>`;
+
+const copyRow = (label: string, value: string | null) => {
+  if (!value) return '';
+  return `<div style="display:flex;align-items:center;gap:4px;line-height:1.8">
+    <span style="font-size:.7em;color:var(--color-text-secondary,#999);width:38px;flex-shrink:0;text-align:right;font-variant-numeric:tabular-nums">${label}</span>
+    <code style="font-size:.78em;color:var(--color-text-secondary,#6b6b70)">${value}</code>
+    ${copyBtn(value)}
+  </div>`;
+};
 
 const paletteRow = (v: string) => {
   const entry = pd[v];
-  const hex = entry?.hex ?? '—';
-  const oklch = entry?.oklch ?? '—';
   const heritage = entry?.heritage
-    ? `<span style="display:inline-block;margin-top:4px;font-size:.75em;color:var(--color-text-secondary,#6b6b70);font-style:italic">${entry.heritage}</span>`
+    ? `<div style="margin-top:3px;font-size:.73em;color:var(--color-text-secondary,#6b6b70);font-style:italic">${entry.heritage}</div>`
     : '';
   return `<tr>
-    <td style="${td}"><code>${v}</code>${heritage}</td>
     <td style="${td}">
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="display:inline-block;width:32px;height:24px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:3px;flex-shrink:0"></span>
-        <div>
-          <code style="display:block;font-size:.8em;color:var(--color-text-secondary,#6b6b70)">${oklch}</code>
-          <code style="display:block;font-size:.8em;color:var(--color-text-secondary,#6b6b70)">${hex}</code>
+      <div style="display:flex;align-items:center;gap:6px">
+        <code style="font-size:.82em">${v}</code>
+        ${copyBtn(v)}
+      </div>
+      ${heritage}
+    </td>
+    <td style="${td}">
+      <div style="display:flex;align-items:flex-start;gap:12px">
+        <span style="display:inline-block;width:48px;height:56px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:4px;flex-shrink:0"></span>
+        <div style="display:flex;flex-direction:column;justify-content:center;min-height:56px">
+          ${copyRow('oklch', entry?.oklch ?? null)}
+          ${copyRow('hex', entry?.hex ?? null)}
+          ${copyRow('rgb', entry?.rgb ?? null)}
         </div>
       </div>
     </td>
@@ -193,10 +212,10 @@ export const Palette: Story = {
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Color Palette — Primitives</h1>
       <p>Raw color primitives. These form the foundation of all semantic tokens. <strong>Do not use these directly in product code</strong> — use Foundation tokens instead.</p>
-      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">Each row shows both the OKLCH value (used at runtime) and the HEX equivalent. Italic text below a token name is the legacy Heritage reference.</p>
+      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">Each row shows OKLCH (used at runtime), HEX, and RGB values. Click ⎘ to copy any value or token name. Italic text is the legacy Heritage reference.</p>
 
       <h2>Blue</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-blue-25')}
         ${paletteRow('--color-blue-35')}
         ${paletteRow('--color-blue-45')}
@@ -210,7 +229,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Green</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-green-25')}
         ${paletteRow('--color-green-35')}
         ${paletteRow('--color-green-45')}
@@ -223,7 +242,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Grey</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-grey-10')}
         ${paletteRow('--color-grey-20')}
         ${paletteRow('--color-grey-25')}
@@ -240,7 +259,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Red</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-red-15')}
         ${paletteRow('--color-red-25')}
         ${paletteRow('--color-red-35')}
@@ -254,7 +273,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Yellow</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-yellow-25')}
         ${paletteRow('--color-yellow-35')}
         ${paletteRow('--color-yellow-45')}
@@ -266,7 +285,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Gold</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-gold-25')}
         ${paletteRow('--color-gold-35')}
         ${paletteRow('--color-gold-45')}
@@ -278,7 +297,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Orange</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-orange-25')}
         ${paletteRow('--color-orange-35')}
         ${paletteRow('--color-orange-45')}
@@ -290,7 +309,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Pink</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-pink-25')}
         ${paletteRow('--color-pink-35')}
         ${paletteRow('--color-pink-45')}
@@ -303,7 +322,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Purple</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-purple-15')}
         ${paletteRow('--color-purple-20')}
         ${paletteRow('--color-purple-25')}
@@ -318,7 +337,7 @@ export const Palette: Story = {
       </tbody></table>
 
       <h2>Core</h2>
-      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">OKLCH / HEX</th></tr></thead><tbody>
+      <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-core-black')}
         ${paletteRow('--color-core-white')}
         ${paletteRow('--color-core-transparent')}

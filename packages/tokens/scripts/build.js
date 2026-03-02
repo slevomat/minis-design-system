@@ -45,6 +45,30 @@ console.log('✓ Built index.css (from tokens.css)');
 fs.copyFileSync(tokensSrc, path.join(distDir, 'tokens.css'));
 console.log('✓ Built tokens.css');
 
+// Convert a hex or rgba() string to an rgb()/rgba() string, or return the input unchanged.
+function hexToRgb(hex) {
+  if (!hex || typeof hex !== 'string') return null;
+  // Already rgba() / rgb() — return as-is
+  if (hex.startsWith('rgba(') || hex.startsWith('rgb(')) return hex;
+  // var() reference — no conversion possible
+  if (hex.startsWith('var(')) return null;
+  const h = hex.replace('#', '');
+  if (h.length === 6) {
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  if (h.length === 8) {
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    const a = Math.round((parseInt(h.slice(6, 8), 16) / 255) * 100) / 100;
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+  }
+  return null;
+}
+
 // Collect all leaf tokens from a JSON tree into an ordered array: { cssName, value, comment? }
 function collectTokens(node, results = []) {
   if (node && typeof node === 'object') {
@@ -95,6 +119,7 @@ if (fs.existsSync(rgbJsonPath)) {
       const rawHeritage = rgbComment || (oklchEntry && oklchEntry.comment) || '';
       palette[cssName] = {
         hex,
+        rgb: hexToRgb(hex),
         oklch: oklchEntry ? oklchEntry.value : null,
         heritage: rawHeritage.replace(/^Heritage reference:\s*/i, ''),
       };
