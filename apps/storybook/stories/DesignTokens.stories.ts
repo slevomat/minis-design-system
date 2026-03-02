@@ -675,13 +675,13 @@ export const TextStyles: Story = {
         <thead><tr><th style="${th}">Style</th><th style="${th}">Tokens</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           <tr>
-            <td style="${td}"><strong>Body / default</strong></td>
+            <td style="${td}"><strong>Body / MD</strong></td>
             <td style="${td}"><code>--typography-size-md</code></td>
             <td style="${td}">16px / 1.5 / regular</td>
             <td style="${td}"><span style="font-size:var(--typography-size-md,16px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
           </tr>
           <tr>
-            <td style="${td}"><strong>Body / small</strong></td>
+            <td style="${td}"><strong>Body / SM</strong></td>
             <td style="${td}"><code>--typography-size-sm</code></td>
             <td style="${td}">14px / 1.5 / regular</td>
             <td style="${td}"><span style="font-size:var(--typography-size-sm,14px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
