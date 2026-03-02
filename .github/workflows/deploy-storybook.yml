@@ -36,6 +36,8 @@ jobs:
 
       - name: Build Storybook
         run: pnpm build-storybook
+        env:
+          STORYBOOK_BASE_URL: /minis-design-system/
 
       - uses: actions/upload-pages-artifact@v3
         with:

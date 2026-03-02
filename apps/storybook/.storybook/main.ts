@@ -24,6 +24,7 @@ const config: StorybookConfig = {
   ],
   async viteFinal(config) {
     return mergeConfig(config, {
+      base: process.env.STORYBOOK_BASE_URL ?? '/',
       esbuild: {
         target: 'es2020',
       },
