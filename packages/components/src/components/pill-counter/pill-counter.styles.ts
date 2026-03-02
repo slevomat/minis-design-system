@@ -12,8 +12,8 @@ export const pillCounterStyles = css`
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-radius-full, 9999px);
-    background: var(--color-core-white, #fff);
-    color: var(--color-text-primary, #000);
+    background: var(--pill-counter-bg, var(--color-core-white, #fff));
+    color: var(--pill-counter-color, var(--color-text-primary, #000));
     font-family: Arial, sans-serif;
     font-weight: var(--typography-weight-bold, 700);
     font-style: normal;

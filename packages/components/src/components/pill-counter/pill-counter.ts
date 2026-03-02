@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { pillCounterStyles } from './pill-counter.styles.js';
 
@@ -29,9 +29,22 @@ export class MinisPillCounter extends LitElement {
   @property({ type: String, reflect: true })
   size: PillCounterSize = 'md';
 
+  @property({ type: String, attribute: 'bg-color' })
+  bgColor: string = '';
+
+  @property({ type: String, attribute: 'text-color' })
+  textColor: string = '';
+
   render() {
+    const style = [
+      this.bgColor ? `--pill-counter-bg: ${this.bgColor}` : '',
+      this.textColor ? `--pill-counter-color: ${this.textColor}` : '',
+    ]
+      .filter(Boolean)
+      .join('; ');
+
     return html`
-      <span class="pill"><slot></slot></span>
+      <span class="pill" style=${style || nothing}><slot></slot></span>
     `;
   }
 }
