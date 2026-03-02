@@ -18,11 +18,11 @@ const TIER_TOKENS: Record<string, string> = {
     --spacing-layout-xl: var(--linear-sp-linear-8);
     --container-padding: var(--linear-sp-linear-2);
     --container-narrow-padding: var(--linear-sp-linear-2);
-    --typography-mega-poster-size: var(--typography-size-2xl);
-    --typography-poster-size: var(--typography-size-2xl);
-    --typography-heading-large-size: var(--typography-size-xl);
-    --typography-heading-medium-size: var(--typography-size-lg);
-    --typography-heading-small-size: var(--typography-size-md);
+    --typography-heading-2xl-size: var(--typography-size-2xl);
+    --typography-heading-xl-size: var(--typography-size-2xl);
+    --typography-heading-lg-size: var(--typography-size-xl);
+    --typography-heading-md-size: var(--typography-size-lg);
+    --typography-heading-sm-size: var(--typography-size-md);
   `,
   sm: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -32,11 +32,11 @@ const TIER_TOKENS: Record<string, string> = {
     --spacing-layout-xl: var(--linear-sp-linear-12);
     --container-padding: var(--linear-sp-linear-4);
     --container-narrow-padding: var(--linear-sp-linear-4);
-    --typography-mega-poster-size: var(--typography-size-2xl);
-    --typography-poster-size: var(--typography-size-2xl);
-    --typography-heading-large-size: var(--typography-size-xl);
-    --typography-heading-medium-size: var(--typography-size-lg);
-    --typography-heading-small-size: var(--typography-size-md);
+    --typography-heading-2xl-size: var(--typography-size-2xl);
+    --typography-heading-xl-size: var(--typography-size-2xl);
+    --typography-heading-lg-size: var(--typography-size-xl);
+    --typography-heading-md-size: var(--typography-size-lg);
+    --typography-heading-sm-size: var(--typography-size-md);
   `,
   md_lg: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -46,11 +46,11 @@ const TIER_TOKENS: Record<string, string> = {
     --spacing-layout-xl: var(--linear-sp-linear-12);
     --container-padding: var(--linear-sp-linear-4);
     --container-narrow-padding: var(--linear-sp-linear-4);
-    --typography-mega-poster-size: var(--typography-size-3xl);
-    --typography-poster-size: var(--typography-size-3xl);
-    --typography-heading-large-size: var(--typography-size-2xl);
-    --typography-heading-medium-size: var(--typography-size-xl);
-    --typography-heading-small-size: var(--typography-size-lg);
+    --typography-heading-2xl-size: var(--typography-size-3xl);
+    --typography-heading-xl-size: var(--typography-size-3xl);
+    --typography-heading-lg-size: var(--typography-size-2xl);
+    --typography-heading-md-size: var(--typography-size-xl);
+    --typography-heading-sm-size: var(--typography-size-lg);
   `,
   xl: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -60,11 +60,11 @@ const TIER_TOKENS: Record<string, string> = {
     --spacing-layout-xl: var(--linear-sp-linear-12);
     --container-padding: var(--linear-sp-linear-8);
     --container-narrow-padding: var(--linear-sp-linear-8);
-    --typography-mega-poster-size: var(--typography-size-4xl);
-    --typography-poster-size: var(--typography-size-3xl);
-    --typography-heading-large-size: var(--typography-size-2xl);
-    --typography-heading-medium-size: var(--typography-size-xl);
-    --typography-heading-small-size: var(--typography-size-lg);
+    --typography-heading-2xl-size: var(--typography-size-4xl);
+    --typography-heading-xl-size: var(--typography-size-3xl);
+    --typography-heading-lg-size: var(--typography-size-2xl);
+    --typography-heading-md-size: var(--typography-size-xl);
+    --typography-heading-sm-size: var(--typography-size-lg);
   `,
 };
 
