@@ -11,7 +11,8 @@
     "./layout": "./dist/layout.css",
     "./breakpoints": "./dist/breakpoints.css",
     "./themes/default": "./dist/themes/default.css",
-    "./themes/gift": "./dist/themes/gift.css"
+    "./themes/gift": "./dist/themes/gift.css",
+    "./tokens.rgb": "./dist/tokens.rgb.css"
   },
   "files": [
     "dist"

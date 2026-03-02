@@ -45,4 +45,43 @@ console.log('✓ Built index.css (from tokens.css)');
 fs.copyFileSync(tokensSrc, path.join(distDir, 'tokens.css'));
 console.log('✓ Built tokens.css');
 
+// Generate tokens.rgb.css from tokens.rgb.json (HEX/rgba values, same CSS variable names)
+const rgbJsonPath = path.join(__dirname, '../../../tokens.rgb.json');
+if (fs.existsSync(rgbJsonPath)) {
+  const rgbJson = JSON.parse(fs.readFileSync(rgbJsonPath, 'utf-8'));
+
+  function collectTokens(node, results = []) {
+    if (node && typeof node === 'object') {
+      if ('cssName' in node && 'value' in node) {
+        results.push({ cssName: node.cssName, value: node.value });
+      } else {
+        for (const child of Object.values(node)) {
+          collectTokens(child, results);
+        }
+      }
+    }
+    return results;
+  }
+
+  const tokens = collectTokens(rgbJson);
+  const declarations = tokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n');
+  const css = [
+    '/**',
+    ' * Minis Design System - Global Tokens (HEX/RGB)',
+    ` * Generated from tokens.rgb.json on ${new Date().toISOString()}`,
+    ' * Use this file instead of tokens.css for environments without OKLCH support.',
+    ' */',
+    '',
+    ':root {',
+    declarations,
+    '}',
+    '',
+  ].join('\n');
+
+  fs.writeFileSync(path.join(distDir, 'tokens.rgb.css'), css);
+  console.log('✓ Built tokens.rgb.css');
+} else {
+  console.warn('⚠ tokens.rgb.json not found, skipping tokens.rgb.css');
+}
+
 console.log('\n✅ Token build complete!');
