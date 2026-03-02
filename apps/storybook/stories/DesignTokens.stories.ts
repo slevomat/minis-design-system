@@ -30,14 +30,14 @@ type PaletteEntry = { hex: string | null; rgb: string | null; oklch: string | nu
 const pd = paletteData as unknown as Record<string, PaletteEntry>;
 
 const copyBtn = (value: string) =>
-  `<button onclick="navigator.clipboard.writeText(${JSON.stringify(value)}).then(()=>{this.textContent='✓';setTimeout(()=>this.textContent='⎘',1200)})"
+  `<button data-copy=${JSON.stringify(value)}
     title="Copy ${value}"
     style="margin-left:6px;padding:1px 5px;font-size:.7em;border:1px solid var(--color-border,#cbccce);border-radius:3px;background:var(--color-surface-faded,#f5f5f5);color:var(--color-text-secondary,#666);cursor:pointer;vertical-align:middle;line-height:1.4;flex-shrink:0">⎘</button>`;
 
 const copyRow = (label: string, value: string | null) => {
   if (!value) return '';
-  return `<div style="display:flex;align-items:center;gap:4px;line-height:1.8">
-    <span style="font-size:.7em;color:var(--color-text-secondary,#999);width:38px;flex-shrink:0;text-align:right;font-variant-numeric:tabular-nums">${label}</span>
+  return `<div style="display:flex;align-items:center;gap:6px;line-height:1.8">
+    <span style="font-size:.72em;font-weight:600;color:var(--color-text-secondary,#999);width:44px;flex-shrink:0;font-variant-numeric:tabular-nums">${label}</span>
     <code style="font-size:.78em;color:var(--color-text-secondary,#6b6b70)">${value}</code>
     ${copyBtn(value)}
   </div>`;
@@ -51,15 +51,15 @@ const paletteRow = (v: string) => {
   return `<tr>
     <td style="${td}">
       <div style="display:flex;align-items:center;gap:6px">
-        <code style="font-size:.82em">${v}</code>
+        <code style="font-size:.82em;font-weight:600">${v}</code>
         ${copyBtn(v)}
       </div>
       ${heritage}
     </td>
     <td style="${td}">
       <div style="display:flex;align-items:flex-start;gap:12px">
-        <span style="display:inline-block;width:48px;height:56px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:4px;flex-shrink:0"></span>
-        <div style="display:flex;flex-direction:column;justify-content:center;min-height:56px">
+        <span style="display:inline-block;width:72px;height:58px;background:var(${v});border:1px solid var(--color-border,#cbccce);border-radius:4px;flex-shrink:0"></span>
+        <div style="display:flex;flex-direction:column;justify-content:center;min-height:58px">
           ${copyRow('oklch', entry?.oklch ?? null)}
           ${copyRow('hex', entry?.hex ?? null)}
           ${copyRow('rgb', entry?.rgb ?? null)}
@@ -342,6 +342,21 @@ export const Palette: Story = {
         ${paletteRow('--color-core-white')}
         ${paletteRow('--color-core-transparent')}
       </tbody></table>
+
+      <script>
+        (function() {
+          document.addEventListener('click', function(e) {
+            var btn = e.target.closest('[data-copy]');
+            if (!btn) return;
+            var text = btn.getAttribute('data-copy');
+            navigator.clipboard.writeText(text).then(function() {
+              var prev = btn.textContent;
+              btn.textContent = '✓';
+              setTimeout(function() { btn.textContent = prev; }, 1200);
+            });
+          });
+        })();
+      </script>
     </div>
   `),
 };
