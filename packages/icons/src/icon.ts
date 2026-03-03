@@ -54,7 +54,8 @@ export class MinisIcon extends LitElement {
     return html`
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
+        viewBox="0 0 18 18"
+        fill="currentColor"
         style="width:${this.size}px;height:${this.size}px"
         role=${this.label ? 'img' : nothing}
         aria-label=${this.label ?? nothing}
