@@ -92,6 +92,139 @@ export const Overview: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
+      <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
+    </div>
+  `,
+};
+
+export const DeveloperGuide: Story = {
+  name: 'Developer guide',
+  render: () => html`
+    <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:2rem;margin-bottom:.5rem">Developer Guide</h1>
+      <p>Mini*S components are standard <strong>Web Components</strong> built with <a href="https://lit.dev" style="color:var(--color-interaction-primary-surface,#006eb9)">Lit</a>. They work in any modern framework or plain HTML — no wrappers needed.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Installation</h2>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>pnpm add @minis/components @minis/tokens</code></pre>
+      <p>Both packages ship full TypeScript types — no <code>@types/*</code> needed.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Setup</h2>
+      <p>Load the token stylesheet once at the application root, then import components as ES modules:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;!-- index.html --&gt;
+&lt;link rel="stylesheet" href="node_modules/@minis/tokens/dist/index.css"&gt;</code></pre>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>// main entry (e.g. main.ts / main.js)
+import '@minis/components';</code></pre>
+      <p>With a bundler (Vite, Webpack) you can import the token CSS the same way:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>import '@minis/tokens/dist/index.css';</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Framework Integration</h2>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Framework</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Notes</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Vanilla HTML</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Works out of the box — use custom element tags directly.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Vue 3</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Works natively. Add <code>compilerOptions.isCustomElement: (tag) => tag.startsWith('minis-')</code> in <code>vite.config.ts</code> to suppress unknown element warnings.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>React 18+</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Web Components work in React but event binding uses <code>ref</code> for custom events. React 19 adds full Web Component support — no workarounds needed.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Angular</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Add <code>CUSTOM_ELEMENTS_SCHEMA</code> to the module/component where Mini*S elements are used.</td></tr>
+        </tbody>
+      </table>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Theme &amp; Mode Switching</h2>
+      <p>Appearance is driven entirely by CSS custom properties. Set attributes on any ancestor element (typically <code>&lt;html&gt;</code> or a wrapper <code>&lt;div&gt;</code>):</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Attribute</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Values</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Effect</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>data-mode</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>light</code> (default) · <code>dark</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Switches all color tokens to the dark palette</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>data-theme</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>classic</code> (default) · <code>gift</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Switches brand accent colors (e.g. CTA button)</td></tr>
+        </tbody>
+      </table>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;!-- dark mode --&gt;
+&lt;html data-mode="dark"&gt;
+
+&lt;!-- gift theme in dark mode --&gt;
+&lt;div data-mode="dark" data-theme="gift"&gt;
+  &lt;minis-button variant="cta-buy"&gt;Buy now&lt;/minis-button&gt;
+&lt;/div&gt;</code></pre>
+      <p>Toggle programmatically:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>document.documentElement.dataset.mode = 'dark';
+document.documentElement.dataset.theme = 'gift';</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Using Design Tokens in Custom Code</h2>
+      <p>Once <code>@minis/tokens/dist/index.css</code> is loaded, all tokens are available as CSS custom properties on <code>:root</code>. Use them directly in your own stylesheets or inline styles:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>.my-element {
+  color: var(--color-text-primary);
+  background: var(--color-surface-faded);
+  border-radius: var(--border-radius-sm);   /* 4px */
+  padding: var(--linear-sp-linear-8);       /* 8px */
+  gap: var(--fibonachi-sp-fib-8);           /* 8px */
+}</code></pre>
+      <p>Token categories:</p>
+      <ul>
+        <li><strong>Color</strong> — <code>--color-text-*</code>, <code>--color-surface-*</code>, <code>--color-border-*</code>, <code>--color-interaction-{variant}-{surface|accent|border}</code></li>
+        <li><strong>Spacing (linear)</strong> — <code>--linear-sp-linear-{n}</code> (4, 8, 12, 16, 20, 24…)</li>
+        <li><strong>Spacing (Fibonacci)</strong> — <code>--fibonachi-sp-fib-{n}</code> (2, 3, 5, 8, 13, 21…)</li>
+        <li><strong>Border radius</strong> — <code>--border-radius-sm</code> (4px), <code>--border-radius-md</code> (8px)</li>
+        <li><strong>Pixel scale</strong> — <code>--pixel-px-{n}</code></li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Component API Patterns</h2>
+      <p>All Mini*S components follow the same conventions:</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Pattern</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Example</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">String attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>variant="secondary"</code>, <code>size="sm"</code></td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Boolean attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>disabled</code>, <code>icon-only</code> — presence = true, absence = false</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Named slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>&lt;svg slot="icon" …&gt;</code> — use the <code>slot</code> attribute on a child element</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Default slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Text content between tags — <code>&lt;minis-button&gt;Label&lt;/minis-button&gt;</code></td></tr>
+        </tbody>
+      </table>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;!-- label only --&gt;
+&lt;minis-button variant="primary" size="md"&gt;Buy now&lt;/minis-button&gt;
+
+&lt;!-- icon + label + counter pill --&gt;
+&lt;minis-button variant="secondary" counter="3"&gt;
+  &lt;svg slot="icon" width="16" height="16" viewBox="0 0 16 16"&gt;…&lt;/svg&gt;
+  Cart
+&lt;/minis-button&gt;
+
+&lt;!-- icon-only with counter --&gt;
+&lt;minis-button variant="primary" icon-only counter="5"&gt;
+  &lt;svg slot="icon" width="16" height="16" viewBox="0 0 16 16"&gt;…&lt;/svg&gt;
+&lt;/minis-button&gt;
+
+&lt;!-- disabled --&gt;
+&lt;minis-button variant="primary" disabled&gt;Unavailable&lt;/minis-button&gt;</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Browser Support</h2>
+      <p>Mini*S targets <strong>evergreen browsers</strong> (Chrome, Firefox, Safari, Edge — last 2 major versions). No polyfills are required. Web Components with Shadow DOM and CSS custom properties are natively supported across all targets.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
+      <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>
   `,
 };
@@ -100,50 +233,78 @@ export const ContributionGuide: Story = {
   name: 'Contribution guide',
   render: () => html`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
-      <h1>Contributing to Mini*S</h1>
-      <p>While design systems define standards and rules, they must remain <strong>open to evolution</strong>. Your feedback and contributions are essential for keeping the system aligned with real-world product needs.</p>
+      <h1 style="font-size:2rem;margin-bottom:.5rem">Contribution Guide</h1>
+      <p>Mini*S is a shared resource — maintained by designers and developers together. Whether you spotted an inconsistency, need a missing component, or want to improve documentation, your input is welcome. This guide applies to everyone using the system.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2>Before Proposing Changes</h2>
+      <h2>Before Proposing a Change</h2>
+      <p>A few steps that save everyone time:</p>
       <ol>
-        <li><strong>Audit the System</strong> — Review existing components, patterns, and tokens to ensure a solution doesn't already exist</li>
-        <li><strong>Validate the Need</strong> — Check if your use case is a recurring pattern or a one-off edge case</li>
-        <li><strong>Team Sync</strong> — Discuss the requirement with your team to confirm its broader utility</li>
+        <li><strong>Check what already exists</strong> — Browse this Storybook and the Figma library. The component or token you need may already be there.</li>
+        <li><strong>Validate the need</strong> — Is this a recurring pattern across multiple screens/features, or a one-off edge case? The DS prioritises recurring needs.</li>
+        <li><strong>Align with your team first</strong> — Confirm the requirement has broader utility before escalating it as a DS change.</li>
       </ol>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2>Proposing Improvements or New Elements</h2>
-      <ol>
-        <li><strong>Define the Rationale</strong> — Document the use case and why the current system doesn't meet it</li>
-        <li><strong>Provide Context</strong> — Include examples of the intended usage (e.g., a Figma link or screenshot)</li>
-        <li><strong>Technical Feasibility</strong> — For changes affecting the codebase, consult with developers early</li>
-        <li><strong>Consult Design Leadership</strong> — Contact the Head of Design to review the proposal</li>
-        <li><strong>Maintain Consistency</strong> — Ensure your proposal follows established naming conventions and visual patterns</li>
-      </ol>
+      <h2>Types of Contributions</h2>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Type</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Who</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">How</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>New component or variant</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Designer · Developer</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Raise with Head of Design. Provide a Figma frame or code prototype showing the intended behaviour.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>New or changed token</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Designer · Developer</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Tokens must be agreed by both design and engineering — changes cascade across the entire system. Discuss before adding.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Bug fix / code improvement</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Developer</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Open a PR against <code>master</code>. Include a Storybook story or screenshot demonstrating the fix.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Documentation update</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Anyone</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Edit the relevant story or <code>docs/ai-prompts/</code> file and open a PR. No design review required for docs-only changes.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Feedback or question</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Anyone</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Reach out to the Head of Design directly or raise it in your team's design-system channel.</td>
+          </tr>
+        </tbody>
+      </table>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2>Contribution Checklist</h2>
+      <h2>Checklist for Any Change</h2>
       <table style="border-collapse:collapse;width:100%;margin:1rem 0">
         <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
-          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Item</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Check</th>
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Question</th>
         </tr></thead>
         <tbody>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Naming</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it follow the system's naming conventions and semantic meaning?</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Adaptability</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it work across different themes (Light/Dark mode) and platforms?</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Redundancy</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it avoid duplicating existing components or styles?</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Implementation Ready</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the logic behind the change clear for both design and code?</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Documentation</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is it accompanied by clear usage guidelines?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>No duplication</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does an equivalent component, variant, or token already exist?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Naming</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it follow the system's naming conventions (semantic, not descriptive)?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Theme &amp; mode</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it work correctly in both light/dark mode and classic/gift theme?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Design + code aligned</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the intent clear to both a designer and a developer?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Documented</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the change reflected in the Storybook story and/or <code>docs/ai-prompts/</code>?</td></tr>
         </tbody>
       </table>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
-      <p>For questions, proposals, or feedback regarding Mini*S, reach out directly or through your design team lead.</p>
+      <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>
   `,
 };
