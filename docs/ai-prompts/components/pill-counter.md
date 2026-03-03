@@ -26,11 +26,13 @@ list items, headlines, etc.
 
 Each size has a designated context — do not mix them:
 
-| Size | Use in                                     |
-|------|--------------------------------------------|
-| `md` | General use — standalone, lists, headlines |
-| `sm` | Inside icon + label buttons                |
-| `xs` | Inside icon-only buttons                   |
+| Size | Dimensions | Use in                                                         |
+|------|------------|----------------------------------------------------------------|
+| `md` | 15×15px    | General use — standalone, lists, headlines; md/lg label buttons |
+| `sm` | 11×11px    | Inside sm label buttons (icon + label); md/lg icon-only buttons |
+| `xs` | 8×8px      | Inside sm icon-only buttons                                    |
+
+Single-digit values render as a circle; multi-digit values expand horizontally into a pill (capsule) shape.
 
 ## Design Tokens Used
 
@@ -39,15 +41,19 @@ Each size has a designated context — do not mix them:
 --color-text-primary    /* Pill text colour */
 --radius-radius-full    /* Border radius (full pill shape) */
 
-/* Typography sizing via pixel tokens */
+/* Overridable via CSS custom properties */
+--pill-counter-bg       /* defaults to --color-core-white */
+--pill-counter-color    /* defaults to --color-text-primary */
+
+/* Pixel tokens used for sizing */
+--pixel-px-15   /* md height, min-width */
 --pixel-px-12   /* md font-size */
---pixel-px-11   /* md line-height */
---pixel-px-15   /* md min-width */
+--pixel-px-11   /* sm height, min-width */
 --pixel-px-10   /* sm font-size */
---pixel-px-8    /* sm line-height / xs font-size */
---pixel-px-11   /* sm min-width */
---pixel-px-8    /* xs min-width */
---pixel-px-6    /* xs line-height */
+--pixel-px-8    /* xs height, min-width, font-size */
+--pixel-px-4    /* md horizontal padding */
+--pixel-px-2    /* sm horizontal padding */
+--pixel-px-1    /* xs horizontal padding */
 ```
 
 ## Usage Examples
@@ -68,19 +74,36 @@ Each size has a designated context — do not mix them:
 
 ### Used via minis-button (automatic — preferred)
 
-`<minis-button>` selects the correct size automatically:
-- `sm` when the button has a label (icon + label variant)
-- `xs` when the button is icon-only
+`<minis-button>` selects the correct pill size automatically based on button size and mode:
+
+| Button size | Label mode (icon + label) | Icon-only mode |
+|-------------|--------------------------|----------------|
+| `sm`        | `sm` pill                | `xs` pill      |
+| `md`        | `md` pill                | `sm` pill      |
+| `lg`        | `md` pill                | `sm` pill      |
+
+When `icon-only` is set, the icon dims to 75% opacity so the floating pill reads clearly.
 
 ```html
-<!-- sm pill chosen automatically -->
+<!-- md pill chosen automatically (md button + label) -->
 <minis-button variant="cta-buy" counter="3">
   <svg slot="icon" ...></svg>
   Cart
 </minis-button>
 
-<!-- xs pill chosen automatically -->
+<!-- sm pill chosen automatically (sm button + label) -->
+<minis-button variant="cta-buy" size="sm" counter="3">
+  <svg slot="icon" ...></svg>
+  Cart
+</minis-button>
+
+<!-- sm pill, floating top-right, icon at 75% opacity (md icon-only) -->
 <minis-button variant="cta-buy" icon-only counter="3" aria-label="Cart, 3 items">
+  <svg slot="icon" ...></svg>
+</minis-button>
+
+<!-- xs pill, floating top-right, icon at 75% opacity (sm icon-only) -->
+<minis-button variant="cta-buy" size="sm" icon-only counter="3" aria-label="Cart, 3 items">
   <svg slot="icon" ...></svg>
 </minis-button>
 ```
@@ -101,10 +124,15 @@ Add a pill counter badge using the Mini*S pill-counter component:
 
 <minis-pill-counter size="md">3</minis-pill-counter>
 
-Sizes: md (default, general use) | sm (inside icon+label buttons) | xs (inside icon-only buttons)
+Sizes:
+  md (15×15px) — general use, standalone, md/lg label buttons
+  sm (11×11px) — sm label buttons, md/lg icon-only buttons
+  xs  (8×8px)  — sm icon-only buttons
+
+Single-digit → circle. Multi-digit → capsule (expands horizontally).
 
 Note: When using with <minis-button>, use the counter="…" attribute on the button instead —
-it will render the correct pill size automatically.
+it selects the correct pill size automatically based on button size and icon-only mode.
 ```
 
 ## Accessibility
@@ -124,6 +152,7 @@ it will render the correct pill size automatically.
 
 - Don't use `sm` or `xs` standalone — these sizes are calibrated for use inside buttons
 - Don't put text or icons inside the pill — numbers only
+- Don't manually compose a pill inside a button — always use `counter="…"` on `<minis-button>`
 
 ---
 

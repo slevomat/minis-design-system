@@ -17,7 +17,7 @@ icon support, and an optional counter pill badge.
 | `size`      | string  | `"md"`      | `sm`, `md`, `lg`                                                          |
 | `disabled`  | boolean | `false`     | —                                                                         |
 | `icon-only` | boolean | `false`     | Renders only the icon slot; counter pill floats top-right                 |
-| `counter`   | string  | —           | Number string e.g. `"3"`. Inline pill when label present, floating when `icon-only` |
+| `counter`   | string  | —           | Number string e.g. `"3"`. Inline pill after label; floating top-right when `icon-only`. Pill size is chosen automatically based on button size — see table below. |
 | `type`      | string  | `"button"`  | `button`, `submit`, `reset`                                               |
 
 ### Slots
@@ -159,22 +159,28 @@ Add the `icon-only` boolean attribute. Always include `aria-label` for accessibi
 <minis-button variant="primary" disabled>Unavailable</minis-button>
 ```
 
-### Counter pill — inline (icon + label)
+### Counter pill
+
+The pill size is chosen automatically — never set it manually:
+
+| Button size | Label mode (icon + label) | Icon-only mode               |
+|-------------|--------------------------|------------------------------|
+| `sm`        | `sm` pill (11×11px)      | `xs` pill (8×8px)            |
+| `md`        | `md` pill (15×15px)      | `sm` pill (11×11px)          |
+| `lg`        | `md` pill (15×15px)      | `sm` pill (11×11px)          |
+
+In icon-only mode the icon dims to 75% opacity so the floating pill is clearly readable.
 
 ```html
+<!-- Inline pill (after label) — md pill auto-selected for md button -->
 <minis-button variant="cta-buy" counter="3">
   <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM5.21 5H3V3H1v2h2l3.6 7.59L5.25 15c-.16.28-.25.61-.25.95C5 17.1 5.9 18 7 18h14v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.5 5H5.21z"/>
   </svg>
   Cart
 </minis-button>
-```
 
-### Counter pill — floating (icon only)
-
-When `icon-only` is set, the pill floats in the top-right corner of the button.
-
-```html
+<!-- Floating pill (top-right corner), icon at 75% opacity — sm pill auto-selected for md button -->
 <minis-button variant="cta-buy" icon-only counter="3" aria-label="Cart, 3 items">
   <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM5.21 5H3V3H1v2h2l3.6 7.59L5.25 15c-.16.28-.25.61-.25.95C5 17.1 5.9 18 7 18h14v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.5 5H5.21z"/>
