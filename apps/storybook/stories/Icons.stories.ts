@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import '@minis/icons';
-import '@minis/components';
+import '@minis/components'; // resolved to src via Vite alias in main.ts
 
 const ALL_ICONS = [
   'arrow-down', 'arrow-left', 'arrow-right', 'arrow-up',

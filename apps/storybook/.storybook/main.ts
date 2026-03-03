@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/web-components-vite';
 import { mergeConfig } from 'vite';
+import { resolve } from 'path';
 
 const config: StorybookConfig = {
   stories: [
@@ -27,6 +28,12 @@ const config: StorybookConfig = {
       base: process.env.STORYBOOK_BASE_URL ?? '/',
       esbuild: {
         target: 'es2020',
+      },
+      resolve: {
+        alias: {
+          '@minis/icons': resolve(__dirname, '../../../packages/icons/src/index.ts'),
+          '@minis/components': resolve(__dirname, '../../../packages/components/src/index.ts'),
+        },
       },
     });
   },
