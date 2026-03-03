@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@minis/components": "workspace:*",
+    "@minis/icons": "workspace:*",
     "@minis/tokens": "workspace:*",
     "@storybook/addon-a11y": "^7.6.7",
     "@storybook/addon-essentials": "^7.6.7",

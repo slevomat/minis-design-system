@@ -9,6 +9,7 @@ Individual UI elements with props and variants.
 
 - [Alert](./components/alert.md) - Contextual feedback: notice, success, error, warning
 - [Button](./components/button.md) - Primary actions, variants, sizes, icon support, counter pill
+- [Icon](./components/icon.md) - SVG icons via `<minis-icon>`, currentColor theming, a11y
 - [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
 
 [→ All Components](./components/README.md)

@@ -29,6 +29,9 @@ importers:
       '@minis/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@minis/icons':
+        specifier: workspace:*
+        version: link:../../packages/icons
       '@minis/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
@@ -69,6 +72,9 @@ importers:
         specifier: ^3.1.0
         version: 3.3.2
     devDependencies:
+      '@minis/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@minis/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -81,6 +87,22 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@25.0.10)
+
+  packages/icons:
+    dependencies:
+      lit:
+        specifier: ^3.1.0
+        version: 3.3.2
+    devDependencies:
+      '@minis/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
+      vite:
+        specifier: ^5.0.0
+        version: 5.4.21(@types/node@25.0.10)
 
   packages/tokens: {}
 
