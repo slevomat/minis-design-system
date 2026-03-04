@@ -158,7 +158,7 @@ export class MyComponent extends LitElement {
 
 ## 📚 Documentation
 
-Run Storybook:
+Run Storybook (available at **http://localhost:6006**):
 ```bash
 pnpm storybook
 ```

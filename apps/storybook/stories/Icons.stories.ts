@@ -44,7 +44,7 @@ const ALL_ICONS = [
 ] as const;
 
 const meta: Meta = {
-  title: 'Foundation/Icons',
+  title: 'Components/Icons',
   parameters: {
     options: { showPanel: false },
   },
