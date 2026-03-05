@@ -46,7 +46,7 @@ const ALL_ICONS = [
 const meta: Meta = {
   title: 'Components/Icons',
   parameters: {
-    options: { showPanel: false },
+    controls: { disable: true },
   },
 };
 

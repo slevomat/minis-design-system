@@ -9,7 +9,7 @@ const r = (s: string) => html`${unsafeHTML(s)}`;
 const meta: Meta = {
   title: 'Design Tokens',
   parameters: {
-    options: { showPanel: false },
+    controls: { disable: true },
   },
 };
 

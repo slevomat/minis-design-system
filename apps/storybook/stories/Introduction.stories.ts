@@ -4,7 +4,7 @@ import { html } from 'lit';
 const meta: Meta = {
   title: 'Introduction',
   parameters: {
-    options: { showPanel: false },
+    controls: { disable: true },
   },
 };
 
