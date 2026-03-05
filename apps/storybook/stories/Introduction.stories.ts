@@ -229,6 +229,93 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
   `,
 };
 
+export const AIDesignIntegration: Story = {
+  name: 'AI & Figma integration',
+  render: () => html`
+    <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:2rem;margin-bottom:.5rem">AI &amp; Figma Integration</h1>
+      <p>Mini*S is designed with <strong>AI-first documentation</strong> — structured prompts and instruction sets that enable AI agents (Cursor, Claude Code, GitHub Copilot, etc.) to generate consistent, design-system-compliant code.</p>
+      <p>Connect Figma directly to Claude Code so you can reference live designs in AI prompts — extract tokens, generate components, and keep code in sync with design without manual copy-paste.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Figma MCP Setup</h2>
+      <p><strong>1. Install Claude Code CLI</strong></p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>brew install --cask claude-code</code></pre>
+
+      <p><strong>2. Add the Figma MCP server</strong></p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user</code></pre>
+
+      <p><strong>3. Authenticate</strong></p>
+      <ul>
+        <li>Start a Claude Code session: <code>claude</code></li>
+        <li>Type <code>/mcp</code> → select <strong>Figma</strong> → <strong>Authenticate</strong> → <strong>Allow Access</strong> in the browser</li>
+        <li>Type <code>/mcp</code> again to confirm "Connected to figma"</li>
+      </ul>
+      <p><em>Tip: In Figma, right-click any frame or component → <strong>Copy link to selection</strong> to get a URL you can paste directly into your AI prompt.</em></p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Example AI Prompts</h2>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code># Extract design tokens from a Figma file
+"Extract all color and spacing tokens from this Figma file and compare with our existing tokens: https://www.figma.com/..."
+
+# Generate a component from a Figma frame
+"Generate a Lit web component for this button variant: https://www.figma.com/..."
+
+# Sync check
+"What CSS variables are missing in our tokens to match this design: https://www.figma.com/..."
+
+# In Cursor or Claude Code
+"Create a login form using Mini*S components and tokens"</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>AI Prompts Library</h2>
+      <p>Every component has a matching <code>docs/ai-prompts/components/&lt;name&gt;.md</code> — the authoritative AI reference with API table, slots, real token names, usage examples, a11y notes, and a copy-paste prompt.</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Folder</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Contents</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/components/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Individual UI elements — props, variants, usage examples</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/patterns/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Composable UI patterns combining multiple components</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/templates/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Full page layouts and structures</td></tr>
+        </tbody>
+      </table>
+
+      <h2>How AI Agents Use Mini*S</h2>
+      <ol>
+        <li><strong>Load context</strong> — AI reads the relevant <code>.md</code> instruction file</li>
+        <li><strong>Understand tokens</strong> — AI learns available design tokens and CSS variables</li>
+        <li><strong>Generate code</strong> — AI produces code that follows Mini*S conventions</li>
+        <li><strong>Stay consistent</strong> — All generated code uses the same token system</li>
+      </ol>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Project Structure</h2>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>minis-design-system/
+├── packages/
+│   ├── tokens/          # Design tokens (CSS)
+│   ├── icons/           # SVG icon library (@minis/icons)
+│   └── components/      # Web Components (Lit)
+├── apps/
+│   └── storybook/       # Interactive documentation
+└── docs/
+    ├── ai-prompts/      # AI agent instructions &amp; prompts
+    └── examples/        # Working code examples</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <p><strong>Related:</strong> <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Mini*S Figma Plugins</a> — design-to-code workflow tools including the token exporter.</p>
+      <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
+      <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
+    </div>
+  `,
+};
+
 export const ContributionGuide: Story = {
   name: 'Contribution guide',
   render: () => html`
