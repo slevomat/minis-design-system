@@ -11,6 +11,13 @@ const meta: Meta = {
   title: 'Components/Button',
   component: 'minis-button',
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '<a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=378-4416" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a>',
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
