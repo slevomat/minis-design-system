@@ -188,6 +188,40 @@ export const buttonStyles = css`
   }
 
   /* =====================
+     COUNTER PILL COLORS — per variant
+     ===================== */
+
+  :host([variant="primary"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-primary-text);
+    --pill-counter-color: var(--button-primary-surface);
+  }
+
+  :host([variant="cta-buy"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-cta-buy-text);
+    --pill-counter-color: var(--button-cta-buy-surface);
+  }
+
+  :host([variant="secondary"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-secondary-text);
+    --pill-counter-color: var(--button-secondary-surface);
+  }
+
+  :host([variant="tertiary"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-tertiary-text);
+    --pill-counter-color: var(--color-surface-primary);
+  }
+
+  :host([variant="transparent"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-transparent-text);
+    --pill-counter-color: var(--button-transparent-surface);
+  }
+
+  :host([variant="danger"]) minis-pill-counter {
+    --pill-counter-bg: var(--button-danger-border);
+    --pill-counter-color: var(--button-danger-surface);
+  }
+
+  /* =====================
      COUNTER PILL WRAPPERS
      Pill sizing/appearance is owned by <minis-pill-counter>.
      Button only controls placement.
