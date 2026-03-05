@@ -2,7 +2,7 @@ import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { pillCounterStyles } from './pill-counter.styles.js';
 
-export type PillCounterSize = 'md' | 'sm' | 'xs';
+export type PillCounterSize = 'lg' | 'md' | 'sm' | 'xs';
 
 /**
  * Mini*S Pill Counter Component
