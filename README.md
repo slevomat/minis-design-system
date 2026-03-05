@@ -158,7 +158,9 @@ export class MyComponent extends LitElement {
 
 ## 📚 Documentation
 
-Run Storybook (available at **http://localhost:6006**):
+**Live:** [slevomat.github.io/minis-design-system](https://slevomat.github.io/minis-design-system)
+
+Run locally (available at **http://localhost:6006**):
 ```bash
 pnpm storybook
 ```

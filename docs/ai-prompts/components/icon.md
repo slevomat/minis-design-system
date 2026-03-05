@@ -21,30 +21,43 @@
 | `size`    | number | `24`     | Width and height in px. |
 | `label`   | string | —        | Accessible label. When set: `role="img" aria-label="{label}"`. When absent: `aria-hidden="true"` (decorative). |
 
-## Available icons (MVP set)
+## Available icons (219 total)
 
-| Name | Usage |
-|------|-------|
-| `arrow-down` | Collapse, dropdown |
-| `arrow-left` | Back, previous |
-| `arrow-right` | Forward, next |
-| `arrow-up` | Expand, scroll up |
-| `bell` | Notifications |
-| `cart-fill` | Cart (filled) |
-| `cart-outline` | Cart (outline) |
-| `check` | Success, confirmation |
-| `circle-check-fill` | Success state indicator |
-| `circle-close-fill` | Error / remove indicator |
-| `circle-info-fill` | Info indicator |
-| `close` | Dismiss, remove |
-| `error` | Warning / error state |
-| `heart` | Favourite (outline) |
-| `heart-fill` | Favourite (filled) |
-| `search` | Search |
-| `settings` | Settings, configuration |
-| `star` | Rating (outline) |
-| `star-fill` | Rating (filled) |
-| `user` | User profile |
+### UI / Actions
+`arrow-classic` `arrow-down` `arrow-left` `arrow-right` `arrow-up` `bin` `check` `checkbox` `checkbox-partly` `circle-arrow` `circle-check` `circle-check-fill` `circle-close` `circle-close-fill` `circle-plus` `circle-plus-fill` `close` `closed` `copy` `dislike` `download` `edit` `error` `expand` `eye` `eye-off` `eye1` `feedback` `filters` `like` `like1` `lock` `menu` `menuburger` `no` `radio-checked` `radio-unchecked` `refresh` `reload` `search` `settings` `share` `share-ios` `single-image` `sort` `stop` `switch`
+
+### Navigation & Location
+`arrival` `circle-question` `crossroads` `departure` `globus` `home` `home1` `on-map` `position` `position1`
+
+### Commerce & Finance
+`apple-pay` `card` `cart-fill` `cart-outline` `cashback` `circle-dollar-fill` `credit-card` `deposit` `fksp` `gift` `no-credit-card` `package` `percentage` `qr-code` `voucher-outline` `wallet`
+
+### Communication & Media
+`bell` `bubble` `camera` `file-text` `flag` `mail` `mail1` `message` `microfon` `photo-gallery` `printer` `signal` `no-signal` `no-wifi` `smartphone` `tumblr` `wifi` `wifi1`
+
+### People & Identity
+`avatar` `children` `children1` `club` `handicap` `person-outline` `team` `user` `userpc` `users` `wheelchair` `wheelchair-not-accessible`
+
+### Travel & Transport
+`bike-cableway` `bike-rental` `bike-room` `bike-trails` `bus` `bus1` `car` `car1` `car2` `cross-country-trails` `ev-charger` `no-parking` `no-transfer` `parking` `plane` `plane1` `plane2` `scooter-rental` `skibus` `train` `train1` `train2` `travel` `truck` `walk`
+
+### Accommodation & Amenities
+`bed` `childrens-cot` `game-room` `indoor-pool` `kids-corner` `outdoor-pool` `own-kitchen` `salt-cave` `sauna` `ski-pass` `ski-room` `ski-school` `ski-slopes` `snowpark` `spa-procedures` `swimming-areas` `thermal-pool` `water-park` `wellness` `wellness-procedures` `whirlpool-bath` `wine-cellar` `wooden-soaking-tub`
+
+### Food & Dining
+`cake` `food` `meal` `meal1` `restaurant`
+
+### Nature & Outdoors
+`countryside` `flake` `iceberg` `sea` `ski-slopes` `surroundings`
+
+### Documents & Business
+`benefits` `box` `building` `calendar` `calendar-upcoming` `calendar1` `calendar2` `categories` `chest` `contract-signing` `document` `document1` `document2` `goods` `growth` `one-contract` `other-services` `partnership` `reservation` `term` `verified`
+
+### Status & Feedback
+`circle-info-fill` `default` `dislike` `error` `event-busy` `no-smoking` `not-pet-friendly` `sad` `smile` `stop`
+
+### Misc / Brand
+`airballoon` `animation-program` `babysitting` `beauty` `bestseller` `bulb` `children-lift` `children-lift-poma` `children-pool` `circle-dollar-fill` `clock` `czech` `fitness` `fun` `golf` `heart` `heart-fill` `hearts` `light` `paw` `phone` `playground` `qr-code` `slevomat` `slovakia` `star` `star-fill` `stay` `stick` `suitcase` `suitcase-checked` `switch`
 
 ## Usage examples
 
@@ -96,9 +109,10 @@ Icons inherit color from their CSS context via `currentColor`. No tokens needed 
 ## Adding new icons
 1. Export the path template from `packages/icons/src/icons/{name}.ts`
 2. Add the import + key to `packages/icons/src/registry.ts`
-3. Re-export from `packages/icons/src/index.ts`
-4. Add to the MVP list in this doc
+3. Add to `ALL_ICONS` in `apps/storybook/stories/Icons.stories.ts`
+
+**Note:** `default`, `package`, `switch`, `document` are JavaScript reserved words — their export variable names use an `Icon` suffix (e.g. `defaultIcon`) but their registry key and `name` attribute remain unchanged.
 
 ## Copy-paste prompt for AI agents
 
-> Render a `<minis-icon>` with `name="cart-fill"` inside a `<minis-button variant="primary">` using the `slot="icon"` attribute. Import `@minis/icons` as a side-effect before using it. Do not pass `aria-hidden` manually — the component handles accessibility automatically.
+> Render a `<minis-icon>` with `name="cart-fill"` inside a `<minis-button variant="primary">` using the `slot="icon"` attribute. Import `@minis/icons` as a side-effect before using it. Do not pass `aria-hidden` manually — the component handles accessibility automatically. Available icon names are listed in `docs/ai-prompts/components/icon.md`.
