@@ -91,6 +91,11 @@ export const Overview: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> ·
+        <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Figma Plugins</a>
+      </p>
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
       <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>
@@ -223,6 +228,11 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> ·
+        <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Figma Plugins</a>
+      </p>
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
       <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>
@@ -309,7 +319,11 @@ export const AIDesignIntegration: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <p><strong>Related:</strong> <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Mini*S Figma Plugins</a> — design-to-code workflow tools including the token exporter.</p>
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> ·
+        <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Figma Plugins</a>
+      </p>
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
       <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>
@@ -390,6 +404,11 @@ export const ContributionGuide: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> ·
+        <a href="https://github.com/slevomat/figma-plugins" style="color:var(--color-interaction-primary-surface,#006eb9)">Figma Plugins</a>
+      </p>
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
       <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
     </div>

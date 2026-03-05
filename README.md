@@ -2,6 +2,8 @@
 
 Modern Web Components design system built with Lit + TypeScript, designed for **AI-agent readiness** with structured prompts and instructions for seamless AI-assisted development.
 
+**→ [Live Storybook](https://slevomat.github.io/minis-design-system)** · **[GitHub](https://github.com/slevomat/minis-design-system)** · **[Figma Plugins](https://github.com/slevomat/figma-plugins)**
+
 ## 🏗️ Project Structure
 
 ```
@@ -158,7 +160,7 @@ export class MyComponent extends LitElement {
 
 ## 📚 Documentation
 
-**Live:** [slevomat.github.io/minis-design-system](https://slevomat.github.io/minis-design-system)
+**Live:** [slevomat.github.io/minis-design-system](https://slevomat.github.io/minis-design-system) · **GitHub:** [github.com/slevomat/minis-design-system](https://github.com/slevomat/minis-design-system)
 
 Run locally (available at **http://localhost:6006**):
 ```bash
