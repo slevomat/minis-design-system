@@ -38,6 +38,8 @@ const theme = create({
 addons.setConfig({
   theme,
   initialActive: 'sidebar',
+  showNav: true,
+  showPanel: true,
   sidebar: {
     showRoots: true,
   },
