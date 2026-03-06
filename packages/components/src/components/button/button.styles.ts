@@ -69,6 +69,11 @@ export const buttonStyles = css`
     padding: var(--button-large-padding-y, 12px);
   }
 
+  /* Icon-only: center content horizontally */
+  :host([icon-only]) button {
+    justify-content: center;
+  }
+
   /* Icon-only: enforce square dimensions */
   :host([size="small"][icon-only]) button {
     width: var(--pixel-px-22, 22px);
@@ -233,8 +238,8 @@ export const buttonStyles = css`
   }
 
   :host([variant="danger"]) minis-pill-counter {
-    --pill-counter-bg: var(--button-danger-border);
-    --pill-counter-color: var(--button-danger-surface);
+    --pill-counter-bg: var(--color-surface-primary);
+    --pill-counter-color: var(--button-danger-border);
   }
 
   /* =====================
