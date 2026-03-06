@@ -251,8 +251,9 @@ export const buttonStyles = css`
     right: var(--pixel-px-2, 2px);
   }
 
-  /* Icon-only + counter: dim the icon so the pill reads clearly */
-  :host([icon-only][counter]) ::slotted([slot="icon"]) {
+  /* Icon-only + counter: dim the icon so the pill reads clearly.
+     Only applies when counter has an actual value (not empty string). */
+  :host([icon-only][counter]:not([counter=""])) ::slotted([slot="icon"]) {
     opacity: 0.75;
   }
 `;
