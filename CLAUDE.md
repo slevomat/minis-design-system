@@ -67,6 +67,7 @@ All components use **full English words** for size values:
 ## Storybook rules
 
 - **NEVER** use `parameters: { options: { showPanel: false } }` — it persists globally to localStorage and hides the panel for all stories. Use `parameters: { controls: { disable: true } }` instead.
+- **`apps/storybook/.storybook/manager.ts` MUST keep `showNav: true` and `showPanel: true`** in `addons.setConfig()`. These override any stale localStorage value that a bad deploy may have written — removing them causes the left panel to disappear on GitHub Pages for all visitors.
 - Import components as side-effects: `import './button.js'`
 - Use `html` tagged template from `lit`
 - Icon slot: `<minis-icon slot="icon" name="…">` or `<svg slot="icon" …>`
