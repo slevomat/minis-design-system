@@ -26,8 +26,8 @@ const meta: Meta = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size of the button (small / default / big)',
+      options: ['small', 'medium', 'large'],
+      description: 'Size of the button',
     },
     disabled: {
       control: 'boolean',
@@ -53,7 +53,7 @@ export const Playground: Story = {
   name: 'Playground',
   args: {
     variant: 'primary',
-    size: 'md',
+    size: 'medium',
     disabled: false,
     counter: '',
   },
@@ -95,9 +95,9 @@ export const AllSizes: Story = {
   name: 'All sizes',
   render: () => html`
     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-      <minis-button variant="primary" size="sm">${iconStar} Small</minis-button>
-      <minis-button variant="primary" size="md">${iconStar} Default</minis-button>
-      <minis-button variant="primary" size="lg">${iconStar} Big</minis-button>
+      <minis-button variant="primary" size="small">${iconStar} Small</minis-button>
+      <minis-button variant="primary" size="medium">${iconStar} Medium</minis-button>
+      <minis-button variant="primary" size="large">${iconStar} Large</minis-button>
     </div>
   `,
 };
@@ -108,15 +108,15 @@ export const IconOnly: Story = {
   name: 'Icon only',
   render: () => html`
     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-      <minis-button variant="primary" size="sm" icon-only>${iconStar}</minis-button>
-      <minis-button variant="primary" size="md" icon-only>${iconStar}</minis-button>
-      <minis-button variant="primary" size="lg" icon-only>${iconStar}</minis-button>
-      <minis-button variant="secondary" size="md" icon-only>${iconStar}</minis-button>
-      <minis-button variant="cta-buy" size="md" icon-only>${iconCart}</minis-button>
-      <minis-button variant="danger" size="md" icon-only>${iconBin}</minis-button>
+      <minis-button variant="primary" size="small" icon-only>${iconStar}</minis-button>
+      <minis-button variant="primary" size="medium" icon-only>${iconStar}</minis-button>
+      <minis-button variant="primary" size="large" icon-only>${iconStar}</minis-button>
+      <minis-button variant="secondary" size="medium" icon-only>${iconStar}</minis-button>
+      <minis-button variant="cta-buy" size="medium" icon-only>${iconCart}</minis-button>
+      <minis-button variant="danger" size="medium" icon-only>${iconBin}</minis-button>
       <div style="background:#555; padding:8px; border-radius:4px; display:inline-flex; gap:8px;">
-        <minis-button variant="transparent" size="md" icon-only>${iconBin}</minis-button>
-        <minis-button variant="transparent" size="lg" icon-only>${iconBin}</minis-button>
+        <minis-button variant="transparent" size="medium" icon-only>${iconBin}</minis-button>
+        <minis-button variant="transparent" size="large" icon-only>${iconBin}</minis-button>
       </div>
     </div>
   `,
@@ -128,9 +128,9 @@ export const LabelOnly: Story = {
   name: 'Label only',
   render: () => html`
     <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-      <minis-button variant="primary" size="sm">Small</minis-button>
-      <minis-button variant="primary" size="md">Default</minis-button>
-      <minis-button variant="primary" size="lg">Big</minis-button>
+      <minis-button variant="primary" size="small">Small</minis-button>
+      <minis-button variant="primary" size="medium">Medium</minis-button>
+      <minis-button variant="primary" size="large">Large</minis-button>
     </div>
   `,
 };
@@ -150,9 +150,9 @@ export const CounterPill: Story = {
       <minis-button variant="cta-buy" icon-only counter="3">${iconCart}</minis-button>
       <minis-button variant="primary" icon-only counter="12">${iconStar}</minis-button>
 
-      <!-- Sizes with counter (sm button → sm pill, md/lg button → md pill) -->
-      <minis-button variant="cta-buy" size="sm" counter="5">${iconCart} Small</minis-button>
-      <minis-button variant="cta-buy" size="lg" counter="5">${iconCart} Big</minis-button>
+      <!-- Sizes with counter (small button → sm pill, medium/large button → md pill) -->
+      <minis-button variant="cta-buy" size="small" counter="5">${iconCart} Small</minis-button>
+      <minis-button variant="cta-buy" size="large" counter="5">${iconCart} Large</minis-button>
     </div>
   `,
 };

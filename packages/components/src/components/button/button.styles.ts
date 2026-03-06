@@ -12,10 +12,10 @@ export const buttonStyles = css`
     gap: var(--button-gap-elements, 4px);
     position: relative;
 
-    font-family: var(--typography-font-family-sans, 'SF Pro Display', sans-serif);
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-semibold, 600);
-    line-height: var(--pixel-px-20, 20px);
+    line-height: var(--typography-line-height-percentage-100%, 1);
     white-space: nowrap;
 
     cursor: pointer;
@@ -40,41 +40,44 @@ export const buttonStyles = css`
      ===================== */
 
   /* Small */
-  :host([size="sm"]) button {
+  :host([size="small"]) button {
+    height: var(--pixel-px-22, 22px);
     padding: var(--button-small-padding-y, 3px) var(--button-small-padding-x, 8px);
   }
 
-  :host([size="sm"][icon-only]) button {
+  :host([size="small"][icon-only]) button {
     padding: var(--button-small-padding-y, 3px);
   }
 
-  /* Default (md) */
-  :host([size="md"]) button {
+  /* Medium */
+  :host([size="medium"]) button {
+    height: var(--fibonachi-sp-fib-8, 34px);
     padding: var(--button-padding-y, 8px) var(--button-padding-x, 12px);
   }
 
-  :host([size="md"][icon-only]) button {
+  :host([size="medium"][icon-only]) button {
     padding: var(--button-padding-y, 8px);
   }
 
   /* Large */
-  :host([size="lg"]) button {
+  :host([size="large"]) button {
+    height: 44px;
     padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
   }
 
-  :host([size="lg"][icon-only]) button {
+  :host([size="large"][icon-only]) button {
     padding: var(--button-large-padding-y, 12px);
   }
 
   /* Icon sizing per size */
-  :host([size="sm"]) ::slotted([slot="icon"]) {
+  :host([size="small"]) ::slotted([slot="icon"]) {
     width: var(--pixel-px-16, 16px);
     height: var(--pixel-px-16, 16px);
     flex-shrink: 0;
   }
 
-  :host([size="md"]) ::slotted([slot="icon"]),
-  :host([size="lg"]) ::slotted([slot="icon"]) {
+  :host([size="medium"]) ::slotted([slot="icon"]),
+  :host([size="large"]) ::slotted([slot="icon"]) {
     width: var(--pixel-px-24, 24px);
     height: var(--pixel-px-24, 24px);
     flex-shrink: 0;
@@ -242,8 +245,8 @@ export const buttonStyles = css`
     padding-left: 0;
   }
 
-  /* sm button: tighter floating offset */
-  :host([size="sm"]) .pill-wrapper--floating {
+  /* small button: tighter floating offset */
+  :host([size="small"]) .pill-wrapper--floating {
     top: var(--pixel-px-2, 2px);
     right: var(--pixel-px-2, 2px);
   }

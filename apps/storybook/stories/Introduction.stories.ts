@@ -198,7 +198,7 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Example</th>
         </tr></thead>
         <tbody>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">String attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>variant="secondary"</code>, <code>size="sm"</code></td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">String attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>variant="secondary"</code>, <code>size="medium"</code></td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Boolean attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>disabled</code>, <code>icon-only</code> — presence = true, absence = false</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Named slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>&lt;svg slot="icon" …&gt;</code> — use the <code>slot</code> attribute on a child element</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Default slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Text content between tags — <code>&lt;minis-button&gt;Label&lt;/minis-button&gt;</code></td></tr>

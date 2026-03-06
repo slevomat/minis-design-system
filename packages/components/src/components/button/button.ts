@@ -4,7 +4,7 @@ import { buttonStyles } from './button.styles.js';
 import '../pill-counter/pill-counter.js';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'cta-buy' | 'transparent';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'small' | 'medium' | 'large';
 
 /**
  * Mini*S Button Component
@@ -44,7 +44,7 @@ export class MinisButton extends LitElement {
   variant: ButtonVariant = 'primary';
 
   @property({ type: String })
-  size: ButtonSize = 'md';
+  size: ButtonSize = 'medium';
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -74,13 +74,13 @@ export class MinisButton extends LitElement {
         ${hasCounter && !this.iconOnly
           ? html`
               <span class="pill-wrapper">
-                <minis-pill-counter size=${this.size === 'sm' ? 'sm' : 'md'}>${this.counter}</minis-pill-counter>
+                <minis-pill-counter size=${this.size === 'small' ? 'sm' : 'md'}>${this.counter}</minis-pill-counter>
               </span>`
           : ''}
         ${hasCounter && this.iconOnly
           ? html`
               <span class="pill-wrapper pill-wrapper--floating">
-                <minis-pill-counter size=${this.size === 'sm' ? 'xs' : 'sm'}>${this.counter}</minis-pill-counter>
+                <minis-pill-counter size=${this.size === 'small' ? 'xs' : 'sm'}>${this.counter}</minis-pill-counter>
               </span>`
           : ''}
       </button>

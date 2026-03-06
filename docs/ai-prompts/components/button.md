@@ -14,7 +14,7 @@ icon support, and an optional counter pill badge.
 | Attribute   | Type    | Default     | Values                                                                    |
 |-------------|---------|-------------|---------------------------------------------------------------------------|
 | `variant`   | string  | `"primary"` | `primary`, `secondary`, `tertiary`, `danger`, `cta-buy`, `transparent`   |
-| `size`      | string  | `"md"`      | `sm`, `md`, `lg`                                                          |
+| `size`      | string  | `"medium"`  | `small`, `medium`, `large`                                                |
 | `disabled`  | boolean | `false`     | —                                                                         |
 | `icon-only` | boolean | `false`     | Renders only the icon slot; counter pill floats top-right                 |
 | `counter`   | string  | —           | Number string e.g. `"3"`. Inline pill after label; floating top-right when `icon-only`. Pill size is chosen automatically based on button size — see table below. |
@@ -148,9 +148,9 @@ Add the `icon-only` boolean attribute. Always include `aria-label` for accessibi
 ### All sizes
 
 ```html
-<minis-button size="sm">Small</minis-button>
-<minis-button size="md">Default</minis-button>
-<minis-button size="lg">Big</minis-button>
+<minis-button size="small">Small</minis-button>
+<minis-button size="medium">Medium</minis-button>
+<minis-button size="large">Large</minis-button>
 ```
 
 ### Disabled state
@@ -165,9 +165,9 @@ The pill size is chosen automatically — never set it manually:
 
 | Button size | Label mode (icon + label) | Icon-only mode               |
 |-------------|--------------------------|------------------------------|
-| `sm`        | `sm` pill (11×11px)      | `xs` pill (8×8px)            |
-| `md`        | `md` pill (15×15px)      | `sm` pill (11×11px)          |
-| `lg`        | `md` pill (15×15px)      | `sm` pill (11×11px)          |
+| `small`     | `sm` pill (11×11px)      | `xs` pill (8×8px)            |
+| `medium`    | `md` pill (15×15px)      | `sm` pill (11×11px)          |
+| `large`     | `md` pill (15×15px)      | `sm` pill (11×11px)          |
 
 In icon-only mode the icon dims to 75% opacity so the floating pill is clearly readable.
 
@@ -202,7 +202,7 @@ In icon-only mode the icon dims to 75% opacity so the floating pill is clearly r
 ### Primary CTA
 
 ```html
-<minis-button variant="primary" size="lg">
+<minis-button variant="primary" size="large">
   Get Started
 </minis-button>
 ```
@@ -244,16 +244,16 @@ In icon-only mode the icon dims to 75% opacity so the floating pill is clearly r
 Create a button using the Mini*S minis-button component:
 
 <!-- Label only -->
-<minis-button variant="primary" size="md">Label</minis-button>
+<minis-button variant="primary" size="medium">Label</minis-button>
 
 <!-- Icon + Label -->
-<minis-button variant="primary" size="md">
+<minis-button variant="primary" size="medium">
   <svg slot="icon" ...></svg>
   Label
 </minis-button>
 
 <!-- Icon only (requires aria-label) -->
-<minis-button variant="primary" size="md" icon-only aria-label="Action description">
+<minis-button variant="primary" size="medium" icon-only aria-label="Action description">
   <svg slot="icon" ...></svg>
 </minis-button>
 
@@ -264,7 +264,7 @@ Create a button using the Mini*S minis-button component:
 </minis-button>
 
 Variants:  primary | secondary | tertiary | danger | cta-buy | transparent
-Sizes:     sm | md | lg
+Sizes:     small | medium | large
 Booleans:  disabled  icon-only
 Counter:   counter="<number string>"
 Type:      type="button | submit | reset"
@@ -293,7 +293,7 @@ Note: icon-only buttons must have aria-label for accessibility.
 - Use `variant="transparent"` only on dark or image backgrounds
 - Always add `aria-label` when using `icon-only`
 - Reflect the counter value in `aria-label` for icon-only buttons with `counter`
-- Use `size="lg"` for prominent hero CTAs, `size="sm"` for compact toolbars
+- Use `size="large"` for prominent hero CTAs, `size="small"` for compact toolbars
 
 ### ❌ Don't
 
