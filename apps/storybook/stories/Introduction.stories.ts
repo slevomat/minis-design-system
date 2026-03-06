@@ -335,16 +335,21 @@ export const Changelog: Story = {
   render: () => html`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1 style="font-size:2rem;margin-bottom:.25rem">Changelog</h1>
-      <p style="color:var(--color-text-secondary,#666);margin-top:0">Notable changes to Mini*S components and tokens.</p>
+      <p style="color:var(--color-text-secondary,#666);margin-top:0">Notable changes to Mini*S components and tokens, newest first.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <!-- ─── Button ─────────────────────────────────────────────── -->
-      <h2 style="display:flex;align-items:center;gap:.5rem">
-        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px;font-size:1rem">&lt;minis-button&gt;</code>
-      </h2>
+      <!-- ═══════════════════════════════════════════════════════════
+           2026-03-06
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-06</h2>
 
-      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <p style="margin:.25rem 0 .5rem"><strong>Size naming aligned to design system convention</strong>
           <span style="display:inline-block;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce);border-radius:4px;font-size:.75rem;padding:.1rem .4rem;margin-left:.5rem;vertical-align:middle">Breaking change</span>
         </p>
@@ -364,7 +369,7 @@ export const Changelog: Story = {
         <p style="margin:.25rem 0 .75rem"><strong>Migrate:</strong> find-replace <code>size="sm"</code> → <code>size="small"</code>, <code>size="md"</code> → <code>size="medium"</code>, <code>size="lg"</code> → <code>size="large"</code>.</p>
       </div>
 
-      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <p style="margin:.25rem 0 .5rem"><strong>Typography tokens applied to button text</strong></p>
         <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
           <li><code>font-family</code> now uses <code>--typography-font-family-sans</code> (Inter)</li>
@@ -374,23 +379,70 @@ export const Changelog: Story = {
         </ul>
       </div>
 
-      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
-        <p style="margin:.25rem 0 .5rem"><strong>Explicit <code>height</code> per size</strong></p>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <p style="margin:.25rem 0 .5rem"><strong>Explicit height per size</strong></p>
         <p style="margin:.25rem 0 .75rem">Each size now enforces a fixed height via token or raw value (<code>small</code>: <code>--pixel-px-22</code> · <code>medium</code>: <code>--fibonachi-sp-fib-8</code> · <code>large</code>: <code>44px</code>), so button dimensions are predictable regardless of content.</p>
       </div>
 
-      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
-        <p style="margin:.25rem 0 .5rem"><strong>Counter pill size logic</strong></p>
-        <p style="margin:.25rem 0 .75rem">Internal pill sizing uses the new size names. Behaviour is unchanged — pill size is still chosen automatically based on button size and icon-only mode.</p>
+      <!-- minis-pill-counter -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-pill-counter&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <p style="margin:.25rem 0 .75rem">No API change. Button now passes the correct new size strings internally — pill sizes are still chosen automatically.</p>
       </div>
 
-      <!-- ─── Pill Counter ───────────────────────────────────────── -->
-      <h2 style="display:flex;align-items:center;gap:.5rem">
-        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px;font-size:1rem">&lt;minis-pill-counter&gt;</code>
-      </h2>
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
-        <p style="margin:.25rem 0 .75rem">Pill counter own API (<code>size="sm | md | xs"</code>) is unchanged. Button now passes the correct size strings internally.</p>
+      <!-- ═══════════════════════════════════════════════════════════
+           2026-03-05
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-05</h2>
+
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Added counter pill color overrides per variant (<code>--pill-counter-bg</code>, <code>--pill-counter-color</code>)</li>
+          <li>Added Storybook stories: Playground, AllVariants, AllSizes, IconOnly, LabelOnly, CounterPill, States, VariantsAndStates</li>
+          <li>Updated AI prompt doc (<code>docs/ai-prompts/components/button.md</code>)</li>
+        </ul>
+      </div>
+
+      <!-- minis-pill-counter -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-pill-counter&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Sizes: <code>md</code> 15×15px · <code>sm</code> 11×11px · <code>xs</code> 8×8px</li>
+          <li>Single digit → circle, multi-digit → capsule</li>
+          <li>Used inside <code>&lt;minis-button&gt;</code> — floating (icon-only) or inline (label) mode</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           2026-03-03
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-03</h2>
+
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Initial implementation imported from Figma — variants, sizes, icon slot, disabled state, transparent backdrop-filter</li>
+          <li>AI prompt doc created</li>
+        </ul>
       </div>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
