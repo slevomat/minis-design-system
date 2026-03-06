@@ -77,10 +77,21 @@ Specific needs:
 
 ### Spacing
 ```css
---spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl
---spacing-inset-sm                     /* Padding */
---spacing-stack-md                     /* Margin */
+/* Linear scale (4px steps) */
+--linear-sp-linear-1   /* 4px  */
+--linear-sp-linear-2   /* 8px  */
+--linear-sp-linear-3   /* 12px */
+--linear-sp-linear-4   /* 16px */
+
+/* Fibonacci scale */
+--fibonachi-sp-fib-3   /* 3px  */
+--fibonachi-sp-fib-5   /* 5px  */
+--fibonachi-sp-fib-8   /* 34px */ /* ← also used for medium button height */
+
+/* Pixel exact */
+--pixel-px-{n}         /* e.g. --pixel-px-22 = 22px */
 ```
+> There are **no** `--spacing-*` tokens in this system.
 
 ### Interactive States
 ```css
