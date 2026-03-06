@@ -238,8 +238,8 @@ export const buttonStyles = css`
   }
 
   :host([variant="danger"]) minis-pill-counter {
-    --pill-counter-bg: var(--color-surface-primary);
-    --pill-counter-color: var(--button-danger-border);
+    --pill-counter-bg: var(--button-danger-border);
+    --pill-counter-color: var(--color-surface-primary);
   }
 
   /* =====================
