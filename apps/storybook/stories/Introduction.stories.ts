@@ -205,7 +205,7 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
         </tbody>
       </table>
       <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;!-- label only --&gt;
-&lt;minis-button variant="primary" size="md"&gt;Buy now&lt;/minis-button&gt;
+&lt;minis-button variant="primary" size="medium"&gt;Buy now&lt;/minis-button&gt;
 
 &lt;!-- icon + label + counter pill --&gt;
 &lt;minis-button variant="secondary" counter="3"&gt;
@@ -326,6 +326,78 @@ export const AIDesignIntegration: Story = {
       </p>
       <p><strong>Head of Design:</strong> Michal — michal.strnadel@slevomat.cz</p>
       <p><strong>Author:</strong> Alexandr Hudeček &amp; Slevomat team</p>
+    </div>
+  `,
+};
+
+export const Changelog: Story = {
+  name: 'Changelog',
+  render: () => html`
+    <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:2rem;margin-bottom:.25rem">Changelog</h1>
+      <p style="color:var(--color-text-secondary,#666);margin-top:0">Notable changes to Mini*S components and tokens.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ─── Button ─────────────────────────────────────────────── -->
+      <h2 style="display:flex;align-items:center;gap:.5rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px;font-size:1rem">&lt;minis-button&gt;</code>
+      </h2>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+        <p style="margin:.25rem 0 .5rem"><strong>Size naming aligned to design system convention</strong>
+          <span style="display:inline-block;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce);border-radius:4px;font-size:.75rem;padding:.1rem .4rem;margin-left:.5rem;vertical-align:middle">Breaking change</span>
+        </p>
+        <p style="margin:.25rem 0">The <code>size</code> attribute values have been renamed for consistency across all Mini*S components:</p>
+        <table style="width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.9rem">
+          <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+            <th style="padding:.5rem .75rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Before</th>
+            <th style="padding:.5rem .75rem;text-align:left;border:1px solid var(--color-border,#cbccce)">After</th>
+            <th style="padding:.5rem .75rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Height</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>sm</code></td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>small</code></td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)">22px</td></tr>
+            <tr><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>md</code> (default)</td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>medium</code> (default)</td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)">34px</td></tr>
+            <tr><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>lg</code></td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)"><code>large</code></td><td style="padding:.5rem .75rem;border:1px solid var(--color-border,#cbccce)">44px</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:.25rem 0 .75rem"><strong>Migrate:</strong> find-replace <code>size="sm"</code> → <code>size="small"</code>, <code>size="md"</code> → <code>size="medium"</code>, <code>size="lg"</code> → <code>size="large"</code>.</p>
+      </div>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+        <p style="margin:.25rem 0 .5rem"><strong>Typography tokens applied to button text</strong></p>
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><code>font-family</code> now uses <code>--typography-font-family-sans</code> (Inter)</li>
+          <li><code>font-weight</code> now uses <code>--typography-weight-semibold</code> (600)</li>
+          <li><code>font-size</code> uses <code>--typography-size-sm</code> (14px) — all sizes</li>
+          <li><code>line-height</code> uses <code>--typography-line-height-percentage-100%</code> (1) — replaces hardcoded 20px</li>
+        </ul>
+      </div>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+        <p style="margin:.25rem 0 .5rem"><strong>Explicit <code>height</code> per size</strong></p>
+        <p style="margin:.25rem 0 .75rem">Each size now enforces a fixed height via token or raw value (<code>small</code>: <code>--pixel-px-22</code> · <code>medium</code>: <code>--fibonachi-sp-fib-8</code> · <code>large</code>: <code>44px</code>), so button dimensions are predictable regardless of content.</p>
+      </div>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+        <p style="margin:.25rem 0 .5rem"><strong>Counter pill size logic</strong></p>
+        <p style="margin:.25rem 0 .75rem">Internal pill sizing uses the new size names. Behaviour is unchanged — pill size is still chosen automatically based on button size and icon-only mode.</p>
+      </div>
+
+      <!-- ─── Pill Counter ───────────────────────────────────────── -->
+      <h2 style="display:flex;align-items:center;gap:.5rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px;font-size:1rem">&lt;minis-pill-counter&gt;</code>
+      </h2>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:1rem 0 1.5rem 0">
+        <p style="margin:.25rem 0 .75rem">Pill counter own API (<code>size="sm | md | xs"</code>) is unchanged. Button now passes the correct size strings internally.</p>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <p style="color:var(--color-text-secondary,#666);font-size:.875rem">
+        All changes are reflected in <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> and the <code>docs/ai-prompts/components/</code> instruction files.
+      </p>
     </div>
   `,
 };
