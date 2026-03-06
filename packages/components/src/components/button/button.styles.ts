@@ -61,12 +61,25 @@ export const buttonStyles = css`
 
   /* Large */
   :host([size="large"]) button {
-    height: 44px;
+    height: var(--pixel-px-44, 44px);
     padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
   }
 
   :host([size="large"][icon-only]) button {
     padding: var(--button-large-padding-y, 12px);
+  }
+
+  /* Icon-only: enforce square dimensions */
+  :host([size="small"][icon-only]) button {
+    width: var(--pixel-px-22, 22px);
+  }
+
+  :host([size="medium"][icon-only]) button {
+    width: var(--fibonachi-sp-fib-8, 34px);
+  }
+
+  :host([size="large"][icon-only]) button {
+    width: var(--pixel-px-44, 44px);
   }
 
   /* Icon sizing per size */
