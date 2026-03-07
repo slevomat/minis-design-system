@@ -340,6 +340,26 @@ export const Changelog: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-03-07
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-07</h2>
+
+      <!-- minis-alert -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-alert&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Typography updated to use design tokens: <code>--typography-font-family-sans</code> (Inter), <code>--typography-weight-regular</code>, <code>--typography-line-height-percentage-133%</code> (1.33)</li>
+          <li>Icon optical alignment: when icon is visible, content gets <code>margin-top/bottom: var(--pixel-px-3)</code> (3px) via <code>.icon ~ .content</code> selector</li>
+          <li>Storybook docs page: added Figma link (node-id <code>2513-8007</code>), consistent with Button and Pill Counter</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-06
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-06</h2>
