@@ -3,10 +3,10 @@ import { css } from 'lit';
 export const alertStyles = css`
   :host {
     display: block;
-    font-family: var(--typography-font-family-sans, 'SF Pro Display', sans-serif);
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-regular, 400);
-    line-height: var(--pixel-px-20, 20px);
+    line-height: var(--typography-line-height-percentage-133%, 1.33);
   }
 
   .alert {
@@ -81,5 +81,10 @@ export const alertStyles = css`
 
   .content {
     flex: 1 0 0;
+  }
+
+  .icon ~ .content {
+    margin-top: var(--pixel-px-3, 3px);
+    margin-bottom: var(--pixel-px-3, 3px);
   }
 `;

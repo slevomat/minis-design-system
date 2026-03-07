@@ -6,6 +6,13 @@ const meta: Meta = {
   title: 'Components/Alert',
   component: 'minis-alert',
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: '<a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=2513-8007" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a>',
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
