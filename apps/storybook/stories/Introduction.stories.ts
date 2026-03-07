@@ -200,7 +200,7 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
         <tbody>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">String attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>variant="secondary"</code>, <code>size="medium"</code></td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Boolean attribute</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>disabled</code>, <code>icon-only</code> — presence = true, absence = false</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Named slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>&lt;svg slot="icon" …&gt;</code> — use the <code>slot</code> attribute on a child element</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Named slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>&lt;minis-icon slot="icon" name="…"&gt;</code> — use the <code>slot</code> attribute on a child element</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Default slot</td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Text content between tags — <code>&lt;minis-button&gt;Label&lt;/minis-button&gt;</code></td></tr>
         </tbody>
       </table>
@@ -209,13 +209,13 @@ document.documentElement.dataset.theme = 'gift';</code></pre>
 
 &lt;!-- icon + label + counter pill --&gt;
 &lt;minis-button variant="secondary" counter="3"&gt;
-  &lt;svg slot="icon" width="16" height="16" viewBox="0 0 16 16"&gt;…&lt;/svg&gt;
+  &lt;minis-icon slot="icon" name="cart-fill"&gt;&lt;/minis-icon&gt;
   Cart
 &lt;/minis-button&gt;
 
 &lt;!-- icon-only with counter --&gt;
 &lt;minis-button variant="primary" icon-only counter="5"&gt;
-  &lt;svg slot="icon" width="16" height="16" viewBox="0 0 16 16"&gt;…&lt;/svg&gt;
+  &lt;minis-icon slot="icon" name="star"&gt;&lt;/minis-icon&gt;
 &lt;/minis-button&gt;
 
 &lt;!-- disabled --&gt;
