@@ -64,6 +64,13 @@ All components use **full English words** for size values:
 > Never use abbreviations `sm`, `md`, `lg` as component `size` attribute values.
 > (Exception: `<minis-pill-counter>` uses `xs | sm | md` — its own internal scale, not changed.)
 
+## Changelog rules
+
+Every change to components or tokens **must** be recorded in two places, in the same commit as the change:
+
+1. **`CHANGELOG.md`** (repo root) — grouped by date (`## YYYY-MM-DD`), component sub-heading, bullet points.
+2. **Storybook Changelog page** (`apps/storybook/stories/Introduction.stories.ts` → `Changelog` story) — same structure, styled HTML, newest date at the top.
+
 ## Storybook rules
 
 - **NEVER** use `parameters: { options: { showPanel: false } }` — it persists globally to localStorage and hides the panel for all stories. Use `parameters: { controls: { disable: true } }` instead.
