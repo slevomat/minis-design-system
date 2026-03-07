@@ -344,6 +344,19 @@ export const Changelog: Story = {
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-07</h2>
 
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+      </h3>
+
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Accessibility fix:</strong> <code>aria-label</code>, <code>aria-labelledby</code>, and <code>aria-describedby</code> set on <code>&lt;minis-button&gt;</code> are now forwarded to the inner <code>&lt;button&gt;</code> element — screen readers correctly announce icon-only buttons.</li>
+          <li><strong>Accessibility fix:</strong> In <code>icon-only</code> mode the label slot is now visually hidden instead of removed from the DOM, preserving slotted text in the accessibility tree.</li>
+          <li>Host element receives <code>role="none"</code> to prevent a redundant button role announcement from the custom element wrapper.</li>
+        </ul>
+      </div>
+
       <!-- minis-alert -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-alert&gt;</code>

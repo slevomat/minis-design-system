@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { buttonStyles } from './button.styles.js';
 import '../pill-counter/pill-counter.js';
@@ -10,7 +10,7 @@ export type ButtonSize = 'small' | 'medium' | 'large';
  * Mini*S Button Component
  *
  * @slot - Button label text
- * @slot icon - Icon to display inside the button (before the label)
+ * @slot icon - Icon to display inside the button (before the label). Use `<minis-icon slot="icon" name="…">`.
  * @csspart button - The native button element
  *
  * @example
@@ -20,18 +20,18 @@ export type ButtonSize = 'small' | 'medium' | 'large';
  *
  * <!-- Icon + Label -->
  * <minis-button variant="cta-buy">
- *   <svg slot="icon" ...></svg>
+ *   <minis-icon slot="icon" name="cart-fill"></minis-icon>
  *   Buy now
  * </minis-button>
  *
- * <!-- Icon only -->
- * <minis-button variant="primary" icon-only>
- *   <svg slot="icon" ...></svg>
+ * <!-- Icon only (aria-label required) -->
+ * <minis-button variant="primary" icon-only aria-label="Add to favourites">
+ *   <minis-icon slot="icon" name="star"></minis-icon>
  * </minis-button>
  *
  * <!-- With counter pill -->
  * <minis-button variant="cta-buy" counter="3">
- *   <svg slot="icon" ...></svg>
+ *   <minis-icon slot="icon" name="cart-fill"></minis-icon>
  *   Cart
  * </minis-button>
  * ```
@@ -60,17 +60,36 @@ export class MinisButton extends LitElement {
   @property({ type: String })
   type: 'button' | 'submit' | 'reset' = 'button';
 
+  /**
+   * Delegate ARIA attributes from the host element to the inner <button>.
+   * This ensures screen readers announce the correct accessible name/description
+   * even though the focusable element is inside Shadow DOM.
+   */
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('role', 'none');
+  }
+
   render() {
     const hasCounter = !!this.counter;
+
+    // Delegate ARIA attributes to the inner <button> so screen readers
+    // compute the accessible name from the host's aria-label/aria-labelledby/aria-describedby.
+    const ariaLabel = this.getAttribute('aria-label');
+    const ariaLabelledby = this.getAttribute('aria-labelledby');
+    const ariaDescribedby = this.getAttribute('aria-describedby');
 
     return html`
       <button
         part="button"
         type=${this.type}
         ?disabled=${this.disabled}
+        aria-label=${ariaLabel || nothing}
+        aria-labelledby=${ariaLabelledby || nothing}
+        aria-describedby=${ariaDescribedby || nothing}
       >
         <slot name="icon"></slot>
-        ${!this.iconOnly ? html`<slot></slot>` : ''}
+        <slot class=${this.iconOnly ? 'visually-hidden' : ''}></slot>
         ${hasCounter && !this.iconOnly
           ? html`
               <span class="pill-wrapper">

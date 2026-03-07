@@ -74,6 +74,20 @@ export const buttonStyles = css`
     justify-content: center;
   }
 
+  /* Visually hide the label slot in icon-only mode while keeping it in the
+     accessibility tree so slotted text contributes to the accessible name. */
+  slot.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Icon-only: enforce square dimensions */
   :host([size="small"][icon-only]) button {
     width: var(--pixel-px-22, 22px);
