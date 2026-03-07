@@ -22,10 +22,10 @@ icon support, and an optional counter pill badge.
 
 ### Slots
 
-| Slot        | Description                                    |
-|-------------|------------------------------------------------|
-| *(default)* | Button label text                              |
-| `icon`      | Icon element placed before the label (any SVG) |
+| Slot        | Description                                                               |
+|-------------|---------------------------------------------------------------------------|
+| *(default)* | Button label text                                                         |
+| `icon`      | Icon placed before the label. Use `<minis-icon slot="icon" name="…">` from `@minis/icons`. Raw SVG is also accepted. |
 
 ## Design Tokens Used
 
@@ -107,13 +107,11 @@ All tokens are `--button-*` component tokens resolved through the design token c
 
 ### Icon + Label
 
-Place the icon in the `icon` slot — it renders before the label automatically.
+Place the icon in the `icon` slot using `<minis-icon>` — it renders before the label automatically.
 
 ```html
 <minis-button variant="primary">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-  </svg>
+  <minis-icon slot="icon" name="star"></minis-icon>
   Label
 </minis-button>
 ```
@@ -124,9 +122,7 @@ Add the `icon-only` boolean attribute. Always include `aria-label` for accessibi
 
 ```html
 <minis-button variant="primary" icon-only aria-label="Add to favourites">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-  </svg>
+  <minis-icon slot="icon" name="star"></minis-icon>
 </minis-button>
 ```
 
@@ -174,17 +170,13 @@ In icon-only mode the icon dims to 75% opacity so the floating pill is clearly r
 ```html
 <!-- Inline pill (after label) — md pill auto-selected for md button -->
 <minis-button variant="cta-buy" counter="3">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM5.21 5H3V3H1v2h2l3.6 7.59L5.25 15c-.16.28-.25.61-.25.95C5 17.1 5.9 18 7 18h14v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.5 5H5.21z"/>
-  </svg>
+  <minis-icon slot="icon" name="cart-fill"></minis-icon>
   Cart
 </minis-button>
 
 <!-- Floating pill (top-right corner), icon at 75% opacity — sm pill auto-selected for md button -->
 <minis-button variant="cta-buy" icon-only counter="3" aria-label="Cart, 3 items">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM5.21 5H3V3H1v2h2l3.6 7.59L5.25 15c-.16.28-.25.61-.25.95C5 17.1 5.9 18 7 18h14v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.5 5H5.21z"/>
-  </svg>
+  <minis-icon slot="icon" name="cart-fill"></minis-icon>
 </minis-button>
 ```
 
@@ -211,9 +203,7 @@ In icon-only mode the icon dims to 75% opacity so the floating pill is clearly r
 
 ```html
 <minis-button variant="cta-buy">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zM5.21 5H3V3H1v2h2l3.6 7.59L5.25 15c-.16.28-.25.61-.25.95C5 17.1 5.9 18 7 18h14v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.5 5H5.21z"/>
-  </svg>
+  <minis-icon slot="icon" name="cart-fill"></minis-icon>
   Buy now
 </minis-button>
 ```
@@ -231,9 +221,7 @@ In icon-only mode the icon dims to 75% opacity so the floating pill is clearly r
 
 ```html
 <minis-button variant="danger">
-  <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-  </svg>
+  <minis-icon slot="icon" name="bin"></minis-icon>
   Delete item
 </minis-button>
 ```
@@ -246,20 +234,20 @@ Create a button using the Mini*S minis-button component:
 <!-- Label only -->
 <minis-button variant="primary" size="medium">Label</minis-button>
 
-<!-- Icon + Label -->
+<!-- Icon + Label (use <minis-icon> from @minis/icons) -->
 <minis-button variant="primary" size="medium">
-  <svg slot="icon" ...></svg>
+  <minis-icon slot="icon" name="star"></minis-icon>
   Label
 </minis-button>
 
 <!-- Icon only (requires aria-label) -->
 <minis-button variant="primary" size="medium" icon-only aria-label="Action description">
-  <svg slot="icon" ...></svg>
+  <minis-icon slot="icon" name="star"></minis-icon>
 </minis-button>
 
 <!-- With counter pill -->
 <minis-button variant="cta-buy" counter="5">
-  <svg slot="icon" ...></svg>
+  <minis-icon slot="icon" name="cart-fill"></minis-icon>
   Cart
 </minis-button>
 
