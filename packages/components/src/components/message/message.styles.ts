@@ -24,13 +24,24 @@ export const messageStyles = css`
      ===================== */
 
   :host([layout="vertical"]) .message {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--message-gap, var(--linear-sp-linear-2, 8px));
     padding: var(--message-padding, var(--linear-sp-linear-2, 8px));
   }
 
-  :host([layout="vertical"]) .container {
+  :host([layout="vertical"]) .body {
     display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  :host([layout="vertical"]) .header {
+    display: flex;
+    flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
     gap: var(--message-gap, var(--linear-sp-linear-2, 8px));
   }
 
@@ -139,4 +150,5 @@ export const messageStyles = css`
     align-items: center;
     justify-content: center;
   }
+
 `;

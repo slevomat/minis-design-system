@@ -6,6 +6,8 @@ import '../pill-counter/pill-counter.js';
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger' | 'cta-buy' | 'transparent';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
+const VALID_SIZES: ButtonSize[] = ['small', 'medium', 'large'];
+
 /**
  * Mini*S Button Component
  *
@@ -43,8 +45,12 @@ export class MinisButton extends LitElement {
   @property({ type: String })
   variant: ButtonVariant = 'primary';
 
-  @property({ type: String })
-  size: ButtonSize = 'medium';
+  @property({ type: String, reflect: true })
+  get size(): ButtonSize { return this._size; }
+  set size(value: ButtonSize) {
+    this._size = VALID_SIZES.includes(value) ? value : 'medium';
+  }
+  private _size: ButtonSize = 'medium';
 
   @property({ type: Boolean, reflect: true })
   disabled = false;

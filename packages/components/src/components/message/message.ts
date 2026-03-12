@@ -68,6 +68,39 @@ export class MinisMessage extends LitElement {
   }
 
   render() {
+    const closeButton = this.closable ? html`
+      <div class="close">
+        <minis-button
+          variant="tertiary"
+          size="medium"
+          icon-only
+          aria-label="Close"
+          @click=${this._handleClose}
+        >
+          <span slot="icon">${iconClose()}</span>
+        </minis-button>
+      </div>
+    ` : '';
+
+    if (this.layout === 'vertical') {
+      return html`
+        <div class="message">
+          ${this.visual ? html`
+            <div class="visual">
+              <slot name="visual"></slot>
+            </div>
+          ` : ''}
+          <div class="body">
+            <div class="header">
+              <slot name="title" class="title"></slot>
+              ${closeButton}
+            </div>
+            <slot class="description"></slot>
+          </div>
+        </div>
+      `;
+    }
+
     return html`
       <div class="message">
         <div class="container">
@@ -81,19 +114,7 @@ export class MinisMessage extends LitElement {
             <slot class="description"></slot>
           </div>
         </div>
-        ${this.closable ? html`
-          <div class="close">
-            <minis-button
-              variant="tertiary"
-              size="md"
-              icon-only
-              aria-label="Close"
-              @click=${this._handleClose}
-            >
-              <span slot="icon">${iconClose()}</span>
-            </minis-button>
-          </div>
-        ` : ''}
+        ${closeButton}
       </div>
     `;
   }

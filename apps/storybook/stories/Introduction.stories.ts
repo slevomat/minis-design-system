@@ -340,6 +340,35 @@ export const Changelog: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-03-12
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-12</h2>
+
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Size fallback:</strong> <code>size</code> property now normalises invalid or missing values to <code>'medium'</code> via a setter; attribute is reflected so CSS selectors always match a valid value.</li>
+        </ul>
+      </div>
+
+      <!-- minis-message -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-message&gt;</code>
+      </h3>
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Vertical layout redesign:</strong> replaced column-flex + absolute-positioned close button with a proper flex-row structure — visual left, body column right (<code>.header</code> row: title + close button; description below).</li>
+          <li><strong>Close button alignment:</strong> <code>.header</code> uses <code>align-items: flex-start</code> so the close button aligns with the top of the title text.</li>
+          <li><strong>Bug fix:</strong> close button was using invalid <code>size="md"</code> — corrected to <code>size="medium"</code>.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-07
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-07</h2>
