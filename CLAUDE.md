@@ -86,6 +86,15 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
+## Token exports
+
+When tokens are updated in Figma, they are exported to two JSON files at the repo root:
+
+- **`tokens.json`** — values in `oklch()` with `var()` references (use for reading token structure, names, and relationships)
+- **`tokens.rgb.json`** — fully resolved values in `#hex` / `rgba()` (use when you need the actual colour values)
+
+These are the primary source of truth for token discovery. Alternatively, use the Figma MCP (`mcp__figma__get_variable_defs`) to query variables directly from the Figma file.
+
 ## Common pitfalls
 
 - **No `--spacing-*` tokens** — they don't exist in this system (outdated name).
