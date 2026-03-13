@@ -12,6 +12,7 @@ const meta: Meta = {
     docs: {
       description: {
         component: `
+<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3470-668" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
 <p>A horizontal scrollable navigation bar composed of <code>&lt;minis-navigation-item&gt;</code> elements.</p>
 <p>Two variants match the two patterns on slevomat.cz:</p>
 <ul>

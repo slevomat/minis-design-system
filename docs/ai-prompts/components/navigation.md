@@ -1,5 +1,7 @@
 # Navigation & Navigation Item
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3470-668)
+
 Two components for horizontal navigational UI patterns, based on slevomat.cz production usage.
 
 - `<minis-navigation>` — the scrollable nav bar wrapper
