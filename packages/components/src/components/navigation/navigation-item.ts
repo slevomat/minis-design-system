@@ -60,14 +60,22 @@ export class MinisNavigationItem extends LitElement {
     this._hasIcon = slot.assignedNodes({ flatten: true }).length > 0;
   }
 
-  private _onLabelSlotChange(e: Event) {
-    const slot = e.target as HTMLSlotElement;
-    const text = slot.assignedNodes({ flatten: true })
-      .map((n) => n.textContent ?? '')
-      .join('')
-      .trim();
+  private _syncLabelSizer() {
     const label = this.shadowRoot?.querySelector('.label') as HTMLElement | null;
-    if (label) label.dataset.label = text;
+    if (!label) return;
+    const slot = label.querySelector('slot') as HTMLSlotElement | null;
+    const text = slot
+      ? slot.assignedNodes({ flatten: true }).map((n) => n.textContent ?? '').join('').trim()
+      : this.textContent?.trim() ?? '';
+    label.dataset.label = text;
+  }
+
+  private _onLabelSlotChange() {
+    this._syncLabelSizer();
+  }
+
+  protected override updated() {
+    this._syncLabelSizer();
   }
 
   render() {
