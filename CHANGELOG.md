@@ -19,6 +19,10 @@ All notable changes to this project will be documented in this file.
 - All colours via `--color-interaction-secondary-*` tokens — light/dark mode automatic
 - AI prompt doc: `docs/ai-prompts/components/tag.md`
 
+### Tokens
+
+- **Tag component tokens** added to `packages/tokens/src/tokens.css`: `--tag-height`, `--tag-padding-x`, `--tag-padding-y`, `--tag-gap-elements`, `--tag-icon-size`, `--tag-toggle-icon-size`
+
 ### Storybook
 
 - **Story source panel**: added `docs.source.excludeDecorators: true` globally in `preview.ts` — decorator wrapper div no longer appears in the "Show code" examples, so users see only the component markup when copying code snippets.

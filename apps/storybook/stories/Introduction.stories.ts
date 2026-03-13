@@ -366,6 +366,16 @@ export const Changelog: Story = {
         </ul>
       </div>
 
+      <!-- tokens -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">Tokens</code>
+      </h3>
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Tag component tokens added: <code>--tag-height</code>, <code>--tag-padding-x</code>, <code>--tag-padding-y</code>, <code>--tag-gap-elements</code>, <code>--tag-icon-size</code>, <code>--tag-toggle-icon-size</code>.</li>
+        </ul>
+      </div>
+
       <!-- storybook -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">Storybook</code>

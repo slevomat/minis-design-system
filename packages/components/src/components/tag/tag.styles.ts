@@ -12,7 +12,7 @@ export const tagStyles = css`
   .tag {
     display: inline-flex;
     align-items: center;
-    gap: var(--tag-gap, 4px);
+    gap: var(--tag-gap-elements, 4px);
     padding: var(--tag-padding-y, 4px) var(--tag-padding-x, 6px);
     height: var(--tag-height, 32px);
     box-sizing: border-box;
@@ -123,6 +123,7 @@ export const tagStyles = css`
     flex-shrink: 0;
     width: var(--tag-icon-size, 20px);
     height: var(--tag-icon-size, 20px);
+    overflow: hidden;
   }
 
   .icon ::slotted(*) {
@@ -135,6 +136,7 @@ export const tagStyles = css`
   :host([variant="toggle"]) .icon {
     width: var(--tag-toggle-icon-size, 24px);
     height: var(--tag-toggle-icon-size, 24px);
+    overflow: hidden;
   }
 
   /* =====================

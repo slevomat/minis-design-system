@@ -619,6 +619,14 @@
   --message-padding: var(--linear-sp-linear-2);
   --message-gap: var(--linear-sp-linear-2);
 
+  /* Tag */
+  --tag-height: var(--pixel-px-32);
+  --tag-padding-x: var(--pixel-px-6);
+  --tag-padding-y: var(--spacing-layout-xs);
+  --tag-gap-elements: var(--spacing-layout-xs);
+  --tag-icon-size: var(--pixel-px-20);
+  --tag-toggle-icon-size: var(--pixel-px-24);
+
   /* Input */
   --input-border: var(--color-border);
   --input-border-hover: var(--color-border-focus);
