@@ -34,7 +34,7 @@ A compact pill-shaped label used to display metadata, applied filters, or lightw
 | Slot | Description |
 |---|---|
 | *(default)* | Label text |
-| `icon` | Leading icon. Use `<minis-icon slot="icon" name="…" size="14">`. Renders at 14×14 px. |
+| `icon` | Leading icon. Use `<minis-icon slot="icon" name="…">`. Size: `20×20px` for static/clickable/dismissible (`size="20"`), `24×24px` for toggle (omit `size` — 24 is the default). |
 
 ### Events
 

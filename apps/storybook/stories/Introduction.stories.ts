@@ -351,10 +351,17 @@ export const Changelog: Story = {
       </h3>
       <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
-          <li><strong>New component</strong> — compact pill-shaped label with three variants: <code>static</code> (read-only), <code>clickable</code> (lightweight action + toggle state, fires <code>toggle</code> event), <code>dismissible</code> (applied filter with built-in ✕ button, fires <code>dismiss</code> event).</li>
-          <li>Optional <code>icon</code> slot for 14×14 px leading icons.</li>
-          <li><code>pressed</code> boolean attribute for pre-selected toggle state (clickable only).</li>
-          <li><code>disabled</code> boolean attribute (clickable only).</li>
+          <li><strong>New component</strong> — compact pill-shaped label with four variants:</li>
+          <ul style="margin:.25rem 0;padding-left:1.5rem">
+            <li><code>static</code> — read-only label/badge, no interaction</li>
+            <li><code>clickable</code> — triggers a lightweight action (open modal/tooltip); returns to default state after click</li>
+            <li><code>toggle</code> — persists pressed/unpressed state, fires <code>toggle</code> event; icon typically switches outline ↔ filled (e.g. <code>heart</code> ↔ <code>heart-fill</code>)</li>
+            <li><code>dismissible</code> — applied filter with built-in ✕ button; fires <code>dismiss</code> event</li>
+          </ul>
+          <li>Fixed height <code>32px</code>; typography fully inherited from context.</li>
+          <li>Icon sizes: <code>20×20px</code> for static/clickable/dismissible, <code>24×24px</code> for toggle.</li>
+          <li><code>pressed</code> boolean attribute for pre-selected toggle state (<code>toggle</code> variant only).</li>
+          <li><code>disabled</code> boolean attribute (<code>clickable</code> and <code>toggle</code> variants).</li>
           <li>All colours via <code>--color-interaction-secondary-*</code> tokens — light/dark mode automatic.</li>
         </ul>
       </div>

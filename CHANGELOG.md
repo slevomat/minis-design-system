@@ -6,13 +6,16 @@ All notable changes to this project will be documented in this file.
 
 ### Tag
 
-- **New component** `<minis-tag>` — compact pill-shaped label with three variants:
+- **New component** `<minis-tag>` — compact pill-shaped label with four variants:
   - `static` — read-only label (default), rendered as a `<div>`
-  - `clickable` — lightweight interactive action, rendered as a `<button aria-pressed>` with toggle state; fires `toggle` event with `{ pressed: boolean }` detail
+  - `clickable` — lightweight action (open modal/tooltip), rendered as a `<button>`; returns to default state after click, no persistent state
+  - `toggle` — toggle/checkbox-style button, rendered as `<button aria-pressed>`; persists pressed state, fires `toggle` event with `{ pressed: boolean }` detail; icon typically switches outline ↔ filled (e.g. `heart` ↔ `heart-fill`)
   - `dismissible` — applied filter with built-in ✕ button; fires `dismiss` event
-- Optional `icon` slot for 14×14 px leading icons
-- `pressed` boolean attribute for pre-selected toggle state (clickable only)
-- `disabled` boolean attribute (clickable only)
+- Fixed height `32px`; typography fully inherited from context
+- Icon slot sizes: `20×20px` for static/clickable/dismissible, `24×24px` for toggle
+- Padding: `4px` vertical, `6px` horizontal; gap `4px`
+- `pressed` boolean attribute for pre-selected toggle state (`toggle` variant only)
+- `disabled` boolean attribute (`clickable` and `toggle` variants)
 - All colours via `--color-interaction-secondary-*` tokens — light/dark mode automatic
 - AI prompt doc: `docs/ai-prompts/components/tag.md`
 

@@ -3,10 +3,6 @@ import { css } from 'lit';
 export const tagStyles = css`
   :host {
     display: inline-flex;
-    font-family: var(--typography-font-family-sans, Inter, sans-serif);
-    font-size: var(--typography-size-sm, 14px);
-    font-weight: var(--typography-weight-regular, 400);
-    line-height: var(--typography-line-height-percentage-133%, 1.33);
   }
 
   /* =====================
@@ -18,12 +14,18 @@ export const tagStyles = css`
     align-items: center;
     gap: var(--tag-gap, 4px);
     padding: var(--tag-padding-y, 4px) var(--tag-padding-x, 6px);
+    height: var(--tag-height, 32px);
+    box-sizing: border-box;
     border-width: 1px;
     border-style: solid;
     border-radius: var(--tag-border-radius, 9999px);
-    min-height: var(--tag-min-height, 30px);
-    box-sizing: border-box;
     white-space: nowrap;
+    /* Typography inherited from context */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
   }
 
   /* =====================
@@ -111,7 +113,7 @@ export const tagStyles = css`
   }
 
   /* =====================
-     ICON SLOT (static / clickable / dismissible — 14px)
+     ICON SLOT (20px for static / clickable / dismissible)
      ===================== */
 
   .icon {
@@ -119,8 +121,8 @@ export const tagStyles = css`
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: var(--tag-icon-size, 14px);
-    height: var(--tag-icon-size, 14px);
+    width: var(--tag-icon-size, 20px);
+    height: var(--tag-icon-size, 20px);
   }
 
   .icon ::slotted(*) {
@@ -129,7 +131,7 @@ export const tagStyles = css`
     display: block;
   }
 
-  /* Toggle icon uses minis-icon default 24px — no size constraint */
+  /* Toggle icon uses 24px */
   :host([variant="toggle"]) .icon {
     width: var(--tag-toggle-icon-size, 24px);
     height: var(--tag-toggle-icon-size, 24px);

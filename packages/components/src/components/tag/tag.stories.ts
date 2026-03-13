@@ -56,7 +56,7 @@ export const Playground: Story = {
       ?pressed=${args.pressed}
       ?disabled=${args.disabled}
     >
-      <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
+      <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
       Platba na zálohu
     </minis-tag>
   `,
@@ -69,12 +69,12 @@ export const AllVariants: Story = {
   render: () => html`
     <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
       <minis-tag variant="static">
-        <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
+        <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
         Static
       </minis-tag>
 
       <minis-tag variant="clickable">
-        <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
+        <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
         Clickable
       </minis-tag>
 
@@ -85,12 +85,12 @@ export const AllVariants: Story = {
           if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
         }}
       >
-        <minis-icon slot="icon" name="heart" size="14"></minis-icon>
+        <minis-icon slot="icon" name="heart"></minis-icon>
         Toggle
       </minis-tag>
 
       <minis-tag variant="dismissible">
-        <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
+        <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
         Dismissible
       </minis-tag>
     </div>
@@ -148,7 +148,7 @@ export const Toggle: Story = {
           if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
         }}
       >
-        <minis-icon slot="icon" name="heart" size="14"></minis-icon>
+        <minis-icon slot="icon" name="heart"></minis-icon>
         Oblíbené
       </minis-tag>
       <span>← pressed state persists</span>
