@@ -1,7 +1,7 @@
 {
   "$metadata": {
-    "exportDate": "2026-03-02T12:00:56.090Z",
-    "exportMode": "references",
+    "exportDate": "2026-03-13T11:25:25.887Z",
+    "exportMode": "resolved",
     "figmaFile": "MiniS DS"
   },
   "color": {
@@ -14,7 +14,7 @@
           "origin": "--color-black-a-black-a10"
         },
         "black-a100": {
-          "value": "var(--color-core-black)",
+          "value": "#000000",
           "type": "color",
           "cssName": "--color-black-a-black-a100",
           "origin": "--color-black-a-black-a100"
@@ -566,7 +566,7 @@
           "origin": "--color-white-a-white-a10"
         },
         "white-a100": {
-          "value": "var(--color-core-white)",
+          "value": "#ffffff",
           "type": "color",
           "cssName": "--color-white-a-white-a100",
           "origin": "--color-white-a-white-a100"
@@ -632,7 +632,7 @@
     },
     "heritage": {
       "blue-b": {
-        "value": "var(--color-blue-t)",
+        "value": "#006eb9",
         "type": "color",
         "cssName": "--color-blue-b",
         "origin": "--color-blue-b"
@@ -680,7 +680,7 @@
         "origin": "--color-calendar-blue-2"
       },
       "calendar-blue-3": {
-        "value": "var(--color-blue-h)",
+        "value": "#00b2e5",
         "type": "color",
         "cssName": "--color-calendar-blue-3",
         "origin": "--color-calendar-blue-3"
@@ -817,7 +817,7 @@
           "origin": "--color-map-colors-color-map-food"
         },
         "color-map-fun": {
-          "value": "var(--color-green-t)",
+          "value": "#078a06",
           "type": "color",
           "cssName": "--color-map-colors-color-map-fun",
           "origin": "--color-map-colors-color-map-fun"
@@ -841,13 +841,13 @@
           "origin": "--color-map-colors-color-map-primary"
         },
         "color-map-restaurant": {
-          "value": "var(--color-uncategorized-gift-orange)",
+          "value": "#d44508",
           "type": "color",
           "cssName": "--color-map-colors-color-map-restaurant",
           "origin": "--color-map-colors-color-map-restaurant"
         },
         "color-map-travel": {
-          "value": "var(--color-blue-t)",
+          "value": "#006eb9",
           "type": "color",
           "cssName": "--color-map-colors-color-map-travel",
           "origin": "--color-map-colors-color-map-travel"
@@ -861,7 +861,7 @@
           "origin": "--color-messages-message-info-bg"
         },
         "message-notice-bg": {
-          "value": "var(--color-blue-bgl)",
+          "value": "#e4eef6",
           "type": "color",
           "cssName": "--color-messages-message-notice-bg",
           "origin": "--color-messages-message-notice-bg"
@@ -873,7 +873,7 @@
           "origin": "--color-messages-message-success-bg"
         },
         "message-unimportant-bg": {
-          "value": "var(--color-grey-bg)",
+          "value": "#f1f3f5",
           "type": "color",
           "cssName": "--color-messages-message-unimportant-bg",
           "origin": "--color-messages-message-unimportant-bg"
@@ -978,37 +978,37 @@
       "light": {
         "border": {
           "default": {
-            "value": "var(--color-grey-80)",
+            "value": "#cbccce",
             "type": "color",
             "cssName": "--color-border",
             "origin": "--color-grey-80"
           },
           "focus": {
-            "value": "var(--color-blue-65)",
+            "value": "#00b2e5",
             "type": "color",
             "cssName": "--color-border-focus",
             "origin": "--color-blue-65"
           },
           "invalid": {
-            "value": "var(--color-red-55)",
+            "value": "#e8472a",
             "type": "color",
             "cssName": "--color-border-invalid",
             "origin": "--color-red-55"
           },
           "strong": {
-            "value": "var(--color-grey-40)",
+            "value": "#616266",
             "type": "color",
             "cssName": "--color-border-strong",
             "origin": "--color-grey-40"
           },
           "subtle": {
-            "value": "var(--color-grey-90)",
+            "value": "#e3e4e6",
             "type": "color",
             "cssName": "--color-border-subtle",
             "origin": "--color-grey-90"
           },
           "valid": {
-            "value": "var(--color-green-55)",
+            "value": "#1aad17",
             "type": "color",
             "cssName": "--color-border-valid",
             "origin": "--color-green-55"
@@ -1016,49 +1016,49 @@
         },
         "feedback": {
           "error": {
-            "value": "var(--color-red-45)",
+            "value": "#d2381d",
             "type": "color",
             "cssName": "--color-feedback-error",
             "origin": "--color-red-45"
           },
           "error-light": {
-            "value": "var(--color-red-95)",
+            "value": "#ffefec",
             "type": "color",
             "cssName": "--color-feedback-error-light",
             "origin": "--color-red-95"
           },
           "info": {
-            "value": "var(--color-blue-45)",
+            "value": "#006eb9",
             "type": "color",
             "cssName": "--color-feedback-info",
             "origin": "--color-blue-45"
           },
           "info-light": {
-            "value": "var(--color-blue-95)",
+            "value": "#e6f7fc",
             "type": "color",
             "cssName": "--color-feedback-info-light",
             "origin": "--color-blue-95"
           },
           "success": {
-            "value": "var(--color-green-45)",
+            "value": "#088107",
             "type": "color",
             "cssName": "--color-feedback-success",
             "origin": "--color-green-45"
           },
           "success-light": {
-            "value": "var(--color-green-95)",
+            "value": "#e9fce9",
             "type": "color",
             "cssName": "--color-feedback-success-light",
             "origin": "--color-green-95"
           },
           "warning": {
-            "value": "var(--color-yellow-45)",
+            "value": "#ffa400",
             "type": "color",
             "cssName": "--color-feedback-warning",
             "origin": "--color-yellow-45"
           },
           "warning-light": {
-            "value": "var(--color-yellow-95)",
+            "value": "#fff3e0",
             "type": "color",
             "cssName": "--color-feedback-warning-light",
             "origin": "--color-yellow-95"
@@ -1068,19 +1068,19 @@
           "cta-buy": {
             "default": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-green-45)",
+                "value": "#088107",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-border",
                 "origin": "--color-green-45"
               },
               "surface": {
-                "value": "var(--color-green-45)",
+                "value": "#088107",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-surface",
                 "origin": "--color-green-45"
@@ -1088,19 +1088,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-green-35)",
+                "value": "#136110",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-border",
                 "origin": "--color-green-35"
               },
               "surface": {
-                "value": "var(--color-green-35)",
+                "value": "#136110",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-surface",
                 "origin": "--color-green-35"
@@ -1110,19 +1110,19 @@
           "danger": {
             "default": {
               "accent": {
-                "value": "var(--color-red-45)",
+                "value": "#d2381d",
                 "type": "color",
                 "cssName": "--color-interaction-danger-accent",
                 "origin": "--color-red-45"
               },
               "border": {
-                "value": "var(--color-interaction-danger-accent)",
+                "value": "#d2381d",
                 "type": "color",
                 "cssName": "--color-interaction-danger-border",
                 "origin": "--color-red-45"
               },
               "surface": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-danger-surface",
                 "origin": "--color-core-white"
@@ -1130,19 +1130,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-red-35)",
+                "value": "#a1150e",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-accent",
                 "origin": "--color-red-35"
               },
               "border": {
-                "value": "var(--color-interaction-danger-hover-accent)",
+                "value": "#a1150e",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-border",
                 "origin": "--color-red-35"
               },
               "surface": {
-                "value": "var(--color-red-95)",
+                "value": "#ffefec",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-surface",
                 "origin": "--color-red-95"
@@ -1152,19 +1152,19 @@
           "primary": {
             "default": {
               "accent": {
-                "value": "var(--theme-interaction-primary-accent)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-primary-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--theme-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--color-interaction-primary-border",
                 "origin": "--color-blue-45"
               },
               "surface": {
-                "value": "var(--theme-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--color-interaction-primary-surface",
                 "origin": "--color-blue-45"
@@ -1172,19 +1172,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-blue-35)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-border",
                 "origin": "--color-blue-35"
               },
               "surface": {
-                "value": "var(--color-blue-35)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-surface",
                 "origin": "--color-blue-35"
@@ -1194,19 +1194,19 @@
           "secondary": {
             "default": {
               "accent": {
-                "value": "var(--color-core-black)",
+                "value": "#000000",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-accent",
                 "origin": "--color-core-black"
               },
               "border": {
-                "value": "var(--color-grey-80)",
+                "value": "#cbccce",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-border",
                 "origin": "--color-grey-80"
               },
               "surface": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-surface",
                 "origin": "--color-core-white"
@@ -1214,19 +1214,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-black)",
+                "value": "#000000",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-accent",
                 "origin": "--color-core-black"
               },
               "border": {
-                "value": "var(--color-grey-80)",
+                "value": "#cbccce",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-border",
                 "origin": "--color-grey-80"
               },
               "surface": {
-                "value": "var(--color-blue-95)",
+                "value": "#e6f7fc",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-surface",
                 "origin": "--color-blue-95"
@@ -1236,19 +1236,19 @@
           "tertiary": {
             "default": {
               "accent": {
-                "value": "var(--theme-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-accent",
                 "origin": "--color-blue-45"
               },
               "border": {
-                "value": "var(--color-core-transparent)",
+                "value": "rgba(255, 255, 255, 0)",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-border",
                 "origin": "--color-core-transparent"
               },
               "surface": {
-                "value": "var(--color-core-transparent)",
+                "value": "rgba(255, 255, 255, 0)",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-surface",
                 "origin": "--color-core-transparent"
@@ -1256,19 +1256,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-interaction-primary-hover-surface)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-accent",
                 "origin": "--color-blue-35"
               },
               "border": {
-                "value": "var(--color-grey-80)",
+                "value": "#cbccce",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-border",
                 "origin": "--color-grey-80"
               },
               "surface": {
-                "value": "var(--color-blue-95)",
+                "value": "#e6f7fc",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-surface",
                 "origin": "--color-blue-95"
@@ -1278,19 +1278,19 @@
           "transparent": {
             "default": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-border",
                 "origin": "--color-core-white"
               },
               "surface": {
-                "value": "var(--color-black-a-black-a60)",
+                "value": "rgba(0, 0, 0, 0.6)",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-surface",
                 "origin": "--color-black-a-black-a60"
@@ -1298,19 +1298,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-black)",
+                "value": "#000000",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-accent",
                 "origin": "--color-core-black"
               },
               "border": {
-                "value": "var(--color-interaction-transparent-hover-surface)",
+                "value": "#e6f7fc",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-border",
                 "origin": "--color-blue-95"
               },
               "surface": {
-                "value": "var(--color-blue-95)",
+                "value": "#e6f7fc",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-surface",
                 "origin": "--color-blue-95"
@@ -1320,13 +1320,13 @@
         },
         "surface": {
           "faded": {
-            "value": "var(--theme-surface-faded)",
+            "value": "#f1f3f5",
             "type": "color",
             "cssName": "--color-surface-faded",
             "origin": "--color-grey-95"
           },
           "primary": {
-            "value": "var(--theme-surface-primary)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--color-surface-primary",
             "origin": "--color-core-white"
@@ -1335,51 +1335,51 @@
         "text": {
           "accent": {
             "attention": {
-              "value": "var(--color-yellow-25)",
+              "value": "#996600",
               "type": "color",
               "cssName": "--color-text-accent-attention",
               "origin": "--color-yellow-25"
             },
             "danger": {
-              "value": "var(--color-red-45)",
+              "value": "#d2381d",
               "type": "color",
               "cssName": "--color-text-accent-danger",
               "origin": "--color-red-45"
             },
             "link": {
-              "value": "var(--theme-text-accent-link)",
+              "value": "#006eb9",
               "type": "color",
               "cssName": "--color-text-accent-link",
               "origin": "--color-blue-45",
               "hover": {
-                "value": "var(--theme-text-accent-link-hover)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-text-accent-link-hover",
                 "origin": "--color-blue-35"
               }
             },
             "positive": {
-              "value": "var(--color-green-45)",
+              "value": "#088107",
               "type": "color",
               "cssName": "--color-text-accent-positive",
               "origin": "--color-green-45"
             }
           },
           "primary": {
-            "value": "var(--color-core-black)",
+            "value": "#000000",
             "type": "color",
             "cssName": "--color-text-primary",
             "origin": "--color-core-black"
           },
           "secondary": {
-            "value": "var(--color-grey-50)",
+            "value": "#6b6b70",
             "type": "color",
             "cssName": "--color-text-secondary",
             "origin": "--color-grey-50"
           }
         },
         "background": {
-          "value": "var(--theme-background)",
+          "value": "#fcfdff",
           "type": "color",
           "cssName": "--color-background",
           "comment": "Page background",
@@ -1389,37 +1389,37 @@
       "dark": {
         "border": {
           "default": {
-            "value": "var(--color-grey-60)",
+            "value": "#8f8f8f",
             "type": "color",
             "cssName": "--color-border",
             "origin": "--color-grey-60"
           },
           "focus": {
-            "value": "var(--color-blue-65)",
+            "value": "#00b2e5",
             "type": "color",
             "cssName": "--color-border-focus",
             "origin": "--color-blue-65"
           },
           "invalid": {
-            "value": "var(--color-red-75)",
+            "value": "#f37b5f",
             "type": "color",
             "cssName": "--color-border-invalid",
             "origin": "--color-red-75"
           },
           "strong": {
-            "value": "var(--color-grey-80)",
+            "value": "#cbccce",
             "type": "color",
             "cssName": "--color-border-strong",
             "origin": "--color-grey-80"
           },
           "subtle": {
-            "value": "var(--color-grey-35)",
+            "value": "#51585d",
             "type": "color",
             "cssName": "--color-border-subtle",
             "origin": "--color-grey-35"
           },
           "valid": {
-            "value": "var(--color-green-75)",
+            "value": "#66dd66",
             "type": "color",
             "cssName": "--color-border-valid",
             "origin": "--color-green-75"
@@ -1427,49 +1427,49 @@
         },
         "feedback": {
           "error": {
-            "value": "var(--color-red-65)",
+            "value": "#ee5a3c",
             "type": "color",
             "cssName": "--color-feedback-error",
             "origin": "--color-red-65"
           },
           "error-light": {
-            "value": "var(--color-surface-faded)",
+            "value": "#1b1c20",
             "type": "color",
             "cssName": "--color-feedback-error-light",
             "origin": "--color-grey-10"
           },
           "info": {
-            "value": "var(--color-blue-65)",
+            "value": "#00b2e5",
             "type": "color",
             "cssName": "--color-feedback-info",
             "origin": "--color-blue-65"
           },
           "info-light": {
-            "value": "var(--color-surface-faded)",
+            "value": "#1b1c20",
             "type": "color",
             "cssName": "--color-feedback-info-light",
             "origin": "--color-grey-10"
           },
           "success": {
-            "value": "var(--color-green-65)",
+            "value": "#0db70d",
             "type": "color",
             "cssName": "--color-feedback-success",
             "origin": "--color-green-65"
           },
           "success-light": {
-            "value": "var(--color-surface-faded)",
+            "value": "#1b1c20",
             "type": "color",
             "cssName": "--color-feedback-success-light",
             "origin": "--color-grey-10"
           },
           "warning": {
-            "value": "var(--color-yellow-65)",
+            "value": "#ffc641",
             "type": "color",
             "cssName": "--color-feedback-warning",
             "origin": "--color-yellow-65"
           },
           "warning-light": {
-            "value": "var(--color-surface-faded)",
+            "value": "#1b1c20",
             "type": "color",
             "cssName": "--color-feedback-warning-light",
             "origin": "--color-grey-10"
@@ -1479,19 +1479,19 @@
           "cta-buy": {
             "default": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-green-45)",
+                "value": "#088107",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-border",
                 "origin": "--color-green-45"
               },
               "surface": {
-                "value": "var(--color-green-45)",
+                "value": "#088107",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-surface",
                 "origin": "--color-green-45"
@@ -1499,19 +1499,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-green-35)",
+                "value": "#136110",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-border",
                 "origin": "--color-green-35"
               },
               "surface": {
-                "value": "var(--color-green-35)",
+                "value": "#136110",
                 "type": "color",
                 "cssName": "--color-interaction-cta-buy-hover-surface",
                 "origin": "--color-green-35"
@@ -1521,39 +1521,39 @@
           "danger": {
             "default": {
               "accent": {
-                "value": "var(--color-red-85)",
+                "value": "#f8b5a3",
                 "type": "color",
                 "cssName": "--color-interaction-danger-accent",
                 "origin": "--color-red-85"
               },
               "border": {
-                "value": "var(--color-interaction-danger-accent)",
+                "value": "#f8b5a3",
                 "type": "color",
                 "cssName": "--color-interaction-danger-border",
                 "origin": "--color-red-85"
               },
               "surface": {
-                "value": "var(--color-core-transparent)",
+                "value": "#333333",
                 "type": "color",
                 "cssName": "--color-interaction-danger-surface",
-                "origin": "--color-core-transparent"
+                "origin": "--color-grey-20"
               }
             },
             "hover": {
               "accent": {
-                "value": "var(--color-red-75)",
+                "value": "#f37b5f",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-accent",
                 "origin": "--color-red-75"
               },
               "border": {
-                "value": "var(--color-interaction-danger-hover-accent)",
+                "value": "#f37b5f",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-border",
                 "origin": "--color-red-75"
               },
               "surface": {
-                "value": "var(--color-red-15)",
+                "value": "#5c0a0a",
                 "type": "color",
                 "cssName": "--color-interaction-danger-hover-surface",
                 "origin": "--color-red-15"
@@ -1563,19 +1563,19 @@
           "primary": {
             "default": {
               "accent": {
-                "value": "var(--theme-interaction-primary-accent)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-primary-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--theme-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--color-interaction-primary-border",
                 "origin": "--color-blue-45"
               },
               "surface": {
-                "value": "var(--theme-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--color-interaction-primary-surface",
                 "origin": "--color-blue-45"
@@ -1583,19 +1583,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-blue-35)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-border",
                 "origin": "--color-blue-35"
               },
               "surface": {
-                "value": "var(--color-blue-35)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--color-interaction-primary-hover-surface",
                 "origin": "--color-blue-35"
@@ -1605,19 +1605,19 @@
           "secondary": {
             "default": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-grey-80)",
+                "value": "#cbccce",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-border",
                 "origin": "--color-grey-80"
               },
               "surface": {
-                "value": "var(--color-grey-35)",
+                "value": "#51585d",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-surface",
                 "origin": "--color-grey-35"
@@ -1625,19 +1625,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-grey-60)",
+                "value": "#8f8f8f",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-border",
                 "origin": "--color-grey-60"
               },
               "surface": {
-                "value": "var(--color-grey-25)",
+                "value": "#363b3e",
                 "type": "color",
                 "cssName": "--color-interaction-secondary-hover-surface",
                 "origin": "--color-grey-25"
@@ -1647,19 +1647,19 @@
           "tertiary": {
             "default": {
               "accent": {
-                "value": "var(--theme-text-accent-link)",
+                "value": "#00b2e5",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-accent",
                 "origin": "--color-blue-65"
               },
               "border": {
-                "value": "var(--color-core-transparent)",
+                "value": "rgba(255, 255, 255, 0)",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-border",
                 "origin": "--color-core-transparent"
               },
               "surface": {
-                "value": "var(--color-core-transparent)",
+                "value": "rgba(255, 255, 255, 0)",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-surface",
                 "origin": "--color-core-transparent"
@@ -1667,19 +1667,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--theme-text-accent-link-hover)",
+                "value": "#4dcdff",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-accent",
                 "origin": "--color-blue-75"
               },
               "border": {
-                "value": "var(--color-grey-60)",
+                "value": "#8f8f8f",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-border",
                 "origin": "--color-grey-60"
               },
               "surface": {
-                "value": "var(--color-grey-20)",
+                "value": "#333333",
                 "type": "color",
                 "cssName": "--color-interaction-tertiary-hover-surface",
                 "origin": "--color-grey-20"
@@ -1689,19 +1689,19 @@
           "transparent": {
             "default": {
               "accent": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--color-core-white)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-border",
                 "origin": "--color-core-white"
               },
               "surface": {
-                "value": "var(--color-black-a-black-a60)",
+                "value": "rgba(0, 0, 0, 0.6)",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-surface",
                 "origin": "--color-black-a-black-a60"
@@ -1709,19 +1709,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--color-core-black)",
+                "value": "#000000",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-accent",
                 "origin": "--color-core-black"
               },
               "border": {
-                "value": "var(--color-interaction-transparent-border)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-border",
                 "origin": "--color-core-white"
               },
               "surface": {
-                "value": "var(--color-blue-95)",
+                "value": "#e6f7fc",
                 "type": "color",
                 "cssName": "--color-interaction-transparent-hover-surface",
                 "origin": "--color-blue-95"
@@ -1731,13 +1731,13 @@
         },
         "surface": {
           "faded": {
-            "value": "var(--theme-surface-faded)",
+            "value": "#1b1c20",
             "type": "color",
             "cssName": "--color-surface-faded",
             "origin": "--color-grey-10"
           },
           "primary": {
-            "value": "var(--theme-surface-primary)",
+            "value": "#333333",
             "type": "color",
             "cssName": "--color-surface-primary",
             "origin": "--color-grey-20"
@@ -1746,51 +1746,51 @@
         "text": {
           "accent": {
             "attention": {
-              "value": "var(--color-yellow-75)",
+              "value": "#ffd666",
               "type": "color",
               "cssName": "--color-text-accent-attention",
               "origin": "--color-yellow-75"
             },
             "danger": {
-              "value": "var(--color-red-85)",
+              "value": "#f8b5a3",
               "type": "color",
               "cssName": "--color-text-accent-danger",
               "origin": "--color-red-85"
             },
             "link": {
-              "value": "var(--theme-text-accent-link)",
+              "value": "#00b2e5",
               "type": "color",
               "cssName": "--color-text-accent-link",
               "origin": "--color-blue-65",
               "hover": {
-                "value": "var(--theme-text-accent-link-hover)",
+                "value": "#4dcdff",
                 "type": "color",
                 "cssName": "--color-text-accent-link-hover",
                 "origin": "--color-blue-75"
               }
             },
             "positive": {
-              "value": "var(--color-green-75)",
+              "value": "#66dd66",
               "type": "color",
               "cssName": "--color-text-accent-positive",
               "origin": "--color-green-75"
             }
           },
           "primary": {
-            "value": "var(--color-grey-95)",
+            "value": "#f1f3f5",
             "type": "color",
             "cssName": "--color-text-primary",
             "origin": "--color-grey-95"
           },
           "secondary": {
-            "value": "var(--color-grey-60)",
+            "value": "#8f8f8f",
             "type": "color",
             "cssName": "--color-text-secondary",
             "origin": "--color-grey-60"
           }
         },
         "background": {
-          "value": "var(--theme-background)",
+          "value": "#000000",
           "type": "color",
           "cssName": "--color-background",
           "comment": "Page background",
@@ -1804,37 +1804,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -1842,13 +1842,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -1858,7 +1858,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -1871,7 +1871,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-8)",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -1893,7 +1893,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-2xs)",
+          "value": "360px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -1902,37 +1902,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -1943,14 +1943,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-143%)",
+              "value": "1.4299999475479126",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-138%)",
+            "value": "1.3799999952316284",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -1959,13 +1959,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -1973,13 +1973,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -1987,13 +1987,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-138%)",
+              "value": "1.3799999952316284",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-md)",
+              "value": "16px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -2002,7 +2002,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -2010,7 +2010,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -2022,37 +2022,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -2060,13 +2060,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -2076,7 +2076,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2089,7 +2089,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-2)",
+          "value": "8px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2111,7 +2111,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-2xs)",
+          "value": "360px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -2120,37 +2120,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-5)",
+            "value": "20px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-3)",
+            "value": "12px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-1)",
+            "value": "4px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -2161,14 +2161,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-143%)",
+              "value": "1.4299999475479126",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-138%)",
+            "value": "1.3799999952316284",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -2177,13 +2177,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -2191,13 +2191,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -2205,13 +2205,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-138%)",
+              "value": "1.3799999952316284",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-md)",
+              "value": "16px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -2220,7 +2220,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -2228,7 +2228,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -2240,37 +2240,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -2278,13 +2278,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -2294,7 +2294,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2307,7 +2307,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-2)",
+          "value": "8px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2329,7 +2329,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-xs)",
+          "value": "408px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -2338,37 +2338,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-5)",
+            "value": "20px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-3)",
+            "value": "12px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-1)",
+            "value": "4px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -2379,14 +2379,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-143%)",
+              "value": "1.4299999475479126",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-138%)",
+            "value": "1.3799999952316284",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -2395,13 +2395,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -2409,13 +2409,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -2423,13 +2423,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-138%)",
+              "value": "1.3799999952316284",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-md)",
+              "value": "16px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -2438,7 +2438,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -2446,7 +2446,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -2458,37 +2458,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -2496,13 +2496,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -2512,7 +2512,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2525,7 +2525,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-4)",
+          "value": "16px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2547,7 +2547,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-sm)",
+          "value": "600px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -2556,37 +2556,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -2597,14 +2597,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-143%)",
+              "value": "1.4299999475479126",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-138%)",
+            "value": "1.3799999952316284",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -2613,13 +2613,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -2627,13 +2627,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -2641,13 +2641,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-138%)",
+              "value": "1.3799999952316284",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-md)",
+              "value": "16px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -2656,7 +2656,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -2664,7 +2664,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-2xl)",
+            "value": "24px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -2676,37 +2676,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -2714,13 +2714,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -2730,7 +2730,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2743,7 +2743,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-4)",
+          "value": "16px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2765,7 +2765,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-md)",
+          "value": "768px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -2774,37 +2774,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -2815,14 +2815,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -2831,13 +2831,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -2845,13 +2845,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -2859,13 +2859,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -2874,7 +2874,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -2882,7 +2882,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -2894,37 +2894,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -2932,13 +2932,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -2948,7 +2948,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2961,7 +2961,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-4)",
+          "value": "16px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2983,7 +2983,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-lg)",
+          "value": "1008px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -2992,37 +2992,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -3033,14 +3033,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -3049,13 +3049,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -3063,13 +3063,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -3077,13 +3077,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -3092,7 +3092,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -3100,7 +3100,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -3112,37 +3112,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -3150,13 +3150,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -3166,7 +3166,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -3179,7 +3179,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-8)",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -3201,7 +3201,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-xl)",
+          "value": "1256px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -3210,37 +3210,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -3251,14 +3251,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -3267,13 +3267,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -3281,13 +3281,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -3295,13 +3295,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -3310,7 +3310,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-4xl)",
+            "value": "40px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -3318,7 +3318,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -3330,37 +3330,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -3368,13 +3368,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -3384,7 +3384,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -3397,7 +3397,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-8)",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -3419,7 +3419,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-2xl)",
+          "value": "1480px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -3428,37 +3428,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -3469,14 +3469,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -3485,13 +3485,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -3499,13 +3499,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -3513,13 +3513,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -3528,7 +3528,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-4xl)",
+            "value": "40px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -3536,7 +3536,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -3548,37 +3548,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -3586,13 +3586,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -3602,7 +3602,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -3615,7 +3615,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-8)",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -3637,7 +3637,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-3xl)",
+          "value": "1920px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -3646,37 +3646,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -3687,14 +3687,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -3703,13 +3703,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -3717,13 +3717,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -3731,13 +3731,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -3746,7 +3746,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-4xl)",
+            "value": "40px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -3754,7 +3754,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -3766,37 +3766,37 @@
       "border": {
         "radius": {
           "full": {
-            "value": "var(--radius-radius-full)",
+            "value": "9999px",
             "type": "float",
             "cssName": "--border-radius-full",
             "origin": null
           },
           "lg": {
-            "value": "var(--radius-radius-12)",
+            "value": "12px",
             "type": "float",
             "cssName": "--border-radius-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--radius-radius-8)",
+            "value": "8px",
             "type": "float",
             "cssName": "--border-radius-md",
             "origin": null
           },
           "none": {
-            "value": "var(--radius-radius-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-radius-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--radius-radius-4)",
+            "value": "4px",
             "type": "float",
             "cssName": "--border-radius-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--radius-radius-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--border-radius-xl",
             "origin": null
@@ -3804,13 +3804,13 @@
         },
         "width": {
           "none": {
-            "value": "var(--pixel-px-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--border-width-none",
             "origin": null
           },
           "thin": {
-            "value": "var(--pixel-px-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--border-width-thin",
             "origin": null
@@ -3820,7 +3820,7 @@
       "container": {
         "narrow": {
           "padding": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -3833,7 +3833,7 @@
           }
         },
         "padding": {
-          "value": "var(--linear-sp-linear-8)",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -3855,7 +3855,7 @@
       },
       "page": {
         "width": {
-          "value": "var(--breakpoint-4xl)",
+          "value": "2560px",
           "type": "float",
           "cssName": "--page-width",
           "origin": null
@@ -3864,37 +3864,37 @@
       "spacing": {
         "layout": {
           "lg": {
-            "value": "var(--linear-sp-linear-8)",
+            "value": "32px",
             "type": "float",
             "cssName": "--spacing-layout-lg",
             "origin": null
           },
           "md": {
-            "value": "var(--linear-sp-linear-6)",
+            "value": "24px",
             "type": "float",
             "cssName": "--spacing-layout-md",
             "origin": null
           },
           "none": {
-            "value": "var(--linear-sp-linear-0)",
+            "value": "0px",
             "type": "float",
             "cssName": "--spacing-layout-none",
             "origin": null
           },
           "sm": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--spacing-layout-sm",
             "origin": null
           },
           "xl": {
-            "value": "var(--linear-sp-linear-12)",
+            "value": "48px",
             "type": "float",
             "cssName": "--spacing-layout-xl",
             "origin": null
           },
           "xs": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--spacing-layout-xs",
             "origin": null
@@ -3905,14 +3905,14 @@
         "body": {
           "s": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-157%)",
+              "value": "1.5700000524520874",
               "type": "float",
               "cssName": "--typography-body-s-line-height",
               "origin": null
             }
           },
           "line-height": {
-            "value": "var(--typography-line-height-percentage-150%)",
+            "value": "1.5",
             "type": "float",
             "cssName": "--typography-body-line-height",
             "origin": null
@@ -3921,13 +3921,13 @@
         "heading": {
           "large": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-125%)",
+              "value": "1.25",
               "type": "float",
               "cssName": "--typography-heading-large-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-2xl)",
+              "value": "24px",
               "type": "float",
               "cssName": "--typography-heading-large-size",
               "origin": null
@@ -3935,13 +3935,13 @@
           },
           "medium": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-130%)",
+              "value": "1.2999999523162842",
               "type": "float",
               "cssName": "--typography-heading-medium-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-xl)",
+              "value": "20px",
               "type": "float",
               "cssName": "--typography-heading-medium-size",
               "origin": null
@@ -3949,13 +3949,13 @@
           },
           "small": {
             "line-height": {
-              "value": "var(--typography-line-height-percentage-133%)",
+              "value": "1.3300000429153442",
               "type": "float",
               "cssName": "--typography-heading-small-line-height",
               "origin": null
             },
             "size": {
-              "value": "var(--typography-size-lg)",
+              "value": "18px",
               "type": "float",
               "cssName": "--typography-heading-small-size",
               "origin": null
@@ -3964,7 +3964,7 @@
         },
         "mega-poster": {
           "size": {
-            "value": "var(--typography-size-4xl)",
+            "value": "40px",
             "type": "float",
             "cssName": "--typography-mega-poster-size",
             "origin": null
@@ -3972,7 +3972,7 @@
         },
         "poster": {
           "size": {
-            "value": "var(--typography-size-3xl)",
+            "value": "32px",
             "type": "float",
             "cssName": "--typography-poster-size",
             "origin": null
@@ -4041,13 +4041,13 @@
     "alert": {
       "color": {
         "border": {
-          "value": "var(--color-feedback-info)",
+          "value": "#006eb9",
           "type": "color",
           "cssName": "--alert-color-border",
           "origin": "--color-blue-45"
         },
         "surface": {
-          "value": "var(--color-feedback-info-light)",
+          "value": "#e6f7fc",
           "type": "color",
           "cssName": "--alert-color-surface",
           "origin": "--color-blue-95"
@@ -4056,13 +4056,13 @@
       "error": {
         "color": {
           "border": {
-            "value": "var(--color-feedback-error)",
+            "value": "#d2381d",
             "type": "color",
             "cssName": "--alert-error-color-border",
             "origin": "--color-red-45"
           },
           "surface": {
-            "value": "var(--color-feedback-error-light)",
+            "value": "#ffefec",
             "type": "color",
             "cssName": "--alert-error-color-surface",
             "origin": "--color-red-95"
@@ -4070,20 +4070,20 @@
         }
       },
       "gap": {
-        "value": "var(--spacing-layout-xs)",
+        "value": "8px",
         "type": "float",
         "cssName": "--alert-gap",
         "origin": null
       },
       "padding": {
         "x": {
-          "value": "var(--spacing-layout-xs)",
+          "value": "8px",
           "type": "float",
           "cssName": "--alert-padding-x",
           "origin": null
         },
         "y": {
-          "value": "var(--spacing-layout-xs)",
+          "value": "8px",
           "type": "float",
           "cssName": "--alert-padding-y",
           "origin": null
@@ -4092,13 +4092,13 @@
       "sucess": {
         "color": {
           "border": {
-            "value": "var(--color-feedback-success)",
+            "value": "#088107",
             "type": "color",
             "cssName": "--alert-sucess-color-border",
             "origin": "--color-green-45"
           },
           "surface": {
-            "value": "var(--color-feedback-success-light)",
+            "value": "#e9fce9",
             "type": "color",
             "cssName": "--alert-sucess-color-surface",
             "origin": "--color-green-95"
@@ -4108,13 +4108,13 @@
       "warning": {
         "color": {
           "border": {
-            "value": "var(--color-feedback-warning)",
+            "value": "#ffa400",
             "type": "color",
             "cssName": "--alert-warning-color-border",
             "origin": "--color-yellow-45"
           },
           "surface": {
-            "value": "var(--color-feedback-warning-light)",
+            "value": "#fff3e0",
             "type": "color",
             "cssName": "--alert-warning-color-surface",
             "origin": "--color-yellow-95"
@@ -4140,19 +4140,19 @@
         },
         "sizing": {
           "md": {
-            "value": "var(--pixel-px-20)",
+            "value": "20px",
             "type": "float",
             "cssName": "--button-icon-sizing-md",
             "origin": null
           },
           "sm": {
-            "value": "var(--pixel-px-18)",
+            "value": "18px",
             "type": "float",
             "cssName": "--button-icon-sizing-sm",
             "origin": null
           },
           "xs": {
-            "value": "var(--pixel-px-16)",
+            "value": "16px",
             "type": "float",
             "cssName": "--button-icon-sizing-xs",
             "origin": null
@@ -4161,13 +4161,13 @@
       },
       "border": {
         "radius": {
-          "value": "var(--border-radius-sm)",
+          "value": "4px",
           "type": "float",
           "cssName": "--button-border-radius",
           "origin": null
         },
         "width": {
-          "value": "var(--border-width-thin)",
+          "value": "1px",
           "type": "float",
           "cssName": "--button-border-width",
           "origin": null
@@ -4176,19 +4176,19 @@
       "cta-buy": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-cta-buy-border)",
+            "value": "#088107",
             "type": "color",
             "cssName": "--button-cta-buy-border",
             "origin": "--color-green-45"
           },
           "surface": {
-            "value": "var(--color-interaction-cta-buy-surface)",
+            "value": "#088107",
             "type": "color",
             "cssName": "--button-cta-buy-surface",
             "origin": "--color-green-45"
           },
           "text": {
-            "value": "var(--color-interaction-cta-buy-accent)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-cta-buy-text",
             "origin": "--color-core-white"
@@ -4196,19 +4196,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-cta-buy-hover-border)",
+            "value": "#136110",
             "type": "color",
             "cssName": "--button-cta-buy-hover-border",
             "origin": "--color-green-35"
           },
           "surface": {
-            "value": "var(--color-interaction-cta-buy-hover-surface)",
+            "value": "#136110",
             "type": "color",
             "cssName": "--button-cta-buy-hover-surface",
             "origin": "--color-green-35"
           },
           "text": {
-            "value": "var(--color-interaction-cta-buy-hover-accent)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-cta-buy-hover-text",
             "origin": "--color-core-white"
@@ -4218,19 +4218,19 @@
       "danger": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-danger-border)",
+            "value": "#d2381d",
             "type": "color",
             "cssName": "--button-danger-border",
             "origin": "--color-red-45"
           },
           "surface": {
-            "value": "var(--color-interaction-danger-surface)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-danger-surface",
             "origin": "--color-core-white"
           },
           "text": {
-            "value": "var(--color-interaction-danger-accent)",
+            "value": "#d2381d",
             "type": "color",
             "cssName": "--button-danger-text",
             "origin": "--color-red-45"
@@ -4238,19 +4238,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-danger-hover-border)",
+            "value": "#a1150e",
             "type": "color",
             "cssName": "--button-danger-hover-border",
             "origin": "--color-red-35"
           },
           "surface": {
-            "value": "var(--color-interaction-danger-hover-surface)",
+            "value": "#ffefec",
             "type": "color",
             "cssName": "--button-danger-hover-surface",
             "origin": "--color-red-95"
           },
           "text": {
-            "value": "var(--color-interaction-danger-hover-accent)",
+            "value": "#a1150e",
             "type": "color",
             "cssName": "--button-danger-hover-text",
             "origin": "--color-red-35"
@@ -4260,19 +4260,19 @@
       "default": {
         "gap": {
           "addon": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-gap-addon",
             "origin": null
           },
           "elements": {
-            "value": "var(--linear-sp-linear-1)",
+            "value": "4px",
             "type": "float",
             "cssName": "--button-gap-elements",
             "origin": null
           },
           "spacer": {
-            "value": "var(--fibonachi-sp-fib-2)",
+            "value": "2px",
             "type": "float",
             "cssName": "--button-gap-spacer",
             "origin": null
@@ -4280,19 +4280,19 @@
         },
         "padding": {
           "x": {
-            "value": "var(--linear-sp-linear-3)",
+            "value": "12px",
             "type": "float",
             "cssName": "--button-padding-x",
             "origin": null
           },
           "x-icon-only": {
-            "value": "var(--fibonachi-sp-fib-5)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-padding-x-icon-only",
             "origin": null
           },
           "y": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-padding-y",
             "origin": null
@@ -4302,19 +4302,19 @@
       "large": {
         "gap": {
           "addon": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-large-gap-addon",
             "origin": null
           },
           "elements": {
-            "value": "var(--linear-sp-linear-1)",
+            "value": "4px",
             "type": "float",
             "cssName": "--button-large-gap-elements",
             "origin": null
           },
           "spacer": {
-            "value": "var(--fibonachi-sp-fib-4)",
+            "value": "5px",
             "type": "float",
             "cssName": "--button-large-gap-spacer",
             "origin": null
@@ -4322,19 +4322,19 @@
         },
         "padding": {
           "x": {
-            "value": "var(--linear-sp-linear-4)",
+            "value": "16px",
             "type": "float",
             "cssName": "--button-large-padding-x",
             "origin": null
           },
           "x-icon-only": {
-            "value": "var(--linear-sp-linear-3)",
+            "value": "12px",
             "type": "float",
             "cssName": "--button-large-padding-x-icon-only",
             "origin": null
           },
           "y": {
-            "value": "var(--linear-sp-linear-3)",
+            "value": "12px",
             "type": "float",
             "cssName": "--button-large-padding-y",
             "origin": null
@@ -4344,19 +4344,19 @@
       "primary": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-primary-border)",
+            "value": "#006eb9",
             "type": "color",
             "cssName": "--button-primary-border",
             "origin": "--color-blue-45"
           },
           "surface": {
-            "value": "var(--color-interaction-primary-surface)",
+            "value": "#006eb9",
             "type": "color",
             "cssName": "--button-primary-surface",
             "origin": "--color-blue-45"
           },
           "text": {
-            "value": "var(--color-interaction-primary-accent)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-primary-text",
             "origin": "--color-core-white"
@@ -4364,19 +4364,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-primary-hover-border)",
+            "value": "#005685",
             "type": "color",
             "cssName": "--button-primary-hover-border",
             "origin": "--color-blue-35"
           },
           "surface": {
-            "value": "var(--color-interaction-primary-hover-surface)",
+            "value": "#005685",
             "type": "color",
             "cssName": "--button-primary-hover-surface",
             "origin": "--color-blue-35"
           },
           "text": {
-            "value": "var(--color-interaction-primary-hover-accent)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-primary-hover-text",
             "origin": "--color-core-white"
@@ -4386,19 +4386,19 @@
       "secondary": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-secondary-border)",
+            "value": "#cbccce",
             "type": "color",
             "cssName": "--button-secondary-border",
             "origin": "--color-grey-80"
           },
           "surface": {
-            "value": "var(--color-interaction-secondary-surface)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-secondary-surface",
             "origin": "--color-core-white"
           },
           "text": {
-            "value": "var(--color-interaction-secondary-accent)",
+            "value": "#000000",
             "type": "color",
             "cssName": "--button-secondary-text",
             "origin": "--color-core-black"
@@ -4406,19 +4406,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-secondary-hover-border)",
+            "value": "#cbccce",
             "type": "color",
             "cssName": "--button-secondary-hover-border",
             "origin": "--color-grey-80"
           },
           "surface": {
-            "value": "var(--color-interaction-secondary-hover-surface)",
+            "value": "#e6f7fc",
             "type": "color",
             "cssName": "--button-secondary-hover-surface",
             "origin": "--color-blue-95"
           },
           "text": {
-            "value": "var(--color-interaction-secondary-hover-accent)",
+            "value": "#000000",
             "type": "color",
             "cssName": "--button-secondary-hover-text",
             "origin": "--color-core-black"
@@ -4428,19 +4428,19 @@
       "small": {
         "gap": {
           "addon": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-small-gap-addon",
             "origin": null
           },
           "elements": {
-            "value": "var(--linear-sp-linear-1)",
+            "value": "4px",
             "type": "float",
             "cssName": "--button-small-gap-elements",
             "origin": null
           },
           "spacer": {
-            "value": "var(--fibonachi-sp-fib-1)",
+            "value": "1px",
             "type": "float",
             "cssName": "--button-small-gap-spacer",
             "origin": null
@@ -4448,19 +4448,19 @@
         },
         "padding": {
           "x": {
-            "value": "var(--linear-sp-linear-2)",
+            "value": "8px",
             "type": "float",
             "cssName": "--button-small-padding-x",
             "origin": null
           },
           "x-icon-only": {
-            "value": "var(--fibonachi-sp-fib-3)",
+            "value": "3px",
             "type": "float",
             "cssName": "--button-small-padding-x-icon-only",
             "origin": null
           },
           "y": {
-            "value": "var(--fibonachi-sp-fib-3)",
+            "value": "3px",
             "type": "float",
             "cssName": "--button-small-padding-y",
             "origin": null
@@ -4470,19 +4470,19 @@
       "tertiary": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-tertiary-border)",
+            "value": "rgba(255, 255, 255, 0)",
             "type": "color",
             "cssName": "--button-tertiary-border",
             "origin": "--color-core-transparent"
           },
           "surface": {
-            "value": "var(--color-interaction-tertiary-surface)",
+            "value": "rgba(255, 255, 255, 0)",
             "type": "color",
             "cssName": "--button-tertiary-surface",
             "origin": "--color-core-transparent"
           },
           "text": {
-            "value": "var(--color-interaction-tertiary-accent)",
+            "value": "#006eb9",
             "type": "color",
             "cssName": "--button-tertiary-text",
             "origin": "--color-blue-45"
@@ -4490,19 +4490,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-tertiary-hover-border)",
+            "value": "#cbccce",
             "type": "color",
             "cssName": "--button-tertiary-hover-border",
             "origin": "--color-grey-80"
           },
           "surface": {
-            "value": "var(--color-interaction-tertiary-hover-surface)",
+            "value": "#e6f7fc",
             "type": "color",
             "cssName": "--button-tertiary-hover-surface",
             "origin": "--color-blue-95"
           },
           "text": {
-            "value": "var(--color-interaction-tertiary-hover-accent)",
+            "value": "#005685",
             "type": "color",
             "cssName": "--button-tertiary-hover-text",
             "origin": "--color-blue-35"
@@ -4512,19 +4512,19 @@
       "transparent": {
         "default": {
           "border": {
-            "value": "var(--color-interaction-transparent-border)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-transparent-border",
             "origin": "--color-core-white"
           },
           "surface": {
-            "value": "var(--color-interaction-transparent-surface)",
+            "value": "rgba(0, 0, 0, 0.6)",
             "type": "color",
             "cssName": "--button-transparent-surface",
             "origin": "--color-black-a-black-a60"
           },
           "text": {
-            "value": "var(--color-interaction-transparent-accent)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--button-transparent-text",
             "origin": "--color-core-white"
@@ -4532,19 +4532,19 @@
         },
         "hover": {
           "border": {
-            "value": "var(--color-interaction-transparent-hover-border)",
+            "value": "#e6f7fc",
             "type": "color",
             "cssName": "--button-transparent-hover-border",
             "origin": "--color-blue-95"
           },
           "surface": {
-            "value": "var(--color-interaction-transparent-hover-surface)",
+            "value": "#e6f7fc",
             "type": "color",
             "cssName": "--button-transparent-hover-surface",
             "origin": "--color-blue-95"
           },
           "text": {
-            "value": "var(--color-interaction-transparent-hover-accent)",
+            "value": "#000000",
             "type": "color",
             "cssName": "--button-transparent-hover-text",
             "origin": "--color-core-black"
@@ -4553,7 +4553,7 @@
       }
     },
     "cardgrid": {
-      "value": "var(--spacing-layout-xs)",
+      "value": "8px",
       "type": "float",
       "cssName": "--cardgrid",
       "origin": null
@@ -4561,53 +4561,89 @@
     "input": {
       "border": {
         "default": {
-          "value": "var(--color-border)",
+          "value": "#cbccce",
           "type": "color",
           "cssName": "--input-border",
           "origin": "--color-grey-80"
         },
         "hover": {
-          "value": "var(--color-border-focus)",
+          "value": "#00b2e5",
           "type": "color",
           "cssName": "--input-border-hover",
           "origin": "--color-blue-65"
         },
         "invalid": {
-          "value": "var(--color-border-invalid)",
+          "value": "#e8472a",
           "type": "color",
           "cssName": "--input-border-invalid",
           "origin": "--color-red-55"
         },
         "valid": {
-          "value": "var(--color-border-valid)",
+          "value": "#1aad17",
           "type": "color",
           "cssName": "--input-border-valid",
           "origin": "--color-green-55"
         }
       },
       "label": {
-        "value": "var(--color-text-primary)",
+        "value": "#000000",
         "type": "color",
         "cssName": "--input-label",
         "origin": "--color-core-black"
       },
       "placeholder": {
-        "value": "var(--color-text-secondary)",
+        "value": "#6b6b70",
         "type": "color",
         "cssName": "--input-placeholder",
         "origin": "--color-grey-50"
       },
       "surface": {
-        "value": "var(--color-surface-primary)",
+        "value": "#ffffff",
         "type": "color",
         "cssName": "--input-surface",
         "origin": "--color-core-white"
       },
       "value": {
-        "value": "var(--color-text-primary)",
+        "value": "#000000",
         "type": "color",
         "cssName": "--input-value",
         "origin": "--color-core-black"
+      }
+    },
+    "tag": {
+      "gap": {
+        "elements": {
+          "value": "4px",
+          "type": "float",
+          "cssName": "--tag-gap-elements",
+          "origin": null
+        },
+        "icon-correction": {
+          "value": "2px",
+          "type": "float",
+          "cssName": "--tag-gap-icon-correction",
+          "origin": null
+        }
+      },
+      "padding": {
+        "x": {
+          "value": "8px",
+          "type": "float",
+          "cssName": "--tag-padding-x",
+          "origin": null
+        },
+        "x-noicon": {
+          "value": "16px",
+          "type": "float",
+          "cssName": "--tag-padding-x-noicon",
+          "origin": null
+        },
+        "y": {
+          "value": "0px",
+          "type": "float",
+          "cssName": "--tag-padding-y",
+          "origin": null
+        }
       }
     }
   },
@@ -4999,6 +5035,12 @@
         "cssName": "--pixel-px-40",
         "origin": null
       },
+      "px-44": {
+        "value": "44px",
+        "type": "float",
+        "cssName": "--pixel-px-44",
+        "origin": null
+      },
       "px-48": {
         "value": "48px",
         "type": "float",
@@ -5095,19 +5137,21 @@
   },
   "typography": {
     "body": {
-      "value": {
-        "fontFamily": "Inter",
-        "fontWeight": 400,
-        "fontSize": "16px",
-        "lineHeight": "150%",
-        "letterSpacing": "0",
-        "textDecoration": "none",
-        "textTransform": "none"
+      "md": {
+        "value": {
+          "fontFamily": "Inter",
+          "fontWeight": 400,
+          "fontSize": "16px",
+          "lineHeight": "150%",
+          "letterSpacing": "0",
+          "textDecoration": "none",
+          "textTransform": "none"
+        },
+        "type": "typography",
+        "cssName": "--typography-body-md",
+        "comment": "Default text"
       },
-      "type": "typography",
-      "cssName": "--typography-body",
-      "comment": "Default text",
-      "small": {
+      "sm": {
         "value": {
           "fontFamily": "Inter",
           "fontWeight": 400,
@@ -5118,7 +5162,7 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-body-small",
+        "cssName": "--typography-body-sm",
         "comment": "Smaller texts: notes, descriptions, captions."
       }
     },
@@ -5167,7 +5211,21 @@
       }
     },
     "heading": {
-      "large": {
+      "2xl": {
+        "value": {
+          "fontFamily": "Inter",
+          "fontWeight": 600,
+          "fontSize": "24px",
+          "lineHeight": "normal",
+          "letterSpacing": "0",
+          "textDecoration": "none",
+          "textTransform": "none"
+        },
+        "type": "typography",
+        "cssName": "--typography-heading-2xl",
+        "comment": "large claims"
+      },
+      "lg": {
         "value": {
           "fontFamily": "Inter",
           "fontWeight": 600,
@@ -5178,10 +5236,10 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-heading-large",
+        "cssName": "--typography-heading-lg",
         "comment": "Usualy H1"
       },
-      "medium": {
+      "md": {
         "value": {
           "fontFamily": "Inter",
           "fontWeight": 500,
@@ -5192,10 +5250,10 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-heading-medium",
+        "cssName": "--typography-heading-md",
         "comment": "Usualy H1"
       },
-      "small": {
+      "sm": {
         "value": {
           "fontFamily": "Inter",
           "fontWeight": 500,
@@ -5206,26 +5264,10 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-heading-small",
+        "cssName": "--typography-heading-sm",
         "comment": "Usualy H3"
-      }
-    },
-    "poster": {
-      "mega": {
-        "value": {
-          "fontFamily": "Inter",
-          "fontWeight": 600,
-          "fontSize": "24px",
-          "lineHeight": "normal",
-          "letterSpacing": "0",
-          "textDecoration": "none",
-          "textTransform": "none"
-        },
-        "type": "typography",
-        "cssName": "--typography-poster-mega",
-        "comment": "large claims"
       },
-      "poster": {
+      "xl": {
         "value": {
           "fontFamily": "Inter",
           "fontWeight": 600,
@@ -5236,7 +5278,7 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-poster-poster",
+        "cssName": "--typography-heading-xl",
         "comment": "large claims"
       }
     }
@@ -5248,19 +5290,19 @@
           "primary": {
             "default": {
               "accent": {
-                "value": "var(--schemas-classic-interaction-primary-accent)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--schemas-classic-interaction-primary-border)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-border",
                 "origin": "--color-blue-45"
               },
               "surface": {
-                "value": "var(--schemas-classic-interaction-primary-surface)",
+                "value": "#006eb9",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-surface",
                 "origin": "--color-blue-45"
@@ -5268,19 +5310,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--schemas-classic-interaction-primary-hover-accent)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--schemas-classic-interaction-primary-hover-border)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-border",
                 "origin": "--color-blue-35"
               },
               "surface": {
-                "value": "var(--schemas-classic-interaction-primary-hover-surface)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-surface",
                 "origin": "--color-blue-35"
@@ -5290,13 +5332,13 @@
         },
         "surface": {
           "faded": {
-            "value": "var(--schemas-classic-surface-faded)",
+            "value": "#f1f3f5",
             "type": "color",
             "cssName": "--theme-surface-faded",
             "origin": "--color-grey-95"
           },
           "primary": {
-            "value": "var(--schemas-classic-surface-primary)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--theme-surface-primary",
             "origin": "--color-core-white"
@@ -5305,12 +5347,12 @@
         "text": {
           "accent": {
             "link": {
-              "value": "var(--schemas-classic-text-accent-link)",
+              "value": "#006eb9",
               "type": "color",
               "cssName": "--theme-text-accent-link",
               "origin": "--color-blue-45",
               "hover": {
-                "value": "var(--schemas-classic-text-accent-link-hover)",
+                "value": "#005685",
                 "type": "color",
                 "cssName": "--theme-text-accent-link-hover",
                 "origin": "--color-blue-35"
@@ -5319,7 +5361,7 @@
           }
         },
         "background": {
-          "value": "var(--schemas-classic-background)",
+          "value": "#fcfdff",
           "type": "color",
           "cssName": "--theme-background",
           "origin": "--color-blue-99"
@@ -5332,19 +5374,19 @@
           "primary": {
             "default": {
               "accent": {
-                "value": "var(--schemas-gift-interaction-primary-accent)",
+                "value": "#000000",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-accent",
                 "origin": "--color-core-black"
               },
               "border": {
-                "value": "var(--schemas-gift-interaction-primary-border)",
+                "value": "#ffa400",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-border",
                 "origin": "--color-yellow-45"
               },
               "surface": {
-                "value": "var(--schemas-gift-interaction-primary-surface)",
+                "value": "#ffa400",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-surface",
                 "origin": "--color-yellow-45"
@@ -5352,19 +5394,19 @@
             },
             "hover": {
               "accent": {
-                "value": "var(--schemas-gift-interaction-primary-hover-accent)",
+                "value": "#ffffff",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-accent",
                 "origin": "--color-core-white"
               },
               "border": {
-                "value": "var(--schemas-gift-interaction-primary-hover-border)",
+                "value": "#cc8800",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-border",
                 "origin": "--color-yellow-35"
               },
               "surface": {
-                "value": "var(--schemas-gift-interaction-primary-hover-surface)",
+                "value": "#cc8800",
                 "type": "color",
                 "cssName": "--theme-interaction-primary-hover-surface",
                 "origin": "--color-yellow-35"
@@ -5374,13 +5416,13 @@
         },
         "surface": {
           "faded": {
-            "value": "var(--schemas-classic-surface-faded)",
+            "value": "#f1f3f5",
             "type": "color",
             "cssName": "--theme-surface-faded",
             "origin": "--color-grey-95"
           },
           "primary": {
-            "value": "var(--schemas-classic-surface-primary)",
+            "value": "#ffffff",
             "type": "color",
             "cssName": "--theme-surface-primary",
             "origin": "--color-core-white"
@@ -5389,12 +5431,12 @@
         "text": {
           "accent": {
             "link": {
-              "value": "var(--schemas-gift-text-accent-link)",
+              "value": "#ffa400",
               "type": "color",
               "cssName": "--theme-text-accent-link",
               "origin": "--color-yellow-45",
               "hover": {
-                "value": "var(--schemas-gift-text-accent-link-hover)",
+                "value": "#cc8800",
                 "type": "color",
                 "cssName": "--theme-text-accent-link-hover",
                 "origin": "--color-yellow-35"
@@ -5403,7 +5445,7 @@
           }
         },
         "background": {
-          "value": "var(--schemas-classic-background)",
+          "value": "#fcfdff",
           "type": "color",
           "cssName": "--theme-background",
           "origin": "--color-blue-99"
