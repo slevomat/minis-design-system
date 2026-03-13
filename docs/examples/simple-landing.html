@@ -1,191 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini*S - Simple Landing Page</title>
-  
+  <title>Slevomat — S wellness</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap">
+
   <!-- Mini*S Design Tokens -->
-  <link rel="stylesheet" href="../../packages/tokens/dist/index.css">
-  
+  <link rel="stylesheet" href="../../packages/tokens/dist/tokens.rgb.css">
+  <link rel="stylesheet" href="../../packages/tokens/dist/tokens.css">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "lit": "https://cdn.jsdelivr.net/npm/lit@3/index.js",
+        "lit/": "https://cdn.jsdelivr.net/npm/lit@3/",
+        "lit-html": "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js",
+        "lit-html/": "https://cdn.jsdelivr.net/npm/lit-html@3/",
+        "@lit/reactive-element": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@2/reactive-element.js",
+        "@lit/reactive-element/": "https://cdn.jsdelivr.net/npm/@lit/reactive-element@2/"
+      }
+    }
+  </script>
   <script type="module">
     import '../../packages/components/dist/index.js';
   </script>
-  
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--color-background);
-      color: var(--color-text-primary);
+      font-family: var(--typography-font-family-sans, Inter, sans-serif);
+      font-size: var(--typography-size-md, 16px);
+      background: var(--color-background, #fff);
+      color: var(--color-text-primary, #1a1a1a);
+      line-height: 1.5;
     }
-    
+
+    /* ── Layout ── */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 var(--spacing-xl);
+      padding: 0 var(--linear-sp-linear-6, 24px);
     }
-    
-    /* Header */
-    header {
-      padding: var(--spacing-lg) 0;
-      border-bottom: 1px solid var(--color-border-subtle);
+
+    /* ── Top bar ── */
+    .topbar {
+      border-bottom: 1px solid var(--color-border-subtle, #e5e5e5);
+      padding: var(--linear-sp-linear-3, 12px) 0;
     }
-    
-    .header-content {
+
+    .topbar-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: var(--color-interaction-primary-surface);
+      font-size: 22px;
+      font-weight: var(--typography-weight-bold, 700);
+      color: var(--color-text-accent-link, #006eb9);
+      text-decoration: none;
     }
-    
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: var(--spacing-3xl) 0;
-    }
-    
-    .hero h1 {
-      font-size: 48px;
-      margin: 0 0 var(--spacing-md) 0;
-      line-height: 1.2;
-    }
-    
-    .hero p {
-      font-size: 20px;
-      color: var(--color-text-secondary);
-      margin: 0 0 var(--spacing-xl) 0;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .hero-buttons {
+
+    .topbar-actions {
       display: flex;
-      gap: var(--spacing-md);
-      justify-content: center;
+      align-items: center;
+      gap: var(--linear-sp-linear-3, 12px);
     }
-    
-    /* Features */
-    .features {
-      background: var(--color-surface-faded);
-      padding: var(--spacing-3xl) 0;
+
+    /* ── Category nav ── */
+    .category-nav-wrap {
+      border-bottom: none; /* navigation draws its own border */
+      padding: 0;
     }
-    
-    .features h2 {
-      text-align: center;
-      font-size: 36px;
-      margin: 0 0 var(--spacing-2xl) 0;
+
+    /* ── Sub-category / tab nav ── */
+    .subnav-wrap {
+      background: var(--color-surface-primary, #fff);
     }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--spacing-xl);
+
+    /* ── Active filters bar ── */
+    .filters-bar {
+      padding: var(--linear-sp-linear-4, 16px) 0;
+      display: flex;
+      align-items: center;
+      gap: var(--linear-sp-linear-2, 8px);
+      flex-wrap: wrap;
     }
-    
-    .feature {
-      background: var(--color-surface-primary);
-      padding: var(--spacing-inset-lg);
-      border-radius: var(--border-radius-lg);
+
+    .filters-label {
+      font-size: var(--typography-size-sm, 14px);
+      color: var(--color-text-secondary, #666);
+      margin-right: var(--linear-sp-linear-1, 4px);
     }
-    
-    .feature h3 {
-      font-size: 20px;
-      margin: 0 0 var(--spacing-sm) 0;
+
+    /* ── Results header ── */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--linear-sp-linear-6, 24px) 0 var(--linear-sp-linear-4, 16px);
     }
-    
-    .feature p {
-      color: var(--color-text-secondary);
+
+    .results-title {
+      font-size: var(--typography-size-xl, 20px);
+      font-weight: var(--typography-weight-semibold, 600);
       margin: 0;
-      line-height: 1.6;
     }
-    
-    /* Footer */
+
+    .results-count {
+      font-size: var(--typography-size-sm, 14px);
+      color: var(--color-text-secondary, #666);
+    }
+
+    /* ── Product grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--linear-sp-linear-6, 24px);
+      padding-bottom: var(--linear-sp-linear-10, 40px);
+    }
+
+    /* ── Product card ── */
+    .card {
+      background: var(--color-surface-primary, #fff);
+      border: 1px solid var(--color-border-subtle, #e5e5e5);
+      border-radius: var(--border-radius-md, 8px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 150ms ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      background: var(--color-surface-faded, #f5f5f5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--typography-size-xs, 12px);
+      color: var(--color-text-secondary, #666);
+    }
+
+    .card-body {
+      padding: var(--linear-sp-linear-4, 16px);
+      display: flex;
+      flex-direction: column;
+      gap: var(--linear-sp-linear-2, 8px);
+      flex: 1;
+    }
+
+    .card-location {
+      font-size: var(--typography-size-xs, 12px);
+      color: var(--color-text-secondary, #666);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-size: var(--typography-size-md, 16px);
+      font-weight: var(--typography-weight-semibold, 600);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .card-subtitle {
+      font-size: var(--typography-size-sm, 14px);
+      color: var(--color-text-secondary, #666);
+      margin: 0;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--linear-sp-linear-1, 4px);
+    }
+
+    .card-footer {
+      padding: var(--linear-sp-linear-3, 12px) var(--linear-sp-linear-4, 16px);
+      border-top: 1px solid var(--color-border-subtle, #e5e5e5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--linear-sp-linear-2, 8px);
+    }
+
+    .card-pricing {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-price-label {
+      font-size: var(--typography-size-xs, 12px);
+      color: var(--color-text-secondary, #666);
+    }
+
+    .card-price {
+      font-size: var(--typography-size-xl, 20px);
+      font-weight: var(--typography-weight-bold, 700);
+      color: var(--color-text-primary, #1a1a1a);
+      line-height: 1;
+    }
+
+    .card-price-orig {
+      font-size: var(--typography-size-sm, 14px);
+      color: var(--color-text-secondary, #666);
+      text-decoration: line-through;
+    }
+
+    .card-discount {
+      font-size: var(--typography-size-xs, 12px);
+      color: var(--color-text-accent-positive, #2e7d32);
+      font-weight: var(--typography-weight-semibold, 600);
+    }
+
+    /* ── Image placeholder colours ── */
+    .img-blue   { background: #cce3f5; }
+    .img-green  { background: #c8e6c9; }
+    .img-purple { background: #e1bee7; }
+    .img-orange { background: #ffe0b2; }
+    .img-teal   { background: #b2ebf2; }
+    .img-pink   { background: #f8bbd0; }
+
+    /* ── Footer ── */
     footer {
-      background: var(--color-surface-faded);
-      padding: var(--spacing-xl) 0;
+      background: var(--color-surface-faded, #f5f5f5);
+      border-top: 1px solid var(--color-border-subtle, #e5e5e5);
+      padding: var(--linear-sp-linear-8, 32px) 0;
       text-align: center;
-      color: var(--color-text-secondary);
+      font-size: var(--typography-size-sm, 14px);
+      color: var(--color-text-secondary, #666);
     }
   </style>
 </head>
 <body>
-  
-  <!-- Header -->
-  <header>
+
+  <!-- ═══ Top bar ═══ -->
+  <header class="topbar">
     <div class="container">
-      <div class="header-content">
-        <div class="logo">Mini*S</div>
-        <minis-button variant="secondary" size="sm">Sign In</minis-button>
+      <div class="topbar-inner">
+        <a class="logo" href="/">Slevomat</a>
+        <div class="topbar-actions">
+          <minis-button variant="tertiary" size="small">Přihlásit se</minis-button>
+          <minis-button variant="primary" size="small">Registrovat</minis-button>
+        </div>
       </div>
     </div>
   </header>
-  
-  <!-- Hero Section -->
-  <section class="hero">
+
+  <!-- ═══ Category navigation ═══ -->
+  <div class="category-nav-wrap">
     <div class="container">
-      <h1>Build amazing products faster</h1>
-      <p>
-        The complete design system that helps you ship beautiful, 
-        accessible interfaces in record time.
-      </p>
-      <div class="hero-buttons">
-        <minis-button variant="primary" size="lg">Get Started Free</minis-button>
-        <minis-button variant="secondary" size="lg">View Demo</minis-button>
-      </div>
+      <minis-navigation variant="horizontal" aria-label="Hlavní kategorie" id="cat-nav">
+        <minis-navigation-item id="item-extra">
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          Extra slevy
+        </minis-navigation-item>
+        <minis-navigation-item active>Cestování</minis-navigation-item>
+        <minis-navigation-item>Zážitky a zábava</minis-navigation-item>
+        <minis-navigation-item>Krása a relax</minis-navigation-item>
+        <minis-navigation-item>Restaurace a bary</minis-navigation-item>
+        <minis-navigation-item>Zboží</minis-navigation-item>
+        <minis-navigation-item>Potraviny</minis-navigation-item>
+        <minis-navigation-item>Dárky</minis-navigation-item>
+        <minis-navigation-item color="positive">
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21H5.6C7.02 18.13 8.84 15.5 12 14c-1 3-1 6 1 8h2c0-4 1.5-6.83 3-9C18 15 18 18 17 22h1.8c1.57-3.53 2.2-8 0-14z"/></svg>
+          Pro přírodu
+        </minis-navigation-item>
+      </minis-navigation>
     </div>
-  </section>
-  
-  <!-- Features Section -->
-  <section class="features">
+  </div>
+
+  <!-- ═══ Sub-category tabs ═══ -->
+  <div class="subnav-wrap">
     <div class="container">
-      <h2>Why choose Mini*S</h2>
-      
-      <div class="features-grid">
-        <div class="feature">
-          <h3>Fast Development</h3>
-          <p>
-            Pre-built components and design tokens let you build 
-            interfaces in minutes, not hours.
-          </p>
-        </div>
-        
-        <div class="feature">
-          <h3>Accessible by Default</h3>
-          <p>
-            Every component follows WCAG guidelines and includes 
-            proper ARIA attributes out of the box.
-          </p>
-        </div>
-        
-        <div class="feature">
-          <h3>Fully Customizable</h3>
-          <p>
-            Design tokens give you complete control over colors, 
-            spacing, typography, and more.
-          </p>
-        </div>
-      </div>
+      <minis-navigation variant="tabs" aria-label="Podkategorie cestování" id="sub-nav">
+        <minis-navigation-item>Víkendové pobyty</minis-navigation-item>
+        <minis-navigation-item active>S wellness</minis-navigation-item>
+        <minis-navigation-item>Na horách</minis-navigation-item>
+        <minis-navigation-item>U moře</minis-navigation-item>
+        <minis-navigation-item>Dovolená</minis-navigation-item>
+        <minis-navigation-item>Rodinné pobyty</minis-navigation-item>
+        <minis-navigation-item>Last minute</minis-navigation-item>
+      </minis-navigation>
     </div>
-  </section>
-  
-  <!-- Footer -->
+  </div>
+
+  <!-- ═══ Active filters ═══ -->
+  <div class="container">
+    <div class="filters-bar">
+      <span class="filters-label">Filtry:</span>
+      <minis-tag variant="dismissible" id="filter-sauna">Sauna</minis-tag>
+      <minis-tag variant="dismissible" id="filter-pool">Vířivka</minis-tag>
+      <minis-tag variant="toggle" id="filter-bazin">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M22 21c-1.11 0-1.73-.37-2.18-.64-.37-.22-.6-.36-1.15-.36s-.78.14-1.15.36c-.45.27-1.07.64-2.18.64s-1.73-.37-2.18-.64c-.37-.22-.6-.36-1.15-.36s-.78.14-1.15.36c-.45.27-1.07.64-2.18.64s-1.73-.37-2.18-.64C6.42 20.14 6.19 20 5.64 20s-.78.14-1.15.36C4.04 20.63 3.42 21 2.32 21H2v2h.32c1.11 0 1.73-.37 2.18-.64.37-.22.6-.36 1.15-.36s.78.14 1.15.36c.45.27 1.07.64 2.18.64s1.73-.37 2.18-.64c.37-.22.6-.36 1.15-.36s.78.14 1.15.36c.45.27 1.07.64 2.18.64s1.73-.37 2.18-.64c.37-.22.6-.36 1.15-.36s.78.14 1.15.36c.45.27 1.07.64 2.18.64h.32v-2H22zM5.5 16c1.1 0 2-.9 2-2s-2-4-2-4-2 2.9-2 4 .9 2 2 2zm13 0c1.1 0 2-.9 2-2s-2-4-2-4-2 2.9-2 4 .9 2 2 2zM12 16c1.1 0 2-.9 2-2s-2-4-2-4-2 2.9-2 4 .9 2 2 2z"/></svg>
+        Bazén
+      </minis-tag>
+      <minis-tag variant="toggle" id="filter-snidane">Snídaně v ceně</minis-tag>
+    </div>
+  </div>
+
+  <!-- ═══ Results header ═══ -->
+  <div class="container">
+    <div class="results-header">
+      <h1 class="results-title">Pobyty s wellness</h1>
+      <span class="results-count">1 284 nabídek</span>
+    </div>
+  </div>
+
+  <!-- ═══ Product grid ═══ -->
+  <div class="container">
+    <div class="product-grid">
+
+      <!-- Card 1 -->
+      <article class="card">
+        <div class="card-image img-blue">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Česká republika · Beskydy</div>
+          <h2 class="card-title">Hotel Lanterna — Wellness &amp; Spa pobyt</h2>
+          <p class="card-subtitle">2 noci pro 2 osoby se snídaní a wellness</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Sauna</minis-tag>
+            <minis-tag variant="static">Vířivka</minis-tag>
+            <minis-tag variant="static">Snídaně</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">2 890 Kč</span>
+            <span class="card-price-orig">5 200 Kč</span>
+            <span class="card-discount">Ušetříte 44 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card">
+        <div class="card-image img-green">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Slovensko · Vysoké Tatry</div>
+          <h2 class="card-title">Grand Hotel Permon — Horský relax</h2>
+          <p class="card-subtitle">3 noci pro 2 osoby s polopenzí a bazénem</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Bazén</minis-tag>
+            <minis-tag variant="static">Sauna</minis-tag>
+            <minis-tag variant="static">Polopenze</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">4 490 Kč</span>
+            <span class="card-price-orig">7 800 Kč</span>
+            <span class="card-discount">Ušetříte 42 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card">
+        <div class="card-image img-purple">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Česká republika · Šumava</div>
+          <h2 class="card-title">Spa Resort Sanssouci — Odpočinkový pobyt</h2>
+          <p class="card-subtitle">2 noci pro 2 osoby se snídaní a neomezeným wellness</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Vířivka</minis-tag>
+            <minis-tag variant="static">Bazén</minis-tag>
+            <minis-tag variant="static">Sauna</minis-tag>
+            <minis-tag variant="static">Snídaně</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">3 290 Kč</span>
+            <span class="card-price-orig">5 900 Kč</span>
+            <span class="card-discount">Ušetříte 44 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="card">
+        <div class="card-image img-orange">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Maďarsko · Budapešť</div>
+          <h2 class="card-title">Thermal Hotel Balance — Lázně &amp; Wellness</h2>
+          <p class="card-subtitle">3 noci pro 2 osoby s polopenzí a termálními lázněmi</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Termální lázně</minis-tag>
+            <minis-tag variant="static">Polopenze</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">5 690 Kč</span>
+            <span class="card-price-orig">9 400 Kč</span>
+            <span class="card-discount">Ušetříte 39 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="card">
+        <div class="card-image img-teal">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Česká republika · Krkonoše</div>
+          <h2 class="card-title">Wellness Hotel Horizont — Aktivní dovolená</h2>
+          <p class="card-subtitle">2 noci pro 2 osoby se snídaní, výlety a wellness</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Sauna</minis-tag>
+            <minis-tag variant="static">Snídaně</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">2 490 Kč</span>
+            <span class="card-price-orig">4 200 Kč</span>
+            <span class="card-discount">Ušetříte 41 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="card">
+        <div class="card-image img-pink">📸 foto hotelu</div>
+        <div class="card-body">
+          <div class="card-location">Německo · Bavorsko</div>
+          <h2 class="card-title">Alpen-Wellness Resort Hochfirst</h2>
+          <p class="card-subtitle">4 noci pro 2 osoby se snídaní a alpským wellness</p>
+          <div class="card-tags">
+            <minis-tag variant="static">Vířivka</minis-tag>
+            <minis-tag variant="static">Bazén</minis-tag>
+            <minis-tag variant="static">Sauna</minis-tag>
+            <minis-tag variant="static">Snídaně</minis-tag>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="card-pricing">
+            <span class="card-price-label">Cena za pobyt</span>
+            <span class="card-price">8 990 Kč</span>
+            <span class="card-price-orig">15 600 Kč</span>
+            <span class="card-discount">Ušetříte 42 %</span>
+          </div>
+          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
   <footer>
     <div class="container">
-      <p>&copy; 2025 Mini*S. All rights reserved.</p>
+      <p>&copy; 2025 Slevomat.cz — ukázkový příklad použití Mini*S Design System</p>
     </div>
   </footer>
-  
+
+  <script>
+    // Category nav — click-to-activate
+    const catNav = document.getElementById('cat-nav');
+    catNav.addEventListener('click', (e) => {
+      const item = e.target.closest('minis-navigation-item');
+      if (!item) return;
+      catNav.querySelectorAll('minis-navigation-item').forEach(el => el.removeAttribute('active'));
+      item.setAttribute('active', '');
+    });
+
+    // Sub-category tabs — click-to-activate
+    const subNav = document.getElementById('sub-nav');
+    subNav.addEventListener('click', (e) => {
+      const item = e.target.closest('minis-navigation-item');
+      if (!item) return;
+      subNav.querySelectorAll('minis-navigation-item').forEach(el => el.removeAttribute('active'));
+      item.setAttribute('active', '');
+    });
+
+    // Dismissible filter tags — hide on dismiss
+    document.getElementById('filter-sauna').addEventListener('dismiss', (e) => {
+      e.target.style.display = 'none';
+    });
+    document.getElementById('filter-pool').addEventListener('dismiss', (e) => {
+      e.target.style.display = 'none';
+    });
+  </script>
+
 </body>
 </html>
