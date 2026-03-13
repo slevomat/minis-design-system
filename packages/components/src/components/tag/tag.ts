@@ -1,14 +1,9 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { tagStyles } from './tag.styles.js';
+import '../button/button.js';
 
 export type TagVariant = 'static' | 'clickable' | 'toggle' | 'dismissible';
-
-function iconClose() {
-  return html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="16" height="16">
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-  </svg>`;
-}
 
 /**
  * Mini*S Tag Component
@@ -101,6 +96,7 @@ export class MinisTag extends LitElement {
   }
 
   render() {
+    const tagClass = this._hasIcon ? 'tag tag--has-icon' : 'tag';
     const iconSlot = html`<slot
       name="icon"
       class=${this._hasIcon ? 'icon' : ''}
@@ -110,7 +106,7 @@ export class MinisTag extends LitElement {
     if (this.variant === 'clickable') {
       return html`
         <button
-          class="tag"
+          class=${tagClass}
           type="button"
           ?disabled=${this.disabled}
           @click=${this._handleClick}
@@ -124,7 +120,7 @@ export class MinisTag extends LitElement {
     if (this.variant === 'toggle') {
       return html`
         <button
-          class="tag"
+          class=${tagClass}
           type="button"
           ?disabled=${this.disabled}
           aria-pressed=${this.pressed ? 'true' : 'false'}
@@ -138,22 +134,27 @@ export class MinisTag extends LitElement {
 
     if (this.variant === 'dismissible') {
       return html`
-        <div class="tag" role="group">
+        <div class=${tagClass} role="group">
           ${iconSlot}
           <span class="label"><slot></slot></span>
-          <button
-            class="dismiss"
-            type="button"
+          <minis-button
+            variant="tertiary"
+            size="small"
+            icon-only
             aria-label="Remove"
             @click=${this._handleDismiss}
-          >${iconClose()}</button>
+          >
+            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="16" height="16">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+          </minis-button>
         </div>
       `;
     }
 
     // static (default)
     return html`
-      <div class="tag">
+      <div class=${tagClass}>
         ${iconSlot}
         <span class="label"><slot></slot></span>
       </div>

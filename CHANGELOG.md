@@ -18,10 +18,14 @@ All notable changes to this project will be documented in this file.
 - `disabled` boolean attribute (`clickable` and `toggle` variants)
 - All colours via `--color-interaction-secondary-*` tokens — light/dark mode automatic
 - AI prompt doc: `docs/ai-prompts/components/tag.md`
+- **Padding tokens aligned with Figma**: `--tag-padding-x` (8px, with icon), `--tag-padding-x-noicon` (16px, label only), `--tag-padding-y` (0px)
+- **Dismiss button** replaced plain `<button>` with `<minis-button variant="tertiary" size="small" icon-only>` — inherits full tertiary button styling and focus/hover states
+- **Padding applies contextually**: `--tag-padding-x-noicon` (16px) when no icon; `--tag-padding-x` (8px) when icon is present via `.tag--has-icon` class
 
 ### Tokens
 
 - **Tag component tokens** added to `packages/tokens/src/tokens.css`: `--tag-height`, `--tag-padding-x`, `--tag-padding-y`, `--tag-gap-elements`, `--tag-icon-size`, `--tag-toggle-icon-size`
+- **Tag tokens updated** from Figma export: `--tag-padding-x` → `var(--spacing-layout-xs)` (8px); added `--tag-padding-x-noicon` → `var(--spacing-layout-sm)` (16px); `--tag-padding-y` → `var(--spacing-layout-none)` (0px); `--tag-gap-elements` → `var(--linear-sp-linear-1)` (4px); added `--tag-gap-icon-correction` → `var(--pixel-px-2)`
 
 ### Storybook
 

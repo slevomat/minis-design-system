@@ -363,6 +363,8 @@ export const Changelog: Story = {
           <li><code>pressed</code> boolean attribute for pre-selected toggle state (<code>toggle</code> variant only).</li>
           <li><code>disabled</code> boolean attribute (<code>clickable</code> and <code>toggle</code> variants).</li>
           <li>All colours via <code>--color-interaction-secondary-*</code> tokens — light/dark mode automatic.</li>
+          <li><strong>Padding tokens aligned with Figma</strong>: <code>--tag-padding-x</code> (8px with icon), <code>--tag-padding-x-noicon</code> (16px label-only), <code>--tag-padding-y</code> (0px) — padding switches automatically via <code>.tag--has-icon</code> class.</li>
+          <li><strong>Dismiss button</strong>: replaced hand-rolled <code>&lt;button&gt;</code> with <code>&lt;minis-button variant="tertiary" size="small" icon-only&gt;</code> — inherits full tertiary button styling, hover, and focus states.</li>
         </ul>
       </div>
 
@@ -373,6 +375,7 @@ export const Changelog: Story = {
       <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
           <li>Tag component tokens added: <code>--tag-height</code>, <code>--tag-padding-x</code>, <code>--tag-padding-y</code>, <code>--tag-gap-elements</code>, <code>--tag-icon-size</code>, <code>--tag-toggle-icon-size</code>.</li>
+          <li>Tag tokens updated from Figma: <code>--tag-padding-x</code> 8px (with icon); new <code>--tag-padding-x-noicon</code> 16px (label only); <code>--tag-padding-y</code> 0px; <code>--tag-gap-elements</code> 4px; new <code>--tag-gap-icon-correction</code> 2px.</li>
         </ul>
       </div>
 

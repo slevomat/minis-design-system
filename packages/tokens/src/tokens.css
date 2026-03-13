@@ -621,9 +621,11 @@
 
   /* Tag */
   --tag-height: var(--pixel-px-32);
-  --tag-padding-x: var(--pixel-px-6);
-  --tag-padding-y: var(--spacing-layout-xs);
-  --tag-gap-elements: var(--spacing-layout-xs);
+  --tag-padding-x: var(--spacing-layout-xs);        /*  8px — with icon */
+  --tag-padding-x-noicon: var(--spacing-layout-sm); /* 16px — label only */
+  --tag-padding-y: var(--spacing-layout-none);       /*  0px */
+  --tag-gap-elements: var(--linear-sp-linear-1);     /*  4px */
+  --tag-gap-icon-correction: var(--pixel-px-2);
   --tag-icon-size: var(--pixel-px-20);
   --tag-toggle-icon-size: var(--pixel-px-24);
 

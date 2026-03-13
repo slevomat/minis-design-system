@@ -13,7 +13,7 @@ export const tagStyles = css`
     display: inline-flex;
     align-items: center;
     gap: var(--tag-gap-elements, 4px);
-    padding: var(--tag-padding-y, 4px) var(--tag-padding-x, 6px);
+    padding: var(--tag-padding-y, 0) var(--tag-padding-x-noicon, 16px);
     height: var(--tag-height, 32px);
     box-sizing: border-box;
     border-width: 1px;
@@ -26,6 +26,10 @@ export const tagStyles = css`
     font-weight: inherit;
     line-height: inherit;
     color: inherit;
+  }
+
+  .tag--has-icon {
+    padding-inline: var(--tag-padding-x, 8px);
   }
 
   /* =====================
@@ -98,7 +102,6 @@ export const tagStyles = css`
     background: var(--tag-dismissible-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
     border-color: var(--tag-dismissible-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
     color: var(--tag-dismissible-accent, var(--color-interaction-secondary-accent, #000));
-    padding-inline-end: var(--tag-dismissible-padding-end, 3px);
   }
 
   /* =====================
@@ -148,37 +151,10 @@ export const tagStyles = css`
   }
 
   /* =====================
-     DISMISS BUTTON
+     DISMISS BUTTON (minis-button tertiary small icon-only)
      ===================== */
 
-  .dismiss {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  :host([variant="dismissible"]) minis-button {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    border-radius: 50%;
-    margin-inline-start: 2px;
-    transition: opacity 150ms ease;
-  }
-
-  .dismiss:hover {
-    opacity: 0.7;
-  }
-
-  .dismiss:focus-visible {
-    outline: 2px solid var(--color-border-focus, #4a90d9);
-    outline-offset: 1px;
-  }
-
-  .dismiss svg {
-    display: block;
-    pointer-events: none;
   }
 `;
