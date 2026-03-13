@@ -6,7 +6,7 @@ export const tagStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-regular, 400);
-    line-height: var(--typography-line-height-percentage-143%, 1.43);
+    line-height: var(--typography-line-height-percentage-133%, 1.33);
   }
 
   /* =====================
@@ -17,7 +17,7 @@ export const tagStyles = css`
     display: inline-flex;
     align-items: center;
     gap: var(--tag-gap, 4px);
-    padding: var(--tag-padding-y, 4px) var(--tag-padding-x, 12px);
+    padding: var(--tag-padding-y, 4px) var(--tag-padding-x, 6px);
     border-width: 1px;
     border-style: solid;
     border-radius: var(--tag-border-radius, 9999px);
@@ -96,11 +96,11 @@ export const tagStyles = css`
     background: var(--tag-dismissible-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
     border-color: var(--tag-dismissible-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
     color: var(--tag-dismissible-accent, var(--color-interaction-secondary-accent, #000));
-    padding-inline-end: var(--tag-dismissible-padding-end, 6px);
+    padding-inline-end: var(--tag-dismissible-padding-end, 3px);
   }
 
   /* =====================
-     DISABLED (clickable only)
+     DISABLED (clickable + toggle)
      ===================== */
 
   :host([variant="clickable"][disabled]) .tag,
@@ -111,7 +111,7 @@ export const tagStyles = css`
   }
 
   /* =====================
-     ICON SLOT
+     ICON SLOT (static / clickable / dismissible — 14px)
      ===================== */
 
   .icon {
@@ -127,6 +127,12 @@ export const tagStyles = css`
     width: 100%;
     height: 100%;
     display: block;
+  }
+
+  /* Toggle icon uses minis-icon default 24px — no size constraint */
+  :host([variant="toggle"]) .icon {
+    width: var(--tag-toggle-icon-size, 24px);
+    height: var(--tag-toggle-icon-size, 24px);
   }
 
   /* =====================
