@@ -59,11 +59,33 @@ export const tagStyles = css`
     outline-offset: 2px;
   }
 
+  /* =====================
+     VARIANT: TOGGLE
+     ===================== */
+
+  :host([variant="toggle"]) .tag {
+    background: transparent;
+    border-color: var(--tag-toggle-border, var(--color-interaction-secondary-border, #cbccce));
+    color: var(--tag-toggle-accent, var(--color-interaction-secondary-accent, #000));
+    cursor: pointer;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  :host([variant="toggle"]) .tag:hover {
+    background: var(--tag-toggle-hover-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+    border-color: var(--tag-toggle-hover-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+  }
+
+  :host([variant="toggle"]) .tag:focus-visible {
+    outline: 2px solid var(--color-border-focus, #4a90d9);
+    outline-offset: 2px;
+  }
+
   /* Pressed / selected state */
-  :host([variant="clickable"][pressed]) .tag,
-  :host([variant="clickable"]) .tag[aria-pressed="true"] {
-    background: var(--tag-clickable-pressed-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
-    border-color: var(--tag-clickable-pressed-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+  :host([variant="toggle"][pressed]) .tag,
+  :host([variant="toggle"]) .tag[aria-pressed="true"] {
+    background: var(--tag-toggle-pressed-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+    border-color: var(--tag-toggle-pressed-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
   }
 
   /* =====================
@@ -81,7 +103,8 @@ export const tagStyles = css`
      DISABLED (clickable only)
      ===================== */
 
-  :host([disabled]) .tag {
+  :host([variant="clickable"][disabled]) .tag,
+  :host([variant="toggle"][disabled]) .tag {
     opacity: 0.4;
     cursor: not-allowed;
     pointer-events: none;

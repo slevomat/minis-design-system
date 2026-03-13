@@ -10,19 +10,26 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: '<a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=2523-339" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a>',
+        component: `<p>A compact pill-shaped label for displaying metadata, applied filters, or lightweight interactive states.</p>
+<ul>
+  <li><strong>static</strong> — read-only label for displaying metadata or category badges. No interaction.</li>
+  <li><strong>clickable</strong> — same look, but clickable. Use for subtle actions like opening a modal or tooltip with more info about the tag. Returns to default state after click — no persistent state. Do NOT use as a form submit button.</li>
+  <li><strong>toggle</strong> — works like a toggle/checkbox button. Persists pressed/unpressed state. Use for active selection: Like button, favourite, active filter. Icon typically switches between outline and filled version (e.g. heart ↔ heart-fill).</li>
+  <li><strong>dismissible</strong> — applied filter the user can remove. Built-in ✕ button fires a <code>dismiss</code> event.</li>
+</ul>
+<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=2523-339" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>`,
       },
     },
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['static', 'clickable', 'dismissible'],
-      description: 'Visual and behavioural variant',
+      options: ['static', 'clickable', 'toggle', 'dismissible'],
+      description: 'Visual and behavioural variant. See component description above for when to use each.',
     },
     pressed: {
       control: 'boolean',
-      description: 'Toggle / selected state (clickable variant only)',
+      description: 'Toggle / selected state (toggle variant only)',
     },
     disabled: {
       control: 'boolean',
@@ -71,6 +78,17 @@ export const AllVariants: Story = {
         Clickable
       </minis-tag>
 
+      <minis-tag
+        variant="toggle"
+        @toggle=${(e: CustomEvent) => {
+          const icon = (e.target as Element).querySelector('minis-icon[slot="icon"]') as HTMLElement & { name: string };
+          if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
+        }}
+      >
+        <minis-icon slot="icon" name="heart" size="14"></minis-icon>
+        Toggle
+      </minis-tag>
+
       <minis-tag variant="dismissible">
         <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
         Dismissible
@@ -92,14 +110,39 @@ export const WithoutIcon: Story = {
   `,
 };
 
-// ─── Toggle (clickable + pressed) ─────────────────────────────────────────────
+// ─── Clickable ────────────────────────────────────────────────────────────────
+
+export const Clickable: Story = {
+  name: 'Clickable',
+  render: () => {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;gap:12px;align-items:center;font-family:sans-serif;font-size:13px;color:#555;';
+
+    const tag = document.createElement('minis-tag') as HTMLElement & { variant: string };
+    tag.variant = 'clickable';
+    tag.textContent = 'Zobrazit na mapě';
+    const hint = document.createElement('span');
+    hint.textContent = '← click fires an action (no state change)';
+
+    tag.addEventListener('click', () => {
+      hint.textContent = '← action triggered! (tag stays default)';
+      setTimeout(() => { hint.textContent = '← click fires an action (no state change)'; }, 1500);
+    });
+
+    container.appendChild(tag);
+    container.appendChild(hint);
+    return container;
+  },
+};
+
+// ─── Toggle ───────────────────────────────────────────────────────────────────
 
 export const Toggle: Story = {
-  name: 'Toggle (clickable)',
+  name: 'Toggle',
   render: () => html`
     <div style="display: flex; gap: 12px; align-items: center; font-family: sans-serif; font-size: 13px; color: #555;">
       <minis-tag
-        variant="clickable"
+        variant="toggle"
         @toggle=${(e: CustomEvent) => {
           const icon = (e.target as Element).querySelector('minis-icon[slot="icon"]') as HTMLElement & { name: string };
           if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
@@ -108,7 +151,7 @@ export const Toggle: Story = {
         <minis-icon slot="icon" name="heart" size="14"></minis-icon>
         Oblíbené
       </minis-tag>
-      <span>Click to toggle favourite ↑</span>
+      <span>← pressed state persists</span>
     </div>
   `,
 };
@@ -147,10 +190,18 @@ export const DismissibleList: Story = {
 export const States: Story = {
   name: 'States',
   render: () => html`
-    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
-      <minis-tag variant="clickable">Default</minis-tag>
-      <minis-tag variant="clickable" pressed>Pressed</minis-tag>
-      <minis-tag variant="clickable" disabled>Disabled</minis-tag>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <span style="font-family: sans-serif; font-size: 12px; color: #888; width: 80px;">clickable</span>
+        <minis-tag variant="clickable">Default</minis-tag>
+        <minis-tag variant="clickable" disabled>Disabled</minis-tag>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <span style="font-family: sans-serif; font-size: 12px; color: #888; width: 80px;">toggle</span>
+        <minis-tag variant="toggle">Default</minis-tag>
+        <minis-tag variant="toggle" pressed>Pressed</minis-tag>
+        <minis-tag variant="toggle" disabled>Disabled</minis-tag>
+      </div>
     </div>
   `,
 };

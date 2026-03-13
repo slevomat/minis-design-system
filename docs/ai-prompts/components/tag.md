@@ -8,13 +8,14 @@
 
 ## Purpose
 
-A compact pill-shaped label used to communicate metadata, applied filters, or lightweight interactive states. Three variants cover the main use cases:
+A compact pill-shaped label used to display metadata, applied filters, or lightweight interactive states. Four variants cover the main use cases:
 
 | Variant | Use case |
 |---|---|
-| `static` | Read-only label (e.g. "Platba na zálohu", category badge) |
-| `clickable` | Lightweight action — open modal, toggle filter, toggle favourite. **Not** a form submit button. |
-| `dismissible` | Applied filter that the user can remove; built-in ✕ fires a `dismiss` event |
+| `static` | Read-only label for displaying metadata or category badges (e.g. "Platba na zálohu"). No interaction. |
+| `clickable` | Same visual as static, but clickable. Use for subtle actions like opening a modal or a tooltip with more info about the tag. **Returns to default state after click — no persistent state.** Do NOT use as a form submit button. |
+| `toggle` | Works like a toggle/checkbox button visually. Persists pressed/unpressed state. Use for active selection (e.g. Like button, favourite, active filter). The icon typically switches between outline and filled version (e.g. `heart` ↔ `heart-fill`). |
+| `dismissible` | Applied filter that the user can remove. Built-in ✕ button fires a `dismiss` event. |
 
 ---
 
@@ -24,22 +25,22 @@ A compact pill-shaped label used to communicate metadata, applied filters, or li
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"static" \| "clickable" \| "dismissible"` | `"static"` | Visual and behavioural variant |
-| `pressed` | `boolean` | `false` | Toggle/selected state. Only meaningful on `clickable`. Sets `aria-pressed` on the inner `<button>`. |
-| `disabled` | `boolean` | `false` | Disables the tag. Only meaningful on `clickable`. |
+| `variant` | `"static" \| "clickable" \| "toggle" \| "dismissible"` | `"static"` | Visual and behavioural variant |
+| `pressed` | `boolean` | `false` | Toggle/selected state. Only meaningful on `toggle`. Sets `aria-pressed` on the inner `<button>`. Can be set declaratively for server-rendered initial state. |
+| `disabled` | `boolean` | `false` | Disables the tag. Only meaningful on `clickable` and `toggle`. |
 
 ### Slots
 
 | Slot | Description |
 |---|---|
 | *(default)* | Label text |
-| `icon` | Leading icon. Use `<minis-icon slot="icon" name="…">` or an `<svg slot="icon">`. Renders at 14×14 px. |
+| `icon` | Leading icon. Use `<minis-icon slot="icon" name="…" size="14">`. Renders at 14×14 px. |
 
 ### Events
 
 | Event | Detail | When |
 |---|---|---|
-| `toggle` | `{ pressed: boolean }` | `clickable` variant — fired when the user clicks and the pressed state changes |
+| `toggle` | `{ pressed: boolean }` | `toggle` variant — fired when the user clicks and the pressed state changes |
 | `dismiss` | — | `dismissible` variant — fired when the ✕ button is clicked |
 
 ---
@@ -63,8 +64,12 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 | `--tag-clickable-accent` | `--color-interaction-secondary-accent` | Clickable text/icon colour |
 | `--tag-clickable-hover-surface` | `--color-interaction-secondary-hover-surface` | Hover background |
 | `--tag-clickable-hover-border` | `--color-interaction-secondary-hover-surface` | Hover border |
-| `--tag-clickable-pressed-surface` | `--color-interaction-secondary-hover-surface` | Pressed/selected background |
-| `--tag-clickable-pressed-border` | `--color-interaction-secondary-hover-surface` | Pressed/selected border |
+| `--tag-toggle-border` | `--color-interaction-secondary-border` | Toggle default border |
+| `--tag-toggle-accent` | `--color-interaction-secondary-accent` | Toggle text/icon colour |
+| `--tag-toggle-hover-surface` | `--color-interaction-secondary-hover-surface` | Toggle hover background |
+| `--tag-toggle-hover-border` | `--color-interaction-secondary-hover-surface` | Toggle hover border |
+| `--tag-toggle-pressed-surface` | `--color-interaction-secondary-hover-surface` | Toggle pressed background |
+| `--tag-toggle-pressed-border` | `--color-interaction-secondary-hover-surface` | Toggle pressed border |
 | `--tag-dismissible-surface` | `--color-interaction-secondary-hover-surface` | Dismissible background |
 | `--tag-dismissible-border` | `--color-interaction-secondary-hover-surface` | Dismissible border |
 | `--tag-dismissible-accent` | `--color-interaction-secondary-accent` | Dismissible text/icon colour |
@@ -80,8 +85,43 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 <minis-tag>Platba na zálohu</minis-tag>
 
 <minis-tag>
-  <minis-icon slot="icon" name="credit-card"></minis-icon>
+  <minis-icon slot="icon" name="credit-card" size="14"></minis-icon>
   Platba na zálohu
+</minis-tag>
+```
+
+### Clickable tag — opens a modal or tooltip
+
+```html
+<!-- Fires a click event; tag returns to default state immediately -->
+<minis-tag variant="clickable" id="info-tag">Více informací</minis-tag>
+<script>
+  document.querySelector('#info-tag').addEventListener('click', () => {
+    openModal(); // or showTooltip(), etc.
+  });
+</script>
+```
+
+### Toggle tag — like button / favourite / active filter
+
+```html
+<minis-tag variant="toggle" id="fav-tag">
+  <minis-icon slot="icon" name="heart" size="14" id="fav-icon"></minis-icon>
+  Oblíbené
+</minis-tag>
+<script>
+  document.querySelector('#fav-tag').addEventListener('toggle', (e) => {
+    document.querySelector('#fav-icon').name = e.detail.pressed ? 'heart-fill' : 'heart';
+  });
+</script>
+```
+
+Initial pressed state (e.g. already liked, server-rendered):
+
+```html
+<minis-tag variant="toggle" pressed>
+  <minis-icon slot="icon" name="heart-fill" size="14"></minis-icon>
+  Oblíbené
 </minis-tag>
 ```
 
@@ -96,53 +136,32 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 </script>
 ```
 
-### Clickable tag — simple action
-
-```html
-<!-- Opens a modal, does NOT submit a form -->
-<minis-tag variant="clickable" id="info-tag">Více informací</minis-tag>
-<script>
-  document.querySelector('#info-tag').addEventListener('click', () => {
-    openModal();
-  });
-</script>
-```
-
-### Clickable tag — toggle (e.g. favourite)
-
-```html
-<minis-tag variant="clickable" id="fav-tag">
-  <minis-icon slot="icon" name="heart" id="fav-icon"></minis-icon>
-  Oblíbené
-</minis-tag>
-<script>
-  document.querySelector('#fav-tag').addEventListener('toggle', (e) => {
-    document.querySelector('#fav-icon').name = e.detail.pressed ? 'heart-fill' : 'heart';
-  });
-</script>
-```
-
-The `pressed` attribute can also be set declaratively for server-rendered initial state:
-
-```html
-<minis-tag variant="clickable" pressed>
-  <minis-icon slot="icon" name="heart-fill"></minis-icon>
-  Oblíbené
-</minis-tag>
-```
-
 ---
 
 ## Accessibility notes
 
 - **`static`**: rendered as a `<div>` — purely informational, no interaction.
-- **`clickable`**: rendered as a native `<button type="button">` with `aria-pressed`. Focus ring is visible on keyboard navigation.
+- **`clickable`**: rendered as a native `<button type="button">`. No `aria-pressed` — it has no persistent state. Focus ring visible on keyboard navigation.
+- **`toggle`**: rendered as a native `<button type="button" aria-pressed="true|false">`. Screen readers announce the pressed state. Focus ring visible on keyboard navigation.
 - **`dismissible`**: rendered as a `<div role="group">` containing a `<button aria-label="Remove">` for the ✕ icon.
-- The `icon` slot content should include `aria-hidden="true"` when it is decorative.
-- Clickable tags must not be used to submit forms — use `<minis-button>` for that.
+- The `icon` slot content is decorative — `<minis-icon>` handles `aria-hidden` automatically when no `label` attribute is set.
+- `clickable` and `toggle` tags must not be used to submit forms — use `<minis-button>` for that.
+
+---
+
+## Choosing the right variant
+
+| Question | Answer → variant |
+|---|---|
+| Is this just informational? | `static` |
+| Does clicking open something (modal, tooltip)? | `clickable` |
+| Does clicking change a persistent state (like, save, active filter)? | `toggle` |
+| Can the user remove it? | `dismissible` |
 
 ---
 
 ## Copy-paste prompt for AI agents
 
 > Create a dismissible tag set that acts as applied filters. Each tag has a label and fires a `dismiss` event to remove itself. Use `<minis-tag variant="dismissible">` from `@minis/components`. Import the component as a side-effect (`import '@minis/components'`). Load tokens from `@minis/tokens/dist/index.css`. Labels: "Praha", "Restaurace", "Do 500 Kč".
+
+> Create a toggle tag that works as a Like / favourite button. Use `<minis-tag variant="toggle">` with `<minis-icon slot="icon" name="heart" size="14">`. Listen to the `toggle` event and swap the icon `name` to `heart-fill` when `e.detail.pressed` is `true`, back to `heart` when `false`. Import `@minis/icons` for the icon component.

@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { tagStyles } from './tag.styles.js';
 
-export type TagVariant = 'static' | 'clickable' | 'dismissible';
+export type TagVariant = 'static' | 'clickable' | 'toggle' | 'dismissible';
 
 function iconClose() {
   return html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="16" height="16">
@@ -17,17 +17,18 @@ function iconClose() {
  * interactive states. Three variants cover the main use cases:
  *
  * - **static** — read-only label, no interaction
- * - **clickable** — fires a `click` event; supports `pressed` toggle state
- *   (e.g. favourite/save icon switching outline ↔ filled).
- *   Use only for lightweight actions like opening a modal or toggling a filter.
+ * - **clickable** — fires a `click` event and returns to default state immediately.
+ *   Use for lightweight actions like opening a modal or tooltip.
  *   Do NOT use as a form submit button.
+ * - **toggle** — persists pressed/unpressed state; fires a `toggle` event.
+ *   Ideal for favouriting, saving, or filter selection (icon switches outline ↔ filled).
  * - **dismissible** — has a built-in ✕ button; fires a `dismiss` event
  *
  * @slot        - Label text
  * @slot icon   - Leading icon (use `<minis-icon slot="icon">` or an `<svg>`)
  *
  * @fires dismiss - Dismissed by the ✕ button (dismissible variant only)
- * @fires toggle  - Pressed state changed (clickable variant only),
+ * @fires toggle  - Pressed state changed (toggle variant only),
  *                  detail: `{ pressed: boolean }`
  *
  * @example
@@ -63,13 +64,13 @@ export class MinisTag extends LitElement {
   variant: TagVariant = 'static';
 
   /**
-   * Toggle / selected state. Only relevant for the `clickable` variant.
+   * Toggle / selected state. Only relevant for the `toggle` variant.
    * Sets `aria-pressed` on the inner button.
    */
   @property({ type: Boolean, reflect: true })
   pressed = false;
 
-  /** Disabled state. Only meaningful on the `clickable` variant. */
+  /** Disabled state. Only meaningful on the `clickable` and `toggle` variants. */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
@@ -82,13 +83,16 @@ export class MinisTag extends LitElement {
   }
 
   private _handleClick() {
-    if (this.variant !== 'clickable' || this.disabled) return;
-    this.pressed = !this.pressed;
-    this.dispatchEvent(new CustomEvent('toggle', {
-      bubbles: true,
-      composed: true,
-      detail: { pressed: this.pressed },
-    }));
+    if (this.disabled) return;
+    if (this.variant === 'toggle') {
+      this.pressed = !this.pressed;
+      this.dispatchEvent(new CustomEvent('toggle', {
+        bubbles: true,
+        composed: true,
+        detail: { pressed: this.pressed },
+      }));
+    }
+    // clickable variant: no state change, native click event propagates naturally
   }
 
   private _handleDismiss(e: Event) {
@@ -104,6 +108,20 @@ export class MinisTag extends LitElement {
     ></slot>`;
 
     if (this.variant === 'clickable') {
+      return html`
+        <button
+          class="tag"
+          type="button"
+          ?disabled=${this.disabled}
+          @click=${this._handleClick}
+        >
+          ${iconSlot}
+          <span class="label"><slot></slot></span>
+        </button>
+      `;
+    }
+
+    if (this.variant === 'toggle') {
       return html`
         <button
           class="tag"
