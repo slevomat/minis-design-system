@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-03-13
+
+### Tag
+
+- **New component** `<minis-tag>` — compact pill-shaped label with three variants:
+  - `static` — read-only label (default), rendered as a `<div>`
+  - `clickable` — lightweight interactive action, rendered as a `<button aria-pressed>` with toggle state; fires `toggle` event with `{ pressed: boolean }` detail
+  - `dismissible` — applied filter with built-in ✕ button; fires `dismiss` event
+- Optional `icon` slot for 14×14 px leading icons
+- `pressed` boolean attribute for pre-selected toggle state (clickable only)
+- `disabled` boolean attribute (clickable only)
+- All colours via `--color-interaction-secondary-*` tokens — light/dark mode automatic
+- AI prompt doc: `docs/ai-prompts/components/tag.md`
+
+### Storybook
+
+- **Story source panel**: added `docs.source.excludeDecorators: true` globally in `preview.ts` — decorator wrapper div no longer appears in the "Show code" examples, so users see only the component markup when copying code snippets.
+
 ## [Unreleased]
 
 ### Changed

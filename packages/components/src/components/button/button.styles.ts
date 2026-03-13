@@ -76,7 +76,7 @@ export const buttonStyles = css`
 
   /* Visually hide the label slot in icon-only mode while keeping it in the
      accessibility tree so slotted text contributes to the accessible name. */
-  slot.visually-hidden {
+  span.visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;

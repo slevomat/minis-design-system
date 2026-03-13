@@ -340,6 +340,38 @@ export const Changelog: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-03-13
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
+
+      <!-- minis-tag -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-tag&gt;</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>New component</strong> — compact pill-shaped label with three variants: <code>static</code> (read-only), <code>clickable</code> (lightweight action + toggle state, fires <code>toggle</code> event), <code>dismissible</code> (applied filter with built-in ✕ button, fires <code>dismiss</code> event).</li>
+          <li>Optional <code>icon</code> slot for 14×14 px leading icons.</li>
+          <li><code>pressed</code> boolean attribute for pre-selected toggle state (clickable only).</li>
+          <li><code>disabled</code> boolean attribute (clickable only).</li>
+          <li>All colours via <code>--color-interaction-secondary-*</code> tokens — light/dark mode automatic.</li>
+        </ul>
+      </div>
+
+      <!-- storybook -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">Storybook</code>
+      </h3>
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Story source panel:</strong> added <code>docs.source.excludeDecorators: true</code> globally in <code>preview.ts</code> — decorator wrapper div no longer appears in "Show code" examples, so users see only the component markup when copying code snippets.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-12
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-12</h2>

@@ -95,7 +95,7 @@ export class MinisButton extends LitElement {
         aria-describedby=${ariaDescribedby || nothing}
       >
         <slot name="icon"></slot>
-        <slot class=${this.iconOnly ? 'visually-hidden' : ''}></slot>
+        <span class=${this.iconOnly ? 'visually-hidden' : ''}><slot></slot></span>
         ${hasCounter && !this.iconOnly
           ? html`
               <span class="pill-wrapper">

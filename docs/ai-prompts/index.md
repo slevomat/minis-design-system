@@ -12,6 +12,7 @@ Individual UI elements with props and variants.
 - [Icon](./components/icon.md) - SVG icons via `<minis-icon>`, currentColor theming, a11y
 - [Message](./components/message.md) - Notification card with visual, title, description and close button
 - [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
+- [Tag](./components/tag.md) - Compact pill label: static, clickable (with toggle), or dismissible
 
 [→ All Components](./components/README.md)
 

@@ -106,6 +106,11 @@ const preview: Preview = {
     },
   ],
   parameters: {
+    docs: {
+      source: {
+        excludeDecorators: true,
+      },
+    },
     options: {
       storySort: {
         order: ['Introduction', 'Design Tokens', 'Contributing', 'Components'],
