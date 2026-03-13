@@ -340,7 +340,51 @@ export const Changelog: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-03-13
+           2026-03-13 (navigation)
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
+
+      <!-- minis-navigation + minis-navigation-item -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-navigation&gt; &amp; &lt;minis-navigation-item&gt;</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>New components</strong> — horizontal scrollable navigation bar based on slevomat.cz production patterns.</li>
+          <li><code>&lt;minis-navigation&gt;</code> — wrapper with two variants:
+            <ul style="margin:.25rem 0;padding-left:1.5rem">
+              <li><code>horizontal</code> — top-level category nav bar (homepage menu)</li>
+              <li><code>tabs</code> — product detail tab switcher (Nabídka / Hodnocení / O hotelu)</li>
+            </ul>
+          </li>
+          <li><code>&lt;minis-navigation-item&gt;</code> — individual item:
+            <ul style="margin:.25rem 0;padding-left:1.5rem">
+              <li>Renders <code>&lt;a&gt;</code> when <code>href</code> is set, <code>&lt;button&gt;</code> otherwise</li>
+              <li><code>active</code> — blue underline (2px) + bold text for the current page/tab</li>
+              <li><code>color="positive"</code> — green accent: icon is green at rest; text + underline turn green on hover and active</li>
+            </ul>
+          </li>
+          <li>Icon slot (20×20px) for leading icons.</li>
+          <li><code>actions</code> slot for right-aligned content (e.g. <code>&lt;minis-tag variant="toggle"&gt;</code> favourite).</li>
+          <li>Horizontal overflow scroll with hidden scrollbar.</li>
+          <li><strong>No layout shift on active</strong>: label reserves bold width via CSS <code>::after</code> ghost — sibling items never move when active changes.</li>
+          <li>Typography: Inter, 16px, no horizontal padding on items.</li>
+        </ul>
+      </div>
+
+      <!-- Tokens -->
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Tokens</h3>
+      <div style="border-left:3px solid var(--color-border,#cbccce);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li>Navigation tokens added: <code>--navigation-gap</code>, <code>--navigation-border-color</code>, <code>--navigation-item-padding-y</code>, <code>--navigation-item-gap</code>, <code>--navigation-item-icon-size</code>, <code>--navigation-item-accent</code>, <code>--navigation-item-active-accent</code>, <code>--navigation-item-active-border-color</code>, <code>--navigation-item-active-border-width</code>, <code>--navigation-item-hover-border-color</code>.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           2026-03-13 (tag)
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
 

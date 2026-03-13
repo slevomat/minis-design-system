@@ -8,3 +8,5 @@ export { MinisPillCounter } from './components/pill-counter/pill-counter.js';
 export { MinisAlert } from './components/alert/alert.js';
 export { MinisMessage } from './components/message/message.js';
 export { MinisTag } from './components/tag/tag.js';
+export { MinisNavigation } from './components/navigation/navigation.js';
+export { MinisNavigationItem } from './components/navigation/navigation-item.js';

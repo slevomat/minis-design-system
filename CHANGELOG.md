@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-13
 
+### Navigation & Navigation Item
+
+- **New components** `<minis-navigation>` and `<minis-navigation-item>` — horizontal scrollable navigation bar based on slevomat.cz production patterns (`horizontal-nav__section` and `navigation__links`)
+- `<minis-navigation>` variants: `horizontal` (category nav bar) · `tabs` (product detail tab switcher)
+- `<minis-navigation-item>` props:
+  - `href` — renders `<a>` when set, `<button>` otherwise
+  - `active` — blue underline (2px) + bold text for the current page/tab
+  - `color="positive"` — green accent (`--color-text-accent-positive`): icon is green at rest; text + underline turn green on hover and active
+- Icon slot (20×20px) for leading icons
+- `actions` slot on `<minis-navigation>` for right-aligned content (e.g. `<minis-tag variant="toggle">` favourite button)
+- Horizontal overflow scroll with hidden scrollbar
+- **No layout shift on active**: label reserves bold width via CSS `::after` ghost (`data-label` attribute + `height:0; visibility:hidden; font-weight:bold`) — sibling items never shift position when active changes
+- Typography: Inter, 16px (`--typography-size-md`), 1.5 line-height; no horizontal padding on items
+- Navigation tokens added to `packages/tokens/src/tokens.css`: `--navigation-gap`, `--navigation-border-color`, `--navigation-item-padding-y`, `--navigation-item-gap`, `--navigation-item-icon-size`, `--navigation-item-accent`, `--navigation-item-active-accent`, `--navigation-item-active-border-color`, `--navigation-item-active-border-width`, `--navigation-item-hover-border-color`
+- AI prompt doc: `docs/ai-prompts/components/navigation.md`
+
 ### Tag
 
 - **New component** `<minis-tag>` — compact pill-shaped label with four variants:

@@ -629,6 +629,18 @@
   --tag-icon-size: var(--pixel-px-20);
   --tag-toggle-icon-size: var(--pixel-px-24);
 
+  /* Navigation */
+  --navigation-item-gap: var(--linear-sp-linear-2);               /*  8px — gap between icon and label */
+  --navigation-item-icon-size: var(--pixel-px-20);                /* 20px */
+  --navigation-item-padding-y: var(--linear-sp-linear-2);         /*  8px — vertical only, no horizontal padding */
+  --navigation-item-accent: var(--color-text-primary);
+  --navigation-item-active-accent: var(--color-text-accent-link);
+  --navigation-item-active-border-color: var(--color-text-accent-link);
+  --navigation-item-active-border-width: 2px;
+  --navigation-item-hover-border-color: var(--color-text-accent-link);
+  --navigation-gap: var(--linear-sp-linear-6);                    /* 24px — gap between items */
+  --navigation-border-color: var(--color-border);
+
   /* Input */
   --input-border: var(--color-border);
   --input-border-hover: var(--color-border-focus);
