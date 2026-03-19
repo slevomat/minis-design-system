@@ -34,7 +34,7 @@ export type NavigationVariant = 'horizontal' | 'tabs';
  *   <minis-navigation-item href="#nabidka" active>Nabídka</minis-navigation-item>
  *   <minis-navigation-item href="#hodnoceni">Hodnocení</minis-navigation-item>
  *   <minis-navigation-item href="#o-hotelu">O hotelu</minis-navigation-item>
- *   <minis-button slot="actions" variant="secondary" size="small">Uložit</minis-button>
+ *   <minis-button slot="actions" variant="secondary" size="sm">Uložit</minis-button>
  * </minis-navigation>
  * ```
  */

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-03-19
+
+### Button
+
+- **Breaking: size values renamed** — `small` → `sm`, `medium` → `md`, `large` → `lg` to align with the rest of the design system's naming convention
+- **New size `xl`** (48px height, `--pixel-px-48`) — the largest button for prominent hero CTAs
+- **Heights adjusted**: `sm` 24px (`--pixel-px-24`), `md` 32px (`--pixel-px-32`), `lg` 40px (`--pixel-px-40`), `xl` 48px (`--pixel-px-48`)
+- Icon-only variant uses the same height token for width (square) for all four sizes
+- Default size updated from `medium` to `md`
+
 ## 2026-03-13
 
 ### Navigation & Navigation Item

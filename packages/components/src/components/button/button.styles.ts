@@ -40,32 +40,42 @@ export const buttonStyles = css`
      ===================== */
 
   /* Small */
-  :host([size="small"]) button {
-    height: var(--pixel-px-22, 22px);
+  :host([size="sm"]) button {
+    height: var(--pixel-px-24, 24px);
     padding: var(--button-small-padding-y, 3px) var(--button-small-padding-x, 8px);
   }
 
-  :host([size="small"][icon-only]) button {
+  :host([size="sm"][icon-only]) button {
     padding: var(--button-small-padding-y, 3px);
   }
 
   /* Medium */
-  :host([size="medium"]) button {
-    height: var(--fibonachi-sp-fib-8, 34px);
+  :host([size="md"]) button {
+    height: var(--pixel-px-32, 32px);
     padding: var(--button-padding-y, 8px) var(--button-padding-x, 12px);
   }
 
-  :host([size="medium"][icon-only]) button {
+  :host([size="md"][icon-only]) button {
     padding: var(--button-padding-y, 8px);
   }
 
   /* Large */
-  :host([size="large"]) button {
-    height: var(--pixel-px-44, 44px);
+  :host([size="lg"]) button {
+    height: var(--pixel-px-40, 40px);
     padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
   }
 
-  :host([size="large"][icon-only]) button {
+  :host([size="lg"][icon-only]) button {
+    padding: var(--button-large-padding-y, 12px);
+  }
+
+  /* XL */
+  :host([size="xl"]) button {
+    height: var(--pixel-px-48, 48px);
+    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
+  }
+
+  :host([size="xl"][icon-only]) button {
     padding: var(--button-large-padding-y, 12px);
   }
 
@@ -89,27 +99,32 @@ export const buttonStyles = css`
   }
 
   /* Icon-only: enforce square dimensions */
-  :host([size="small"][icon-only]) button {
-    width: var(--pixel-px-22, 22px);
+  :host([size="sm"][icon-only]) button {
+    width: var(--pixel-px-24, 24px);
   }
 
-  :host([size="medium"][icon-only]) button {
-    width: var(--fibonachi-sp-fib-8, 34px);
+  :host([size="md"][icon-only]) button {
+    width: var(--pixel-px-32, 32px);
   }
 
-  :host([size="large"][icon-only]) button {
-    width: var(--pixel-px-44, 44px);
+  :host([size="lg"][icon-only]) button {
+    width: var(--pixel-px-40, 40px);
+  }
+
+  :host([size="xl"][icon-only]) button {
+    width: var(--pixel-px-48, 48px);
   }
 
   /* Icon sizing per size */
-  :host([size="small"]) ::slotted([slot="icon"]) {
+  :host([size="sm"]) ::slotted([slot="icon"]) {
     width: var(--pixel-px-16, 16px);
     height: var(--pixel-px-16, 16px);
     flex-shrink: 0;
   }
 
-  :host([size="medium"]) ::slotted([slot="icon"]),
-  :host([size="large"]) ::slotted([slot="icon"]) {
+  :host([size="md"]) ::slotted([slot="icon"]),
+  :host([size="lg"]) ::slotted([slot="icon"]),
+  :host([size="xl"]) ::slotted([slot="icon"]) {
     width: var(--pixel-px-24, 24px);
     height: var(--pixel-px-24, 24px);
     flex-shrink: 0;
@@ -278,7 +293,7 @@ export const buttonStyles = css`
   }
 
   /* small button: tighter floating offset */
-  :host([size="small"]) .pill-wrapper--floating {
+  :host([size="sm"]) .pill-wrapper--floating {
     top: var(--pixel-px-2, 2px);
     right: var(--pixel-px-2, 2px);
   }

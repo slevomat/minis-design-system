@@ -139,7 +139,7 @@ export class MinisTag extends LitElement {
           <span class="label"><slot></slot></span>
           <minis-button
             variant="tertiary"
-            size="small"
+            size="sm"
             icon-only
             aria-label="Remove"
             @click=${this._handleDismiss}

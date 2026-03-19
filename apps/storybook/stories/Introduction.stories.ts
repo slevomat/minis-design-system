@@ -340,6 +340,28 @@ export const Changelog: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-03-19 (button sizes)
+           ═══════════════════════════════════════════════════════════ -->
+      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-19</h2>
+
+      <!-- minis-button -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-button&gt;</code>
+        <span style="background:var(--color-gold-45,#c89a00);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">BREAKING</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-gold-45,#c89a00);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Size values renamed</strong> — <code>small</code> → <code>sm</code>, <code>medium</code> → <code>md</code>, <code>large</code> → <code>lg</code> to align with design system conventions.</li>
+          <li><strong>New size <code>xl</code></strong> (48px height) — use for prominent hero CTAs.</li>
+          <li><strong>Heights adjusted</strong>: <code>sm</code> 24px · <code>md</code> 32px · <code>lg</code> 40px · <code>xl</code> 48px.</li>
+          <li>Icon-only variant uses height token for width (square) at all sizes.</li>
+          <li>Default size changed from <code>medium</code> to <code>md</code>.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-13 (navigation)
            ═══════════════════════════════════════════════════════════ -->
       <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
