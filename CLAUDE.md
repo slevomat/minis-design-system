@@ -101,6 +101,7 @@ These are the primary source of truth for token discovery. Alternatively, use th
 - **Avoid `var(--a, 1px 2px)` multi-value fallbacks** in Lit `css` templates — invalid CSS crashes the module.
 - **No duplicate `@customElement` registrations** — check existing tag names before adding a new component.
 - **TypeScript strict mode** (`noUnusedLocals`, `noUnusedParameters`) — unused imports/params fail the Vite build.
+- **`100000px` in `tokens.json` means "full width" (100%)** — Figma cannot mix `%` and `px` in the same variable collection, so unbounded widths are encoded as `100000px`. Always translate to `100%` in CSS. Only actual numeric values (e.g. `752px`, `1240px`) represent real constraints.
 
 ## AI-agent docs
 

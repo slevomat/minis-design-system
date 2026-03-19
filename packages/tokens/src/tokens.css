@@ -478,6 +478,12 @@
      sm    : 408–767px  (sm)      — medium spacing, small type
      md    : 768–1255px (md/lg)   — medium spacing, large type; narrow width caps at 752px
      xl    : ≥ 1256px   (xl+)     — large container-padding, default width caps at 1240px
+
+   NOTE — "100000px" in Figma tokens.json:
+     Figma cannot mix % and px in the same variable collection mode, so unbounded
+     widths are encoded as 100000px (effectively "no max-width / full width").
+     When translating to CSS, always replace 100000px → 100%.
+     Only non-100000px values represent real design constraints (e.g. 752px, 1240px).
    ======================================== */
 
 /* Base — 2xs/xs (≤ 407px) */
