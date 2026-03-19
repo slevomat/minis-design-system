@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './header.js';
 import '../button/button.js';
-import '../../../../icons/src/minis-icon.js';
+import '@minis/icons';
 
 const meta: Meta = {
   title: 'Components/Header',
