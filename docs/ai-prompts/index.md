@@ -14,6 +14,7 @@ Individual UI elements with props and variants.
 - [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
 - [Navigation](./components/navigation.md) - Horizontal scrollable nav bar: category nav or tab switcher
 - [Tag](./components/tag.md) - Compact pill label: static, clickable (with toggle), or dismissible
+- [Card Grid](./components/card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
 
 [→ All Components](./components/README.md)
 

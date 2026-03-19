@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-19
 
+### Card Grid
+
+- **New component** `<minis-card-grid>` — responsive CSS-grid layout wrapper for cards and images
+- **`navigation` variant** — 4-col grid, item 1 spans 2 cols (featured), item 6 spans 2 cols (wide mirror); mobile: horizontal scroll strip with equal-size cells
+- **`navigation-small` variant** — uniform 4-col grid, row count determined by number of slotted items (8 = 2 rows, 12 = 3 rows); same mobile behaviour
+- **`photogallery` variant** — asymmetric 5-col layout: large main photo (3-col × 3-row), wide image top-right (2-col × 2-row), two small thumbnails bottom-right; mobile: only main photo shown
+- Pure layout wrapper — slots any content (cards, images, links)
+
 ### Tag
 
 - **New: `icon-only` attribute on `toggle` variant** — hides the label and renders the tag as a square icon button (same height as width). Requires an icon in the `icon` slot. Useful for compact favourite/like buttons in tight layouts.

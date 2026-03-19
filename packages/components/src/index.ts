@@ -10,3 +10,4 @@ export { MinisMessage } from './components/message/message.js';
 export { MinisTag } from './components/tag/tag.js';
 export { MinisNavigation } from './components/navigation/navigation.js';
 export { MinisNavigationItem } from './components/navigation/navigation-item.js';
+export { MinisCardGrid } from './components/card-grid/card-grid.js';
