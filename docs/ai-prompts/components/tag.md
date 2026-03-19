@@ -28,6 +28,7 @@ A compact pill-shaped label used to display metadata, applied filters, or lightw
 | `variant` | `"static" \| "clickable" \| "toggle" \| "dismissible"` | `"static"` | Visual and behavioural variant |
 | `pressed` | `boolean` | `false` | Toggle/selected state. Only meaningful on `toggle`. Sets `aria-pressed` on the inner `<button>`. Can be set declaratively for server-rendered initial state. |
 | `disabled` | `boolean` | `false` | Disables the tag. Only meaningful on `clickable` and `toggle`. |
+| `icon-only` | `boolean` | `false` | Icon-only mode. Only meaningful on `toggle`. Hides the label slot and renders the tag as a square icon button (width = height). Requires an icon in the `icon` slot. |
 
 ### Slots
 
@@ -106,7 +107,7 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 
 ```html
 <minis-tag variant="toggle" id="fav-tag">
-  <minis-icon slot="icon" name="heart" size="14" id="fav-icon"></minis-icon>
+  <minis-icon slot="icon" name="heart" id="fav-icon"></minis-icon>
   Oblíbené
 </minis-tag>
 <script>
@@ -120,9 +121,22 @@ Initial pressed state (e.g. already liked, server-rendered):
 
 ```html
 <minis-tag variant="toggle" pressed>
-  <minis-icon slot="icon" name="heart-fill" size="14"></minis-icon>
+  <minis-icon slot="icon" name="heart-fill"></minis-icon>
   Oblíbené
 </minis-tag>
+```
+
+### Toggle icon-only — compact favourite button
+
+```html
+<minis-tag variant="toggle" icon-only id="fav-tag">
+  <minis-icon slot="icon" name="heart" id="fav-icon"></minis-icon>
+</minis-tag>
+<script>
+  document.querySelector('#fav-tag').addEventListener('toggle', (e) => {
+    document.querySelector('#fav-icon').name = e.detail.pressed ? 'heart-fill' : 'heart';
+  });
+</script>
 ```
 
 ### Dismissible tag (applied filter)

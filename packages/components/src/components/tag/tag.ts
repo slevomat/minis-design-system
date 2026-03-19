@@ -69,6 +69,14 @@ export class MinisTag extends LitElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * Icon-only mode. Only meaningful on the `toggle` variant.
+   * Hides the label slot and renders the tag as a square icon button.
+   * Requires an icon in the `icon` slot.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
+  iconOnly = false;
+
   @state()
   private _hasIcon = false;
 
@@ -96,7 +104,11 @@ export class MinisTag extends LitElement {
   }
 
   render() {
-    const tagClass = this._hasIcon ? 'tag tag--has-icon' : 'tag';
+    const tagClass = [
+      'tag',
+      this._hasIcon ? 'tag--has-icon' : '',
+      this.iconOnly ? 'tag--icon-only' : '',
+    ].filter(Boolean).join(' ');
     const iconSlot = html`<slot
       name="icon"
       class=${this._hasIcon ? 'icon' : ''}
@@ -127,7 +139,7 @@ export class MinisTag extends LitElement {
           @click=${this._handleClick}
         >
           ${iconSlot}
-          <span class="label"><slot></slot></span>
+          ${this.iconOnly ? '' : html`<span class="label"><slot></slot></span>`}
         </button>
       `;
     }

@@ -95,6 +95,16 @@ export const tagStyles = css`
   }
 
   /* =====================
+     TOGGLE: ICON-ONLY
+     ===================== */
+
+  :host([variant="toggle"][icon-only]) .tag {
+    padding-inline: var(--tag-icon-only-padding, 4px);
+    width: var(--tag-height, 32px);
+    justify-content: center;
+  }
+
+  /* =====================
      VARIANT: DISMISSIBLE
      ===================== */
 

@@ -33,7 +33,11 @@ const meta: Meta = {
     },
     disabled: {
       control: 'boolean',
-      description: 'Disabled state (clickable variant only)',
+      description: 'Disabled state (clickable and toggle variants only)',
+    },
+    'icon-only': {
+      control: 'boolean',
+      description: 'Icon-only mode — hides the label (toggle variant only)',
     },
   },
 };
@@ -49,12 +53,14 @@ export const Playground: Story = {
     variant: 'static',
     pressed: false,
     disabled: false,
+    'icon-only': false,
   },
   render: (args) => html`
     <minis-tag
       variant=${args.variant}
       ?pressed=${args.pressed}
       ?disabled=${args.disabled}
+      ?icon-only=${args['icon-only']}
     >
       <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
       Platba na zálohu
@@ -152,6 +158,33 @@ export const Toggle: Story = {
         Oblíbené
       </minis-tag>
       <span>← pressed state persists</span>
+    </div>
+  `,
+};
+
+// ─── Toggle icon-only ─────────────────────────────────────────────────────────
+
+export const ToggleIconOnly: Story = {
+  name: 'Toggle icon-only',
+  render: () => html`
+    <div style="display: flex; gap: 12px; align-items: center; font-family: sans-serif; font-size: 13px; color: #555;">
+      <minis-tag
+        variant="toggle"
+        icon-only
+        @toggle=${(e: CustomEvent) => {
+          const icon = (e.target as Element).querySelector('minis-icon[slot="icon"]') as HTMLElement & { name: string };
+          if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
+        }}
+      >
+        <minis-icon slot="icon" name="heart"></minis-icon>
+      </minis-tag>
+      <minis-tag variant="toggle" icon-only pressed>
+        <minis-icon slot="icon" name="heart-fill"></minis-icon>
+      </minis-tag>
+      <minis-tag variant="toggle" icon-only disabled>
+        <minis-icon slot="icon" name="heart"></minis-icon>
+      </minis-tag>
+      <span>← default / pressed / disabled</span>
     </div>
   `,
 };

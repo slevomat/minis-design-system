@@ -330,19 +330,49 @@ export const AIDesignIntegration: Story = {
   `,
 };
 
-export const Changelog: Story = {
-  name: 'Changelog',
-  render: () => html`
+const changelogHTML = `
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1 style="font-size:2rem;margin-bottom:.25rem">Changelog</h1>
       <p style="color:var(--color-text-secondary,#666);margin-top:0">Notable changes to Mini*S components and tokens, newest first.</p>
 
+      <style>
+        .cl-heading { display:flex; align-items:center; gap:.5rem; }
+        .cl-copy-btn {
+          display:inline-flex; align-items:center; gap:.3rem;
+          background:none; border:1px solid var(--color-border,#cbccce);
+          border-radius:4px; padding:.15rem .5rem; cursor:pointer;
+          font-size:.75rem; color:var(--color-text-secondary,#666);
+          opacity:0; transition:opacity 100ms ease;
+          white-space:nowrap;
+        }
+        .cl-heading:hover .cl-copy-btn { opacity:.6; }
+        .cl-copy-btn:hover { opacity:1 !important; }
+        .cl-copy-btn svg { flex-shrink:0; }
+      </style>
+
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-03-19 (button sizes)
+           2026-03-19 (tag icon-only, button sizes)
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-19</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-19" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-19</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-19">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <!-- minis-tag -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-tag&gt;</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong><code>icon-only</code> attribute on <code>toggle</code> variant</strong> — hides the label and renders the tag as a square icon button. Useful for compact favourite/like buttons in tight layouts.</li>
+        </ul>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -365,7 +395,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-13 (navigation)
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-13-nav" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-13</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-13-nav">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-navigation + minis-navigation-item -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -409,7 +445,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-13 (tag)
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-13</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-13-tag" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-13</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-13-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-tag -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -461,7 +503,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-12
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-12</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-12" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-12</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-12">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -490,7 +538,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-07
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-07</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-07" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-07</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-07">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -523,7 +577,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-06
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-06</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-06" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-06</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-06">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -579,7 +639,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-05
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-05</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-05" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-05</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-05">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -612,7 +678,13 @@ export const Changelog: Story = {
       <!-- ═══════════════════════════════════════════════════════════
            2026-03-03
            ═══════════════════════════════════════════════════════════ -->
-      <h2 style="font-size:1.25rem;margin-bottom:.25rem">2026-03-03</h2>
+      <div class="cl-heading">
+        <h2 id="2026-03-03" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-03</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-03">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
 
       <!-- minis-button -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
@@ -632,7 +704,33 @@ export const Changelog: Story = {
         All changes are reflected in <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a> and the <code>docs/ai-prompts/components/</code> instruction files.
       </p>
     </div>
-  `,
+`;
+
+export const Changelog: Story = {
+  name: 'Changelog',
+  render: () => {
+    const root = document.createElement('div');
+    root.innerHTML = changelogHTML;
+
+    // Wire up copy-link buttons
+    root.querySelectorAll<HTMLButtonElement>('button[data-anchor]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-anchor')!;
+        const url = `${window.location.origin}${window.location.pathname}?path=/story/introduction--changelog#${id}`;
+        navigator.clipboard.writeText(url).then(() => {
+          const label = btn.querySelector('.copy-label')!;
+          label.textContent = 'Copied!';
+          btn.style.opacity = '1';
+          setTimeout(() => {
+            label.textContent = 'Copy link';
+            btn.style.opacity = '';
+          }, 1500);
+        });
+      });
+    });
+
+    return root;
+  },
 };
 
 export const ContributionGuide: Story = {

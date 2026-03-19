@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-19
 
+### Tag
+
+- **New: `icon-only` attribute on `toggle` variant** — hides the label and renders the tag as a square icon button (same height as width). Requires an icon in the `icon` slot. Useful for compact favourite/like buttons in tight layouts.
+
 ### Button
 
 - **Font size by size** — `sm` uses `--typography-size-sm` (14px); `md`, `lg`, `xl` use `--typography-size-md` (16px)
