@@ -363,6 +363,19 @@ const changelogHTML = `
         </button>
       </div>
 
+      <!-- layouts -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">Layouts (AI Prompt Docs)</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>New <code>docs/ai-prompts/layouts/</code> directory</strong> — layout instructions for AI agents to vibe-code responsive pages.</li>
+          <li><strong>Layout system overview</strong> — breakpoint tiers, spacing tokens, 12-col grid, container primitives, page structure pattern.</li>
+          <li><strong>Deal detail layout</strong> — hotel/experience page: header band, photo gallery, tabbed navigation, aside + main content grid, responsive mobile stacking, complete page skeleton.</li>
+        </ul>
+      </div>
+
       <!-- minis-header -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-header&gt;</code>

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-19
 
+### Layouts (AI Prompt Docs)
+
+- **New `docs/ai-prompts/layouts/` directory** — layout instruction files for AI agents to vibe-code responsive pages
+- **Layout system overview** (`layouts/index.md`) — breakpoint tiers, spacing tokens, 12-column grid, container, section cards, page structure pattern
+- **Deal detail layout** (`layouts/deal-detail.md`) — hotel/experience page: header band, photo gallery, tabbed navigation, 4-col aside + 8-col main content grid, responsive mobile stacking, complete page skeleton with copy-paste AI prompt
+
 ### Header
 
 - **New component** `<minis-header>` — main brand bar (64px height) with logo slot (left) and actions slot (right)

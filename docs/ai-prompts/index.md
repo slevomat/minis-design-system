@@ -27,6 +27,14 @@ Composable UI patterns combining multiple components.
 
 [→ All Patterns](./patterns/README.md)
 
+### 📐 Layouts
+Full page layout instructions for AI agents to vibe-code responsive pages.
+
+- [Layout System Overview](./layouts/index.md) - Breakpoint tiers, spacing tokens, grid system, page structure
+- [Deal Detail](./layouts/deal-detail.md) - Hotel/experience detail: photo gallery, tabs, aside + main split
+
+[→ All Layouts](./layouts/)
+
 ### 📄 Templates
 Full page layouts and structures.
 
@@ -78,4 +86,4 @@ All components/patterns/templates use Mini*S tokens:
 
 ---
 
-**Last updated:** 2026-03-06
+**Last updated:** 2026-03-19
