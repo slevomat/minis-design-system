@@ -38,15 +38,21 @@ export const Playground: Story = {
 export const DefaultVsNarrow: Story = {
   name: 'Default vs Narrow',
   render: () => html`
-    <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;flex-direction:column;gap:4px;background:var(--color-border,#cbccce)">
+      <div style="background:var(--color-surface-faded,#f1f3f5);padding:8px 0;font-family:var(--typography-font-family-sans,Inter,sans-serif);font-size:12px;color:var(--color-text-secondary,#666);text-align:center">
+        default — max-width 1240px from 1256px+ · 100% below
+      </div>
       <minis-container>
         <div style=${demoBlockStyle}>
-          <strong>default</strong> — max-width: var(--container-width), padding: var(--container-padding)
+          <strong>default</strong> — full width on mobile, caps at 1240px on wide screens
         </div>
       </minis-container>
+      <div style="background:var(--color-surface-faded,#f1f3f5);padding:8px 0;font-family:var(--typography-font-family-sans,Inter,sans-serif);font-size:12px;color:var(--color-text-secondary,#666);text-align:center">
+        narrow — max-width 752px from 768px+ · 100% below
+      </div>
       <minis-container variant="narrow">
         <div style=${demoBlockStyle}>
-          <strong>narrow</strong> — max-width: var(--container-narrow-width), padding: var(--container-narrow-padding)
+          <strong>narrow</strong> — full width on mobile, caps at 752px from 768px+
         </div>
       </minis-container>
     </div>
