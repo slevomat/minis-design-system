@@ -6,7 +6,7 @@ export const containerStyles = css`
   }
 
   .container {
-    max-width: var(--container-width, 100000px);
+    max-width: var(--container-width, 100%);
     padding-left: var(--container-padding, 8px);
     padding-right: var(--container-padding, 8px);
     margin-left: auto;
@@ -16,7 +16,7 @@ export const containerStyles = css`
   }
 
   :host([variant="narrow"]) .container {
-    max-width: var(--container-narrow-width, 100000px);
+    max-width: var(--container-narrow-width, 100%);
     padding-left: var(--container-narrow-padding, 8px);
     padding-right: var(--container-narrow-padding, 8px);
   }

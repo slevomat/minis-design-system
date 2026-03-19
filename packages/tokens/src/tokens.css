@@ -476,8 +476,8 @@
    Breakpoint tiers (matching Figma modes 2xs / xs / sm / md / xl):
      base  : ≤ 407px    (2xs/xs)  — smallest spacing, small type
      sm    : 408–767px  (sm)      — medium spacing, small type
-     md    : 768–1255px (md/lg)   — medium spacing, large type
-     xl    : ≥ 1256px   (xl+)     — large container-padding, largest mega-poster
+     md    : 768–1255px (md/lg)   — medium spacing, large type; narrow width caps at 752px
+     xl    : ≥ 1256px   (xl+)     — large container-padding, default width caps at 1240px
    ======================================== */
 
 /* Base — 2xs/xs (≤ 407px) */
@@ -498,8 +498,8 @@
   --spacing-layout-xl:   var(--linear-sp-linear-8); /* 32px */
   --container-padding:         var(--linear-sp-linear-2); /*  8px */
   --container-narrow-padding:  var(--linear-sp-linear-2); /*  8px */
-  --container-width: 100000px;
-  --container-narrow-width: 100000px;
+  --container-width: 100%;
+  --container-narrow-width: 100%;
   --elevation-none: 0px;
   /* Typography composite — 2xs/xs (small) */
   --typography-heading-2xl-size: var(--typography-size-2xl); /* 24px */
@@ -527,6 +527,7 @@
 @media (min-width: 768px) {
   :root {
     /* Spacing same as sm */
+    --container-narrow-width: 752px; /* narrow container caps here */
     /* Typography jumps up */
     --typography-heading-2xl-size: var(--typography-size-3xl); /* 32px */
     --typography-heading-xl-size:  var(--typography-size-3xl); /* 32px */
@@ -541,6 +542,7 @@
   :root {
     --container-padding:        var(--linear-sp-linear-8); /* 32px */
     --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
+    --container-width: 1240px; /* default container caps here */
     --typography-heading-2xl-size: var(--typography-size-4xl); /* 40px */
     /* heading/xl stays at 32px, heading/lg–sm unchanged */
   }
