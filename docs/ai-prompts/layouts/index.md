@@ -8,6 +8,7 @@ These are **not** components — they are composition guides for AI agents to vi
 ## Available Layouts
 
 - [Deal Detail](./deal-detail.md) — Hotel/experience detail page: photo gallery, tabbed content, aside + main split
+- [Checkout (Košík)](./checkout.md) — Single-column checkout flow: narrow container, stacked cards, step tabs
 
 ---
 

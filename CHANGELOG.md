@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - **New `docs/ai-prompts/layouts/` directory** — layout instruction files for AI agents to vibe-code responsive pages
 - **Layout system overview** (`layouts/index.md`) — breakpoint tiers, spacing tokens, 12-column grid, container, section cards, page structure pattern
 - **Deal detail layout** (`layouts/deal-detail.md`) — hotel/experience page: header band, photo gallery, tabbed navigation, 4-col aside + 8-col main content grid, responsive mobile stacking, complete page skeleton with copy-paste AI prompt
+- **Checkout layout** (`layouts/checkout.md`) — single-column checkout flow with `<minis-container variant="narrow">`, step tabs, stacked cards, CTA button
 
 ### Header
 

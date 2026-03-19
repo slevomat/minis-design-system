@@ -32,6 +32,7 @@ Full page layout instructions for AI agents to vibe-code responsive pages.
 
 - [Layout System Overview](./layouts/index.md) - Breakpoint tiers, spacing tokens, grid system, page structure
 - [Deal Detail](./layouts/deal-detail.md) - Hotel/experience detail: photo gallery, tabs, aside + main split
+- [Checkout (Košík)](./layouts/checkout.md) - Single-column checkout flow: narrow container, stacked cards, step tabs
 
 [→ All Layouts](./layouts/)
 

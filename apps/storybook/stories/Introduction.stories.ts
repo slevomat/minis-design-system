@@ -373,6 +373,7 @@ const changelogHTML = `
           <li><strong>New <code>docs/ai-prompts/layouts/</code> directory</strong> — layout instructions for AI agents to vibe-code responsive pages.</li>
           <li><strong>Layout system overview</strong> — breakpoint tiers, spacing tokens, 12-col grid, container primitives, page structure pattern.</li>
           <li><strong>Deal detail layout</strong> — hotel/experience page: header band, photo gallery, tabbed navigation, aside + main content grid, responsive mobile stacking, complete page skeleton.</li>
+          <li><strong>Checkout (Košík) layout</strong> — single-column flow with <code>&lt;minis-container variant="narrow"&gt;</code>, step tabs, stacked cards.</li>
         </ul>
       </div>
 
