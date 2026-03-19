@@ -363,6 +363,19 @@ const changelogHTML = `
         </button>
       </div>
 
+      <!-- minis-header -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-header&gt;</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>New component</strong> — main brand bar (64px) with <code>logo</code> slot (left) and <code>actions</code> slot (right).</li>
+          <li>Slot-based layout — use <code>&lt;minis-button&gt;</code> elements in the <code>actions</code> slot.</li>
+          <li>Figma buttons mapped: <code>variant="tertiary" size="sm"</code> for secondary actions, <code>variant="cta-buy"</code> for cart.</li>
+        </ul>
+      </div>
+
       <!-- minis-container -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-container&gt;</code>

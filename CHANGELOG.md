@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-19
 
+### Header
+
+- **New component** `<minis-header>` — main brand bar (64px height) with logo slot (left) and actions slot (right)
+- Slot-based: `logo` for brand mark, `actions` for `<minis-button>` elements
+- Figma buttons mapped to: `variant="tertiary" size="sm"` for secondary actions, `variant="cta-buy"` for cart
+
 ### Container
 
 - **New component** `<minis-container>` — responsive layout wrapper that applies `--container-*` tokens for max-width, horizontal padding (8→16→32px), and auto centering

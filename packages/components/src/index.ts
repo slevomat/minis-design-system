@@ -12,3 +12,4 @@ export { MinisNavigation } from './components/navigation/navigation.js';
 export { MinisNavigationItem } from './components/navigation/navigation-item.js';
 export { MinisCardGrid } from './components/card-grid/card-grid.js';
 export { MinisContainer } from './components/container/container.js';
+export { MinisHeader } from './components/header/header.js';
