@@ -17,6 +17,9 @@ All notable changes to this project will be documented in this file.
 - Slot-based: `logo` for brand mark, `actions` for `<minis-button>` elements
 - Figma buttons mapped to: `variant="tertiary" size="sm"` for secondary actions, `variant="cta-buy"` for cart
 - **Fix:** stories import corrected from broken relative path to `@minis/icons`
+- **Fix:** logo replaced with real Slevomat wordmark SVG (`fill="#00B2E5"`) — previous version used reconstructed icon paths with `currentColor`
+- **Fix:** Košík (`cta-buy`) button given `size="sm"` to match the tertiary action buttons
+- **Fix:** `::slotted([slot="actions"])` gets `display: flex !important` — overrides `inline-block` from button's own `:host` shadow styles so all action buttons align on the same vertical axis (`!important` required because `::slotted()` in parent shadow tree has lower precedence than `:host` in the slotted element's own shadow tree)
 
 ### Container
 

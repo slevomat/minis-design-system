@@ -40,4 +40,9 @@ export const headerStyles = css`
     gap: var(--header-actions-gap, 10px);
     flex-shrink: 0;
   }
+
+  ::slotted([slot="actions"]) {
+    display: flex !important;
+    align-self: center;
+  }
 `;

@@ -388,6 +388,9 @@ const changelogHTML = `
           <li>Slot-based layout — use <code>&lt;minis-button&gt;</code> elements in the <code>actions</code> slot.</li>
           <li>Figma buttons mapped: <code>variant="tertiary" size="sm"</code> for secondary actions, <code>variant="cta-buy"</code> for cart.</li>
           <li><strong>Fix:</strong> stories import corrected from broken relative path to <code>@minis/icons</code>.</li>
+          <li><strong>Fix:</strong> logo replaced with real Slevomat wordmark SVG — previous version used reconstructed icon paths with <code>currentColor</code>.</li>
+          <li><strong>Fix:</strong> Košík (<code>cta-buy</code>) button given <code>size="sm"</code> to match the tertiary action buttons.</li>
+          <li><strong>Fix:</strong> <code>::slotted([slot="actions"])</code> gets <code>display: flex !important</code> so all action buttons align on the same vertical axis — <code>!important</code> is required because <code>::slotted()</code> in a parent shadow tree has lower precedence than <code>:host</code> styles in the slotted element's own shadow tree.</li>
         </ul>
       </div>
 
