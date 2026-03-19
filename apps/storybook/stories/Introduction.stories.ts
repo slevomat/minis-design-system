@@ -387,6 +387,7 @@ const changelogHTML = `
           <li><strong>New component</strong> — main brand bar (64px) with <code>logo</code> slot (left) and <code>actions</code> slot (right).</li>
           <li>Slot-based layout — use <code>&lt;minis-button&gt;</code> elements in the <code>actions</code> slot.</li>
           <li>Figma buttons mapped: <code>variant="tertiary" size="sm"</code> for secondary actions, <code>variant="cta-buy"</code> for cart.</li>
+          <li><strong>Fix:</strong> stories import corrected from broken relative path to <code>@minis/icons</code>.</li>
         </ul>
       </div>
 
@@ -400,6 +401,7 @@ const changelogHTML = `
           <li><strong>New component</strong> — responsive layout wrapper that applies <code>--container-*</code> tokens for max-width, horizontal padding (8→16→32px), and auto centering.</li>
           <li><code>narrow</code> variant — uses <code>--container-narrow-width</code> and <code>--container-narrow-padding</code> for narrower content areas.</li>
           <li>No internal media queries — responsive behaviour comes from the token layer.</li>
+          <li><strong>Fix:</strong> container widths corrected — <code>100000px</code> Figma placeholder replaced with <code>100%</code> on mobile, <code>752px</code> narrow from 768px+, <code>1240px</code> default from 1256px+.</li>
         </ul>
       </div>
 

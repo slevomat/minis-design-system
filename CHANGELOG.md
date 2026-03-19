@@ -16,12 +16,16 @@ All notable changes to this project will be documented in this file.
 - **New component** `<minis-header>` — main brand bar (64px height) with logo slot (left) and actions slot (right)
 - Slot-based: `logo` for brand mark, `actions` for `<minis-button>` elements
 - Figma buttons mapped to: `variant="tertiary" size="sm"` for secondary actions, `variant="cta-buy"` for cart
+- **Fix:** stories import corrected from broken relative path to `@minis/icons`
 
 ### Container
 
 - **New component** `<minis-container>` — responsive layout wrapper that applies `--container-*` tokens for max-width, horizontal padding (8→16→32px), and auto centering
 - **`narrow` variant** — uses `--container-narrow-width` and `--container-narrow-padding` for narrower content areas (e.g. articles)
 - No internal media queries — responsive behaviour comes from the token layer in `tokens.css`
+- **Fix:** container widths corrected — `100000px` Figma placeholder replaced with `100%` on mobile, `752px` narrow from 768px+, `1240px` default from 1256px+
+- **Fix:** `tokens` dist rebuilt to apply width changes (was serving stale `100000px` values)
+- **Fix:** Default vs Narrow story updated to show page background so width difference is visible
 
 ### Card Grid
 
