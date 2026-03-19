@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Button
 
+- **Font size by size** — `sm` uses `--typography-size-sm` (14px); `md`, `lg`, `xl` use `--typography-size-md` (16px)
 - **Breaking: size values renamed** — `small` → `sm`, `medium` → `md`, `large` → `lg` to align with the rest of the design system's naming convention
 - **New size `xl`** (48px height, `--pixel-px-48`) — the largest button for prominent hero CTAs
 - **Heights adjusted**: `sm` 24px (`--pixel-px-24`), `md` 32px (`--pixel-px-32`), `lg` 40px (`--pixel-px-40`), `xl` 48px (`--pixel-px-48`)

@@ -351,6 +351,7 @@ export const Changelog: Story = {
       </h3>
       <div style="border-left:3px solid var(--color-gold-45,#c89a00);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>Font size per size</strong> — <code>sm</code> uses <code>--typography-size-sm</code> (14px); <code>md</code>, <code>lg</code>, <code>xl</code> use <code>--typography-size-md</code> (16px).</li>
           <li><strong>Size values renamed</strong> — <code>small</code> → <code>sm</code>, <code>medium</code> → <code>md</code>, <code>large</code> → <code>lg</code> to align with design system conventions.</li>
           <li><strong>New size <code>xl</code></strong> (48px height) — use for prominent hero CTAs.</li>
           <li><strong>Heights adjusted</strong>: <code>sm</code> 24px · <code>md</code> 32px · <code>lg</code> 40px · <code>xl</code> 48px.</li>

@@ -13,7 +13,7 @@ export const buttonStyles = css`
     position: relative;
 
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
-    font-size: var(--typography-size-sm, 14px);
+    font-size: var(--typography-size-md, 16px);
     font-weight: var(--typography-weight-semibold, 600);
     line-height: var(--typography-line-height-percentage-100%, 1);
     white-space: nowrap;
@@ -43,6 +43,7 @@ export const buttonStyles = css`
   :host([size="sm"]) button {
     height: var(--pixel-px-24, 24px);
     padding: var(--button-small-padding-y, 3px) var(--button-small-padding-x, 8px);
+    font-size: var(--typography-size-sm, 14px);
   }
 
   :host([size="sm"][icon-only]) button {
