@@ -114,3 +114,4 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/alert.md`
 - `docs/ai-prompts/components/message.md`
 - `docs/ai-prompts/components/navigation.md`
+- `docs/ai-prompts/components/container.md`

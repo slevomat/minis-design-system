@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-03-19
 
+### Container
+
+- **New component** `<minis-container>` — responsive layout wrapper that applies `--container-*` tokens for max-width, horizontal padding (8→16→32px), and auto centering
+- **`narrow` variant** — uses `--container-narrow-width` and `--container-narrow-padding` for narrower content areas (e.g. articles)
+- No internal media queries — responsive behaviour comes from the token layer in `tokens.css`
+
 ### Card Grid
 
 - **New component** `<minis-card-grid>` — responsive CSS-grid layout wrapper for cards and images

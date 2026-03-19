@@ -363,6 +363,19 @@ const changelogHTML = `
         </button>
       </div>
 
+      <!-- minis-container -->
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-container&gt;</code>
+        <span style="background:var(--color-interaction-primary-surface,#006eb9);color:#fff;font-size:.7rem;padding:.15rem .5rem;border-radius:9999px;font-weight:600">NEW</span>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:.25rem 0 .75rem;padding-left:1.5rem">
+          <li><strong>New component</strong> — responsive layout wrapper that applies <code>--container-*</code> tokens for max-width, horizontal padding (8→16→32px), and auto centering.</li>
+          <li><code>narrow</code> variant — uses <code>--container-narrow-width</code> and <code>--container-narrow-padding</code> for narrower content areas.</li>
+          <li>No internal media queries — responsive behaviour comes from the token layer.</li>
+        </ul>
+      </div>
+
       <!-- minis-card-grid -->
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-card-grid&gt;</code>
