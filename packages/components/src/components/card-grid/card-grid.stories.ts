@@ -10,20 +10,21 @@ const meta: Meta = {
     docs: {
       description: {
         component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3583-12247" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
-<p>A responsive CSS-grid wrapper for cards or images. Three variants cover the main Slevomat page patterns:</p>
+<p>A responsive CSS-grid wrapper for cards or images. Four variants cover the main Slevomat page patterns:</p>
 <ul>
-  <li><strong>navigation</strong> — 4-column grid where the first card is featured (spans 2 cols) and the last card mirrors it on row 2. On mobile (&lt;768px) switches to a 2-row horizontally-scrollable equal-size scroll strip.</li>
-  <li><strong>navigation-small</strong> — uniform 4-column grid, all cells equal. Supports any number of rows — slot 8 items for 2 rows, 12 for 3 rows. Same mobile behaviour as <code>navigation</code>.</li>
-  <li><strong>photogallery</strong> — asymmetric 5-column layout: one large image left (3-col × 3-row), wide image top-right (2-col × 2-row), two small thumbnails bottom-right. On mobile only the first (large) image is shown.</li>
+  <li><strong>navigation</strong> — 4-column grid, 6 slots. Item 1 featured (2-col), item 6 wide (2-col). Default height: 584px. Mobile: horizontal scroll strip.</li>
+  <li><strong>navigation-small</strong> — uniform 4×2 grid, 8 slots, all cells equal. Default height: 296px. Mobile: horizontal scroll strip.</li>
+  <li><strong>navigation-small-3</strong> — uniform 4×3 grid, 12 slots, all cells equal. Default height: 448px. Mobile: 4×2 horizontal scroll strip (shows 8 items).</li>
+  <li><strong>photogallery</strong> — asymmetric 5-column layout, 4 slots: large main photo left, wide image top-right, two small thumbnails bottom-right. Default height: 352px. Mobile: only first image shown (210px).</li>
 </ul>
-<p>The component is a pure layout wrapper — slot any content (cards, images, <code>&lt;a&gt;</code> elements). Set a height via <code>style="height:…"</code> or the <code>--card-grid-height</code> token.</p>`,
+<p>Pure layout wrapper — slot any content. Override height via <code>--card-grid-height</code>. Slot background defaults to <code>--color-surface-faded</code>.</p>`,
       },
     },
   },
   argTypes: {
     variant: {
       control: 'select',
-      options: ['navigation', 'navigation-small', 'photogallery'],
+      options: ['navigation', 'navigation-small', 'navigation-small-3', 'photogallery'],
       description: 'Grid layout variant',
     },
   },
@@ -34,17 +35,15 @@ type Story = StoryObj;
 
 // ─── Shared placeholder helper ────────────────────────────────────────────────
 
-const placeholder = (label = '', color = '#e3eaf2') => html`
+const p = (label = '') => html`
   <div style="
-    background:${color};
     display:flex;
     align-items:center;
     justify-content:center;
     height:100%;
     font-family:sans-serif;
     font-size:13px;
-    color:#6b7a8d;
-    border-radius:4px;
+    color:var(--color-text-secondary,#6b7a8d);
   ">${label}</div>
 `;
 
@@ -52,17 +51,10 @@ const placeholder = (label = '', color = '#e3eaf2') => html`
 
 export const Playground: Story = {
   name: 'Playground',
-  args: {
-    variant: 'navigation',
-  },
+  args: { variant: 'navigation' },
   render: (args) => html`
-    <minis-card-grid variant=${args.variant} style="height:420px;display:block">
-      ${placeholder('1 — featured', '#d4e3f0')}
-      ${placeholder('2')}
-      ${placeholder('3')}
-      ${placeholder('4')}
-      ${placeholder('5')}
-      ${placeholder('6 — wide', '#d4e3f0')}
+    <minis-card-grid variant=${args.variant}>
+      ${p('1')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
     </minis-card-grid>
   `,
 };
@@ -74,63 +66,52 @@ export const Navigation: Story = {
   parameters: {
     docs: {
       description: {
-        story: `4-column grid — slot exactly 6 items. The first item spans 2 columns (featured card), the last item mirrors it on the second row. Typical use: homepage category navigation with a hero tile.`,
+        story: `4-column grid — <strong>6 slots</strong>. Item 1 spans 2 columns (featured), item 6 mirrors it on row 2. Default height: 584px. Typical use: homepage category navigation with a hero tile.`,
       },
     },
   },
   render: () => html`
-    <minis-card-grid variant="navigation" style="height:420px;display:block">
-      ${placeholder('Featured', '#bdd4ea')}
-      ${placeholder('Card 2')}
-      ${placeholder('Card 3')}
-      ${placeholder('Card 4')}
-      ${placeholder('Card 5')}
-      ${placeholder('Wide', '#bdd4ea')}
+    <minis-card-grid variant="navigation">
+      ${p('1 — featured')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6 — wide')}
     </minis-card-grid>
   `,
 };
 
 // ─── Navigation Small — 2 rows ────────────────────────────────────────────────
 
-export const NavigationSmall2Rows: Story = {
-  name: 'Navigation Small — 2 rows',
+export const NavigationSmall: Story = {
+  name: 'Navigation Small',
   parameters: {
     docs: {
       description: {
-        story: `Uniform 4-column grid, 2 rows — all 8 items equal size. Use for compact category navigation strips where no item has higher priority than others.`,
+        story: `Uniform 4×2 grid — <strong>8 slots</strong>, all cells equal. Default height: 296px. Use for compact category navigation where no item has higher visual priority.`,
       },
     },
   },
   render: () => html`
-    <minis-card-grid variant="navigation-small" style="height:296px;display:block">
-      ${placeholder('1')}
-      ${placeholder('2')}
-      ${placeholder('3')}
-      ${placeholder('4')}
-      ${placeholder('5')}
-      ${placeholder('6')}
-      ${placeholder('7')}
-      ${placeholder('8')}
+    <minis-card-grid variant="navigation-small">
+      ${p('1')} ${p('2')} ${p('3')} ${p('4')}
+      ${p('5')} ${p('6')} ${p('7')} ${p('8')}
     </minis-card-grid>
   `,
 };
 
 // ─── Navigation Small — 3 rows ────────────────────────────────────────────────
 
-export const NavigationSmall3Rows: Story = {
+export const NavigationSmall3: Story = {
   name: 'Navigation Small — 3 rows',
   parameters: {
     docs: {
       description: {
-        story: `Same uniform 4-column grid, extended to 3 rows by slotting 12 items. Use when more categories need to be surfaced without a featured card.`,
+        story: `Uniform 4×3 grid — <strong>12 slots</strong>, all cells equal. Default height: 448px. Mobile: shows as a 4×2 scroll strip (first 8 visible). Use when more categories need to be surfaced.`,
       },
     },
   },
   render: () => html`
-    <minis-card-grid variant="navigation-small" style="height:448px;display:block">
-      ${placeholder('1')}  ${placeholder('2')}  ${placeholder('3')}  ${placeholder('4')}
-      ${placeholder('5')}  ${placeholder('6')}  ${placeholder('7')}  ${placeholder('8')}
-      ${placeholder('9')}  ${placeholder('10')} ${placeholder('11')} ${placeholder('12')}
+    <minis-card-grid variant="navigation-small-3">
+      ${p('1')}  ${p('2')}  ${p('3')}  ${p('4')}
+      ${p('5')}  ${p('6')}  ${p('7')}  ${p('8')}
+      ${p('9')}  ${p('10')} ${p('11')} ${p('12')}
     </minis-card-grid>
   `,
 };
@@ -142,23 +123,20 @@ export const Photogallery: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Asymmetric 5-column layout — slot exactly 4 items:
+        story: `Asymmetric 5-column layout — <strong>4 slots</strong>:
 <ol>
   <li>Large image — left, spanning 3 of 5 columns × all 3 rows</li>
   <li>Wide image — top-right, spanning 2 columns × 2 rows</li>
   <li>Small thumbnail — bottom-right col 4</li>
   <li>Small thumbnail — bottom-right col 5</li>
 </ol>
-Typical use: hotel/venue detail page photo gallery preview. On mobile only the first (large) image is shown.`,
+Default height: 352px. Typical use: hotel/venue photo gallery preview. Mobile: only slot 1 shown (210px).`,
       },
     },
   },
   render: () => html`
-    <minis-card-grid variant="photogallery" style="height:352px;display:block">
-      ${placeholder('Main photo', '#bdd4ea')}
-      ${placeholder('Wide', '#cfdde8')}
-      ${placeholder('Thumb 3')}
-      ${placeholder('Thumb 4')}
+    <minis-card-grid variant="photogallery">
+      ${p('1 — main')} ${p('2 — wide')} ${p('3')} ${p('4')}
     </minis-card-grid>
   `,
 };
@@ -171,41 +149,33 @@ export const AllVariants: Story = {
     <div style="display:flex;flex-direction:column;gap:40px">
 
       <div>
-        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation</p>
-        <minis-card-grid variant="navigation" style="height:300px;display:block">
-          ${placeholder('Featured', '#bdd4ea')}
-          ${placeholder('2')}
-          ${placeholder('3')}
-          ${placeholder('4')}
-          ${placeholder('5')}
-          ${placeholder('Wide', '#bdd4ea')}
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation — 6 slots (584px)</p>
+        <minis-card-grid variant="navigation">
+          ${p('1')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
         </minis-card-grid>
       </div>
 
       <div>
-        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small (2 rows)</p>
-        <minis-card-grid variant="navigation-small" style="height:200px;display:block">
-          ${placeholder('1')} ${placeholder('2')} ${placeholder('3')} ${placeholder('4')}
-          ${placeholder('5')} ${placeholder('6')} ${placeholder('7')} ${placeholder('8')}
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small — 8 slots (296px)</p>
+        <minis-card-grid variant="navigation-small">
+          ${p('1')} ${p('2')} ${p('3')} ${p('4')}
+          ${p('5')} ${p('6')} ${p('7')} ${p('8')}
         </minis-card-grid>
       </div>
 
       <div>
-        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small (3 rows)</p>
-        <minis-card-grid variant="navigation-small" style="height:300px;display:block">
-          ${placeholder('1')}  ${placeholder('2')}  ${placeholder('3')}  ${placeholder('4')}
-          ${placeholder('5')}  ${placeholder('6')}  ${placeholder('7')}  ${placeholder('8')}
-          ${placeholder('9')}  ${placeholder('10')} ${placeholder('11')} ${placeholder('12')}
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small-3 — 12 slots (448px)</p>
+        <minis-card-grid variant="navigation-small-3">
+          ${p('1')}  ${p('2')}  ${p('3')}  ${p('4')}
+          ${p('5')}  ${p('6')}  ${p('7')}  ${p('8')}
+          ${p('9')}  ${p('10')} ${p('11')} ${p('12')}
         </minis-card-grid>
       </div>
 
       <div>
-        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">photogallery</p>
-        <minis-card-grid variant="photogallery" style="height:260px;display:block">
-          ${placeholder('Main', '#bdd4ea')}
-          ${placeholder('Wide', '#cfdde8')}
-          ${placeholder('Thumb 3')}
-          ${placeholder('Thumb 4')}
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">photogallery — 4 slots (352px)</p>
+        <minis-card-grid variant="photogallery">
+          ${p('1')} ${p('2')} ${p('3')} ${p('4')}
         </minis-card-grid>
       </div>
 

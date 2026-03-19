@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { cardGridStyles } from './card-grid.styles.js';
 
-export type CardGridVariant = 'navigation' | 'navigation-small' | 'photogallery';
+export type CardGridVariant = 'navigation' | 'navigation-small' | 'navigation-small-3' | 'photogallery';
 
 /**
  * Mini*S Card Grid Component
@@ -14,9 +14,11 @@ export type CardGridVariant = 'navigation' | 'navigation-small' | 'photogallery'
  *   (top-left) and a wide card on the second row (bottom-right). On mobile,
  *   switches to a 2×4 horizontally-scrollable equal-size grid.
  *
- * - **navigation-small** — 4-column uniform grid, all cells equal size.
- *   Supports 2 or 3 rows (just slot 8 or 12 items). On mobile, horizontally
- *   scrollable like `navigation`.
+ * - **navigation-small** — 4-column uniform grid, 2 rows, 8 slots. On mobile,
+ *   horizontally scrollable like `navigation`.
+ *
+ * - **navigation-small-3** — 4-column uniform grid, 3 rows, 12 slots. On mobile,
+ *   collapses to a 4×2 scroll strip.
  *
  * - **photogallery** — Asymmetric 5-column layout: one large image on the left
  *   (spanning 3 cols × 3 rows), a wide image top-right (2 cols × 2 rows), and

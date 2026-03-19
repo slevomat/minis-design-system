@@ -14,9 +14,10 @@ Three variants cover the main Slevomat page patterns:
 
 | Variant | Use case |
 |---|---|
-| `navigation` | Homepage category navigation — featured card top-left (2 cols wide), wide card bottom-right. 6 items total. |
-| `navigation-small` | Compact category navigation — all cells equal size. Slot 8 items for 2 rows, 12 for 3 rows. |
-| `photogallery` | Hotel/venue detail page photo preview — large main photo left, wide image top-right, two small thumbnails bottom-right. 4 items total. |
+| `navigation` | Homepage category navigation — featured card top-left (2 cols wide), wide card bottom-right. **6 slots.** |
+| `navigation-small` | Compact category navigation — uniform 4×2 grid, all cells equal. **8 slots.** |
+| `navigation-small-3` | Same as `navigation-small` but 3 rows. **12 slots.** Mobile collapses to 4×2 scroll strip. |
+| `photogallery` | Hotel/venue detail page photo preview — large main photo left, wide image top-right, two small thumbnails bottom-right. **4 slots.** |
 
 ---
 
@@ -26,7 +27,7 @@ Three variants cover the main Slevomat page patterns:
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"navigation" \| "navigation-small" \| "photogallery"` | `"navigation"` | Grid layout variant |
+| `variant` | `"navigation" \| "navigation-small" \| "navigation-small-3" \| "photogallery"` | `"navigation"` | Grid layout variant |
 
 ### Slots
 
@@ -53,9 +54,13 @@ None.
 
 ### `navigation-small`
 
-- Desktop: 4-column uniform grid, all cells equal
-- Row count is implicit — 8 items = 2 rows, 12 items = 3 rows
+- Desktop: 4-column × 2-row uniform grid, all 8 cells equal
 - Mobile: same horizontal scroll strip as `navigation`
+
+### `navigation-small-3`
+
+- Desktop: 4-column × 3-row uniform grid, all 12 cells equal
+- Mobile: collapses to 4×2 scroll strip (same as `navigation-small` mobile)
 
 ### `photogallery`
 
@@ -71,23 +76,21 @@ None.
 
 ## Sizing
 
-The component does **not** impose a fixed height — set it via `style` attribute or CSS:
+Each variant has a built-in default height matching the Figma spec:
+
+| Variant | Desktop height | Mobile height |
+|---|---|---|
+| `navigation` | 584px | 172px (scroll strip) |
+| `navigation-small` | 296px | 172px (scroll strip) |
+| `navigation-small-3` | 448px | 172px (4×2 scroll strip) |
+| `photogallery` | 352px | 210px |
+
+Override the height with the `--card-grid-height` CSS custom property:
 
 ```html
-<minis-card-grid variant="navigation" style="height: 420px">…</minis-card-grid>
+<!-- 3-row navigation-small needs a taller height -->
+<minis-card-grid variant="navigation-small" style="--card-grid-height:448px">…</minis-card-grid>
 ```
-
-Or via a custom property on a wrapper:
-
-```css
-minis-card-grid { height: 420px; }
-```
-
-Recommended heights (matching Figma):
-- `navigation`: ~420px desktop
-- `navigation-small` 2 rows: ~296px desktop
-- `navigation-small` 3 rows: ~448px desktop
-- `photogallery`: ~352px desktop
 
 ---
 
@@ -97,6 +100,8 @@ Recommended heights (matching Figma):
 |---|---|---|
 | `--card-grid-gap` | `8px` | Gap between grid cells |
 | `--card-grid-border-radius` | `var(--border-radius-xl, 16px)` | Outer corner radius |
+| `--card-grid-height` | variant-specific (see Sizing table) | Override the component height |
+| `--card-grid-slot-bg` | `var(--color-surface-faded)` | Background of each slotted item |
 | `--card-grid-xs-item-size` | `172px` | Fixed cell size on mobile scroll (navigation variants) |
 
 ---
