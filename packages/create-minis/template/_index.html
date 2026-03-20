@@ -31,8 +31,9 @@
     }
   </script>
 
-  <!-- Mini*S Components & Icons -->
-  <script type="module" src="/main.js"></script>
+  <!-- Mini*S Components & Icons (loaded from public/vendor/, bypasses Vite transforms) -->
+  <script type="module" src="/vendor/components/index.js"></script>
+  <script type="module" src="/vendor/icons/index.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }

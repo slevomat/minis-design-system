@@ -1,7 +1,7 @@
 # {{PROJECT_NAME}} — Mini*S Prototype
 
 This project uses the **Mini*S Design System** (Lit Web Components + CSS custom properties).
-All components, tokens, and icons are pre-loaded in `vendor/`.
+All components, tokens, and icons are pre-loaded in `public/vendor/` (served as static assets by Vite).
 
 ## Quick Start
 

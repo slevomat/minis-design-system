@@ -887,7 +887,7 @@ pnpm dev</code></pre>
         <tbody>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>index.html</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Your page — edit this file to build your prototype</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>CLAUDE.md</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">AI context file — automatically read by Claude Code and Cursor. Contains component list, token reference, and page structure patterns.</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>vendor/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>public/vendor/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these.</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Detailed API docs for every component — the AI reads these to know exactly how each component works.</td></tr>
         </tbody>
       </table>
@@ -1033,7 +1033,7 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Ask the AI to <strong>"check the Storybook"</strong> for visual reference</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Edit files in <code>vendor/</code> — those are the design system source</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Edit files in <code>public/vendor/</code> — those are the design system source</td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Say <strong>"undo that"</strong> or <strong>"go back"</strong> if something looks wrong</td>

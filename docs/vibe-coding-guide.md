@@ -62,7 +62,7 @@ The scaffolded project contains:
 |--------------|---------|
 | `index.html` | Your page — edit this file to build your prototype |
 | `CLAUDE.md` | AI context file — automatically read by Claude Code and Cursor. Contains component list, token reference, and page structure patterns. |
-| `vendor/` | Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these. |
+| `public/vendor/` | Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these. |
 | `docs/ai-prompts/` | Detailed API docs for every component — the AI reads these to know exactly how each component works. |
 
 ---
@@ -163,7 +163,7 @@ Every Slevomat page follows a consistent structure. The AI already knows this, b
 | Describe the **layout** you want: "two columns, sidebar on the right" | Write HTML or CSS yourself — let the AI do it |
 | Reference **component names** when you know them: "add a cta-buy button" | Worry about exact code syntax — the AI handles that |
 | Iterate in **small steps**: change one section at a time | Try to describe an entire complex page in one prompt |
-| Ask the AI to **"check the Storybook"** for visual reference | Edit files in `vendor/` — those are the design system source |
+| Ask the AI to **"check the Storybook"** for visual reference | Edit files in `public/vendor/` — those are the design system source |
 | Say **"undo that"** or **"go back"** if something looks wrong | Be afraid to experiment — nothing can break permanently |
 
 ---

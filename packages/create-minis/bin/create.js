@@ -82,15 +82,15 @@ function copyTemplate(templateFile, outputFile, replacements = {}) {
 const replacements = { '{{PROJECT_NAME}}': projectName };
 
 copyTemplate('_index.html', 'index.html', replacements);
-copyTemplate('_main.js', 'main.js');
 copyTemplate('_package.json', 'package.json', replacements);
 copyTemplate('_vite.config.js', 'vite.config.js');
 copyTemplate('_CLAUDE.md', 'CLAUDE.md', replacements);
 
 console.log('  ✓ Template files');
 
-// Copy vendor files
-const vendorDir = resolve(targetDir, 'vendor');
+// Copy vendor files into public/ so Vite serves them as plain static assets
+// (no module resolution — bare "lit" imports are handled by the browser import map)
+const vendorDir = resolve(targetDir, 'public/vendor');
 cpSync(distPaths.tokens, vendorDir, { recursive: true });
 cpSync(distPaths.components, resolve(vendorDir, 'components'), { recursive: true });
 cpSync(distPaths.icons, resolve(vendorDir, 'icons'), { recursive: true });
