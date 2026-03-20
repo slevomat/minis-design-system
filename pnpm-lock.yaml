@@ -88,6 +88,8 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@25.0.10)
 
+  packages/create-minis: {}
+
   packages/icons:
     dependencies:
       lit:

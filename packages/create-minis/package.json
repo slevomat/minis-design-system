@@ -1,0 +1,13 @@
+{
+  "name": "@minis/create",
+  "version": "0.1.0",
+  "description": "Scaffold a Mini*S prototype project for vibe-coding",
+  "type": "module",
+  "bin": {
+    "create-minis": "./bin/create.js"
+  },
+  "files": [
+    "bin",
+    "template"
+  ]
+}
