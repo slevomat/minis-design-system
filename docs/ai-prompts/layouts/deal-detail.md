@@ -1,6 +1,6 @@
 # Deal Detail Page — AI Layout Reference
 
-A hotel/experience deal page on Slevomat. Photo gallery at top, tabbed navigation, then a two-column layout with filters/aside on the left and main content cards on the right.
+A hotel/experience deal page on Slevomat. Breadcrumbs + save toggle, photo gallery, deal title, tabbed navigation, then a two-column layout with main content on the left and widgets/aside on the right.
 
 **Figma:** [Deal Page 2XL](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3569-1201)
 
@@ -10,13 +10,14 @@ A hotel/experience deal page on Slevomat. Photo gallery at top, tabbed navigatio
 
 ### 1. Header Band
 
-White background with bottom border. Contains the brand header and main category navigation.
+White background with bottom border. Contains the brand topbar and main category navigation.
+This is **identical on every page** — see [layouts/index.md](./index.md) for the full pattern.
 
 ```html
 <div style="background: var(--color-surface-primary, white); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
   <minis-container>
 
-    <!-- Brand header -->
+    <!-- Brand topbar -->
     <minis-topbar>
       <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- Slevomat logo SVG --></svg>
       <minis-button slot="actions" variant="tertiary" size="sm">
@@ -55,30 +56,69 @@ White background with bottom border. Contains the brand header and main category
 </div>
 ```
 
-### 2. Photo Gallery
+### 2. Breadcrumbs Row
 
-Full-width photo gallery using the card-grid component. Sits on the page background.
+A row inside the container with breadcrumbs on the left and a "Uložit" (save/favourite) toggle tag with heart icon on the right. Uses flexbox with `justify-content: space-between`.
 
 ```html
 <minis-container>
-  <div style="padding: var(--spacing-layout-md) 0;">
-    <minis-card-grid variant="navigation">
-      <img src="photo-1.jpg" alt="Hotel exterior" />
-      <img src="photo-2.jpg" alt="Room" />
-      <img src="photo-3.jpg" alt="Pool" />
-      <img src="photo-4.jpg" alt="Restaurant" />
-      <img src="photo-5.jpg" alt="Spa" />
-      <img src="photo-6.jpg" alt="View" />
-    </minis-card-grid>
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-layout-sm) 0;">
+
+    <!-- Breadcrumbs (left) -->
+    <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: var(--typography-size-sm); color: var(--color-text-secondary);">
+      <a href="/" style="color: var(--color-text-secondary); text-decoration: none;">Slevomat</a>
+      <span>›</span>
+      <a href="/cestovani" style="color: var(--color-text-secondary); text-decoration: none;">Cestování</a>
+      <span>›</span>
+      <span style="color: var(--color-text-primary);">Hotel Marvelous</span>
+    </nav>
+
+    <!-- Save toggle (right) -->
+    <minis-tag variant="toggle">
+      <minis-icon slot="icon" name="heart" size="20"></minis-icon>
+      Uložit
+    </minis-tag>
+
   </div>
 </minis-container>
 ```
 
-**Layout:** 4-col × 2-row grid (584px desktop height). Item 1 spans 2 columns (featured). Mobile: horizontal scroll strip.
+**Toggle behaviour:** The `<minis-tag variant="toggle">` persists pressed state and fires a `toggle` event. Consumer listens and swaps icon: `heart` ↔ `heart-fill`.
 
-### 3. Deal Tab Navigation
+### 3. Photo Gallery
 
-Sticky white band with bottom + top border. Contains deal-specific tab navigation.
+Photo gallery using the card-grid component with the `photogallery` variant.
+
+```html
+<minis-container>
+  <minis-card-grid variant="photogallery">
+    <img src="photo-1.jpg" alt="Hotel exterior" />
+    <img src="photo-2.jpg" alt="Room" />
+    <img src="photo-3.jpg" alt="Pool" />
+    <img src="photo-4.jpg" alt="Restaurant" />
+    <img src="photo-5.jpg" alt="Spa" />
+    <img src="photo-6.jpg" alt="View" />
+  </minis-card-grid>
+</minis-container>
+```
+
+**Layout:** `variant="photogallery"` — 4-col × 2-row grid. Item 1 spans 2 columns (featured). Mobile: horizontal scroll strip.
+
+### 4. Deal Title
+
+The deal title sits inside the container, below the gallery.
+
+```html
+<minis-container>
+  <h1 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold); margin: var(--spacing-layout-sm) 0 var(--spacing-layout-md);">
+    Hotel Marvelous Spa & Wellness ****
+  </h1>
+</minis-container>
+```
+
+### 5. Tab Navigation Band
+
+> **Rule: Tab navigation is ALWAYS wrapped in a full-width band** with `--color-surface-primary` background and `--color-border-subtle` top+bottom borders. The `<minis-navigation variant="tabs">` sits inside a `<minis-container>` within that band. This pattern is never used without the wrapping band.
 
 ```html
 <div style="background: var(--color-surface-primary, white); border-top: 1px solid var(--color-border-subtle, #e3e4e6); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
@@ -94,31 +134,15 @@ Sticky white band with bottom + top border. Contains deal-specific tab navigatio
 </div>
 ```
 
-**Gap between tabs:** `var(--spacing-layout-lg)` (32px on desktop, 20px on mobile).
+### 6. Content Area (Main + Aside)
 
-### 4. Content Area (Aside + Main)
-
-Two-column layout using a 12-column CSS grid: 4 columns for the aside, 8 for the main content.
+Two-column layout using a 12-column CSS grid: **8 columns for main content** (left), **4 columns for aside/widgets** (right). The column gap uses the responsive `--spacing-layout-xl` token (32px base → 48px on xl).
 
 ```html
 <minis-container>
   <div class="deal-content">
 
-    <!-- Aside: 4 columns -->
-    <aside class="deal-aside">
-      <div class="deal-card">
-        <!-- Filters, pricing, booking widget -->
-        <h3 style="font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-bold);">
-          Filtry
-        </h3>
-        <!-- filter content -->
-      </div>
-      <div class="deal-card deal-card--faded">
-        <!-- Additional info -->
-      </div>
-    </aside>
-
-    <!-- Main: 8 columns -->
+    <!-- Main content: 8 columns (left) -->
     <main class="deal-main">
       <div class="deal-card">
         <h2 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold);">
@@ -132,17 +156,20 @@ Two-column layout using a 12-column CSS grid: 4 columns for the aside, 8 for the
           Zobrazit nabídku
         </minis-button>
       </div>
-      <div class="deal-card">
-        <!-- More content sections -->
-        <minis-button variant="secondary">
-          <minis-icon slot="icon" name="star-fill"></minis-icon>
-          Další informace
-        </minis-button>
-      </div>
       <div class="deal-card deal-card--faded">
-        <!-- Secondary sections -->
+        <!-- More content sections -->
       </div>
     </main>
+
+    <!-- Aside widgets: 4 columns (right) -->
+    <aside class="deal-aside">
+      <div class="deal-card">
+        <!-- Pricing widget, booking CTA -->
+      </div>
+      <div class="deal-card deal-card--faded">
+        <!-- Additional info, map, etc. -->
+      </div>
+    </aside>
 
   </div>
 </minis-container>
@@ -161,24 +188,24 @@ body {
   color: var(--color-text-primary, black);
 }
 
-/* 12-column content grid */
+/* 12-column content grid: 8 (main) + 4 (aside) */
 .deal-content {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  column-gap: 48px;
+  column-gap: var(--spacing-layout-xl);
   padding-top: var(--spacing-layout-md);
   padding-bottom: var(--spacing-layout-md);
 }
 
-.deal-aside {
-  grid-column: 1 / span 4;
+.deal-main {
+  grid-column: 1 / span 8;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-layout-md);
 }
 
-.deal-main {
-  grid-column: 5 / span 8;
+.deal-aside {
+  grid-column: 9 / span 4;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-layout-md);
@@ -188,11 +215,10 @@ body {
 .deal-card {
   background: var(--color-surface-primary, white);
   border-radius: var(--border-radius-xl, 16px);
-  padding: var(--spacing-layout-lg) 10px;
+  padding: var(--spacing-layout-lg);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  gap: var(--spacing-layout-sm);
 }
 
 .deal-card--faded {
@@ -208,14 +234,14 @@ body {
     column-gap: 0;
   }
 
-  .deal-aside {
-    grid-column: 1;
-    order: 2; /* push aside below main on mobile */
-  }
-
   .deal-main {
     grid-column: 1;
     order: 1;
+  }
+
+  .deal-aside {
+    grid-column: 1;
+    order: 2; /* push aside below main on mobile */
   }
 }
 ```
@@ -231,9 +257,28 @@ body {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hotel Marvelous — Slevomat</title>
-  <link rel="stylesheet" href="node_modules/@minis/tokens/dist/index.css" />
-  <script type="module">import '@minis/components';</script>
+  <link rel="stylesheet" href="/vendor/tokens.rgb.css" />
+  <link rel="stylesheet" href="/vendor/tokens.css" />
+  <link rel="stylesheet" href="/vendor/layout.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "lit": "https://esm.sh/lit@3",
+        "lit/": "https://esm.sh/lit@3/",
+        "lit-html": "https://esm.sh/lit-html@3",
+        "lit-html/": "https://esm.sh/lit-html@3/",
+        "lit-element": "https://esm.sh/lit-element@4",
+        "lit-element/": "https://esm.sh/lit-element@4/",
+        "@lit/reactive-element": "https://esm.sh/@lit/reactive-element@2",
+        "@lit/reactive-element/": "https://esm.sh/@lit/reactive-element@2/"
+      }
+    }
+  </script>
+  <script type="module" src="/vendor/components/index.js"></script>
+  <script type="module" src="/vendor/icons/index.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       background: var(--color-background, #fcfdff);
       margin: 0;
@@ -243,18 +288,18 @@ body {
     .deal-content {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      column-gap: 48px;
+      column-gap: var(--spacing-layout-xl);
       padding-top: var(--spacing-layout-md);
       padding-bottom: var(--spacing-layout-md);
     }
-    .deal-aside {
-      grid-column: 1 / span 4;
+    .deal-main {
+      grid-column: 1 / span 8;
       display: flex;
       flex-direction: column;
       gap: var(--spacing-layout-md);
     }
-    .deal-main {
-      grid-column: 5 / span 8;
+    .deal-aside {
+      grid-column: 9 / span 4;
       display: flex;
       flex-direction: column;
       gap: var(--spacing-layout-md);
@@ -262,15 +307,18 @@ body {
     .deal-card {
       background: var(--color-surface-primary, white);
       border-radius: var(--border-radius-xl, 16px);
-      padding: var(--spacing-layout-lg) 10px;
+      padding: var(--spacing-layout-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-layout-sm);
     }
     .deal-card--faded {
       background: var(--color-surface-faded, #f1f3f5);
     }
     @media (max-width: 767px) {
       .deal-content { grid-template-columns: 1fr; column-gap: 0; }
-      .deal-aside { grid-column: 1; order: 2; }
       .deal-main { grid-column: 1; order: 1; }
+      .deal-aside { grid-column: 1; order: 2; }
     }
   </style>
 </head>
@@ -280,7 +328,7 @@ body {
   <div style="background: var(--color-surface-primary); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
     <minis-container>
       <minis-topbar>
-        <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- logo --></svg>
+        <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- Slevomat logo --></svg>
         <minis-button slot="actions" variant="tertiary" size="sm">
           <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
           Oblíbené
@@ -309,22 +357,44 @@ body {
     </minis-container>
   </div>
 
-  <!-- 2. Photo gallery -->
+  <!-- 2. Breadcrumbs + save toggle -->
   <minis-container>
-    <div style="padding: var(--spacing-layout-md) 0;">
-      <minis-card-grid variant="navigation">
-        <img src="photo-1.jpg" alt="Main photo" />
-        <img src="photo-2.jpg" alt="Photo 2" />
-        <img src="photo-3.jpg" alt="Photo 3" />
-        <img src="photo-4.jpg" alt="Photo 4" />
-        <img src="photo-5.jpg" alt="Photo 5" />
-        <img src="photo-6.jpg" alt="Photo 6" />
-      </minis-card-grid>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-layout-sm) 0;">
+      <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: var(--typography-size-sm); color: var(--color-text-secondary);">
+        <a href="/" style="color: var(--color-text-secondary); text-decoration: none;">Slevomat</a>
+        <span>›</span>
+        <a href="/cestovani" style="color: var(--color-text-secondary); text-decoration: none;">Cestování</a>
+        <span>›</span>
+        <span style="color: var(--color-text-primary);">Hotel Marvelous</span>
+      </nav>
+      <minis-tag variant="toggle">
+        <minis-icon slot="icon" name="heart" size="20"></minis-icon>
+        Uložit
+      </minis-tag>
     </div>
   </minis-container>
 
-  <!-- 3. Deal tabs -->
-  <div style="background: var(--color-surface-primary); border-top: 1px solid var(--color-border-subtle, #e3e4e6); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
+  <!-- 3. Photo gallery -->
+  <minis-container>
+    <minis-card-grid variant="photogallery">
+      <img src="photo-1.jpg" alt="Main photo" />
+      <img src="photo-2.jpg" alt="Photo 2" />
+      <img src="photo-3.jpg" alt="Photo 3" />
+      <img src="photo-4.jpg" alt="Photo 4" />
+      <img src="photo-5.jpg" alt="Photo 5" />
+      <img src="photo-6.jpg" alt="Photo 6" />
+    </minis-card-grid>
+  </minis-container>
+
+  <!-- 4. Deal title -->
+  <minis-container>
+    <h1 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold); margin: var(--spacing-layout-sm) 0 var(--spacing-layout-md);">
+      Hotel Marvelous Spa & Wellness ****
+    </h1>
+  </minis-container>
+
+  <!-- 5. Tab navigation band (ALWAYS wrapped in full-width surface band) -->
+  <div style="background: var(--color-surface-primary, white); border-top: 1px solid var(--color-border-subtle, #e3e4e6); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
     <minis-container>
       <minis-navigation variant="tabs">
         <minis-navigation-item active>Nabídka</minis-navigation-item>
@@ -336,17 +406,15 @@ body {
     </minis-container>
   </div>
 
-  <!-- 4. Content: aside + main -->
+  <!-- 6. Content: main (8 col) + aside (4 col) -->
   <minis-container>
     <div class="deal-content">
-      <aside class="deal-aside">
-        <div class="deal-card">Aside filters</div>
-        <div class="deal-card deal-card--faded">Aside info</div>
-      </aside>
       <main class="deal-main">
         <div class="deal-card">
-          <h2>Hotel Marvelous Spa & Wellness ****</h2>
-          <p>3 dny (2 noci) pro 2 osoby s polopenzí...</p>
+          <h2 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold);">
+            Hotel Marvelous Spa & Wellness ****
+          </h2>
+          <p>3 dny (2 noci) pro 2 osoby s polopenzí a neomezeným wellness...</p>
           <minis-button variant="primary">
             <minis-icon slot="icon" name="star-fill"></minis-icon>
             Zobrazit nabídku
@@ -354,6 +422,10 @@ body {
         </div>
         <div class="deal-card deal-card--faded">Secondary content</div>
       </main>
+      <aside class="deal-aside">
+        <div class="deal-card">Pricing widget</div>
+        <div class="deal-card deal-card--faded">Additional info</div>
+      </aside>
     </div>
   </minis-container>
 
@@ -363,16 +435,31 @@ body {
 
 ---
 
+## Key Layout Rules
+
+1. **Tab navigation band** — `<minis-navigation variant="tabs">` is ALWAYS wrapped in a full-width `<div>` with `background: var(--color-surface-primary)` and `border: 1px solid var(--color-border-subtle)` on top and bottom. The `<minis-container>` goes inside that band.
+
+2. **Content grid** — 12-column CSS grid split **8 / 4** (main left, aside right). Column gap: `var(--spacing-layout-xl)` (32→48px responsive). On mobile (< 768px), stacks to single column with main first, aside second.
+
+3. **Breadcrumbs row** — Always between header band and photo gallery. Flexbox row with `justify-content: space-between`. Breadcrumbs left, save toggle right.
+
+4. **Section order** — Header → Breadcrumbs → Photo Gallery → Title → Tab Band → Content Grid.
+
+---
+
 ## AI Copy-Paste Prompt
 
 > Create a deal detail page for **[Hotel Name]** using the Mini*S design system.
-> Use the deal-detail layout: header band with `<minis-topbar>` + `<minis-navigation variant="horizontal">`,
-> photo gallery with `<minis-card-grid variant="navigation">` (6 hotel photos),
-> deal tabs with `<minis-navigation variant="tabs">` (Nabídka, Hodnocení, O hotelu, Tipy na výlet, Dotazy),
-> and a 12-column content grid with 4-col aside (filters) + 8-col main (deal cards with title, description, and buttons).
-> Wrap everything in `<minis-container>`. Use `--spacing-layout-*` tokens for gaps.
+> Use the deal-detail layout:
+> 1. Header band with `<minis-topbar>` + `<minis-navigation variant="horizontal">` (full 11 Slevomat categories)
+> 2. Breadcrumbs row with `<minis-tag variant="toggle">` save button (heart icon) on the right
+> 3. Photo gallery with `<minis-card-grid variant="photogallery">` (6 hotel photos)
+> 4. Deal title as `<h1>` using `--typography-heading-xl-size`
+> 5. Tab navigation in a full-width surface-primary band with border-subtle borders: `<minis-navigation variant="tabs">` (Nabídka, Hodnocení, O hotelu, Tipy na výlet, Dotazy)
+> 6. 12-column content grid: 8-col main (left) + 4-col aside (right), gap `var(--spacing-layout-xl)`
+> Wrap everything in `<minis-container>`. Use `--spacing-layout-*` tokens for spacing.
 > Background: `var(--color-background)`. Cards: `var(--color-surface-primary)` with `var(--border-radius-xl)`.
-> On mobile (< 768px), stack aside below main. Replace hotel name, photos, and description with real content.
+> On mobile (< 768px), stack aside below main.
 
 ---
 

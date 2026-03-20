@@ -78,7 +78,7 @@ The standard content grid uses a 12-column layout. This is **not** a component �
 .content-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  column-gap: 48px; /* desktop gutter */
+  column-gap: var(--spacing-layout-xl); /* 32px base → 48px on xl */
   padding-top: var(--spacing-layout-md);
   padding-bottom: var(--spacing-layout-md);
 }
@@ -119,6 +119,21 @@ The header + main navigation sits in a white band with bottom border:
 }
 ```
 
+### Tab Navigation Band
+
+> **Rule:** `<minis-navigation variant="tabs">` is **ALWAYS** wrapped in a full-width band with surface-primary background and border-subtle borders on top and bottom. Never place tab navigation without this wrapper.
+
+```html
+<div style="background: var(--color-surface-primary, white); border-top: 1px solid var(--color-border-subtle, #e3e4e6); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
+  <minis-container>
+    <minis-navigation variant="tabs">
+      <minis-navigation-item active>Tab 1</minis-navigation-item>
+      <minis-navigation-item>Tab 2</minis-navigation-item>
+    </minis-navigation>
+  </minis-container>
+</div>
+```
+
 ---
 
 ## Page Structure Pattern
@@ -133,19 +148,29 @@ Every page follows this vertical stack:
 │  │  <minis-navigation horizontal> │ │
 │  └────────────────────────────────┘ │
 ├─────────────────────────────────────┤
-│  Hero / Photo gallery               │
+│  Breadcrumbs + save toggle          │
+│  ┌─ Container ────────────────────┐ │
+│  │  [breadcrumbs]  [toggle tag]   │ │
+│  └────────────────────────────────┘ │
+├─────────────────────────────────────┤
+│  Photo gallery                      │
 │  ┌─ Container ────────────────────┐ │
 │  │  <minis-card-grid>             │ │
 │  └────────────────────────────────┘ │
 ├─────────────────────────────────────┤
-│  Sub-navigation (tabs)              │
+│  Title                              │
 ├─────────────────────────────────────┤
-│  Content area                        │
+│  Tab band (white, border top+bottom)│
 │  ┌─ Container ────────────────────┐ │
-│  │  12-col grid                   │ │
-│  │  ┌─ Aside (4 col) ──┐ ┌─ Main (8 col) ──┐ │
-│  │  │  Filters / info   │ │  Content cards   │ │
-│  │  └───────────────────┘ └──────────────────┘ │
+│  │  <minis-navigation tabs>       │ │
+│  └────────────────────────────────┘ │
+├─────────────────────────────────────┤
+│  Content area                       │
+│  ┌─ Container ────────────────────┐ │
+│  │  12-col grid (gap: layout-xl)  │ │
+│  │  ┌─ Main (8 col) ──┐ ┌─ Aside (4 col) ──┐ │
+│  │  │  Content cards   │ │  Widgets / info   │ │
+│  │  └─────────────────┘ └───────────────────┘ │
 │  └────────────────────────────────┘ │
 └─────────────────────────────────────┘
 ```
