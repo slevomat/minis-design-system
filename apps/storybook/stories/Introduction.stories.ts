@@ -792,6 +792,336 @@ export const Changelog: Story = {
   },
 };
 
+export const VibeCodingGuide: Story = {
+  name: 'Vibe Coding Guide',
+  render: () => html`
+    <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:2rem;margin-bottom:.5rem">Vibe Coding Guide</h1>
+      <p>Build fully functional page prototypes using Mini*S components and an AI coding assistant — <strong>no coding experience required</strong>. You describe what you want in natural language, and the AI writes the HTML and CSS for you.</p>
+
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        <strong>What is vibe coding?</strong> You use an AI tool (Claude Code, Cursor) to generate code by describing the design you want. The AI knows all Mini*S components, tokens, and layout patterns — you just tell it what to build.
+      </blockquote>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!--  PART 1 — QUICK START                                        -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <h2>Quick Start (5 minutes)</h2>
+      <p>Get a working prototype running in three steps.</p>
+
+      <h3>Step 1 — Prerequisites</h3>
+      <p>You need two things installed on your machine:</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Tool</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">What it does</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Install</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Node.js</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Runs the dev server</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><a href="https://nodejs.org" style="color:var(--color-interaction-primary-surface,#006eb9)">nodejs.org</a> (LTS version)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>pnpm</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Installs dependencies</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>npm install -g pnpm</code> (run in Terminal after installing Node.js)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You also need an AI coding tool — pick one:</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Tool</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Best for</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Link</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Claude Code</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Terminal-based, runs in your project directory, reads CLAUDE.md automatically</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><a href="https://docs.anthropic.com/en/docs/claude-code" style="color:var(--color-interaction-primary-surface,#006eb9)">docs.anthropic.com</a></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Cursor</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Visual editor with AI chat sidebar, good for seeing code + preview side by side</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><a href="https://cursor.com" style="color:var(--color-interaction-primary-surface,#006eb9)">cursor.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Step 2 — Scaffold the project</h3>
+      <p>Open Terminal, navigate to the design system repo, and run:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code># Make sure packages are built first (one-time)
+pnpm build
+
+# Create your prototype project
+pnpm create-prototype ~/prototypy/my-deal-page</code></pre>
+      <p>This creates a complete project folder with all Mini*S components, tokens, icons, and AI documentation pre-loaded.</p>
+
+      <h3>Step 3 — Start coding</h3>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>cd ~/prototypy/my-deal-page
+pnpm install
+pnpm dev</code></pre>
+      <p>Open <code>http://localhost:5173</code> in your browser — you should see a page with the Slevomat topbar, navigation, and sample components. Now open the same folder in your AI tool and start describing what you want to build.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!--  PART 2 — COMPREHENSIVE TUTORIAL                             -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <h2>Comprehensive Tutorial</h2>
+
+      <h3>What you get in the project</h3>
+      <p>The scaffolded project contains:</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">File / Folder</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Purpose</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>index.html</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Your page — edit this file to build your prototype</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>CLAUDE.md</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">AI context file — automatically read by Claude Code and Cursor. Contains component list, token reference, and page structure patterns.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>vendor/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Detailed API docs for every component — the AI reads these to know exactly how each component works.</td></tr>
+        </tbody>
+      </table>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>How to talk to the AI</h3>
+      <p>The AI understands natural language. You don't need to know HTML, CSS, or any code syntax. Here are examples of effective prompts:</p>
+
+      <h4>Starting a page</h4>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"Replace the sample content with a deal detail page. It should have:
+- Photo gallery at the top (use placeholder images)
+- Deal title and price
+- A green CTA Buy button
+- Description section with bullet points
+- An info alert saying 'Limited time offer'"</code></pre>
+
+      <h4>Modifying a section</h4>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"Add a sidebar to the right of the main content.
+Put a secondary button 'Add to favorites' with a heart icon,
+and below it show 3 message cards with deal highlights."</code></pre>
+
+      <h4>Styling and layout</h4>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"Make the content area a two-column layout:
+60% main content on the left, 40% sidebar on the right.
+Add some spacing between sections.
+Use the light grey background for the sidebar."</code></pre>
+
+      <h4>Iterating quickly</h4>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"The buttons are too close together — add more space between them."
+
+"Change the alert from notice to success and update the text."
+
+"Make the navigation item 'Cestovani' active instead of 'Extra slevy'."
+
+"Remove the description section and replace it with a tab switcher
+that has three tabs: Overview, Reviews, Location."</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Available Components</h3>
+      <p>These are all the building blocks you can use. The AI knows them all — just describe what you need and reference component names if you want to be specific:</p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Component</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">What it looks like</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Key variants</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Topbar</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Top blue logo bar with action buttons (favorites, cart)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Slots: logo, actions</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Navigation</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Horizontal scrollable category nav or tab switcher</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>horizontal</code> (categories), <code>tabs</code> (tab switcher)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Container</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Centered content wrapper with responsive padding</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>default</code> (wide), <code>narrow</code> (checkout-width)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Button</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Clickable button with optional icon and counter badge</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>danger</code>, <code>cta-buy</code> (green)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Tag</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Compact pill label/badge</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>static</code>, <code>clickable</code>, <code>toggle</code> (like/favourite), <code>dismissible</code></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Alert</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Colored banner with icon for feedback messages</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>notice</code> (blue), <code>success</code> (green), <code>error</code> (red), <code>warning</code> (yellow)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Message</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Notification card with image, title, description</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>vertical</code>, <code>horizontal</code> layout</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Icon</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">SVG icon from the icon library</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Set <code>name</code> (e.g. "heart-fill", "cart-fill", "star") and optional <code>size</code></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Card Grid</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Responsive grid for cards</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>navigation</code> (featured), <code>navigation-small</code>, <code>photogallery</code></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Pill Counter</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Small numeric badge (usually inside buttons)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Sizes: <code>xs</code>, <code>sm</code>, <code>md</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Browse the <strong>Components</strong> section in this Storybook sidebar to see live interactive examples of each component.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Page structure</h3>
+      <p>Every Slevomat page follows a consistent structure. The AI already knows this, but it helps to understand the building blocks:</p>
+      <div style="background:var(--color-surface-faded,#f1f3f5);padding:1.5rem;border-radius:8px;margin:1rem 0;font-family:monospace;font-size:14px;line-height:2">
+        <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;margin-bottom:8px;border-radius:4px">
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">TOPBAR</strong> — Slevomat logo + Favorites + Cart
+        </div>
+        <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;margin-bottom:8px;border-radius:4px">
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">NAVIGATION</strong> — Extra slevy | Cestovani | Zazitky | ... | Benefity
+        </div>
+        <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;border-radius:4px">
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">CONTAINER</strong> — Your page content goes here
+          <div style="border:1px dotted var(--color-border,#cbccce);padding:8px 12px;margin-top:8px;border-radius:4px;opacity:0.7">
+            Headings, text, buttons, alerts, grids, cards...
+          </div>
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Tips for effective prompting</h3>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:50%">Do</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:50%">Don't</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Describe the <strong>layout</strong> you want: "two columns, sidebar on the right"</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Write HTML or CSS yourself — let the AI do it</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Reference <strong>component names</strong> when you know them: "add a cta-buy button"</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Worry about exact code syntax — the AI handles that</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Iterate in <strong>small steps</strong>: change one section at a time</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Try to describe an entire complex page in one prompt</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Ask the AI to <strong>"check the Storybook"</strong> for visual reference</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Edit files in <code>vendor/</code> — those are the design system source</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Say <strong>"undo that"</strong> or <strong>"go back"</strong> if something looks wrong</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Be afraid to experiment — nothing can break permanently</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Adding more pages</h3>
+      <p>Your prototype can have multiple pages. Ask the AI:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"Create a new page called checkout.html with the same header and navigation,
+but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre>
+      <p>The AI will create a new HTML file, copy the shared header structure, and update navigation links between pages.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Working with Figma</h3>
+      <p>If you have a Figma design you want to replicate:</p>
+      <ol>
+        <li>Share the Figma frame URL with the AI</li>
+        <li>Ask: <em>"Build this design using Mini*S components. Use the Figma MCP to read the design."</em></li>
+        <li>The AI will read the Figma frame and translate it into Mini*S components</li>
+      </ol>
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        <strong>Note:</strong> This requires Figma MCP to be configured in your AI tool. Ask the design system team for setup help if needed.
+      </blockquote>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Troubleshooting</h3>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Problem</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Solution</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Components show as empty/unstyled boxes</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Check browser console for errors. The import map in <code>index.html</code> must be present. Ask the AI to fix it.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>pnpm dev</code> fails</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Run <code>pnpm install</code> first. If that fails, check that Node.js and pnpm are installed.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>create-prototype</code> says "Missing built packages"</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Run <code>pnpm build</code> in the design system repo first — the CLI copies built files.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Colors or fonts look wrong</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Make sure the <code>&lt;link&gt;</code> tags for tokens CSS and Google Fonts are in the <code>&lt;head&gt;</code>. The template includes them by default.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">The AI doesn't know a component</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Point it to the docs: <em>"Read docs/ai-prompts/components/button.md for the button API"</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h3>Example workflow</h3>
+      <p>Here's a typical 15-minute session building a deal detail page:</p>
+      <ol style="line-height:2">
+        <li><strong>Scaffold:</strong> <code>pnpm create-prototype ~/prototypy/hotel-deal</code></li>
+        <li><strong>Start:</strong> <code>cd ~/prototypy/hotel-deal && pnpm install && pnpm dev</code></li>
+        <li><strong>Open AI tool</strong> in the project folder</li>
+        <li><strong>Prompt:</strong> <em>"Replace the sample content with a hotel deal page. Show a big photo at the top, the hotel name, price with a green buy button, and a description."</em></li>
+        <li><strong>Review</strong> in browser at localhost:5173</li>
+        <li><strong>Refine:</strong> <em>"Add a tab switcher below the photo with tabs: Overview, Reviews, Map. Show the overview tab content by default."</em></li>
+        <li><strong>Refine:</strong> <em>"Add a success alert at the top saying 'Last 3 vouchers available!'"</em></li>
+        <li><strong>Refine:</strong> <em>"Make it look more like the Slevomat deal page — add a sidebar with the price card on the right."</em></li>
+        <li><strong>Done!</strong> Share the HTML file or keep iterating.</li>
+      </ol>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a>
+      </p>
+      <p><strong>Need help?</strong> Ask the design system team or Head of Design: Michal — michal.strnadel@slevomat.cz</p>
+    </div>
+  `,
+};
+
 export const ContributionGuide: Story = {
   name: 'Contribution guide',
   render: () => html`
