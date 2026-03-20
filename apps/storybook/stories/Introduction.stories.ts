@@ -38,8 +38,8 @@ export const Overview: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <h2>How to Use — for Designers</h2>
-      <p>Připoj si knihovnu <strong>Mini*S</strong> ve Figma do svého projektu — stačí ji aktivovat v sekci <em>Assets → Libraries</em> a všechny komponenty a tokeny máš okamžitě k dispozici.</p>
-      <p>Pro usnadnění práce můžeš využít některé z Mini*S Figma pluginů — přehled najdeš níže v sekci <strong>Figma Plugins</strong>.</p>
+      <p>Connect the <strong>Mini*S</strong> library to your Figma project — simply enable it in <em>Assets → Libraries</em> and all components and tokens are ready to use.</p>
+      <p>To streamline your workflow, you can also use one of the Mini*S Figma plugins — see the <strong>Figma Plugins</strong> section below.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
