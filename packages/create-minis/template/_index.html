@@ -47,11 +47,48 @@
       color: var(--color-text-primary, #1a1a1a);
       line-height: 1.5;
     }
+
+    /* 12-column content grid: 8 (main) + 4 (aside) */
+    .deal-content {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      column-gap: var(--spacing-layout-xl);
+      padding-top: var(--spacing-layout-md);
+      padding-bottom: var(--spacing-layout-md);
+    }
+    .deal-main {
+      grid-column: 1 / span 8;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-layout-md);
+    }
+    .deal-aside {
+      grid-column: 9 / span 4;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-layout-md);
+    }
+    .deal-card {
+      background: var(--color-surface-primary, white);
+      border-radius: var(--border-radius-xl, 16px);
+      padding: var(--spacing-layout-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-layout-sm);
+    }
+    .deal-card--faded {
+      background: var(--color-surface-faded, #f1f3f5);
+    }
+    @media (max-width: 767px) {
+      .deal-content { grid-template-columns: 1fr; column-gap: 0; }
+      .deal-main { grid-column: 1; order: 1; }
+      .deal-aside { grid-column: 1; order: 2; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ═══ Header band ═══ -->
+  <!-- ═══ 1. Header band ═══ -->
   <div style="background: var(--color-surface-primary, white); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
     <minis-container>
 
@@ -67,62 +104,135 @@
         </svg>
         <minis-button slot="actions" variant="tertiary" size="sm">
           <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
-          Favorites
+          Oblíbené
         </minis-button>
-        <minis-button slot="actions" variant="cta-buy" size="sm">
+        <minis-button slot="actions" variant="tertiary" size="sm">
+          <minis-icon slot="icon" name="stick" size="16"></minis-icon>
+          Neoblíbené
+        </minis-button>
+        <minis-button slot="actions" variant="cta-buy">
           <minis-icon slot="icon" name="cart-fill"></minis-icon>
-          Cart
+          Košík
         </minis-button>
       </minis-topbar>
 
-      <minis-navigation variant="horizontal" aria-label="Main menu">
+      <minis-navigation variant="horizontal" aria-label="Hlavní menu">
         <minis-navigation-item href="/extra-slevy" active>
           <minis-icon slot="icon" name="star" size="20"></minis-icon>
           Extra slevy
         </minis-navigation-item>
-        <minis-navigation-item href="/cestovani">Cestovani</minis-navigation-item>
-        <minis-navigation-item href="/zazitky">Zazitky a zabava</minis-navigation-item>
-        <minis-navigation-item href="/krasa">Krasa a relax</minis-navigation-item>
+        <minis-navigation-item href="/cestovani">Cestování</minis-navigation-item>
+        <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
+        <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
         <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
-        <minis-navigation-item href="/zbozi">Zbozi</minis-navigation-item>
-        <minis-navigation-item href="/fotodary">Fotodarky</minis-navigation-item>
+        <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
+        <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
         <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
-        <minis-navigation-item href="/prakticke">Prakticke</minis-navigation-item>
-        <minis-navigation-item href="/darky">Darky</minis-navigation-item>
+        <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
+        <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
         <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
       </minis-navigation>
 
     </minis-container>
   </div>
 
-  <!-- ═══ Content area ═══ -->
+  <!-- ═══ 2. Breadcrumbs + save toggle ═══ -->
   <minis-container>
-    <div style="padding: var(--spacing-layout-lg, 32px) 0;">
-      <h1 style="font-size: var(--typography-heading-xl-size, 32px); font-weight: var(--typography-weight-bold, 700); margin: 0 0 16px;">
-        {{PROJECT_NAME}}
-      </h1>
-      <p style="color: var(--color-text-secondary, #666); margin: 0 0 24px;">
-        Start prototyping here. Use Mini*S components and design tokens.
-        See <code>docs/ai-prompts/</code> for component API reference.
-      </p>
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-layout-sm) 0;">
+      <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: var(--typography-size-sm); color: var(--color-text-secondary);">
+        <a href="/" style="color: var(--color-text-secondary); text-decoration: none;">Slevomat</a>
+        <span>›</span>
+        <a href="/cestovani" style="color: var(--color-text-secondary); text-decoration: none;">Cestování</a>
+        <span>›</span>
+        <span style="color: var(--color-text-primary);">{{PROJECT_NAME}}</span>
+      </nav>
+      <minis-tag variant="toggle">
+        <minis-icon slot="icon" name="heart" size="20"></minis-icon>
+        Uložit
+      </minis-tag>
+    </div>
+  </minis-container>
 
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <minis-button variant="primary">Primary Action</minis-button>
-        <minis-button variant="secondary">Secondary</minis-button>
-        <minis-button variant="tertiary">Tertiary</minis-button>
-      </div>
+  <!-- ═══ 3. Photo gallery ═══ -->
+  <minis-container>
+    <minis-card-grid variant="photogallery">
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:200px; color: var(--color-text-secondary);">Photo 1 (featured)</div>
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 2</div>
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 3</div>
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 4</div>
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 5</div>
+      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 6</div>
+    </minis-card-grid>
+  </minis-container>
 
-      <div style="margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap;">
-        <minis-tag variant="static">Static Tag</minis-tag>
-        <minis-tag variant="clickable">Clickable</minis-tag>
-        <minis-tag variant="dismissible">Dismissible</minis-tag>
-      </div>
+  <!-- ═══ 4. Deal title ═══ -->
+  <minis-container>
+    <h1 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold); margin: var(--spacing-layout-sm) 0 var(--spacing-layout-md);">
+      {{PROJECT_NAME}}
+    </h1>
+  </minis-container>
 
-      <div style="margin-top: 24px;">
-        <minis-alert variant="notice">
-          This is a Mini*S prototype. Edit <code>index.html</code> to build your page.
-        </minis-alert>
-      </div>
+  <!-- ═══ 5. Tab navigation band ═══ -->
+  <div style="background: var(--color-surface-primary, white); border-top: 1px solid var(--color-border-subtle, #e3e4e6); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
+    <minis-container>
+      <minis-navigation variant="tabs">
+        <minis-navigation-item active>Nabídka</minis-navigation-item>
+        <minis-navigation-item>Hodnocení</minis-navigation-item>
+        <minis-navigation-item>O hotelu</minis-navigation-item>
+        <minis-navigation-item>Tipy na výlet</minis-navigation-item>
+        <minis-navigation-item>Dotazy</minis-navigation-item>
+      </minis-navigation>
+    </minis-container>
+  </div>
+
+  <!-- ═══ 6. Content: main (8 col) + aside (4 col) ═══ -->
+  <minis-container>
+    <div class="deal-content">
+
+      <main class="deal-main">
+        <div class="deal-card">
+          <h2 style="font-size: var(--typography-heading-lg-size); font-weight: var(--typography-weight-bold); margin: 0;">
+            Deal description
+          </h2>
+          <p style="margin: 0; color: var(--color-text-secondary);">
+            3 dny (2 noci) pro 2 osoby s polopenzí a neomezeným wellness...
+          </p>
+          <div>
+            <minis-button variant="primary">
+              <minis-icon slot="icon" name="cart-fill"></minis-icon>
+              Zobrazit nabídku
+            </minis-button>
+          </div>
+        </div>
+        <div class="deal-card deal-card--faded">
+          <h3 style="font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-semibold); margin: 0;">
+            More information
+          </h3>
+          <p style="margin: 0; color: var(--color-text-secondary);">Replace with real content sections.</p>
+        </div>
+      </main>
+
+      <aside class="deal-aside">
+        <div class="deal-card">
+          <h3 style="font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-semibold); margin: 0;">
+            Pricing widget
+          </h3>
+          <p style="margin: 0; color: var(--color-text-secondary);">Aside content goes here.</p>
+          <div>
+            <minis-button variant="cta-buy">
+              <minis-icon slot="icon" name="cart-fill"></minis-icon>
+              Koupit
+            </minis-button>
+          </div>
+        </div>
+        <div class="deal-card deal-card--faded">
+          <h3 style="font-size: var(--typography-heading-sm-size); font-weight: var(--typography-weight-semibold); margin: 0;">
+            Additional info
+          </h3>
+          <p style="margin: 0; color: var(--color-text-secondary);">Map, reviews summary, etc.</p>
+        </div>
+      </aside>
+
     </div>
   </minis-container>
 
