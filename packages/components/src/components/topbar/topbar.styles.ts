@@ -1,15 +1,15 @@
 import { css } from 'lit';
 
-export const headerStyles = css`
+export const topbarStyles = css`
   :host {
     display: block;
   }
 
-  .header {
+  .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: var(--header-height, 64px);
+    height: var(--topbar-height, 64px);
     box-sizing: border-box;
   }
 
@@ -37,7 +37,7 @@ export const headerStyles = css`
   .actions {
     display: flex;
     align-items: center;
-    gap: var(--header-actions-gap, 10px);
+    gap: var(--topbar-actions-gap, 10px);
     flex-shrink: 0;
   }
 

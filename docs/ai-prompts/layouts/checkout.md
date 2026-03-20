@@ -13,13 +13,13 @@ Same as all pages — brand header with simplified actions (typically just logo 
 ```html
 <div style="background: var(--color-surface-primary, white); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
   <minis-container>
-    <minis-header>
+    <minis-topbar>
       <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- Slevomat logo SVG --></svg>
       <minis-button slot="actions" variant="cta-buy">
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
         Košík
       </minis-button>
-    </minis-header>
+    </minis-topbar>
   </minis-container>
 </div>
 ```
@@ -168,13 +168,13 @@ body {
   <!-- 1. Header band -->
   <div style="background: var(--color-surface-primary); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
     <minis-container>
-      <minis-header>
+      <minis-topbar>
         <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- logo --></svg>
         <minis-button slot="actions" variant="cta-buy">
           <minis-icon slot="icon" name="cart-fill"></minis-icon>
           Košík
         </minis-button>
-      </minis-header>
+      </minis-topbar>
     </minis-container>
   </div>
 
@@ -250,7 +250,7 @@ body {
 
 > Create a checkout (košík) page using the Mini*S design system.
 > Use a single-column layout with `<minis-container variant="narrow">`.
-> Header band with `<minis-header>` (logo + cart button).
+> Header band with `<minis-topbar>` (logo + cart button).
 > Checkout step tabs with `<minis-navigation variant="tabs">` (Košík, Dodací údaje, Platba, Potvrzení).
 > Stack content in `.checkout-card` sections (white, `--border-radius-xl`, `--spacing-layout-lg` padding).
 > Final CTA: `<minis-button variant="cta-buy" size="xl">`.

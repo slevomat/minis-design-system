@@ -1,9 +1,9 @@
-# Header Component — AI Prompt Reference
+# Topbar Component — AI Prompt Reference
 
 ## Component Overview
 
-**Tag:** `<minis-header>`
-**Description:** Main brand bar that sits above `<minis-navigation>`. Contains a logo on the left and action buttons on the right.
+**Tag:** `<minis-topbar>`
+**Description:** Brand identity bar that sits above `<minis-navigation>`. Contains the logo on the left and action buttons on the right (shortcuts, cart, etc.).
 
 ---
 
@@ -11,7 +11,7 @@
 
 ### Attributes
 
-None — the header is a pure slot-based layout component.
+None — the topbar is a pure slot-based layout component.
 
 ### Slots
 
@@ -24,8 +24,8 @@ None — the header is a pure slot-based layout component.
 
 | Token | Default | Description |
 |-------|---------|-------------|
-| `--header-height` | `64px` | Total header height |
-| `--header-actions-gap` | `10px` | Gap between action items |
+| `--topbar-height` | `64px` | Total topbar height |
+| `--topbar-actions-gap` | `10px` | Gap between action items |
 
 ---
 
@@ -34,34 +34,34 @@ None — the header is a pure slot-based layout component.
 ### Basic with logo and action buttons
 
 ```html
-<minis-header>
+<minis-topbar>
   <img slot="logo" src="/logo.svg" alt="Slevomat" />
   <minis-button slot="actions" variant="tertiary" size="sm">
     <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
-    Oblibene
+    Oblíbené
   </minis-button>
   <minis-button slot="actions" variant="tertiary" size="sm">
     <minis-icon slot="icon" name="stick" size="16"></minis-icon>
-    Neoblibene
+    Neoblíbené
   </minis-button>
   <minis-button slot="actions" variant="cta-buy">
     <minis-icon slot="icon" name="cart-fill"></minis-icon>
-    Kosik
+    Košík
   </minis-button>
-</minis-header>
+</minis-topbar>
 ```
 
 ### Combined with navigation (typical page layout)
 
 ```html
 <minis-container>
-  <minis-header>
+  <minis-topbar>
     <img slot="logo" src="/logo.svg" alt="Slevomat" />
     <minis-button slot="actions" variant="cta-buy">
       <minis-icon slot="icon" name="cart-fill"></minis-icon>
-      Kosik
+      Košík
     </minis-button>
-  </minis-header>
+  </minis-topbar>
   <minis-navigation variant="horizontal">
     <minis-navigation-item href="/" active>Home</minis-navigation-item>
     <minis-navigation-item href="/deals">Deals</minis-navigation-item>
@@ -73,9 +73,9 @@ None — the header is a pure slot-based layout component.
 
 ## Design Notes (from Figma)
 
-- Header height is 64px
+- Topbar height is 64px
 - Logo area has 16px right padding
-- Right-side buttons use `variant="tertiary" size="sm"` for secondary actions (Oblibene, Neoblibene) and `variant="cta-buy"` for the cart button
+- Right-side buttons use `variant="tertiary" size="sm"` for secondary actions (Oblíbené, Neoblíbené) and `variant="cta-buy"` for the cart button
 - Icons in tertiary buttons use `size="16"` (sm button size)
 - Actions gap is 10px
 
@@ -83,9 +83,9 @@ None — the header is a pure slot-based layout component.
 
 ## Accessibility
 
-- The header is a structural wrapper — add `role="banner"` or use a `<header>` element around it for landmark navigation.
+- The topbar is a structural wrapper — add `role="banner"` or use a `<header>` element around it for landmark navigation.
 - Logo should have meaningful `alt` text.
 
 ---
 
-**Last updated:** 2026-03-19
+**Last updated:** 2026-03-20

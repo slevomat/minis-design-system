@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-03-20
+
+### Topbar (renamed from Header)
+
+- **Renamed** `<minis-header>` → `<minis-topbar>` for semantic clarity — the component is a brand identity bar (logo, shortcuts, cart), not a generic page header
+- Custom element tag: `minis-topbar`, class: `MinisTopbar`
+- CSS tokens renamed: `--header-height` → `--topbar-height`, `--header-actions-gap` → `--topbar-actions-gap`
+- AI prompt doc moved: `docs/ai-prompts/components/header.md` → `topbar.md`
+- All layout docs and navigation examples updated with full 11-item Slevomat category nav list
+
 ## 2026-03-19
 
 ### Layouts (AI Prompt Docs)

@@ -129,7 +129,7 @@ Every page follows this vertical stack:
 ┌─────────────────────────────────────┐
 │  Header band (white, border-bottom) │
 │  ┌─ Container ────────────────────┐ │
-│  │  <minis-header>                │ │
+│  │  <minis-topbar>                │ │
 │  │  <minis-navigation horizontal> │ │
 │  └────────────────────────────────┘ │
 ├─────────────────────────────────────┤
@@ -154,4 +154,4 @@ Background: `var(--color-background, #fcfdff)` (the subtle off-white page backgr
 
 ---
 
-**Last updated:** 2026-03-19
+**Last updated:** 2026-03-20

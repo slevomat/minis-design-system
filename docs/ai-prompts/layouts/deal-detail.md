@@ -17,7 +17,7 @@ White background with bottom border. Contains the brand header and main category
   <minis-container>
 
     <!-- Brand header -->
-    <minis-header>
+    <minis-topbar>
       <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- Slevomat logo SVG --></svg>
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
@@ -31,10 +31,10 @@ White background with bottom border. Contains the brand header and main category
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
         Košík
       </minis-button>
-    </minis-header>
+    </minis-topbar>
 
     <!-- Main category navigation -->
-    <minis-navigation variant="horizontal">
+    <minis-navigation variant="horizontal" aria-label="Hlavní menu">
       <minis-navigation-item href="/extra-slevy" active>
         <minis-icon slot="icon" name="star" size="20"></minis-icon>
         Extra slevy
@@ -44,7 +44,11 @@ White background with bottom border. Contains the brand header and main category
       <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
       <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
       <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
-      <!-- ... more categories -->
+      <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
+      <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
+      <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
+      <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
+      <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
     </minis-navigation>
 
   </minis-container>
@@ -275,7 +279,7 @@ body {
   <!-- 1. Header band -->
   <div style="background: var(--color-surface-primary); border-bottom: 1px solid var(--color-border-subtle, #e3e4e6);">
     <minis-container>
-      <minis-header>
+      <minis-topbar>
         <svg slot="logo" viewBox="0 0 124 30" height="30"><!-- logo --></svg>
         <minis-button slot="actions" variant="tertiary" size="sm">
           <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
@@ -285,14 +289,22 @@ body {
           <minis-icon slot="icon" name="cart-fill"></minis-icon>
           Košík
         </minis-button>
-      </minis-header>
-      <minis-navigation variant="horizontal">
+      </minis-topbar>
+      <minis-navigation variant="horizontal" aria-label="Hlavní menu">
         <minis-navigation-item href="/extra-slevy" active>
           <minis-icon slot="icon" name="star" size="20"></minis-icon>
           Extra slevy
         </minis-navigation-item>
         <minis-navigation-item href="/cestovani">Cestování</minis-navigation-item>
-        <!-- ... -->
+        <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
+        <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
+        <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
+        <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
+        <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
+        <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
+        <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
+        <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
+        <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
       </minis-navigation>
     </minis-container>
   </div>
@@ -354,7 +366,7 @@ body {
 ## AI Copy-Paste Prompt
 
 > Create a deal detail page for **[Hotel Name]** using the Mini*S design system.
-> Use the deal-detail layout: header band with `<minis-header>` + `<minis-navigation variant="horizontal">`,
+> Use the deal-detail layout: header band with `<minis-topbar>` + `<minis-navigation variant="horizontal">`,
 > photo gallery with `<minis-card-grid variant="navigation">` (6 hotel photos),
 > deal tabs with `<minis-navigation variant="tabs">` (Nabídka, Hodnocení, O hotelu, Tipy na výlet, Dotazy),
 > and a 12-column content grid with 4-col aside (filters) + 8-col main (deal cards with title, description, and buttons).
@@ -364,4 +376,4 @@ body {
 
 ---
 
-**Last updated:** 2026-03-19
+**Last updated:** 2026-03-20

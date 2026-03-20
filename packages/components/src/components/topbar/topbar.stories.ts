@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
-import './header.js';
+import './topbar.js';
 import '../button/button.js';
 import '@minis/icons';
 
 const meta: Meta = {
-  title: 'Components/Header',
-  component: 'minis-header',
+  title: 'Components/Topbar',
+  component: 'minis-topbar',
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -37,7 +37,7 @@ const slevomatLogo = html`
 export const Playground: Story = {
   name: 'Playground',
   render: () => html`
-    <minis-header>
+    <minis-topbar>
       ${slevomatLogo}
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
@@ -51,23 +51,23 @@ export const Playground: Story = {
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
         Kosik
       </minis-button>
-    </minis-header>
+    </minis-topbar>
   `,
 };
 
 export const LogoOnly: Story = {
   name: 'Logo only',
   render: () => html`
-    <minis-header>
+    <minis-topbar>
       ${slevomatLogo}
-    </minis-header>
+    </minis-topbar>
   `,
 };
 
 export const WithAllActions: Story = {
   name: 'With all actions',
   render: () => html`
-    <minis-header>
+    <minis-topbar>
       ${slevomatLogo}
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
@@ -81,6 +81,6 @@ export const WithAllActions: Story = {
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
         Kosik
       </minis-button>
-    </minis-header>
+    </minis-topbar>
   `,
 };

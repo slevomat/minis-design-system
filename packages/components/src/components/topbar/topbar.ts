@@ -1,16 +1,17 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { headerStyles } from './header.styles.js';
+import { topbarStyles } from './topbar.styles.js';
 
 /**
- * Mini*S Header Component
+ * Mini*S Topbar Component
  *
- * Main brand bar that sits above `<minis-navigation>`.
- * Contains a logo slot on the left and an actions slot on the right.
+ * Brand identity bar that sits above `<minis-navigation>`.
+ * Contains a logo slot on the left and an actions slot on the right
+ * (search, shortcuts, cart button, etc.).
  *
  * @example
  * ```html
- * <minis-header>
+ * <minis-topbar>
  *   <img slot="logo" src="/logo.svg" alt="Slevomat" />
  *   <minis-button slot="actions" variant="tertiary" size="sm">
  *     <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
@@ -20,16 +21,16 @@ import { headerStyles } from './header.styles.js';
  *     <minis-icon slot="icon" name="cart-fill"></minis-icon>
  *     Kosik
  *   </minis-button>
- * </minis-header>
+ * </minis-topbar>
  * ```
  */
-@customElement('minis-header')
-export class MinisHeader extends LitElement {
-  static styles = headerStyles;
+@customElement('minis-topbar')
+export class MinisTopbar extends LitElement {
+  static styles = topbarStyles;
 
   render() {
     return html`
-      <div class="header">
+      <div class="topbar">
         <div class="logo">
           <slot name="logo"></slot>
         </div>
@@ -43,6 +44,6 @@ export class MinisHeader extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'minis-header': MinisHeader;
+    'minis-topbar': MinisTopbar;
   }
 }

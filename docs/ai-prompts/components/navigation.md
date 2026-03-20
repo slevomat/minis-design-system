@@ -96,14 +96,20 @@ Positive (green) states use `--color-text-accent-positive` directly (no override
 
 ```html
 <minis-navigation variant="horizontal" aria-label="Hlavní menu">
-  <minis-navigation-item href="/kampan">
+  <minis-navigation-item href="/extra-slevy">
     <minis-icon slot="icon" name="star" size="20"></minis-icon>
     Extra slevy
   </minis-navigation-item>
   <minis-navigation-item href="/cestovani" active>Cestování</minis-navigation-item>
+  <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
+  <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
+  <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
   <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
+  <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
   <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
+  <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
   <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
+  <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
 </minis-navigation>
 ```
 

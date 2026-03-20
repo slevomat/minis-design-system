@@ -332,6 +332,27 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-03-20 (topbar rename, full nav list)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-03-20" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-03-20</h2>
+        <button class="cl-copy-btn" data-anchor="2026-03-20">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin-bottom:.25rem">Topbar <span style="font-weight:400;color:var(--color-text-secondary,#666)">(renamed from Header)</span></h3>
+      <ul>
+        <li>Renamed <code>&lt;minis-header&gt;</code> → <code>&lt;minis-topbar&gt;</code> for semantic clarity — it is a brand identity bar (logo, shortcuts, cart), not a generic page header</li>
+        <li>CSS tokens renamed: <code>--header-height</code> → <code>--topbar-height</code>, <code>--header-actions-gap</code> → <code>--topbar-actions-gap</code></li>
+        <li>AI prompt doc moved: <code>components/header.md</code> → <code>components/topbar.md</code></li>
+        <li>All layout docs updated to <code>&lt;minis-topbar&gt;</code> with the full 11-item Slevomat category navigation list</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-19 (card-grid, tag icon-only, button sizes)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
