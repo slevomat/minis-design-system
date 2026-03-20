@@ -37,30 +37,9 @@ export const Overview: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2>How to Use</h2>
-      <p>To deploy the design system in Figma, simply <strong>enable this library in your design file</strong> and you are good to go.</p>
-      <p><strong>The rules for consistent design are simple:</strong></p>
-      <ul>
-        <li>Follow the design system processes</li>
-        <li>Use the provided tokens and components</li>
-        <li>Never use custom values for color, spacing, gaps, or typography</li>
-        <li>Always use predefined variables in the Mini*S semantic layer</li>
-      </ul>
-
-      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
-
-      <h2>Component Architecture</h2>
-      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
-        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
-          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Level</th>
-          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Description</th>
-        </tr></thead>
-        <tbody>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Base Components</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Atomic building blocks (Buttons, Inputs, Badges). Strictly governed — never detach.</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Complex Templates</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">"Detach and use" — high-level patterns, customize content while starting from a standardized foundation.</td></tr>
-        </tbody>
-      </table>
-      <p><strong>Mode-Based Appearance:</strong> Light and Dark modes are handled via CSS variables — not component variants. This keeps the library lean and maintainable.</p>
+      <h2>How to Use — for Designers</h2>
+      <p>Připoj si knihovnu <strong>Mini*S</strong> ve Figma do svého projektu — stačí ji aktivovat v sekci <em>Assets → Libraries</em> a všechny komponenty a tokeny máš okamžitě k dispozici.</p>
+      <p>Pro usnadnění práce můžeš využít některé z Mini*S Figma pluginů — přehled najdeš níže v sekci <strong>Figma Plugins</strong>.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 

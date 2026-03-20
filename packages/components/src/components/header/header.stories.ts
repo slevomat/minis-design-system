@@ -41,11 +41,11 @@ export const Playground: Story = {
       ${slevomatLogo}
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
-        Oblibene
+        Oblíbené
       </minis-button>
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="stick" size="16"></minis-icon>
-        Neoblibene
+        Neoblíbené
       </minis-button>
       <minis-button slot="actions" variant="cta-buy" size="sm">
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
@@ -71,11 +71,11 @@ export const WithAllActions: Story = {
       ${slevomatLogo}
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
-        Oblibene
+        Oblíbené
       </minis-button>
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="stick" size="16"></minis-icon>
-        Neoblibene
+        Neoblíbené
       </minis-button>
       <minis-button slot="actions" variant="cta-buy" size="sm">
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
