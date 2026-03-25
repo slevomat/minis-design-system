@@ -34,22 +34,22 @@ This is **identical on every page** — see [layouts/index.md](./index.md) for t
       </minis-button>
     </minis-topbar>
 
-    <!-- Main category navigation -->
+    <!-- Main category navigation (no href = renders as buttons, no page refresh) -->
     <minis-navigation variant="horizontal" aria-label="Hlavní menu">
-      <minis-navigation-item href="/extra-slevy" active>
+      <minis-navigation-item active>
         <minis-icon slot="icon" name="star" size="20"></minis-icon>
         Extra slevy
       </minis-navigation-item>
-      <minis-navigation-item href="/cestovani">Cestování</minis-navigation-item>
-      <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
-      <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
-      <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
-      <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
-      <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
-      <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
-      <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
-      <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
-      <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
+      <minis-navigation-item>Cestování</minis-navigation-item>
+      <minis-navigation-item>Zážitky a zábava</minis-navigation-item>
+      <minis-navigation-item>Krása a relax</minis-navigation-item>
+      <minis-navigation-item>Restaurace a bary</minis-navigation-item>
+      <minis-navigation-item>Zboží</minis-navigation-item>
+      <minis-navigation-item>Fotodárky</minis-navigation-item>
+      <minis-navigation-item>Potraviny</minis-navigation-item>
+      <minis-navigation-item>Praktické</minis-navigation-item>
+      <minis-navigation-item>Dárky</minis-navigation-item>
+      <minis-navigation-item>Benefity</minis-navigation-item>
     </minis-navigation>
 
   </minis-container>
@@ -83,7 +83,16 @@ A row inside the container with breadcrumbs on the left and a "Uložit" (save/fa
 </minis-container>
 ```
 
-**Toggle behaviour:** The `<minis-tag variant="toggle">` persists pressed state and fires a `toggle` event. Consumer listens and swaps icon: `heart` ↔ `heart-fill`.
+**Toggle behaviour:** The `<minis-tag variant="toggle">` persists pressed state and fires a `toggle` event. Consumer **must** listen and swap icon: `heart` ↔ `heart-fill`:
+
+```js
+document.querySelectorAll('minis-tag[variant="toggle"]').forEach(tag => {
+  tag.addEventListener('toggle', (e) => {
+    const icon = tag.querySelector('minis-icon[slot="icon"]');
+    if (icon) icon.setAttribute('name', e.detail.pressed ? 'heart-fill' : 'heart');
+  });
+});
+```
 
 ### 3. Photo Gallery
 
@@ -92,17 +101,15 @@ Photo gallery using the card-grid component with the `photogallery` variant.
 ```html
 <minis-container>
   <minis-card-grid variant="photogallery">
-    <img src="photo-1.jpg" alt="Hotel exterior" />
-    <img src="photo-2.jpg" alt="Room" />
-    <img src="photo-3.jpg" alt="Pool" />
-    <img src="photo-4.jpg" alt="Restaurant" />
-    <img src="photo-5.jpg" alt="Spa" />
-    <img src="photo-6.jpg" alt="View" />
+    <img src="photo-1.jpg" alt="Hotel exterior" />  <!-- Featured: spans 3 cols × 3 rows -->
+    <img src="photo-2.jpg" alt="Room" />             <!-- Wide: spans 2 cols × 2 rows -->
+    <img src="photo-3.jpg" alt="Pool" />             <!-- Small thumbnail -->
+    <img src="photo-4.jpg" alt="Restaurant" />       <!-- Small thumbnail -->
   </minis-card-grid>
 </minis-container>
 ```
 
-**Layout:** `variant="photogallery"` — 4-col × 2-row grid. Item 1 spans 2 columns (featured). Mobile: horizontal scroll strip.
+> **Exactly 4 slots.** The photogallery variant uses a 5-col × 3-row CSS grid with 4 positioned items: item 1 (large featured, 3 cols × 3 rows), item 2 (wide, 2 cols × 2 rows), items 3–4 (small thumbnails). Extra items will overflow and break the layout.
 
 ### 4. Deal Title
 
@@ -339,20 +346,20 @@ body {
         </minis-button>
       </minis-topbar>
       <minis-navigation variant="horizontal" aria-label="Hlavní menu">
-        <minis-navigation-item href="/extra-slevy" active>
+        <minis-navigation-item active>
           <minis-icon slot="icon" name="star" size="20"></minis-icon>
           Extra slevy
         </minis-navigation-item>
-        <minis-navigation-item href="/cestovani">Cestování</minis-navigation-item>
-        <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
-        <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
-        <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
-        <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
-        <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
-        <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
-        <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
-        <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
-        <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
+        <minis-navigation-item>Cestování</minis-navigation-item>
+        <minis-navigation-item>Zážitky a zábava</minis-navigation-item>
+        <minis-navigation-item>Krása a relax</minis-navigation-item>
+        <minis-navigation-item>Restaurace a bary</minis-navigation-item>
+        <minis-navigation-item>Zboží</minis-navigation-item>
+        <minis-navigation-item>Fotodárky</minis-navigation-item>
+        <minis-navigation-item>Potraviny</minis-navigation-item>
+        <minis-navigation-item>Praktické</minis-navigation-item>
+        <minis-navigation-item>Dárky</minis-navigation-item>
+        <minis-navigation-item>Benefity</minis-navigation-item>
       </minis-navigation>
     </minis-container>
   </div>
@@ -381,8 +388,6 @@ body {
       <img src="photo-2.jpg" alt="Photo 2" />
       <img src="photo-3.jpg" alt="Photo 3" />
       <img src="photo-4.jpg" alt="Photo 4" />
-      <img src="photo-5.jpg" alt="Photo 5" />
-      <img src="photo-6.jpg" alt="Photo 6" />
     </minis-card-grid>
   </minis-container>
 
@@ -429,6 +434,16 @@ body {
     </div>
   </minis-container>
 
+  <!-- Toggle tag: swap heart icon on press -->
+  <script type="module">
+    document.querySelectorAll('minis-tag[variant="toggle"]').forEach(tag => {
+      tag.addEventListener('toggle', (e) => {
+        const icon = tag.querySelector('minis-icon[slot="icon"]');
+        if (icon) icon.setAttribute('name', e.detail.pressed ? 'heart-fill' : 'heart');
+      });
+    });
+  </script>
+
 </body>
 </html>
 ```
@@ -445,6 +460,12 @@ body {
 
 4. **Section order** — Header → Breadcrumbs → Photo Gallery → Title → Tab Band → Content Grid.
 
+5. **Navigation items** — In prototypes, omit `href` on `<minis-navigation-item>` so they render as `<button>` elements (no page refresh on click). Only add `href` when linking to real pages.
+
+6. **Photogallery = exactly 4 items** — The `variant="photogallery"` CSS grid positions exactly 4 children. Extra items overflow and break the layout.
+
+7. **Toggle tag icon swap** — `<minis-tag variant="toggle">` toggles `pressed` internally, but icon swap (e.g. `heart` ↔ `heart-fill`) requires consumer JavaScript listening to the `toggle` event.
+
 ---
 
 ## AI Copy-Paste Prompt
@@ -453,7 +474,7 @@ body {
 > Use the deal-detail layout:
 > 1. Header band with `<minis-topbar>` + `<minis-navigation variant="horizontal">` (full 11 Slevomat categories)
 > 2. Breadcrumbs row with `<minis-tag variant="toggle">` save button (heart icon) on the right
-> 3. Photo gallery with `<minis-card-grid variant="photogallery">` (6 hotel photos)
+> 3. Photo gallery with `<minis-card-grid variant="photogallery">` (exactly 4 photos)
 > 4. Deal title as `<h1>` using `--typography-heading-xl-size`
 > 5. Tab navigation in a full-width surface-primary band with border-subtle borders: `<minis-navigation variant="tabs">` (Nabídka, Hodnocení, O hotelu, Tipy na výlet, Dotazy)
 > 6. 12-column content grid: 8-col main (left) + 4-col aside (right), gap `var(--spacing-layout-xl)`

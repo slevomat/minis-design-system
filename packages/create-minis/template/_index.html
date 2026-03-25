@@ -117,20 +117,20 @@
       </minis-topbar>
 
       <minis-navigation variant="horizontal" aria-label="Hlavní menu">
-        <minis-navigation-item href="/extra-slevy" active>
+        <minis-navigation-item active>
           <minis-icon slot="icon" name="star" size="20"></minis-icon>
           Extra slevy
         </minis-navigation-item>
-        <minis-navigation-item href="/cestovani">Cestování</minis-navigation-item>
-        <minis-navigation-item href="/zazitky">Zážitky a zábava</minis-navigation-item>
-        <minis-navigation-item href="/krasa">Krása a relax</minis-navigation-item>
-        <minis-navigation-item href="/restaurace">Restaurace a bary</minis-navigation-item>
-        <minis-navigation-item href="/zbozi">Zboží</minis-navigation-item>
-        <minis-navigation-item href="/fotodary">Fotodárky</minis-navigation-item>
-        <minis-navigation-item href="/potraviny">Potraviny</minis-navigation-item>
-        <minis-navigation-item href="/prakticke">Praktické</minis-navigation-item>
-        <minis-navigation-item href="/darky">Dárky</minis-navigation-item>
-        <minis-navigation-item href="/benefity">Benefity</minis-navigation-item>
+        <minis-navigation-item>Cestování</minis-navigation-item>
+        <minis-navigation-item>Zážitky a zábava</minis-navigation-item>
+        <minis-navigation-item>Krása a relax</minis-navigation-item>
+        <minis-navigation-item>Restaurace a bary</minis-navigation-item>
+        <minis-navigation-item>Zboží</minis-navigation-item>
+        <minis-navigation-item>Fotodárky</minis-navigation-item>
+        <minis-navigation-item>Potraviny</minis-navigation-item>
+        <minis-navigation-item>Praktické</minis-navigation-item>
+        <minis-navigation-item>Dárky</minis-navigation-item>
+        <minis-navigation-item>Benefity</minis-navigation-item>
       </minis-navigation>
 
     </minis-container>
@@ -160,8 +160,6 @@
       <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 2</div>
       <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 3</div>
       <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 4</div>
-      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 5</div>
-      <div style="background: var(--color-surface-faded); border-radius: var(--border-radius-md); display:flex; align-items:center; justify-content:center; min-height:100px; color: var(--color-text-secondary);">Photo 6</div>
     </minis-card-grid>
   </minis-container>
 
@@ -235,6 +233,18 @@
 
     </div>
   </minis-container>
+
+  <!-- Toggle tag: swap heart icon on press -->
+  <script type="module">
+    document.querySelectorAll('minis-tag[variant="toggle"]').forEach(tag => {
+      tag.addEventListener('toggle', (e) => {
+        const icon = tag.querySelector('minis-icon[slot="icon"]');
+        if (icon) {
+          icon.setAttribute('name', e.detail.pressed ? 'heart-fill' : 'heart');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
