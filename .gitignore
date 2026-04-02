@@ -8,3 +8,4 @@ storybook-static/
 .env
 .env.local
 coverage/
+.claude/worktrees/
