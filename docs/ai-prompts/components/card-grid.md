@@ -8,9 +8,14 @@
 
 ## Purpose
 
-A responsive CSS-grid wrapper for holding cards or images. It is a **pure layout component** — it does not render any cards itself, it only provides the grid structure. Slot any content (card components, `<img>`, `<a>`, `<div>`) as children.
+A pure **layout component** for arranging cards or photos into responsive grids. It provides the grid structure only — it does not render any cards itself. Slot any content (card components, `<img>`, `<a>`, `<div>`) as direct children.
 
-Three variants cover the main Slevomat page patterns:
+Typical use cases:
+
+- **Photo galleries** — hotel or venue detail pages where one large hero image is accompanied by smaller thumbnails.
+- **Category navigation** — homepage grids of clickable category cards (with or without a featured tile).
+
+Three variants cover these patterns:
 
 | Variant | Use case |
 |---|---|
