@@ -118,16 +118,26 @@ export const buttonStyles = css`
 
   /* Icon sizing per size */
   :host([size="sm"]) ::slotted([slot="icon"]) {
-    width: var(--pixel-px-16, 16px);
-    height: var(--pixel-px-16, 16px);
+    width: var(--button-icon-sizing-xs, 16px);
+    height: var(--button-icon-sizing-xs, 16px);
     flex-shrink: 0;
   }
 
-  :host([size="md"]) ::slotted([slot="icon"]),
-  :host([size="lg"]) ::slotted([slot="icon"]),
+  :host([size="md"]) ::slotted([slot="icon"]) {
+    width: var(--button-icon-sizing-sm, 20px);
+    height: var(--button-icon-sizing-sm, 20px);
+    flex-shrink: 0;
+  }
+
+  :host([size="lg"]) ::slotted([slot="icon"]) {
+    width: var(--button-icon-sizing-md, 22px);
+    height: var(--button-icon-sizing-md, 22px);
+    flex-shrink: 0;
+  }
+
   :host([size="xl"]) ::slotted([slot="icon"]) {
-    width: var(--pixel-px-24, 24px);
-    height: var(--pixel-px-24, 24px);
+    width: var(--button-icon-sizing-lg, 24px);
+    height: var(--button-icon-sizing-lg, 24px);
     flex-shrink: 0;
   }
 

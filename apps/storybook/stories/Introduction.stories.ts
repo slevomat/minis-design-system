@@ -332,6 +332,24 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-04-02 (button icon sizing)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-04-02" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-04-02</h2>
+        <button class="cl-copy-btn" data-anchor="2026-04-02"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></button>
+      </div>
+      <h3 style="font-size:1rem;margin-top:.5rem">Button</h3>
+      <ul>
+        <li><strong>Updated</strong> icon sizing tokens — each button size now has its own dedicated icon size instead of a shared value for md/lg/xl</li>
+        <li><code>sm</code> → 16px (unchanged), <code>md</code> → 20px (was 24px), <code>lg</code> → 22px (was 24px), <code>xl</code> → 24px (unchanged)</li>
+        <li><strong>New token</strong> <code>--button-icon-sizing-lg</code> (24px)</li>
+        <li><strong>Changed</strong> <code>--button-icon-sizing-sm</code> 18→20px, <code>--button-icon-sizing-md</code> 20→22px</li>
+        <li>Icon sizing tokens now exported to <code>tokens.css</code></li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-20 (topbar rename, full nav list)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

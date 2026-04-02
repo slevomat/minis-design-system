@@ -569,6 +569,10 @@
   --button-small-padding-y: var(--fibonachi-sp-fib-3);
   --button-large-padding-x: var(--linear-sp-linear-4);
   --button-large-padding-y: var(--linear-sp-linear-3);
+  --button-icon-sizing-xs: var(--pixel-px-16);
+  --button-icon-sizing-sm: var(--pixel-px-20);
+  --button-icon-sizing-md: var(--pixel-px-22);
+  --button-icon-sizing-lg: var(--pixel-px-24);
   --button-primary-border: var(--color-interaction-primary-border);
   --button-primary-surface: var(--color-interaction-primary-surface);
   --button-primary-text: var(--color-interaction-primary-accent);
