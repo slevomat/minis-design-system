@@ -45,6 +45,12 @@ All tokens are `--button-*` component tokens resolved through the design token c
 --button-large-padding-x      /* lg: 16px */
 --button-large-padding-y      /* lg: 12px */
 
+/* Icon sizing per button size */
+--button-icon-sizing-xs       /* 16px — used by sm button */
+--button-icon-sizing-sm       /* 20px — used by md button */
+--button-icon-sizing-md       /* 22px — used by lg button */
+--button-icon-sizing-lg       /* 24px — used by xl button */
+
 /* Primary */
 --button-primary-surface
 --button-primary-text

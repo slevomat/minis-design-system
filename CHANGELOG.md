@@ -11,6 +11,17 @@ All notable changes to this project will be documented in this file.
 - Playground story now dynamically renders the correct number of slots based on selected variant and rows
 - AI prompt doc (`docs/ai-prompts/components/card-grid.md`) updated with new API, travel-themed Unsplash placeholder images
 
+### Button
+
+- **Updated** icon sizing tokens — each button size now has its own dedicated icon size instead of a shared value for md/lg/xl
+  - `sm` button: 16px (unchanged, now uses `--button-icon-sizing-xs`)
+  - `md` button: 20px (was 24px, now uses `--button-icon-sizing-sm`)
+  - `lg` button: 22px (was 24px, now uses `--button-icon-sizing-md`)
+  - `xl` button: 24px (unchanged, now uses `--button-icon-sizing-lg`)
+- **New token** `--button-icon-sizing-lg` (24px) added to the icon sizing scale
+- **Changed** `--button-icon-sizing-sm` from 18px → 20px, `--button-icon-sizing-md` from 20px → 22px
+- Icon sizing tokens (`--button-icon-sizing-*`) now exported to `tokens.css`
+
 ## 2026-03-20
 
 ### Topbar (renamed from Header)

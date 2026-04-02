@@ -332,7 +332,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-04-02 (card-grid rows property)
+           2026-04-02 (card-grid rows property, button icon sizing)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-04-02" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-04-02</h2>
@@ -348,6 +348,14 @@ const changelogHTML = `
         <li>New property <code>rows</code> (number, reflected) — controls row count for <code>navigation-small</code>: <code>rows="2"</code> (default, 8 slots) or <code>rows="3"</code> (12 slots)</li>
         <li>Playground story dynamically renders the correct number of slots based on selected variant and rows</li>
         <li>AI prompt doc updated with new API and travel-themed Unsplash placeholder images</li>
+      </ul>
+      <h3 style="font-size:1rem;margin-top:.5rem">Button</h3>
+      <ul>
+        <li><strong>Updated</strong> icon sizing tokens — each button size now has its own dedicated icon size instead of a shared value for md/lg/xl</li>
+        <li><code>sm</code> → 16px (unchanged), <code>md</code> → 20px (was 24px), <code>lg</code> → 22px (was 24px), <code>xl</code> → 24px (unchanged)</li>
+        <li><strong>New token</strong> <code>--button-icon-sizing-lg</code> (24px)</li>
+        <li><strong>Changed</strong> <code>--button-icon-sizing-sm</code> 18→20px, <code>--button-icon-sizing-md</code> 20→22px</li>
+        <li>Icon sizing tokens now exported to <code>tokens.css</code></li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>

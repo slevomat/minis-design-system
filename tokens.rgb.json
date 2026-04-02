@@ -4139,14 +4139,20 @@
           }
         },
         "sizing": {
+          "lg": {
+            "value": "24px",
+            "type": "float",
+            "cssName": "--button-icon-sizing-lg",
+            "origin": null
+          },
           "md": {
-            "value": "20px",
+            "value": "22px",
             "type": "float",
             "cssName": "--button-icon-sizing-md",
             "origin": null
           },
           "sm": {
-            "value": "18px",
+            "value": "20px",
             "type": "float",
             "cssName": "--button-icon-sizing-sm",
             "origin": null
