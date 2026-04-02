@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { cardGridStyles } from './card-grid.styles.js';
 
-export type CardGridVariant = 'navigation' | 'navigation-small' | 'navigation-small-3' | 'photogallery';
+export type CardGridVariant = 'navigation' | 'navigation-small' | 'photogallery';
 
 /**
  * Mini*S Card Grid Component
@@ -14,11 +14,9 @@ export type CardGridVariant = 'navigation' | 'navigation-small' | 'navigation-sm
  *   (top-left) and a wide card on the second row (bottom-right). On mobile,
  *   switches to a 2×4 horizontally-scrollable equal-size grid.
  *
- * - **navigation-small** — 4-column uniform grid, 2 rows, 8 slots. On mobile,
- *   horizontally scrollable like `navigation`.
- *
- * - **navigation-small-3** — 4-column uniform grid, 3 rows, 12 slots. On mobile,
- *   collapses to a 4×2 scroll strip.
+ * - **navigation-small** — 4-column uniform grid. Number of rows controlled by
+ *   the `rows` attribute (default `2` → 8 slots, set `rows="3"` → 12 slots).
+ *   On mobile, horizontally scrollable (always collapses to 2 rows).
  *
  * - **photogallery** — Asymmetric 5-column layout: one large image on the left
  *   (spanning 3 cols × 3 rows), a wide image top-right (2 cols × 2 rows), and
@@ -49,6 +47,12 @@ export type CardGridVariant = 'navigation' | 'navigation-small' | 'navigation-sm
  *   <!-- … 7 more -->
  * </minis-card-grid>
  *
+ * <!-- Navigation-small 3 rows (12 uniform cards) -->
+ * <minis-card-grid variant="navigation-small" rows="3" style="height:448px">
+ *   <div class="card">1</div>
+ *   <!-- … 11 more -->
+ * </minis-card-grid>
+ *
  * <!-- Photogallery (4 images) -->
  * <minis-card-grid variant="photogallery" style="height:352px">
  *   <img src="big.jpg" />
@@ -65,6 +69,10 @@ export class MinisCardGrid extends LitElement {
   /** Layout variant */
   @property({ type: String, reflect: true })
   variant: CardGridVariant = 'navigation';
+
+  /** Number of rows for navigation-small variant (2 or 3). Default: 2. */
+  @property({ type: Number, reflect: true })
+  rows?: number;
 
   render() {
     return html`<div class="grid"><slot></slot></div>`;

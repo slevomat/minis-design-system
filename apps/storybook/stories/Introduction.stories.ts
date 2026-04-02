@@ -332,6 +332,27 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-04-02 (card-grid rows property)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-04-02" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-04-02</h2>
+        <button class="cl-copy-btn" data-anchor="2026-04-02">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin-bottom:.25rem">Card Grid</h3>
+      <ul>
+        <li>Merged <code>navigation-small-3</code> variant into <code>navigation-small</code> — removed standalone variant in favour of a <code>rows</code> attribute</li>
+        <li>New property <code>rows</code> (number, reflected) — controls row count for <code>navigation-small</code>: <code>rows="2"</code> (default, 8 slots) or <code>rows="3"</code> (12 slots)</li>
+        <li>Playground story dynamically renders the correct number of slots based on selected variant and rows</li>
+        <li>AI prompt doc updated with new API and travel-themed Unsplash placeholder images</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-03-20 (topbar rename, full nav list)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

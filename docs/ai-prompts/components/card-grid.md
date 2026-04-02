@@ -15,8 +15,7 @@ Three variants cover the main Slevomat page patterns:
 | Variant | Use case |
 |---|---|
 | `navigation` | Homepage category navigation — featured card top-left (2 cols wide), wide card bottom-right. **6 slots.** |
-| `navigation-small` | Compact category navigation — uniform 4×2 grid, all cells equal. **8 slots.** |
-| `navigation-small-3` | Same as `navigation-small` but 3 rows. **12 slots.** Mobile collapses to 4×2 scroll strip. |
+| `navigation-small` | Compact category navigation — uniform 4-column grid. Use `rows` attribute to control row count: `rows="2"` (default, **8 slots**) or `rows="3"` (**12 slots**, mobile collapses to 4×2 scroll strip). |
 | `photogallery` | Hotel/venue detail page photo preview — large main photo left, wide image top-right, two small thumbnails bottom-right. **4 slots.** |
 
 ---
@@ -27,7 +26,8 @@ Three variants cover the main Slevomat page patterns:
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"navigation" \| "navigation-small" \| "navigation-small-3" \| "photogallery"` | `"navigation"` | Grid layout variant |
+| `variant` | `"navigation" \| "navigation-small" \| "photogallery"` | `"navigation"` | Grid layout variant |
+| `rows` | `number` | `2` | Number of rows for `navigation-small` variant (2 or 3). Ignored for other variants. |
 
 ### Slots
 
@@ -54,13 +54,9 @@ None.
 
 ### `navigation-small`
 
-- Desktop: 4-column × 2-row uniform grid, all 8 cells equal
-- Mobile: same horizontal scroll strip as `navigation`
-
-### `navigation-small-3`
-
-- Desktop: 4-column × 3-row uniform grid, all 12 cells equal
-- Mobile: collapses to 4×2 scroll strip (same as `navigation-small` mobile)
+- Desktop (default, `rows="2"`): 4-column × 2-row uniform grid, all 8 cells equal
+- Desktop (`rows="3"`): 4-column × 3-row uniform grid, all 12 cells equal
+- Mobile: same horizontal scroll strip as `navigation` (always 2 rows)
 
 ### `photogallery`
 
@@ -81,15 +77,14 @@ Each variant has a built-in default height matching the Figma spec:
 | Variant | Desktop height | Mobile height |
 |---|---|---|
 | `navigation` | 584px | 172px (scroll strip) |
-| `navigation-small` | 296px | 172px (scroll strip) |
-| `navigation-small-3` | 448px | 172px (4×2 scroll strip) |
+| `navigation-small` (rows=2) | 296px | 172px (scroll strip) |
+| `navigation-small` (rows=3) | 448px | 172px (4×2 scroll strip) |
 | `photogallery` | 352px | 210px |
 
 Override the height with the `--card-grid-height` CSS custom property:
 
 ```html
-<!-- 3-row navigation-small needs a taller height -->
-<minis-card-grid variant="navigation-small" style="--card-grid-height:448px">…</minis-card-grid>
+<minis-card-grid variant="navigation-small" rows="3" style="--card-grid-height:500px">…</minis-card-grid>
 ```
 
 ---
@@ -110,33 +105,64 @@ Override the height with the `--card-grid-height` CSS custom property:
 
 ### Navigation grid
 
+Use travel-themed placeholder images from Unsplash (`https://images.unsplash.com/photo-{id}?w={width}&h={height}&fit=crop`). Every `<img>` inside the grid should have `style="width:100%;height:100%;object-fit:cover"`.
+
 ```html
 <minis-card-grid variant="navigation" style="height:420px">
   <!-- Item 1: featured (2-col wide on desktop) -->
   <a href="/wellness">
-    <img src="wellness.jpg" alt="Wellness" style="width:100%;height:100%;object-fit:cover" />
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop" alt="Beach resort" style="width:100%;height:100%;object-fit:cover" />
   </a>
-  <a href="/sport"><img src="sport.jpg" alt="Sport" /></a>
-  <a href="/travel"><img src="travel.jpg" alt="Travel" /></a>
-  <a href="/food"><img src="food.jpg" alt="Food" /></a>
-  <a href="/beauty"><img src="beauty.jpg" alt="Beauty" /></a>
+  <a href="/mountains">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&h=400&fit=crop" alt="Mountains" style="width:100%;height:100%;object-fit:cover" />
+  </a>
+  <a href="/city">
+    <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300&h=400&fit=crop" alt="Paris" style="width:100%;height:100%;object-fit:cover" />
+  </a>
+  <a href="/lakes">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300&h=400&fit=crop" alt="Lake" style="width:100%;height:100%;object-fit:cover" />
+  </a>
+  <a href="/safari">
+    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=300&h=400&fit=crop" alt="Safari" style="width:100%;height:100%;object-fit:cover" />
+  </a>
   <!-- Item 6: wide (2-col wide on desktop) -->
-  <a href="/gifts"><img src="gifts.jpg" alt="Gifts" /></a>
+  <a href="/islands">
+    <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&h=400&fit=crop" alt="Tropical island" style="width:100%;height:100%;object-fit:cover" />
+  </a>
 </minis-card-grid>
 ```
 
-### Navigation-small (2 rows)
+### Navigation-small (2 rows, default)
 
 ```html
-<minis-card-grid variant="navigation-small" style="height:296px">
-  <a href="/wellness"><img src="wellness.jpg" /></a>
-  <a href="/sport"><img src="sport.jpg" /></a>
-  <a href="/travel"><img src="travel.jpg" /></a>
-  <a href="/food"><img src="food.jpg" /></a>
-  <a href="/beauty"><img src="beauty.jpg" /></a>
-  <a href="/fitness"><img src="fitness.jpg" /></a>
-  <a href="/city"><img src="city.jpg" /></a>
-  <a href="/gifts"><img src="gifts.jpg" /></a>
+<minis-card-grid variant="navigation-small">
+  <a href="/beach"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop" alt="Beach" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/mountains"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&h=300&fit=crop" alt="Mountains" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/city"><img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300&h=300&fit=crop" alt="Paris" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/lake"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300&h=300&fit=crop" alt="Lake" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/safari"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=300&h=300&fit=crop" alt="Safari" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/desert"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=300&h=300&fit=crop" alt="Desert" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/forest"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=300&h=300&fit=crop" alt="Forest" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/island"><img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=300&h=300&fit=crop" alt="Island" style="width:100%;height:100%;object-fit:cover" /></a>
+</minis-card-grid>
+```
+
+### Navigation-small (3 rows)
+
+```html
+<minis-card-grid variant="navigation-small" rows="3">
+  <a href="/beach"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop" alt="Beach" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/mountains"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&h=300&fit=crop" alt="Mountains" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/city"><img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=300&h=300&fit=crop" alt="Paris" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/lake"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=300&h=300&fit=crop" alt="Lake" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/safari"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=300&h=300&fit=crop" alt="Safari" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/desert"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=300&h=300&fit=crop" alt="Desert" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/forest"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=300&h=300&fit=crop" alt="Forest" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/island"><img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=300&h=300&fit=crop" alt="Island" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/canyon"><img src="https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=300&h=300&fit=crop" alt="Canyon" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/waterfall"><img src="https://images.unsplash.com/photo-1432405972618-c6b0cfba8672?w=300&h=300&fit=crop" alt="Waterfall" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/camping"><img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=300&h=300&fit=crop" alt="Camping" style="width:100%;height:100%;object-fit:cover" /></a>
+  <a href="/cruise"><img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=300&h=300&fit=crop" alt="Cruise" style="width:100%;height:100%;object-fit:cover" /></a>
 </minis-card-grid>
 ```
 
@@ -144,12 +170,24 @@ Override the height with the `--card-grid-height` CSS custom property:
 
 ```html
 <minis-card-grid variant="photogallery" style="height:352px">
-  <img src="main.jpg" alt="Main photo" style="width:100%;height:100%;object-fit:cover" />
-  <img src="wide.jpg" alt="View" style="width:100%;height:100%;object-fit:cover" />
-  <img src="thumb1.jpg" alt="Detail 1" style="width:100%;height:100%;object-fit:cover" />
-  <img src="thumb2.jpg" alt="Detail 2" style="width:100%;height:100%;object-fit:cover" />
+  <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&h=400&fit=crop" alt="Hotel pool" style="width:100%;height:100%;object-fit:cover" />
+  <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop" alt="Hotel exterior" style="width:100%;height:100%;object-fit:cover" />
+  <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=200&h=200&fit=crop" alt="Hotel room" style="width:100%;height:100%;object-fit:cover" />
+  <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=200&h=200&fit=crop" alt="Hotel lobby" style="width:100%;height:100%;object-fit:cover" />
 </minis-card-grid>
 ```
+
+---
+
+## Placeholder images
+
+When prototyping with `<minis-card-grid>`, always use real travel-themed photos from Unsplash. Use the URL pattern:
+
+```
+https://images.unsplash.com/photo-{id}?w={width}&h={height}&fit=crop
+```
+
+This ensures the grid looks realistic in previews. All images above are freely licensed via Unsplash.
 
 ---
 
@@ -164,4 +202,4 @@ Override the height with the `--card-grid-height` CSS custom property:
 
 ## Copy-paste prompt for AI agents
 
-> Create a homepage category navigation grid using `<minis-card-grid variant="navigation">` from `@minis/components`. Slot 6 `<a>` elements, each containing an `<img>` with `width:100%;height:100%;object-fit:cover`. The first and last items are visually wider on desktop (the component handles this automatically). Set `style="height:420px"` on the grid. Import the component as a side-effect: `import '@minis/components'`. Load tokens from `@minis/tokens/dist/index.css`.
+> Create a homepage category navigation grid using `<minis-card-grid variant="navigation">` from `@minis/components`. Slot 6 `<a>` elements, each containing an `<img>` with `width:100%;height:100%;object-fit:cover`. Use travel-themed placeholder photos from Unsplash (`https://images.unsplash.com/photo-{id}?w=300&h=400&fit=crop`). The first and last items are visually wider on desktop (the component handles this automatically). Set `style="height:420px"` on the grid. Import the component as a side-effect: `import '@minis/components'`. Load tokens from `@minis/tokens/dist/index.css`.

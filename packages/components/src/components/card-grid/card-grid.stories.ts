@@ -10,11 +10,15 @@ const meta: Meta = {
     docs: {
       description: {
         component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3583-12247" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
-<p>A responsive CSS-grid wrapper for cards or images. Four variants cover the main Slevomat page patterns:</p>
+<p>A responsive CSS-grid wrapper for cards or images. Three variants cover the main Slevomat page patterns:</p>
 <ul>
   <li><strong>navigation</strong> — 4-column grid, 6 slots. Item 1 featured (2-col), item 6 wide (2-col). Default height: 584px. Mobile: horizontal scroll strip.</li>
-  <li><strong>navigation-small</strong> — uniform 4×2 grid, 8 slots, all cells equal. Default height: 296px. Mobile: horizontal scroll strip.</li>
-  <li><strong>navigation-small-3</strong> — uniform 4×3 grid, 12 slots, all cells equal. Default height: 448px. Mobile: 4×2 horizontal scroll strip (shows 8 items).</li>
+  <li><strong>navigation-small</strong> — uniform 4-column grid. Use <code>rows</code> to control row count:
+    <ul>
+      <li><code>rows="2"</code> (default) — 8 slots, height 296px</li>
+      <li><code>rows="3"</code> — 12 slots, height 448px. Mobile: collapses to 2 rows.</li>
+    </ul>
+  </li>
   <li><strong>photogallery</strong> — asymmetric 5-column layout, 4 slots: large main photo left, wide image top-right, two small thumbnails bottom-right. Default height: 352px. Mobile: only first image shown (210px).</li>
 </ul>
 <p>Pure layout wrapper — slot any content. Override height via <code>--card-grid-height</code>. Slot background defaults to <code>--color-surface-faded</code>.</p>`,
@@ -24,8 +28,14 @@ const meta: Meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['navigation', 'navigation-small', 'navigation-small-3', 'photogallery'],
+      options: ['navigation', 'navigation-small', 'photogallery'],
       description: 'Grid layout variant',
+    },
+    rows: {
+      control: 'select',
+      options: [2, 3],
+      description: 'Number of rows for navigation-small variant (2 or 3)',
+      if: { arg: 'variant', eq: 'navigation-small' },
     },
   },
 };
@@ -47,16 +57,29 @@ const p = (label = '') => html`
   ">${label}</div>
 `;
 
+// ─── Slot count lookup ───────────────────────────────────────────────────────
+
+function slotCount(variant: string, rows?: number): number {
+  if (variant === 'navigation') return 6;
+  if (variant === 'photogallery') return 4;
+  // navigation-small
+  return (rows === 3) ? 12 : 8;
+}
+
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 export const Playground: Story = {
   name: 'Playground',
-  args: { variant: 'navigation' },
-  render: (args) => html`
-    <minis-card-grid variant=${args.variant}>
-      ${p('1')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
-    </minis-card-grid>
-  `,
+  args: { variant: 'navigation', rows: 2 },
+  render: (args) => {
+    const count = slotCount(args.variant as string, args.rows as number);
+    const items = Array.from({ length: count }, (_, i) => p(`${i + 1}`));
+    return html`
+      <minis-card-grid variant=${args.variant} .rows=${args.variant === 'navigation-small' ? args.rows : undefined}>
+        ${items}
+      </minis-card-grid>
+    `;
+  },
 };
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
@@ -80,7 +103,7 @@ export const Navigation: Story = {
 // ─── Navigation Small — 2 rows ────────────────────────────────────────────────
 
 export const NavigationSmall: Story = {
-  name: 'Navigation Small',
+  name: 'Navigation Small (2 rows)',
   parameters: {
     docs: {
       description: {
@@ -99,7 +122,7 @@ export const NavigationSmall: Story = {
 // ─── Navigation Small — 3 rows ────────────────────────────────────────────────
 
 export const NavigationSmall3: Story = {
-  name: 'Navigation Small — 3 rows',
+  name: 'Navigation Small (3 rows)',
   parameters: {
     docs: {
       description: {
@@ -108,7 +131,7 @@ export const NavigationSmall3: Story = {
     },
   },
   render: () => html`
-    <minis-card-grid variant="navigation-small-3">
+    <minis-card-grid variant="navigation-small" rows="3">
       ${p('1')}  ${p('2')}  ${p('3')}  ${p('4')}
       ${p('5')}  ${p('6')}  ${p('7')}  ${p('8')}
       ${p('9')}  ${p('10')} ${p('11')} ${p('12')}
@@ -164,8 +187,8 @@ export const AllVariants: Story = {
       </div>
 
       <div>
-        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small-3 — 12 slots (448px)</p>
-        <minis-card-grid variant="navigation-small-3">
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation-small rows="3" — 12 slots (448px)</p>
+        <minis-card-grid variant="navigation-small" rows="3">
           ${p('1')}  ${p('2')}  ${p('3')}  ${p('4')}
           ${p('5')}  ${p('6')}  ${p('7')}  ${p('8')}
           ${p('9')}  ${p('10')} ${p('11')} ${p('12')}

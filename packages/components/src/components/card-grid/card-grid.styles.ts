@@ -108,35 +108,23 @@ export const cardGridStyles = css`
   }
 
   /* =====================
-     VARIANT: navigation-small-3
+     VARIANT: navigation-small rows="3"
      4 cols, 3 rows uniform — 12 slots
      Desktop default height: 448px
      ===================== */
 
-  :host([variant="navigation-small-3"]) {
+  :host([variant="navigation-small"][rows="3"]) {
     height: var(--card-grid-height, 448px);
   }
 
-  :host([variant="navigation-small-3"]) .grid {
-    grid-template-columns: repeat(4, 1fr);
+  :host([variant="navigation-small"][rows="3"]) .grid {
     grid-template-rows: repeat(3, 1fr);
   }
 
   /* Mobile: 2-row scroll strip (same as navigation-small) */
   @media (max-width: 767px) {
-    :host([variant="navigation-small-3"]) {
-      height: var(--card-grid-height, var(--card-grid-xs-item-size, 172px));
-      overflow-x: auto;
-      overflow-y: hidden;
-      scrollbar-width: none;
-    }
-    :host([variant="navigation-small-3"])::-webkit-scrollbar {
-      display: none;
-    }
-    :host([variant="navigation-small-3"]) .grid {
-      grid-template-columns: repeat(4, var(--card-grid-xs-item-size, 172px));
+    :host([variant="navigation-small"][rows="3"]) .grid {
       grid-template-rows: repeat(2, var(--card-grid-xs-item-size, 172px));
-      height: auto;
     }
   }
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-04-02
+
+### Card Grid
+
+- **Merged** `navigation-small-3` variant into `navigation-small` — removed standalone variant in favour of a `rows` attribute
+- **New property** `rows` (number, reflected) on `<minis-card-grid>` — controls row count for `navigation-small` variant: `rows="2"` (default, 8 slots) or `rows="3"` (12 slots)
+- Playground story now dynamically renders the correct number of slots based on selected variant and rows
+- AI prompt doc (`docs/ai-prompts/components/card-grid.md`) updated with new API, travel-themed Unsplash placeholder images
+
 ## 2026-03-20
 
 ### Topbar (renamed from Header)
