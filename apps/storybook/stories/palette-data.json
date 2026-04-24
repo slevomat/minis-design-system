@@ -1571,16 +1571,22 @@
     "oklch": "75",
     "heritage": ""
   },
-  "--button-icon-sizing-md": {
-    "hex": "20px",
+  "--button-icon-sizing-lg": {
+    "hex": "24px",
     "rgb": null,
-    "oklch": "var(--pixel-px-20)",
+    "oklch": "var(--pixel-px-24)",
+    "heritage": ""
+  },
+  "--button-icon-sizing-md": {
+    "hex": "22px",
+    "rgb": null,
+    "oklch": "var(--pixel-px-22)",
     "heritage": ""
   },
   "--button-icon-sizing-sm": {
-    "hex": "18px",
+    "hex": "20px",
     "rgb": null,
-    "oklch": "var(--pixel-px-18)",
+    "oklch": "var(--pixel-px-20)",
     "heritage": ""
   },
   "--button-icon-sizing-xs": {

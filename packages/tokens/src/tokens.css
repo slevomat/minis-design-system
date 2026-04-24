@@ -560,7 +560,7 @@
 
 :root {
   /* Button */
-  --button-border-radius: var(--border-radius-sm);
+  --button-border-radius: var(--border-radius-md);
   --button-border-width: var(--border-width-thin);
   --button-padding-x: var(--linear-sp-linear-3);
   --button-padding-y: var(--linear-sp-linear-2);

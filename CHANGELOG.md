@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-04-24
+
+### Button
+
+- **Updated** `--button-border-radius` from `--border-radius-sm` (4px) to `--border-radius-md` (8px)
+
 ## 2026-04-02
 
 ### Card Grid

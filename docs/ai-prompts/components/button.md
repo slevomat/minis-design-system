@@ -33,7 +33,7 @@ All tokens are `--button-*` component tokens resolved through the design token c
 
 ```css
 /* Structure */
---button-border-radius        /* 4px (--border-radius-sm) */
+--button-border-radius        /* 8px (--border-radius-md) */
 --button-border-width         /* 1px */
 --button-gap-elements         /* 4px gap between icon and label */
 
