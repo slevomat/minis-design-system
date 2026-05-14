@@ -352,7 +352,20 @@ const changelogHTML = `
           <li>States: <code>default</code> / <code>hover</code> (auto on hover or forced via <code>state="hover"</code>) / <code>active</code> (persistent highlight). Hover wins over active — an active row turns blue-tinted on hover.</li>
           <li>Optional trailing counter via <code>counter</code> prop — always sits directly after the label, rendered as <code>&lt;minis-pill-counter size="lg"&gt;</code> with white background and primary text.</li>
           <li><code>checked</code> property only applies to <code>variant="checkbox"</code>.</li>
-          <li>New design tokens added under <code>--action-row-*</code> (border radius, surfaces, paddings, gaps).</li>
+          <li>
+            New design tokens added in <code>@minis/tokens</code>:
+            <code>--action-row-border-radius</code>,
+            <code>--action-row-surface</code>,
+            <code>--action-row-text</code>,
+            <code>--action-row-hover-surface</code>,
+            <code>--action-row-active-surface</code>,
+            <code>--action-row-padding-x</code>,
+            <code>--action-row-padding-y</code>,
+            <code>--action-row-padding-x-icon-only</code>,
+            <code>--action-row-padding-x-checkbox</code>,
+            <code>--action-row-gap-icon</code>,
+            <code>--action-row-gap-checkbox</code>.
+          </li>
           <li>AI prompt doc added at <code>docs/ai-prompts/components/action-row.md</code>.</li>
         </ul>
       </div>
