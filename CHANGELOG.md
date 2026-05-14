@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-14
+
+### Checkbox
+
+- **New component** `<minis-checkbox>` — binary selection input
+  - Initial states: `unchecked` / `checked`, each with hover styling
+  - Props: `checked`, `disabled`, `name`, `value`
+  - Slot: default (label)
+  - Event: `change` → `{ checked: boolean }`
+  - Keyboard: `Space` / `Enter` to toggle; `role="checkbox"`, `aria-checked`, `aria-disabled` reflected
+  - Storybook reorganized — checkbox stories live under `Components/Inputs/Checkbox`
+- AI prompt doc added at `docs/ai-prompts/components/checkbox.md`
+
 ## 2026-04-24
 
 ### Button

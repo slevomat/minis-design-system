@@ -17,6 +17,7 @@ Individual UI elements with props and variants.
 - [Card Grid](./components/card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
 - [Container](./components/container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding
 - [Topbar](./components/topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
+- [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
 
 [→ All Components](./components/README.md)
 
