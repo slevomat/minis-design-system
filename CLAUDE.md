@@ -71,6 +71,13 @@ Every change to components or tokens **must** be recorded in two places, in the 
 1. **`CHANGELOG.md`** (repo root) — grouped by date (`## YYYY-MM-DD`), component sub-heading, bullet points.
 2. **Storybook Changelog page** (`apps/storybook/stories/Introduction.stories.ts` → `Changelog` story) — same structure, styled HTML, newest date at the top.
 
+**Token updates must always be logged.** Any added / renamed / removed / re-valued token (in `packages/tokens/src/tokens.css`, the foundation/light/dark files, or the Figma exports `tokens.json` / `tokens.rgb.json`) must appear in both changelog locations. Include:
+
+- The CSS custom property name(s) affected (e.g. `--action-row-surface`).
+- For new tokens: the value or what they reference (e.g. `var(--button-tertiary-surface)`).
+- For changes: old value → new value.
+- A "Tokens" sub-section under the relevant component, or a top-level "Tokens" sub-section when the change is foundation-wide.
+
 ## Storybook rules
 
 - **NEVER** use `parameters: { options: { showPanel: false } }` — it persists globally to localStorage and hides the panel for all stories. Use `parameters: { controls: { disable: true } }` instead.
