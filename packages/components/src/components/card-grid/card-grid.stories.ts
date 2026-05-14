@@ -10,7 +10,8 @@ const meta: Meta = {
     docs: {
       description: {
         component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3583-12247" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
-<p>A responsive CSS-grid wrapper for cards or images. Three variants cover the main Slevomat page patterns:</p>
+<p>A layout component for arranging cards or photos into responsive grids. Use it for <strong>photo galleries</strong> (hotel/venue detail pages) and <strong>category navigation</strong> (homepage card grids). It provides the grid structure only — slot any content as children.</p>
+<p>Three variants:</p>
 <ul>
   <li><strong>navigation</strong> — 4-column grid, 6 slots. Item 1 featured (2-col), item 6 wide (2-col). Default height: 584px. Mobile: horizontal scroll strip.</li>
   <li><strong>navigation-small</strong> — uniform 4-column grid. Use <code>rows</code> to control row count:

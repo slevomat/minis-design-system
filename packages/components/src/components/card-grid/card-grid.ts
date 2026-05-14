@@ -7,8 +7,12 @@ export type CardGridVariant = 'navigation' | 'navigation-small' | 'photogallery'
 /**
  * Mini*S Card Grid Component
  *
- * A responsive grid layout for holding cards or images. Three variants
- * match the main Slevomat page patterns:
+ * A layout component for arranging cards or photos into responsive grids.
+ * Use it for photo galleries (hotel/venue detail pages) and category
+ * navigation (homepage card grids). It provides the grid structure only —
+ * slot any content (card components, `<img>`, `<a>`, `<div>`) as children.
+ *
+ * Three variants cover these patterns:
  *
  * - **navigation** — 4-column grid with a featured card spanning 2 columns
  *   (top-left) and a wide card on the second row (bottom-right). On mobile,
