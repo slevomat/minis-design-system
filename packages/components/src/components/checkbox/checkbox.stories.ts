@@ -9,7 +9,7 @@ const meta: Meta = {
   parameters: {
     docs: {
       description: {
-        component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4192-5150" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
+        component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4192-5095" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
 <p>Binary selection input. Two states are covered today: <strong>unchecked</strong> and <strong>checked</strong>, each with a hover variant. More states (indeterminate, error, disabled visual) will be added later.</p>`,
       },
     },
