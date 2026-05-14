@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { checkboxStyles } from './checkbox.styles.js';
 
 /**
@@ -37,9 +37,6 @@ export class MinisCheckbox extends LitElement {
 
   @state()
   private _hasLabel = false;
-
-  @query('input')
-  private _input!: HTMLInputElement;
 
   connectedCallback() {
     super.connectedCallback();

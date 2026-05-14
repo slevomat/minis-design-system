@@ -33,6 +33,24 @@ All notable changes to this project will be documented in this file.
   - Storybook reorganized — checkbox stories live under `Components/Inputs/Checkbox`
 - AI prompt doc added at `docs/ai-prompts/components/checkbox.md`
 
+### Tokens (Figma export sync)
+
+- **New button tokens** for upcoming variants/spacing:
+  - `--button-padding-x-icon-only` (8px), `--button-small-padding-x-icon-only` (3px), `--button-large-padding-x-icon-only` (12px)
+  - `--button-gap-addon` (8px), `--button-gap-spacer` (2px) — plus matching `small-*` and `large-*` variants
+  - `--button-icon-opacity` (1) and `--button-icon-opacity-icon-only-counter-pill` (0.75)
+- **New `--cardgrid-gap`** token (= `--spacing-layout-xs`)
+- **New `--menu-item-gap`** token (4px) for upcoming menu component
+- **New typography line-height composite tokens**, responsive:
+  - `--typography-body-line-height` (138% base → 150% md+)
+  - `--typography-body-s-line-height` (143% base → 157% md+)
+  - `--typography-heading-{lg,md,sm}-line-height` step down at md+
+- **New layout tokens**:
+  - `--container-bleeding-edge-padding` (0 base → 16px lg → 32px xl+)
+  - `--page-width` (tracks current breakpoint tier)
+- **New effect tokens**: `--effect-background-blur-10`, `--effect-elevation` (drop-shadow recipe for cards)
+- *Note:* `--actionrow-*` tokens from the raw Figma export were superseded by the `--action-row-*` family above (used by the shipped `<minis-action-row>` component) and are not added to `tokens.css`.
+
 ## 2026-04-24
 
 ### Button

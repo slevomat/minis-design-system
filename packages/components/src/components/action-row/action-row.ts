@@ -1,5 +1,5 @@
 import { LitElement, html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { actionRowStyles } from './action-row.styles.js';
 import '../checkbox/checkbox.js';
 import '../pill-counter/pill-counter.js';
@@ -63,9 +63,6 @@ export class MinisActionRow extends LitElement {
   @property({ type: String })
   counter?: string;
 
-  @state()
-  private _hasIconSlot = false;
-
   private _onClick = (e: MouseEvent) => {
     if (this.disabled) {
       e.preventDefault();
@@ -108,11 +105,6 @@ export class MinisActionRow extends LitElement {
     }
   };
 
-  private _onIconSlotChange(e: Event) {
-    const slot = e.target as HTMLSlotElement;
-    this._hasIconSlot = slot.assignedNodes({ flatten: true }).length > 0;
-  }
-
   render() {
     const showCounter = this.counter != null && this.counter !== '';
     const isCheckbox = this.variant === 'checkbox';
@@ -137,7 +129,7 @@ export class MinisActionRow extends LitElement {
             ></minis-checkbox>`
           : nothing}
         ${isIcon
-          ? html`<slot name="icon" @slotchange=${this._onIconSlotChange}></slot>`
+          ? html`<slot name="icon"></slot>`
           : nothing}
         <span class="content">
           <span class="label"><slot></slot></span>

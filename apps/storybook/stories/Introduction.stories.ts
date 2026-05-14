@@ -332,7 +332,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-05-14 (new component: checkbox)
+           2026-05-14 (new components: action-row, checkbox + token sync)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-05-14" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-14</h2>
@@ -379,6 +379,17 @@ const changelogHTML = `
           <li>Initial states: unchecked &amp; checked, each with a hover variant. More states (indeterminate, error) will follow.</li>
           <li>Storybook reorganized — checkbox lives under <code>Components / Inputs / Checkbox</code>.</li>
           <li>AI prompt doc added at <code>docs/ai-prompts/components/checkbox.md</code>.</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:1rem;margin-bottom:.25rem">Tokens (Figma sync)</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>New button tokens</strong> — <code>--button-padding-x-icon-only</code> and <code>small</code>/<code>large</code> variants; <code>--button-gap-addon</code> (8px), <code>--button-gap-spacer</code> (2px) and size variants; <code>--button-icon-opacity</code> (1) + <code>--button-icon-opacity-icon-only-counter-pill</code> (0.75)</li>
+          <li><strong>New</strong> <code>--cardgrid-gap</code>, <code>--menu-item-gap</code> for upcoming components</li>
+          <li><strong>New typography line-height composites</strong> (responsive at md+): <code>--typography-body-line-height</code>, <code>--typography-body-s-line-height</code>, <code>--typography-heading-{lg,md,sm}-line-height</code></li>
+          <li><strong>New layout tokens</strong>: <code>--container-bleeding-edge-padding</code> (0 → 16px lg → 32px xl+) and <code>--page-width</code> (tracks current breakpoint)</li>
+          <li><strong>New effect tokens</strong>: <code>--effect-background-blur-10</code>, <code>--effect-elevation</code></li>
         </ul>
       </div>
 

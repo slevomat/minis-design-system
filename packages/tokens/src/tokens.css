@@ -504,8 +504,10 @@
   --spacing-layout-xl:   var(--linear-sp-linear-8); /* 32px */
   --container-padding:         var(--linear-sp-linear-2); /*  8px */
   --container-narrow-padding:  var(--linear-sp-linear-2); /*  8px */
+  --container-bleeding-edge-padding: var(--linear-sp-linear-0); /* 0 — flush to viewport */
   --container-width: 100%;
   --container-narrow-width: 100%;
+  --page-width: var(--breakpoint-2xs);
   --elevation-none: 0px;
   /* Typography composite — 2xs/xs (small) */
   --typography-heading-2xl-size: var(--typography-size-2xl); /* 24px */
@@ -513,6 +515,11 @@
   --typography-heading-lg-size:  var(--typography-size-xl);  /* 20px */
   --typography-heading-md-size:  var(--typography-size-lg);  /* 18px */
   --typography-heading-sm-size:  var(--typography-size-md);  /* 16px */
+  --typography-heading-lg-line-height: var(--typography-line-height-percentage-130%);
+  --typography-heading-md-line-height: var(--typography-line-height-percentage-133%);
+  --typography-heading-sm-line-height: var(--typography-line-height-percentage-138%);
+  --typography-body-line-height:   var(--typography-line-height-percentage-138%);
+  --typography-body-s-line-height: var(--typography-line-height-percentage-143%);
 }
 
 /* sm tier — 408px–767px */
@@ -525,6 +532,7 @@
     --spacing-layout-xl:  var(--linear-sp-linear-12); /* 48px */
     --container-padding:        var(--linear-sp-linear-4); /* 16px */
     --container-narrow-padding: var(--linear-sp-linear-4); /* 16px */
+    --page-width: var(--breakpoint-sm);
     /* Typography stays small through sm tier */
   }
 }
@@ -534,12 +542,26 @@
   :root {
     /* Spacing same as sm */
     --container-narrow-width: 752px; /* narrow container caps here */
+    --page-width: var(--breakpoint-md);
     /* Typography jumps up */
     --typography-heading-2xl-size: var(--typography-size-3xl); /* 32px */
     --typography-heading-xl-size:  var(--typography-size-3xl); /* 32px */
     --typography-heading-lg-size:  var(--typography-size-2xl); /* 24px */
     --typography-heading-md-size:  var(--typography-size-xl);  /* 20px */
     --typography-heading-sm-size:  var(--typography-size-lg);  /* 18px */
+    --typography-heading-lg-line-height: var(--typography-line-height-percentage-125%);
+    --typography-heading-md-line-height: var(--typography-line-height-percentage-130%);
+    --typography-heading-sm-line-height: var(--typography-line-height-percentage-133%);
+    --typography-body-line-height:   var(--typography-line-height-percentage-150%);
+    --typography-body-s-line-height: var(--typography-line-height-percentage-157%);
+  }
+}
+
+/* lg tier — 1008px–1255px (bleeding-edge padding kicks in) */
+@media (min-width: 1008px) {
+  :root {
+    --container-bleeding-edge-padding: var(--linear-sp-linear-4); /* 16px */
+    --page-width: var(--breakpoint-lg);
   }
 }
 
@@ -548,9 +570,32 @@
   :root {
     --container-padding:        var(--linear-sp-linear-8); /* 32px */
     --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
+    --container-bleeding-edge-padding: var(--linear-sp-linear-8); /* 32px */
     --container-width: 1240px; /* default container caps here */
+    --page-width: var(--breakpoint-xl);
     --typography-heading-2xl-size: var(--typography-size-4xl); /* 40px */
     /* heading/xl stays at 32px, heading/lg–sm unchanged */
+  }
+}
+
+/* 2xl tier — 1480px+ */
+@media (min-width: 1480px) {
+  :root {
+    --page-width: var(--breakpoint-2xl);
+  }
+}
+
+/* 3xl tier — 1920px+ */
+@media (min-width: 1920px) {
+  :root {
+    --page-width: var(--breakpoint-3xl);
+  }
+}
+
+/* 4xl tier — 2560px+ */
+@media (min-width: 2560px) {
+  :root {
+    --page-width: var(--breakpoint-4xl);
   }
 }
 
@@ -564,15 +609,28 @@
   --button-border-width: var(--border-width-thin);
   --button-padding-x: var(--linear-sp-linear-3);
   --button-padding-y: var(--linear-sp-linear-2);
+  --button-padding-x-icon-only: var(--fibonachi-sp-fib-5); /*  8px */
   --button-gap-elements: var(--linear-sp-linear-1);
+  --button-gap-addon: var(--linear-sp-linear-2);
+  --button-gap-spacer: var(--fibonachi-sp-fib-2);
   --button-small-padding-x: var(--linear-sp-linear-2);
   --button-small-padding-y: var(--fibonachi-sp-fib-3);
+  --button-small-padding-x-icon-only: var(--fibonachi-sp-fib-3);
+  --button-small-gap-elements: var(--linear-sp-linear-1);
+  --button-small-gap-addon: var(--linear-sp-linear-2);
+  --button-small-gap-spacer: var(--fibonachi-sp-fib-1);
   --button-large-padding-x: var(--linear-sp-linear-4);
   --button-large-padding-y: var(--linear-sp-linear-3);
+  --button-large-padding-x-icon-only: var(--linear-sp-linear-3);
+  --button-large-gap-elements: var(--linear-sp-linear-1);
+  --button-large-gap-addon: var(--linear-sp-linear-2);
+  --button-large-gap-spacer: var(--fibonachi-sp-fib-4);
   --button-icon-sizing-xs: var(--pixel-px-16);
   --button-icon-sizing-sm: var(--pixel-px-20);
   --button-icon-sizing-md: var(--pixel-px-22);
   --button-icon-sizing-lg: var(--pixel-px-24);
+  --button-icon-opacity: 1;
+  --button-icon-opacity-icon-only-counter-pill: 0.75;
   --button-primary-border: var(--color-interaction-primary-border);
   --button-primary-surface: var(--color-interaction-primary-surface);
   --button-primary-text: var(--color-interaction-primary-accent);
@@ -665,6 +723,16 @@
   --action-row-padding-x-checkbox: var(--fibonachi-sp-fib-4);                /*  5px — leading inset when checkbox is present */
   --action-row-gap-icon: var(--linear-sp-linear-2);                          /*  8px — icon ↔ label and label ↔ counter */
   --action-row-gap-checkbox: var(--fibonachi-sp-fib-6);                      /* 13px — checkbox ↔ label */
+
+  /* Card grid (upcoming component) */
+  --cardgrid-gap: var(--spacing-layout-xs);
+
+  /* Menu item (upcoming component) */
+  --menu-item-gap: var(--linear-sp-linear-1);
+
+  /* Effects */
+  --effect-background-blur-10: blur(var(--blur-blur-10));
+  --effect-elevation: 0px 1px 4px 0px rgba(0, 0, 0, 0.08), 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
 
   /* Input */
   --input-border: var(--color-border);
