@@ -332,6 +332,31 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-05-14 (token export sync: new button/actionrow/layout/typography tokens)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-05-14" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-14</h2>
+        <button class="cl-copy-btn" data-anchor="2026-05-14">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin-bottom:.25rem">Tokens</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>New button tokens</strong> — <code>--button-padding-x-icon-only</code> and <code>small</code>/<code>large</code> variants; <code>--button-gap-addon</code> (8px), <code>--button-gap-spacer</code> (2px) and size variants; <code>--button-icon-opacity</code> (1) + <code>--button-icon-opacity-icon-only-counter-pill</code> (0.75)</li>
+          <li><strong>New ActionRow tokens</strong> (upcoming component): <code>--actionrow-border-radius</code>, <code>--actionrow-surface</code>, <code>--actionrow-text</code>, <code>--actionrow-hover-surface</code>, <code>--actionrow-padding-{x,x-icon-only,y}</code>, <code>--actionrow-gap-{elements,addon,spacer}</code></li>
+          <li><strong>New</strong> <code>--cardgrid-gap</code>, <code>--menu-item-gap</code> for upcoming components</li>
+          <li><strong>New typography line-height composites</strong> (responsive at md+): <code>--typography-body-line-height</code>, <code>--typography-body-s-line-height</code>, <code>--typography-heading-{lg,md,sm}-line-height</code></li>
+          <li><strong>New layout tokens</strong>: <code>--container-bleeding-edge-padding</code> (0 → 16px lg → 32px xl+) and <code>--page-width</code> (tracks current breakpoint)</li>
+          <li><strong>New effect tokens</strong>: <code>--effect-background-blur-10</code>, <code>--effect-elevation</code></li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-04-24 (button corner radius → md 8px)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
