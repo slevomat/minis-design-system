@@ -18,6 +18,7 @@ Individual UI elements with props and variants.
 - [Container](./components/container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding
 - [Topbar](./components/topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
 - [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
+- [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
 
 [→ All Components](./components/README.md)
 

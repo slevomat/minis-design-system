@@ -343,6 +343,21 @@ const changelogHTML = `
       </div>
 
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-action-row&gt;</code>
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>New component</strong> — interactive list row for vertical menus, dropdowns and filter lists. Always clickable.</li>
+          <li>Leading <code>variant</code> (mutually exclusive): <code>none</code> (label only), <code>icon</code> (24×24 icon slot), <code>checkbox</code> (leading <code>&lt;minis-checkbox&gt;</code>).</li>
+          <li>States: <code>default</code> / <code>hover</code> (auto on hover or forced via <code>state="hover"</code>) / <code>active</code> (persistent highlight). Hover wins over active — an active row turns blue-tinted on hover.</li>
+          <li>Optional trailing counter via <code>counter</code> prop — always sits directly after the label, rendered as <code>&lt;minis-pill-counter size="lg"&gt;</code> with white background and primary text.</li>
+          <li><code>checked</code> property only applies to <code>variant="checkbox"</code>.</li>
+          <li>New design tokens added under <code>--action-row-*</code> (border radius, surfaces, paddings, gaps).</li>
+          <li>AI prompt doc added at <code>docs/ai-prompts/components/action-row.md</code>.</li>
+        </ul>
+      </div>
+
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
         <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-checkbox&gt;</code>
       </h3>
       <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">

@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-05-14
 
+### Action Row
+
+- **New component** `<minis-action-row>` — interactive list row for vertical menus, dropdowns and filter lists
+  - Leading `variant` (mutually exclusive): `none` (label only) · `icon` (leading icon slot, 24×24) · `checkbox` (leading `<minis-checkbox>`)
+  - States: `default`, `hover` (auto on pointer hover, or forced via `state="hover"`), `active` (persistent highlight). Hover wins over active — an active row turns blue-tinted on hover.
+  - Optional trailing counter via `counter` prop — always rendered directly after the label, using `<minis-pill-counter size="lg">` with white background and primary text colour (per Figma).
+  - Props: `variant`, `state`, `active`, `checked` (checkbox variant only), `disabled`, `counter`
+  - Slots: default (label), `icon` (only for `variant="icon"`)
+  - Event: `change` → `{ checked: boolean }` (checkbox variant)
+  - Keyboard: `Enter` / `Space` activate
+- **New tokens** in `@minis/tokens` for the component:
+  `--action-row-border-radius`, `--action-row-surface`, `--action-row-text`,
+  `--action-row-hover-surface`, `--action-row-active-surface`,
+  `--action-row-padding-x`, `--action-row-padding-y`,
+  `--action-row-padding-x-icon-only`, `--action-row-padding-x-checkbox`,
+  `--action-row-gap-icon`, `--action-row-gap-checkbox`
+- AI prompt doc added at `docs/ai-prompts/components/action-row.md`
+
 ### Checkbox
 
 - **New component** `<minis-checkbox>` — binary selection input

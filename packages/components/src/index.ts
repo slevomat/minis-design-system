@@ -14,3 +14,4 @@ export { MinisCardGrid } from './components/card-grid/card-grid.js';
 export { MinisContainer } from './components/container/container.js';
 export { MinisTopbar } from './components/topbar/topbar.js';
 export { MinisCheckbox } from './components/checkbox/checkbox.js';
+export { MinisActionRow } from './components/action-row/action-row.js';

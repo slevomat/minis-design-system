@@ -653,6 +653,19 @@
   --navigation-gap: var(--linear-sp-linear-6);                    /* 24px — gap between items */
   --navigation-border-color: var(--color-border);
 
+  /* Action Row */
+  --action-row-border-radius: var(--border-radius-md);                       /*  8px */
+  --action-row-surface: var(--button-tertiary-surface);                      /* transparent */
+  --action-row-text: var(--color-interaction-secondary-accent);              /* black/white per mode */
+  --action-row-hover-surface: var(--button-tertiary-hover-surface);          /* #e6f7fc */
+  --action-row-active-surface: var(--color-surface-faded);                   /* #f1f3f5 */
+  --action-row-padding-x: var(--linear-sp-linear-2);                         /*  8px */
+  --action-row-padding-y: var(--fibonachi-sp-fib-3);                         /*  3px */
+  --action-row-padding-x-icon-only: var(--fibonachi-sp-fib-3);               /*  3px — leading inset when icon is present */
+  --action-row-padding-x-checkbox: var(--fibonachi-sp-fib-4);                /*  5px — leading inset when checkbox is present */
+  --action-row-gap-icon: var(--linear-sp-linear-2);                          /*  8px — icon ↔ label and label ↔ counter */
+  --action-row-gap-checkbox: var(--fibonachi-sp-fib-6);                      /* 13px — checkbox ↔ label */
+
   /* Input */
   --input-border: var(--color-border);
   --input-border-hover: var(--color-border-focus);
