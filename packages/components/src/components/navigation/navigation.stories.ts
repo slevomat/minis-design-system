@@ -5,7 +5,7 @@ import '../tag/tag.js';
 import '@minis/icons';
 
 const meta: Meta = {
-  title: 'Components/Navigation/Navigation',
+  title: 'Components/Navigations/Navigation',
   component: 'minis-navigation',
   tags: ['autodocs'],
   parameters: {
