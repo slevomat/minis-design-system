@@ -2,7 +2,7 @@
 
 [Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3470-668)
 
-Two components for horizontal navigational UI patterns, based on slevomat.cz production usage.
+The Navigation component consists of a set of elements used to build the main Slevomat menu, as well as contextual tab navigation on product detail pages.
 
 - `<minis-navigation>` — the scrollable nav bar wrapper
 - `<minis-navigation-item>` — an individual link or tab item
