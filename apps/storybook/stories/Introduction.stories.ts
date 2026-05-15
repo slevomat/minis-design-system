@@ -347,22 +347,19 @@ const changelogHTML = `
       </h3>
       <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <ul style="margin:0;padding-left:1.25rem">
-          <li>Vertical, icon-based navigation tile for primary shortcuts — typically arranged in a grid (e.g. 4-column homepage shortcut row).</li>
+          <li>Vertical, icon-based navigation tile for primary shortcuts — typically arranged in a 4-column homepage grid.</li>
           <li>Renders as <code>&lt;button&gt;</code> by default; as <code>&lt;a&gt;</code> when <code>href</code> is set.</li>
-          <li>Required: <code>icon</code> slot (24×24 px) and label (default slot).</li>
-          <li>Optional <code>counter</code> prop — shows an inline counter pill directly after the label.</li>
-          <li>States: <code>default</code>, <code>hover</code>, <code>disabled</code>.</li>
+          <li>Props: <code>href</code> (string), <code>counter</code> (string — inline pill after label), <code>disabled</code> (boolean).</li>
+          <li>Required slots: <code>icon</code> (24×24 px, use <code>&lt;minis-icon slot="icon"&gt;</code>) and default slot (label text).</li>
+          <li>States: <code>default</code>, <code>hover</code> (blue-tinted surface), <code>disabled</code> (opacity 0.6, no pointer events).</li>
+          <li>Fixed height <strong>70 px</strong>: 1 px border + 12 px top pad + 24 px icon + 4 px gap + 16 px label row + 12 px bottom pad + 1 px border.</li>
+          <li>Icon colour: blue <code>#006eb9</code> via <code>--tile-icon-color</code> — separate from label colour (black).</li>
+          <li>Counter pill uses inverted colours: black background (<code>--tile-counter-surface</code>), white text (<code>--tile-counter-text</code>).</li>
+          <li><code>:host</code> enforces <code>min-width: calc(2 × --tile-padding-x)</code> = 64 px — x-padding (32 px each side) is always visible; labels truncate with <code>…</code> rather than padding collapsing.</li>
+          <li>Grid: use <code>repeat(N, 1fr)</code> for equal-width columns. Reduce column count in tighter spaces — do not shrink tiles to squeeze more columns in.</li>
           <li>New tokens: <code>--tile-surface</code>, <code>--tile-border</code>, <code>--tile-text</code>, <code>--tile-icon-color</code>, <code>--tile-hover-surface</code>, <code>--tile-counter-surface</code>, <code>--tile-counter-text</code>, <code>--tile-padding-top</code>, <code>--tile-padding-bottom</code>, <code>--tile-padding-x</code>, <code>--tile-gap-elements-y</code>, <code>--tile-gap-elements-x</code>, <code>--tile-label-row-height</code>.</li>
-        </ul>
-      </div>
-
-      <h3 style="font-size:1rem;margin:.75rem 0 .25rem"><code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-tile&gt;</code> — Refinements</h3>
-      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
-        <ul style="margin:0;padding-left:1.25rem">
-          <li><code>:host</code> enforces <code>min-width: calc(2 × --tile-padding-x)</code> — 32 px padding on each side is always visible; labels truncate with <code>…</code> rather than padding collapsing when the tile is narrow.</li>
-          <li>Label row constrained to the tile content area (<code>display: flex; width: 100%</code>) — prevents label + counter from spilling into the padding zone.</li>
-          <li>Grid Example story: container widened to 640 px; track sizing corrected to <code>repeat(4, 1fr)</code> for equal-width columns that still honour the tile's enforced minimum width.</li>
-          <li>AI prompt doc extended with grid layout rules: use <code>repeat(N, 1fr)</code>, size the container for the widest label, reduce column count in tighter spaces rather than shrinking tiles.</li>
+          <li>Storybook stories: Playground, States, With Counter, As Link, Grid Example — under <strong>Components / Navigations / Tile</strong>.</li>
+          <li>AI prompt reference: <code>docs/ai-prompts/components/tile.md</code>.</li>
         </ul>
       </div>
 

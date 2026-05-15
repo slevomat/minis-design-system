@@ -6,28 +6,68 @@ All notable changes to this project will be documented in this file.
 
 ### Tile
 
-- **New component** `<minis-tile>` — vertical, icon-based navigation tile for primary shortcuts
-  - Renders as `<button>` by default; as `<a>` when `href` is set
-  - Required slots: `icon` (24×24 px) and default slot (label text)
-  - Optional `counter` prop — renders an inline counter pill directly after the label
-  - States: `default`, `hover` (CSS), `disabled` (attribute, opacity 0.6 + `pointer-events: none`)
-  - Props: `href`, `counter`, `disabled`
-  - Keyboard: Tab-focusable, `:focus-visible` outline; disabled prevents all interaction
-  - Dark mode handled via CSS custom property overrides
-- **New tokens** in `@minis/tokens`:
-  `--tile-surface`, `--tile-border`, `--tile-text`, `--tile-hover-surface`,
-  `--tile-counter-surface`, `--tile-counter-text`,
-  `--tile-padding-top`, `--tile-padding-bottom`, `--tile-padding-x`,
-  `--tile-gap-elements-y`, `--tile-gap-elements-x`
-- AI prompt doc added at `docs/ai-prompts/components/tile.md`
-- Storybook stories added under **Components/Navigations/Tile** (Playground, States, With Counter, As Link, Grid Example)
+**New component** `<minis-tile>` ([Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4208-4230))
 
-#### Refinements
+A vertical, icon-based navigation tile for primary shortcuts, typically arranged in a 4-column homepage grid.
 
-- `:host` enforces `min-width: calc(2 × --tile-padding-x)` — 32 px padding on each side is always visible; labels truncate with `…` rather than padding collapsing when the tile is narrow
-- Label row constrained to the tile content area (`display: flex; width: 100%`) — prevents label + counter from spilling into the padding zone
-- Grid Example story: container widened to 640 px; track sizing corrected to `repeat(4, 1fr)` for equal-width columns that still honour the tile's enforced minimum width
-- AI prompt doc extended with grid layout rules: use `repeat(N, 1fr)`, size the container for the widest label, reduce column count in tighter spaces rather than shrinking tiles
+#### API
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `href` | `string` | `''` | Destination URL — renders `<a>` when set, `<button>` otherwise |
+| `counter` | `string` | — | Inline counter pill after the label; omit or pass `""` to hide |
+| `disabled` | `boolean` | `false` | Prevents interaction; reduces opacity to 0.6 |
+
+| Slot | Required | Description |
+|---|---|---|
+| `icon` | **Yes** | Navigation icon 24×24 px — use `<minis-icon slot="icon" name="…">` |
+| _(default)_ | **Yes** | Label text — short, ideally one word |
+
+#### States
+
+- `default` — white surface, grey border
+- `hover` — blue-tinted surface (`--tile-hover-surface`)
+- `disabled` — opacity 0.6, `pointer-events: none`, `cursor: not-allowed`
+
+#### Visual spec
+
+- Fixed height **70 px**: 1 px border + 12 px top padding + 24 px icon + 4 px gap + 16 px label row + 12 px bottom padding + 1 px border
+- Icon colour: **blue** `#006eb9` (`--tile-icon-color`) — separate from the label colour (black)
+- Counter pill: inverted colours — background = `--tile-counter-surface` (black), text = `--tile-counter-text` (white)
+- Label row height fixed at 16 px; the 18 px pill overflows this row but is clipped by the tile's `overflow: hidden`
+- `:host` enforces `min-width: calc(2 × --tile-padding-x)` = 64 px — x-padding is always visible; labels truncate with `…` rather than padding collapsing
+
+#### New tokens
+
+| Token | Value | Resolved | Purpose |
+|---|---|---|---|
+| `--tile-surface` | `var(--button-secondary-surface)` | `#fff` | Default background |
+| `--tile-border` | `var(--button-secondary-border)` | `#cbccce` | Border colour |
+| `--tile-text` | `var(--button-secondary-text)` | `#000` | Label text colour |
+| `--tile-icon-color` | `var(--button-tertiary-text)` | `#006eb9` | Icon colour (blue) |
+| `--tile-hover-surface` | `var(--button-secondary-hover-surface)` | `#e6f7fc` | Hover background |
+| `--tile-counter-surface` | `var(--button-secondary-text)` | `#000` | Counter pill background (inverted) |
+| `--tile-counter-text` | `var(--button-secondary-surface)` | `#fff` | Counter pill text (inverted) |
+| `--tile-padding-top` | `var(--linear-sp-linear-3)` | `12 px` | Top padding |
+| `--tile-padding-bottom` | `var(--linear-sp-linear-3)` | `12 px` | Bottom padding |
+| `--tile-padding-x` | `var(--linear-sp-linear-8)` | `32 px` | Horizontal padding (each side) |
+| `--tile-gap-elements-y` | `var(--linear-sp-linear-1)` | `4 px` | Gap: icon → label row |
+| `--tile-gap-elements-x` | `var(--linear-sp-linear-2)` | `8 px` | Gap: label → counter pill |
+| `--tile-label-row-height` | `var(--pixel-px-16)` | `16 px` | Fixed label row height |
+
+#### Grid layout
+
+- Use `repeat(N, 1fr)` for equal-width columns. **Do not use `minmax(0, 1fr)`** — it removes the tile's enforced minimum width and can collapse the padding.
+- Size the container so the widest label fits. Reference: "Moje nákupy" (no counter) needs ~155 px tile width → ~644 px for a 4-column grid with 8 px gaps.
+- **In tighter spaces, reduce the column count** (`repeat(3, 1fr)`, `repeat(2, 1fr)`) rather than shrinking tiles below a readable label width.
+
+#### Storybook stories
+
+Added under **Components / Navigations / Tile**: Playground, States, With Counter, As Link, Grid Example.
+
+#### Docs
+
+AI prompt reference added at `docs/ai-prompts/components/tile.md`.
 
 ### Action Row
 
