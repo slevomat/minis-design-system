@@ -12,7 +12,7 @@ const wheelIcon = html`
 `;
 
 const meta: Meta = {
-  title: 'Components/Lists/Action Row',
+  title: 'Components/Navigation/Action Row',
   component: 'minis-action-row',
   tags: ['autodocs'],
   parameters: {
