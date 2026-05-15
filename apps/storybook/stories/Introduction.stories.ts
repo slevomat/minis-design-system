@@ -332,6 +332,26 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-05-15 (storybook: Navigations folder)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-05-15" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-15</h2>
+        <button class="cl-copy-btn" data-anchor="2026-05-15">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Storybook</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li>Navigation and Action Row components grouped under a new <strong>Navigations</strong> folder, reflecting their shared role in building all kinds of navigation and menus.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-05-14 (new components: action-row, checkbox + token sync)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

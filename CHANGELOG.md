@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-15
+
+### Storybook
+
+- Navigation and Action Row components grouped under a new **Navigations** folder, reflecting their shared role in building all kinds of navigation and menus.
+
 ## 2026-05-14
 
 ### Action Row
