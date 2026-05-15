@@ -19,6 +19,7 @@ Individual UI elements with props and variants.
 - [Topbar](./components/topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
 - [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
+- [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 
 [→ All Components](./components/README.md)
 

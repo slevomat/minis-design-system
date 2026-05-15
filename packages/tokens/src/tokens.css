@@ -725,6 +725,21 @@
   --action-row-gap-icon: var(--linear-sp-linear-2);                          /*  8px — icon ↔ label and label ↔ counter */
   --action-row-gap-checkbox: var(--fibonachi-sp-fib-6);                      /* 13px — checkbox ↔ label */
 
+  /* Tile */
+  --tile-padding-top: var(--linear-sp-linear-3);     /* 12px — top/bottom symmetric */
+  --tile-padding-bottom: var(--linear-sp-linear-3);
+  --tile-padding-x: var(--linear-sp-linear-8);       /* 32px */
+  --tile-gap-elements-y: var(--linear-sp-linear-1);  /*  4px — icon → label row */
+  --tile-gap-elements-x: var(--linear-sp-linear-2);  /*  8px — label text → counter pill */
+  --tile-label-row-height: var(--pixel-px-16);       /* 16px — matches Figma; pill (18px) overflows row but stays within tile. 1+12+24+4+16+12+1 = 70px */
+  --tile-surface: var(--button-secondary-surface);
+  --tile-border: var(--button-secondary-border);
+  --tile-text: var(--button-secondary-text);          /* label text — black */
+  --tile-icon-color: var(--button-tertiary-text);     /* icon — blue #006eb9 */
+  --tile-hover-surface: var(--button-secondary-hover-surface);
+  --tile-counter-surface: var(--button-secondary-text);   /* pill bg = button text colour (inverted) */
+  --tile-counter-text: var(--button-secondary-surface);   /* pill text = button surface colour (inverted) */
+
   /* Card grid (upcoming component) */
   --cardgrid-gap: var(--spacing-layout-xs);
 

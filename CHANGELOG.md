@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-05-15
 
+### Tile
+
+- **New component** `<minis-tile>` — vertical, icon-based navigation tile for primary shortcuts
+  - Renders as `<button>` by default; as `<a>` when `href` is set
+  - Required slots: `icon` (24×24 px) and default slot (label text)
+  - Optional `counter` prop — renders an inline counter pill directly after the label
+  - States: `default`, `hover` (CSS), `disabled` (attribute, opacity 0.6 + `pointer-events: none`)
+  - Props: `href`, `counter`, `disabled`
+  - Keyboard: Tab-focusable, `:focus-visible` outline; disabled prevents all interaction
+  - Dark mode handled via CSS custom property overrides
+- **New tokens** in `@minis/tokens`:
+  `--tile-surface`, `--tile-border`, `--tile-text`, `--tile-hover-surface`,
+  `--tile-counter-surface`, `--tile-counter-text`,
+  `--tile-padding-top`, `--tile-padding-bottom`, `--tile-padding-x`,
+  `--tile-gap-elements-y`, `--tile-gap-elements-x`
+- AI prompt doc added at `docs/ai-prompts/components/tile.md`
+- Storybook stories added under **Components/Navigations/Tile** (Playground, States, With Counter, As Link, Grid Example)
+
+#### Refinements
+
+- `:host` enforces `min-width: calc(2 × --tile-padding-x)` — 32 px padding on each side is always visible; labels truncate with `…` rather than padding collapsing when the tile is narrow
+- Label row constrained to the tile content area (`display: flex; width: 100%`) — prevents label + counter from spilling into the padding zone
+- Grid Example story: container widened to 640 px; track sizing corrected to `repeat(4, 1fr)` for equal-width columns that still honour the tile's enforced minimum width
+- AI prompt doc extended with grid layout rules: use `repeat(N, 1fr)`, size the container for the widest label, reduce column count in tighter spaces rather than shrinking tiles
+
 ### Action Row
 
 #### Tokens
