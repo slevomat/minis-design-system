@@ -714,7 +714,8 @@
   /* Action Row */
   --action-row-border-radius: var(--border-radius-md);                       /*  8px */
   --action-row-surface: var(--button-tertiary-surface);                      /* transparent */
-  --action-row-text: var(--color-interaction-secondary-accent);              /* black/white per mode */
+  --action-row-text: var(--color-text-primary);                              /* primary text colour */
+  --action-row-icon: var(--button-tertiary-text);                            /* leading icon colour (blue) */
   --action-row-hover-surface: var(--button-tertiary-hover-surface);          /* #e6f7fc */
   --action-row-active-surface: var(--color-surface-faded);                   /* #f1f3f5 */
   --action-row-padding-x: var(--linear-sp-linear-2);                         /*  8px */

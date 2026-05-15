@@ -342,6 +342,16 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-action-row&gt;</code> — Tokens
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><code>--action-row-text</code> updated: now references <code>--color-text-primary</code> (was <code>--color-interaction-secondary-accent</code>). Same value in light mode; slightly different in dark mode.</li>
+          <li><code>--action-row-icon</code> added: references <code>--button-tertiary-text</code> (blue <code>#006eb9</code>). Leading icons in <code>variant="icon"</code> now use the tertiary-action blue, separate from the text colour.</li>
+        </ul>
+      </div>
+
       <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Storybook</h3>
       <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
         <ul style="margin:0;padding-left:1.25rem">

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-05-15
 
+### Action Row
+
+#### Tokens
+
+- `--action-row-text` updated: now references `--color-text-primary` (was `--color-interaction-secondary-accent`). Same value in light mode; slightly different in dark mode (near-white `--color-grey-95` instead of pure white).
+- `--action-row-icon` added: references `--button-tertiary-text` (`--color-interaction-tertiary-accent`, blue `#006eb9`). Leading icons in the `variant="icon"` row are now styled with the tertiary-action blue, separate from the text colour.
+
 ### Storybook
 
 - Navigation and Action Row components grouped under a new **Navigations** folder, reflecting their shared role in building all kinds of navigation and menus.
