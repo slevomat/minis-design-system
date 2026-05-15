@@ -1,6 +1,6 @@
 # Navigation & Navigation Item
 
-[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3470-668)
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4135-3385&t=mtbinHhK8psdU6hq-11)
 
 The Navigation component consists of a set of elements used to build the main Slevomat menu, as well as contextual tab navigation on product detail pages.
 

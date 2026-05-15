@@ -332,7 +332,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-05-15 (storybook: Navigations folder)
+           2026-05-15 (new component: tile + storybook: Navigations folder)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-05-15" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-15</h2>
@@ -340,6 +340,30 @@ const changelogHTML = `
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
           <span class="copy-label">Copy link</span>
         </button>
+      </div>
+
+      <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
+        <code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-tile&gt;</code> — New component
+      </h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li>Vertical, icon-based navigation tile for primary shortcuts — typically arranged in a grid (e.g. 4-column homepage shortcut row).</li>
+          <li>Renders as <code>&lt;button&gt;</code> by default; as <code>&lt;a&gt;</code> when <code>href</code> is set.</li>
+          <li>Required: <code>icon</code> slot (24×24 px) and label (default slot).</li>
+          <li>Optional <code>counter</code> prop — shows an inline counter pill directly after the label.</li>
+          <li>States: <code>default</code>, <code>hover</code>, <code>disabled</code>.</li>
+          <li>New tokens: <code>--tile-surface</code>, <code>--tile-border</code>, <code>--tile-text</code>, <code>--tile-icon-color</code>, <code>--tile-hover-surface</code>, <code>--tile-counter-surface</code>, <code>--tile-counter-text</code>, <code>--tile-padding-top</code>, <code>--tile-padding-bottom</code>, <code>--tile-padding-x</code>, <code>--tile-gap-elements-y</code>, <code>--tile-gap-elements-x</code>, <code>--tile-label-row-height</code>.</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem"><code style="background:var(--color-surface-faded,#f1f3f5);padding:.2rem .5rem;border-radius:4px">&lt;minis-tile&gt;</code> — Refinements</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><code>:host</code> enforces <code>min-width: calc(2 × --tile-padding-x)</code> — 32 px padding on each side is always visible; labels truncate with <code>…</code> rather than padding collapsing when the tile is narrow.</li>
+          <li>Label row constrained to the tile content area (<code>display: flex; width: 100%</code>) — prevents label + counter from spilling into the padding zone.</li>
+          <li>Grid Example story: container widened to 640 px; track sizing corrected to <code>repeat(4, 1fr)</code> for equal-width columns that still honour the tile's enforced minimum width.</li>
+          <li>AI prompt doc extended with grid layout rules: use <code>repeat(N, 1fr)</code>, size the container for the widest label, reduce column count in tighter spaces rather than shrinking tiles.</li>
+        </ul>
       </div>
 
       <h3 style="display:flex;align-items:center;gap:.5rem;font-size:1rem;margin:.75rem 0 .25rem">
