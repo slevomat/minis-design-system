@@ -332,6 +332,44 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-05-21 (tokens: typography line-height export fix)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-05-21" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-21</h2>
+        <button class="cl-copy-btn" data-anchor="2026-05-21">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Tokens — typography line-height</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>Line-height scale export fixed.</strong> The Figma token exporter plugin now emits the <code>typography/line-height</code> collection correctly — previously Figma stored meaningless internal floats and produced CSS-invalid variable names containing <code>%</code>.</li>
+          <li>Renamed scale tokens <code>--typography-line-height-percentage-{n}%</code> → <code>--typography-line-height-{n}</code> (the trailing <code>%</code>, invalid in a CSS custom property name, is gone).</li>
+          <li>Values changed from unitless ratios to percentages — e.g. <code>--typography-line-height-138</code> is now <code>138%</code> (was <code>1.38</code>).</li>
+          <li>New token <code>--typography-line-height-90</code> (<code>90%</code>).</li>
+          <li>Responsive tokens <code>--typography-heading-{lg,md,sm}-line-height</code>, <code>--typography-body-md-line-height</code>, <code>--typography-body-sm-line-height</code> now reference the renamed scale.</li>
+          <li>Body responsive line-height tokens renamed <code>--typography-body-line-height</code> → <code>--typography-body-md-line-height</code> and <code>--typography-body-s-line-height</code> → <code>--typography-body-sm-line-height</code>, aligning the Layout collection with the <code>body/md</code> · <code>body/sm</code> text-style tiers — body text styles now resolve their <code>line-height</code> to a <code>var()</code> reference instead of a frozen value.</li>
+          <li>Caption text style <code>--typography-caption-s</code> renamed to <code>--typography-caption-sm</code>, consistent with the <code>xs</code> / <code>xxs</code> siblings.</li>
+          <li>Heading MD and SM weights corrected to <strong>semibold (600)</strong> to match the Figma text styles — Storybook previously showed them as medium (500).</li>
+          <li>Components updated to the new names: <code>&lt;minis-alert&gt;</code>, <code>&lt;minis-button&gt;</code>, <code>&lt;minis-checkbox&gt;</code>, <code>&lt;minis-navigation-item&gt;</code>, <code>&lt;minis-pill-counter&gt;</code>.</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Storybook</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>Design Tokens → Typography</strong> — new <em>Line Heights</em> table documenting the full <code>--typography-line-height-{n}</code> scale with rendered previews.</li>
+          <li><strong>Design Tokens → Text Styles</strong> — new <em>Responsive line-heights</em> table. Heading and Body previews and Spec columns read live values and re-flow when the Viewport toolbar tier changes.</li>
+          <li><strong>Design Tokens → Text Styles</strong> — each row's Token column leads with the Figma composite text-style token (<code>--typography-heading-sm</code>, <code>--typography-body-md</code>…) and lists the <code>size</code> + <code>line-height</code> tokens it resolves to. Headings, Body and Caption tables now share one consistent layout.</li>
+          <li>The Viewport switcher now overrides the responsive line-height tokens per tier, so line-heights visibly tighten/loosen across <strong>2xs/xs · sm · md/lg · xl</strong>.</li>
+        </ul>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-05-15 (new component: tile + storybook: Navigations folder)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
