@@ -1379,22 +1379,22 @@
     "oklch": "var(--linear-sp-linear-2)",
     "heritage": ""
   },
-  "--typography-body-s-line-height": {
+  "--typography-body-sm-line-height": {
     "hex": "1.5700000524520874",
     "rgb": null,
-    "oklch": "var(--typography-line-height-percentage-157%)",
+    "oklch": "var(--typography-line-height-157)",
     "heritage": ""
   },
-  "--typography-body-line-height": {
+  "--typography-body-md-line-height": {
     "hex": "1.5",
     "rgb": null,
-    "oklch": "var(--typography-line-height-percentage-150%)",
+    "oklch": "var(--typography-line-height-150)",
     "heritage": ""
   },
   "--typography-heading-large-line-height": {
     "hex": "1.25",
     "rgb": null,
-    "oklch": "var(--typography-line-height-percentage-125%)",
+    "oklch": "var(--typography-line-height-125)",
     "heritage": ""
   },
   "--typography-heading-large-size": {
@@ -1406,7 +1406,7 @@
   "--typography-heading-medium-line-height": {
     "hex": "1.2999999523162842",
     "rgb": null,
-    "oklch": "var(--typography-line-height-percentage-130%)",
+    "oklch": "var(--typography-line-height-130)",
     "heritage": ""
   },
   "--typography-heading-medium-size": {
@@ -1418,7 +1418,7 @@
   "--typography-heading-small-line-height": {
     "hex": "1.3300000429153442",
     "rgb": null,
-    "oklch": "var(--typography-line-height-percentage-133%)",
+    "oklch": "var(--typography-line-height-133)",
     "heritage": ""
   },
   "--typography-heading-small-size": {
@@ -2533,7 +2533,7 @@
     },
     "heritage": "Smaller texts: notes, descriptions, captions."
   },
-  "--typography-caption-s": {
+  "--typography-caption-sm": {
     "hex": {
       "fontFamily": "Inter",
       "fontWeight": 400,

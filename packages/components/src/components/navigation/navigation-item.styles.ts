@@ -21,7 +21,7 @@ export const navigationItemStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-md, 16px);
     font-weight: var(--typography-weight-regular, 400);
-    line-height: var(--typography-line-height-percentage-150%, 1.5);
+    line-height: var(--typography-line-height-150, 150%);
     color: var(--navigation-item-accent, currentColor);
     background: transparent;
     border: none;

@@ -15,7 +15,7 @@ export const buttonStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-md, 16px);
     font-weight: var(--typography-weight-semibold, 600);
-    line-height: var(--typography-line-height-percentage-100%, 1);
+    line-height: var(--typography-line-height-100, 100%);
     white-space: nowrap;
 
     cursor: pointer;

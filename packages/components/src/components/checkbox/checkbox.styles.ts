@@ -9,7 +9,7 @@ export const checkboxStyles = css`
     -webkit-tap-highlight-color: transparent;
     font-family: var(--typography-font-family-sans);
     font-size: var(--typography-size-sm);
-    line-height: var(--typography-line-height-percentage-125\\%, 1.25);
+    line-height: var(--typography-line-height-125, 125%);
     color: var(--color-text-primary);
   }
 

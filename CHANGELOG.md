@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-21
+
+### Tokens
+
+**Typography line-height export fixed** — the Figma token exporter plugin now emits the `typography/line-height` scale correctly. Previously Figma stored meaningless internal floats and produced CSS-invalid variable names containing `%`.
+
+- Renamed scale tokens `--typography-line-height-percentage-{100,125,130,133,138,140,143,150,157}%` → `--typography-line-height-{n}`. The trailing `%` — invalid in a CSS custom property name — is gone.
+- Values changed from unitless ratios to percentages: e.g. `--typography-line-height-138` is now `138%` (was `1.38`).
+- New token `--typography-line-height-90` (`90%`).
+- The responsive line-height tokens (`--typography-heading-{lg,md,sm}-line-height`, `--typography-body-md-line-height`, `--typography-body-sm-line-height`) now reference the renamed scale.
+- Body responsive line-height tokens renamed `--typography-body-line-height` → `--typography-body-md-line-height` and `--typography-body-s-line-height` → `--typography-body-sm-line-height`, aligning the Layout collection variables with the `body/md` · `body/sm` text-style tiers. The Figma body text styles now resolve their `line-height` to these `var()` references instead of a frozen value (headings already did).
+- Caption text style `--typography-caption-s` renamed to `--typography-caption-sm`, consistent with the `xs` / `xxs` siblings and the `sm` tier naming used elsewhere.
+- Heading MD and SM weights corrected to **semibold (600)** to match the Figma text styles — Storybook previously rendered them as medium (500).
+- Components updated to the new names: `<minis-alert>`, `<minis-button>`, `<minis-checkbox>`, `<minis-navigation-item>`, `<minis-pill-counter>`.
+
+### Storybook
+
+- **Design Tokens → Typography** — new "Line Heights" table documenting the full `--typography-line-height-{n}` scale with rendered previews.
+- **Design Tokens → Text Styles** — new "Responsive line-heights" table. Heading and Body previews and Spec columns now read live values and re-flow when the Viewport toolbar tier changes.
+- **Design Tokens → Text Styles** — each row's Token column now leads with the Figma composite text-style token (`--typography-heading-sm`, `--typography-body-md`…) and lists the `size` + `line-height` tokens it resolves to underneath. Headings, Body and Caption tables share one consistent layout.
+- The Viewport switcher (`preview.ts`) now also overrides the responsive line-height tokens per tier, so line-heights visibly tighten/loosen across 2xs/xs · sm · md/lg · xl.
+
 ## 2026-05-15
 
 ### Tile

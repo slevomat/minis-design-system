@@ -85,6 +85,44 @@ const interactionRow = (label: string, surface: string, border: string, accent: 
 
 const hr = `<hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>`;
 
+/**
+ * A Text Styles row. The headline is the Figma text-style composite token; below it
+ * the size + line-height tokens it resolves to in CSS. `lhToken` omitted → the style
+ * carries a fixed line-height with no Layout-collection counterpart.
+ */
+type StyleRowDef = {
+  label: string;
+  composite: string;
+  sizeToken: string;
+  sizeFallback: string;
+  lhToken?: string;
+  lhValue: string;
+  weight: string;
+  preview: string;
+};
+
+const styleRow = (d: StyleRowDef) => {
+  const lhCss = d.lhToken ? `var(${d.lhToken}, ${d.lhValue})` : d.lhValue;
+  const lhAttr = d.lhToken ?? d.lhValue;
+  const lhDisplay = d.lhToken
+    ? `<code>${d.lhToken}</code>`
+    : `<span style="font-style:italic">${d.lhValue}</span>`;
+  return `<tr>
+    <td style="${td}"><strong>${d.label}</strong></td>
+    <td style="${td}">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <code style="font-weight:600">${d.composite}</code>
+        <div style="font-size:.75em;color:var(--color-text-secondary,#6b6b70);line-height:1.7">
+          <div>size&nbsp;·&nbsp;<code>${d.sizeToken}</code></div>
+          <div>line-height&nbsp;·&nbsp;${lhDisplay}</div>
+        </div>
+      </div>
+    </td>
+    <td style="${td}"><span data-live-spec="${d.sizeToken}" data-weight="${d.weight}" data-lh="${lhAttr}"></span></td>
+    <td style="${td}"><span style="font-size:var(${d.sizeToken}, ${d.sizeFallback});font-weight:${d.weight};line-height:${lhCss};display:block">${d.preview}</span></td>
+  </tr>`;
+};
+
 export const Overview: Story = {
   name: 'Overview',
   render: () => r(`
@@ -580,6 +618,30 @@ export const Typography: Story = {
           </tr>`).join('')}
         </tbody>
       </table>
+
+      <h2>Line Heights</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">The raw line-height scale. Each token is a percentage relative to the element's font size. Responsive text styles pick a value from this scale per breakpoint — see <strong>Text Styles → responsive line-heights</strong>.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Token</th><th style="${th}">Value</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          ${[
+            ['--typography-line-height-90', '90%'],
+            ['--typography-line-height-100', '100%'],
+            ['--typography-line-height-125', '125%'],
+            ['--typography-line-height-130', '130%'],
+            ['--typography-line-height-133', '133%'],
+            ['--typography-line-height-138', '138%'],
+            ['--typography-line-height-140', '140%'],
+            ['--typography-line-height-143', '143%'],
+            ['--typography-line-height-150', '150%'],
+            ['--typography-line-height-157', '157%'],
+          ].map(([token, val]) => `<tr>
+            <td style="${td}"><code>${token}</code></td>
+            <td style="${td}">${val}</td>
+            <td style="${td}"><span style="display:block;font-size:14px;line-height:var(${token},${val});background:var(--color-surface-faded,#f1f3f5);border-left:2px solid var(--color-text-accent-link,#006eb9)">The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
     </div>
   `),
 };
@@ -589,59 +651,68 @@ export const TextStyles: Story = {
   render: () => r(`
     <div style="max-width:860px;font-family:var(--typography-font-family-sans,Inter,sans-serif);line-height:1.6;color:var(--color-text-primary,#000)">
       <h1 style="font-size:32px;font-weight:600;margin:0 0 8px">Text Styles</h1>
-      <p style="font-size:16px;font-weight:400;margin:0 0 40px;color:var(--color-text-secondary,#666)">Composite text styles combining size, weight, and line-height. Responsive sizes change at breakpoints.</p>
+      <p style="font-size:16px;font-weight:400;margin:0 0 16px;color:var(--color-text-secondary,#666)">Each text style is a Figma composite (<code>--typography-heading-sm</code>, <code>--typography-body-md</code>…). A composite isn't a single CSS variable — it bundles family, weight, size and line-height — so in CSS you apply it through its part tokens. The <strong>Token</strong> column shows the composite as the headline and the size + line-height tokens it resolves to underneath.</p>
+
+      <div style="display:flex;gap:10px;align-items:flex-start;background:var(--color-feedback-info-light,#e6f7fc);border:1px solid var(--color-feedback-info,#006eb9);border-radius:8px;padding:12px 16px;margin:0 0 40px;font-size:14px">
+        <span style="font-size:18px;line-height:1.3">📐</span>
+        <span>Use the <strong>Viewport</strong> switcher in the toolbar above (2xs/xs · sm · md/lg · xl) to see the Spec column and previews re-flow. Heading and body line-heights tighten as the viewport grows.</span>
+      </div>
+
+      ${hr}
+
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Responsive line-heights</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">These layout tokens resolve to a different value per breakpoint tier. The Value column below is live — switch the Viewport in the toolbar to watch it change.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Token</th><th style="${th}">2xs / xs · sm</th><th style="${th}">md / lg · xl</th><th style="${th}">Live value</th></tr></thead>
+        <tbody>
+          ${[
+            ['--typography-heading-lg-line-height', '130%', '125%'],
+            ['--typography-heading-md-line-height', '133%', '130%'],
+            ['--typography-heading-sm-line-height', '138%', '133%'],
+            ['--typography-body-md-line-height', '138%', '150%'],
+            ['--typography-body-sm-line-height', '143%', '157%'],
+          ].map(([token, small, large]) => `<tr>
+            <td style="${td}"><code>${token}</code></td>
+            <td style="${td}">${small}</td>
+            <td style="${td}">${large}</td>
+            <td style="${td}"><strong data-live-lh="${token}" style="font-variant-numeric:tabular-nums">—</strong></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
 
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Headings</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">All heading sizes from 2XL (large claims) down to SM. Responsive — sizes change at breakpoints.</p>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">All heading sizes from 2XL (large claims) down to SM. Responsive — size and line-height change at breakpoints.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
-          <tr>
-            <td style="${td}"><strong>Heading / 2XL</strong></td>
-            <td style="${td}"><code>--typography-heading-2xl-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-2xl-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-2xl-size,40px);font-weight:600;line-height:1.25;display:block">Heading 2XL</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Heading / XL</strong></td>
-            <td style="${td}"><code>--typography-heading-xl-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-xl-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-xl-size,32px);font-weight:600;line-height:1.25;display:block">Heading XL</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Heading / LG</strong></td>
-            <td style="${td}"><code>--typography-heading-lg-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-lg-size" data-weight="600" data-lh="1.25"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-lg-size,24px);font-weight:600;line-height:1.25;display:block">Heading LG</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Heading / MD</strong></td>
-            <td style="${td}"><code>--typography-heading-md-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-md-size" data-weight="500" data-lh="1.33"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-md-size,20px);font-weight:500;line-height:1.33;display:block">Heading MD</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Heading / SM</strong></td>
-            <td style="${td}"><code>--typography-heading-sm-size</code></td>
-            <td style="${td}"><span data-live-spec="--typography-heading-sm-size" data-weight="500" data-lh="1.38"></span></td>
-            <td style="${td}"><span style="font-size:var(--typography-heading-sm-size,18px);font-weight:500;line-height:1.38;display:block">Heading SM</span></td>
-          </tr>
+          ${[
+            { label: 'Heading / 2XL', composite: '--typography-heading-2xl', sizeToken: '--typography-heading-2xl-size', sizeFallback: '40px', lhValue: 'normal', weight: '600', preview: 'Heading 2XL' },
+            { label: 'Heading / XL', composite: '--typography-heading-xl', sizeToken: '--typography-heading-xl-size', sizeFallback: '32px', lhValue: 'normal', weight: '600', preview: 'Heading XL' },
+            { label: 'Heading / LG', composite: '--typography-heading-lg', sizeToken: '--typography-heading-lg-size', sizeFallback: '24px', lhToken: '--typography-heading-lg-line-height', lhValue: '125%', weight: '600', preview: 'Heading LG' },
+            { label: 'Heading / MD', composite: '--typography-heading-md', sizeToken: '--typography-heading-md-size', sizeFallback: '20px', lhToken: '--typography-heading-md-line-height', lhValue: '130%', weight: '600', preview: 'Heading MD' },
+            { label: 'Heading / SM', composite: '--typography-heading-sm', sizeToken: '--typography-heading-sm-size', sizeFallback: '18px', lhToken: '--typography-heading-sm-line-height', lhValue: '133%', weight: '600', preview: 'Heading SM' },
+          ].map(styleRow).join('')}
         </tbody>
       </table>
 
       <script>
         (function() {
           var WEIGHT_NAMES = { '600': 'semibold', '500': 'medium', '400': 'regular' };
+          function resolve(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+          }
           function updateSpecs() {
-            var spans = document.querySelectorAll('[data-live-spec]');
-            spans.forEach(function(el) {
+            document.querySelectorAll('[data-live-spec]').forEach(function(el) {
               var prop = el.getAttribute('data-live-spec');
               var weight = el.getAttribute('data-weight') || '400';
-              var lh = el.getAttribute('data-lh') || '1.5';
-              var val = getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
-              el.textContent = val + ' / ' + lh + ' / ' + (WEIGHT_NAMES[weight] || weight);
+              var lhAttr = el.getAttribute('data-lh') || '1.5';
+              var lh = lhAttr.indexOf('--') === 0 ? (resolve(lhAttr) || lhAttr) : lhAttr;
+              el.textContent = resolve(prop) + ' / ' + lh + ' / ' + (WEIGHT_NAMES[weight] || weight);
+            });
+            document.querySelectorAll('[data-live-lh]').forEach(function(el) {
+              el.textContent = resolve(el.getAttribute('data-live-lh')) || '—';
             });
           }
           if (document.readyState === 'loading') {
@@ -670,50 +741,29 @@ export const TextStyles: Story = {
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Body</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Main group for all readable text. Same size across all breakpoints.</p>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Main group for all readable text. Size is fixed across breakpoints — so it resolves to a primitive <code>--typography-size-*</code> token, not a Layout one — but line-height loosens from md upwards for more comfortable long-form reading.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Style</th><th style="${th}">Tokens</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
-          <tr>
-            <td style="${td}"><strong>Body / MD</strong></td>
-            <td style="${td}"><code>--typography-size-md</code></td>
-            <td style="${td}">16px / 1.5 / regular</td>
-            <td style="${td}"><span style="font-size:var(--typography-size-md,16px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Body / SM</strong></td>
-            <td style="${td}"><code>--typography-size-sm</code></td>
-            <td style="${td}">14px / 1.5 / regular</td>
-            <td style="${td}"><span style="font-size:var(--typography-size-sm,14px);font-weight:400;line-height:1.5;display:block">The quick brown fox jumps over the lazy dog</span></td>
-          </tr>
+          ${[
+            { label: 'Body / MD', composite: '--typography-body-md', sizeToken: '--typography-size-md', sizeFallback: '16px', lhToken: '--typography-body-md-line-height', lhValue: '150%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
+            { label: 'Body / SM', composite: '--typography-body-sm', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhToken: '--typography-body-sm-line-height', lhValue: '157%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
+          ].map(styleRow).join('')}
         </tbody>
       </table>
 
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Caption</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Small text for UI elements like pills, labels, descriptions. Same size across all breakpoints.</p>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Small text for UI elements like pills, labels, descriptions. Fixed at every breakpoint — line-height is a constant in the text style, with no Layout-collection token, so it shows in italics.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Style</th><th style="${th}">Tokens</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
-          <tr>
-            <td style="${td}"><strong>Caption / S</strong></td>
-            <td style="${td}"><code>--typography-size-sm</code></td>
-            <td style="${td}">14px / 1.5 / regular</td>
-            <td style="${td}"><span style="font-size:var(--typography-size-sm,14px);font-weight:400;line-height:1.5;display:block">Caption small text</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Caption / XS</strong></td>
-            <td style="${td}"><code>--typography-size-xs</code></td>
-            <td style="${td}">12px / 1.33 / regular</td>
-            <td style="${td}"><span style="font-size:var(--typography-size-xs,12px);font-weight:400;line-height:1.33;display:block">Caption extra small text</span></td>
-          </tr>
-          <tr>
-            <td style="${td}"><strong>Caption / XXS</strong></td>
-            <td style="${td}"><code>--typography-size-2xs</code></td>
-            <td style="${td}">10px / 1.4 / regular</td>
-            <td style="${td}"><span style="font-size:var(--typography-size-2xs,10px);font-weight:400;line-height:1.4;display:block">Caption extra extra small text</span></td>
-          </tr>
+          ${[
+            { label: 'Caption / SM', composite: '--typography-caption-sm', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhValue: '150%', weight: '400', preview: 'Caption small text' },
+            { label: 'Caption / XS', composite: '--typography-caption-xs', sizeToken: '--typography-size-xs', sizeFallback: '12px', lhValue: '133%', weight: '400', preview: 'Caption extra small text' },
+            { label: 'Caption / XXS', composite: '--typography-caption-xxs', sizeToken: '--typography-size-2xs', sizeFallback: '10px', lhValue: '140%', weight: '400', preview: 'Caption extra extra small text' },
+          ].map(styleRow).join('')}
         </tbody>
       </table>
 
@@ -721,22 +771,22 @@ export const TextStyles: Story = {
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 16px">Usage</h2>
       <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;font-size:13px"><code>/* Heading / 2XL — large claims */
-.claim { font-size: var(--typography-heading-2xl-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+.claim { font-size: var(--typography-heading-2xl-size); font-weight: var(--typography-weight-semibold); line-height: normal; }
 
 /* Heading / XL */
-h1 { font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+h1 { font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-semibold); line-height: normal; }
 
-/* Heading / LG */
-h2 { font-size: var(--typography-heading-lg-size); font-weight: var(--typography-weight-semibold); line-height: 1.25; }
+/* Heading / LG — line-height is responsive */
+h2 { font-size: var(--typography-heading-lg-size); font-weight: var(--typography-weight-semibold); line-height: var(--typography-heading-lg-line-height); }
 
 /* Heading / MD */
-h3 { font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-medium); line-height: 1.33; }
+h3 { font-size: var(--typography-heading-md-size); font-weight: var(--typography-weight-semibold); line-height: var(--typography-heading-md-line-height); }
 
 /* Heading / SM */
-h4 { font-size: var(--typography-heading-sm-size); font-weight: var(--typography-weight-medium); line-height: 1.38; }
+h4 { font-size: var(--typography-heading-sm-size); font-weight: var(--typography-weight-semibold); line-height: var(--typography-heading-sm-line-height); }
 
-/* Body / default */
-p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-regular); line-height: 1.5; }
+/* Body / default — line-height is responsive */
+p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-regular); line-height: var(--typography-body-md-line-height); }
 
 /* Caption */
 .label { font-size: var(--typography-size-xs); font-weight: var(--typography-weight-regular); line-height: 1.33; }</code></pre>
