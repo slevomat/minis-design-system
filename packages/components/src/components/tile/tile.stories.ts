@@ -152,29 +152,31 @@ export const AsLink: Story = {
   `,
 };
 
-// ─── Grid Example ─────────────────────────────────────────────────────────────
+// ─── Navigation Grid ──────────────────────────────────────────────────────────
 
-export const GridExample: Story = {
-  name: 'Grid Example',
+export const NavigationGrid: Story = {
+  name: 'Navigation Grid',
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Tiles arranged in a typical 4-column navigation grid. Apply `display:grid` on the wrapper.',
+        story:
+          'Primary use case: tiles arranged in a 4-column shortcut grid. ' +
+          'The wrapper uses `display:grid` with `gap:8px` (`--linear-sp-linear-2`) on both axes.',
       },
     },
   },
   render: () => html`
-    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; width:640px;">
-      <minis-tile counter="3">
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; max-width:640px;">
+      <minis-tile>
         <minis-icon slot="icon" name="voucher-outline"></minis-icon>
         Moje nákupy
       </minis-tile>
-      <minis-tile>
+      <minis-tile counter="3">
         <minis-icon slot="icon" name="cart-outline"></minis-icon>
         Košík
       </minis-tile>
-      <minis-tile>
+      <minis-tile counter="12">
         <minis-icon slot="icon" name="heart"></minis-icon>
         Oblíbené
       </minis-tile>
@@ -186,17 +188,17 @@ export const GridExample: Story = {
         <minis-icon slot="icon" name="gift"></minis-icon>
         Dárky
       </minis-tile>
-      <minis-tile counter="12">
-        <minis-icon slot="icon" name="star"></minis-icon>
-        Slevy
+      <minis-tile counter="5">
+        <minis-icon slot="icon" name="percentage"></minis-icon>
+        Extra slevy
       </minis-tile>
-      <minis-tile ?disabled=${true}>
-        <minis-icon slot="icon" name="cart-outline"></minis-icon>
-        Nedostupné
+      <minis-tile counter="2">
+        <minis-icon slot="icon" name="cashback"></minis-icon>
+        Cashback
       </minis-tile>
       <minis-tile>
-        <minis-icon slot="icon" name="heart-fill"></minis-icon>
-        Uložené
+        <minis-icon slot="icon" name="benefits"></minis-icon>
+        Benefity
       </minis-tile>
     </div>
   `,
