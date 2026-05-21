@@ -367,6 +367,13 @@ const changelogHTML = `
         </ul>
       </div>
 
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Tile</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><strong>Storybook docs updated</strong> — <em>Grid Example</em> story replaced by <em>Navigation Grid</em>: a realistic 4-column shortcut grid (Moje nákupy, Košík, Oblíbené, Profil, Dárky, Extra slevy, Cashback, Benefity) demonstrating the primary grid usage pattern with <code>gap:8px</code> (<code>--linear-sp-linear-2</code>) on both axes and optional counter pills.</li>
+        </ul>
+      </div>
+
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════

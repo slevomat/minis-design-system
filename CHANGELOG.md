@@ -24,6 +24,10 @@ All notable changes to this project will be documented in this file.
 - **Design Tokens → Text Styles** — each row's Token column now leads with the Figma composite text-style token (`--typography-heading-sm`, `--typography-body-md`…) and lists the `size` + `line-height` tokens it resolves to underneath. Headings, Body and Caption tables share one consistent layout.
 - The Viewport switcher (`preview.ts`) now also overrides the responsive line-height tokens per tier, so line-heights visibly tighten/loosen across 2xs/xs · sm · md/lg · xl.
 
+### Tile
+
+- **Storybook docs updated** — `Grid Example` story replaced by `Navigation Grid`: a realistic 4-column shortcut grid (Moje nákupy, Košík, Oblíbené, Profil, Dárky, Extra slevy, Cashback, Benefity) demonstrating the primary grid usage pattern with `gap:8px` (`--linear-sp-linear-2`) on both axes and optional counter pills.
+
 ## 2026-05-15
 
 ### Tile
