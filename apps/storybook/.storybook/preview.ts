@@ -23,6 +23,11 @@ const TIER_TOKENS: Record<string, string> = {
     --typography-heading-lg-size: var(--typography-size-xl);
     --typography-heading-md-size: var(--typography-size-lg);
     --typography-heading-sm-size: var(--typography-size-md);
+    --typography-heading-lg-line-height: var(--typography-line-height-130);
+    --typography-heading-md-line-height: var(--typography-line-height-133);
+    --typography-heading-sm-line-height: var(--typography-line-height-138);
+    --typography-body-md-line-height: var(--typography-line-height-138);
+    --typography-body-sm-line-height: var(--typography-line-height-143);
   `,
   sm: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -37,6 +42,11 @@ const TIER_TOKENS: Record<string, string> = {
     --typography-heading-lg-size: var(--typography-size-xl);
     --typography-heading-md-size: var(--typography-size-lg);
     --typography-heading-sm-size: var(--typography-size-md);
+    --typography-heading-lg-line-height: var(--typography-line-height-130);
+    --typography-heading-md-line-height: var(--typography-line-height-133);
+    --typography-heading-sm-line-height: var(--typography-line-height-138);
+    --typography-body-md-line-height: var(--typography-line-height-138);
+    --typography-body-sm-line-height: var(--typography-line-height-143);
   `,
   md_lg: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -51,6 +61,11 @@ const TIER_TOKENS: Record<string, string> = {
     --typography-heading-lg-size: var(--typography-size-2xl);
     --typography-heading-md-size: var(--typography-size-xl);
     --typography-heading-sm-size: var(--typography-size-lg);
+    --typography-heading-lg-line-height: var(--typography-line-height-125);
+    --typography-heading-md-line-height: var(--typography-line-height-130);
+    --typography-heading-sm-line-height: var(--typography-line-height-133);
+    --typography-body-md-line-height: var(--typography-line-height-150);
+    --typography-body-sm-line-height: var(--typography-line-height-157);
   `,
   xl: `
     --spacing-layout-xs: var(--linear-sp-linear-2);
@@ -65,6 +80,11 @@ const TIER_TOKENS: Record<string, string> = {
     --typography-heading-lg-size: var(--typography-size-2xl);
     --typography-heading-md-size: var(--typography-size-xl);
     --typography-heading-sm-size: var(--typography-size-lg);
+    --typography-heading-lg-line-height: var(--typography-line-height-125);
+    --typography-heading-md-line-height: var(--typography-line-height-130);
+    --typography-heading-sm-line-height: var(--typography-line-height-133);
+    --typography-body-md-line-height: var(--typography-line-height-150);
+    --typography-body-sm-line-height: var(--typography-line-height-157);
   `,
 };
 

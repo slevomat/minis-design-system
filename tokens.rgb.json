@@ -1945,14 +1945,14 @@
             "line-height": {
               "value": "1.4299999475479126",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.3799999952316284",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -2163,14 +2163,14 @@
             "line-height": {
               "value": "1.4299999475479126",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.3799999952316284",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -2381,14 +2381,14 @@
             "line-height": {
               "value": "1.4299999475479126",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.3799999952316284",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -2599,14 +2599,14 @@
             "line-height": {
               "value": "1.4299999475479126",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.3799999952316284",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -2817,14 +2817,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -3035,14 +3035,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -3253,14 +3253,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -3471,14 +3471,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -3689,14 +3689,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -3907,14 +3907,14 @@
             "line-height": {
               "value": "1.5700000524520874",
               "type": "float",
-              "cssName": "--typography-body-s-line-height",
+              "cssName": "--typography-body-sm-line-height",
               "origin": null
             }
           },
           "line-height": {
             "value": "1.5",
             "type": "float",
-            "cssName": "--typography-body-line-height",
+            "cssName": "--typography-body-md-line-height",
             "origin": null
           }
         },
@@ -5184,7 +5184,7 @@
           "textTransform": "none"
         },
         "type": "typography",
-        "cssName": "--typography-caption-s",
+        "cssName": "--typography-caption-sm",
         "comment": "For extra small captions inside components like Pill etc."
       },
       "xs": {

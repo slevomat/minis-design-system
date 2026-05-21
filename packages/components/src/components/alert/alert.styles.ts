@@ -6,7 +6,7 @@ export const alertStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-regular, 400);
-    line-height: var(--typography-line-height-percentage-133%, 1.33);
+    line-height: var(--typography-line-height-133, 133%);
   }
 
   .alert {

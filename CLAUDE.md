@@ -35,7 +35,7 @@ docs/
 - **Typography family**: `--typography-font-family-sans` (Inter), `--typography-font-family-mono`
 - **Typography size**: `--typography-size-{2xs|xs|sm|md|lg|xl|2xl|3xl|4xl}` (`sm` = 14px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
-- **Typography line-height**: `--typography-line-height-percentage-{100%|125%|…}` (value is a unitless ratio, e.g. `1`)
+- **Typography line-height**: `--typography-line-height-{90|100|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint.
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
 

@@ -16,7 +16,7 @@ export const pillCounterStyles = css`
     background: var(--pill-counter-bg, var(--color-feedback-success, #43a047));
     color: var(--pill-counter-color, var(--color-surface-primary, #fff));
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
-    line-height: var(--typography-line-height-percentage-100%, 1);
+    line-height: var(--typography-line-height-100, 100%);
     font-weight: var(--typography-weight-bold, 700);
     font-style: normal;
     text-align: center;
