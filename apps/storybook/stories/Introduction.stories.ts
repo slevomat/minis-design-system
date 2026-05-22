@@ -332,6 +332,30 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-05-22 (tokens: dark mode background + surface)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-05-22" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-22</h2>
+        <button class="cl-copy-btn" data-anchor="2026-05-22">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Tokens — dark mode colours</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <p style="margin:0 0 .5rem"><strong>Dark mode background and surface tokens updated</strong> to match production dark mode colours.</p>
+        <ul style="margin:0;padding-left:1.25rem">
+          <li><code>--color-background</code> (dark): <code>var(--color-core-black)</code> → <code>var(--color-grey-10)</code></li>
+          <li><code>--color-surface-primary</code> (dark): <code>var(--color-grey-20)</code> → <code>var(--color-grey-25)</code></li>
+          <li><code>--color-surface-faded</code> (dark): <code>var(--color-grey-10)</code> → <code>var(--color-grey-25)</code></li>
+        </ul>
+        <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-text-secondary,#666)">Both classic and gift schema dark-mode overrides updated.</p>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-05-21 (tokens: typography line-height export fix)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
