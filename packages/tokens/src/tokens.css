@@ -414,17 +414,17 @@
   --schemas-classic-interaction-primary-hover-surface: var(--color-blue-35);
   --schemas-classic-text-accent-link: var(--color-blue-65);
   --schemas-classic-text-accent-link-hover: var(--color-blue-75);
-  --schemas-classic-background: var(--color-core-black);
-  --schemas-classic-surface-faded: var(--color-grey-10);
-  --schemas-classic-surface-primary: var(--color-grey-20);
+  --schemas-classic-background: var(--color-grey-10);
+  --schemas-classic-surface-faded: var(--color-grey-25);
+  --schemas-classic-surface-primary: var(--color-grey-25);
 
   --schemas-gift-interaction-primary-accent: var(--color-core-black);
   --schemas-gift-interaction-primary-surface: var(--color-yellow-45);
   --schemas-gift-interaction-primary-hover-accent: var(--color-core-black);
   --schemas-gift-interaction-primary-hover-surface: var(--color-yellow-35);
-  --schemas-gift-background: var(--color-core-black);
-  --schemas-gift-surface-faded: var(--color-grey-10);
-  --schemas-gift-surface-primary: var(--color-grey-20);
+  --schemas-gift-background: var(--color-grey-10);
+  --schemas-gift-surface-faded: var(--color-grey-25);
+  --schemas-gift-surface-primary: var(--color-grey-25);
 
   --color-border: var(--color-grey-60);
   --color-border-focus: var(--color-blue-65);

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-22
+
+### Tokens
+
+**Dark mode background and surface tokens updated** to match production dark mode colours.
+
+- `--color-background` (dark): `var(--color-core-black)` → `var(--color-grey-10)` (`oklch(0.23 0.01 275)`)
+- `--color-surface-primary` (dark): `var(--color-grey-20)` → `var(--color-grey-25)` (`oklch(0.35 0.01 234)`)
+- `--color-surface-faded` (dark): `var(--color-grey-10)` → `var(--color-grey-25)` (`oklch(0.35 0.01 234)`)
+
+Both classic and gift schema dark-mode overrides (`--schemas-classic-*` and `--schemas-gift-*`) updated.
+
 ## 2026-05-21
 
 ### Tokens
