@@ -108,6 +108,7 @@ These are the primary source of truth for token discovery. Alternatively, use th
 - **Avoid `var(--a, 1px 2px)` multi-value fallbacks** in Lit `css` templates — invalid CSS crashes the module.
 - **No duplicate `@customElement` registrations** — check existing tag names before adding a new component.
 - **TypeScript strict mode** (`noUnusedLocals`, `noUnusedParameters`) — unused imports/params fail the Vite build.
+- **Avoid `disabled` unless interaction is structurally impossible** — prefer keeping components active and displaying a `<minis-alert>` or inline message that explains what the user must do first. Only use `disabled` when the action truly cannot be taken (e.g. a locked premium feature). See `docs/ai-prompts/principles.md`.
 - **`100000px` in `tokens.json` means "full width" (100%)** — Figma cannot mix `%` and `px` in the same variable collection, so unbounded widths are encoded as `100000px`. Always translate to `100%` in CSS. Only actual numeric values (e.g. `752px`, `1240px`) represent real constraints.
 
 ## AI-agent docs
@@ -116,6 +117,7 @@ Full component references with API tables, token lists, usage examples, and copy
 
 - `docs/ai-prompts/index.md` — navigation index
 - `docs/ai-prompts/getting-started.md` — setup and token reference
+- `docs/ai-prompts/principles.md` — design principles (e.g. prefer active over disabled)
 - `docs/ai-prompts/components/button.md`
 - `docs/ai-prompts/components/pill-counter.md`
 - `docs/ai-prompts/components/icon.md`

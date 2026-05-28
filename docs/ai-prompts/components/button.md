@@ -158,6 +158,8 @@ Add the `icon-only` boolean attribute. Always include `aria-label` for accessibi
 
 ### Disabled state
 
+> **Prefer active over disabled.** Reach for `disabled` only when interaction is structurally impossible. For cases where the button is blocked by a missing prerequisite, keep it active and pair it with a `<minis-alert>` or contextual message instead. See [Design Principles → Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled).
+
 ```html
 <minis-button variant="primary" disabled>Unavailable</minis-button>
 ```
@@ -299,6 +301,7 @@ Note: icon-only buttons must have aria-label for accessibility.
 - Don't use buttons for navigation — use `<a>` links instead
 - Don't nest buttons inside links
 - Don't use `loading` — not yet implemented (planned roadmap item)
+- Don't reach for `disabled` when the action is blocked by a missing prerequisite — prefer an active button paired with a `<minis-alert>`. See [Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled)
 
 ---
 

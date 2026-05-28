@@ -87,6 +87,8 @@ Row height is fixed at 32px (`--pixel-px-32`). Typography: `--typography-size-sm
 - For destructive/primary form actions → use `<minis-button>`
 - For non-interactive labels → use `<minis-tag variant="static">`
 
+> **Prefer active over disabled.** Reach for `disabled` only when interaction is structurally impossible. For cases where the row is blocked by a missing prerequisite, keep it active and show a `<minis-alert>` or contextual message instead. See [Design Principles → Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled).
+
 ## Copy-paste prompt
 
 > Use `<minis-action-row>` from `@minis/components` to build a vertical filter list. Each row should use `variant="checkbox"` with a `counter` showing the result count. Selected filters should set `checked`. Highlight the actively focused filter with `active`. Wrap the list in a 240-280px wide container.

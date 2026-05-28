@@ -23,6 +23,13 @@ Individual UI elements with props and variants.
 
 [→ All Components](./components/README.md)
 
+### 💡 Principles
+Design decisions and rules for how to use components correctly.
+
+- [Prefer active states over disabled](./principles.md#prefer-active-states-over-disabled) — keep components interactive and show contextual guidance instead of silently disabling them
+
+[→ All Principles](./principles.md)
+
 ### 🧩 Patterns
 Composable UI patterns combining multiple components.
 
