@@ -1,18 +1,19 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { checkboxStyles } from './checkbox.styles.js';
 
 /**
  * Mini*S Checkbox
  *
- * Simple binary selection input — unchecked / checked, with hover state.
+ * Binary selection input — unchecked / checked / indeterminate, with hover state.
  *
  * @slot - Optional label text
- * @fires change - Fires when the checked state changes. `detail: { checked: boolean }`
+ * @fires change - Fires when the state changes. `detail: { checked: boolean, indeterminate: boolean }`
  *
  * @example
  * ```html
  * <minis-checkbox checked>Accept terms</minis-checkbox>
+ * <minis-checkbox indeterminate>Select all</minis-checkbox>
  * ```
  */
 @customElement('minis-checkbox')
@@ -22,6 +23,10 @@ export class MinisCheckbox extends LitElement {
   /** Checked state */
   @property({ type: Boolean, reflect: true })
   checked = false;
+
+  /** Indeterminate state — shown as a dash; clicking resolves to checked */
+  @property({ type: Boolean, reflect: true })
+  indeterminate = false;
 
   /** Disabled state */
   @property({ type: Boolean, reflect: true })
@@ -38,6 +43,9 @@ export class MinisCheckbox extends LitElement {
   @state()
   private _hasLabel = false;
 
+  @query('input')
+  private _input?: HTMLInputElement;
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'checkbox');
@@ -51,8 +59,9 @@ export class MinisCheckbox extends LitElement {
   }
 
   updated(changed: Map<string, unknown>) {
-    if (changed.has('checked')) {
-      this.setAttribute('aria-checked', String(this.checked));
+    if (changed.has('checked') || changed.has('indeterminate')) {
+      this.setAttribute('aria-checked', this.indeterminate ? 'mixed' : String(this.checked));
+      if (this._input) this._input.indeterminate = this.indeterminate;
     }
     if (changed.has('disabled')) {
       this.setAttribute('aria-disabled', String(this.disabled));
@@ -77,12 +86,18 @@ export class MinisCheckbox extends LitElement {
 
   private _onInputChange = (e: Event) => {
     e.stopPropagation();
+    this.indeterminate = false;
     this.checked = (e.target as HTMLInputElement).checked;
     this._emit();
   };
 
   private _toggle() {
-    this.checked = !this.checked;
+    if (this.indeterminate) {
+      this.indeterminate = false;
+      this.checked = true;
+    } else {
+      this.checked = !this.checked;
+    }
     this._emit();
   }
 
@@ -90,7 +105,7 @@ export class MinisCheckbox extends LitElement {
     this.dispatchEvent(new CustomEvent('change', {
       bubbles: true,
       composed: true,
-      detail: { checked: this.checked },
+      detail: { checked: this.checked, indeterminate: this.indeterminate },
     }));
   }
 
@@ -123,6 +138,9 @@ export class MinisCheckbox extends LitElement {
               stroke-linecap="round"
               stroke-linejoin="round"
             />
+          </svg>
+          <svg class="dash" viewBox="0 0 10 2" fill="none" aria-hidden="true">
+            <line x1="0.5" y1="1" x2="9.5" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </span>
         ${this._hasLabel ? html`<span class="label"><slot @slotchange=${this._onSlotChange}></slot></span>`

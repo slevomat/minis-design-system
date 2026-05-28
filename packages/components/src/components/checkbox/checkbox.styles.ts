@@ -27,9 +27,6 @@ export const checkboxStyles = css`
     border-radius: var(--border-radius-sm);
     border: 1px solid var(--input-border, #cbccce);
     background: var(--input-surface, #ffffff);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
     transition: background-color 120ms ease, border-color 120ms ease;
   }
@@ -38,28 +35,54 @@ export const checkboxStyles = css`
     border-color: var(--input-border-hover, #00b2e5);
   }
 
-  :host([checked]) .box {
+  :host([checked]) .box,
+  :host([indeterminate]) .box {
     background: var(--color-interaction-primary-surface, #006eb9);
     border-color: var(--color-interaction-primary-border, #006eb9);
   }
 
-  :host([checked]:hover:not([disabled])) .box {
+  :host([checked]:hover:not([disabled])) .box,
+  :host([indeterminate]:hover:not([disabled])) .box {
     background: var(--button-primary-hover-surface, #005685);
     border-color: var(--button-primary-hover-border, #005685);
+  }
+
+  .check,
+  .dash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--color-core-white, #ffffff);
+    opacity: 0;
+    transition: opacity 120ms ease, transform 120ms ease;
   }
 
   .check {
     width: 10px;
     height: 8px;
-    color: var(--color-core-white, #ffffff);
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 120ms ease, transform 120ms ease;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+
+  .dash {
+    width: 10px;
+    height: 2px;
+    transform: translate(-50%, -50%) scale(0.6);
   }
 
   :host([checked]) .check {
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* indeterminate takes visual priority over checked */
+  :host([indeterminate]) .check {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+
+  :host([indeterminate]) .dash {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   /* Visually-hidden native input for accessibility & form participation */
