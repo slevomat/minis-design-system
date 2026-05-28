@@ -309,6 +309,55 @@ export const AIDesignIntegration: Story = {
   `,
 };
 
+export const DesignPrinciples: Story = {
+  name: 'Design Principles',
+  render: () => html`
+    <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
+      <h1 style="font-size:2rem;margin-bottom:.5rem">Design Principles</h1>
+      <p>Rules for using components correctly and consistently — beyond the API.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Prefer active states over disabled</h2>
+      <p><strong>Rule:</strong> Use <code>disabled</code> only when interaction is truly impossible — not just conditional or blocked by an incomplete prerequisite. When a component <em>could</em> work but requires something from the user first, keep it active and explain the requirement instead.</p>
+
+      <h3>Why</h3>
+      <p>Disabled elements are silent. They offer no feedback, are frequently invisible to assistive technologies, and leave users guessing about what went wrong or what they need to do. An active component paired with a <code>&lt;minis-alert&gt;</code> or inline message is clearer, more accessible, and more forgiving.</p>
+
+      <h3>Prefer this</h3>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;minis-alert variant="warning"&gt;
+  Complete your billing address before placing your order.
+&lt;/minis-alert&gt;
+&lt;minis-button variant="primary"&gt;Place order&lt;/minis-button&gt;</code></pre>
+
+      <h3>Over this</h3>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;!-- Avoid: gives no hint about what is missing or how to fix it --&gt;
+&lt;minis-button variant="primary" disabled&gt;Place order&lt;/minis-button&gt;</code></pre>
+
+      <h3>When <code>disabled</code> is appropriate</h3>
+      <p>Use it only when <strong>all</strong> of these apply:</p>
+      <ol>
+        <li><strong>The action is structurally impossible</strong> for this user — not just blocked by missing data. Examples: a premium feature unavailable on the current plan; a field pre-filled from an external read-only source.</li>
+        <li><strong>No action exists</strong> that would make it available in this session.</li>
+        <li><strong>Removing it from the tab order</strong> is actually correct — the user should not be able to focus or interact with it at all.</li>
+      </ol>
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        When in doubt, keep it active and explain with an alert.
+      </blockquote>
+
+      <h3>Components with <code>disabled</code></h3>
+      <p>This principle applies to all components that expose a <code>disabled</code> attribute: <code>&lt;minis-button&gt;</code>, <code>&lt;minis-checkbox&gt;</code>, <code>&lt;minis-action-row&gt;</code>, <code>&lt;minis-tile&gt;</code>, <code>&lt;minis-tag&gt;</code>.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <p>
+        <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
+        <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a>
+      </p>
+    </div>
+  `,
+};
+
 const changelogHTML = `
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1 style="font-size:2rem;margin-bottom:.25rem">Changelog</h1>

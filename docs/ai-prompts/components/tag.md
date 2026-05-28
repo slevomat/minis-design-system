@@ -172,6 +172,8 @@ Initial pressed state (e.g. already liked, server-rendered):
 | Does clicking change a persistent state (like, save, active filter)? | `toggle` |
 | Can the user remove it? | `dismissible` |
 
+> **Prefer active over disabled.** Reach for `disabled` only when interaction is structurally impossible. For cases where the tag is blocked by a missing prerequisite, keep it active and show a `<minis-alert>` or contextual message instead. See [Design Principles → Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled).
+
 ---
 
 ## Copy-paste prompt for AI agents

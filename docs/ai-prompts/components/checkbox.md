@@ -46,6 +46,8 @@ Binary selection control. Initial release ships two selection states (unchecked 
 <minis-checkbox disabled>Not available</minis-checkbox>
 ```
 
+> **Prefer active over disabled.** Reach for `disabled` only when interaction is structurally impossible. For cases where the checkbox is blocked by a missing prerequisite, keep it active and show a `<minis-alert>` or contextual message explaining why. See [Design Principles → Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled).
+
 ```js
 document.querySelector('minis-checkbox').addEventListener('change', (e) => {
   console.log(e.detail.checked);

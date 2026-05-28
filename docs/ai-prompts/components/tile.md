@@ -87,6 +87,8 @@ Every tile **must** have an icon (24×24 px) and a label. An optional inline cou
 
 ### Disabled tile
 
+> **Prefer active over disabled.** Reach for `disabled` only when interaction is structurally impossible. For cases where the tile is blocked by a missing prerequisite, keep it active and show a `<minis-alert>` or contextual message instead. See [Design Principles → Prefer active states over disabled](../principles.md#prefer-active-states-over-disabled).
+
 ```html
 <minis-tile disabled>
   <minis-icon slot="icon" name="voucher-outline"></minis-icon>
