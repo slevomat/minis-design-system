@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-28
+
+### Docs
+
+**New: Design Principles section** — establishes the first system-wide design principle: Prefer active states over disabled.
+
+- New `docs/ai-prompts/principles.md` — canonical reference with rationale, before/after code examples, and the 3-condition rule for when `disabled` is actually appropriate.
+- New **Design Principles** Storybook story under Introduction.
+- `docs/ai-prompts/index.md` — Principles navigation section added.
+- `CLAUDE.md` — rule added to Common pitfalls so Claude Code follows it automatically.
+- `docs/ai-prompts/components/{button,checkbox,action-row,tile,tag}.md` — callout added near each component's `disabled` documentation, linking to the principles page.
+
 ## 2026-05-22
 
 ### Tokens

@@ -179,6 +179,7 @@ docs/
 ├── ai-prompts/              # AI agent instructions & prompts
 │   ├── index.md             # Main entry point for AI tools
 │   ├── getting-started.md   # Quick start guide for AI agents
+│   ├── principles.md        # Design principles (e.g. prefer active over disabled)
 │   ├── components/          # Component-specific AI instructions
 │   │   ├── README.md        # Components overview
 │   │   └── button.md        # Button component prompt
@@ -196,6 +197,7 @@ Mini*S is designed with **AI-first documentation** - structured prompts and inst
 
 ### AI Prompts Library (`docs/ai-prompts/`)
 
+- **Principles** - System-wide design rules (e.g. [prefer active states over disabled](docs/ai-prompts/principles.md))
 - **Components** - Individual UI elements with props, variants, and usage examples
 - **Patterns** - Composable UI patterns combining multiple components
 - **Templates** - Full page layouts and structures
