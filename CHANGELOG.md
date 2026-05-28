@@ -14,6 +14,16 @@ All notable changes to this project will be documented in this file.
 - `CLAUDE.md` — rule added to Common pitfalls so Claude Code follows it automatically.
 - `docs/ai-prompts/components/{button,checkbox,action-row,tile,tag}.md` — callout added near each component's `disabled` documentation, linking to the principles page.
 
+### Checkbox
+
+- **Indeterminate state added** — new `indeterminate` boolean attribute (reflected) displays a dash inside the checkbox box using the same filled blue background as the checked state.
+- Hover and disabled variants work for the indeterminate state.
+- Clicking an indeterminate checkbox resolves to `checked=true, indeterminate=false`.
+- `aria-checked` now outputs `"mixed"` when indeterminate (ARIA 1.2 tri-state checkbox).
+- `change` event detail extended: `{ checked: boolean, indeterminate: boolean }`.
+- `States` Storybook story updated to a 3-column grid covering all three selection states × disabled.
+- New `Indeterminate` story added.
+
 ## 2026-05-22
 
 ### Tokens

@@ -10,20 +10,26 @@ const meta: Meta = {
     docs: {
       description: {
         component: `<p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4192-5095" target="_blank" rel="noopener noreferrer">Open in Figma ↗</a></p>
-<p>Binary selection input. Two states are covered today: <strong>unchecked</strong> and <strong>checked</strong>, each with a hover variant. More states (indeterminate, error, disabled visual) will be added later.</p>`,
+<p>Binary selection input with three states: <strong>unchecked</strong>, <strong>checked</strong>, and <strong>indeterminate</strong> (dash). All states support hover and disabled variants.</p>`,
       },
     },
   },
   argTypes: {
     checked: { control: 'boolean' },
+    indeterminate: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
   args: {
     checked: false,
+    indeterminate: false,
     disabled: false,
   },
   render: (args) => html`
-    <minis-checkbox ?checked=${args.checked} ?disabled=${args.disabled}>
+    <minis-checkbox
+      ?checked=${args.checked && !args.indeterminate}
+      ?indeterminate=${args.indeterminate}
+      ?disabled=${args.disabled}
+    >
       ${args.label ?? 'Accept terms'}
     </minis-checkbox>
   `,
@@ -42,11 +48,16 @@ export const Checked: Story = {
   args: { checked: true },
 };
 
+export const Indeterminate: Story = {
+  args: { indeterminate: true },
+};
+
 export const WithoutLabel: Story = {
   render: () => html`
     <div style="display:flex; gap:16px; align-items:center;">
       <minis-checkbox></minis-checkbox>
       <minis-checkbox checked></minis-checkbox>
+      <minis-checkbox indeterminate></minis-checkbox>
     </div>
   `,
 };
@@ -54,11 +65,13 @@ export const WithoutLabel: Story = {
 export const States: Story = {
   parameters: { controls: { disable: true } },
   render: () => html`
-    <div style="display:grid; grid-template-columns: repeat(2, max-content); gap: 16px 32px; align-items:center;">
-      <minis-checkbox>Default</minis-checkbox>
-      <minis-checkbox checked>Default · checked</minis-checkbox>
-      <minis-checkbox disabled>Disabled</minis-checkbox>
-      <minis-checkbox checked disabled>Disabled · checked</minis-checkbox>
+    <div style="display:grid; grid-template-columns: repeat(3, max-content); gap: 16px 32px; align-items:center;">
+      <minis-checkbox>Unchecked</minis-checkbox>
+      <minis-checkbox checked>Checked</minis-checkbox>
+      <minis-checkbox indeterminate>Indeterminate</minis-checkbox>
+      <minis-checkbox disabled>Unchecked · disabled</minis-checkbox>
+      <minis-checkbox checked disabled>Checked · disabled</minis-checkbox>
+      <minis-checkbox indeterminate disabled>Indeterminate · disabled</minis-checkbox>
     </div>
   `,
 };

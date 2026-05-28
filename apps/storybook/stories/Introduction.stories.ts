@@ -403,6 +403,18 @@ const changelogHTML = `
         </ul>
       </div>
 
+      <h3 style="font-size:1rem;margin:.75rem 0 .25rem">Checkbox — indeterminate state</h3>
+      <div style="border-left:3px solid var(--color-interaction-primary-surface,#006eb9);padding:.75rem 1rem 0 1rem;margin:.5rem 0 1rem 0">
+        <p style="margin:0 0 .5rem"><strong>Indeterminate state added</strong> — new <code>indeterminate</code> boolean attribute displays a dash inside the box, using the same filled-blue background as the checked state.</p>
+        <ul style="margin:0;padding-left:1.25rem">
+          <li>Hover and disabled variants supported for the indeterminate state.</li>
+          <li>Clicking an indeterminate checkbox resolves to <code>checked=true, indeterminate=false</code>.</li>
+          <li><code>aria-checked</code> now outputs <code>"mixed"</code> when indeterminate (ARIA 1.2 tri-state checkbox).</li>
+          <li><code>change</code> event detail extended: <code>{ checked: boolean, indeterminate: boolean }</code>.</li>
+          <li>New <strong>Indeterminate</strong> story; <strong>States</strong> story updated to a 3-column grid.</li>
+        </ul>
+      </div>
+
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
