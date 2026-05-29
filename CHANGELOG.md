@@ -6,17 +6,32 @@ All notable changes to this project will be documented in this file.
 
 ### Tokens
 
-**Kensington Compressed Bold — brand typeface added**
+**Kensington — brand typeface and new typography scale tokens (Figma sync)**
 
-- New `@font-face` declaration in `packages/tokens/src/tokens.css` for the `'Kensington Compressed Bold'` typeface served from `./fonts/kensington-compressed-bold.woff2`.
-- New token `--typography-font-family-brand: 'Kensington Compressed Bold'` — for banner headlines only.
+- `@font-face` font-family name corrected from `'Kensington Compressed Bold'` → `'Kensington'` to match Figma's family name.
+- Token `--typography-font-family-brand` updated accordingly: `'Kensington Compressed Bold'` → `'Kensington'`.
+- New token `--typography-line-height-110: 110%` — between `--typography-line-height-100` and `--typography-line-height-125`. Used by brand headings.
+- New token `--typography-size-3xs: var(--linear-sp-linear-2)` — 8px, smallest size in the scale (below `--typography-size-2xs`).
+- New token `--typography-size-5xl: var(--linear-sp-linear-14)` — 56px, largest size in the scale (above `--typography-size-4xl`).
+- New brand heading composite responsive tokens:
+  - `--typography-brand-lg-size` — 24px base, scales to 32px at 1480px+
+  - `--typography-brand-lg-line-height: var(--typography-line-height-110)` — fixed 110%
+  - `--typography-brand-xl-size` — 32px base, scales to 56px at 1480px+
+  - `--typography-brand-xl-line-height: var(--typography-line-height-110)` — fixed 110%
+
+**Kensington Compressed Bold — brand typeface added** *(previous entry, kept for reference)*
+
+- New `@font-face` declaration in `packages/tokens/src/tokens.css` for the `'Kensington'` typeface served from `./fonts/kensington-compressed-bold.woff2`.
 - Font file added to `packages/tokens/src/fonts/` and distributed via `@minis/tokens` dist.
 - Build script updated to copy `src/fonts/` → `dist/fonts/` on every `pnpm build`.
 
 ### Docs
 
 - **Typography section** updated in `docs/ai-prompts/getting-started.md` — documents all three font-family tokens and explains when to use Kensington vs. Inter.
-- **Storybook Design Tokens → Typography → Font Families** updated with `--typography-font-family-brand` row, Usage column, and live preview of the Kensington typeface.
+- **Storybook Design Tokens → Typography → Font Families** updated with corrected `'Kensington'` name and preview.
+- **Storybook Design Tokens → Typography → Font Sizes** — added `--typography-size-3xs` (8px) and `--typography-size-5xl` (56px) rows.
+- **Storybook Design Tokens → Typography → Line Heights** — added `--typography-line-height-110` (110%) row.
+- **Storybook Design Tokens → Text Styles** — new "Brand Headings" section documenting `Brand / LG` and `Brand / XL` with live responsive previews and usage examples.
 
 ## 2026-05-28
 
