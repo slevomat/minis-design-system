@@ -567,13 +567,19 @@ export const Typography: Story = {
   render: () => r(`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1>Typography Tokens</h1>
+      <p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4401-3435" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4">
+        <svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg>
+        Open in Figma ↗
+      </a></p>
 
       <h2>Font Families</h2>
+      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">All typography across the Slevomat website and mobile app uses the variable Inter font family in various weights. The only exception is for banner headlines, which use the branded Kensington Compressed Bold typeface.</p>
       <table style="${ts}">
-        <thead><tr><th style="${th}">Token</th><th style="${th}">Preview</th></tr></thead>
+        <thead><tr><th style="${th}">Token</th><th style="${th}">Usage</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
-          <tr><td style="${td}"><code>--typography-font-family-sans</code></td><td style="${td}"><span style="font-family:Inter,sans-serif">Inter — The quick brown fox jumps over the lazy dog</span></td></tr>
-          <tr><td style="${td}"><code>--typography-font-family-mono</code></td><td style="${td}"><span style="font-family:'SF Mono',monospace">SF Mono — const value = 42;</span></td></tr>
+          <tr><td style="${td}"><code>--typography-font-family-sans</code></td><td style="${td}">All UI text, headings, body</td><td style="${td}"><span style="font-family:Inter,sans-serif">Inter — The quick brown fox jumps over the lazy dog</span></td></tr>
+          <tr><td style="${td}"><code>--typography-font-family-mono</code></td><td style="${td}">Code, numeric data</td><td style="${td}"><span style="font-family:'SF Mono',monospace">SF Mono — const value = 42;</span></td></tr>
+          <tr><td style="${td}"><code>--typography-font-family-brand</code></td><td style="${td}">Banner headlines only</td><td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington Compressed Bold');font-size:1.5em;letter-spacing:-0.01em">Kensington Compressed Bold — Skvělé nabídky každý den</span></td></tr>
         </tbody>
       </table>
 

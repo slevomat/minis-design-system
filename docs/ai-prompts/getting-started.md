@@ -33,7 +33,7 @@ Every HTML file using Mini*S should start with:
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: var(--typography-font-family-sans, Inter, sans-serif);
       background: var(--color-background);
       color: var(--color-text-primary);
     }
@@ -92,6 +92,22 @@ Specific needs:
 --pixel-px-{n}         /* e.g. --pixel-px-22 = 22px */
 ```
 > There are **no** `--spacing-*` tokens in this system.
+
+### Typography
+```css
+--typography-font-family-sans   /* Inter — all UI text, headings, body copy */
+--typography-font-family-mono   /* SF Mono — code and numeric data */
+--typography-font-family-brand  /* Kensington Compressed Bold — banner headlines only */
+```
+
+All typography across the Slevomat website and mobile app uses the variable Inter font family in various weights. The only exception is for banner headlines, which use the branded Kensington Compressed Bold typeface.
+
+```css
+/* Banner headline example */
+.banner-headline {
+  font-family: var(--typography-font-family-brand);
+}
+```
 
 ### Interactive States
 ```css

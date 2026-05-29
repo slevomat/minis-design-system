@@ -10,7 +10,8 @@ const distDir = path.join(__dirname, '../dist');
 const dirs = [
   distDir,
   path.join(distDir, 'foundation'),
-  path.join(distDir, 'themes')
+  path.join(distDir, 'themes'),
+  path.join(distDir, 'fonts'),
 ];
 
 dirs.forEach(dir => {
@@ -18,6 +19,16 @@ dirs.forEach(dir => {
     fs.mkdirSync(dir, { recursive: true });
   }
 });
+
+// Copy font files from src/fonts to dist/fonts
+const srcFontsDir = path.join(srcDir, 'fonts');
+const distFontsDir = path.join(distDir, 'fonts');
+if (fs.existsSync(srcFontsDir)) {
+  for (const file of fs.readdirSync(srcFontsDir)) {
+    fs.copyFileSync(path.join(srcFontsDir, file), path.join(distFontsDir, file));
+    console.log(`✓ Copied fonts/${file}`);
+  }
+}
 
 // Function to concatenate CSS files from a directory
 function concatenateCSS(dir, outputFile) {

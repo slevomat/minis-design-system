@@ -32,7 +32,7 @@ docs/
 - **Linear spacing**: `--linear-sp-linear-{n}` (e.g. `--linear-sp-linear-3` = 12px)
 - **Fibonacci spacing**: `--fibonachi-sp-fib-{n}` (e.g. `--fibonachi-sp-fib-8` = 34px)
 - **Border radius**: `--border-radius-sm` (4px), `--border-radius-md` (8px)
-- **Typography family**: `--typography-font-family-sans` (Inter), `--typography-font-family-mono`
+- **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (Kensington Compressed Bold — banner headlines only)
 - **Typography size**: `--typography-size-{2xs|xs|sm|md|lg|xl|2xl|3xl|4xl}` (`sm` = 14px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
 - **Typography line-height**: `--typography-line-height-{90|100|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint.
@@ -92,6 +92,66 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
+
+## Figma Code Connect
+
+Code Connect maps each Lit component to its Figma counterpart so Dev Mode shows real usage snippets.
+
+### Every component = 3 files
+
+| File | Purpose |
+|---|---|
+| `{component}.ts` | Lit Web Component |
+| `{component}.stories.ts` | Storybook docs |
+| `{component}.figma.ts` | Figma Code Connect mapping |
+
+Never create a component without a `.figma.ts` file.
+
+### `.figma.ts` template
+
+```typescript
+import figma, { html } from '@figma/code-connect';
+
+figma.connect('FIGMA_NODE_URL', {
+  props: {
+    // figma.enum    → variant/type/size selectors
+    // figma.boolean → disabled/loading/checked states
+    // figma.string  → label/text/placeholder values
+    // figma.instance → slot/icon/nested components
+  },
+  example: (props) => html`
+    <minis-{component}
+      ...mapped-attributes
+    >
+      ...slotted content
+    </minis-{component}>
+  `,
+});
+```
+
+Get the Figma node URL: open Figma → Dev Mode → click the component → copy the URL from the browser address bar.
+
+### Naming convention — Figma ↔ Code sync
+
+| Figma Property | HTML Attribute | figma.ts mapping |
+|---|---|---|
+| `Variant` | `variant` | `figma.enum('Variant', {...})` |
+| `Size` | `size` | `figma.enum('Size', {...})` |
+| `Disabled` | `disabled` (boolean attr) | `figma.boolean('Disabled')` |
+| `Label` | slot content | `figma.string('Label')` |
+| `Icon` | slot or attr | `figma.instance('Icon')` |
+
+### Publishing
+
+```bash
+# Dry-run parse (no publish)
+pnpm figma:parse
+
+# Publish to Figma Dev Mode
+pnpm figma:publish
+```
+
+Scripts use `$FIGMA_ACCESS_TOKEN` from `.env.local` (never commit that file).
 
 ## Token exports
 

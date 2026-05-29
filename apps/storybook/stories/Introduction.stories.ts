@@ -381,6 +381,34 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-05-29 (tokens: Kensington brand font)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-05-29" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-29</h2>
+        <button class="cl-copy-btn" data-anchor="2026-05-29">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens</h3>
+      <p><strong>Kensington Compressed Bold — brand typeface added</strong></p>
+      <ul>
+        <li>New <code>@font-face</code> in <code>tokens.css</code> — <code>'Kensington Compressed Bold'</code> served from <code>./fonts/kensington-compressed-bold.woff2</code>.</li>
+        <li>New token <code>--typography-font-family-brand: 'Kensington Compressed Bold'</code> — for banner headlines only.</li>
+        <li>Font file added to <code>packages/tokens/src/fonts/</code> and distributed via <code>@minis/tokens</code> dist.</li>
+        <li>Build script updated to copy <code>src/fonts/</code> → <code>dist/fonts/</code> on every build.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Docs</h3>
+      <ul>
+        <li>Typography section added to <code>docs/ai-prompts/getting-started.md</code> — documents all three font-family tokens and when to use Kensington vs. Inter.</li>
+        <li>Storybook <strong>Design Tokens → Typography → Font Families</strong> table updated with <code>--typography-font-family-brand</code>, Usage column, and live Kensington preview.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-05-28 (docs: design principles)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
