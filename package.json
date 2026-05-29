@@ -11,9 +11,13 @@
     "test": "pnpm --filter \"./packages/**\" test",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,css,md}\"",
     "lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
-    "create-prototype": "node packages/create-minis/bin/create.js"
+    "create-prototype": "node packages/create-minis/bin/create.js",
+    "figma:publish": "figma connect publish --token=$FIGMA_ACCESS_TOKEN",
+    "figma:unpublish": "figma connect unpublish --token=$FIGMA_ACCESS_TOKEN",
+    "figma:parse": "figma connect parse --token=$FIGMA_ACCESS_TOKEN"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.4.7",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",

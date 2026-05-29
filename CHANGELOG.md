@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-05-29
+
+### Tokens
+
+**Kensington Compressed Bold — brand typeface added**
+
+- New `@font-face` declaration in `packages/tokens/src/tokens.css` for the `'Kensington Compressed Bold'` typeface served from `./fonts/kensington-compressed-bold.woff2`.
+- New token `--typography-font-family-brand: 'Kensington Compressed Bold'` — for banner headlines only.
+- Font file added to `packages/tokens/src/fonts/` and distributed via `@minis/tokens` dist.
+- Build script updated to copy `src/fonts/` → `dist/fonts/` on every `pnpm build`.
+
+### Docs
+
+- **Typography section** updated in `docs/ai-prompts/getting-started.md` — documents all three font-family tokens and explains when to use Kensington vs. Inter.
+- **Storybook Design Tokens → Typography → Font Families** updated with `--typography-font-family-brand` row, Usage column, and live preview of the Kensington typeface.
+
 ## 2026-05-28
 
 ### Docs

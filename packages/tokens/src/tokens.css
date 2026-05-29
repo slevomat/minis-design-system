@@ -5,6 +5,18 @@
  */
 
 /* ========================================
+   FONTS
+   ======================================== */
+
+@font-face {
+  font-family: 'Kensington Compressed Bold';
+  src: url('./fonts/kensington-compressed-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
    PRIMITIVES (Hidden in Figma Library)
    ======================================== */
 
@@ -235,6 +247,7 @@
   --typography-font-family-sans: Inter;
   --typography-font-family-mono: SF Mono;
   --typography-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --typography-font-family-brand: 'Kensington Compressed Bold';
   --typography-line-height-90: 90%;
   --typography-line-height-100: 100%;
   --typography-line-height-125: 125%;
