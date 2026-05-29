@@ -381,7 +381,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-05-29 (tokens: Kensington brand font)
+           2026-05-29 (tokens: Kensington + new typography scale)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-05-29" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-05-29</h2>
@@ -392,18 +392,31 @@ const changelogHTML = `
       </div>
 
       <h3 style="margin-top:1rem">Tokens</h3>
-      <p><strong>Kensington Compressed Bold — brand typeface added</strong></p>
+      <p><strong>Kensington — brand typeface name corrected &amp; new typography scale tokens (Figma sync)</strong></p>
       <ul>
-        <li>New <code>@font-face</code> in <code>tokens.css</code> — <code>'Kensington Compressed Bold'</code> served from <code>./fonts/kensington-compressed-bold.woff2</code>.</li>
-        <li>New token <code>--typography-font-family-brand: 'Kensington Compressed Bold'</code> — for banner headlines only.</li>
-        <li>Font file added to <code>packages/tokens/src/fonts/</code> and distributed via <code>@minis/tokens</code> dist.</li>
-        <li>Build script updated to copy <code>src/fonts/</code> → <code>dist/fonts/</code> on every build.</li>
+        <li><code>@font-face</code> font-family name corrected: <code>'Kensington Compressed Bold'</code> → <code>'Kensington'</code> (matches Figma family name).</li>
+        <li><code>--typography-font-family-brand</code> updated: <code>'Kensington Compressed Bold'</code> → <code>'Kensington'</code>.</li>
+        <li>New <code>--typography-line-height-110: 110%</code> — tight line-height for brand headlines.</li>
+        <li>New <code>--typography-size-3xs: var(--linear-sp-linear-2)</code> — 8px, smallest size in the scale.</li>
+        <li>New <code>--typography-size-5xl: var(--linear-sp-linear-14)</code> — 56px, largest size in the scale.</li>
+        <li>New brand heading composite responsive tokens:
+          <ul>
+            <li><code>--typography-brand-lg-size</code> — 24px base → 32px at 1480px+</li>
+            <li><code>--typography-brand-lg-line-height: var(--typography-line-height-110)</code></li>
+            <li><code>--typography-brand-xl-size</code> — 32px base → 56px at 1480px+</li>
+            <li><code>--typography-brand-xl-line-height: var(--typography-line-height-110)</code></li>
+          </ul>
+        </li>
+        <li><code>@font-face</code> added for <code>'Kensington'</code> typeface; font file distributed via <code>@minis/tokens</code> dist.</li>
       </ul>
 
       <h3 style="margin-top:1rem">Docs</h3>
       <ul>
-        <li>Typography section added to <code>docs/ai-prompts/getting-started.md</code> — documents all three font-family tokens and when to use Kensington vs. Inter.</li>
-        <li>Storybook <strong>Design Tokens → Typography → Font Families</strong> table updated with <code>--typography-font-family-brand</code>, Usage column, and live Kensington preview.</li>
+        <li>Storybook <strong>Design Tokens → Typography → Font Families</strong> — updated brand row to <code>'Kensington'</code>.</li>
+        <li>Storybook <strong>Design Tokens → Typography → Font Sizes</strong> — added <code>--typography-size-3xs</code> (8px) and <code>--typography-size-5xl</code> (56px).</li>
+        <li>Storybook <strong>Design Tokens → Typography → Line Heights</strong> — added <code>--typography-line-height-110</code> (110%).</li>
+        <li>Storybook <strong>Design Tokens → Text Styles</strong> — new "Brand Headings" section with <em>Brand / LG</em> and <em>Brand / XL</em> responsive live previews.</li>
+        <li>Typography section in <code>docs/ai-prompts/getting-started.md</code> — all three font-family tokens documented.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>

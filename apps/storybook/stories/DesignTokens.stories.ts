@@ -579,7 +579,7 @@ export const Typography: Story = {
         <tbody>
           <tr><td style="${td}"><code>--typography-font-family-sans</code></td><td style="${td}">All UI text, headings, body</td><td style="${td}"><span style="font-family:Inter,sans-serif">Inter — The quick brown fox jumps over the lazy dog</span></td></tr>
           <tr><td style="${td}"><code>--typography-font-family-mono</code></td><td style="${td}">Code, numeric data</td><td style="${td}"><span style="font-family:'SF Mono',monospace">SF Mono — const value = 42;</span></td></tr>
-          <tr><td style="${td}"><code>--typography-font-family-brand</code></td><td style="${td}">Banner headlines only</td><td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington Compressed Bold');font-size:1.5em;letter-spacing:-0.01em">Kensington Compressed Bold — Skvělé nabídky každý den</span></td></tr>
+          <tr><td style="${td}"><code>--typography-font-family-brand</code></td><td style="${td}">Banner headlines only</td><td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington');font-size:1.5em;letter-spacing:-0.01em">Kensington — Skvělé nabídky každý den</span></td></tr>
         </tbody>
       </table>
 
@@ -588,6 +588,7 @@ export const Typography: Story = {
         <thead><tr><th style="${th}">Token</th><th style="${th}">Value</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
+            ['--typography-size-3xs', '8px'],
             ['--typography-size-2xs', '10px'],
             ['--typography-size-xs', '12px'],
             ['--typography-size-xs-plus', '13px'],
@@ -598,6 +599,7 @@ export const Typography: Story = {
             ['--typography-size-2xl', '24px'],
             ['--typography-size-3xl', '32px'],
             ['--typography-size-4xl', '40px'],
+            ['--typography-size-5xl', '56px'],
           ].map(([token, val]) => `<tr>
             <td style="${td}"><code>${token}</code></td>
             <td style="${td}">${val}</td>
@@ -633,6 +635,7 @@ export const Typography: Story = {
           ${[
             ['--typography-line-height-90', '90%'],
             ['--typography-line-height-100', '100%'],
+            ['--typography-line-height-110', '110%'],
             ['--typography-line-height-125', '125%'],
             ['--typography-line-height-130', '130%'],
             ['--typography-line-height-133', '133%'],
@@ -746,6 +749,34 @@ export const TextStyles: Story = {
 
       ${hr}
 
+      <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Brand Headings</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Banner headlines using the Kensington brand font. Responsive — scales up significantly at 1480px+. Line-height is always 110% (tight, compressed feel matching the typeface).</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          ${[
+            { label: 'Brand / LG', composite: '--typography-brand-lg', sizeToken: '--typography-brand-lg-size', sizeFallback: '24px', lhToken: '--typography-brand-lg-line-height', lhValue: '110%', weight: '700', preview: 'Skvělé nabídky' },
+            { label: 'Brand / XL', composite: '--typography-brand-xl', sizeToken: '--typography-brand-xl-size', sizeFallback: '32px', lhToken: '--typography-brand-xl-line-height', lhValue: '110%', weight: '700', preview: 'Skvělé nabídky každý den' },
+          ].map(d => `<tr>
+            <td style="${td}"><strong>${d.label}</strong></td>
+            <td style="${td}">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <code style="font-weight:600">${d.composite}</code>
+                <div style="font-size:.75em;color:var(--color-text-secondary,#6b6b70);line-height:1.7">
+                  <div>font-family&nbsp;·&nbsp;<code>--typography-font-family-brand</code></div>
+                  <div>size&nbsp;·&nbsp;<code>${d.sizeToken}</code></div>
+                  <div>line-height&nbsp;·&nbsp;<code>${d.lhToken}</code></div>
+                </div>
+              </div>
+            </td>
+            <td style="${td}"><span data-live-spec="${d.sizeToken}" data-weight="${d.weight}" data-lh="${d.lhToken}"></span></td>
+            <td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington');font-size:var(${d.sizeToken},${d.sizeFallback});font-weight:${d.weight};line-height:var(${d.lhToken},${d.lhValue});display:block">${d.preview}</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+
+      ${hr}
+
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Body</h2>
       <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Main group for all readable text. Size is fixed across breakpoints — so it resolves to a primitive <code>--typography-size-*</code> token, not a Layout one — but line-height loosens from md upwards for more comfortable long-form reading.</p>
       <table style="${ts}">
@@ -795,7 +826,13 @@ h4 { font-size: var(--typography-heading-sm-size); font-weight: var(--typography
 p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-regular); line-height: var(--typography-body-md-line-height); }
 
 /* Caption */
-.label { font-size: var(--typography-size-xs); font-weight: var(--typography-weight-regular); line-height: 1.33; }</code></pre>
+.label { font-size: var(--typography-size-xs); font-weight: var(--typography-weight-regular); line-height: 1.33; }
+
+/* Brand Heading / LG — Kensington, responsive */
+.banner-title { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-lg-size); font-weight: var(--typography-weight-bold); line-height: var(--typography-brand-lg-line-height); }
+
+/* Brand Heading / XL */
+.banner-claim { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-xl-size); font-weight: var(--typography-weight-bold); line-height: var(--typography-brand-xl-line-height); }</code></pre>
     </div>
   `),
 };
