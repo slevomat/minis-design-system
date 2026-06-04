@@ -33,6 +33,7 @@ Three variants cover these patterns:
 |---|---|---|---|
 | `variant` | `"navigation" \| "navigation-small" \| "photogallery"` | `"navigation"` | Grid layout variant |
 | `rows` | `number` | `2` | Number of rows for `navigation-small` variant (2 or 3). Ignored for other variants. |
+| `vertical-slots` | `"0" \| "1" \| "2"` | `"0"` | Number of tall vertical photo slots in the `navigation` variant (desktop only). See subvariant details below. Ignored for other variants. |
 
 ### Slots
 
@@ -50,12 +51,59 @@ None.
 
 ### `navigation`
 
-- Desktop: 4-column grid, 2 rows
-  - Item 1: `grid-column: span 2` (featured, top-left)
-  - Items 2–5: single columns
-  - Item 6: `grid-column: span 2` (wide, bottom-right)
-- Mobile (`<768px`): horizontal scroll strip, 4 × 2 equal cells (`--card-grid-xs-item-size`, default 172px)
-- **Slot exactly 6 items**
+4-column, 2-row grid with 6 slots. Desktop only. Mobile collapses to a 4×2 horizontal scroll strip.
+
+Three subvariants controlled by `vertical-slots`:
+
+#### `vertical-slots="0"` (default)
+
+Standard layout — featured wide card top-left, wide card bottom-right.
+
+```
+col1  col2  col3  col4
+[ 1 ——— 1 ] [ 2 ] [ 3 ]
+[ 4 ] [ 5 ] [——6——————]
+```
+
+- Item 1: `grid-column: span 2` (featured, top-left)
+- Items 2–5: single columns
+- Item 6: `grid-column: span 2` (wide, bottom-right)
+
+#### `vertical-slots="1"`
+
+One tall vertical photo — item 2 spans both rows in column 3.
+
+```
+col1  col2  col3  col4
+[ 1 ——— 1 ] [ 2 ] [ 3 ]
+[ 4 ] [ 5 ] [ 2 ] [ 6 ]
+```
+
+- Item 1: col 1–2, row 1 (featured)
+- Item 2: col 3, rows 1–2 (tall vertical photo)
+- Item 3: col 4, row 1
+- Item 4: col 1, row 2
+- Item 5: col 2, row 2
+- Item 6: col 4, row 2
+
+#### `vertical-slots="2"`
+
+Two tall vertical photos — items 1 and 2 span both rows. Items 3–6 fill the right two columns as a 2×2 grid.
+
+```
+col1  col2  col3  col4
+[ 1 ] [ 2 ] [ 3 ] [ 5 ]
+[ 1 ] [ 2 ] [ 4 ] [ 6 ]
+```
+
+- Item 1: col 1, rows 1–2 (tall vertical photo)
+- Item 2: col 2, rows 1–2 (tall vertical photo)
+- Item 3: col 3, row 1
+- Item 4: col 3, row 2
+- Item 5: col 4, row 1
+- Item 6: col 4, row 2
+
+**Mobile (all subvariants):** 3-column × 2-row horizontal scroll strip — 3 items per row, 6 items total. Each cell is `--card-grid-xs-item-size` (default 172px) square. Total height = `calc(2 × 172px + 8px gap) = 352px`. The grid is 3 × 172px = 516px wide, extending beyond a 390px viewport so the third column peeks and invites scrolling. All special placements (featured, wide, vertical) are reset — every item becomes a uniform square.
 
 ### `navigation-small`
 
@@ -81,9 +129,9 @@ Each variant has a built-in default height matching the Figma spec:
 
 | Variant | Desktop height | Mobile height |
 |---|---|---|
-| `navigation` | 584px | 172px (scroll strip) |
-| `navigation-small` (rows=2) | 296px | 172px (scroll strip) |
-| `navigation-small` (rows=3) | 448px | 172px (4×2 scroll strip) |
+| `navigation` | 584px | 352px (2-row × 3-col horizontal scroll strip — 3 items per row) |
+| `navigation-small` (rows=2) | 296px | 352px (2-row × 4-col horizontal scroll strip) |
+| `navigation-small` (rows=3) | 448px | 352px (2-row × 4-col horizontal scroll strip) |
 | `photogallery` | 352px | 210px |
 
 Override the height with the `--card-grid-height` CSS custom property:

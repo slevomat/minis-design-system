@@ -38,6 +38,12 @@ const meta: Meta = {
       description: 'Number of rows for navigation-small variant (2 or 3)',
       if: { arg: 'variant', eq: 'navigation-small' },
     },
+    verticalSlots: {
+      control: 'select',
+      options: ['0', '1', '2'],
+      description: 'Vertical photo slots for the navigation variant (desktop only). "0" = standard, "1" = one tall column, "2" = two tall columns.',
+      if: { arg: 'variant', eq: 'navigation' },
+    },
   },
 };
 
@@ -71,12 +77,17 @@ function slotCount(variant: string, rows?: number): number {
 
 export const Playground: Story = {
   name: 'Playground',
-  args: { variant: 'navigation', rows: 2 },
+  args: { variant: 'navigation', rows: 2, verticalSlots: '0' },
   render: (args) => {
     const count = slotCount(args.variant as string, args.rows as number);
     const items = Array.from({ length: count }, (_, i) => p(`${i + 1}`));
+    const vs = args.variant === 'navigation' && args.verticalSlots !== '0' ? args.verticalSlots as string : undefined;
     return html`
-      <minis-card-grid variant=${args.variant} .rows=${args.variant === 'navigation-small' ? args.rows : undefined}>
+      <minis-card-grid
+        variant=${args.variant}
+        .rows=${args.variant === 'navigation-small' ? args.rows : undefined}
+        vertical-slots=${vs ?? '0'}
+      >
         ${items}
       </minis-card-grid>
     `;
@@ -97,6 +108,46 @@ export const Navigation: Story = {
   render: () => html`
     <minis-card-grid variant="navigation">
       ${p('1 — featured')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6 — wide')}
+    </minis-card-grid>
+  `,
+};
+
+// ─── Navigation — vertical-slots="1" ─────────────────────────────────────────
+
+export const NavigationVertical1: Story = {
+  name: 'Navigation (1 vertical slot)',
+  parameters: {
+    docs: {
+      description: {
+        story: `4-column grid — <strong>6 slots</strong>. Item 1 spans 2 columns (featured, top-left). Item 2 spans both rows in column 3 (tall vertical photo). Desktop only — mobile collapses to the same horizontal scroll strip.
+<br><br>Grid layout: <code>[C1 C1 C2 C3] / [C4 C5 C2 C6]</code>`,
+      },
+    },
+  },
+  render: () => html`
+    <minis-card-grid variant="navigation" vertical-slots="1">
+      ${p('1 — featured')} ${p('2 — vertical')} ${p('3')}
+      ${p('4')} ${p('5')} ${p('6')}
+    </minis-card-grid>
+  `,
+};
+
+// ─── Navigation — vertical-slots="2" ─────────────────────────────────────────
+
+export const NavigationVertical2: Story = {
+  name: 'Navigation (2 vertical slots)',
+  parameters: {
+    docs: {
+      description: {
+        story: `4-column grid — <strong>6 slots</strong>. Items 1 and 2 each span both rows (tall vertical photos in columns 1 and 2). Items 3–6 fill the right two columns as a 2×2 grid. Desktop only — mobile collapses to the same horizontal scroll strip.
+<br><br>Grid layout: <code>[C1 C2 C3 C5] / [C1 C2 C4 C6]</code>`,
+      },
+    },
+  },
+  render: () => html`
+    <minis-card-grid variant="navigation" vertical-slots="2">
+      ${p('1 — vertical')} ${p('2 — vertical')} ${p('3')}
+      ${p('4')} ${p('5')} ${p('6')}
     </minis-card-grid>
   `,
 };
@@ -176,6 +227,20 @@ export const AllVariants: Story = {
         <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation — 6 slots (584px)</p>
         <minis-card-grid variant="navigation">
           ${p('1')} ${p('2')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
+        </minis-card-grid>
+      </div>
+
+      <div>
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation vertical-slots="1" — 1 tall photo (col 3)</p>
+        <minis-card-grid variant="navigation" vertical-slots="1">
+          ${p('1')} ${p('2 ↕')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
+        </minis-card-grid>
+      </div>
+
+      <div>
+        <p style="font-family:sans-serif;font-size:12px;color:#888;margin:0 0 8px">navigation vertical-slots="2" — 2 tall photos (cols 1–2, slots 1 and 2)</p>
+        <minis-card-grid variant="navigation" vertical-slots="2">
+          ${p('1 ↕')} ${p('2 ↕')} ${p('3')} ${p('4')} ${p('5')} ${p('6')}
         </minis-card-grid>
       </div>
 

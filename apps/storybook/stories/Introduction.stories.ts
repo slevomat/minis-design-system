@@ -381,6 +381,43 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-06-04 (card-grid navigation vertical-slots)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-06-04" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-06-04</h2>
+        <button class="cl-copy-btn" data-anchor="2026-06-04">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Card Grid</h3>
+      <p><strong><code>&lt;minis-card-grid&gt;</code> navigation variant — <code>vertical-slots</code> subvariants (desktop only)</strong></p>
+      <ul>
+        <li>New attribute <code>vertical-slots</code> (<code>"0" | "1" | "2"</code>, default <code>"0"</code>) on <code>&lt;minis-card-grid variant="navigation"&gt;</code>.</li>
+        <li><code>vertical-slots="0"</code> — unchanged standard layout: featured wide card top-left, wide card bottom-right.</li>
+        <li><code>vertical-slots="1"</code> — item 2 spans both rows in col 3 (one tall vertical photo). Layout: <code>[C1 C1 C2 C3] / [C4 C5 C2 C6]</code>.</li>
+        <li><code>vertical-slots="2"</code> — items 2 and 4 each span both rows (two tall vertical photos in cols 1–2). Layout: <code>[C4 C2 C1 C3] / [C4 C2 C5 C6]</code>.</li>
+        <li>All three subvariants collapse to the same 3×2 horizontal scroll strip on mobile (&lt;768px).</li>
+      </ul>
+      <p><strong>Bug fix — mobile height for <code>navigation</code> variants</strong></p>
+      <ul>
+        <li>Previous mobile height was <code>172px</code> (1 row), clipping the second row — the breakpoint switch appeared to have no effect.</li>
+        <li>Fixed to <code>352px</code> (<code>calc(2 × --card-grid-xs-item-size + --card-grid-gap)</code>), matching the Figma xs spec. Applies to <code>navigation</code>, <code>navigation-small</code> (rows=2 and rows=3).</li>
+      </ul>
+      <p><strong>Bug fix — navigation mobile grid: 3 columns for equal row distribution</strong></p>
+      <ul>
+        <li>With 4 columns and 6 items: row 1 had 4, row 2 had 2 (unequal). Fixed to <strong>3 columns</strong>: 3 items per row in both rows. Grid is 3 × 172px = 516px — the third column peeks at ~390px to invite scrolling.</li>
+      </ul>
+      <p><strong>Improvement — container queries replace media queries</strong></p>
+      <ul>
+        <li>All <code>@media (max-width: 767px)</code> replaced with <code>@container (max-width: 767px)</code>. <code>:host</code> is now <code>container-type: inline-size</code>. An inner <code>.host-wrapper</code> div carries height and overflow.</li>
+        <li>The Storybook breakpoint switcher now correctly triggers the mobile layout.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-05-29 (tokens: Kensington + new typography scale)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
