@@ -4,6 +4,9 @@ import { cardGridStyles } from './card-grid.styles.js';
 
 export type CardGridVariant = 'navigation' | 'navigation-small' | 'photogallery';
 
+/** Number of vertical photo slots in the navigation variant (desktop only). */
+export type CardGridVerticalSlots = '0' | '1' | '2';
+
 /**
  * Mini*S Card Grid Component
  *
@@ -78,8 +81,17 @@ export class MinisCardGrid extends LitElement {
   @property({ type: Number, reflect: true })
   rows?: number;
 
+  /**
+   * Number of vertical photo slots for the navigation variant (desktop only).
+   * - '0' — standard layout (featured + wide card, default)
+   * - '1' — one tall vertical photo (child 2, col 3, full height)
+   * - '2' — two tall vertical photos (children 2 and 4, cols 1–2, full height)
+   */
+  @property({ type: String, attribute: 'vertical-slots', reflect: true })
+  verticalSlots: CardGridVerticalSlots = '0';
+
   render() {
-    return html`<div class="grid"><slot></slot></div>`;
+    return html`<div class="host-wrapper"><div class="grid"><slot></slot></div></div>`;
   }
 }
 

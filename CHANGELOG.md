@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-04
+
+### Card Grid
+
+**`navigation` variant — `vertical-slots` subvariants (desktop only)**
+
+- New attribute `vertical-slots` (`"0" | "1" | "2"`, default `"0"`) on `<minis-card-grid variant="navigation">`.
+- `vertical-slots="0"` — unchanged standard layout: featured wide card top-left, wide card bottom-right.
+- `vertical-slots="1"` — item 2 spans both rows in col 3 (one tall vertical photo). Other five items unchanged.
+- `vertical-slots="2"` — items 2 and 4 each span both rows (two tall vertical photos in cols 1–2); items 1, 3, 5, 6 fill the right two columns.
+- All three subvariants collapse to the same 4×2 horizontal scroll strip on mobile (`<768px`).
+
+**Bug fix — mobile height for navigation variants**
+
+- Previous mobile height was `172px` (one row), which clipped the second row and made the breakpoint switch appear to have no effect.
+- Fixed to `calc(2 × --card-grid-xs-item-size + --card-grid-gap)` = **352px** (2 rows × 172px + 8px gap), matching the Figma xs spec.
+- Applies to `navigation`, `navigation-small` (rows=2), and `navigation-small` (rows=3) variants.
+
+**Bug fix — navigation mobile grid: 3 columns for equal row distribution**
+
+- With 4 columns and 6 items: row 1 = 4, row 2 = 2 (unequal). Fixed to **3 columns**: 3 items per row in both rows. Grid is 3 × 172px = 516px wide — the third column peeks at ~390px to invite scrolling.
+
+**Improvement — container queries for responsive behaviour**
+
+- All `@media (max-width: 767px)` replaced with `@container (max-width: 767px)`. `:host` is now `container-type: inline-size`. An inner `.host-wrapper` div carries height and overflow so it can respond to container queries.
+- The Storybook breakpoint switcher now correctly triggers the mobile layout (narrows the CSS container, not the viewport).
+
 ## 2026-05-29
 
 ### Tokens
