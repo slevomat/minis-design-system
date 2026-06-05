@@ -188,3 +188,4 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/topbar.md`
 - `docs/ai-prompts/components/checkbox.md`
 - `docs/ai-prompts/components/action-row.md`
+- `docs/ai-prompts/components/badge.md`

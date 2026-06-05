@@ -381,6 +381,29 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-06-05 (brand-check new component + tokens)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-06-05" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-06-05</h2>
+        <button class="cl-copy-btn" data-anchor="2026-06-05">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Badge</h3>
+      <p><strong>New component <code>&lt;minis-badge&gt;</code></strong></p>
+      <ul>
+        <li>Decorative scalloped seal badge with a white checkmark — three color variants: <code>pink</code> (default), <code>yellow</code>, <code>blue</code>.</li>
+        <li>Natural size 82×82 px; scale freely via CSS <code>width</code> / <code>height</code>.</li>
+        <li>Inline SVG — no external assets, no slots, no events.</li>
+        <li>Colors use existing primitive tokens: <code>--color-pink-45</code>, <code>--color-yellow-45</code>, <code>--color-blue-45</code>.</li>
+        <li>Storybook path: <strong>Components / Brand / Badge</strong>.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-06-04 (card-grid navigation vertical-slots)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-05
+
+### Badge
+
+- **New component `<minis-badge>`** — decorative scalloped seal badge with a white checkmark; three color variants: `pink` (default), `yellow`, `blue`.
+- Colors use existing primitive tokens: `--color-pink-45`, `--color-yellow-45`, `--color-blue-45`.
+- Natural size 82×82 px; scalable via CSS `width`/`height`.
+- Inline SVG — no external assets, no slots, no events.
+- Storybook path: `Components/Brand/Badge`.
+
 ## 2026-06-04
 
 ### Card Grid
