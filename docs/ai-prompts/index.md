@@ -20,6 +20,7 @@ Individual UI elements with props and variants.
 - [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
+- [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants (pink, yellow, blue)
 
 [→ All Components](./components/README.md)
 
