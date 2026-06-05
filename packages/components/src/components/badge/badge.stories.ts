@@ -77,32 +77,39 @@ export const AllVariants: Story = {
   `,
 };
 
-// ─── Custom Size ──────────────────────────────────────────────────────────────
+// ─── Sizes ────────────────────────────────────────────────────────────────────
 
-export const CustomSize: Story = {
-  name: 'Custom Size',
+export const Sizes: Story = {
+  name: 'Sizes',
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Override <code>width</code> and <code>height</code> via CSS to scale the badge.',
+        story: `
+The badge scales via CSS <code>width</code> / <code>height</code>. The smallest recommended size is <strong>43 px</strong>,
+intended as a companion next to a headline. The default Figma size is <strong>82 px</strong>.
+        `,
       },
     },
   },
   render: () => html`
-    <div style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap">
+    <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <minis-badge color="blue" style="width:40px;height:40px"></minis-badge>
-        <span style="font-size:12px;color:var(--color-text-secondary,#888)">40px</span>
+        <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
+        <span style="font-size:12px;color:var(--color-text-secondary,#888)">43 px — min (headline)</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <minis-badge color="blue" style="width:82px;height:82px"></minis-badge>
-        <span style="font-size:12px;color:var(--color-text-secondary,#888)">82px (default)</span>
+        <minis-badge color="pink"></minis-badge>
+        <span style="font-size:12px;color:var(--color-text-secondary,#888)">82 px — default</span>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <minis-badge color="blue" style="width:120px;height:120px"></minis-badge>
-        <span style="font-size:12px;color:var(--color-text-secondary,#888)">120px</span>
-      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:24px 0"/>
+
+    <p style="font-size:12px;color:var(--color-text-secondary,#888);margin:0 0 12px">Headline companion example (43 px)</p>
+    <div style="display:flex;align-items:center;gap:12px">
+      <h2 style="margin:0;font-size:24px;font-weight:600;line-height:1.2">Ověřený prodejce</h2>
+      <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
     </div>
   `,
 };

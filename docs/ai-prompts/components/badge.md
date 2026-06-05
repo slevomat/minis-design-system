@@ -47,21 +47,23 @@ None.
 
 ## Sizing
 
-Natural size is **82×82 px** (matches Figma). Override via CSS:
+| Size  | Use case                        |
+|-------|---------------------------------|
+| 43 px | Minimum — companion for headlines |
+| 82 px | Default (Figma natural size)    |
 
-```css
-minis-badge {
-  width: 48px;
-  height: 48px;
-}
-```
+Override via CSS `width` / `height` — the SVG scales proportionally and is always square.
 
-Or inline:
 ```html
-<minis-badge color="blue" style="width:48px;height:48px"></minis-badge>
-```
+<!-- Headline companion (43 px) -->
+<div style="display:flex;align-items:center;gap:12px">
+  <h2>Ověřený prodejce</h2>
+  <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
+</div>
 
-The internal SVG scales proportionally — always square.
+<!-- Default (82 px) -->
+<minis-badge color="pink"></minis-badge>
+```
 
 ---
 
