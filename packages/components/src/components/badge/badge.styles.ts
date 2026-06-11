@@ -8,6 +8,17 @@ export const badgeStyles = css`
     --badge-color: var(--color-pink-45);
   }
 
+  /* size variants */
+  :host([size='sm']) {
+    width: 32px;
+    height: 32px;
+  }
+
+  :host([size='md']) {
+    width: 43px;
+    height: 43px;
+  }
+
   :host([color='yellow']) {
     --badge-color: var(--color-yellow-45);
   }

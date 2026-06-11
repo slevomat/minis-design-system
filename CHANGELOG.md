@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-11
+
+### Badge
+
+- **New `size` attribute** — `sm` (32 px), `md` (43 px), `xl` (82 px, default).
+- `sm` targets XS/SM breakpoint headlines; `md` is the former recommended minimum for headline companions; `xl` is unchanged default.
+- Existing usage without `size` is unaffected — defaults to `xl` (82 px).
+
 ## 2026-06-05
 
 ### Badge
