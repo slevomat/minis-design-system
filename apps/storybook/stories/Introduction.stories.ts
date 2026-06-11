@@ -404,6 +404,7 @@ const changelogHTML = `
 
       <h3 style="margin-top:1rem">Badge</h3>
       <ul>
+        <li><strong>Colors now use branding semantic tokens</strong> — <code>--color-branding-pink/yellow/blue</code> instead of primitives. The <code>yellow</code> variant now resolves to <code>--color-yellow-75</code> (warm golden amber) instead of <code>--color-yellow-45</code>.</li>
         <li><strong>New <code>size</code> attribute</strong> — <code>sm</code> 32 px, <code>md</code> 43 px, <code>xl</code> 82 px (default).</li>
         <li><code>sm</code> is intended for XS/SM breakpoint headlines; <code>md</code> for headline companions on larger viewports.</li>
         <li>Existing usage without <code>size</code> is unaffected — defaults to <code>xl</code>.</li>

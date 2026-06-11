@@ -5,7 +5,7 @@ export const badgeStyles = css`
     display: inline-block;
     width: 82px;
     height: 82px;
-    --badge-color: var(--color-pink-45);
+    --badge-color: var(--color-branding-pink);
   }
 
   /* size variants */
@@ -20,11 +20,11 @@ export const badgeStyles = css`
   }
 
   :host([color='yellow']) {
-    --badge-color: var(--color-yellow-45);
+    --badge-color: var(--color-branding-yellow);
   }
 
   :host([color='blue']) {
-    --badge-color: var(--color-blue-45);
+    --badge-color: var(--color-branding-blue);
   }
 
   svg {
