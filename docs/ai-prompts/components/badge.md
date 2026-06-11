@@ -7,8 +7,14 @@ A decorative brand symbol: a scalloped seal badge with a white checkmark. Purely
 ## Quick Copy-Paste Prompt
 
 ```
-Add a badge symbol (pink variant, default size):
+Add a badge symbol (pink, default xl size):
 <minis-badge color="pink"></minis-badge>
+
+XS/SM headline companion (32 px):
+<minis-badge color="pink" size="sm"></minis-badge>
+
+Headline companion (43 px):
+<minis-badge color="pink" size="md"></minis-badge>
 ```
 
 ---
@@ -24,6 +30,7 @@ Add a badge symbol (pink variant, default size):
 | Attribute | Type                         | Default  | Description                       |
 |-----------|------------------------------|----------|-----------------------------------|
 | `color`   | `'pink' \| 'yellow' \| 'blue'` | `'pink'` | Color variant of the seal badge   |
+| `size`    | `'sm' \| 'md' \| 'xl'`       | `'xl'`   | Size: sm 32 px · md 43 px · xl 82 px |
 
 ### Slots
 
@@ -47,19 +54,20 @@ None.
 
 ## Sizing
 
-| Size  | Use case                        |
-|-------|---------------------------------|
-| 43 px | Minimum — companion for headlines |
-| 82 px | Default (Figma natural size)    |
+Use the `size` attribute to select a named size. The SVG scales proportionally and is always square.
 
-Override via CSS `width` / `height` — the SVG scales proportionally and is always square.
+| `size` | px  | Use case                              |
+|--------|-----|---------------------------------------|
+| `sm`   | 32  | XS/SM breakpoint headline companion  |
+| `md`   | 43  | Headline companion (≥ MD breakpoints) |
+| `xl`   | 82  | Default — standalone hero badge       |
 
 ```html
-<!-- Headline companion (43 px) -->
-<div style="display:flex;align-items:center;gap:12px">
-  <h2>Ověřený prodejce</h2>
-  <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
-</div>
+<!-- XS/SM headline companion -->
+<minis-badge color="pink" size="sm"></minis-badge>
+
+<!-- Headline companion, larger viewports -->
+<minis-badge color="pink" size="md"></minis-badge>
 
 <!-- Default (82 px) -->
 <minis-badge color="pink"></minis-badge>

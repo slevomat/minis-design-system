@@ -16,7 +16,7 @@ const meta: Meta = {
 <p>A decorative brand symbol — a scalloped seal badge with a white checkmark — used to communicate trust or verification. Purely visual, no interaction.</p>
 <ul>
   <li>Three color variants: <code>pink</code> (default), <code>yellow</code>, <code>blue</code>.</li>
-  <li>Natural size is <strong>82×82 px</strong>; override with CSS <code>width</code> / <code>height</code> as needed.</li>
+  <li>Three sizes via the <code>size</code> attribute: <code>sm</code> 32 px (XS/SM headline), <code>md</code> 43 px (headline companion), <code>xl</code> 82 px (default).</li>
   <li>No slots, no events — place it inline next to text or inside a card.</li>
 </ul>
         `,
@@ -29,12 +29,18 @@ const meta: Meta = {
       options: ['pink', 'yellow', 'blue'],
       description: 'Color variant of the badge symbol',
     },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'xl'],
+      description: 'Size: sm 32 px · md 43 px · xl 82 px (default)',
+    },
   },
   args: {
     color: 'pink',
+    size: 'xl',
   },
   render: (args) => html`
-    <minis-badge color=${args.color}></minis-badge>
+    <minis-badge color=${args.color} size=${args.size}></minis-badge>
   `,
 };
 
@@ -86,8 +92,9 @@ export const Sizes: Story = {
     docs: {
       description: {
         story: `
-The badge scales via CSS <code>width</code> / <code>height</code>. The smallest recommended size is <strong>43 px</strong>,
-intended as a companion next to a headline. The default Figma size is <strong>82 px</strong>.
+Use the <code>size</code> attribute to pick from three named sizes:
+<code>sm</code> 32 px for XS/SM breakpoint headlines, <code>md</code> 43 px as a headline companion on larger viewports,
+and <code>xl</code> 82 px (default) for standalone hero use.
         `,
       },
     },
@@ -95,21 +102,31 @@ intended as a companion next to a headline. The default Figma size is <strong>82
   render: () => html`
     <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
-        <span style="font-size:12px;color:var(--color-text-secondary,#888)">43 px — min (headline)</span>
+        <minis-badge color="pink" size="sm"></minis-badge>
+        <span style="font-size:12px;color:var(--color-text-secondary,#888)">sm — 32 px (XS/SM headline)</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <minis-badge color="pink"></minis-badge>
-        <span style="font-size:12px;color:var(--color-text-secondary,#888)">82 px — default</span>
+        <minis-badge color="pink" size="md"></minis-badge>
+        <span style="font-size:12px;color:var(--color-text-secondary,#888)">md — 43 px (headline companion)</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <minis-badge color="pink" size="xl"></minis-badge>
+        <span style="font-size:12px;color:var(--color-text-secondary,#888)">xl — 82 px (default)</span>
       </div>
     </div>
 
     <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:24px 0"/>
 
-    <p style="font-size:12px;color:var(--color-text-secondary,#888);margin:0 0 12px">Headline companion example (43 px)</p>
+    <p style="font-size:12px;color:var(--color-text-secondary,#888);margin:0 0 12px">XS/SM headline (size="sm", 32 px)</p>
+    <div style="display:flex;align-items:center;gap:8px">
+      <h2 style="margin:0;font-size:20px;font-weight:600;line-height:1.2">Ověřený prodejce</h2>
+      <minis-badge color="pink" size="sm"></minis-badge>
+    </div>
+
+    <p style="font-size:12px;color:var(--color-text-secondary,#888);margin:16px 0 12px">Headline companion (size="md", 43 px)</p>
     <div style="display:flex;align-items:center;gap:12px">
       <h2 style="margin:0;font-size:24px;font-weight:600;line-height:1.2">Ověřený prodejce</h2>
-      <minis-badge color="pink" style="width:43px;height:43px"></minis-badge>
+      <minis-badge color="pink" size="md"></minis-badge>
     </div>
   `,
 };

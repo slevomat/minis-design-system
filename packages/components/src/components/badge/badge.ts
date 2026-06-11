@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { badgeStyles } from './badge.styles.js';
 
 export type BadgeColor = 'pink' | 'yellow' | 'blue';
+/** sm = 32 px (XS/SM headline), md = 43 px (headline companion), xl = 82 px (default) */
+export type BadgeSize = 'sm' | 'md' | 'xl';
 
 @customElement('minis-badge')
 export class MinisBadge extends LitElement {
@@ -11,6 +13,10 @@ export class MinisBadge extends LitElement {
   /** Color variant of the badge symbol. */
   @property({ type: String, reflect: true })
   color: BadgeColor = 'pink';
+
+  /** Size: sm 32 px · md 43 px · xl 82 px (default). */
+  @property({ type: String, reflect: true })
+  size: BadgeSize = 'xl';
 
   render() {
     return html`
