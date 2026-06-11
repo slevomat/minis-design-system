@@ -1,7 +1,7 @@
 /**
  * Minis Design System - Global Tokens
  * Generated from Figma Variables
- * Export date: 2026-02-27T15:37:05.947Z
+ * Export date: 2026-06-11T13:39:48.548Z
  */
 
 /* ========================================
@@ -359,6 +359,12 @@
   --color-border-strong: var(--color-grey-40);
   --color-border-subtle: var(--color-grey-90);
   --color-border-valid: var(--color-green-55);
+  /* Branding palette — semantic aliases over primitives */
+  --color-branding-pink: var(--color-pink-45);
+  --color-branding-yellow: var(--color-yellow-75);
+  --color-branding-blue: var(--color-blue-45);
+  --color-branding-brand: var(--color-blue-65);
+  --color-branding-green: var(--color-green-35);
   --color-feedback-error: var(--color-red-45);
   --color-feedback-error-light: var(--color-red-95);
   --color-feedback-info: var(--color-blue-45);
@@ -414,6 +420,8 @@
   --color-text-secondary: var(--color-grey-50);
   /* Page background */
   --color-background: var(--theme-background);
+  /* Contextual font weight — bold in light, semibold in dark */
+  --font-text-bold: var(--typography-weight-bold);
 }
 
 /* ========================================
@@ -485,6 +493,7 @@
   --color-text-accent-positive: var(--color-green-75);
   --color-text-primary: var(--color-grey-95);
   --color-text-secondary: var(--color-grey-60);
+  --font-text-bold: var(--typography-weight-semibold);
 }
 
 /* ========================================

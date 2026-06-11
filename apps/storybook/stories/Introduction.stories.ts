@@ -391,6 +391,17 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tokens</h3>
+      <p><strong>New <code>--color-branding-*</code> tokens</strong> — semantic aliases over colour primitives:</p>
+      <ul>
+        <li><code>--color-branding-pink</code> → <code>var(--color-pink-45)</code></li>
+        <li><code>--color-branding-yellow</code> → <code>var(--color-yellow-75)</code></li>
+        <li><code>--color-branding-blue</code> → <code>var(--color-blue-45)</code></li>
+        <li><code>--color-branding-brand</code> → <code>var(--color-blue-65)</code></li>
+        <li><code>--color-branding-green</code> → <code>var(--color-green-35)</code></li>
+      </ul>
+      <p><strong>New <code>--font-text-bold</code></strong> — <code>var(--typography-weight-bold)</code> in light; overridden to <code>var(--typography-weight-semibold)</code> in dark.</p>
+
       <h3 style="margin-top:1rem">Badge</h3>
       <ul>
         <li><strong>New <code>size</code> attribute</strong> — <code>sm</code> 32 px, <code>md</code> 43 px, <code>xl</code> 82 px (default).</li>

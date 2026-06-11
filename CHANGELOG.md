@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-06-11
 
+### Tokens
+
+- **New `--color-branding-*` tokens** — semantic aliases over primitives, added to the Foundation light section:
+  - `--color-branding-pink` → `var(--color-pink-45)`
+  - `--color-branding-yellow` → `var(--color-yellow-75)`
+  - `--color-branding-blue` → `var(--color-blue-45)`
+  - `--color-branding-brand` → `var(--color-blue-65)`
+  - `--color-branding-green` → `var(--color-green-35)`
+- **New `--font-text-bold`** — `var(--typography-weight-bold)` in light mode; overridden to `var(--typography-weight-semibold)` in dark mode.
+- Export date bumped to `2026-06-11T13:39:48.548Z`.
+
 ### Badge
 
 - **New `size` attribute** — `sm` (32 px), `md` (43 px), `xl` (82 px, default).
