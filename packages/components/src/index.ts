@@ -17,3 +17,4 @@ export { MinisCheckbox } from './components/checkbox/checkbox.js';
 export { MinisActionRow } from './components/action-row/action-row.js';
 export { MinisTile } from './components/tile/tile.js';
 export { MinisBadge } from './components/badge/badge.js';
+export { MinisPageHeader } from './components/page-header/page-header.js';

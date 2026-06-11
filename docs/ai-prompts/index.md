@@ -21,6 +21,7 @@ Individual UI elements with props and variants.
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 - [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants (pink, yellow, blue)
+- [Page Header](./components/page-header.md) - Full-width branded banner for category/campaign pages; 5 themes, responsive layout, image + CTA slots
 
 [→ All Components](./components/README.md)
 

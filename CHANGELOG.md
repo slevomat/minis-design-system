@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-06-11
 
+### Page Header
+
+- **New component `<minis-page-header>`** — full-width branded banner for category and campaign pages.
+- **5 themes**: `brand` (cyan, default), `blue`, `yellow`, `pink`, `green` — background uses `--color-branding-*` tokens.
+- **Responsive layout**: horizontal on desktop (≥768 px) — content left, image right; stacked on mobile — image top, content below.
+- **Slots**: default (heading HTML), `image` (decorative photo), `button` (CTA).
+- **Attributes**: `description` (string body copy), `tag` (string countdown pill), `badge` (boolean, default `true` — shows Brand/Badge seal).
+- Desktop layout corrected to match Figma: all content left-aligned; heading row is natural-width (`width: auto`, `flex: none`) so the Brand/Badge seal sits right after the last line of the heading — not pushed to the far right.
+- Mobile badge uses yellow on most themes, pink on the yellow theme.
+- **Responsive layout now uses CSS container queries** (`@container page-header (min-width: 768px)`) with `container-type: inline-size` on `:host`. The component responds to its own rendered width rather than the browser viewport, so the Storybook viewport toolbar correctly switches between mobile and desktop layouts.
+- Storybook: added **Mobile Layout** story; use the Storybook viewport toolbar (device icon) to resize the canvas below 768 px to see the mobile layout.
+
+### Storybook / preview.ts
+
+- **xl viewport tier** now injects `--typography-brand-xl-size: var(--typography-size-5xl)` and `--typography-brand-xl-line-height: var(--typography-line-height-100)` so the brand heading displays at 56 px when the xl tier is selected in the toolbar, matching the Figma 1480 px+ breakpoint.
+- **Tier toolbar renamed** from `viewport` to `tier` in `globalTypes`, freeing up `globals.viewport` for the standard Storybook viewport addon (included in `@storybook/addon-essentials`). The viewport addon's device selector now actually resizes the iframe so container queries respond.
+- **One-click viewport + tier sync**: selecting a device preset (e.g. "Small mobile") now automatically applies the matching tier tokens AND updates the Tier toolbar label. A `window resize` listener in the preview iframe reads `window.innerWidth` when the viewport addon resizes the iframe and derives the correct tier — no second manual click needed. The Tier dropdown remains available for forcing a specific tier at full (responsive) width.
+
 ### Tokens
 
 - **New `--color-branding-*` tokens** — semantic aliases over primitives, added to the Foundation light section:
