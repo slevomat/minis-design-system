@@ -391,6 +391,26 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Page Header</h3>
+      <ul>
+        <li><strong>New component <code>&lt;minis-page-header&gt;</code></strong> — full-width branded banner for category and campaign pages.</li>
+        <li><strong>5 themes</strong>: <code>brand</code> (cyan, default), <code>blue</code>, <code>yellow</code>, <code>pink</code>, <code>green</code> — uses <code>--color-branding-*</code> tokens for the background.</li>
+        <li><strong>Responsive layout</strong>: horizontal on desktop (≥768 px) — content left, image right; stacked on mobile — image top, content below.</li>
+        <li><strong>Slots</strong>: default (heading HTML), <code>image</code> (decorative photo), <code>button</code> (CTA).</li>
+        <li><strong>Attributes</strong>: <code>description</code> (string), <code>tag</code> (string, countdown pill), <code>badge</code> (boolean, default <code>true</code> — shows Brand/Badge seal).</li>
+        <li>Desktop layout corrected to match Figma: all content left-aligned; heading row is natural-width so the Brand/Badge seal sits right after the last line of heading text — not pushed to the far right.</li>
+        <li>Mobile badge uses yellow on most themes, pink on the yellow theme.</li>
+        <li><strong>Responsive layout now uses CSS container queries</strong> — <code>@container page-header (min-width: 768px)</code> with <code>container-type: inline-size</code> on <code>:host</code>. The component responds to its own rendered width so the Storybook viewport toolbar correctly switches between layouts.</li>
+        <li>Storybook: added <strong>Mobile Layout</strong> story; use the viewport toolbar (device icon) to resize the canvas below 768 px to see mobile layout.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Storybook / preview.ts</h3>
+      <ul>
+        <li><strong>xl viewport tier</strong> now injects <code>--typography-brand-xl-size: var(--typography-size-5xl)</code> (56 px) and <code>--typography-brand-xl-line-height: var(--typography-line-height-100)</code> — matches the Figma 1480 px+ breakpoint value when the xl tier is selected in the Storybook toolbar.</li>
+        <li><strong>Tier toolbar renamed</strong> from <code>viewport</code> to <code>tier</code> in <code>globalTypes</code>, freeing <code>globals.viewport</code> for the standard Storybook viewport addon. The device-selector icon in the toolbar now actually resizes the iframe so container queries respond.</li>
+        <li><strong>One-click viewport + tier sync</strong> — selecting a device preset (e.g. "Small mobile") now automatically applies the matching tier tokens AND updates the Tier toolbar label. A <code>window resize</code> listener reads <code>window.innerWidth</code> when the viewport addon resizes the iframe and derives the correct tier. The Tier dropdown remains available for forcing a specific tier at responsive (full) width.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Tokens</h3>
       <p><strong>New <code>--color-branding-*</code> tokens</strong> — semantic aliases over colour primitives:</p>
       <ul>
