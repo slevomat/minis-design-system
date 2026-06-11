@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file.
 
 ### Badge
 
+- **Colors now use branding semantic tokens** instead of primitives directly:
+  - `pink` → `var(--color-branding-pink)` (was `--color-pink-45`, same resolved value)
+  - `yellow` → `var(--color-branding-yellow)` (was `--color-yellow-45`; now resolves to `--color-yellow-75` — warm golden amber)
+  - `blue` → `var(--color-branding-blue)` (was `--color-blue-45`, same resolved value)
 - **New `size` attribute** — `sm` (32 px), `md` (43 px), `xl` (82 px, default).
 - `sm` targets XS/SM breakpoint headlines; `md` is the former recommended minimum for headline companions; `xl` is unchanged default.
 - Existing usage without `size` is unaffected — defaults to `xl` (82 px).

@@ -75,15 +75,17 @@ Use the `size` attribute to select a named size. The SVG scales proportionally a
 
 ---
 
-## Colors — Primitive Token Reference
+## Colors — Token Reference
 
-No new tokens are introduced. The component uses existing primitives directly:
+The component uses the branding semantic tokens (added 2026-06-11). These alias the primitives so a single Figma variable change propagates automatically.
 
-| Variant  | Primitive token       | Resolved hex |
-|----------|-----------------------|--------------|
-| `pink`   | `--color-pink-45`     | `#cf2e41`    |
-| `yellow` | `--color-yellow-45`   | `#ffa400`    |
-| `blue`   | `--color-blue-45`     | `#006eb9`    |
+| Variant  | Branding token          | Primitive alias       | Resolved hex |
+|----------|-------------------------|-----------------------|--------------|
+| `pink`   | `--color-branding-pink` | `--color-pink-45`     | `#cf2e41`    |
+| `yellow` | `--color-branding-yellow` | `--color-yellow-75` | `#d4a017` ≈  |
+| `blue`   | `--color-branding-blue` | `--color-blue-45`     | `#006eb9`    |
+
+> Note: `yellow` resolves to `--color-yellow-75` (a warm golden amber), not `--color-yellow-45` (the warning/alert yellow).
 
 ---
 
