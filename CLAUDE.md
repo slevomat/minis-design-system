@@ -53,16 +53,19 @@ docs/
 
 ## Size naming convention
 
-All components use **full English words** for size values:
+All components use **abbreviated size values matching the Figma `Size` variant names**:
 
-| Value    | Meaning  |
-|----------|----------|
-| `small`  | Compact  |
-| `medium` | Default  |
-| `large`  | Spacious |
+| Value | Meaning              |
+|-------|----------------------|
+| `xs`  | Extra compact        |
+| `sm`  | Compact              |
+| `md`  | Default              |
+| `lg`  | Spacious             |
+| `xl`  | Extra spacious       |
 
-> Never use abbreviations `sm`, `md`, `lg` as component `size` attribute values.
-> (Exception: `<minis-pill-counter>` uses `xs | sm | md` — its own internal scale, not changed.)
+Each component exposes only the subset it supports (e.g. `<minis-button>` = `sm | md | lg | xl`, `<minis-badge>` = `sm | md | xl`, `<minis-pill-counter>` = `xs | sm | md`).
+
+> Never use full words `small`, `medium`, `large` as component `size` attribute values — they don't match the Figma variants and components will fall back to their default size.
 
 ## Changelog rules
 
@@ -110,7 +113,9 @@ Never create a component without a `.figma.ts` file.
 ### `.figma.ts` template
 
 ```typescript
-import figma, { html } from '@figma/code-connect';
+// IMPORTANT: import from the '/html' subpath — the package root only
+// exports the React API and `{ html }` fails `tsc` (TS2614).
+import figma, { html } from '@figma/code-connect/html';
 
 figma.connect('FIGMA_NODE_URL', {
   props: {

@@ -30,23 +30,6 @@ if (fs.existsSync(srcFontsDir)) {
   }
 }
 
-// Function to concatenate CSS files from a directory
-function concatenateCSS(dir, outputFile) {
-  if (!fs.existsSync(dir)) {
-    console.warn(`⚠ Directory not found: ${dir}`);
-    return;
-  }
-  
-  const files = fs.readdirSync(dir).filter(file => file.endsWith('.css'));
-  const content = files.map(file => {
-    const filePath = path.join(dir, file);
-    return `/* ${file} */\n${fs.readFileSync(filePath, 'utf-8')}\n`;
-  }).join('\n');
-  
-  fs.writeFileSync(outputFile, content);
-  console.log(`✓ Built ${path.relative(distDir, outputFile)}`);
-}
-
 // Copy the canonical tokens.css (Figma export) as the main output
 const tokensSrc = path.join(srcDir, 'tokens.css');
 fs.copyFileSync(tokensSrc, path.join(distDir, 'index.css'));

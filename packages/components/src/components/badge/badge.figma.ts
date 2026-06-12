@@ -1,4 +1,4 @@
-import figma, { html } from '@figma/code-connect';
+import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
   'https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4605-441',

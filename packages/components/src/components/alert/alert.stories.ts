@@ -19,9 +19,9 @@ const meta: Meta = {
       options: ['notice', 'success', 'error', 'warning'],
       description: 'Visual variant — communicates the nature of the message',
     },
-    icon: {
+    'no-icon': {
       control: 'boolean',
-      description: 'Show the variant icon (default: true)',
+      description: 'Hide the variant icon (shown by default)',
     },
   },
 };
@@ -35,10 +35,10 @@ export const Playground: Story = {
   name: 'Playground',
   args: {
     variant: 'notice',
-    icon: true,
+    'no-icon': false,
   },
   render: (args) => html`
-    <minis-alert variant=${args.variant} ?icon=${args.icon}>
+    <minis-alert variant=${args.variant} ?no-icon=${args['no-icon']}>
       Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
     </minis-alert>
   `,
@@ -72,16 +72,16 @@ export const WithoutIcon: Story = {
   name: 'Without icon',
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 12px; max-width: 520px;">
-      <minis-alert variant="notice" ?icon=${false}>
+      <minis-alert variant="notice" no-icon>
         Notice without icon.
       </minis-alert>
-      <minis-alert variant="success" ?icon=${false}>
+      <minis-alert variant="success" no-icon>
         Success without icon.
       </minis-alert>
-      <minis-alert variant="error" ?icon=${false}>
+      <minis-alert variant="error" no-icon>
         Error without icon.
       </minis-alert>
-      <minis-alert variant="warning" ?icon=${false}>
+      <minis-alert variant="warning" no-icon>
         Warning without icon.
       </minis-alert>
     </div>

@@ -381,6 +381,44 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-06-12 (quality fixes: checkbox forms, no-icon/no-badge, build & CI)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-06-12" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-06-12</h2>
+        <button class="cl-copy-btn" data-anchor="2026-06-12">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Checkbox</h3>
+      <ul>
+        <li><strong>Form association via ElementInternals</strong> — <code>&lt;minis-checkbox name="…" value="…"&gt;</code> now actually submits with a surrounding <code>&lt;form&gt;</code>. Previously the hidden native input lived inside Shadow DOM where forms cannot see it, so <code>name</code>/<code>value</code> were silently ignored.</li>
+        <li>Participates in <code>form.reset()</code> (restores initial checked state) and <code>&lt;fieldset disabled&gt;</code>.</li>
+        <li>Redundant hidden <code>&lt;input&gt;</code> removed; keyboard, ARIA and click behaviour unchanged.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Alert</h3>
+      <ul>
+        <li><strong>BREAKING</strong>: <code>icon</code> attribute replaced by <code>no-icon</code>. <code>icon="false"</code> never worked — HTML boolean attributes are true whenever present. Use <code>&lt;minis-alert no-icon&gt;</code> to hide the icon (shown by default).</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Page Header</h3>
+      <ul>
+        <li><strong>BREAKING</strong>: <code>badge</code> attribute replaced by <code>no-badge</code>, for the same reason as Alert's <code>icon</code>. The seal is shown by default; use <code>&lt;minis-page-header no-badge&gt;</code> to hide it.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Build &amp; tooling</h3>
+      <ul>
+        <li><strong>Fixed broken package build</strong> — the three <code>*.figma.ts</code> Code Connect files imported <code>html</code> from the React-only root of <code>@figma/code-connect</code>, failing <code>tsc</code> (TS2614). They now import from <code>@figma/code-connect/html</code> and are excluded from the build tsconfig.</li>
+        <li><strong>New CI workflow</strong> — <code>pnpm build</code> + <code>pnpm lint</code> run on every push and pull request.</li>
+        <li>Added <code>.eslintignore</code> — lint previously crashed on a symlink loop in <code>storybook-static</code>; also removed dead code it flagged (unused imports/helpers in navigation &amp; page-header stories and the tokens build script).</li>
+        <li><strong>Size naming convention corrected in CLAUDE.md</strong> — components use abbreviated sizes matching Figma variant names (<code>xs | sm | md | lg | xl</code>); the documented full-word convention never matched the shipped code.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-06-11 (badge size attribute)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

@@ -1,4 +1,4 @@
-import figma, { html } from '@figma/code-connect';
+import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
   'https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396',
@@ -21,7 +21,7 @@ figma.connect(
         theme="${theme}"
         ${description ? 'description="Your description text here."' : ''}
         ${tag ? 'tag="Do 1. června zbývá 6 dní"' : ''}
-        ${badge ? '' : '.badge="${false}"'}
+        ${badge ? '' : 'no-badge'}
       >
         Nadpis stránky<br>druhý řádek
         ${button ? html`<minis-button slot="button" variant="transparent" size="xl">Text výzvy k akci</minis-button>` : ''}

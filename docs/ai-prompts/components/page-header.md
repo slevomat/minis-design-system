@@ -32,7 +32,7 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 | `theme` | `'brand' \| 'blue' \| 'yellow' \| 'pink' \| 'green'` | `'brand'` | Background color theme |
 | `description` | `string` | `''` | Body copy shown below the heading. Omit to hide. |
 | `tag` | `string` | `''` | Countdown/label text shown as a pill above the heading. Omit to hide. |
-| `badge` | `boolean` | `true` | Whether to show the Brand/Badge checkmark seal next to the heading |
+| `no-badge` | `boolean` | `false` | Hide the Brand/Badge checkmark seal next to the heading (shown by default) |
 
 ### Slots
 
@@ -124,7 +124,7 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 ### No badge
 
 ```html
-<minis-page-header theme="pink" .badge="${false}">
+<minis-page-header theme="pink" no-badge>
   Heading text
   <img slot="image" src="photo.png" alt="">
 </minis-page-header>
@@ -148,7 +148,7 @@ Create a <minis-page-header> with:
 - Heading: "Ušetřete za pobyt<br>v italském Rimini"
 - description="Dnešní 30% sleva vám nesmí uniknout."
 - tag="Do 1. června zbývá 6 dní"
-- badge (true, default)
+- no-badge (absent by default — badge is shown)
 - button slot: <minis-button variant="transparent" size="xl">Zjistit více</minis-button>
 - image slot: <img src="photo.png" alt="Rimini beach">
 ```

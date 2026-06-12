@@ -23,7 +23,7 @@ const meta: Meta = {
   <li><strong><code>button</code> slot</strong>: optional CTA — use <code>&lt;minis-button variant="transparent" size="xl"&gt;</code>.</li>
   <li><strong><code>description</code></strong> attribute: optional body copy below the heading.</li>
   <li><strong><code>tag</code></strong> attribute: optional countdown/label pill above the heading.</li>
-  <li><strong><code>badge</code></strong> boolean (default <code>true</code>): Brand/Badge checkmark seal next to the heading.</li>
+  <li><strong><code>no-badge</code></strong> boolean (default <code>false</code>): hides the Brand/Badge checkmark seal next to the heading.</li>
 </ul>
         `,
       },
@@ -43,26 +43,21 @@ const meta: Meta = {
       control: 'text',
       description: 'Optional countdown/label pill above the heading',
     },
-    badge: {
+    'no-badge': {
       control: 'boolean',
-      description: 'Show Brand/Badge checkmark seal',
+      description: 'Hide the Brand/Badge checkmark seal (shown by default)',
     },
   },
   args: {
     theme: 'brand',
     description: 'Dnešní 30% sleva navíc vám nesmí uniknout. Pořiďte si dovolenou u moře za ještě lepší cenu. Ale pozor – akce platí jen dnes.',
     tag: '',
-    badge: true,
+    'no-badge': false,
   },
 };
 
 export default meta;
 type Story = StoryObj;
-
-// ─── Placeholder image helper ─────────────────────────────────────────────────
-
-const placeholderImg = (bg: string, label: string) =>
-  `<div slot="image" style="width:100%;height:100%;background:${bg};display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:12px;color:rgba(255,255,255,.7);text-align:center;padding:8px;box-sizing:border-box">${label}</div>`;
 
 // ─── Playground ───────────────────────────────────────────────────────────────
 
@@ -73,7 +68,7 @@ export const Playground: Story = {
       theme="${args.theme}"
       description="${args.description}"
       tag="${args.tag}"
-      ?badge="${args.badge}"
+      ?no-badge="${args['no-badge']}"
     >
       Ušetřete za pobyt<br>v italském Rimini
       <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.6);text-align:center">
@@ -169,14 +164,14 @@ export const NoBadge: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: 'Set <code>badge</code> to <code>false</code> to hide the Brand/Badge seal.' },
+      description: { story: 'Add the <code>no-badge</code> attribute to hide the Brand/Badge seal.' },
     },
   },
   render: () => html`
     <minis-page-header
       theme="blue"
       description="Dnešní 30% sleva navíc vám nesmí uniknout."
-      .badge="${false}"
+      no-badge
     >
       Ušetřete za pobyt<br>v italském Rimini
       <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.6)">photo</div>
