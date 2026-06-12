@@ -46,14 +46,9 @@ export class MinisPageHeader extends LitElement {
   @property({ type: Boolean, attribute: 'no-badge', reflect: true })
   noBadge = false;
 
-  /** Desktop badge color: pink on brand/yellow (light backgrounds); yellow on blue/pink/green (dark). */
-  private get _badgeColorDesktop(): 'pink' | 'yellow' {
-    return ['brand', 'yellow'].includes(this.theme) ? 'pink' : 'yellow';
-  }
-
-  /** Mobile badge color: yellow on most themes; pink on yellow (better contrast). */
-  private get _badgeColorMobile(): 'yellow' | 'pink' {
-    return this.theme === 'yellow' ? 'pink' : 'yellow';
+  /** Badge color: red (pink) seal on every theme; blue seal on the pink theme for contrast. */
+  private get _badgeColor(): 'pink' | 'blue' {
+    return this.theme === 'pink' ? 'blue' : 'pink';
   }
 
   render() {
@@ -71,8 +66,8 @@ export class MinisPageHeader extends LitElement {
                 <slot></slot>
               </h1>
               ${!this.noBadge ? html`
-                <minis-badge class="badge-desktop" size="md" color="${this._badgeColorDesktop}"></minis-badge>
-                <minis-badge class="badge-mobile" size="sm" color="${this._badgeColorMobile}"></minis-badge>
+                <minis-badge class="badge-desktop" size="md" color="${this._badgeColor}"></minis-badge>
+                <minis-badge class="badge-mobile" size="sm" color="${this._badgeColor}"></minis-badge>
               ` : nothing}
             </div>
 

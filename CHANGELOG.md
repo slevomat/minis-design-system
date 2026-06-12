@@ -12,8 +12,14 @@ All notable changes to this project will be documented in this file.
 - Added `tag.figma.ts` Code Connect mapping for the `tag/toggle` Figma component (maps `Icon only`, `State`, and `In Color`).
 - **Tokens** (component override hooks, CSS-only): added `--tag-toggle-surface` (`transparent`), `--tag-toggle-icon-only-surface` (`var(--color-surface-primary)`), `--tag-toggle-color-accent` (`var(--color-interaction-danger-accent)`), `--tag-toggle-color-hover-surface` (`var(--color-interaction-danger-hover-surface)`), `--tag-toggle-color-hover-border` (`var(--color-interaction-secondary-border)`). `--tag-toggle-hover-border` now defaults to `var(--color-interaction-secondary-border)` (was the hover-surface colour). Removed `--tag-toggle-pressed-surface` / `--tag-toggle-pressed-border` (toggled no longer changes surface).
 
+### Page Header
+
+- **Badge color realigned to Figma** ([node `4642:396`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396)). The checkmark seal is now red (`color="pink"`) on every theme, with the single exception of the `pink` theme, which uses a blue seal (`color="blue"`) for contrast. Desktop (`md`) and mobile (`sm`) badges now share the same color. Previously the color varied per theme and differed between desktop and mobile (a pink/yellow mix).
+- Internals: the two getters `_badgeColorDesktop` / `_badgeColorMobile` were replaced by a single `_badgeColor` getter.
+
 ### Tokens
 
+- **`--color-branding-green` retargeted to primitive green 45** — now `var(--color-green-45)` (`#088107`), was `var(--color-green-35)` (`#136110`). Brightens the `green` page-header theme surface; matches the updated Figma `Color/Branding/green` variable.
 - **New `--button-primary-hover-shadow`** — the primary button's layered blue-toned hover `box-shadow` (five `rgba(0, 71, 120, …)` layers), previously hardcoded in `button.styles.ts`, is now a component token next to the other `--button-primary-hover-*` tokens.
 - `button.styles.ts` and `message.styles.ts` now reference `var(--button-primary-hover-shadow)` / `var(--message-shadow)` without hardcoded fallbacks — multi-value `var()` fallbacks in Lit `css` templates are a documented pitfall, and `--message-shadow` already existed in `tokens.css`. Rendered values unchanged.
 
