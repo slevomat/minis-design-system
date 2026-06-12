@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { badgeStyles } from './badge.styles.js';
 
-export type BadgeColor = 'pink' | 'yellow' | 'blue';
+export type BadgeColor = 'pink' | 'yellow' | 'blue' | 'brand';
 /** sm = 32 px (XS/SM headline), md = 43 px (headline companion), xl = 82 px (default) */
 export type BadgeSize = 'sm' | 'md' | 'xl';
 

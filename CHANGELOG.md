@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### Badge
 
+- **New `brand` color variant** — `<minis-badge color="brand">` paints the seal in Slevomat brand cyan via `--color-branding-brand` (`var(--color-blue-65)` → `#00b2e5`). Joins `pink` (default), `yellow`, and `blue`. Mapped in `badge.figma.ts`, stories, and the AI-prompt doc.
 - **Code Connect mapping fixed**: `badge.figma.ts` referenced a non-existent `Color` property (the Figma variant property is lowercase `color` with lowercase values) and didn't map `Size` at all. Both now mapped; `figma connect publish` validation passes.
 
 ### Checkbox

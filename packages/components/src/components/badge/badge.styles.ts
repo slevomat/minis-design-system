@@ -27,6 +27,10 @@ export const badgeStyles = css`
     --badge-color: var(--color-branding-blue);
   }
 
+  :host([color='brand']) {
+    --badge-color: var(--color-branding-brand);
+  }
+
   svg {
     display: block;
     width: 100%;
