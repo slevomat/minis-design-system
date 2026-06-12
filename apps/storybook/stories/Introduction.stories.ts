@@ -428,7 +428,7 @@ const changelogHTML = `
       <h3 style="margin-top:1rem">Page Header</h3>
       <ul>
         <li><strong>BREAKING</strong>: <code>badge</code> attribute replaced by <code>no-badge</code>, for the same reason as Alert's <code>icon</code>. The seal is shown by default; use <code>&lt;minis-page-header no-badge&gt;</code> to hide it.</li>
-        <li><strong>Badge color realigned to Figma</strong> — the checkmark seal is now red (<code>color="pink"</code>) on every theme, except the <code>pink</code> theme, which uses a blue seal (<code>color="blue"</code>) for contrast. Desktop (<code>md</code>) and mobile (<code>sm</code>) badges now share the same color (previously a per-theme pink/yellow mix that differed between breakpoints).</li>
+        <li><strong>Badge color realigned to Figma</strong> — the checkmark seal is now red (<code>color="pink"</code>) on every theme, except the <code>pink</code> theme, which uses a brand-cyan seal (<code>color="brand"</code>) for contrast. Desktop (<code>md</code>) and mobile (<code>sm</code>) badges now share the same color (previously a per-theme pink/yellow mix that differed between breakpoints).</li>
       </ul>
 
       <h3 style="margin-top:1rem">Build &amp; tooling</h3>

@@ -72,14 +72,14 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 - Content column (left): flex column, `align-items: flex-start`, `gap: --spacing-layout-sm`
 - Image area (right): `290×280px`, `overflow: hidden`
 - Brand and Yellow themes: image rotated `−3deg`
-- Badge: `md` (43px), red (pink) on every theme — blue on the `pink` theme — bottom-aligned next to heading
+- Badge: `md` (43px), red (pink) on every theme — brand (cyan) on the `pink` theme — bottom-aligned next to heading
 
 **Mobile (<768 px)**
 - Root: `padding: 40px var(--container-padding, 14px)`
 - Container: flex column, `align-items: center`, `gap: 24px`
 - Image area (top): `160×160px`, `border-radius: 50%` (circle)
 - Content (below): centered text
-- Badge: `sm` (32px), same color as desktop — red (pink) on every theme, blue on the `pink` theme — absolute top-right of heading
+- Badge: `sm` (32px), same color as desktop — red (pink) on every theme, brand (cyan) on the `pink` theme — absolute top-right of heading
 
 ---
 

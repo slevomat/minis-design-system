@@ -46,9 +46,9 @@ export class MinisPageHeader extends LitElement {
   @property({ type: Boolean, attribute: 'no-badge', reflect: true })
   noBadge = false;
 
-  /** Badge color: red (pink) seal on every theme; blue seal on the pink theme for contrast. */
-  private get _badgeColor(): 'pink' | 'blue' {
-    return this.theme === 'pink' ? 'blue' : 'pink';
+  /** Badge color: red (pink) seal on every theme; brand (cyan) seal on the pink theme for contrast. */
+  private get _badgeColor(): 'pink' | 'brand' {
+    return this.theme === 'pink' ? 'brand' : 'pink';
   }
 
   render() {
