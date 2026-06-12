@@ -14,7 +14,7 @@ A compact pill-shaped label used to display metadata, applied filters, or lightw
 |---|---|
 | `static` | Read-only label for displaying metadata or category badges (e.g. "Platba na zálohu"). No interaction. |
 | `clickable` | Same visual as static, but clickable. Use for subtle actions like opening a modal or a tooltip with more info about the tag. **Returns to default state after click — no persistent state.** Do NOT use as a form submit button. |
-| `toggle` | Works like a toggle/checkbox button visually. Persists pressed/unpressed state. Use for active selection (e.g. Like button, favourite, active filter). The icon typically switches between outline and filled version (e.g. `heart` ↔ `heart-fill`). |
+| `toggle` | Works like a toggle/checkbox button visually. Persists pressed/unpressed state. Use for active selection (e.g. Like button, favourite, active filter). The icon typically switches between outline and filled version (e.g. `heart` ↔ `heart-fill`). Add `in-color` to render the icon in the brand/red accent. |
 | `dismissible` | Applied filter that the user can remove. Built-in ✕ button fires a `dismiss` event. |
 
 ---
@@ -29,6 +29,7 @@ A compact pill-shaped label used to display metadata, applied filters, or lightw
 | `pressed` | `boolean` | `false` | Toggle/selected state. Only meaningful on `toggle`. Sets `aria-pressed` on the inner `<button>`. Can be set declaratively for server-rendered initial state. |
 | `disabled` | `boolean` | `false` | Disables the tag. Only meaningful on `clickable` and `toggle`. |
 | `icon-only` | `boolean` | `false` | Icon-only mode. Only meaningful on `toggle`. Hides the label slot and renders the tag as a square icon button (width = height). Requires an icon in the `icon` slot. |
+| `in-color` | `boolean` | `false` | Renders the icon in the brand/danger accent (red) and uses the danger palette for the hover/pressed surfaces. The label stays neutral. Only meaningful on `toggle` — e.g. a red "like" heart. |
 
 ### Slots
 
@@ -65,12 +66,15 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 | `--tag-clickable-accent` | `--color-interaction-secondary-accent` | Clickable text/icon colour |
 | `--tag-clickable-hover-surface` | `--color-interaction-secondary-hover-surface` | Hover background |
 | `--tag-clickable-hover-border` | `--color-interaction-secondary-hover-surface` | Hover border |
-| `--tag-toggle-border` | `--color-interaction-secondary-border` | Toggle default border |
+| `--tag-toggle-surface` | `transparent` | Toggle resting background (default **and** toggled — the filled icon is the indicator, not a surface change) |
+| `--tag-toggle-border` | `--color-interaction-secondary-border` | Toggle border |
 | `--tag-toggle-accent` | `--color-interaction-secondary-accent` | Toggle text/icon colour |
-| `--tag-toggle-hover-surface` | `--color-interaction-secondary-hover-surface` | Toggle hover background |
-| `--tag-toggle-hover-border` | `--color-interaction-secondary-hover-surface` | Toggle hover border |
-| `--tag-toggle-pressed-surface` | `--color-interaction-secondary-hover-surface` | Toggle pressed background |
-| `--tag-toggle-pressed-border` | `--color-interaction-secondary-hover-surface` | Toggle pressed border |
+| `--tag-toggle-hover-surface` | `--color-interaction-secondary-hover-surface` | Toggle hover background tint |
+| `--tag-toggle-hover-border` | `--color-interaction-secondary-border` | Toggle hover border (stays neutral) |
+| `--tag-toggle-icon-only-surface` | `--color-surface-primary` | Icon-only resting background (no border — sits over photos) |
+| `--tag-toggle-color-accent` | `--color-interaction-danger-accent` | Icon colour when `in-color` is set (red) |
+| `--tag-toggle-color-hover-surface` | `--color-interaction-danger-hover-surface` | Hover background tint when `in-color` is set |
+| `--tag-toggle-color-hover-border` | `--color-interaction-secondary-border` | Hover border when `in-color` is set |
 | `--tag-dismissible-surface` | `--color-interaction-secondary-hover-surface` | Dismissible background |
 | `--tag-dismissible-border` | `--color-interaction-secondary-hover-surface` | Dismissible border |
 | `--tag-dismissible-accent` | `--color-interaction-secondary-accent` | Dismissible text/icon colour |
@@ -123,6 +127,30 @@ Initial pressed state (e.g. already liked, server-rendered):
 <minis-tag variant="toggle" pressed>
   <minis-icon slot="icon" name="heart-fill"></minis-icon>
   Oblíbené
+</minis-tag>
+```
+
+> **Toggle state model.** Default uses the **outline** icon, toggled uses the **filled** icon — the consumer swaps `icon.name` on the `toggle` event. **Hover** is the only state that tints the background; the toggled state itself does not change the surface. Icon-only toggles are **borderless** over a solid primary (white) surface, because they are typically placed over photos.
+
+### Toggle in color — red "like" heart
+
+```html
+<minis-tag variant="toggle" in-color id="like-tag">
+  <minis-icon slot="icon" name="heart" id="like-icon"></minis-icon>
+  Uložit
+</minis-tag>
+<script>
+  document.querySelector('#like-tag').addEventListener('toggle', (e) => {
+    document.querySelector('#like-icon').name = e.detail.pressed ? 'heart-fill' : 'heart';
+  });
+</script>
+```
+
+`in-color` also works with `icon-only`:
+
+```html
+<minis-tag variant="toggle" icon-only in-color>
+  <minis-icon slot="icon" name="heart"></minis-icon>
 </minis-tag>
 ```
 

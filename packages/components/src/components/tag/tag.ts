@@ -17,6 +17,7 @@ export type TagVariant = 'static' | 'clickable' | 'toggle' | 'dismissible';
  *   Do NOT use as a form submit button.
  * - **toggle** — persists pressed/unpressed state; fires a `toggle` event.
  *   Ideal for favouriting, saving, or filter selection (icon switches outline ↔ filled).
+ *   Add `in-color` to render the icon in the brand/red accent (e.g. a "like" heart).
  * - **dismissible** — has a built-in ✕ button; fires a `dismiss` event
  *
  * @slot        - Label text
@@ -76,6 +77,14 @@ export class MinisTag extends LitElement {
    */
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
   iconOnly = false;
+
+  /**
+   * Renders the icon in the brand / danger accent colour (red) and uses the
+   * danger palette for the hover / pressed surfaces. The label stays neutral.
+   * Only meaningful on the `toggle` variant — typical use is a red "like" heart.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'in-color' })
+  inColor = false;
 
   @state()
   private _hasIcon = false;

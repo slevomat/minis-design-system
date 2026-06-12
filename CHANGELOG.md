@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-06-12
 
+### Tag
+
+- **New `in-color` boolean attribute** on the `toggle` variant (mirrors the Figma "In Color" property). When set, the icon renders in the brand/danger accent (`--color-interaction-danger-accent`, red) and the hover tint uses the danger palette; the label and borders stay neutral. Typical use: a red "like"/favourite heart. Works with `icon-only` too.
+- **Toggle state model aligned to Figma** — the toggled/pressed state no longer paints a background surface. Default and toggled share the resting surface; the outline ↔ filled icon (swapped by the consumer) is the only state indicator, and **hover** is the only state that tints the background. Previously the pressed state filled with `--color-interaction-secondary-hover-surface`.
+- **Icon-only toggle is now borderless** over a primary (white) surface (`--color-surface-primary`) — these sit over photos, so a solid surface reads better than an outline.
+- Added `tag.figma.ts` Code Connect mapping for the `tag/toggle` Figma component (maps `Icon only`, `State`, and `In Color`).
+- **Tokens** (component override hooks, CSS-only): added `--tag-toggle-surface` (`transparent`), `--tag-toggle-icon-only-surface` (`var(--color-surface-primary)`), `--tag-toggle-color-accent` (`var(--color-interaction-danger-accent)`), `--tag-toggle-color-hover-surface` (`var(--color-interaction-danger-hover-surface)`), `--tag-toggle-color-hover-border` (`var(--color-interaction-secondary-border)`). `--tag-toggle-hover-border` now defaults to `var(--color-interaction-secondary-border)` (was the hover-surface colour). Removed `--tag-toggle-pressed-surface` / `--tag-toggle-pressed-border` (toggled no longer changes surface).
+
 ### Tokens
 
 - **New `--button-primary-hover-shadow`** — the primary button's layered blue-toned hover `box-shadow` (five `rgba(0, 71, 120, …)` layers), previously hardcoded in `button.styles.ts`, is now a component token next to the other `--button-primary-hover-*` tokens.

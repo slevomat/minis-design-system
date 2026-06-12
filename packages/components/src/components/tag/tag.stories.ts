@@ -39,6 +39,10 @@ const meta: Meta = {
       control: 'boolean',
       description: 'Icon-only mode — hides the label (toggle variant only)',
     },
+    'in-color': {
+      control: 'boolean',
+      description: 'Renders the icon in the brand/red accent (toggle variant only)',
+    },
   },
 };
 
@@ -54,6 +58,7 @@ export const Playground: Story = {
     pressed: false,
     disabled: false,
     'icon-only': false,
+    'in-color': false,
   },
   render: (args) => html`
     <minis-tag
@@ -61,6 +66,7 @@ export const Playground: Story = {
       ?pressed=${args.pressed}
       ?disabled=${args.disabled}
       ?icon-only=${args['icon-only']}
+      ?in-color=${args['in-color']}
     >
       <minis-icon slot="icon" name="credit-card" size="20"></minis-icon>
       Platba na zálohu
@@ -189,6 +195,58 @@ export const ToggleIconOnly: Story = {
   `,
 };
 
+// ─── Toggle in color ──────────────────────────────────────────────────────────
+
+export const ToggleInColor: Story = {
+  name: 'Toggle in color',
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px; font-family: sans-serif; font-size: 13px; color: #555;">
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <minis-tag
+          variant="toggle"
+          in-color
+          @toggle=${(e: CustomEvent) => {
+            const icon = (e.target as Element).querySelector('minis-icon[slot="icon"]') as HTMLElement & { name: string };
+            if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
+          }}
+        >
+          <minis-icon slot="icon" name="heart"></minis-icon>
+          Uložit
+        </minis-tag>
+        <minis-tag variant="toggle" in-color pressed>
+          <minis-icon slot="icon" name="heart-fill"></minis-icon>
+          Uložit
+        </minis-tag>
+        <minis-tag variant="toggle" in-color disabled>
+          <minis-icon slot="icon" name="heart"></minis-icon>
+          Uložit
+        </minis-tag>
+        <span>← default / pressed / disabled</span>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <minis-tag
+          variant="toggle"
+          icon-only
+          in-color
+          @toggle=${(e: CustomEvent) => {
+            const icon = (e.target as Element).querySelector('minis-icon[slot="icon"]') as HTMLElement & { name: string };
+            if (icon) icon.name = e.detail.pressed ? 'heart-fill' : 'heart';
+          }}
+        >
+          <minis-icon slot="icon" name="heart"></minis-icon>
+        </minis-tag>
+        <minis-tag variant="toggle" icon-only in-color pressed>
+          <minis-icon slot="icon" name="heart-fill"></minis-icon>
+        </minis-tag>
+        <minis-tag variant="toggle" icon-only in-color disabled>
+          <minis-icon slot="icon" name="heart"></minis-icon>
+        </minis-tag>
+        <span>← icon-only: default / pressed / disabled</span>
+      </div>
+    </div>
+  `,
+};
+
 // ─── Dismissed list ───────────────────────────────────────────────────────────
 
 export const DismissibleList: Story = {
@@ -231,10 +289,22 @@ export const States: Story = {
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
         <span style="font-family: sans-serif; font-size: 12px; color: #888; width: 80px;">toggle</span>
-        <minis-tag variant="toggle">Default</minis-tag>
-        <minis-tag variant="toggle" pressed>Pressed</minis-tag>
-        <minis-tag variant="toggle" disabled>Disabled</minis-tag>
+        <minis-tag variant="toggle">
+          <minis-icon slot="icon" name="heart"></minis-icon>
+          Default
+        </minis-tag>
+        <minis-tag variant="toggle" pressed>
+          <minis-icon slot="icon" name="heart-fill"></minis-icon>
+          Toggled
+        </minis-tag>
+        <minis-tag variant="toggle" disabled>
+          <minis-icon slot="icon" name="heart"></minis-icon>
+          Disabled
+        </minis-tag>
       </div>
+      <p style="font-family: sans-serif; font-size: 12px; color: #888; margin: 0;">
+        Default uses the outline icon, toggled uses the filled icon (swapped by the consumer on the <code>toggle</code> event). Hover only tints the background.
+      </p>
     </div>
   `,
 };

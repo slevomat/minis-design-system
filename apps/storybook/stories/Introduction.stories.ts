@@ -391,6 +391,15 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tag</h3>
+      <ul>
+        <li><strong>New <code>in-color</code> boolean attribute</strong> on the <code>toggle</code> variant (mirrors the Figma "In Color" property). When set, the icon renders in the brand/danger accent (<code>--color-interaction-danger-accent</code>, red) and the hover tint uses the danger palette; the label and borders stay neutral. Typical use: a red "like"/favourite heart. Works with <code>icon-only</code> too.</li>
+        <li><strong>Toggle state model aligned to Figma</strong> — the toggled state no longer paints a background. Default and toggled share the resting surface; the outline ↔ filled icon (swapped by the consumer) is the state indicator, and <strong>hover</strong> is the only state that tints the background.</li>
+        <li><strong>Icon-only toggle is now borderless</strong> over a primary (white) surface (<code>--color-surface-primary</code>) — these sit over photos.</li>
+        <li>Added <code>tag.figma.ts</code> Code Connect mapping for the <code>tag/toggle</code> Figma component (maps <code>Icon only</code>, <code>State</code>, <code>In Color</code>).</li>
+        <li><strong>Tokens</strong> (component override hooks): added <code>--tag-toggle-surface</code>, <code>--tag-toggle-icon-only-surface</code>, <code>--tag-toggle-color-accent</code>, <code>--tag-toggle-color-hover-surface</code>, <code>--tag-toggle-color-hover-border</code>; <code>--tag-toggle-hover-border</code> now defaults to the neutral border colour; removed <code>--tag-toggle-pressed-surface</code> / <code>--tag-toggle-pressed-border</code>.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Tokens</h3>
       <ul>
         <li><strong>New <code>--button-primary-hover-shadow</code></strong> — the primary button's layered blue-toned hover <code>box-shadow</code> (five <code>rgba(0, 71, 120, …)</code> layers), previously hardcoded in <code>button.styles.ts</code>, is now a component token.</li>
