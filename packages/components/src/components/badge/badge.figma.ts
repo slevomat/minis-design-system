@@ -4,14 +4,19 @@ figma.connect(
   'https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4605-441',
   {
     props: {
-      color: figma.enum('Color', {
-        Pink: 'pink',
-        Yellow: 'yellow',
-        Blue: 'blue',
+      color: figma.enum('color', {
+        pink: 'pink',
+        yellow: 'yellow',
+        blue: 'blue',
+      }),
+      size: figma.enum('Size', {
+        sm: 'sm',
+        md: 'md',
+        xl: 'xl',
       }),
     },
-    example: ({ color }) => html`
-      <minis-badge color="${color}"></minis-badge>
+    example: ({ color, size }) => html`
+      <minis-badge color="${color}" size="${size}"></minis-badge>
     `,
   },
 );
