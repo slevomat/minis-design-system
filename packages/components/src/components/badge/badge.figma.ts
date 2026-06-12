@@ -8,6 +8,7 @@ figma.connect(
         pink: 'pink',
         yellow: 'yellow',
         blue: 'blue',
+        brand: 'brand',
       }),
       size: figma.enum('Size', {
         sm: 'sm',

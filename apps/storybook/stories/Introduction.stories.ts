@@ -408,6 +408,7 @@ const changelogHTML = `
 
       <h3 style="margin-top:1rem">Badge</h3>
       <ul>
+        <li><strong>New <code>brand</code> color variant</strong> — <code>&lt;minis-badge color="brand"&gt;</code> paints the seal in Slevomat brand cyan via <code>--color-branding-brand</code> (<code>var(--color-blue-65)</code> → <code>#00b2e5</code>). Joins <code>pink</code> (default), <code>yellow</code>, and <code>blue</code>.</li>
         <li><strong>Code Connect mapping fixed</strong> — <code>badge.figma.ts</code> referenced a non-existent <code>Color</code> property (the Figma variant property is lowercase <code>color</code>) and didn't map <code>Size</code>. Both now mapped.</li>
       </ul>
 

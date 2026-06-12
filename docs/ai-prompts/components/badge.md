@@ -27,10 +27,10 @@ Headline companion (43 px):
 
 ### Properties / Attributes
 
-| Attribute | Type                         | Default  | Description                       |
-|-----------|------------------------------|----------|-----------------------------------|
-| `color`   | `'pink' \| 'yellow' \| 'blue'` | `'pink'` | Color variant of the seal badge   |
-| `size`    | `'sm' \| 'md' \| 'xl'`       | `'xl'`   | Size: sm 32 px · md 43 px · xl 82 px |
+| Attribute | Type                                      | Default  | Description                       |
+|-----------|-------------------------------------------|----------|-----------------------------------|
+| `color`   | `'pink' \| 'yellow' \| 'blue' \| 'brand'` | `'pink'` | Color variant of the seal badge   |
+| `size`    | `'sm' \| 'md' \| 'xl'`                    | `'xl'`   | Size: sm 32 px · md 43 px · xl 82 px |
 
 ### Slots
 
@@ -49,6 +49,7 @@ None.
 | `pink`   | `--badge-pink`  | `#cf2e41` | Default — Slevomat brand red   |
 | `yellow` | `--badge-yellow`| `#ffa400` | Warm accent / attention        |
 | `blue`   | `--badge-blue`  | `#006eb9` | Slevomat brand blue            |
+| `brand`  | `--badge-brand` | `#00b2e5` | Slevomat brand cyan            |
 
 ---
 
@@ -84,6 +85,7 @@ The component uses the branding semantic tokens (added 2026-06-11). These alias 
 | `pink`   | `--color-branding-pink` | `--color-pink-45`     | `#cf2e41`    |
 | `yellow` | `--color-branding-yellow` | `--color-yellow-75` | `#d4a017` ≈  |
 | `blue`   | `--color-branding-blue` | `--color-blue-45`     | `#006eb9`    |
+| `brand`  | `--color-branding-brand` | `--color-blue-65`    | `#00b2e5`    |
 
 > Note: `yellow` resolves to `--color-yellow-75` (a warm golden amber), not `--color-yellow-45` (the warning/alert yellow).
 
