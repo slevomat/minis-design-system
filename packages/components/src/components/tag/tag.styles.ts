@@ -69,17 +69,20 @@ export const tagStyles = css`
      VARIANT: TOGGLE
      ===================== */
 
+  /* Resting surface. Default and toggled share it — the icon (outline ↔ filled,
+     swapped by the consumer) is the state indicator, not a background change. */
   :host([variant="toggle"]) .tag {
-    background: transparent;
+    background: var(--tag-toggle-surface, transparent);
     border-color: var(--tag-toggle-border, var(--color-interaction-secondary-border, #cbccce));
     color: var(--tag-toggle-accent, var(--color-interaction-secondary-accent, #000));
     cursor: pointer;
     transition: background 150ms ease, border-color 150ms ease;
   }
 
+  /* Hover only tints the background; the border stays neutral. */
   :host([variant="toggle"]) .tag:hover {
     background: var(--tag-toggle-hover-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
-    border-color: var(--tag-toggle-hover-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+    border-color: var(--tag-toggle-hover-border, var(--color-interaction-secondary-border, #cbccce));
   }
 
   :host([variant="toggle"]) .tag:focus-visible {
@@ -87,21 +90,44 @@ export const tagStyles = css`
     outline-offset: 2px;
   }
 
-  /* Pressed / selected state */
-  :host([variant="toggle"][pressed]) .tag,
-  :host([variant="toggle"]) .tag[aria-pressed="true"] {
-    background: var(--tag-toggle-pressed-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
-    border-color: var(--tag-toggle-pressed-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+  /* ---------------------
+     TOGGLE — IN COLOR
+     Renders the icon in the brand / danger accent (red) and uses the danger
+     tint on hover. The label and borders stay neutral.
+     Only meaningful on the toggle variant (e.g. a red "like" heart).
+     --------------------- */
+
+  :host([variant="toggle"][in-color]) .icon {
+    color: var(--tag-toggle-color-accent, var(--color-interaction-danger-accent, #d2381d));
+  }
+
+  :host([variant="toggle"][in-color]) .tag:hover {
+    background: var(--tag-toggle-color-hover-surface, var(--color-interaction-danger-hover-surface, #ffefec));
+    border-color: var(--tag-toggle-color-hover-border, var(--color-interaction-secondary-border, #cbccce));
   }
 
   /* =====================
      TOGGLE: ICON-ONLY
+     No border — these sit over photos, so a solid primary surface is enough.
      ===================== */
 
   :host([variant="toggle"][icon-only]) .tag {
     padding-inline: var(--tag-icon-only-padding, 4px);
     width: var(--tag-height, 32px);
     justify-content: center;
+    background: var(--tag-toggle-icon-only-surface, var(--color-surface-primary, #fff));
+    border-color: transparent;
+  }
+
+  /* Icon-only hover keeps the tint but never a border. */
+  :host([variant="toggle"][icon-only]) .tag:hover {
+    background: var(--tag-toggle-hover-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+    border-color: transparent;
+  }
+
+  :host([variant="toggle"][icon-only][in-color]) .tag:hover {
+    background: var(--tag-toggle-color-hover-surface, var(--color-interaction-danger-hover-surface, #ffefec));
+    border-color: transparent;
   }
 
   /* =====================
