@@ -402,6 +402,7 @@ const changelogHTML = `
 
       <h3 style="margin-top:1rem">Tokens</h3>
       <ul>
+        <li><strong><code>--color-branding-green</code> retargeted to primitive green 45</strong> — now <code>var(--color-green-45)</code> (<code>#088107</code>), was <code>var(--color-green-35)</code> (<code>#136110</code>). Brightens the <code>green</code> page-header theme; matches the updated Figma <code>Color/Branding/green</code> variable.</li>
         <li><strong>New <code>--button-primary-hover-shadow</code></strong> — the primary button's layered blue-toned hover <code>box-shadow</code> (five <code>rgba(0, 71, 120, …)</code> layers), previously hardcoded in <code>button.styles.ts</code>, is now a component token.</li>
         <li><code>button.styles.ts</code> and <code>message.styles.ts</code> now reference <code>var(--button-primary-hover-shadow)</code> / <code>var(--message-shadow)</code> without hardcoded fallbacks. Rendered values unchanged.</li>
       </ul>
@@ -427,6 +428,7 @@ const changelogHTML = `
       <h3 style="margin-top:1rem">Page Header</h3>
       <ul>
         <li><strong>BREAKING</strong>: <code>badge</code> attribute replaced by <code>no-badge</code>, for the same reason as Alert's <code>icon</code>. The seal is shown by default; use <code>&lt;minis-page-header no-badge&gt;</code> to hide it.</li>
+        <li><strong>Badge color realigned to Figma</strong> — the checkmark seal is now red (<code>color="pink"</code>) on every theme, except the <code>pink</code> theme, which uses a blue seal (<code>color="blue"</code>) for contrast. Desktop (<code>md</code>) and mobile (<code>sm</code>) badges now share the same color (previously a per-theme pink/yellow mix that differed between breakpoints).</li>
       </ul>
 
       <h3 style="margin-top:1rem">Build &amp; tooling</h3>
