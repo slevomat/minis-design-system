@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Page Header
 
-- **Badge color realigned to Figma** ([node `4642:396`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396)). The checkmark seal is now red (`color="pink"`) on every theme, with the single exception of the `pink` theme, which uses a blue seal (`color="blue"`) for contrast. Desktop (`md`) and mobile (`sm`) badges now share the same color. Previously the color varied per theme and differed between desktop and mobile (a pink/yellow mix).
+- **Badge color realigned to Figma** ([node `4642:396`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396)). The checkmark seal is now red (`color="pink"`) on every theme, with the single exception of the `pink` theme, which uses a brand-cyan seal (`color="brand"`) for contrast. Desktop (`md`) and mobile (`sm`) badges now share the same color. Previously the color varied per theme and differed between desktop and mobile (a pink/yellow mix).
 - Internals: the two getters `_badgeColorDesktop` / `_badgeColorMobile` were replaced by a single `_badgeColor` getter.
 
 ### Tokens
