@@ -156,12 +156,7 @@ export const buttonStyles = css`
     background: var(--button-primary-hover-surface);
     color: var(--button-primary-hover-text);
     border-color: var(--button-primary-hover-border);
-    box-shadow:
-      0px 4px 8px 0px rgba(0, 71, 120, 0.12),
-      0px 12px 12px 0px rgba(0, 71, 120, 0.06),
-      0px 20px 20px 0px rgba(0, 71, 120, 0.06),
-      0px 32px 32px 0px rgba(0, 71, 120, 0.02),
-      0px 40px 40px 0px rgba(0, 71, 120, 0.02);
+    box-shadow: var(--button-primary-hover-shadow);
   }
 
   /* Secondary */

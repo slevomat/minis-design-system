@@ -391,6 +391,17 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tokens</h3>
+      <ul>
+        <li><strong>New <code>--button-primary-hover-shadow</code></strong> — the primary button's layered blue-toned hover <code>box-shadow</code> (five <code>rgba(0, 71, 120, …)</code> layers), previously hardcoded in <code>button.styles.ts</code>, is now a component token.</li>
+        <li><code>button.styles.ts</code> and <code>message.styles.ts</code> now reference <code>var(--button-primary-hover-shadow)</code> / <code>var(--message-shadow)</code> without hardcoded fallbacks. Rendered values unchanged.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Badge</h3>
+      <ul>
+        <li><strong>Code Connect mapping fixed</strong> — <code>badge.figma.ts</code> referenced a non-existent <code>Color</code> property (the Figma variant property is lowercase <code>color</code>) and didn't map <code>Size</code>. Both now mapped.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Checkbox</h3>
       <ul>
         <li><strong>Form association via ElementInternals</strong> — <code>&lt;minis-checkbox name="…" value="…"&gt;</code> now actually submits with a surrounding <code>&lt;form&gt;</code>. Previously the hidden native input lived inside Shadow DOM where forms cannot see it, so <code>name</code>/<code>value</code> were silently ignored.</li>

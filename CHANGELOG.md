@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-06-12
 
+### Tokens
+
+- **New `--button-primary-hover-shadow`** — the primary button's layered blue-toned hover `box-shadow` (five `rgba(0, 71, 120, …)` layers), previously hardcoded in `button.styles.ts`, is now a component token next to the other `--button-primary-hover-*` tokens.
+- `button.styles.ts` and `message.styles.ts` now reference `var(--button-primary-hover-shadow)` / `var(--message-shadow)` without hardcoded fallbacks — multi-value `var()` fallbacks in Lit `css` templates are a documented pitfall, and `--message-shadow` already existed in `tokens.css`. Rendered values unchanged.
+
+### Badge
+
+- **Code Connect mapping fixed**: `badge.figma.ts` referenced a non-existent `Color` property (the Figma variant property is lowercase `color` with lowercase values) and didn't map `Size` at all. Both now mapped; `figma connect publish` validation passes.
+
 ### Checkbox
 
 - **Form association via ElementInternals** (`static formAssociated = true`) — `<minis-checkbox name="…" value="…">` now actually submits with a surrounding `<form>`. Previously the hidden native `<input>` lived inside Shadow DOM where forms cannot see it, so `name`/`value` were silently ignored.

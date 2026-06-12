@@ -12,10 +12,7 @@ export const messageStyles = css`
     background: var(--message-surface, var(--color-surface-primary, #fff));
     border: 1px solid var(--message-border, var(--color-border, #cbccce));
     border-radius: var(--message-border-radius, var(--border-radius-md, 8px));
-    box-shadow: var(--message-shadow,
-      0px 1px 4px 0px rgba(0, 0, 0, 0.08),
-      0px 4px 24px 0px rgba(0, 0, 0, 0.08)
-    );
+    box-shadow: var(--message-shadow);
     position: relative;
   }
 
