@@ -42,9 +42,9 @@ export class MinisPageHeader extends LitElement {
   @property({ type: String })
   tag = '';
 
-  /** Whether to show the Brand/Badge checkmark seal next to the heading. */
-  @property({ type: Boolean, reflect: true })
-  badge = true;
+  /** Hide the Brand/Badge checkmark seal next to the heading (shown by default). */
+  @property({ type: Boolean, attribute: 'no-badge', reflect: true })
+  noBadge = false;
 
   /** Desktop badge color: pink on brand/yellow (light backgrounds); yellow on blue/pink/green (dark). */
   private get _badgeColorDesktop(): 'pink' | 'yellow' {
@@ -70,7 +70,7 @@ export class MinisPageHeader extends LitElement {
               <h1 class="heading" part="heading">
                 <slot></slot>
               </h1>
-              ${this.badge ? html`
+              ${!this.noBadge ? html`
                 <minis-badge class="badge-desktop" size="md" color="${this._badgeColorDesktop}"></minis-badge>
                 <minis-badge class="badge-mobile" size="sm" color="${this._badgeColorMobile}"></minis-badge>
               ` : nothing}

@@ -85,21 +85,7 @@ export const checkboxStyles = css`
     transform: translate(-50%, -50%) scale(1);
   }
 
-  /* Visually-hidden native input for accessibility & form participation */
-  input[type='checkbox'] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  :host(:focus-visible) .box,
-  input[type='checkbox']:focus-visible + .box {
+  :host(:focus-visible) .box {
     outline: 2px solid var(--input-border-hover, #00b2e5);
     outline-offset: 2px;
   }

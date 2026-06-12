@@ -27,7 +27,7 @@ function iconWarning() {
  * ```html
  * <minis-alert variant="notice">Your changes have been saved.</minis-alert>
  * <minis-alert variant="error">Please fix the errors below.</minis-alert>
- * <minis-alert variant="success" icon="false">Done!</minis-alert>
+ * <minis-alert variant="success" no-icon>Done!</minis-alert>
  * ```
  */
 @customElement('minis-alert')
@@ -37,9 +37,9 @@ export class MinisAlert extends LitElement {
   @property({ type: String, reflect: true })
   variant: AlertVariant = 'notice';
 
-  /** Show the variant icon. Defaults to true. */
-  @property({ type: Boolean, reflect: true })
-  icon: boolean = true;
+  /** Hide the variant icon (shown by default). */
+  @property({ type: Boolean, attribute: 'no-icon', reflect: true })
+  noIcon = false;
 
   render() {
     const isAlert = this.variant === 'error' || this.variant === 'warning';
@@ -54,7 +54,7 @@ export class MinisAlert extends LitElement {
 
     return html`
       <div class="alert" role="${role}">
-        ${this.icon ? html`<span class="icon" aria-hidden="true">${iconMap[this.variant]()}</span>` : ''}
+        ${this.noIcon ? '' : html`<span class="icon" aria-hidden="true">${iconMap[this.variant]()}</span>`}
         <span class="content"><slot></slot></span>
       </div>
     `;

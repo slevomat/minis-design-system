@@ -14,7 +14,7 @@
 | Attribute | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `variant` | `notice \| success \| error \| warning` | `notice` | Visual style — communicates the nature of the message |
-| `icon` | boolean | `true` | Show the variant icon before the content |
+| `no-icon` | boolean | `false` | Hide the variant icon (shown by default) |
 
 ### Slots
 
@@ -58,7 +58,7 @@
 ### Without icon
 
 ```html
-<minis-alert variant="error" icon="false">Required field.</minis-alert>
+<minis-alert variant="error" no-icon>Required field.</minis-alert>
 ```
 
 ### In a form (typical use case)
@@ -80,7 +80,7 @@ Use <minis-alert> with:
 - variant="success" for valid fields
 - variant="notice" for informational hints
 - variant="warning" for destructive actions
-Icon is shown by default; use icon="false" to hide it.
+Icon is shown by default; add the `no-icon` attribute to hide it.
 Load tokens: <link rel="stylesheet" href="node_modules/@minis/tokens/dist/tokens.css">
 Import component: import '@minis/components';
 ```

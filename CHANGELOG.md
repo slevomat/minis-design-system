@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-12
+
+### Checkbox
+
+- **Form association via ElementInternals** (`static formAssociated = true`) — `<minis-checkbox name="…" value="…">` now actually submits with a surrounding `<form>`. Previously the hidden native `<input>` lived inside Shadow DOM where forms cannot see it, so `name`/`value` were silently ignored.
+- Participates in `form.reset()` (restores initial checked state) and `<fieldset disabled>` via `formResetCallback` / `formDisabledCallback`.
+- The redundant hidden `<input type="checkbox">` and the inline wrapper styles were removed; behaviour (keyboard, ARIA, click) is unchanged.
+
+### Alert
+
+- **BREAKING**: `icon` attribute replaced by `no-icon`. `icon="false"` never worked — HTML boolean attributes are true whenever present, so the icon could not be disabled from markup. Use `<minis-alert no-icon>` to hide the icon; it is shown by default.
+
+### Page Header
+
+- **BREAKING**: `badge` attribute replaced by `no-badge` for the same reason as Alert's `icon`. The seal is shown by default; use `<minis-page-header no-badge>` to hide it.
+
+### Build & tooling
+
+- **Fixed broken package build**: the three `*.figma.ts` Code Connect files imported `html` from `@figma/code-connect` (React-only root export), failing `tsc` with TS2614. They now import from `@figma/code-connect/html`; `*.figma.ts` is also excluded from the build tsconfig (the Figma CLI parses these files independently).
+- **New CI workflow** (`.github/workflows/ci.yml`) — runs `pnpm build` + `pnpm lint` on every push and pull request, so type errors can no longer land silently on master.
+- Added `.eslintignore` (`dist/`, `storybook-static/`, `node_modules/`) — lint previously crashed on a symlink loop inside `storybook-static`.
+- Removed dead code flagged by lint: unused `html` import (navigation stories), unused `placeholderImg` helper (page-header stories), unused `concatenateCSS` (tokens build script).
+
+### Docs
+
+- **Size naming convention corrected in CLAUDE.md**: the documented `small | medium | large` full-word convention never matched the shipped components. Components use abbreviated sizes matching the Figma `Size` variant names (`xs | sm | md | lg | xl`, each component exposing its own subset).
+- `.figma.ts` template in CLAUDE.md fixed to import from `@figma/code-connect/html`.
+
 ## 2026-06-11
 
 ### Page Header

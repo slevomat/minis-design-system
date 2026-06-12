@@ -13,8 +13,8 @@ Binary selection control with three selection states: unchecked, checked, and in
 | `checked`        | boolean | `false` | Checked state. Reflected. |
 | `indeterminate`  | boolean | `false` | Indeterminate state — shows a dash. Reflected. Clicking resolves to `checked=true`. |
 | `disabled`       | boolean | `false` | Disabled state. Reflected. |
-| `name`           | string  | —       | Form field name. |
-| `value`          | string  | `"on"`  | Form field value. |
+| `name`           | string  | —       | Form field name — set as an attribute; submitted with the surrounding `<form>`. |
+| `value`          | string  | `"on"`  | Form field value submitted while checked. |
 
 ### Slots
 
@@ -80,7 +80,7 @@ selectAll.addEventListener('change', (e) => {
 
 - Host element has `role="checkbox"` and reflects `aria-checked` (`"true"` / `"false"` / `"mixed"`) and `aria-disabled`.
 - Keyboard: `Space` / `Enter` toggles when focused. Clicking an indeterminate checkbox resolves to `checked`.
-- A hidden native `<input type="checkbox">` participates in form submission via `name` / `value`.
+- Form-associated via ElementInternals (`static formAssociated`): submits `value` under `name` while checked, resets with `form.reset()`, and honours `<fieldset disabled>`.
 
 ## Copy-paste prompt
 
