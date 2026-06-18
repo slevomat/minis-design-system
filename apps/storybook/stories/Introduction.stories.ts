@@ -391,6 +391,20 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tile</h3>
+      <ul>
+        <li><strong>Labels now wrap to up to 3 lines</strong> (then ellipsis), realigned to Figma (node <code>4208:4297</code>). Previously labels were single-line with truncation.</li>
+        <li><strong>Content is top-aligned</strong> — the icon and first label line start at the same level for every tile in a row, regardless of how many lines a neighbouring label takes (the tile fills the grid cell with <code>height: 100%</code> and <code>justify-content: flex-start</code>).</li>
+        <li><strong>Counter pill recoloured to tertiary blue</strong> with white text (was an inverted black pill).</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Tile · Tokens</h3>
+      <ul>
+        <li><code>--tile-counter-surface</code> retargeted <code>var(--button-secondary-text)</code> → <code>var(--button-tertiary-text)</code> (blue <code>#006eb9</code>).</li>
+        <li><code>--tile-counter-text</code> retargeted <code>var(--button-secondary-surface)</code> → <code>var(--color-core-white)</code>.</li>
+        <li>Added <code>--tile-label-line-height</code> (<code>var(--pixel-px-18)</code> = 18px) and <code>--tile-label-max-lines</code> (<code>3</code>). Removed <code>--tile-label-row-height</code> (label row is no longer fixed-height).</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Button</h3>
       <ul>
         <li><strong>Large &amp; XL horizontal padding widened to 48px</strong> to match Figma (node <code>284:5283</code>). The <code>lg</code> and <code>xl</code> sizes now use a more spacious <code>--button-large-padding-x</code> (48px, was 16px); vertical padding (12px) is unchanged.</li>

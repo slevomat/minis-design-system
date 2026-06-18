@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-06-18
 
+### Tile
+
+- **Labels now wrap to up to 3 lines** (then ellipsis), realigned to Figma ([node `4208:4297`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4208-4297)). Previously labels were single-line with truncation.
+- **Content is top-aligned** — the icon and first label line start at the same level for every tile in a row, regardless of how many lines a neighbouring label takes (the tile fills the grid cell with `height: 100%` and `justify-content: flex-start`).
+- **Counter pill recoloured to tertiary blue** with white text (was an inverted black pill).
+- **Tokens**: `--tile-counter-surface` retargeted `var(--button-secondary-text)` → `var(--button-tertiary-text)` (blue `#006eb9`); `--tile-counter-text` retargeted `var(--button-secondary-surface)` → `var(--color-core-white)`. Added `--tile-label-line-height` (`var(--pixel-px-18)` = 18px) and `--tile-label-max-lines` (`3`). Removed `--tile-label-row-height` (the label row is no longer fixed-height).
+
 ### Button
 
 - **Large & XL horizontal padding widened to 48px** to match Figma ([node `284:5283`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=284-5283)). The `lg` and `xl` sizes now use a more spacious `--button-large-padding-x` (48px, was 16px); vertical padding (12px) is unchanged.
