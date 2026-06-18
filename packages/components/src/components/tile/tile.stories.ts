@@ -203,3 +203,40 @@ export const NavigationGrid: Story = {
     </div>
   `,
 };
+
+// ─── Multi-line Labels ─────────────────────────────────────────────────────────
+
+export const MultiLineLabels: Story = {
+  name: 'Multi-line Labels',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Labels wrap to up to 3 lines (then ellipsis). Content is top-aligned, so the icon ' +
+          'and first text line start at the same level across every tile in a row, regardless ' +
+          'of how many lines a neighbouring label takes.',
+      },
+    },
+  },
+  render: () => html`
+    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; max-width:360px;">
+      <minis-tile>
+        <minis-icon slot="icon" name="voucher-outline"></minis-icon>
+        Moje nákupy
+      </minis-tile>
+      <minis-tile counter="6">
+        <minis-icon slot="icon" name="voucher-outline"></minis-icon>
+        Moje nákupy
+      </minis-tile>
+      <minis-tile>
+        <minis-icon slot="icon" name="voucher-outline"></minis-icon>
+        Moje nákupy jsou delší
+      </minis-tile>
+      <minis-tile counter="6">
+        <minis-icon slot="icon" name="heart"></minis-icon>
+        Oblíbené nabídky pro celou rodinu
+      </minis-tile>
+    </div>
+  `,
+};
