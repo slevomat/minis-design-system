@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-06-18
+
+### Button
+
+- **Large & XL horizontal padding widened to 48px** to match Figma ([node `284:5283`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=284-5283)). The `lg` and `xl` sizes now use a more spacious `--button-large-padding-x` (48px, was 16px); vertical padding (12px) is unchanged.
+- **New `full-width` boolean attribute** (Figma "Fill container" sizing). `<minis-button full-width>` stretches the button to its container's width and centres the content — no consumer CSS needed. Use for stacked, full-width layouts such as the `xs` breakpoint or a mobile sheet. By default the button still hugs its content (`display: inline-block`).
+
+### Tokens
+
+- **`--button-large-padding-x` retargeted** to `var(--linear-sp-linear-12)` (48px), was `var(--linear-sp-linear-4)` (16px). Affects both the `lg` and `xl` button sizes. Fallbacks in `button.styles.ts` updated `16px` → `48px` to match.
+
 ## 2026-06-12
 
 ### Tag

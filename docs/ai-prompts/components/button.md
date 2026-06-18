@@ -7,6 +7,12 @@ icon support, and an optional counter pill badge.
 
 **Tag:** `<minis-button>`
 
+**Width:** By default the button hugs its content (`display: inline-block`) — its width is driven by
+the label/icon plus the size padding. To make it span the full width of its container (Figma "Fill
+container" sizing — used for stacked layouts such as the `xs` breakpoint or a mobile sheet), add the
+`full-width` boolean attribute. It stretches the host to `100%` and centres the content; no consumer
+CSS required.
+
 ## API
 
 ### Attributes
@@ -17,6 +23,7 @@ icon support, and an optional counter pill badge.
 | `size`      | string  | `"md"`      | `sm`, `md`, `lg`, `xl`                                                    |
 | `disabled`  | boolean | `false`     | —                                                                         |
 | `icon-only` | boolean | `false`     | Renders only the icon slot; counter pill floats top-right                 |
+| `full-width`| boolean | `false`     | Stretch to fill the container width (Figma "Fill container"); centres content |
 | `counter`   | string  | —           | Number string e.g. `"3"`. Inline pill after label; floating top-right when `icon-only`. Pill size is chosen automatically based on button size — see table below. |
 | `type`      | string  | `"button"`  | `button`, `submit`, `reset`                                               |
 
@@ -42,8 +49,8 @@ All tokens are `--button-*` component tokens resolved through the design token c
 --button-padding-y            /* md: 8px */
 --button-small-padding-x      /* sm: 8px */
 --button-small-padding-y      /* sm: 3px */
---button-large-padding-x      /* lg: 16px */
---button-large-padding-y      /* lg: 12px */
+--button-large-padding-x      /* lg + xl: 48px (spacious horizontal padding) */
+--button-large-padding-y      /* lg + xl: 12px */
 
 /* Icon sizing per button size */
 --button-icon-sizing-xs       /* 16px — used by sm button */
