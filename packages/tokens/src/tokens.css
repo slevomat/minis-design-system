@@ -653,7 +653,7 @@
   --button-small-gap-elements: var(--linear-sp-linear-1);
   --button-small-gap-addon: var(--linear-sp-linear-2);
   --button-small-gap-spacer: var(--fibonachi-sp-fib-1);
-  --button-large-padding-x: var(--linear-sp-linear-4);
+  --button-large-padding-x: var(--linear-sp-linear-12);
   --button-large-padding-y: var(--linear-sp-linear-3);
   --button-large-padding-x-icon-only: var(--linear-sp-linear-3);
   --button-large-gap-elements: var(--linear-sp-linear-1);

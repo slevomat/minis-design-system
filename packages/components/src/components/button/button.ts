@@ -63,6 +63,14 @@ export class MinisButton extends LitElement {
   @property({ type: String, reflect: true })
   counter: string | null = null;
 
+  /**
+   * Stretch the button to fill its container's width (Figma "Fill container"
+   * sizing). By default the button hugs its content; set this for stacked,
+   * full-width layouts such as the xs breakpoint or a mobile sheet.
+   */
+  @property({ type: Boolean, attribute: 'full-width', reflect: true })
+  fullWidth = false;
+
   @property({ type: String })
   type: 'button' | 'submit' | 'reset' = 'button';
 

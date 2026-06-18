@@ -37,6 +37,10 @@ const meta: Meta = {
       control: 'boolean',
       description: 'Show only the icon, no label text',
     },
+    'full-width': {
+      control: 'boolean',
+      description: 'Stretch to fill the container width (Figma "Fill container")',
+    },
     counter: {
       control: 'text',
       description: 'Counter pill value (number as string). Shows a badge on the button.',
@@ -63,6 +67,7 @@ export const Playground: Story = {
       size=${args.size}
       ?disabled=${args.disabled}
       ?icon-only=${args['icon-only']}
+      ?full-width=${args['full-width']}
       counter=${args.counter || null}
     >
       ${iconStar}
@@ -99,6 +104,26 @@ export const AllSizes: Story = {
       <minis-button variant="primary" size="md">${iconStar} Medium</minis-button>
       <minis-button variant="primary" size="lg">${iconStar} Large</minis-button>
       <minis-button variant="primary" size="xl">${iconStar} XL</minis-button>
+    </div>
+  `,
+};
+
+// ─── Full width ───────────────────────────────────────────────────────────────
+
+export const FullWidth: Story = {
+  name: 'Full width (fill container)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'With the `full-width` attribute the button stretches to fill its container and centres its content (Figma "Fill container" sizing). Typical use: stacked buttons at the `xs` breakpoint or in a mobile sheet. The 240px box below stands in for a narrow column.',
+      },
+    },
+  },
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 12px; width: 240px; padding: 12px; border: 1px dashed #cbccce; border-radius: 8px;">
+      <minis-button variant="cta-buy" full-width>${iconCart} Buy now</minis-button>
+      <minis-button variant="secondary" full-width>Add to favourites</minis-button>
     </div>
   `,
 };

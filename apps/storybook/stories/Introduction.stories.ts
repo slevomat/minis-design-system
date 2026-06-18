@@ -381,6 +381,30 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-06-18 (button large/xl padding)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-06-18" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-06-18</h2>
+        <button class="cl-copy-btn" data-anchor="2026-06-18">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Button</h3>
+      <ul>
+        <li><strong>Large &amp; XL horizontal padding widened to 48px</strong> to match Figma (node <code>284:5283</code>). The <code>lg</code> and <code>xl</code> sizes now use a more spacious <code>--button-large-padding-x</code> (48px, was 16px); vertical padding (12px) is unchanged.</li>
+        <li><strong>New <code>full-width</code> boolean attribute</strong> (Figma "Fill container" sizing). <code>&lt;minis-button full-width&gt;</code> stretches the button to its container's width and centres the content — no consumer CSS needed. Use for stacked, full-width layouts such as the <code>xs</code> breakpoint or a mobile sheet. By default the button still hugs its content (<code>display: inline-block</code>).</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Tokens</h3>
+      <ul>
+        <li><strong><code>--button-large-padding-x</code> retargeted</strong> to <code>var(--linear-sp-linear-12)</code> (48px), was <code>var(--linear-sp-linear-4)</code> (16px). Affects both the <code>lg</code> and <code>xl</code> button sizes. Fallbacks in <code>button.styles.ts</code> updated <code>16px</code> → <code>48px</code> to match.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-06-12 (quality fixes: checkbox forms, no-icon/no-badge, build & CI)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

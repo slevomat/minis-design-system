@@ -6,6 +6,19 @@ export const buttonStyles = css`
     position: relative;
   }
 
+  /* Fill container (Figma "Fill container" sizing) — stretch host + button to
+     full width and centre the content. Used for stacked/full-width layouts,
+     e.g. the xs breakpoint. */
+  :host([full-width]) {
+    display: block;
+    width: 100%;
+  }
+
+  :host([full-width]) button {
+    width: 100%;
+    justify-content: center;
+  }
+
   button {
     display: inline-flex;
     align-items: center;
@@ -63,7 +76,7 @@ export const buttonStyles = css`
   /* Large */
   :host([size="lg"]) button {
     height: var(--pixel-px-40, 40px);
-    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
+    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 48px);
   }
 
   :host([size="lg"][icon-only]) button {
@@ -73,7 +86,7 @@ export const buttonStyles = css`
   /* XL */
   :host([size="xl"]) button {
     height: var(--pixel-px-48, 48px);
-    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 16px);
+    padding: var(--button-large-padding-y, 12px) var(--button-large-padding-x, 48px);
   }
 
   :host([size="xl"][icon-only]) button {
