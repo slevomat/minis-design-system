@@ -15,9 +15,10 @@ export const tileStyles = css`
     box-sizing: border-box;
     display: inline-flex;
     width: 100%;
+    height: 100%; /* fill the grid cell so content top-aligns consistently across a row */
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* top-align: text starts on the same level for every tile in a row */
     gap: var(--tile-gap-elements-y, 4px);
     padding: var(--tile-padding-top, 12px) var(--tile-padding-x, 32px) var(--tile-padding-bottom, 12px);
     background: var(--tile-surface, #fff);
@@ -83,20 +84,16 @@ export const tileStyles = css`
 
   /* =====================
      LABEL ROW (text + optional counter)
-     Fixed height keeps the tile at 70px regardless of counter presence:
-     1(border) + 12(pt) + 24(icon) + 4(gap) + 16(label-row) + 12(pb) + 1(border) = 70px
+     Grows with the label (up to 3 lines). The pill aligns to the first line.
      ===================== */
 
   .label-row {
     display: flex;
     width: 100%; /* constrains to the tile's content area so label+counter never spill into padding */
-    align-items: center;
+    align-items: center; /* pill sits at the vertical centre of the label (incl. when it wraps) */
     justify-content: center;
     gap: var(--tile-gap-elements-x, 8px);
-    height: var(--tile-label-row-height, 16px);
     flex-shrink: 0;
-    /* overflow: visible — pill (18px) is taller than this row (16px) but the
-       tile's own overflow:hidden clips everything at the tile boundary. */
   }
 
   /* =====================
@@ -107,12 +104,16 @@ export const tileStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-medium, 500);
-    line-height: 1;
+    line-height: var(--tile-label-line-height, 18px);
     color: var(--tile-text, currentColor);
     text-align: center;
-    white-space: nowrap;
+    /* Wrap up to 3 lines, then ellipsis. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--tile-label-max-lines, 3);
+    line-clamp: var(--tile-label-max-lines, 3);
     overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word; /* break a word only if it can't fit on its own line */
   }
 
   /* =====================

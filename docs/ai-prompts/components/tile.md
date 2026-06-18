@@ -8,7 +8,9 @@
 
 `<minis-tile>` is a vertical, icon-based navigation tile for primary navigation shortcuts. It renders as a **button** by default or as an **anchor** when `href` is provided. Tiles are typically arranged in a grid layout (e.g. a 4-column shortcut row on a homepage).
 
-Every tile **must** have an icon (24×24 px) and a label. An optional inline counter pill can appear right of the label.
+Every tile **must** have an icon (24×24 px) and a label. An optional inline counter pill (tertiary blue, white text) can appear right of the label.
+
+Content is **top-aligned**: the icon and label start at the same level for every tile in a row, regardless of how many lines a neighbouring label takes. Labels wrap to **up to 3 lines** and then truncate with an ellipsis.
 
 ---
 
@@ -46,13 +48,15 @@ Every tile **must** have an icon (24×24 px) and a label. An optional inline cou
 | `--tile-text` | `var(--button-secondary-text)` | Label text colour (black) |
 | `--tile-icon-color` | `var(--button-tertiary-text)` | Icon colour (blue `#006eb9`) |
 | `--tile-hover-surface` | `var(--button-secondary-hover-surface)` | Background on hover |
-| `--tile-counter-surface` | `var(--button-secondary-text)` | Counter pill background (inverted) |
-| `--tile-counter-text` | `var(--button-secondary-surface)` | Counter pill text (inverted) |
+| `--tile-counter-surface` | `var(--button-tertiary-text)` | Counter pill background (tertiary blue `#006eb9`) |
+| `--tile-counter-text` | `var(--color-core-white)` | Counter pill text (white, both modes) |
 | `--tile-padding-top` | `var(--linear-sp-linear-3)` = 12 px | Top padding |
 | `--tile-padding-bottom` | `var(--linear-sp-linear-3)` = 12 px | Bottom padding |
 | `--tile-padding-x` | `var(--linear-sp-linear-8)` = 32 px | Horizontal padding (left + right, each side) |
 | `--tile-gap-elements-y` | `var(--linear-sp-linear-1)` = 4 px | Gap: icon → label row |
 | `--tile-gap-elements-x` | `var(--linear-sp-linear-2)` = 8 px | Gap: label text → counter |
+| `--tile-label-line-height` | `var(--pixel-px-18)` = 18 px | Height of each label line |
+| `--tile-label-max-lines` | `3` | Label clamps after 3 lines, then ellipsis |
 
 ---
 
@@ -125,8 +129,9 @@ Every tile **must** have an icon (24×24 px) and a label. An optional inline cou
 - **Do not use `repeat(N, auto)` or `repeat(N, minmax(0, 1fr))`**:
   - `auto` gives each column its own min-content width → unequal columns.
   - `minmax(0, 1fr)` can shrink columns to 0, collapsing the tile's horizontal padding.
-- The tile enforces `min-width: calc(2 × --tile-padding-x)` (64 px) so the 32 px left/right padding is **always visible**; labels truncate with `…` rather than the padding being sacrificed.
-- Size the grid container so the widest expected label fits. A reference value: a tile showing "Moje nákupy" (no counter) needs roughly **155 px** of tile width (32 px pad + ~90 px text + 32 px pad + 1 px borders). For a 4-column grid with 8 px gaps that is a container of **~644 px**. Labels that do not fit truncate — this is intentional.
+- The tile enforces `min-width: calc(2 × --tile-padding-x)` (64 px) so the 32 px left/right padding is **always visible**; labels wrap (up to 3 lines) and then truncate with `…` rather than the padding being sacrificed.
+- Labels **wrap to up to 3 lines** and then truncate. Tile height grows with the label; in a grid, all tiles in a row stretch to the tallest and content is **top-aligned**, so icons and the first label line stay on the same level across the row.
+- Size the grid container so the widest expected label reads well. A reference value: a tile showing "Moje nákupy" (no counter) needs roughly **155 px** of tile width (32 px pad + ~90 px text + 32 px pad + 1 px borders). For a 4-column grid with 8 px gaps that is a container of **~644 px**. Longer labels wrap onto further lines.
 - **In tighter spaces, reduce the number of columns** rather than shrinking the container. Cramming more tiles into a narrow container leaves too little room for label text. Use `repeat(3, 1fr)` or `repeat(2, 1fr)` so each tile retains enough horizontal space for its label to read clearly.
 
 ---
@@ -143,4 +148,4 @@ Every tile **must** have an icon (24×24 px) and a label. An optional inline cou
 
 ## Copy-Paste Prompt
 
-> Create a `<minis-tile>` navigation tile with an icon, a label, and a counter pill. Use a 4-column grid wrapper. The tile renders as a link when `href` is provided. Match the Mini\*S DS visual style: white background, 1 px border, 8 px border-radius, blue hover surface, inline inverted-colour counter pill.
+> Create a `<minis-tile>` navigation tile with an icon, a label, and a counter pill. Use a 4-column grid wrapper. The tile renders as a link when `href` is provided. Match the Mini\*S DS visual style: white background, 1 px border, 8 px border-radius, blue hover surface, top-aligned content, labels that wrap to up to 3 lines, and an inline blue counter pill with white text.
