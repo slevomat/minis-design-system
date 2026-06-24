@@ -314,132 +314,132 @@ export const DesignPrinciples: Story = {
   render: () => html`
     <div style="max-width:860px;font-family:inherit;line-height:1.6;color:var(--color-text-primary,#000)">
       <h1 style="font-size:2rem;margin-bottom:.5rem">Design Principles</h1>
-      <p>Sada zásad, které vyjadřují naši sdílenou vizi toho, co dělá produkty Slevomatu skvělými. Vznikly přímo u nás během interního workshopu napříč designem, produktem, vývojem, brandem i copy.</p>
+      <p>A set of principles that express our shared vision of what makes Slevomat products great. They were created in-house during an internal workshop spanning design, product, engineering, brand and copy.</p>
       <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
-        <em>Vycházejí z naší vlastní vize, reflektují potřeby zákazníků a jsou v souladu s tone of voice a vizuálním stylem.</em>
+        <em>They stem from our own vision, reflect our customers' needs, and align with our tone of voice and visual style.</em>
       </blockquote>
 
       <nav style="margin:1.5rem 0;padding:1rem 1.25rem;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce);border-radius:6px">
-        <strong style="display:block;margin-bottom:.5rem">Osnova</strong>
+        <strong style="display:block;margin-bottom:.5rem">Contents</strong>
         <ol style="margin:0;padding-left:1.25rem">
-          <li><a href="#proc" style="color:var(--color-interaction-primary-surface,#006eb9)">Proč je potřebujeme</a></li>
-          <li><a href="#princip-1" style="color:var(--color-interaction-primary-surface,#006eb9)">Použitelnost a spolehlivost jako základní zážitek</a></li>
-          <li><a href="#princip-2" style="color:var(--color-interaction-primary-surface,#006eb9)">Vizuální kultivovanost</a></li>
-          <li><a href="#princip-3" style="color:var(--color-interaction-primary-surface,#006eb9)">Zřetelně výhodně</a></li>
-          <li><a href="#princip-4" style="color:var(--color-interaction-primary-surface,#006eb9)">Zážitek bez přikrášlení</a></li>
-          <li><a href="#princip-5" style="color:var(--color-interaction-primary-surface,#006eb9)">Designujeme cestu uživatele, ne jen obrazovky</a></li>
-          <li><a href="#princip-6" style="color:var(--color-interaction-primary-surface,#006eb9)">Ukazujeme směr a necháváme objevovat</a></li>
-          <li><a href="#princip-7" style="color:var(--color-interaction-primary-surface,#006eb9)">Design, který překvapí</a></li>
-          <li><a href="#pouziti" style="color:var(--color-interaction-primary-surface,#006eb9)">Použití</a></li>
-          <li><a href="#design-patterns" style="color:var(--color-interaction-primary-surface,#006eb9)">Design patterns (komponenty)</a></li>
+          <li><a href="#proc" style="color:var(--color-interaction-primary-surface,#006eb9)">Why we need them</a></li>
+          <li><a href="#princip-1" style="color:var(--color-interaction-primary-surface,#006eb9)">Usability and reliability as the baseline experience</a></li>
+          <li><a href="#princip-2" style="color:var(--color-interaction-primary-surface,#006eb9)">Visual refinement</a></li>
+          <li><a href="#princip-3" style="color:var(--color-interaction-primary-surface,#006eb9)">Clearly worth it</a></li>
+          <li><a href="#princip-4" style="color:var(--color-interaction-primary-surface,#006eb9)">Experience without embellishment</a></li>
+          <li><a href="#princip-5" style="color:var(--color-interaction-primary-surface,#006eb9)">We design the user journey, not just screens</a></li>
+          <li><a href="#princip-6" style="color:var(--color-interaction-primary-surface,#006eb9)">We show direction and leave room to explore</a></li>
+          <li><a href="#princip-7" style="color:var(--color-interaction-primary-surface,#006eb9)">Design that surprises</a></li>
+          <li><a href="#pouziti" style="color:var(--color-interaction-primary-surface,#006eb9)">How to use them</a></li>
+          <li><a href="#design-patterns" style="color:var(--color-interaction-primary-surface,#006eb9)">Design patterns (components)</a></li>
         </ol>
       </nav>
 
-      <h2 id="proc" style="scroll-margin-top:1rem">Proč je potřebujeme</h2>
-      <p>Navrhování produktů vyžaduje rychlá rozhodnutí, která dělá neustále spousta různých lidí. Abychom mohli rozhodovat konzistentně — napříč designem, vývojem, produktem, copy i brandem — potřebujeme sdílenou představu o tom, co je pro nás dobrý design a kvalitní produkt.</p>
-      <p>Naše produkty nebudou působit konzistentně, pokud každý nebude vycházet ze stejného chápání toho, co „kvalita“ znamená.</p>
+      <h2 id="proc" style="scroll-margin-top:1rem">Why we need them</h2>
+      <p>Designing products requires fast decisions made constantly by many different people. To decide consistently — across design, engineering, product, copy and brand — we need a shared idea of what good design and a quality product mean to us.</p>
+      <p>Our products won't feel consistent unless everyone works from the same understanding of what "quality" means.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-1" style="scroll-margin-top:1rem">#1 — Použitelnost a spolehlivost jako základní zážitek</h2>
-      <p><strong>Co znamená.</strong> Design Slevomatu je intuitivní, vede uživatele jasně, přirozeně a bez zbytečného přemýšlení. Design pro nás není jen o vzhledu, ale především o tom, jak dobře funguje. Rozhraní musí být použitelné, spolehlivé a svižné ve vlaku, doma na Wi-Fi i na starším zařízení. Držíme se osvědčených patternů, neexperimentujeme na úkor použitelnosti. Mobil je základ, ale myslíme i na desktop.</p>
-      <p><strong>Proč.</strong> Sebehezčí design nic neznamená, když stránka poskakuje, načítá se pomalu nebo nefunguje, jak má. Kvalita se neprojevuje jen animací, ale tím, že všechno funguje, dává smysl a nezradí ve chvíli, kdy na tom záleží. Design musí být srozumitelný, přístupný a konzistentní, připravený i na chvíle, kdy technika selže nebo uživatel zrovna není ve formě.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-1" style="scroll-margin-top:1rem">#1 — Usability and reliability as the baseline experience</h2>
+      <p><strong>What it means.</strong> Slevomat's design is intuitive; it guides users clearly, naturally and without needless thinking. Design isn't just about looks for us — above all it's about how well it works. The interface has to be usable, reliable and snappy on a train, at home on Wi-Fi, and on an older device alike. We stick to proven patterns and don't experiment at the expense of usability. Mobile is the baseline, but we keep desktop in mind too.</p>
+      <p><strong>Why.</strong> Even the prettiest design means nothing when the page jumps around, loads slowly, or doesn't work as it should. Quality doesn't show through animation alone, but through everything working, making sense, and not letting users down at the moment that matters. Design must be clear, accessible and consistent — ready even for the moments when technology fails or the user just isn't at their best.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Rozhraní se načítá rychle, plynule a nic neposkakuje ani nezmizí při interakci.</li>
-        <li>Komponenty se chovají konzistentně a předvídatelně — co vypadá jako tlačítko, se jako tlačítko i chová.</li>
-        <li>Design je srozumitelný a použitelný i v náročnějších podmínkách (slabší signál, menší obrazovka).</li>
-        <li>Kritické situace jsou ošetřené fallbacky, srozumitelné chybové hlášky, skeletony a loading stavy udrží uživatele v kontextu.</li>
-        <li>Vše důležité funguje stejně dobře na mobilu i desktopu, bez potřeby návodu nebo podpory.</li>
-        <li><strong>Splňujeme přístupnost</strong> — dostatečný kontrast barev (WCAG AA), čitelnost při zhoršených podmínkách, podpora klávesnice a screen readerů, ohleduplnost k uživatelům s pohybovou nebo zrakovou potřebou.</li>
+        <li>The interface loads fast and smoothly; nothing jumps around or disappears during interaction.</li>
+        <li>Components behave consistently and predictably — what looks like a button behaves like a button.</li>
+        <li>The design stays clear and usable even in tougher conditions (weak signal, smaller screen).</li>
+        <li>Critical situations are handled with fallbacks; clear error messages, skeletons and loading states keep the user in context.</li>
+        <li>Everything important works equally well on mobile and desktop, without needing a manual or support.</li>
+        <li><strong>We meet accessibility standards</strong> — sufficient colour contrast (WCAG AA), legibility in poor conditions, keyboard and screen-reader support, and consideration for users with motor or visual needs.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-2" style="scroll-margin-top:1rem">#2 — Vizuální kultivovanost (i bohatá nabídka může vypadat přehledně)</h2>
-      <p><strong>Co znamená.</strong> Design Slevomatu pracuje s bohatou nabídkou, ale nikdy nepůsobí přeplácaně. I pestrý obsah může být přehledný, když se s ním zachází s citem a rozvahou. Nejde o strohý minimalismus, ale o vizuální kultivovanost — jsme pestrá služba, ale nepůsobíme jako blikající leták. Ukazujeme to podstatné ve správný čas a způsobem, který působí přehledně i pro někoho, kdo se s námi teprve seznamuje. Každé slovo, tlačítko i karta jsou napsané s rozvahou a respektem k pozornosti člověka.</p>
-      <p><strong>Proč.</strong> Ve světě plném hluku vítězí design, který neruší, ale pomáhá. Kultivovanost, kvalitní copy a vizuální harmonie usnadňují orientaci všem — od digitálně zdatných po méně jisté. I bohatá nabídka může být srozumitelná a snadno uchopitelná. Uživatel projde službou bez stresu a bez potřeby návodu.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-2" style="scroll-margin-top:1rem">#2 — Visual refinement (even a rich offering can look clear)</h2>
+      <p><strong>What it means.</strong> Slevomat's design works with a rich offering, yet never feels cluttered. Even varied content can stay clear when handled with care and judgement. This isn't austere minimalism, but visual refinement — we're a colourful service, but we don't come across like a flashing flyer. We show what matters at the right time and in a way that feels clear even to someone just getting to know us. Every word, button and card is written with care and respect for people's attention.</p>
+      <p><strong>Why.</strong> In a world full of noise, the design that wins is the one that helps rather than distracts. Refinement, good copy and visual harmony make orientation easier for everyone — from the digitally fluent to the less confident. Even a rich offering can be understandable and easy to grasp. Users move through the service without stress and without needing a manual.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Zobrazujeme jen to, co je v danou chvíli opravdu důležité; ostatní přidáváme až tehdy, když to fakt dává smysl.</li>
-        <li>Texty jsou srozumitelné a mluví jazykem běžného člověka, ne reklamním newspeakem.</li>
-        <li>Struktura rozhraní odpovídá tomu, jak lidé uvažují — netlačíme je cestou, ale přirozeně vedeme.</li>
-        <li>I když máme co nabídnout, působíme přehledně díky jasné vizuální hierarchii a konzistenci napříč celým rozhraním.</li>
+        <li>We show only what truly matters at a given moment; we add the rest only when it genuinely makes sense.</li>
+        <li>Texts are understandable and speak the language of an ordinary person, not advertising newspeak.</li>
+        <li>The interface structure matches how people think — we don't push them down a path, we guide them naturally.</li>
+        <li>Even with a lot to offer, we feel clear thanks to a strong visual hierarchy and consistency across the whole interface.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-3" style="scroll-margin-top:1rem">#3 — Zřetelně výhodně</h2>
-      <p><strong>Co znamená.</strong> U nás je vždy jasné, proč se to vyplatí. Výhodnost je klíčová a má v designu své místo, ale nemusí křičet. Uživatel rychle pochopí, v čem je nabídka výhodná — ať už jde o cenu, balíček, benefit nebo časovou akci. Pomáháme mu snadno rozpoznat, co dává největší hodnotu, bez zahlcení a bez nátlaku. Výhodné nabídky ukazujeme čitelně, přehledně a v kontextu celé cesty.</p>
-      <p><strong>Proč.</strong> Na Slevomatu lidé přirozeně očekávají chytrý nákup. Když výhoda vystupuje na první pohled, roste důvěra, zkracuje se rozhodování a uživatel nemusí hledat jinde. Nemusí přepínat mezi záložkami ani ověřovat, jestli to jinde není levnější. Vidí, že u nás to dává smysl. Pomáháme lidem rozhodnout se rychle, s jistotou a bez pochyb.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-3" style="scroll-margin-top:1rem">#3 — Clearly worth it</h2>
+      <p><strong>What it means.</strong> With us, it's always clear why something is worth it. Value is key and has its place in the design, but it doesn't have to shout. The user quickly grasps why an offer is a good deal — whether it's the price, a bundle, a benefit or a time-limited promotion. We help them easily recognise what delivers the most value, without overwhelm and without pressure. We present good deals legibly, clearly, and in the context of the whole journey.</p>
+      <p><strong>Why.</strong> On Slevomat, people naturally expect a smart purchase. When the value stands out at first glance, trust grows, decisions get shorter, and users don't have to look elsewhere. They don't need to switch between tabs or verify whether it's cheaper somewhere else. They see that with us it makes sense. We help people decide quickly, with confidence and without doubt.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Na první pohled je zřejmé, proč je nabídka výhodná, ať už cenou, kombinací služeb nebo přidanou hodnotou.</li>
-        <li>Používáme vizuální akcenty (štítky, ikonky, zvýraznění), které vedou pozornost k nejlepším volbám, bez nátlaku.</li>
-        <li>Nabídky komunikujeme férově, jasně a bez triků, včetně balíčků, časových akcí nebo doplňkových benefitů.</li>
-        <li>Uživatel cítí, že nemusí nic dohledávat jinde. Výhodnost je patrná, důvěryhodná a srozumitelná.</li>
+        <li>It's obvious at first glance why an offer is worth it — be it the price, a combination of services, or added value.</li>
+        <li>We use visual accents (tags, icons, highlights) that draw attention to the best choices, without pressure.</li>
+        <li>We communicate offers fairly, clearly and without tricks — including bundles, time-limited promotions or add-on benefits.</li>
+        <li>Users feel they don't need to look anything up elsewhere. The value is evident, trustworthy and understandable.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-4" style="scroll-margin-top:1rem">#4 — Zážitek bez přikrášlení (autentický design, kterému se dá věřit)</h2>
-      <p><strong>Co znamená.</strong> Design stavíme na pravdivosti a otevřenosti. Ukazujeme věci tak, jak skutečně jsou, ať už jde o fotku, text nebo celkový dojem ze zážitku. Věříme, že důvěra vzniká tam, kde nic nepřikrášlujeme a neslibujeme víc, než umíme splnit. Už první kontakt s obsahem by měl působit jako pozvánka do skutečného zážitku, ne do marketingové bubliny.</p>
-      <p><strong>Proč.</strong> Důvěra není něco, co se dá navrhnout jedním rozhodnutím — buduje se v každém detailu. Autenticita, tón, vizuál i atmosféra rozhraní společně vytváří dojem, jestli člověk uvěří tomu, co vidí. Chceme, aby měl jistotu, že to, co vybírá, odpovídá realitě a že Slevomat mluví narovinu.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-4" style="scroll-margin-top:1rem">#4 — Experience without embellishment (authentic design you can trust)</h2>
+      <p><strong>What it means.</strong> We build design on truthfulness and openness. We show things as they really are — whether it's a photo, text, or the overall impression of an experience. We believe trust grows where we embellish nothing and promise no more than we can deliver. The very first contact with the content should feel like an invitation into a real experience, not a marketing bubble.</p>
+      <p><strong>Why.</strong> Trust isn't something you can design in a single decision — it's built in every detail. Authenticity, tone, visuals and the atmosphere of the interface together shape whether a person believes what they see. We want them to be sure that what they're choosing matches reality, and that Slevomat speaks straight.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Fotky i 3D ilustrace vybíráme tak, aby přirozeně navodily atmosféru skutečného zážitku — bez přehánění, ale vizuálně lákavě.</li>
-        <li>Texty popisují realitu, ne sny; raději přiznáme omezení než slíbíme něco, co se nenaplní.</li>
-        <li>Hodnocení, recenze a zkušenosti ostatních jsou snadno dostupné a stávají se přirozenou součástí rozhodování.</li>
-        <li>Celý design budí důvěru, od vizuálu přes tone of voice až po drobné detaily, které potvrzují, že si stojíme za tím, co nabízíme.</li>
+        <li>We choose photos and 3D illustrations so they naturally evoke the atmosphere of a real experience — without exaggeration, but visually appealing.</li>
+        <li>Texts describe reality, not dreams; we'd rather admit a limitation than promise something that won't come true.</li>
+        <li>Ratings, reviews and others' experiences are easily accessible and become a natural part of decision-making.</li>
+        <li>The whole design inspires trust — from visuals through tone of voice to the small details that confirm we stand behind what we offer.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-5" style="scroll-margin-top:1rem">#5 — Designujeme cestu uživatele, ne jen obrazovky</h2>
-      <p><strong>Co znamená.</strong> Náš design vychází z porozumění tomu, co lidé opravdu potřebují a v jaké situaci se nacházejí. Ať už si přišli pro inspiraci, srovnání nebo rovnou nakoupit, vytváříme prostředí, které jim dává smysl v danou chvíli, v jejich tempu. Každý krok, tlačítko i text vzniká s ohledem na to, kam člověk směřuje a jak se tam co nejlépe dostane. UX research je pro nás základ.</p>
-      <p><strong>Proč.</strong> Každý uživatel je jiný, ale náš přístup je vždy založený na výzkumu, pozorování a zpětné vazbě. Když rozumíme záměru, emocím i překážkám, můžeme vytvářet design, který vede s jistotou a zároveň neruší. Každý touchpoint, od první nabídky po rezervaci, je promyšlený tak, aby uživateli dával smysl v kontextu toho, co právě dělá.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-5" style="scroll-margin-top:1rem">#5 — We design the user journey, not just screens</h2>
+      <p><strong>What it means.</strong> Our design starts from understanding what people really need and the situation they're in. Whether they came for inspiration, comparison or to buy right away, we create an environment that makes sense to them in that moment, at their own pace. Every step, button and piece of text is created with an eye on where the person is heading and how to get them there as smoothly as possible. UX research is foundational for us.</p>
+      <p><strong>Why.</strong> Every user is different, but our approach is always grounded in research, observation and feedback. When we understand intent, emotions and obstacles, we can create design that guides with confidence while staying out of the way. Every touchpoint, from the first offer to the booking, is thought through so it makes sense to the user in the context of what they're doing.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Design rozhodujeme na základě výzkumu — nasloucháme lidem, sledujeme jejich chování a reflektujeme jejich potřeby, motivace i překážky.</li>
-        <li>Při návrhu obrazovek zohledňujeme celý kontext: co mu předchází a co následuje. Neřešíme jen UI, ale celou customer journey a její touchpointy.</li>
-        <li>Myslíme na to, co se děje po nákupu — jak se uživatel dostane na místo, co ho tam čeká, jak zážitek hodnotí.</li>
-        <li>Neřešíme jen jednotlivé obrazovky, ale celý příběh: od první návštěvy až po to, jak si člověk zážitek pamatuje.</li>
-        <li>Testujeme v reálných situacích, ne v ideálním světě, ale tak, jak lidé opravdu Slevomat používají.</li>
+        <li>We make design decisions based on research — we listen to people, watch their behaviour, and reflect their needs, motivations and obstacles.</li>
+        <li>When designing screens we consider the whole context: what comes before and what follows. We don't just deal with UI, but with the entire customer journey and its touchpoints.</li>
+        <li>We think about what happens after the purchase — how the user gets to the venue, what awaits them there, how they rate the experience.</li>
+        <li>We don't deal with individual screens in isolation, but with the whole story: from the first visit to how a person remembers the experience.</li>
+        <li>We test in real situations, not in an ideal world — the way people actually use Slevomat.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-6" style="scroll-margin-top:1rem">#6 — Ukazujeme směr a necháváme objevovat</h2>
-      <p><strong>Co znamená.</strong> Design Slevomatu pomáhá uživateli najít to, co hledá, a zároveň dává prostor objevit něco, co nečekal. Stojíme si za tím, co je kvalitní; víme, co dává smysl, a umíme to doporučit. Neskrýváme se za čistou analytiku, nebojíme se být průvodcem, který poradí, když je to potřeba. Zároveň respektujeme, že každý uživatel chce někdy objevovat po svém.</p>
-      <p><strong>Proč.</strong> Každý přichází s jiným záměrem — někdo ví přesně, co chce, jiný hledá inspiraci. Nejsme pasivní katalog ani strojová personalizace. Jsme značka, která rozumí zážitkům, rozumí svým uživatelům a má odvahu říct: „Tohle je dobré.“ Design proto balancuje mezi vedením a volností: pomáhá, ale netlačí.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-6" style="scroll-margin-top:1rem">#6 — We show direction and leave room to explore</h2>
+      <p><strong>What it means.</strong> Slevomat's design helps the user find what they're looking for, while also leaving room to discover something they didn't expect. We stand behind what's good; we know what makes sense and we know how to recommend it. We don't hide behind pure analytics — we're not afraid to be a guide who advises when needed. At the same time we respect that every user sometimes wants to explore in their own way.</p>
+      <p><strong>Why.</strong> Everyone arrives with a different intent — some know exactly what they want, others are looking for inspiration. We're neither a passive catalogue nor machine personalisation. We're a brand that understands experiences, understands its users, and has the courage to say: "This is good." So the design balances guidance and freedom: it helps, but doesn't push.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Uživatel má možnost vyhledat přesně to, co potřebuje, ale hned vedle narazí na něco, co by sám nehledal.</li>
-        <li>Doporučujeme s rozvahou — nejen na základě dat, ale i kurátorovaným výběrem.</li>
-        <li>Naše rozhraní nenutí rozhodnutí, ale pomáhá mu uzrát tím, že dává smysl a inspiraci zároveň.</li>
-        <li>Prvky jako „Doporučeno pro vás“, „Naše tipy“ nebo „Objevte další“ fungují jako jemné vedení, ne jako direktiva.</li>
+        <li>The user can search for exactly what they need, but right next to it they come across something they wouldn't have looked for themselves.</li>
+        <li>We recommend with judgement — not only based on data, but also through a curated selection.</li>
+        <li>Our interface doesn't force a decision, but helps it mature by offering sense and inspiration at the same time.</li>
+        <li>Elements like "Recommended for you", "Our tips" or "Discover more" act as gentle guidance, not a directive.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="princip-7" style="scroll-margin-top:1rem">#7 — Design, který překvapí (i malý moment může změnit plánování v zážitek)</h2>
-      <p><strong>Co znamená.</strong> Design Slevomatu má za cíl nejen sloužit, ale i potěšit. Nejde o samoúčelnou hravost, ale o promyšlené momenty, které přidávají zážitku hloubku a emoci. Tam, kde to dává smysl, si dovolíme překvapit — vždy s rozvahou, nikdy na úkor použitelnosti. Nákup se může stát chvílí inspirace, kdy si člověk řekne „to jsem nečekal, ale líbí se mi to“.</p>
-      <p><strong>Proč.</strong> Lidé si nepamatují všechny funkce, ale pamatují si, jak se při používání cítili. Silný zážitek nevzniká jen z funkce, ale i z emoce. Když design dokáže probudit zvědavost, překvapit v detailu a zároveň nerušit hlavní cestu, zanechává dojem. A právě ten dojem často rozhoduje, zda se člověk vrátí.</p>
-      <p><strong>Jak se pozná v praxi:</strong></p>
+      <h2 id="princip-7" style="scroll-margin-top:1rem">#7 — Design that surprises (even a small moment can turn planning into an experience)</h2>
+      <p><strong>What it means.</strong> Slevomat's design aims not only to serve, but also to delight. This isn't playfulness for its own sake, but deliberate moments that add depth and emotion to the experience. Where it makes sense, we allow ourselves to surprise — always with judgement, never at the expense of usability. A purchase can become a moment of inspiration where a person thinks "I didn't expect that, but I like it."</p>
+      <p><strong>Why.</strong> People don't remember every feature, but they remember how they felt while using it. A strong experience doesn't come from function alone, but also from emotion. When design can spark curiosity, surprise in a detail, and at the same time not disrupt the main path, it leaves an impression. And that impression often decides whether a person comes back.</p>
+      <p><strong>How you can tell in practice:</strong></p>
       <ul>
-        <li>Uživatel se necítí zahlcený, ale jako by objevoval.</li>
-        <li>Fotky, ilustrace a texty neprodávají jen slevu, ale navozují chuť něco zažít.</li>
-        <li>Karty nabídek zaujmou nejen cenou, ale i detailem, který chytne za oko a zůstane v hlavě.</li>
-        <li>Nabídky dávají smysl v kontextu, pomáhají objevit i to, co si uživatel původně nehledal.</li>
-        <li>Občasné drobné vizuální nebo textové překvapení nepřekáží orientaci, ale potěší ve správný moment.</li>
-        <li>I běžný nákup může začít momentem: „To bych nečekal, ale chci to.“</li>
+        <li>The user doesn't feel overwhelmed, but as if they're discovering.</li>
+        <li>Photos, illustrations and texts don't just sell a discount — they create an appetite to experience something.</li>
+        <li>Offer cards catch attention not only with the price, but with a detail that grabs the eye and stays in mind.</li>
+        <li>Offers make sense in context and help discover even what the user wasn't originally looking for.</li>
+        <li>The occasional small visual or textual surprise doesn't get in the way of orientation, but delights at the right moment.</li>
+        <li>Even an ordinary purchase can start with a moment: "I wouldn't have expected that, but I want it."</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <h2 id="pouziti" style="scroll-margin-top:1rem">Použití</h2>
-      <p>Při každém produktovém rozhodnutí (návrh featury, design obrazovky, copy, brand) si projdi všech 7 principů a polož si: <strong>držím se každého z nich, nebo některý porušuju a proč?</strong></p>
-      <p>Pro automatický check existuje skill <code>slevomat-design-principles</code> — pošli mu popis featury nebo screenshot a dostaneš strukturovaný feedback proti všem 7 principům.</p>
+      <h2 id="pouziti" style="scroll-margin-top:1rem">How to use them</h2>
+      <p>For every product decision (feature design, screen design, copy, brand), go through all 7 principles and ask yourself: <strong>am I honouring each of them, or am I breaking one — and why?</strong></p>
+      <p>For an automated check there's the <code>slevomat-design-principles</code> skill — send it a feature description or a screenshot and you'll get structured feedback against all 7 principles.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
