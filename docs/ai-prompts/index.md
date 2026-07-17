@@ -58,19 +58,58 @@ Full page layouts and structures.
 
 ## How to Use with AI
 
-### For Cursor
-```
-Include the relevant .md file in your Cursor chat context, then:
+This folder is a **self-contained context pack** — it works in any AI coding tool
+without CLAUDE.md or repository access. Load files in this order:
 
-"Create a login page using the Auth Page template from Mini*S"
+1. **Always**: this file (`index.md`) + [`getting-started.md`](./getting-started.md) + [`principles.md`](./principles.md)
+   — setup, token reference, and the rules that keep generated code on-system.
+2. **Per task**: the `components/*.md` file for each component you're using.
+3. **For full pages**: the relevant `layouts/*.md` guide (breakpoint tiers, grid, page structure).
+
+### Claude Code (this repository)
+
+Nothing to load — `CLAUDE.md` wires the conventions in automatically and points here.
+For deep dives, reference files directly in your prompt:
+
+```
+Look at docs/ai-prompts/components/page-header.md and build a campaign
+page section using <minis-page-header theme="yellow"> with a CTA button.
 ```
 
-### For Claude Code
-```
-Attach the .md file and prompt:
+### Claude Code (a different project consuming @minis/components)
 
-"Build a hero section following the Hero Section pattern, 
-use the primary button for CTA, include heading and description"
+Copy this folder into the project (e.g. `docs/minis/`) and add one line to that
+project's `CLAUDE.md`:
+
+```
+Mini*S Design System reference: docs/minis/index.md — read getting-started.md
+and principles.md before generating any UI; per-component docs in components/.
+```
+
+### Cursor
+
+Create `.cursor/rules/minis.mdc` (or add to your rules) with the same pointer as
+above, or `@`-mention the files per chat:
+
+```
+@docs/ai-prompts/getting-started.md @docs/ai-prompts/components/button.md
+Create a product card with a cta-buy button and a favourite toggle tag.
+```
+
+### claude.ai / ChatGPT / other chat tools
+
+Attach or paste `getting-started.md` + `principles.md` + the component files you
+need, then prompt normally. Every component doc ends with a **copy-paste AI
+prompt** you can use as a starting point.
+
+### Example prompts that work with these docs
+
+```
+"Build the Deal Detail page from docs/ai-prompts/layouts/deal-detail.md
+ with a yellow page header and a photo gallery."
+
+"Create a horizontal category navigation following
+ docs/ai-prompts/components/navigation.md, with 'Extra slevy' active."
 ```
 
 ## Design Token Usage
@@ -105,7 +144,7 @@ work needed. Remove the attribute (or set `data-mode="light"`) to return to ligh
 
 ## Development Workflow
 
-1. **Select** component/pattern/template from this index
+1. **Select** component/layout from this index
 2. **Open** the relevant .md file
 3. **Copy** the AI prompt or code example
 4. **Paste** into your AI tool
