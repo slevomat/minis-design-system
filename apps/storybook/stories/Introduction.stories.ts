@@ -400,6 +400,7 @@ const changelogHTML = `
 
       <h3 style="margin-top:1rem">Storybook</h3>
       <ul>
+        <li><strong>Tier toolbar tokens are now generated from <code>tokens.json</code></strong> (<code>.storybook/tier-tokens.ts</code>) instead of a hand-copied table in <code>preview.ts</code> — the Tier simulation can no longer drift from the Figma export. Each Storybook tier maps to a representative Figma Layout mode (<code>2xs_xs</code>→xs, <code>sm</code>→sm, <code>md_lg</code>→lg, <code>xl</code>→2xl); <code>100000px</code> is translated to <code>100%</code> and the export names are aliased to the tokens.css names. Tiers now also simulate <code>--container-width</code> / <code>--container-narrow-width</code> / <code>--page-width</code>.</li>
         <li><strong>Fullscreen stories no longer get the 24px decorator padding.</strong> The global preview decorator padded every story, which shrank full-width components below the iframe width and broke container-query breakpoints — Page Header showed its mobile layout at the 768px "tablet" viewport (container was only 720px). Stories with <code>layout: 'fullscreen'</code> now render edge-to-edge, so the layout switch happens exactly at 768px.</li>
       </ul>
 
@@ -408,6 +409,7 @@ const changelogHTML = `
         <li><strong>Dark mode documented correctly</strong> — <code>docs/ai-prompts/index.md</code> and <code>getting-started.md</code> now document <code>&lt;html data-mode="dark"&gt;</code> as the only dark-mode mechanism. The old instruction to link <code>dist/foundation/dark.css</code> was removed (legacy file with hardcoded hex values and no toggle) and <code>packages/tokens/src/index.css</code> carries a deprecation notice.</li>
         <li><strong><code>--spacing-layout-*</code> guidance fixed</strong> — CLAUDE.md and <code>getting-started.md</code> claimed no <code>--spacing-*</code> tokens exist; the responsive <code>--spacing-layout-{xs|sm|md|lg|xl}</code> set is real and now documented. The unimplementable "use <code>--breakpoint-*</code> tokens in media queries" advice was replaced with the viewport-scaling layout tokens.</li>
         <li>Removed dead links to nonexistent pattern/template docs and deleted two empty brace-expansion artifact directories.</li>
+        <li><strong>Responsive architecture documented</strong> — new "Two Responsive Mechanisms" section in <code>docs/ai-prompts/layouts/index.md</code>: viewport-driven tokens for page-level spacing/typography vs container queries for component-internal layout, the convention for new layout-switching components, and the narrow-embed caveat. CLAUDE.md gained the matching pitfall plus a table of the Figma-export naming drift (<code>heading-large</code>/<code>poster</code>/<code>mega-poster</code> → <code>heading-lg</code>/<code>heading-xl</code>/<code>heading-2xl</code>).</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>

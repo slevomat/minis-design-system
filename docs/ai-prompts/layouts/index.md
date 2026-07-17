@@ -45,8 +45,8 @@ These tokens automatically scale with the viewport tier:
 |-------|------|----|----|----|
 | `--container-padding` | 8px | 16px | 16px | 32px |
 | `--container-narrow-padding` | 8px | 16px | 16px | 32px |
-| `--container-width` | 100000px | — | — | — |
-| `--container-narrow-width` | 100000px | — | — | — |
+| `--container-width` | 100% | 100% | 100% | 1240px |
+| `--container-narrow-width` | 100% | 100% | 752px | 752px |
 
 ### Responsive Typography (Headings)
 
@@ -57,6 +57,39 @@ These tokens automatically scale with the viewport tier:
 | `--typography-heading-lg-size` | 20px | 24px | 24px |
 | `--typography-heading-md-size` | 18px | 20px | 20px |
 | `--typography-heading-sm-size` | 16px | 18px | 18px |
+
+---
+
+## Two Responsive Mechanisms — When to Use Which
+
+The system deliberately uses **two** responsive mechanisms. Understanding the split
+prevents subtle layout bugs:
+
+**1. Viewport-driven tokens (media queries)** — spacing, container padding/width,
+and typography tokens change with the *browser viewport* via media queries baked
+into `tokens.css`. Consumers never write these media queries; they just use the
+tokens. Use this for page-level layout: grids, section spacing, heading sizes.
+
+**2. Container queries (component-internal layout)** — components that rearrange
+their own internals (`<minis-page-header>`, `<minis-card-grid>`) use
+`@container (min-width: …)` on **their own width** (`container-type: inline-size`
+on `:host`). They adapt to whatever box they're placed in, not to the screen.
+
+**Convention for new components:** if a component changes its internal layout at
+a breakpoint, use a container query, and pick the breakpoint from the
+`--breakpoint-*` scale (hardcode the number with a comment — CSS custom
+properties cannot be used inside `@container` or `@media` conditions).
+
+**Known caveat:** a container-responsive component that also consumes
+viewport-driven tokens (e.g. `--container-padding`) can mismatch when placed in
+a narrow box on a wide screen — it renders its mobile layout with desktop
+spacing. These components are designed to sit at (near) full page width. If you
+must embed one in a narrow panel, override the viewport tokens locally on the
+host element:
+
+```css
+.sidebar minis-page-header { --container-padding: var(--linear-sp-linear-4); }
+```
 
 ---
 

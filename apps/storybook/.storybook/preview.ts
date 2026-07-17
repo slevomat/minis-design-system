@@ -1,97 +1,17 @@
 import type { Preview } from '@storybook/web-components';
 import { html } from 'lit';
+import { TIER_TOKENS } from './tier-tokens';
 
 /**
- * Token overrides per Layout collection tier (mirrors Figma "Layout" variable modes).
+ * Token overrides per Layout collection tier (mirrors Figma "Layout" variable
+ * modes). Generated from tokens.json at build time — see ./tier-tokens.ts.
  *
  * Injected as a <style> block on :root so they take effect regardless of the
  * actual iframe width. The viewport addon resizes the iframe from the Manager
  * frame without updating any Storybook global — tier tokens therefore cannot be
  * derived from globals.viewport. Instead a window resize listener reads
  * window.innerWidth directly and picks the matching tier (see below).
- *
- * Values sourced from tokens.json Layout collection modes.
  */
-const TIER_TOKENS: Record<string, string> = {
-  '2xs_xs': `
-    --spacing-layout-xs: var(--linear-sp-linear-1);
-    --spacing-layout-sm: var(--linear-sp-linear-3);
-    --spacing-layout-md: var(--linear-sp-linear-4);
-    --spacing-layout-lg: var(--linear-sp-linear-5);
-    --spacing-layout-xl: var(--linear-sp-linear-8);
-    --container-padding: var(--linear-sp-linear-2);
-    --container-narrow-padding: var(--linear-sp-linear-2);
-    --typography-heading-2xl-size: var(--typography-size-2xl);
-    --typography-heading-xl-size: var(--typography-size-2xl);
-    --typography-heading-lg-size: var(--typography-size-xl);
-    --typography-heading-md-size: var(--typography-size-lg);
-    --typography-heading-sm-size: var(--typography-size-md);
-    --typography-heading-lg-line-height: var(--typography-line-height-130);
-    --typography-heading-md-line-height: var(--typography-line-height-133);
-    --typography-heading-sm-line-height: var(--typography-line-height-138);
-    --typography-body-md-line-height: var(--typography-line-height-138);
-    --typography-body-sm-line-height: var(--typography-line-height-143);
-  `,
-  sm: `
-    --spacing-layout-xs: var(--linear-sp-linear-2);
-    --spacing-layout-sm: var(--linear-sp-linear-4);
-    --spacing-layout-md: var(--linear-sp-linear-6);
-    --spacing-layout-lg: var(--linear-sp-linear-8);
-    --spacing-layout-xl: var(--linear-sp-linear-12);
-    --container-padding: var(--linear-sp-linear-4);
-    --container-narrow-padding: var(--linear-sp-linear-4);
-    --typography-heading-2xl-size: var(--typography-size-2xl);
-    --typography-heading-xl-size: var(--typography-size-2xl);
-    --typography-heading-lg-size: var(--typography-size-xl);
-    --typography-heading-md-size: var(--typography-size-lg);
-    --typography-heading-sm-size: var(--typography-size-md);
-    --typography-heading-lg-line-height: var(--typography-line-height-130);
-    --typography-heading-md-line-height: var(--typography-line-height-133);
-    --typography-heading-sm-line-height: var(--typography-line-height-138);
-    --typography-body-md-line-height: var(--typography-line-height-138);
-    --typography-body-sm-line-height: var(--typography-line-height-143);
-  `,
-  md_lg: `
-    --spacing-layout-xs: var(--linear-sp-linear-2);
-    --spacing-layout-sm: var(--linear-sp-linear-4);
-    --spacing-layout-md: var(--linear-sp-linear-6);
-    --spacing-layout-lg: var(--linear-sp-linear-8);
-    --spacing-layout-xl: var(--linear-sp-linear-12);
-    --container-padding: var(--linear-sp-linear-4);
-    --container-narrow-padding: var(--linear-sp-linear-4);
-    --typography-heading-2xl-size: var(--typography-size-3xl);
-    --typography-heading-xl-size: var(--typography-size-3xl);
-    --typography-heading-lg-size: var(--typography-size-2xl);
-    --typography-heading-md-size: var(--typography-size-xl);
-    --typography-heading-sm-size: var(--typography-size-lg);
-    --typography-heading-lg-line-height: var(--typography-line-height-125);
-    --typography-heading-md-line-height: var(--typography-line-height-130);
-    --typography-heading-sm-line-height: var(--typography-line-height-133);
-    --typography-body-md-line-height: var(--typography-line-height-150);
-    --typography-body-sm-line-height: var(--typography-line-height-157);
-  `,
-  xl: `
-    --spacing-layout-xs: var(--linear-sp-linear-2);
-    --spacing-layout-sm: var(--linear-sp-linear-4);
-    --spacing-layout-md: var(--linear-sp-linear-6);
-    --spacing-layout-lg: var(--linear-sp-linear-8);
-    --spacing-layout-xl: var(--linear-sp-linear-12);
-    --container-padding: var(--linear-sp-linear-8);
-    --container-narrow-padding: var(--linear-sp-linear-8);
-    --typography-heading-2xl-size: var(--typography-size-4xl);
-    --typography-heading-xl-size: var(--typography-size-3xl);
-    --typography-heading-lg-size: var(--typography-size-2xl);
-    --typography-heading-md-size: var(--typography-size-xl);
-    --typography-heading-sm-size: var(--typography-size-lg);
-    --typography-heading-lg-line-height: var(--typography-line-height-125);
-    --typography-heading-md-line-height: var(--typography-line-height-130);
-    --typography-heading-sm-line-height: var(--typography-line-height-133);
-    --typography-body-md-line-height: var(--typography-line-height-150);
-    --typography-body-sm-line-height: var(--typography-line-height-157);
-    --typography-brand-xl-size: var(--typography-size-5xl);
-    --typography-brand-xl-line-height: var(--typography-line-height-100);
-  `,
-};
 
 function tierFromWidth(px: number): string {
   if (px <= 407) return '2xs_xs';

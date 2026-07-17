@@ -90,6 +90,8 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - Use `html` tagged template from `lit`
 - Icon slot: `<minis-icon slot="icon" name="…">` or `<svg slot="icon" …>`
 - **Restart the dev server** after adding a new `*.stories.ts` file — the glob virtual module is built at startup.
+- **The Tier toolbar tokens are generated from `tokens.json`** at build time by `apps/storybook/.storybook/tier-tokens.ts` — never hand-edit tier values in `preview.ts`. After a Figma token re-export, restart the dev server to pick up new values. The Tier dropdown only overrides *tokens*; it does not affect container-query components (page-header, card-grid) — those respond to real iframe width only.
+- **The global decorator must not pad `layout: 'fullscreen'` stories** — padding shrinks container-query components below the viewport width and shifts their breakpoints (e.g. page-header showing mobile layout at the 768px tablet preset). Container-query component stories must set `layout: 'fullscreen'`.
 
 ## Figma
 
@@ -168,6 +170,20 @@ When tokens are updated in Figma, they are exported to two JSON files at the rep
 
 These are the primary source of truth for token discovery. Alternatively, use the Figma MCP (`mcp__figma__get_variable_defs`) to query variables directly from the Figma file.
 
+### Figma-export naming drift (Layout collection)
+
+Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the components actually use. When reading `tokens.json`, translate:
+
+| tokens.json `cssName` | tokens.css / components |
+|---|---|
+| `--typography-heading-large-*` | `--typography-heading-lg-*` |
+| `--typography-heading-medium-*` | `--typography-heading-md-*` |
+| `--typography-heading-small-*` | `--typography-heading-sm-*` |
+| `--typography-mega-poster-size` | `--typography-heading-2xl-size` |
+| `--typography-poster-size` | `--typography-heading-xl-size` |
+
+The brand (Kensington) composites `--typography-brand-{lg,xl}-*` and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+
 ## Common pitfalls
 
 - **No bare `--spacing-{n}` scale** — the only `--spacing-*` tokens are the responsive `--spacing-layout-*` set; a numeric `--spacing-4`-style scale does not exist.
@@ -176,6 +192,7 @@ These are the primary source of truth for token discovery. Alternatively, use th
 - **No duplicate `@customElement` registrations** — check existing tag names before adding a new component.
 - **TypeScript strict mode** (`noUnusedLocals`, `noUnusedParameters`) — unused imports/params fail the Vite build.
 - **Avoid `disabled` unless interaction is structurally impossible** — prefer keeping components active and displaying a `<minis-alert>` or inline message that explains what the user must do first. Only use `disabled` when the action truly cannot be taken (e.g. a locked premium feature). See `docs/ai-prompts/principles.md`.
+- **Two responsive mechanisms — don't mix them up**: page-level spacing/typography respond to the *viewport* (media-query-driven tokens in `tokens.css`); components that rearrange their own internals (page-header, card-grid) use *container queries* on their own width. New layout-switching components must use container queries with the breakpoint hardcoded from the `--breakpoint-*` scale + a comment (CSS custom properties cannot be used in `@container`/`@media` conditions). See `docs/ai-prompts/layouts/index.md` → "Two Responsive Mechanisms".
 - **`100000px` in `tokens.json` means "full width" (100%)** — Figma cannot mix `%` and `px` in the same variable collection, so unbounded widths are encoded as `100000px`. Always translate to `100%` in CSS. Only actual numeric values (e.g. `752px`, `1240px`) represent real constraints.
 
 ## AI-agent docs
