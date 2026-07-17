@@ -350,6 +350,39 @@ export const DesignPrinciples: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <h2>Style with tokens, never hardcoded values</h2>
+      <p><strong>Rule:</strong> Every color, spacing, radius, and typography value comes from a design token (<code>--color-*</code>, <code>--spacing-layout-*</code>, <code>--linear-sp-linear-*</code>, <code>--typography-*</code>). Never write raw hex colors or magic pixel values.</p>
+      <p>Tokens carry both light <strong>and</strong> dark values, scale with the viewport tier, and stay in sync with Figma. A hardcoded value opts out of all three silently — it looks right today and breaks the moment the theme, mode, or breakpoint changes.</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>/* Prefer */   background: var(--color-surface-primary);  padding: var(--spacing-layout-md);
+/* Avoid  */   background: #ffffff;                        padding: 16px;</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Dark mode comes free — if you follow the token rule</h2>
+      <p><strong>Rule:</strong> Never write component-level dark-mode styling. Dark mode is toggled globally with <code>&lt;html data-mode="dark"&gt;</code> — <code>tokens.css</code> overrides all semantic color tokens in one place. If something looks wrong in dark mode, use the right semantic token instead of adding a dark override.</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;html data-mode="dark"&gt;  &lt;!-- that's the entire integration --&gt;</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Use abbreviated size values only</h2>
+      <p><strong>Rule:</strong> The <code>size</code> attribute accepts the abbreviated Figma variant names — <code>xs | sm | md | lg | xl</code> (each component exposes only its subset). Never use full words like <code>small</code> or <code>large</code>: an unrecognized value fails <strong>silently</strong> and the component renders at its default size.</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>&lt;minis-button size="sm"&gt;Save&lt;/minis-button&gt;     &lt;!-- Prefer --&gt;
+&lt;minis-button size="small"&gt;Save&lt;/minis-button&gt;  &lt;!-- Avoid: silently falls back to md --&gt;</code></pre>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Respect the two responsive mechanisms</h2>
+      <p><strong>Rule:</strong> Page-level spacing and typography respond to the <strong>viewport</strong> through tokens (<code>--spacing-layout-*</code>, <code>--container-padding</code>) — you never write media queries for spacing. Components that rearrange their own internals (<code>&lt;minis-page-header&gt;</code>, <code>&lt;minis-card-grid&gt;</code>) use <strong>container queries</strong> on their own width — they adapt to the box they're placed in, not the screen.</p>
+      <p>New layout-switching components must use container queries, with the breakpoint hardcoded from the <code>--breakpoint-*</code> scale plus a comment (CSS custom properties cannot be used inside <code>@container</code>/<code>@media</code> conditions).</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <h2>Brand font is for banner headlines only</h2>
+      <p><strong>Rule:</strong> <code>--typography-font-family-brand</code> (Kensington Compressed Bold) is reserved for banner and campaign headlines — the <code>&lt;minis-page-header&gt;</code> heading and equivalent hero moments. Everything else — headings, body copy, UI labels, numbers — uses Inter (<code>--typography-font-family-sans</code>).</p>
+      <p>Kensington is a display face: it works at large sizes in uppercase, and its impact comes from scarcity. Used in body text or UI controls it becomes hard to read and dilutes the brand moment it was designed for.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <p>
         <a href="https://slevomat.github.io/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">Live Storybook</a> ·
         <a href="https://github.com/slevomat/minis-design-system" style="color:var(--color-interaction-primary-surface,#006eb9)">GitHub</a>
@@ -409,6 +442,7 @@ const changelogHTML = `
         <li><strong>Dark mode documented correctly</strong> — <code>docs/ai-prompts/index.md</code> and <code>getting-started.md</code> now document <code>&lt;html data-mode="dark"&gt;</code> as the only dark-mode mechanism. The old instruction to link <code>dist/foundation/dark.css</code> was removed (legacy file with hardcoded hex values and no toggle) and <code>packages/tokens/src/index.css</code> carries a deprecation notice.</li>
         <li><strong><code>--spacing-layout-*</code> guidance fixed</strong> — CLAUDE.md and <code>getting-started.md</code> claimed no <code>--spacing-*</code> tokens exist; the responsive <code>--spacing-layout-{xs|sm|md|lg|xl}</code> set is real and now documented. The unimplementable "use <code>--breakpoint-*</code> tokens in media queries" advice was replaced with the viewport-scaling layout tokens.</li>
         <li>Removed dead links to nonexistent pattern/template docs and deleted two empty brace-expansion artifact directories.</li>
+        <li><strong>Five new design principles</strong> in <code>docs/ai-prompts/principles.md</code> and the Design Principles page (previously only "Prefer active states over disabled"): style with tokens, never hardcoded values · dark mode comes free if you follow the token rule · use abbreviated size values only · respect the two responsive mechanisms · brand font is for banner headlines only.</li>
         <li><strong>Responsive architecture documented</strong> — new "Two Responsive Mechanisms" section in <code>docs/ai-prompts/layouts/index.md</code>: viewport-driven tokens for page-level spacing/typography vs container queries for component-internal layout, the convention for new layout-switching components, and the narrow-embed caveat. CLAUDE.md gained the matching pitfall plus a table of the Figma-export naming drift (<code>heading-large</code>/<code>poster</code>/<code>mega-poster</code> → <code>heading-lg</code>/<code>heading-xl</code>/<code>heading-2xl</code>).</li>
       </ul>
 

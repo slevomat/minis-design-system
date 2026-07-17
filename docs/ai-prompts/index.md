@@ -29,6 +29,11 @@ Individual UI elements with props and variants.
 Design decisions and rules for how to use components correctly.
 
 - [Prefer active states over disabled](./principles.md#prefer-active-states-over-disabled) — keep components interactive and show contextual guidance instead of silently disabling them
+- [Style with tokens, never hardcoded values](./principles.md#style-with-tokens-never-hardcoded-values) — tokens carry dark mode and responsive scaling; raw hex/px silently opts out
+- [Dark mode comes free](./principles.md#dark-mode-comes-free--if-you-follow-the-token-rule) — `<html data-mode="dark">` is the entire integration; never write per-component dark CSS
+- [Use abbreviated size values only](./principles.md#use-abbreviated-size-values-only) — `sm`/`md`/`lg`, never `small`/`medium`/`large` (invalid values silently fall back)
+- [Respect the two responsive mechanisms](./principles.md#respect-the-two-responsive-mechanisms) — viewport tokens for page spacing, container queries for component layout
+- [Brand font is for banner headlines only](./principles.md#brand-font-is-for-banner-headlines-only) — Kensington for hero moments; Inter for everything else
 
 [→ All Principles](./principles.md)
 
