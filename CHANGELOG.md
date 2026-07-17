@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-17
+
+### Page Header
+
+- **Storybook grouping changed**: moved out of the "Brand" folder — story path is now `Components/Page Header` (was `Components/Brand/Page Header`). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — `theme="brand"` remains a valid theme value.
+- **XS/mobile vertical padding reduced to 24px** (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the `--linear-sp-linear-6` spacing token instead of a hardcoded `40px`.
+
 ## 2026-06-18
 
 ### Tile

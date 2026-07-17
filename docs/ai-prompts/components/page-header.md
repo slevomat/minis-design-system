@@ -75,7 +75,7 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 - Badge: `md` (43px), red (pink) on every theme — brand (cyan) on the `pink` theme — bottom-aligned next to heading
 
 **Mobile (<768 px)**
-- Root: `padding: 40px var(--container-padding, 14px)`
+- Root: `padding: var(--linear-sp-linear-6) var(--container-padding, 14px)` (24px vertical)
 - Container: flex column, `align-items: center`, `gap: 24px`
 - Image area (top): `160×160px`, `border-radius: 50%` (circle)
 - Content (below): centered text

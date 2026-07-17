@@ -6,7 +6,7 @@ import '../button/button.js';
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta = {
-  title: 'Components/Brand/Page Header',
+  title: 'Components/Page Header',
   component: 'minis-page-header',
   tags: ['autodocs'],
   parameters: {

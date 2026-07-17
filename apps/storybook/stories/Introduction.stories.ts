@@ -381,6 +381,25 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-07-17 (page header: storybook regrouping)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-07-17" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-07-17</h2>
+        <button class="cl-copy-btn" data-anchor="2026-07-17">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Page Header</h3>
+      <ul>
+        <li><strong>Storybook grouping changed</strong> — moved out of the "Brand" folder: story path is now <code>Components/Page Header</code> (was <code>Components/Brand/Page Header</code>). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — <code>theme="brand"</code> remains a valid theme value.</li>
+        <li><strong>XS/mobile vertical padding reduced to 24px</strong> (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the <code>--linear-sp-linear-6</code> spacing token instead of a hardcoded <code>40px</code>.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-06-18 (button large/xl padding)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

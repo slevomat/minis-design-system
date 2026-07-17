@@ -47,7 +47,7 @@ export const pageHeaderStyles = css`
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 40px var(--container-padding, 14px);
+    padding: var(--linear-sp-linear-6, 24px) var(--container-padding, 14px);
     box-sizing: border-box;
   }
 
