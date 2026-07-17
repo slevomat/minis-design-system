@@ -32,6 +32,13 @@ Headline companion (43 px):
 | `color`   | `'pink' \| 'yellow' \| 'blue' \| 'brand'` | `'pink'` | Color variant of the seal badge   |
 | `size`    | `'sm' \| 'md' \| 'xl'`                    | `'xl'`   | Size: sm 32 px · md 43 px · xl 82 px |
 
+### CSS custom properties
+
+| Property | Default | Description |
+|---|---|---|
+| `--badge-size` | `82px` (`sm` 32px · `md` 43px) | Width and height of the square seal. Set it directly for fluid sizing — e.g. `0.8em` to track the surrounding font-size. Overrides `size`. |
+| `--badge-color` | `var(--color-branding-pink)` | Seal fill. Prefer the `color` attribute. |
+
 ### Slots
 
 None — the component is self-contained inline SVG.
@@ -73,6 +80,21 @@ Use the `size` attribute to select a named size. The SVG scales proportionally a
 <!-- Default (82 px) -->
 <minis-badge color="pink"></minis-badge>
 ```
+
+### Fluid sizing — `--badge-size`
+
+The `size` attribute is a shorthand for the `--badge-size` custom property. Set that
+property directly to size the seal off anything other than the fixed px scale — most
+usefully in `em`, so it tracks the surrounding font-size:
+
+```html
+<!-- seal scales with whatever font-size it sits in -->
+<minis-badge style="--badge-size: 0.8em"></minis-badge>
+```
+
+`--badge-size` beats the `size` attribute when both are set. This is how
+`<minis-page-header>` keeps its seal proportional to the responsive heading — see
+[page-header.md](./page-header.md#badge-positioning).
 
 ---
 

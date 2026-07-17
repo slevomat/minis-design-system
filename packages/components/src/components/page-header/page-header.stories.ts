@@ -25,6 +25,7 @@ const meta: Meta = {
   <li><strong><code>tag</code></strong> attribute: optional countdown/label pill above the heading.</li>
   <li><strong><code>no-badge</code></strong> boolean (default <code>false</code>): hides the Brand/Badge checkmark seal next to the heading.</li>
 </ul>
+<p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>--page-header-badge-size</code>, default <code>0.8em</code>), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a <code>0.27em</code> gap after that line's text (<code>--page-header-badge-gap</code>) — for any number of heading lines, at every breakpoint. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
         `,
       },
     },
@@ -176,6 +177,55 @@ export const NoBadge: Story = {
       Ušetřete za pobyt<br>v italském Rimini
       <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.6)">photo</div>
     </minis-page-header>
+  `,
+};
+
+// ─── Badge Anchoring ──────────────────────────────────────────────────────────
+
+export const BadgeAnchoring: Story = {
+  name: 'Badge Anchoring',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+The badge always lands on the <strong>last line</strong> of the heading, centred on that
+line's line-height, with a <code>0.27em</code> gap after the text — one line or five, at any
+breakpoint. Size (<code>0.8em</code>) and gap (<code>0.27em</code>) are <code>em</code>-relative, so both scale
+with the responsive heading font-size.
+<br><br>
+Override per instance with <code>--page-header-badge-size</code> and
+<code>--page-header-badge-gap</code> (last example below).
+        `,
+      },
+    },
+  },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:0">
+      <minis-page-header theme="brand">
+        One line
+        <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
+      </minis-page-header>
+
+      <minis-page-header theme="yellow">
+        Two lines<br>of heading
+        <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
+      </minis-page-header>
+
+      <minis-page-header theme="green">
+        Three lines<br>of a longer<br>page heading
+        <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
+      </minis-page-header>
+
+      <minis-page-header
+        theme="pink"
+        style="--page-header-badge-size:1.4em;--page-header-badge-gap:0.5em"
+        description="--page-header-badge-size: 1.4em · --page-header-badge-gap: 0.5em"
+      >
+        Custom size<br>and gap
+        <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
+      </minis-page-header>
+    </div>
   `,
 };
 

@@ -103,11 +103,6 @@ export const pageHeaderStyles = css`
   ────────────────────────────────────────────────────────── */
 
   .heading-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 16px;
-    position: relative;
     width: 100%;
   }
 
@@ -126,27 +121,41 @@ export const pageHeaderStyles = css`
     color: var(--page-header-text);
     text-align: center;
     margin: 0;
-    flex: 1 0 0;
-    min-width: 0;
   }
 
   /* ──────────────────────────────────────────────────────────
-     BADGE variants — mobile sm, desktop md
+     BADGE — inline at the end of the heading's last line
+
+     The anchor is an inline box exactly one line-height tall
+     (1lh) aligned to the top of the line box, so it covers the
+     same vertical band as the heading's strut. Centring the seal
+     inside it therefore centres it on the last line's
+     line-height, whatever the font metrics are. The seal itself
+     is sized in em, so it tracks the responsive heading size,
+     and may overflow the line band without changing line height.
   ────────────────────────────────────────────────────────── */
 
-  .badge-desktop {
-    display: none;
-    flex-shrink: 0;
-    align-self: flex-end;
-    margin-bottom: 10px;
+  .badge-anchor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    /* fallback for browsers without the lh unit — the brand
+       line-height token, approximated */
+    height: 1.1em;
+    height: 1lh;
+    width: var(--page-header-badge-size, 0.8em);
+    /* One word space always precedes the anchor; --_space-advance is its width
+       (measured in JS, as a ratio of the font size) so the visible gap is
+       exactly --page-header-badge-gap. */
+    margin-left: calc(
+      var(--page-header-badge-gap, 0.27em) - var(--_space-advance, 0) * 1em
+    );
   }
 
-  .badge-mobile {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 8px;
-    flex-shrink: 0;
+  .badge {
+    flex: none;
+    --badge-size: var(--page-header-badge-size, 0.8em);
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -231,21 +240,11 @@ export const pageHeaderStyles = css`
 
     .heading-row {
       width: auto;
-      justify-content: flex-start;
     }
 
     .heading {
       text-align: left;
-      flex: none;
       white-space: nowrap;
-    }
-
-    .badge-desktop {
-      display: block;
-    }
-
-    .badge-mobile {
-      display: none;
     }
 
     .description {

@@ -48,6 +48,16 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 |---|---|---|
 | `--page-header-surface` | per theme | Background color |
 | `--page-header-text` | per theme | Heading and description text color |
+| `--page-header-badge-size` | `0.8em` | Badge seal size. Relative to the heading font-size — keep it in `em` so it stays proportional at every breakpoint. |
+| `--page-header-badge-gap` | `0.27em` | Horizontal gap between the end of the heading's last line and the badge. Also `em`-relative. |
+
+### CSS shadow parts
+
+| Part | Description |
+|---|---|
+| `root`, `container`, `content`, `heading-row`, `heading`, `tag`, `description`, `image-area` | Layout elements |
+| `badge-anchor` | Inline box that positions the badge on the heading's last line |
+| `badge` | The `<minis-badge>` seal itself |
 
 ---
 
@@ -74,14 +84,83 @@ component adapts to the width of whatever it is placed in.
 - Container: `max-width: 1240px`, flex row, `padding: 70px 0`
 - Content column (left): flex column, `align-items: flex-start`, `gap: --spacing-layout-sm`
 - Image area (right): `290×280px`, clipped to the scalloped organic blob shape via CSS `mask-image` (from Figma Path 1443)
-- Badge: `md` (43px), red (pink) on every theme — brand (cyan) on the `pink` theme — bottom-aligned next to heading
 
 **Mobile (container <768 px)**
 - Root: `padding: var(--linear-sp-linear-6) var(--container-padding, 14px)` (24px vertical)
 - Container: flex column, `align-items: center`, `gap: 24px`
 - Image area (top): `160×160px`, clipped to the same blob shape via CSS `mask-image` (smaller variant)
 - Content (below): centered text
-- Badge: `sm` (32px), same color as desktop — red (pink) on every theme, brand (cyan) on the `pink` theme — absolute top-right of heading
+
+The badge is **not** breakpoint-specific — the same em-relative seal is used at every
+size (see below).
+
+---
+
+## Badge positioning
+
+The Brand/Badge seal is rendered **inline, at the end of the heading's last line**.
+Three rules hold at every breakpoint and for any number of heading lines:
+
+1. **Size tracks the font size** — `--page-header-badge-size` defaults to `0.8em`, so
+   the seal scales automatically with the responsive heading (≈26px at the 32px
+   heading, ≈45px at the 56px heading). No `size` attribute is set on the badge; the
+   page header drives `--badge-size` directly.
+2. **Vertically centred on the last line's line-height** — exactly, not approximately.
+3. **`0.27em` gap after the last line's text** — `--page-header-badge-gap`.
+
+### How it works (CSS, plus one measurement)
+
+The centring and sizing are **pure CSS**, no JS:
+
+```css
+.badge-anchor {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: top;
+  height: 1lh;          /* one line-height, the CSS `lh` unit */
+  width: var(--page-header-badge-size, 0.8em);
+}
+```
+
+The anchor is an inline box exactly `1lh` tall. Because it is the same height as the
+line's strut and is aligned to the **top of the line box**, its box coincides with that
+line's line-height band — so centring the seal inside it centres it on the line-height,
+independent of the font's ascent/descent metrics. Being inline, it automatically lands
+on the *last* line, whether the heading has one line or five. A seal larger than the
+line-height simply overflows the band without changing the line height.
+
+`height: 1.1em` is declared before `height: 1lh` as a fallback for browsers without the
+`lh` unit (pre-Chrome 109 / Safari 16.4 / Firefox 120).
+
+**The one thing CSS can't do**: the slotted heading markup usually ends with a
+whitespace text node (any newline before `<img slot="image">`), which renders as a word
+space in front of the badge. That made the gap `1.12em` for some authors and `1.00em`
+for others, depending purely on how they formatted their HTML. So the component:
+
+- emits exactly one space in its own template before the anchor — any trailing space in
+  the slotted markup collapses into it, so there is always **exactly one** space; and
+- measures that space's advance in the heading's font (`_measureSpace()`, re-run on
+  `slotchange` and after `document.fonts.ready`) and publishes it as the
+  `--_space-advance` ratio, which the anchor's margin subtracts:
+
+```css
+margin-left: calc(var(--page-header-badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
+```
+
+The ratio is stored relative to the font size, so it survives the responsive size step
+without re-measuring.
+
+### Consequences to know
+
+- **Keep the heading slot inline-level.** A block-level child would push the badge onto
+  its own line.
+- **The badge can wrap.** On narrow viewports, if the last line plus the gap plus the
+  seal doesn't fit, the badge wraps to a line of its own — the same as any inline
+  content. Shorten the heading or lower `--page-header-badge-size` if that's unwanted.
+- To override per instance:
+  ```css
+  minis-page-header.hero { --page-header-badge-size: 1em; --page-header-badge-gap: 0.5em; }
+  ```
 
 ---
 

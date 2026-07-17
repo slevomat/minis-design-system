@@ -426,9 +426,28 @@ const changelogHTML = `
 
       <h3 style="margin-top:1rem">Page Header</h3>
       <ul>
+        <li>
+          <strong>Badge is now typography-relative and anchored to the heading's last line.</strong>
+          The seal sizes off the heading font-size (<code>0.8em</code> — ≈26px at the 32px heading, ≈45px at the 56px heading),
+          sits exactly centred on the <strong>last line's line-height</strong>, and keeps a <strong>0.27em gap</strong> after the end of
+          that line — for any number of heading lines, at every breakpoint. Previously two fixed-px badges were rendered:
+          a <code>md</code> (43px) one bottom-aligned beside the whole heading block on desktop, and an <code>sm</code> (32px) one
+          absolutely positioned at the heading's top-right on mobile.
+          <ul>
+            <li><strong>Implementation</strong> — the badge is an inline box inside the <code>&lt;h1&gt;</code>, after the slot. Its anchor is <code>height: 1lh</code> with <code>vertical-align: top</code>, so its box coincides with the last line's line-height band regardless of the font's ascent/descent metrics; the seal is centred inside it. Sizing and centring are pure CSS. The gap needs one JS assist: slotted markup usually ends in a whitespace text node that renders as a word space before the badge, making the gap ~1.12em for some authors and 1.00em for others depending only on HTML formatting. The component now emits exactly one space in its template — any slotted trailing space collapses into it — and measures that space's advance in the heading font (on <code>slotchange</code> and after <code>document.fonts.ready</code>), publishing it as the <code>--_space-advance</code> ratio that the anchor's margin subtracts.</li>
+            <li><strong>Fallback</strong> — <code>height: 1.1em</code> is declared before <code>height: 1lh</code> for browsers without the <code>lh</code> unit (pre-Chrome 109 / Safari 16.4 / Firefox 120).</li>
+            <li><strong>Consequences</strong> — the heading slot must stay inline-level (a block child pushes the badge onto its own line), and the badge may wrap to its own line on narrow viewports like any inline content.</li>
+            <li><strong>Tokens</strong> — added <code>--page-header-badge-size</code> (<code>0.8em</code>) and <code>--page-header-badge-gap</code> (<code>0.27em</code>), both overridable per instance. Added the <code>badge-anchor</code> and <code>badge</code> CSS shadow parts.</li>
+          </ul>
+        </li>
         <li><strong>Storybook grouping changed</strong> — moved out of the "Brand" folder: story path is now <code>Components/Page Header</code> (was <code>Components/Brand/Page Header</code>). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — <code>theme="brand"</code> remains a valid theme value.</li>
         <li><strong>XS/mobile vertical padding reduced to 24px</strong> (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the <code>--linear-sp-linear-6</code> spacing token instead of a hardcoded <code>40px</code>.</li>
         <li><strong>AI docs refreshed</strong> (<code>docs/ai-prompts/components/page-header.md</code>) — removed stale references to <code>--page-header-image-radius</code>, the −3deg image rotation, and the circular mobile image; documented that the layout switch is a container query on the component's own width, not a viewport media query.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Badge</h3>
+      <ul>
+        <li><strong>New <code>--badge-size</code> custom property</strong> drives the seal's width/height, enabling fluid sizing off any unit — e.g. <code>--badge-size: 0.8em</code> to track the surrounding font-size (used by Page Header). The <code>size</code> attribute (<code>sm</code> 32px · <code>md</code> 43px · <code>xl</code> 82px) is now a shorthand that sets this property; setting <code>--badge-size</code> directly overrides it. No visual change to existing usage.</li>
       </ul>
 
       <h3 style="margin-top:1rem">Storybook</h3>

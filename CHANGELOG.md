@@ -6,9 +6,18 @@ All notable changes to this project will be documented in this file.
 
 ### Page Header
 
+- **Badge is now typography-relative and anchored to the heading's last line.** The seal sizes off the heading font-size (`0.8em` — ≈26px at the 32px heading, ≈45px at the 56px heading), sits exactly centred on the **last line's line-height**, and keeps a **0.27em gap** after the end of that line — for any number of heading lines, at every breakpoint. Previously two fixed-px badges were rendered: a `md` (43px) one bottom-aligned beside the whole heading block on desktop, and an `sm` (32px) one absolutely positioned at the heading's top-right on mobile.
+  - **Implementation**: the badge is an inline box inside the `<h1>`, after the slot. Its anchor is `height: 1lh` with `vertical-align: top`, so its box coincides with the last line's line-height band regardless of the font's ascent/descent metrics; the seal is centred inside it. Sizing and centring are pure CSS. The gap needs one JS assist: the slotted markup usually ends in a whitespace text node that renders as a word space before the badge (making the gap ~1.12em for some authors and 1.00em for others, depending only on HTML formatting). The component now emits exactly one space in its template — any slotted trailing space collapses into it — and measures that space's advance in the heading font (`_measureSpace()`, on `slotchange` and after `document.fonts.ready`), publishing it as the `--_space-advance` ratio that the anchor's margin subtracts.
+  - **Fallback**: `height: 1.1em` is declared before `height: 1lh` for browsers without the `lh` unit (pre-Chrome 109 / Safari 16.4 / Firefox 120).
+  - **Consequences**: the heading slot must stay inline-level (a block child pushes the badge onto its own line), and the badge may wrap to its own line on narrow viewports like any inline content. The `.badge-desktop` / `.badge-mobile` internal classes are gone.
+  - **Tokens**: added `--page-header-badge-size` (`0.8em`) and `--page-header-badge-gap` (`0.27em`), both overridable per instance. Added the `badge-anchor` and `badge` CSS shadow parts.
 - **Storybook grouping changed**: moved out of the "Brand" folder — story path is now `Components/Page Header` (was `Components/Brand/Page Header`). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — `theme="brand"` remains a valid theme value.
 - **XS/mobile vertical padding reduced to 24px** (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the `--linear-sp-linear-6` spacing token instead of a hardcoded `40px`.
 - **AI docs refreshed** (`docs/ai-prompts/components/page-header.md`): removed stale references to `--page-header-image-radius`, the −3deg image rotation, and the circular mobile image — the image is clipped with the blob `mask-image` on both breakpoints. Documented that the layout switch is a container query on the component's own width, not a viewport media query.
+
+### Badge
+
+- **New `--badge-size` custom property** drives the seal's width/height, enabling fluid sizing off any unit — e.g. `--badge-size: 0.8em` to track the surrounding font-size (used by Page Header). The `size` attribute (`sm` 32px · `md` 43px · `xl` 82px) is now a shorthand that sets this property; setting `--badge-size` directly overrides it. No visual change to existing usage.
 
 ### Storybook
 

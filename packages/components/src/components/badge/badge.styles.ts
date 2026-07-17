@@ -3,20 +3,21 @@ import { css } from 'lit';
 export const badgeStyles = css`
   :host {
     display: inline-block;
-    width: 82px;
-    height: 82px;
+    /* Override --badge-size to scale the seal off anything — e.g. an em value
+       that tracks the surrounding font-size. The size attribute sets it too. */
+    --badge-size: 82px;
     --badge-color: var(--color-branding-pink);
+    width: var(--badge-size);
+    height: var(--badge-size);
   }
 
   /* size variants */
   :host([size='sm']) {
-    width: 32px;
-    height: 32px;
+    --badge-size: 32px;
   }
 
   :host([size='md']) {
-    width: 43px;
-    height: 43px;
+    --badge-size: 43px;
   }
 
   :host([color='yellow']) {
