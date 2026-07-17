@@ -113,4 +113,4 @@ work needed. Remove the attribute (or set `data-mode="light"`) to return to ligh
 
 ---
 
-**Last updated:** 2026-03-19
+**Last updated:** 2026-07-17

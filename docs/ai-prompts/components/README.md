@@ -1,18 +1,31 @@
 # Components Library
 
-Individual UI components for building interfaces.
+Individual UI components for building interfaces. Every component has a full AI-prompt reference with API tables, real token names, usage examples, and a copy-paste prompt.
 
 ## Available Components
 
-- [Button](./button.md) - Buttons with variants and states
-- More components coming soon...
+- [Action Row](./action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
+- [Alert](./alert.md) - Contextual feedback: notice, success, error, warning
+- [Badge](./badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants
+- [Button](./button.md) - Primary actions, variants, sizes, icon support, counter pill
+- [Card Grid](./card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
+- [Checkbox](./checkbox.md) - Binary selection input with checked / unchecked states and hover
+- [Container](./container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding
+- [Icon](./icon.md) - SVG icons via `<minis-icon>`, currentColor theming, a11y
+- [Message](./message.md) - Notification card with visual, title, description and close button
+- [Navigation](./navigation.md) - Horizontal scrollable nav bar: category nav or tab switcher
+- [Page Header](./page-header.md) - Full-width branded banner for category/campaign pages; 5 themes, responsive layout
+- [Pill Counter](./pill-counter.md) - Numeric badge used in buttons and standalone
+- [Tag](./tag.md) - Compact pill label: static, clickable, toggle, or dismissible
+- [Tile](./tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically in a grid
+- [Topbar](./topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
 
 ## Component Naming
 
 All components use the `minis-` prefix:
 - `<minis-button>`
-- `<minis-input>`
-- `<minis-card>`
+- `<minis-page-header>`
+- `<minis-navigation>`
 
 ## Using Components
 

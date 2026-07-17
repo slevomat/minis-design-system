@@ -147,6 +147,26 @@ document.documentElement.removeAttribute('data-mode');      // back to light
 > Do **not** load `dist/foundation/dark.css` — it is a deprecated legacy file that
 > permanently forces dark colors with no toggle.
 
+## Token Export Files (for tools reading raw tokens)
+
+Tokens are exported from Figma to two JSON files at the repo root — use them for
+programmatic token discovery; use `tokens.css` names in actual code:
+
+- **`tokens.json`** — values in `oklch()` with `var()` references (structure, names, relationships)
+- **`tokens.rgb.json`** — fully resolved `#hex` / `rgba()` values (actual colors)
+
+Two things to know when reading them:
+
+1. **`100000px` means "full width"** — Figma cannot mix `%` and `px` in one
+   variable collection, so unbounded widths are encoded as `100000px`. Always
+   translate to `100%` in CSS. Real numeric values (`752px`, `1240px`) are real constraints.
+2. **Some exported `cssName`s differ from the names used in code**: translate
+   `--typography-heading-{large|medium|small}-*` → `--typography-heading-{lg|md|sm}-*`,
+   `--typography-mega-poster-size` → `--typography-heading-2xl-size`, and
+   `--typography-poster-size` → `--typography-heading-xl-size`. The brand
+   (Kensington) composites `--typography-brand-*` exist only in `tokens.css`,
+   not in the export.
+
 ## Component Prefix
 
 All Mini*S components use the `minis-` prefix:
