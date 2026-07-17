@@ -35,9 +35,7 @@ Design decisions and rules for how to use components correctly.
 ### 🧩 Patterns
 Composable UI patterns combining multiple components.
 
-- [Card with Action](./patterns/card-with-action.md) - Card + Button pattern
-
-[→ All Patterns](./patterns/README.md)
+- None documented yet — see [Patterns overview](./patterns/README.md)
 
 ### 📐 Layouts
 Full page layout instructions for AI agents to vibe-code responsive pages.
@@ -51,9 +49,7 @@ Full page layout instructions for AI agents to vibe-code responsive pages.
 ### 📄 Templates
 Full page layouts and structures.
 
-- [Landing Page](./templates/landing-page.md) - Marketing landing page
-
-[→ All Templates](./templates/README.md)
+- None documented yet — use the [Layouts](./layouts/index.md) guides in the meantime
 
 ## How to Use with AI
 
@@ -77,17 +73,30 @@ use the primary button for CTA, include heading and description"
 All components/patterns/templates use Mini*S tokens:
 
 ```html
-<!-- Load tokens first -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/index.css">
-
-<!-- Or for dark mode -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/foundation/dark.css">
+<!-- Load tokens first (contains light AND dark values) -->
+<link rel="stylesheet" href="node_modules/@minis/tokens/dist/tokens.css">
 
 <!-- Then use components -->
 <script type="module">
   import '@minis/components';
 </script>
 ```
+
+### Dark mode
+
+Dark mode is toggled with a single attribute — **do not** load a separate stylesheet:
+
+```html
+<html data-mode="dark">
+```
+
+`tokens.css` contains a `[data-mode="dark"]` block that overrides all semantic color
+tokens (`--color-text-*`, `--color-border-*`, `--color-interaction-*`, `--color-background`, …).
+Components consume only semantic tokens, so they switch automatically — no component-level
+work needed. Remove the attribute (or set `data-mode="light"`) to return to light mode.
+
+> ⚠️ `dist/foundation/dark.css` is a deprecated legacy file with hardcoded hex values and
+> no toggle mechanism. Never link it — it permanently forces stale dark colors.
 
 ## Development Workflow
 

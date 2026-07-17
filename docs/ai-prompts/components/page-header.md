@@ -48,7 +48,6 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 |---|---|---|
 | `--page-header-surface` | per theme | Background color |
 | `--page-header-text` | per theme | Heading and description text color |
-| `--page-header-image-radius` | `0` (desktop) | `border-radius` on the image container at desktop |
 
 ---
 
@@ -66,18 +65,21 @@ Full-width branded banner used at the top of category and campaign pages. Switch
 
 ## Layout details
 
-**Desktop (≥768 px)**
-- Root: full width, `min-height: 328px`, centered inner container
-- Container: `max-width: 1240px`, flex row, `padding: 70px var(--container-padding)`
+The layout switch is a **CSS container query** on the component's own width
+(`@container page-header (min-width: 768px)`), not a viewport media query — the
+component adapts to the width of whatever it is placed in.
+
+**Desktop (container ≥768 px)**
+- Root: full width, `min-height: 328px`, `padding: 0 var(--container-padding)`, centered inner container
+- Container: `max-width: 1240px`, flex row, `padding: 70px 0`
 - Content column (left): flex column, `align-items: flex-start`, `gap: --spacing-layout-sm`
-- Image area (right): `290×280px`, `overflow: hidden`
-- Brand and Yellow themes: image rotated `−3deg`
+- Image area (right): `290×280px`, clipped to the scalloped organic blob shape via CSS `mask-image` (from Figma Path 1443)
 - Badge: `md` (43px), red (pink) on every theme — brand (cyan) on the `pink` theme — bottom-aligned next to heading
 
-**Mobile (<768 px)**
+**Mobile (container <768 px)**
 - Root: `padding: var(--linear-sp-linear-6) var(--container-padding, 14px)` (24px vertical)
 - Container: flex column, `align-items: center`, `gap: 24px`
-- Image area (top): `160×160px`, `border-radius: 50%` (circle)
+- Image area (top): `160×160px`, clipped to the same blob shape via CSS `mask-image` (smaller variant)
 - Content (below): centered text
 - Badge: `sm` (32px), same color as desktop — red (pink) on every theme, brand (cyan) on the `pink` theme — absolute top-right of heading
 

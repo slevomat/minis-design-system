@@ -151,11 +151,17 @@ const preview: Preview = {
       const tier = autoTier !== 'xl' ? autoTier : _manualTier;
       applyViewportTokens(tier);
 
+      // Fullscreen stories (e.g. page-header) must span the full iframe width —
+      // any wrapper padding shrinks the component below the viewport width and
+      // breaks container-query breakpoints (mobile layout showing at a 768px
+      // viewport because the container is only 720px wide).
+      const isFullscreen = context.parameters?.layout === 'fullscreen';
+
       return html`
         <div style="
           background: var(--color-background);
           color: var(--color-text-primary);
-          padding: 24px;
+          padding: ${isFullscreen ? '0' : '24px'};
           min-height: 100%;
           box-sizing: border-box;
         ">

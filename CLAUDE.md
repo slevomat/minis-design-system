@@ -31,6 +31,7 @@ docs/
 - **Primitive pixel scale**: `--pixel-px-{n}` (e.g. `--pixel-px-22` = 22px)
 - **Linear spacing**: `--linear-sp-linear-{n}` (e.g. `--linear-sp-linear-3` = 12px)
 - **Fibonacci spacing**: `--fibonachi-sp-fib-{n}` (e.g. `--fibonachi-sp-fib-8` = 34px)
+- **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values scale with the viewport breakpoint tier (e.g. `--spacing-layout-sm` = 12px mobile → 16px from 408px up). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`.
 - **Border radius**: `--border-radius-sm` (4px), `--border-radius-md` (8px)
 - **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (Kensington — banner headlines only)
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
@@ -39,7 +40,7 @@ docs/
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
 
-> There are NO `--spacing-*` tokens. Use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
+> There is NO bare numeric `--spacing-{n}` scale. The only `--spacing-*` tokens are the responsive `--spacing-layout-*` set. For fixed values use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
 
 ## Component conventions
 
@@ -169,7 +170,8 @@ These are the primary source of truth for token discovery. Alternatively, use th
 
 ## Common pitfalls
 
-- **No `--spacing-*` tokens** — they don't exist in this system (outdated name).
+- **No bare `--spacing-{n}` scale** — the only `--spacing-*` tokens are the responsive `--spacing-layout-*` set; a numeric `--spacing-4`-style scale does not exist.
+- **Dark mode = `<html data-mode="dark">`** — `tokens.css` contains the `[data-mode="dark"]` override block. Never link `dist/foundation/dark.css` (deprecated legacy file, hardcoded hex, no toggle).
 - **Avoid `var(--a, 1px 2px)` multi-value fallbacks** in Lit `css` templates — invalid CSS crashes the module.
 - **No duplicate `@customElement` registrations** — check existing tag names before adding a new component.
 - **TypeScript strict mode** (`noUnusedLocals`, `noUnusedParameters`) — unused imports/params fail the Vite build.

@@ -1,8 +1,10 @@
 /**
- * Mini*S Design Tokens - Main Entry
- * 
- * Imports Foundation (light mode), Layout, and Breakpoints
- * For dark mode, import './foundation/dark.css' instead
+ * ⚠️ DEPRECATED — do not use for new consumers.
+ *
+ * The canonical token file is `tokens.css`, which contains light AND dark
+ * values. Dark mode is toggled with `<html data-mode="dark">` — the
+ * `foundation/dark/*.css` files here are legacy hex snapshots with no toggle
+ * mechanism and will drift from tokens.css.
  */
 
 /* Foundation - Light Mode */

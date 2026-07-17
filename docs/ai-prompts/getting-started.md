@@ -21,8 +21,8 @@ Every HTML file using Mini*S should start with:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini*S Prototype</title>
   
-  <!-- Load Design Tokens -->
-  <link rel="stylesheet" href="node_modules/@minis/tokens/dist/index.css">
+  <!-- Load Design Tokens (contains light AND dark values) -->
+  <link rel="stylesheet" href="node_modules/@minis/tokens/dist/tokens.css">
   
   <!-- Load Web Components -->
   <script type="module">
@@ -56,9 +56,12 @@ Create a [component/pattern/template name] using Mini*S Design System.
 
 Requirements:
 - Use Web Components with <minis-*> prefix
-- Apply Mini*S design tokens (--color-*, --spacing-*, etc.)
+- Apply Mini*S design tokens (--color-*, --spacing-layout-*, --linear-sp-linear-*, etc.)
 - Follow the structure from [relevant .md file]
-- Make it responsive using --breakpoint-* tokens
+- Make it responsive with the viewport-scaling layout tokens
+  (--spacing-layout-*, --container-padding, --container-width) — they change
+  automatically per breakpoint tier, so you rarely need to write media queries
+  for spacing. See docs/ai-prompts/layouts/index.md for the tier table.
 
 Specific needs:
 [Your customizations here]
@@ -90,8 +93,13 @@ Specific needs:
 
 /* Pixel exact */
 --pixel-px-{n}         /* e.g. --pixel-px-22 = 22px */
+
+/* Viewport-responsive layout scale (changes per breakpoint tier) */
+--spacing-layout-{xs|sm|md|lg|xl}   /* e.g. sm = 12px mobile → 16px from 408px up */
 ```
-> There are **no** `--spacing-*` tokens in this system.
+> There is **no** bare numeric `--spacing-{n}` scale in this system — the only
+> `--spacing-*` tokens are the responsive `--spacing-layout-*` set above. For
+> fixed values use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
 
 ### Typography
 ```css
@@ -118,6 +126,26 @@ All typography across the Slevomat website and mobile app uses the variable Inte
 --color-interaction-danger-surface
 --color-interaction-cta-buy-surface
 ```
+
+## Dark Mode
+
+Toggle dark mode by setting one attribute on the root element — no extra stylesheet:
+
+```html
+<html data-mode="dark">
+```
+
+`tokens.css` ships a `[data-mode="dark"]` override block for all semantic color tokens.
+Because components only ever reference semantic tokens, every `<minis-*>` component
+switches automatically. Toggle at runtime with:
+
+```js
+document.documentElement.setAttribute('data-mode', 'dark'); // enable
+document.documentElement.removeAttribute('data-mode');      // back to light
+```
+
+> Do **not** load `dist/foundation/dark.css` — it is a deprecated legacy file that
+> permanently forces dark colors with no toggle.
 
 ## Component Prefix
 
@@ -163,4 +191,4 @@ Then in a Claude Code session: type `/mcp` → select **Figma** → **Authentica
 
 1. Browse [Component Library](./components/README.md)
 2. Explore [Pattern Library](./patterns/README.md)
-3. Check [Template Examples](./templates/README.md)
+3. Check the [Layout guides](./layouts/index.md) for full-page composition

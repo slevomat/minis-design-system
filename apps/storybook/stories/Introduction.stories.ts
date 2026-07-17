@@ -395,6 +395,19 @@ const changelogHTML = `
       <ul>
         <li><strong>Storybook grouping changed</strong> — moved out of the "Brand" folder: story path is now <code>Components/Page Header</code> (was <code>Components/Brand/Page Header</code>). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — <code>theme="brand"</code> remains a valid theme value.</li>
         <li><strong>XS/mobile vertical padding reduced to 24px</strong> (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the <code>--linear-sp-linear-6</code> spacing token instead of a hardcoded <code>40px</code>.</li>
+        <li><strong>AI docs refreshed</strong> (<code>docs/ai-prompts/components/page-header.md</code>) — removed stale references to <code>--page-header-image-radius</code>, the −3deg image rotation, and the circular mobile image; documented that the layout switch is a container query on the component's own width, not a viewport media query.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Storybook</h3>
+      <ul>
+        <li><strong>Fullscreen stories no longer get the 24px decorator padding.</strong> The global preview decorator padded every story, which shrank full-width components below the iframe width and broke container-query breakpoints — Page Header showed its mobile layout at the 768px "tablet" viewport (container was only 720px). Stories with <code>layout: 'fullscreen'</code> now render edge-to-edge, so the layout switch happens exactly at 768px.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Docs</h3>
+      <ul>
+        <li><strong>Dark mode documented correctly</strong> — <code>docs/ai-prompts/index.md</code> and <code>getting-started.md</code> now document <code>&lt;html data-mode="dark"&gt;</code> as the only dark-mode mechanism. The old instruction to link <code>dist/foundation/dark.css</code> was removed (legacy file with hardcoded hex values and no toggle) and <code>packages/tokens/src/index.css</code> carries a deprecation notice.</li>
+        <li><strong><code>--spacing-layout-*</code> guidance fixed</strong> — CLAUDE.md and <code>getting-started.md</code> claimed no <code>--spacing-*</code> tokens exist; the responsive <code>--spacing-layout-{xs|sm|md|lg|xl}</code> set is real and now documented. The unimplementable "use <code>--breakpoint-*</code> tokens in media queries" advice was replaced with the viewport-scaling layout tokens.</li>
+        <li>Removed dead links to nonexistent pattern/template docs and deleted two empty brace-expansion artifact directories.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>

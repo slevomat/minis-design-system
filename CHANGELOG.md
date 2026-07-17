@@ -8,6 +8,17 @@ All notable changes to this project will be documented in this file.
 
 - **Storybook grouping changed**: moved out of the "Brand" folder — story path is now `Components/Page Header` (was `Components/Brand/Page Header`). PageHeader has been adopted across all page types, not just brand/campaign pages, so it no longer belongs under the Brand grouping. No API, prop, or token changes — `theme="brand"` remains a valid theme value.
 - **XS/mobile vertical padding reduced to 24px** (was 40px), realigned to Figma. The root padding on the sub-768px breakpoint now uses the `--linear-sp-linear-6` spacing token instead of a hardcoded `40px`.
+- **AI docs refreshed** (`docs/ai-prompts/components/page-header.md`): removed stale references to `--page-header-image-radius`, the −3deg image rotation, and the circular mobile image — the image is clipped with the blob `mask-image` on both breakpoints. Documented that the layout switch is a container query on the component's own width, not a viewport media query.
+
+### Storybook
+
+- **Fullscreen stories no longer get the 24px decorator padding.** The global preview decorator padded every story, which shrank full-width components below the iframe width and broke container-query breakpoints — Page Header showed its mobile layout at the 768px "tablet" viewport (container was only 720px). Stories with `layout: 'fullscreen'` now render edge-to-edge, so the layout switch happens exactly at 768px.
+
+### Docs
+
+- **Dark mode documented correctly**: `docs/ai-prompts/index.md` and `getting-started.md` now document `<html data-mode="dark">` as the only dark-mode mechanism. The old instruction to link `dist/foundation/dark.css` was removed (that legacy file force-applies hardcoded dark hex values with no toggle) and `packages/tokens/src/index.css` carries a deprecation notice.
+- **`--spacing-layout-*` guidance fixed**: CLAUDE.md and `getting-started.md` claimed no `--spacing-*` tokens exist; the responsive `--spacing-layout-{xs–xl}` set is real and now documented. The unimplementable "use `--breakpoint-*` tokens in media queries" advice was replaced with the viewport-scaling layout tokens.
+- Removed dead links to nonexistent pattern/template docs and deleted two empty brace-expansion artifact directories (`packages/tokens/src/foundation/{light,dark}`, `docs/ai-prompts/{components,patterns,templates}`).
 
 ## 2026-06-18
 
