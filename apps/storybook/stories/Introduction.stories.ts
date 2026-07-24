@@ -414,6 +414,78 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-07-24 (accordion: new component + tokens)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-07-24" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-07-24</h2>
+        <button class="cl-copy-btn" data-anchor="2026-07-24">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Separator <em style="font-weight:400;font-size:.85em">(new Figma component)</em></h3>
+      <ul>
+        <li><strong>New <code>separator</code> Figma component</strong> (node <code>4987:147</code>) on the previously empty ↳ Separator page (<code>4977:346</code>) — a horizontal 1px rule, width-filling, colour and height variable-bound. Its first consumer is the <code>accordion-item</code> divider.</li>
+        <li>No Lit component yet — <code>&lt;minis-separator&gt;</code> is not implemented. The tokens below are registered ahead of it, matching the existing "upcoming component" precedent for card-grid and menu-item.</li>
+        <li>
+          <strong>Tokens</strong> — new <code>/* Separator (upcoming component) */</code> block in <code>packages/tokens/src/tokens.css</code>, mirrored as <code>Separator/*</code> variables in <code>.Components</code>:
+          <code>--separator-color</code> → <code>var(--color-border-subtle)</code>;
+          <code>--separator-height</code> → <code>var(--border-width-thin)</code> (1px).
+        </li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Accordion <em style="font-weight:400;font-size:.85em">(new component)</em></h3>
+      <ul>
+        <li>
+          <strong>New <code>&lt;minis-accordion&gt;</code> + <code>&lt;minis-accordion-item&gt;</code></strong> —
+          vertical expand/collapse list for FAQ sections, built from the Figma "Accordeon" page
+          (<code>node-id=4977-145</code>). Each row is a bold heading on the left with a blue
+          <code>arrow-down</code> chevron on the right, separated by 1px dividers; opening a row reveals its
+          panel below.
+          <ul>
+            <li><strong><code>&lt;minis-accordion&gt;</code></strong> — <code>single</code> (exclusive mode: opening one item closes the others), <code>bordered</code> (rule above the first and below the last item too), <code>heading-level</code> (ARIA level applied to every child item, default <code>3</code>; <code>0</code> omits the heading role). Read-only <code>items</code> getter returns the child items in DOM order.</li>
+            <li><strong><code>&lt;minis-accordion-item&gt;</code></strong> — <code>heading</code> (string), <code>open</code> (reflected), <code>disabled</code>, <code>heading-level</code>. Slots: default (panel content), <code>heading</code> (custom heading markup). Fires <code>toggle</code> with <code>{ open: boolean }</code>, bubbling and composed — that is how <code>single</code> mode closes siblings. CSS parts: <code>trigger</code>, <code>panel</code>.</li>
+            <li><strong>Responsive typography, no container query</strong> — the heading uses <code>--typography-heading-sm-size</code> / <code>-line-height</code>: 16px/138% below 768px, 18px/133% from 768px up. The component only rescales, it never rearranges its internals, so the viewport-driven tokens are the correct mechanism. Row height ends up 65px desktop / ~57px mobile for a single-line heading; long headings wrap and the chevron stays vertically centred.</li>
+            <li><strong>Panel animation</strong> uses <code>grid-template-rows: 0fr → 1fr</code> (no measured height); the chevron rotates 180° when open. Both are suppressed under <code>prefers-reduced-motion: reduce</code>.</li>
+            <li><strong>Accessibility</strong> — the trigger is a real <code>&lt;button type="button"&gt;</code> with <code>aria-expanded</code> / <code>aria-controls</code>; the panel is a <code>role="region"</code> labelled by the trigger and <code>inert</code> while closed, so closed content stays out of the tab order.</li>
+            <li>Exported from <code>@minis/components</code>; AI docs added at <code>docs/ai-prompts/components/accordion.md</code> and linked from the index.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Built in Figma</strong> on the previously empty ↳ Accordeon page (<code>4977:145</code>):
+          <ul>
+            <li><strong><code>accordion-item</code> component set</strong> (node <code>4984:9556</code>) — 6 variants, <code>State</code> (Default / Hover / Disabled) × <code>Open</code> (True / False), plus <code>Label</code> and <code>Body</code> TEXT properties. Every fill, stroke, stroke-weight, padding and gap is bound to an <code>Accordion/*</code> variable — binding audit reports <strong>0 unbound properties</strong>.</li>
+            <li><strong><code>accordion</code> component</strong> (node <code>4984:9557</code>) — list container with four stacked <code>accordion-item</code> instances, <code>Show divider</code> off on the last row.</li>
+            <li><strong><code>Show divider</code> boolean property</strong> on <code>accordion-item</code> (default <code>true</code>). The bottom rule is no longer a frame stroke — it is a nested <code>separator</code> instance as the item's last child, so a boolean property can toggle its visibility (Figma booleans drive layer visibility only, not stroke weight). Colour/height are overridden to <code>Accordion/default/border</code> / <code>Accordion/border/width</code>, keeping the accordion's own tokens authoritative. <strong>No code change</strong> — the CSS already hides the last rule via <code>:last-of-type</code>. Chosen over an <code>Item + Separator + Item</code> sibling structure, which would put a node on the canvas with no DOM counterpart and force designers to hand-maintain the alternation on every add/remove/reorder.</li>
+            <li><strong>XS / LG demo frames</strong> use explicit Layout-collection mode overrides (<code>xs</code> / <code>lg</code>) to show the 16px → 18px heading shift without resizing anything.</li>
+            <li>The chevron is a real instance of <code>Icon/arrow-down</code> from the <strong>Slevomat Icons</strong> library, rotated 180° when open — not a redrawn vector.</li>
+            <li>The heading uses the <code>Heading/sm</code> text style, whose <code>fontSize</code> is already bound to <code>typography/heading/sm/size</code>, so the Figma component inherits the responsive type ramp automatically.</li>
+            <li><strong>Code Connect is wired</strong> in <code>accordion.figma.ts</code> for both nodes: <code>Label</code> → <code>heading</code>, <code>Body</code> → slot content, <code>Open</code> → <code>open</code>, <code>State=Disabled</code> → <code>disabled</code>. Parses clean via <code>pnpm figma:parse</code>.</li>
+            <li>⚠️ <strong>Known divergence</strong> — the Figma <code>Heading/sm</code> text style is Inter <strong>Semi Bold (600)</strong>; the CSS <code>--accordion-heading-weight</code> is <strong>Bold (700)</strong>. Figma follows the text style; pick one before this ships.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Tokens</strong> — new <code>/* Accordion */</code> block in <code>packages/tokens/src/tokens.css</code>:
+          <code>--accordion-surface</code> → <code>var(--color-core-transparent)</code>;
+          <code>--accordion-border-color</code> → <code>var(--color-border-subtle)</code>;
+          <code>--accordion-border-width</code> → <code>1px</code>;
+          <code>--accordion-padding-x</code> → <code>var(--linear-sp-linear-4)</code> (16px);
+          <code>--accordion-padding-y</code> → <code>var(--linear-sp-linear-5)</code> (20px);
+          <code>--accordion-panel-padding-bottom</code> → <code>var(--linear-sp-linear-5)</code> (20px);
+          <code>--accordion-gap</code> → <code>var(--linear-sp-linear-4)</code> (16px);
+          <code>--accordion-heading-text</code> → <code>var(--color-text-primary)</code>;
+          <code>--accordion-heading-hover-text</code> → <code>var(--color-text-accent-link)</code>;
+          <code>--accordion-heading-weight</code> → <code>var(--typography-weight-bold)</code>;
+          <code>--accordion-icon-color</code> → <code>var(--button-tertiary-text)</code>;
+          <code>--accordion-panel-text</code> → <code>var(--color-text-primary)</code>;
+          <code>--accordion-transition-duration</code> → <code>200ms</code>.
+        </li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-07-17 (page header: storybook regrouping)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

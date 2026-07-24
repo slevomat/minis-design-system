@@ -22,6 +22,7 @@ Individual UI elements with props and variants.
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 - [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants (pink, yellow, blue)
 - [Page Header](./components/page-header.md) - Full-width branded banner for category/campaign pages; 5 themes, responsive layout, image + CTA slots
+- [Accordion](./components/accordion.md) - Expand/collapse list for FAQ sections; bold heading + blue chevron, optional exclusive (`single`) mode
 
 [→ All Components](./components/README.md)
 

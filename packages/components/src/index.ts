@@ -18,3 +18,5 @@ export { MinisActionRow } from './components/action-row/action-row.js';
 export { MinisTile } from './components/tile/tile.js';
 export { MinisBadge } from './components/badge/badge.js';
 export { MinisPageHeader } from './components/page-header/page-header.js';
+export { MinisAccordion } from './components/accordion/accordion.js';
+export { MinisAccordionItem } from './components/accordion/accordion-item.js';

@@ -97,6 +97,8 @@ Every change to components or tokens **must** be recorded in two places, in the 
 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
+- Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container `4984:9557`
+- Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet)
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
 ## Figma Code Connect
@@ -213,3 +215,4 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/checkbox.md`
 - `docs/ai-prompts/components/action-row.md`
 - `docs/ai-prompts/components/badge.md`
+- `docs/ai-prompts/components/accordion.md`

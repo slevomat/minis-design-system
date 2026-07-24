@@ -776,6 +776,25 @@
   --tile-counter-surface: var(--button-tertiary-text);    /* pill bg = tertiary blue #006eb9 */
   --tile-counter-text: var(--color-core-white);           /* pill text = white (both modes) */
 
+  /* Accordion */
+  --accordion-surface: var(--color-core-transparent);
+  --accordion-border-color: var(--color-border-subtle);        /* 1px divider between items */
+  --accordion-border-width: 1px;
+  --accordion-padding-x: var(--linear-sp-linear-4);            /* 16px — trigger + panel horizontal inset */
+  --accordion-padding-y: var(--linear-sp-linear-5);            /* 20px — trigger vertical padding */
+  --accordion-panel-padding-bottom: var(--linear-sp-linear-5); /* 20px — below the open panel */
+  --accordion-gap: var(--linear-sp-linear-4);                  /* 16px — heading ↔ chevron */
+  --accordion-heading-text: var(--color-text-primary);
+  --accordion-heading-hover-text: var(--color-text-accent-link); /* heading turns link-blue on hover */
+  --accordion-heading-weight: var(--typography-weight-bold);   /* 700 */
+  --accordion-icon-color: var(--button-tertiary-text);         /* chevron — tertiary blue #006eb9 */
+  --accordion-panel-text: var(--color-text-primary);
+  --accordion-transition-duration: 200ms;
+
+  /* Separator (upcoming component) */
+  --separator-color: var(--color-border-subtle);
+  --separator-height: var(--border-width-thin);           /* 1px */
+
   /* Card grid (upcoming component) */
   --cardgrid-gap: var(--spacing-layout-xs);
 

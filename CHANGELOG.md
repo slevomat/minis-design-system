@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-24
+
+### Separator (new Figma component)
+
+- **New `separator` Figma component** (node `4987:147`) on the previously empty ↳ Separator page (`4977:346`) — a horizontal 1px rule, width-filling, colour and height variable-bound. Its first consumer is the `accordion-item` divider.
+- No Lit component yet — `<minis-separator>` is not implemented. The CSS tokens below are registered ahead of it, matching the existing "upcoming component" precedent for card-grid and menu-item.
+
+#### Tokens
+
+Added a `/* Separator (upcoming component) */` block in `packages/tokens/src/tokens.css`, mirrored as `Separator/*` Figma variables in `.Components`:
+
+- `--separator-color` → `var(--color-border-subtle)` · Figma `Separator/default/color` → `Color/Border/subtle`
+- `--separator-height` → `var(--border-width-thin)` (1px) · Figma `Separator/height` → `border/width/thin`
+
+### Accordion (new component)
+
+- **New `<minis-accordion>` + `<minis-accordion-item>`** — vertical expand/collapse list for FAQ sections, built from the Figma "Accordeon" page (`node-id=4977-145`). Each row is a bold heading on the left with a blue `arrow-down` chevron on the right, separated by 1px dividers; opening a row reveals its panel below.
+  - `<minis-accordion>` props: `single` (exclusive mode — opening one item closes the others), `bordered` (rule above the first and below the last item too), `heading-level` (ARIA level applied to every child item, default `3`, `0` omits the heading role). Read-only `items` getter returns the child items in DOM order.
+  - `<minis-accordion-item>` props: `heading` (string), `open` (reflected), `disabled`, `heading-level`. Slots: default (panel content), `heading` (custom heading markup). Fires `toggle` with `{ open: boolean }` — bubbles and composed, which is how `single` mode closes siblings. CSS parts: `trigger`, `panel`.
+  - **Responsive typography, no container query.** The heading uses `--typography-heading-sm-size` / `-line-height`: 16px/138% below 768px, 18px/133% from 768px up. The component only rescales, it never rearranges its internals, so the viewport-driven tokens are the correct mechanism. Row height ends up 65px desktop / ~57px mobile for a single-line heading; long headings wrap and the chevron stays vertically centred.
+  - **Panel animation** uses `grid-template-rows: 0fr → 1fr` (no measured height). Chevron rotates 180° when open. Both are suppressed under `prefers-reduced-motion: reduce`.
+  - **Accessibility**: trigger is a real `<button type="button">` with `aria-expanded` / `aria-controls`; the panel is a `role="region"` labelled by the trigger and `inert` while closed, so closed content stays out of the tab order.
+  - Exported from `@minis/components`; AI docs added at `docs/ai-prompts/components/accordion.md` and linked from the index.
+
+#### Figma
+
+The component was **built in Figma** on the previously empty ↳ Accordeon page (`4977:145`):
+
+- **`accordion-item` component set** (node `4984:9556`) — 6 variants, `State` (Default / Hover / Disabled) × `Open` (True / False), plus `Label` and `Body` TEXT properties. Every fill, stroke, stroke-weight, padding and gap is bound to an `Accordion/*` variable — a binding audit reports **0 unbound properties**.
+- **`accordion` component** (node `4984:9557`) — the list container, four `accordion-item` instances stacked vertically, with `Show divider` turned off on the last row.
+- **`Show divider` boolean property** on `accordion-item` (default `true`). The bottom rule is no longer a frame stroke — it is a nested **`separator`** instance as the item's last child, so a boolean property can toggle its visibility (Figma booleans can only drive layer visibility, not stroke weight). Its colour/height are overridden to `Accordion/default/border` / `Accordion/border/width`, keeping the accordion's own tokens authoritative. No code change: the CSS already hides the last rule via `:last-of-type`.
+  - Chosen over an `Item + Separator + Item` sibling structure, which would put a node on the canvas with no DOM counterpart (nothing for Code Connect to map) and force designers to hand-maintain the alternation on every add/remove/reorder.
+- **XS / LG demo frames** using explicit Layout-collection mode overrides (`xs` / `lg`) to show the 16px → 18px heading shift without resizing anything.
+- The chevron is a real instance of `Icon/arrow-down` from the **Slevomat Icons** library (rotated 180° when open), not a redrawn vector.
+- The heading uses the `Heading/sm` text style, whose `fontSize` is already bound to `typography/heading/sm/size` — so the Figma component inherits the responsive type ramp automatically.
+- **Code Connect is now wired** in `accordion.figma.ts` for both nodes, mapping `Label` → `heading`, `Body` → slot content, `Open` → `open`, `State=Disabled` → `disabled`. Parses clean via `pnpm figma:parse`.
+- ⚠️ **Known divergence**: the Figma `Heading/sm` text style is Inter **Semi Bold (600)**; the CSS `--accordion-heading-weight` is **Bold (700)**. Figma follows the text style. Pick one before this ships.
+
+#### Tokens
+
+Added a new `/* Accordion */` block in `packages/tokens/src/tokens.css`. The same 11 tokens were created as Figma variables in the `.Components` collection (`Accordion/*`), each aliased to the same Foundation/.Scales variable the CSS resolves to, each explicitly scoped (no `ALL_SCOPES`), and each carrying its `var(--accordion-*)` name as WEB code syntax so Dev Mode surfaces the real custom property:
+
+- `--accordion-surface` → `var(--color-core-transparent)`
+- `--accordion-border-color` → `var(--color-border-subtle)` · `--accordion-border-width` → `1px`
+- `--accordion-padding-x` → `var(--linear-sp-linear-4)` (16px) · `--accordion-padding-y` → `var(--linear-sp-linear-5)` (20px)
+- `--accordion-panel-padding-bottom` → `var(--linear-sp-linear-5)` (20px)
+- `--accordion-gap` → `var(--linear-sp-linear-4)` (16px — heading ↔ chevron)
+- `--accordion-heading-text` → `var(--color-text-primary)` · `--accordion-heading-hover-text` → `var(--color-text-accent-link)`
+- `--accordion-heading-weight` → `var(--typography-weight-bold)` (700)
+- `--accordion-icon-color` → `var(--button-tertiary-text)` (tertiary blue)
+- `--accordion-panel-text` → `var(--color-text-primary)`
+- `--accordion-transition-duration` → `200ms`
+
 ## 2026-07-17
 
 ### Page Header
