@@ -68,7 +68,9 @@ Component-level tokens (defined in `@minis/tokens`):
 
 - `--accordion-surface` → transparent
 - `--accordion-border-color` → `--color-border-subtle` (grey-90 light / grey-35 dark) · `--accordion-border-width` → 1px
-- `--accordion-padding-x` → 16px (`--linear-sp-linear-4`) · `--accordion-padding-y` → 20px (`--linear-sp-linear-5`)
+- `--accordion-padding-x` → 16px (`--linear-sp-linear-4`)
+- `--accordion-padding-y` → **responsive**: 20px (`--linear-sp-linear-5`) below 768px, 24px (`--linear-sp-linear-6`) from 768px up. The override lives in a media block at the **end** of `tokens.css` — `:root` inside a media query has the same specificity as a bare `:root`, so it has to come after the component block or the default silently wins.
+- `--accordion-icon-size` → 20px (`--pixel-px-20`)
 - `--accordion-panel-padding-bottom` → 20px (`--linear-sp-linear-5`)
 - `--accordion-gap` → 16px (`--linear-sp-linear-4`) — heading ↔ chevron
 - `--accordion-heading-text` → `--color-text-primary` · `--accordion-heading-hover-text` → `--color-text-accent-link`
@@ -81,11 +83,24 @@ In Figma these live in the `.Components` collection as `Accordion/*`, each alias
 
 **Typography is viewport-responsive, not container-responsive.** The heading uses `--typography-heading-sm-size` / `--typography-heading-sm-line-height`: **16px / 138%** below 768px, **18px / 133%** from 768px up. The Figma component gets the same behaviour from the `Heading/sm` text style, whose `fontSize` is bound to the `typography/heading/sm/size` Layout variable — switch a frame's Layout mode between `xs` and `lg` to preview both. Panel body text uses `--typography-size-md` (16px) with `--typography-body-md-line-height`. There is no container query — the accordion never rearranges its internals, it only rescales, so the media-query-driven tokens are the correct mechanism (see `docs/ai-prompts/layouts/index.md` → "Two Responsive Mechanisms").
 
-Resulting row height is **65px** at desktop and **~57px** at mobile for a single-line heading; long headings wrap onto multiple lines and the chevron stays vertically centred.
+### Row height
+
+Matched to production. For a single-line heading:
+
+| | padding-y ×2 | heading line box | **content box** | + 1px divider |
+| --- | --- | --- | --- | --- |
+| XS (< 768px) | 20 + 20 | 16 × 138% = 22.08 | **62** | 63 |
+| LG (≥ 768px) | 24 + 24 | 18 × 133% = 23.94 | **72** | 73 |
+
+This only works because the chevron is **20px** — smaller than the heading's line box at both breakpoints. `.trigger` is a centred flex row, so its height is `max(line box, chevron)`; a 24px icon would dominate both breakpoints and pin every row to 65px regardless of padding or type. If you change `--accordion-icon-size` above ~22px you take the row height back off the type ramp.
+
+Long headings wrap onto multiple lines and the chevron stays vertically centred.
+
+> ⚠️ **Figma reads 73 at LG, not 72.** The `Heading/sm` text style binds `fontSize`, `fontStyle` and `fontFamily` to variables but **not `lineHeight`** — it is hardcoded at 138%. So Figma computes 18 × 138% = 24.84 → 25 where CSS uses the 133% tier value → 23.94. The fix is to bind that style's `lineHeight` to the existing `typography/heading/sm/line-height` Layout variable (which already holds 138% for `2xs–sm` and 133% for `md+`). That is a shared text style, so it affects every component using it — not changed here.
 
 ## Behaviour notes
 
-- The chevron is the `arrow-down` icon at 24px, rotated 180° when open.
+- The chevron is the `arrow-down` icon at 20px, rotated 180° when open. `<minis-icon>` writes width/height inline on its `<svg>`, so the template passes `size="20"` *and* the stylesheet sets `--minis-icon-size` from `--accordion-icon-size` — changing the token alone resizes the host box but not the glyph.
 - The panel animates via `grid-template-rows: 0fr → 1fr`, so no height has to be measured. Both the rotation and the reveal are suppressed under `prefers-reduced-motion: reduce`.
 - Hovering the trigger turns the whole heading `--color-text-accent-link` blue; the chevron keeps its own colour.
 - `disabled` should be rare — prefer keeping the row open-able and explaining any precondition inside the panel. See `docs/ai-prompts/principles.md`.

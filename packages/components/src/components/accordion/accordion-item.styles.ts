@@ -57,9 +57,14 @@ export const accordionItemStyles = css`
      CHEVRON
      ===================== */
 
+  /* Sized under the heading's line box (22.08px at XS / 23.94px at LG) so the
+     text — not the icon — determines the row height. The template also passes
+     size="20" because <minis-icon> writes width/height inline on its <svg>;
+     this custom property only drives the host box. */
   .chevron {
     flex: 0 0 auto;
     display: inline-flex;
+    --minis-icon-size: var(--accordion-icon-size, 20px);
     color: var(--accordion-icon-color, #006eb9);
     transition: transform var(--accordion-transition-duration, 200ms) ease;
   }

@@ -90,7 +90,7 @@ export class MinisAccordionItem extends LitElement {
           <span class="heading">
             <slot name="heading">${this.heading}</slot>
           </span>
-          <minis-icon class="chevron" name="arrow-down" size="24"></minis-icon>
+          <minis-icon class="chevron" name="arrow-down" size="20"></minis-icon>
         </button>
       </div>
 

@@ -781,7 +781,8 @@
   --accordion-border-color: var(--color-border-subtle);        /* 1px divider between items */
   --accordion-border-width: 1px;
   --accordion-padding-x: var(--linear-sp-linear-4);            /* 16px — trigger + panel horizontal inset */
-  --accordion-padding-y: var(--linear-sp-linear-5);            /* 20px — trigger vertical padding */
+  --accordion-padding-y: var(--linear-sp-linear-5);            /* 20px below 768px → 24px from 768px up (see override at end of file) */
+  --accordion-icon-size: var(--pixel-px-20);                   /* 20px — kept under the heading line box so type drives row height */
   --accordion-panel-padding-bottom: var(--linear-sp-linear-5); /* 20px — below the open panel */
   --accordion-gap: var(--linear-sp-linear-4);                  /* 16px — heading ↔ chevron */
   --accordion-heading-text: var(--color-text-primary);
@@ -814,4 +815,23 @@
   --input-placeholder: var(--color-text-secondary);
   --input-surface: var(--color-surface-primary);
   --input-value: var(--color-text-primary);
+}
+
+/* ========================================
+   COMPONENT RESPONSIVE OVERRIDES
+
+   These MUST stay after the component :root block above. `:root` inside a
+   media query carries the same specificity as a bare `:root`, so source order
+   decides the winner — putting these up with the layout-tier media queries
+   (which sit before the component block) would let the component defaults
+   silently win.
+   ======================================== */
+
+/* md tier and up — 768px+ */
+@media (min-width: 768px) {
+  :root {
+    /* Row content box: 24 + 24 padding + 23.94 heading line box ≈ 72px.
+       Below this breakpoint: 20 + 20 + 22.08 ≈ 62px. */
+    --accordion-padding-y: var(--linear-sp-linear-6); /* 24px */
+  }
 }

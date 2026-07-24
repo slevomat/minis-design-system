@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-25
+
+### Accordion
+
+- **Row heights matched to production**: content box is now **62px** below 768px and **72px** from 768px up (was ~65px at both). Row pitch including the 1px divider is 63 / 73.
+  - **Root cause of the old behaviour**: `.trigger` is a centred flex row, so its height is `max(heading line box, chevron)`. The 24px chevron was taller than the heading at *both* breakpoints (22.08px at XS, 23.94px at LG), so it pinned every row to 65px and the height never responded to padding or the type ramp.
+  - **`--accordion-icon-size`** (new token) → `var(--pixel-px-20)`. Dropping the chevron to 20px puts it under the line box at both breakpoints, so the type now drives row height. `<minis-icon>` writes width/height inline on its `<svg>`, so the template passes `size="20"` as well as setting `--minis-icon-size` from the token.
+  - **`--accordion-padding-y` is now responsive**: 20px (`--linear-sp-linear-5`) below 768px → 24px (`--linear-sp-linear-6`) from 768px up. No typography token was touched.
+  - **New `COMPONENT RESPONSIVE OVERRIDES` section at the end of `tokens.css`.** `:root` inside a media query has the same specificity as a bare `:root`, so a component override placed with the existing layout-tier media queries (which sit *before* the component block) would lose the cascade to the component default. Component-level responsive overrides must go after the component block.
+  - **Figma**: new `accordion/padding/y` in the **Layout** collection carrying the per-tier values (20 for `default/2xs/xs/sm`, 24 for `md`+), with `.Components → Accordion/padding/y` re-pointed to alias it — mirroring how `typography/heading/sm/size` already works, since `.Components` has only one mode. Added `Accordion/icon/size` → `pixel/px-20`. Chevron instances resized to 20×20 and bound to the new token.
+  - **Known 1px gap at LG**: Figma measures the row content box at 73, not 72. The `Heading/sm` text style binds `fontSize`, `fontStyle` and `fontFamily` to variables but **not `lineHeight`**, which is hardcoded at 138% — so Figma computes 18 × 138% = 24.84 → 25 where CSS uses the 133% tier value → 23.94. The fix is to bind that style's `lineHeight` to the existing `typography/heading/sm/line-height` Layout variable (already holding 138% for `2xs–sm`, 133% for `md`+). Not changed here: it is a shared text style affecting every component that uses it. XS matches exactly (62 / 63 in both).
+
 ## 2026-07-24
 
 ### Separator (new Figma component)

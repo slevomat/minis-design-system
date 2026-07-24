@@ -414,6 +414,34 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-07-25 (accordion: production row heights)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-07-25" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-07-25</h2>
+        <button class="cl-copy-btn" data-anchor="2026-07-25">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Accordion</h3>
+      <ul>
+        <li>
+          <strong>Row heights matched to production</strong> — content box is now <strong>62px</strong> below 768px and <strong>72px</strong> from 768px up (was ~65px at both). Row pitch including the 1px divider is 63 / 73.
+          <ul>
+            <li><strong>Why it was stuck at 65</strong> — <code>.trigger</code> is a centred flex row, so its height is <code>max(heading line box, chevron)</code>. The 24px chevron was taller than the heading at <em>both</em> breakpoints (22.08px XS, 23.94px LG), pinning every row to 65px so the height never responded to padding or the type ramp.</li>
+            <li><strong>New <code>--accordion-icon-size</code></strong> → <code>var(--pixel-px-20)</code>. A 20px chevron sits under the line box at both breakpoints, so type drives row height again. <code>&lt;minis-icon&gt;</code> writes width/height inline on its <code>&lt;svg&gt;</code>, so the template passes <code>size="20"</code> as well as setting <code>--minis-icon-size</code> from the token.</li>
+            <li><strong><code>--accordion-padding-y</code> is now responsive</strong> — 20px (<code>--linear-sp-linear-5</code>) below 768px → 24px (<code>--linear-sp-linear-6</code>) from 768px up. No typography token was touched.</li>
+            <li><strong>New <code>COMPONENT RESPONSIVE OVERRIDES</code> section at the end of <code>tokens.css</code></strong> — <code>:root</code> inside a media query has the same specificity as a bare <code>:root</code>, so a component override placed with the existing layout-tier media queries (which sit <em>before</em> the component block) would lose the cascade to the component default. Component-level responsive overrides must come after the component block.</li>
+            <li><strong>Figma</strong> — new <code>accordion/padding/y</code> in the <strong>Layout</strong> collection carrying the per-tier values (20 for <code>default/2xs/xs/sm</code>, 24 for <code>md</code>+), with <code>.Components → Accordion/padding/y</code> re-pointed to alias it, mirroring how <code>typography/heading/sm/size</code> already works (<code>.Components</code> has only one mode). Added <code>Accordion/icon/size</code> → <code>pixel/px-20</code>; chevrons resized to 20×20 and bound.</li>
+            <li>⚠️ <strong>Known 1px gap at LG</strong> — Figma measures the content box at 73, not 72. The <code>Heading/sm</code> text style binds <code>fontSize</code>, <code>fontStyle</code> and <code>fontFamily</code> to variables but <strong>not <code>lineHeight</code></strong>, which is hardcoded at 138%, so Figma computes 18 × 138% = 24.84 → 25 where CSS uses the 133% tier value → 23.94. Fix is to bind that style's <code>lineHeight</code> to the existing <code>typography/heading/sm/line-height</code> Layout variable. Not changed here — it is a shared text style affecting every component that uses it. XS matches exactly (62 / 63 in both).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-07-24 (accordion: new component + tokens)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
