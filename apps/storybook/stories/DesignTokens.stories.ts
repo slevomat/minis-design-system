@@ -573,13 +573,13 @@ export const Typography: Story = {
       </a></p>
 
       <h2>Font Families</h2>
-      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">All typography across the Slevomat website and mobile app uses the variable Inter font family in various weights. The only exception is for banner headlines, which use the branded Kensington Compressed Bold typeface.</p>
+      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">All typography across the Slevomat website and mobile app uses the variable Inter font family in various weights. The only exception is for banner headlines, which use the branded Kensington Compressed Bold typeface. Kensington is Slevomat-proprietary and is <strong>not distributed with this design system</strong> — where it is not installed, the brand token falls back to <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener">Bebas Neue</a>, a condensed all-caps display face with similar proportions.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Token</th><th style="${th}">Usage</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           <tr><td style="${td}"><code>--typography-font-family-sans</code></td><td style="${td}">All UI text, headings, body</td><td style="${td}"><span style="font-family:Inter,sans-serif">Inter — The quick brown fox jumps over the lazy dog</span></td></tr>
           <tr><td style="${td}"><code>--typography-font-family-mono</code></td><td style="${td}">Code, numeric data</td><td style="${td}"><span style="font-family:'SF Mono',monospace">SF Mono — const value = 42;</span></td></tr>
-          <tr><td style="${td}"><code>--typography-font-family-brand</code></td><td style="${td}">Banner headlines only</td><td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington');font-size:1.5em;letter-spacing:-0.01em">Kensington — Skvělé nabídky každý den</span></td></tr>
+          <tr><td style="${td}"><code>--typography-font-family-brand</code></td><td style="${td}">Banner headlines only<div style="font-size:.8em;color:var(--color-text-secondary,#6b6b70);margin-top:4px">Kensington, then Bebas Neue. Both are all-caps display faces — lowercase renders as capitals.</div></td><td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington','Bebas Neue',sans-serif);font-weight:var(--typography-brand-weight,400);font-size:1.5em;letter-spacing:-0.01em">Skvělé nabídky každý den</span></td></tr>
         </tbody>
       </table>
 
@@ -750,13 +750,13 @@ export const TextStyles: Story = {
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Brand Headings</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Banner headlines using the Kensington brand font. Responsive — scales up significantly at 1480px+. Line-height is always 110% (tight, compressed feel matching the typeface).</p>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Banner headlines using the brand font — Kensington where it is installed, otherwise Bebas Neue. Responsive — scales up significantly at 1480px+. Line-height is always 110% (tight, compressed feel matching the typeface). Weight is always <code>--typography-brand-weight</code> (400): both faces are single-weight, so asking for bold only produces synthetic bolding.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
-            { label: 'Brand / LG', composite: '--typography-brand-lg', sizeToken: '--typography-brand-lg-size', sizeFallback: '24px', lhToken: '--typography-brand-lg-line-height', lhValue: '110%', weight: '700', preview: 'Skvělé nabídky' },
-            { label: 'Brand / XL', composite: '--typography-brand-xl', sizeToken: '--typography-brand-xl-size', sizeFallback: '32px', lhToken: '--typography-brand-xl-line-height', lhValue: '110%', weight: '700', preview: 'Skvělé nabídky každý den' },
+            { label: 'Brand / LG', composite: '--typography-brand-lg', sizeToken: '--typography-brand-lg-size', sizeFallback: '24px', lhToken: '--typography-brand-lg-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky' },
+            { label: 'Brand / XL', composite: '--typography-brand-xl', sizeToken: '--typography-brand-xl-size', sizeFallback: '32px', lhToken: '--typography-brand-xl-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky každý den' },
           ].map(d => `<tr>
             <td style="${td}"><strong>${d.label}</strong></td>
             <td style="${td}">
@@ -765,12 +765,13 @@ export const TextStyles: Story = {
                 <div style="font-size:.75em;color:var(--color-text-secondary,#6b6b70);line-height:1.7">
                   <div>font-family&nbsp;·&nbsp;<code>--typography-font-family-brand</code></div>
                   <div>size&nbsp;·&nbsp;<code>${d.sizeToken}</code></div>
+                  <div>weight&nbsp;·&nbsp;<code>--typography-brand-weight</code></div>
                   <div>line-height&nbsp;·&nbsp;<code>${d.lhToken}</code></div>
                 </div>
               </div>
             </td>
             <td style="${td}"><span data-live-spec="${d.sizeToken}" data-weight="${d.weight}" data-lh="${d.lhToken}"></span></td>
-            <td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington');font-size:var(${d.sizeToken},${d.sizeFallback});font-weight:${d.weight};line-height:var(${d.lhToken},${d.lhValue});display:block">${d.preview}</span></td>
+            <td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington','Bebas Neue',sans-serif);font-size:var(${d.sizeToken},${d.sizeFallback});font-weight:var(--typography-brand-weight,${d.weight});line-height:var(${d.lhToken},${d.lhValue});display:block">${d.preview}</span></td>
           </tr>`).join('')}
         </tbody>
       </table>
@@ -828,11 +829,11 @@ p { font-size: var(--typography-size-md); font-weight: var(--typography-weight-r
 /* Caption */
 .label { font-size: var(--typography-size-xs); font-weight: var(--typography-weight-regular); line-height: 1.33; }
 
-/* Brand Heading / LG — Kensington, responsive */
-.banner-title { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-lg-size); font-weight: var(--typography-weight-bold); line-height: var(--typography-brand-lg-line-height); }
+/* Brand Heading / LG — Kensington (Bebas Neue fallback), responsive */
+.banner-title { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-lg-size); font-weight: var(--typography-brand-weight); line-height: var(--typography-brand-lg-line-height); }
 
 /* Brand Heading / XL */
-.banner-claim { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-xl-size); font-weight: var(--typography-weight-bold); line-height: var(--typography-brand-xl-line-height); }</code></pre>
+.banner-claim { font-family: var(--typography-font-family-brand); font-size: var(--typography-brand-xl-size); font-weight: var(--typography-brand-weight); line-height: var(--typography-brand-xl-line-height); }</code></pre>
     </div>
   `),
 };

@@ -33,10 +33,10 @@ docs/
 - **Fibonacci spacing**: `--fibonachi-sp-fib-{n}` (e.g. `--fibonachi-sp-fib-8` = 34px)
 - **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values scale with the viewport breakpoint tier (e.g. `--spacing-layout-sm` = 12px mobile → 16px from 408px up). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`.
 - **Border radius**: `--border-radius-sm` (4px), `--border-radius-md` (8px)
-- **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (Kensington — banner headlines only)
+- **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (`'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` — banner headlines only). **Kensington is Slevomat-proprietary and NOT in the repo** — Bebas Neue (Google Fonts) is the public fallback. Both faces are all-caps and single-weight, so brand text is always `text-transform: uppercase` at `--typography-brand-weight` (400) — never `--typography-weight-bold`, which synthesises a fake bold. To use the real font locally, see `packages/tokens/src/fonts/README.md`.
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
-- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+.
+- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
 
@@ -184,11 +184,12 @@ Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the comp
 | `--typography-mega-poster-size` | `--typography-heading-2xl-size` |
 | `--typography-poster-size` | `--typography-heading-xl-size` |
 
-The brand (Kensington) composites `--typography-brand-{lg,xl}-*` and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-brand-weight`, the `--typography-font-family-*` set, the hand-written `FONTS` comment block at the top of `tokens.css`, and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. **A Figma re-export must preserve them** (they are marked `HAND-MAINTAINED` in the file). `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
 
 ## Common pitfalls
 
 - **No bare `--spacing-{n}` scale** — the only `--spacing-*` tokens are the responsive `--spacing-layout-*` set; a numeric `--spacing-4`-style scale does not exist.
+- **Never commit font binaries** — Kensington is proprietary; `packages/tokens/src/fonts/*.woff2` is git-ignored and the `@font-face` lives in a build-generated `dist/fonts/kensington.css`, never in `tokens.css`. See `packages/tokens/src/fonts/README.md`.
 - **Dark mode = `<html data-mode="dark">`** — `tokens.css` contains the `[data-mode="dark"]` override block. Never link `dist/foundation/dark.css` (deprecated legacy file, hardcoded hex, no toggle).
 - **Avoid `var(--a, 1px 2px)` multi-value fallbacks** in Lit `css` templates — invalid CSS crashes the module.
 - **No duplicate `@customElement` registrations** — check existing tag names before adding a new component.

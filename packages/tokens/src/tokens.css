@@ -5,16 +5,25 @@
  */
 
 /* ========================================
-   FONTS
-   ======================================== */
+   FONTS  —  HAND-MAINTAINED, preserve on Figma re-export
+   ========================================
 
-@font-face {
-  font-family: 'Kensington';
-  src: url('./fonts/kensington-compressed-bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+   This file carries no @font-face. Fonts are loaded by the consuming page:
+
+   1. Inter + Bebas Neue — one Google Fonts <link>:
+      https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap
+
+   2. Kensington (brand / banner headlines) — Slevomat-proprietary, NOT
+      distributed with this repo. Link the generated overlay alongside this
+      file to pick it up when available:
+      <link rel="stylesheet" href="<tokens-dist>/fonts/kensington.css">
+
+      That file is written on every `pnpm --filter tokens build` by
+      scripts/build.js. It always resolves an OS-installed copy via local(),
+      and additionally self-hosts the woff2 when one has been dropped into
+      packages/tokens/src/fonts/ (see the README there). Without either,
+      --typography-font-family-brand falls back to Bebas Neue.
+   ======================================== */
 
 /* ========================================
    PRIMITIVES (Hidden in Figma Library)
@@ -247,7 +256,9 @@
   --typography-font-family-sans: Inter;
   --typography-font-family-mono: SF Mono;
   --typography-font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --typography-font-family-brand: 'Kensington';
+  /* Kensington is Slevomat-proprietary and not distributed — Bebas Neue
+     (Google Fonts) is the public fallback. See the FONTS block at the top. */
+  --typography-font-family-brand: 'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif;
   --typography-line-height-90: 90%;
   --typography-line-height-100: 100%;
   --typography-line-height-110: 110%;
@@ -547,6 +558,11 @@
   --typography-body-md-line-height:   var(--typography-line-height-138);
   --typography-body-sm-line-height: var(--typography-line-height-143);
   /* Brand heading composite — base */
+  /* Brand display faces are single-weight: Kensington ships Bold only and the
+     Bebas Neue fallback ships 400 only. Always request 400 — the generated
+     kensington.css declares `font-weight: 400 700`, so Kensington still wins
+     when present, while Bebas Neue avoids synthetic (faux) bolding. */
+  --typography-brand-weight: 400;
   --typography-brand-lg-line-height: var(--typography-line-height-110);
   --typography-brand-lg-size: var(--typography-size-2xl); /* 24px */
   --typography-brand-xl-line-height: var(--typography-line-height-110);

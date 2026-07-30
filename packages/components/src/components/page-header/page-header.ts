@@ -56,7 +56,8 @@ export class MinisPageHeader extends LitElement {
 
   firstUpdated() {
     this._measureSpace();
-    // Kensington usually resolves after first paint — re-measure once it lands.
+    // The brand face (Kensington, or the Bebas Neue fallback) usually resolves
+    // after first paint — re-measure once whichever one lands.
     document.fonts?.ready.then(() => this._measureSpace());
   }
 

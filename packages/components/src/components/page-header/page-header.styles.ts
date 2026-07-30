@@ -107,12 +107,16 @@ export const pageHeaderStyles = css`
   }
 
   /* ──────────────────────────────────────────────────────────
-     HEADING — Kensington Bold brand typography
+     HEADING — brand display typography
+
+     Kensington when available, otherwise Bebas Neue (Google Fonts).
+     Both are single-weight faces, so the weight token is 400 — requesting
+     bold would synthetically bolden the Bebas Neue fallback.
   ────────────────────────────────────────────────────────── */
 
   .heading {
-    font-family: var(--typography-font-family-brand, 'Kensington', serif);
-    font-weight: var(--typography-weight-bold, 700);
+    font-family: var(--typography-font-family-brand, 'Kensington', 'Bebas Neue', sans-serif);
+    font-weight: var(--typography-brand-weight, 400);
     /* responsive token: 32px at base → 56px at xl+ breakpoint */
     font-size: var(--typography-brand-xl-size, 32px);
     line-height: var(--typography-brand-xl-line-height, 1.1);

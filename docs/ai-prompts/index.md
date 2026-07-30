@@ -34,7 +34,7 @@ Design decisions and rules for how to use components correctly.
 - [Dark mode comes free](./principles.md#dark-mode-comes-free--if-you-follow-the-token-rule) — `<html data-mode="dark">` is the entire integration; never write per-component dark CSS
 - [Use abbreviated size values only](./principles.md#use-abbreviated-size-values-only) — `sm`/`md`/`lg`, never `small`/`medium`/`large` (invalid values silently fall back)
 - [Respect the two responsive mechanisms](./principles.md#respect-the-two-responsive-mechanisms) — viewport tokens for page spacing, container queries for component layout
-- [Brand font is for banner headlines only](./principles.md#brand-font-is-for-banner-headlines-only) — Kensington for hero moments; Inter for everything else
+- [Brand font is for banner headlines only](./principles.md#brand-font-is-for-banner-headlines-only) — Kensington (Bebas Neue fallback, not distributed) for hero moments; Inter for everything else. Always uppercase, always weight 400.
 
 [→ All Principles](./principles.md)
 

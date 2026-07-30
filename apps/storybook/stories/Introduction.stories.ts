@@ -508,6 +508,7 @@ export const DesignPrinciples: Story = {
       <h2>Brand font is for banner headlines only</h2>
       <p><strong>Rule:</strong> <code>--typography-font-family-brand</code> (Kensington Compressed Bold) is reserved for banner and campaign headlines — the <code>&lt;minis-page-header&gt;</code> heading and equivalent hero moments. Everything else — headings, body copy, UI labels, numbers — uses Inter (<code>--typography-font-family-sans</code>).</p>
       <p>Kensington is a display face: it works at large sizes in uppercase, and its impact comes from scarcity. Used in body text or UI controls it becomes hard to read and dilutes the brand moment it was designed for.</p>
+      <p>Kensington is Slevomat-proprietary and is <strong>not distributed with this design system</strong>. Where it is not installed, the token falls back to <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener" style="color:var(--color-interaction-primary-surface,#006eb9)">Bebas Neue</a> (Google Fonts). Both faces are all-caps and single-weight, so always pair the brand family with <code>--typography-brand-weight</code> (400) and uppercase text — requesting bold only produces synthetic bolding.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
@@ -538,6 +539,44 @@ const changelogHTML = `
         .cl-copy-btn:hover { opacity:1 !important; }
         .cl-copy-btn svg { flex-shrink:0; }
       </style>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           2026-07-30 (brand font: Kensington out of repo, Bebas Neue fallback)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-07-30" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-07-30</h2>
+        <button class="cl-copy-btn" data-anchor="2026-07-30">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Brand font — Kensington removed from the repository, Bebas Neue fallback</h3>
+      <p>Kensington Compressed Bold is Slevomat-proprietary. It is no longer committed or redistributed, so this repo can be shared without shipping a licensed typeface. Kensington remains the <em>definition</em> — still first in the brand stack, still what Figma uses — but it is now resolved from your machine rather than from the repo.</p>
+      <ul>
+        <li><strong>The woff2 is gone from the repo</strong> — deleted, git-ignored, and purged from git history. <code>packages/tokens/src/fonts/README.md</code> documents how to enable the real font locally.</li>
+        <li><strong>Two zero-config ways to get it back</strong> — install Kensington on your machine (resolved via <code>local()</code>: no files, no network request), or drop the woff2 into <code>packages/tokens/src/fonts/</code> and run <code>pnpm --filter tokens build</code>. Storybook and <code>create-minis</code> prototypes pick either up automatically.</li>
+        <li><strong>Public fallback is <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener">Bebas Neue</a></strong> (Google Fonts, OFL) — a condensed all-caps display face with near-identical proportions. Verified to render Czech diacritics (both <code>latin</code> and <code>latin-ext</code> subsets are served).</li>
+        <li><strong><code>@font-face</code> no longer lives in <code>tokens.css</code></strong> — the tokens build now generates <code>dist/fonts/kensington.css</code>, always with <code>local('Kensington Compressed Bold'), local('Kensington')</code> and with the <code>url(...)</code> source appended <em>only</em> when the woff2 is present. The file is written either way, so consumers link it unconditionally and never hit a 404.</li>
+        <li><strong><code>Bebas+Neue</code> added to the existing Google Fonts request</strong> (one combined <code>&lt;link&gt;</code>) and the overlay linked in Storybook, the <code>create-minis</code> template, and <code>docs/examples/simple-landing.html</code>.</li>
+        <li><strong>Licensing</strong> — added a root <code>LICENSE</code> (MIT, Slevomat; the README claimed MIT with no file present) plus a <strong>Third-party assets</strong> section covering Inter (OFL), Bebas Neue (OFL), and Kensington (proprietary, not included). The MIT grant explicitly excludes Slevomat brand assets.</li>
+      </ul>
+
+      <h4 style="margin-top:1rem">Tokens</h4>
+      <ul>
+        <li><code>--typography-font-family-brand</code> — <code>'Kensington'</code> → <code>'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif</code>.</li>
+        <li><strong>New <code>--typography-brand-weight</code></strong> → <code>400</code>. Both brand faces are single-weight (Kensington ships Bold only, Bebas Neue ships 400 only), so requesting 700 synthesised a fake bold on the fallback. Requesting 400 renders Bebas Neue correctly <em>and</em> still resolves to Kensington, because the generated <code>@font-face</code> declares <code>font-weight: 400 700</code>.</li>
+        <li><strong>Removed</strong> the <code>@font-face</code> block from the top of <code>tokens.css</code>. That <code>FONTS</code> section is now a comment explaining how fonts load, marked <code>HAND-MAINTAINED — preserve on Figma re-export</code> along with <code>--typography-font-family-*</code> and <code>--typography-brand-*</code>, none of which exist in <code>tokens.json</code>.</li>
+      </ul>
+
+      <h4 style="margin-top:1rem">Page Header</h4>
+      <ul>
+        <li><code>.heading</code> now uses <code>--typography-brand-weight</code> (400) instead of <code>--typography-weight-bold</code> (700), and its <code>font-family</code> fallback chain is <code>'Kensington', 'Bebas Neue', sans-serif</code> instead of <code>'Kensington', serif</code>.</li>
+        <li>Brand Badge anchoring needed no change — <code>firstUpdated()</code> already re-measures the word-space advance on <code>document.fonts.ready</code>, so it adapts to whichever face lands (measured 0.120 em for Kensington vs 0.178 em for Bebas Neue).</li>
+        <li>⚠️ <strong>Code and Figma will diverge for anyone without Kensington.</strong> Bebas Neue is taller and narrower, so brand headlines re-flow slightly.</li>
+      </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 

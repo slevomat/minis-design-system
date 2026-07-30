@@ -9,3 +9,10 @@ storybook-static/
 .env.local
 coverage/
 .claude/worktrees/
+
+# Brand font binaries — Kensington is Slevomat-proprietary and must never be
+# committed. See packages/tokens/src/fonts/README.md.
+packages/tokens/src/fonts/*.woff
+packages/tokens/src/fonts/*.woff2
+packages/tokens/src/fonts/*.ttf
+packages/tokens/src/fonts/*.otf

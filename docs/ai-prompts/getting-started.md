@@ -106,15 +106,26 @@ Specific needs:
 --typography-font-family-sans   /* Inter — all UI text, headings, body copy */
 --typography-font-family-mono   /* SF Mono — code and numeric data */
 --typography-font-family-brand  /* Kensington Compressed Bold — banner headlines only */
+--typography-brand-weight       /* 400 — always; both brand faces are single-weight */
 ```
 
 All typography across the Slevomat website and mobile app uses the variable Inter font family in various weights. The only exception is for banner headlines, which use the branded Kensington Compressed Bold typeface.
+
+**Kensington is Slevomat-proprietary and is not distributed with this design system.** The brand token is a stack — `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` — so it renders Kensington where that font is installed and [Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue) (Google Fonts) everywhere else. Both are all-caps, single-weight display faces, so brand headlines are always uppercase at weight 400. See [principles → Brand font](./principles.md#brand-font-is-for-banner-headlines-only) and `packages/tokens/src/fonts/README.md`.
 
 ```css
 /* Banner headline example */
 .banner-headline {
   font-family: var(--typography-font-family-brand);
+  font-weight: var(--typography-brand-weight);
+  text-transform: uppercase;
 }
+```
+
+Load both webfonts with a single Google Fonts request:
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap">
 ```
 
 ### Interactive States
@@ -164,8 +175,10 @@ Two things to know when reading them:
    `--typography-heading-{large|medium|small}-*` → `--typography-heading-{lg|md|sm}-*`,
    `--typography-mega-poster-size` → `--typography-heading-2xl-size`, and
    `--typography-poster-size` → `--typography-heading-xl-size`. The brand
-   (Kensington) composites `--typography-brand-*` exist only in `tokens.css`,
-   not in the export.
+   (Kensington) composites `--typography-brand-*`, including
+   `--typography-brand-weight`, exist only in `tokens.css`, not in the export —
+   along with the `FONTS` comment block and `--typography-font-family-*`. A Figma
+   re-export must preserve all of them.
 
 ## Component Prefix
 

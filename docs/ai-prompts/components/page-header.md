@@ -168,12 +168,22 @@ without re-measuring.
 
 | Property | Token | Value |
 |---|---|---|
-| Font family | `--typography-font-family-brand` | Kensington |
-| Font weight | `--typography-weight-bold` | 700 |
+| Font family | `--typography-font-family-brand` | `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` |
+| Font weight | `--typography-brand-weight` | 400 |
 | Font size | `--typography-brand-xl-size` | 32px (mobile) → 56px (desktop ≥xl) |
 | Line height | `--typography-brand-xl-line-height` | 1.1 |
 | Letter spacing | `--typography-spacing-extra-wide` | 1px |
 | Transform | — | `uppercase` |
+
+> **The brand face is not distributed.** Kensington Compressed Bold is
+> Slevomat-proprietary and not committed to the repo. Where it is not installed the
+> heading renders in **Bebas Neue** (Google Fonts) — taller and narrower than
+> Kensington, so headlines re-flow and **the rendered heading will not match Figma
+> pixel-for-pixel**. The badge anchor adapts automatically: `firstUpdated()`
+> re-measures the word-space advance on `document.fonts.ready`, whichever face lands.
+> Weight is 400 rather than bold because both faces are single-weight — asking for
+> 700 only produces synthetic bolding. See `packages/tokens/src/fonts/README.md` for
+> how to enable the real font locally.
 
 ---
 

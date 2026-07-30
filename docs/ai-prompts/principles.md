@@ -135,10 +135,34 @@ See [Layouts → Two Responsive Mechanisms](./layouts/index.md#two-responsive-me
 
 Kensington is a display face: it works at large sizes in uppercase, and its impact comes from scarcity. Used in body text or UI controls it becomes hard to read and dilutes the brand moment it was designed for.
 
+### The font is not distributed
+
+Kensington Compressed Bold is Slevomat-proprietary, so it is **not committed to this
+repo and not shipped in `@minis/tokens`**. `--typography-font-family-brand` is a stack:
+
+```css
+--typography-font-family-brand: 'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif;
+```
+
+Where Kensington is installed (or dropped into `packages/tokens/src/fonts/` — see the
+README there) it wins. Everywhere else the brand face is
+[Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue) from Google Fonts, a
+condensed all-caps display face with similar proportions. Two consequences:
+
+- **Always uppercase.** Neither face has lowercase glyphs — lowercase input renders as
+  capitals. Pair the brand family with `text-transform: uppercase`.
+- **Always weight 400.** Both faces are single-weight. Use
+  `--typography-brand-weight` (400); asking for bold only triggers synthetic bolding,
+  which looks visibly wrong on a condensed face.
+
 ### Prefer this
 
 ```css
-.hero-headline { font-family: var(--typography-font-family-brand); }
+.hero-headline {
+  font-family: var(--typography-font-family-brand);
+  font-weight: var(--typography-brand-weight);
+  text-transform: uppercase;
+}
 .section-title { font-family: var(--typography-font-family-sans); }
 ```
 
@@ -147,4 +171,7 @@ Kensington is a display face: it works at large sizes in uppercase, and its impa
 ```css
 /* Avoid: brand face outside banner headlines */
 .nav-item { font-family: var(--typography-font-family-brand); }
+
+/* Avoid: bold on a single-weight display face — synthetic bolding */
+.hero-headline { font-family: var(--typography-font-family-brand); font-weight: 700; }
 ```

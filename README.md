@@ -224,4 +224,21 @@ Mini*S is designed with **AI-first documentation** - structured prompts and inst
 
 ## 📄 License
 
-MIT
+MIT — see [LICENSE](./LICENSE).
+
+### Third-party assets
+
+| Asset | Licence | Notes |
+|---|---|---|
+| [Inter](https://fonts.google.com/specimen/Inter) | SIL Open Font License 1.1 | All UI typography. Loaded from Google Fonts, not bundled. |
+| [Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue) | SIL Open Font License 1.1 | Public fallback for the brand display face. Loaded from Google Fonts, not bundled. |
+| **Kensington Compressed Bold** | Proprietary — Slevomat | **Not included in this repository and not redistributed.** |
+
+`--typography-font-family-brand` names Kensington first, so Slevomat machines that
+have the font render the real brand face; everyone else gets Bebas Neue
+automatically. Nothing needs to be configured either way. To enable Kensington
+locally, see [`packages/tokens/src/fonts/README.md`](./packages/tokens/src/fonts/README.md).
+
+The MIT licence covers the code, tokens, and documentation in this repository — it
+does not grant any rights to Slevomat brand assets (the Kensington typeface, logos,
+or brand imagery).

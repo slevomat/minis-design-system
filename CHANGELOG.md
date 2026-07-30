@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-07-30
+
+### Brand font — Kensington removed from the repository, Bebas Neue fallback
+
+Kensington Compressed Bold is Slevomat-proprietary. It is no longer committed or redistributed, so this repo can be shared without shipping a licensed typeface. Kensington remains the *definition* — it is still first in the brand stack and still what Figma uses — but it is now resolved from the machine rather than from the repo.
+
+- **`packages/tokens/src/fonts/kensington-compressed-bold.woff2` deleted** and the path git-ignored (`*.woff2|woff|ttf|otf` under that folder). The blob was also purged from git history. A new `packages/tokens/src/fonts/README.md` documents how to enable the real font locally.
+- **Two zero-config ways to get the real font**: install it on your machine (resolved via `local()`, no files, no network request), or drop the woff2 back into `packages/tokens/src/fonts/` and run `pnpm --filter tokens build` (self-hosted). Storybook and `create-minis` prototypes pick either up automatically.
+- **Public fallback is [Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue)** (Google Fonts, OFL) — a condensed all-caps display face with near-identical proportions. Verified: renders Czech diacritics (`latin` + `latin-ext` subsets both served).
+- **`@font-face` no longer lives in `tokens.css`.** `packages/tokens/scripts/build.js` now generates `dist/fonts/kensington.css` on every build — always with `local('Kensington Compressed Bold'), local('Kensington')`, and with `url('./kensington-compressed-bold.woff2')` appended **only when the file is present**. The file is written either way, so consumers link it unconditionally and never hit a 404. The build logs which branch it took.
+- **`Bebas+Neue` added to the existing Google Fonts request** (one combined `<link>`, not a second one) and the overlay linked in all three consumers: `apps/storybook/.storybook/preview-head.html`, `packages/create-minis/template/_index.html`, `docs/examples/simple-landing.html`.
+- **`@minis/tokens` `exports`**: added `"./fonts/*": "./dist/fonts/*"` — `dist/fonts` shipped via `files` but was unreachable through the `exports` map.
+- **Licensing**: added a root `LICENSE` (MIT, Slevomat — `README.md` claimed MIT with no file present) plus a **Third-party assets** section covering Inter (OFL), Bebas Neue (OFL), and Kensington (proprietary, not included). The MIT grant explicitly excludes Slevomat brand assets.
+
+#### Tokens
+
+- **`--typography-font-family-brand`**: `'Kensington'` → `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif`.
+- **`--typography-brand-weight`** (new) → `400`. Both brand faces are single-weight — Kensington ships Bold only and Bebas Neue ships 400 only — so requesting 700 synthesised a fake bold on the fallback. Requesting 400 renders Bebas Neue correctly *and* still resolves to Kensington, because the generated `@font-face` declares `font-weight: 400 700`.
+- **Removed**: the `@font-face` block at the top of `tokens.css` (moved to the generated `dist/fonts/kensington.css`). The `FONTS` section is now a comment explaining how fonts are loaded, marked `HAND-MAINTAINED — preserve on Figma re-export` along with `--typography-font-family-*` and `--typography-brand-*`, none of which exist in `tokens.json`.
+
+#### Page Header
+
+- `.heading` now uses `--typography-brand-weight` (400) instead of `--typography-weight-bold` (700), and its `font-family` fallback chain is `'Kensington', 'Bebas Neue', sans-serif` instead of `'Kensington', serif`.
+- No change needed to the Brand Badge anchoring: `firstUpdated()` already re-measures the word-space advance on `document.fonts.ready`, so it adapts to whichever face lands (measured 0.120 em for Kensington vs 0.178 em for Bebas Neue).
+- ⚠️ **Code and Figma will diverge for anyone without Kensington.** Bebas Neue is taller and narrower, so brand headlines re-flow slightly. Documented in `docs/ai-prompts/components/page-header.md`.
+
 ## 2026-07-25
 
 ### Accordion

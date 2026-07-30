@@ -201,6 +201,7 @@ If you have a Figma design you want to replicate:
 | `pnpm dev` fails | Run `pnpm install` first. If that fails, check that Node.js and pnpm are installed. |
 | `create-prototype` says "Missing built packages" | Run `pnpm build` in the design system repo first — the CLI copies built files. |
 | Colors or fonts look wrong | Make sure the `<link>` tags for tokens CSS and Google Fonts are in the `<head>`. The template includes them by default. |
+| Banner headlines aren't in the Slevomat brand font | Expected: Kensington is proprietary and not shipped, so headlines fall back to Bebas Neue. To get the real face, install Kensington on your machine or drop the woff2 into the design system's `packages/tokens/src/fonts/` and re-run `pnpm build` before scaffolding — see `packages/tokens/src/fonts/README.md`. |
 | The AI doesn't know a component | Point it to the docs: *"Read docs/ai-prompts/components/button.md for the button API"* |
 
 ---

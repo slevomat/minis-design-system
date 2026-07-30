@@ -35,10 +35,12 @@ Exception: `<minis-button>` uses `sm`, `md`, `lg`, `xl`.
 
 ```css
 /* Typography */
-var(--typography-font-family-sans)        /* Inter */
+var(--typography-font-family-sans)        /* Inter — all UI text */
+var(--typography-font-family-brand)       /* banner headlines ONLY (see note below) */
 var(--typography-size-sm)                 /* 14px */
 var(--typography-size-md)                 /* 16px */
 var(--typography-weight-bold)             /* 700 */
+var(--typography-brand-weight)            /* 400 — always, for brand headlines */
 var(--typography-heading-xl-size)         /* responsive: 24→32px */
 
 /* Colors */

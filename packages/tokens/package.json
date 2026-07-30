@@ -12,7 +12,8 @@
     "./breakpoints": "./dist/breakpoints.css",
     "./themes/default": "./dist/themes/default.css",
     "./themes/gift": "./dist/themes/gift.css",
-    "./tokens.rgb": "./dist/tokens.rgb.css"
+    "./tokens.rgb": "./dist/tokens.rgb.css",
+    "./fonts/*": "./dist/fonts/*"
   },
   "files": [
     "dist"
