@@ -27,7 +27,8 @@ Kensington Compressed Bold is Slevomat-proprietary. It is no longer committed or
 
 - `.heading` now uses `--typography-brand-weight` (400) instead of `--typography-weight-bold` (700), and its `font-family` fallback chain is `'Kensington', 'Bebas Neue', sans-serif` instead of `'Kensington', serif`.
 - No change needed to the Brand Badge anchoring: `firstUpdated()` already re-measures the word-space advance on `document.fonts.ready`, so it adapts to whichever face lands (measured 0.120 em for Kensington vs 0.178 em for Bebas Neue).
-- ⚠️ **Code and Figma will diverge for anyone without Kensington.** Bebas Neue is taller and narrower, so brand headlines re-flow slightly. Documented in `docs/ai-prompts/components/page-header.md`.
+- ⚠️ **Code and Figma will diverge for anyone without Kensington.** Bebas Neue is taller and narrower, so brand headlines re-flow slightly.
+- **Warning callout added to the Storybook Page Header docs page** (`page-header.stories.ts` → `parameters.docs.description.component`): the licensed Kensington font is required for a 1:1 match with Figma, Bebas Neue is substituted otherwise, how to tell which face you are currently looking at, and the two ways to enable the real font. Mirrored in `docs/ai-prompts/components/page-header.md` under "Heading typography".
 
 ## 2026-07-25
 

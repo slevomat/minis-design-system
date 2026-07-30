@@ -26,6 +26,12 @@ const meta: Meta = {
   <li><strong><code>no-badge</code></strong> boolean (default <code>false</code>): hides the Brand/Badge checkmark seal next to the heading.</li>
 </ul>
 <p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>--page-header-badge-size</code>, default <code>0.8em</code>), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a <code>0.27em</code> gap after that line's text (<code>--page-header-badge-gap</code>) — for any number of heading lines, at every breakpoint. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
+<blockquote style="border-left:4px solid var(--color-interaction-danger-accent,#e8112d);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+  <p style="margin:0 0 .5rem"><strong>⚠️ The heading needs the licensed Kensington font for a 1:1 match with Figma.</strong></p>
+  <p style="margin:0 0 .5rem">Kensington Compressed Bold is Slevomat-proprietary and is <strong>not shipped with this design system</strong>. If it is not available on the machine rendering the page, the heading falls back to <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener noreferrer">Bebas Neue</a> (Google Fonts) — a close condensed all-caps substitute, but <strong>taller and narrower</strong>. Headlines re-flow slightly and <strong>will not match the Figma design pixel-for-pixel</strong>. Judge final brand typography only on a machine that has the real font.</p>
+  <p style="margin:0 0 .5rem"><strong>What you are looking at right now:</strong> if this heading renders in Kensington, your machine has the font; if it looks slightly narrower and taller, you are seeing the Bebas Neue fallback.</p>
+  <p style="margin:0"><strong>To get the real font</strong> — either install Kensington Compressed Bold on your machine (resolved automatically, no project setup), or drop the <code>.woff2</code> into <code>packages/tokens/src/fonts/</code> and re-run <code>pnpm --filter tokens build</code>. Either way it just works, in Storybook and in scaffolded prototypes. See <code>packages/tokens/src/fonts/README.md</code>. Everything else about the component — layout, spacing, badge anchoring, colours — is unaffected: the badge re-measures itself against whichever face loads.</p>
+</blockquote>
         `,
       },
     },

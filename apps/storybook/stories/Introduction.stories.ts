@@ -577,6 +577,7 @@ const changelogHTML = `
         <li><code>.heading</code> now uses <code>--typography-brand-weight</code> (400) instead of <code>--typography-weight-bold</code> (700), and its <code>font-family</code> fallback chain is <code>'Kensington', 'Bebas Neue', sans-serif</code> instead of <code>'Kensington', serif</code>.</li>
         <li>Brand Badge anchoring needed no change — <code>firstUpdated()</code> already re-measures the word-space advance on <code>document.fonts.ready</code>, so it adapts to whichever face lands (measured 0.120 em for Kensington vs 0.178 em for Bebas Neue).</li>
         <li>⚠️ <strong>Code and Figma will diverge for anyone without Kensington.</strong> Bebas Neue is taller and narrower, so brand headlines re-flow slightly.</li>
+        <li><strong>Warning callout added to the Page Header docs page</strong> — the licensed Kensington font is required for a 1:1 match with Figma, Bebas Neue is substituted otherwise, how to tell which face you are currently looking at, and the two ways to enable the real one. Mirrored in <code>docs/ai-prompts/components/page-header.md</code>.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
