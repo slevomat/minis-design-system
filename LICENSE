@@ -19,16 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-This licence applies to the source code, design tokens, and documentation in
-this repository. It does NOT grant any rights to Slevomat brand assets,
-including but not limited to the Kensington Compressed Bold typeface, the
-Slevomat name, and Slevomat logos and brand imagery.
-
-Third-party fonts referenced by this design system are loaded from Google Fonts
-and are not redistributed here:
-
-  - Inter — SIL Open Font License 1.1
-  - Bebas Neue — SIL Open Font License 1.1

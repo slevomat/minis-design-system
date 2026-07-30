@@ -1,0 +1,40 @@
+Mini*S Design System
+Copyright (c) 2026 Slevomat.cz, s.r.o.
+
+This product is licensed under the MIT License — see LICENSE for the full text.
+The notes below clarify the scope of that licence and credit third-party work.
+They do not add conditions to, or restrict, the rights granted by LICENSE.
+
+
+SCOPE OF THE MIT LICENCE
+
+The MIT licence covers the source code, design tokens, and documentation in this
+repository.
+
+It does not grant rights to Slevomat brand assets, because a copyright licence
+never conveys trademark rights. Brand assets include, without limitation:
+
+  - the Kensington Compressed Bold typeface
+  - the Slevomat name and word mark
+  - Slevomat logos and brand imagery
+
+
+BRAND TYPEFACE
+
+Kensington Compressed Bold is proprietary to Slevomat and is deliberately not
+included in this repository or redistributed with it.
+
+The brand font token names Kensington first, so machines that already have the
+font render the real brand face; everywhere else it falls back to Bebas Neue
+automatically, with no configuration either way. See
+packages/tokens/src/fonts/README.md.
+
+
+THIRD-PARTY FONTS
+
+Referenced from Google Fonts at runtime, not redistributed here:
+
+  - Inter — SIL Open Font License 1.1
+    https://fonts.google.com/specimen/Inter
+  - Bebas Neue — SIL Open Font License 1.1
+    https://fonts.google.com/specimen/Bebas+Neue

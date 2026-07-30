@@ -224,7 +224,19 @@ Mini*S is designed with **AI-first documentation** - structured prompts and inst
 
 ## 📄 License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](./LICENSE). Scope notes and third-party credits are in [NOTICE](./NOTICE).
+
+### Project scope
+
+Mini*S is built for **Slevomat's own products and internal prototyping**. It is not a
+general-purpose UI library and it is not a supported product:
+
+- no support, SLA, or release guarantees — treat it as read-only unless you work at Slevomat;
+- external contributions and feature requests are not accepted;
+- APIs, tokens, and component names change whenever Slevomat's design needs change, without notice or a deprecation period.
+
+The code is MIT-licensed, so you are free to read, fork, and reuse it — just don't
+expect it to stay still or to be maintained for anyone else's use case.
 
 ### Third-party assets
 
@@ -239,6 +251,6 @@ have the font render the real brand face; everyone else gets Bebas Neue
 automatically. Nothing needs to be configured either way. To enable Kensington
 locally, see [`packages/tokens/src/fonts/README.md`](./packages/tokens/src/fonts/README.md).
 
-The MIT licence covers the code, tokens, and documentation in this repository — it
-does not grant any rights to Slevomat brand assets (the Kensington typeface, logos,
-or brand imagery).
+The MIT licence covers the code, tokens, and documentation here. It does not convey
+rights to Slevomat brand assets — the Kensington typeface, the Slevomat name, logos,
+and brand imagery — because a copyright licence never conveys trademark rights.
