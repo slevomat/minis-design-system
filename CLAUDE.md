@@ -190,6 +190,7 @@ The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-
 
 ## Common pitfalls
 
+- **Borders wrap, separators divide** — a border encloses content (cards, inputs, buttons) and is always a **solid** `--color-border-*`; a separator/divider splits content inside a block (accordion rows, list items, section breaks) and is always the **alpha** `--separator-color` → `--color-separator-default`, so it reads on faded panels, tinted banners and photos alike. Never use a `--color-border-*` for a divider or `--separator-color` for an edge. See `docs/ai-prompts/getting-started.md` → "Borders vs. Separators".
 - **No bare `--spacing-{n}` scale** — the only `--spacing-*` tokens are the responsive `--spacing-layout-*` set; a numeric `--spacing-4`-style scale does not exist.
 - **Never commit font binaries** — Kensington is proprietary; `packages/tokens/src/fonts/*.woff2` is git-ignored and the `@font-face` lives in a build-generated `dist/fonts/kensington.css`, never in `tokens.css`. See `packages/tokens/src/fonts/README.md`.
 - **Dark mode = `<html data-mode="dark">`** — `tokens.css` contains the `[data-mode="dark"]` override block. Never link `dist/foundation/dark.css` (deprecated legacy file, hardcoded hex, no toggle).

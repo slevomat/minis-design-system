@@ -44,6 +44,16 @@ The separator rule was a solid grey (`--color-border-subtle` → `#e3e4e6`), whi
 - `--accordion-border-color` → `var(--separator-color)`, `--accordion-border-width` → `var(--separator-height)`. The names are kept as hooks so a single accordion can still be restyled without touching every rule in the system; the component CSS is unchanged apart from its hard-coded fallback (`#e6e6e6` → `rgba(0, 0, 0, 0.05)`).
 - The unused `Accordion/default/border` and `Accordion/border/width` variables still exist in the Figma `.Components` collection — worth deleting there if nothing else binds them.
 
+#### Docs — Borders vs. Separators
+
+The distinction is now written down, so neither family gets reached for by mistake:
+
+- **`docs/ai-prompts/getting-started.md`** → new "Borders vs. Separators" section under Colors: comparison table (purpose / colour / component tokens) plus the reasoning and a two-line CSS example.
+- **Storybook → Design Tokens → Colors**: the Border table gained a lead-in ("borders wrap content, solid colour"), and the separator token moved out of it into its own **Separator** section explaining why dividers use alpha.
+- **`CLAUDE.md`** → new bullet under Common pitfalls.
+
+> Borders wrap content — cards, inputs, buttons — and are solid, because a border defines an object's edge. Separators (dividers) split content inside a block — accordion rows, list items, section breaks — and use an alpha colour, because a divider only has to read as a break and must do so on every surface it lands on. One alpha token covers a faded panel, a tinted banner and a photo; a solid grey tuned for white goes muddy on a mid-tone and vanishes on a dark one.
+
 #### Not changed
 
 - No Lit `<minis-separator>` yet; these tokens remain registered ahead of the component.

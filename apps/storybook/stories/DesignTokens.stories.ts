@@ -201,6 +201,7 @@ export const Colors: Story = {
       </table>
 
       <h2>Border</h2>
+      <p>Borders <strong>wrap</strong> content — cards, inputs, buttons, any enclosed block. They are <strong>solid</strong>: a border defines an object's edge, so it needs an opaque colour that holds against whatever it encloses.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Token</th><th style="${th}">Role</th></tr></thead>
         <tbody>
@@ -212,6 +213,16 @@ export const Colors: Story = {
           ${colorRow('--color-border-valid', 'Valid / success state border')}
         </tbody>
       </table>
+
+      <h2>Separator</h2>
+      <p>Separators (dividers) <strong>split</strong> content inside a block — accordion rows, list items, section breaks. They use an <strong>alpha</strong> colour, because a divider only has to read as a break, and it has to do that on every surface it lands on: a faded panel, a tinted banner, a photo. An alpha rule tints whatever sits behind it, so one token covers all of them — a solid grey tuned for white goes muddy on a mid-tone and vanishes on a dark one.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Token</th><th style="${th}">Role</th></tr></thead>
+        <tbody>
+          ${colorRow('--color-separator-default', 'Divider rule — black 5% light / white 35% dark')}
+        </tbody>
+      </table>
+      <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">Component-level: <code>--separator-color</code> (→ this token) and <code>--separator-height</code> (1px). The accordion divider resolves to both.</p>
 
       <h2>Feedback</h2>
       <table style="${ts}">
@@ -399,6 +410,7 @@ export const Palette: Story = {
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
         ${paletteRow('--color-white-a-white-a5')}
         ${paletteRow('--color-white-a-white-a10')}
+        ${paletteRow('--color-white-a-white-a35')}
         ${paletteRow('--color-white-a-white-a100')}
       </tbody></table>
 
