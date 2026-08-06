@@ -16,11 +16,11 @@ export const accordionStyles = css`
   /* Opt-in top rule, so a standalone accordion can be fully ruled. */
   :host([bordered]) ::slotted(minis-accordion-item:first-of-type) {
     border-top: var(--accordion-border-width, 1px) solid
-      var(--accordion-border-color, #e6e6e6);
+      var(--accordion-border-color, rgba(0, 0, 0, 0.05));
   }
 
   :host([bordered]) ::slotted(minis-accordion-item:last-of-type) {
     border-bottom: var(--accordion-border-width, 1px) solid
-      var(--accordion-border-color, #e6e6e6);
+      var(--accordion-border-color, rgba(0, 0, 0, 0.05));
   }
 `;

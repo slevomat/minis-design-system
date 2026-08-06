@@ -156,6 +156,7 @@
   --color-red-95: oklch(0.96 0.02 30);
   --color-white-a-white-a10: oklch(1 0 0 / 0.1);
   --color-white-a-white-a100: var(--color-core-white);
+  --color-white-a-white-a35: oklch(1 0 0 / 0.35);
   --color-white-a-white-a5: oklch(1 0 0 / 0.05);
   --color-yellow-25: oklch(0.55 0.12 75);
   --color-yellow-35: oklch(0.68 0.14 74);
@@ -420,6 +421,8 @@
   --color-interaction-transparent-hover-accent: var(--color-core-black);
   --color-interaction-transparent-hover-border: var(--color-interaction-transparent-hover-surface);
   --color-interaction-transparent-hover-surface: var(--color-blue-95);
+  /* Separator — alpha, so it works on any surface colour */
+  --color-separator-default: var(--color-black-a-black-a5);
   --color-surface-faded: var(--theme-surface-faded);
   --color-surface-primary: var(--theme-surface-primary);
   --color-text-accent-attention: var(--color-yellow-25);
@@ -499,6 +502,8 @@
   --color-interaction-tertiary-hover-accent: var(--theme-text-accent-link-hover);
   --color-interaction-tertiary-hover-border: var(--color-grey-60);
   --color-interaction-tertiary-hover-surface: var(--color-grey-20);
+  /* Separator — alpha, so it works on any surface colour */
+  --color-separator-default: var(--color-white-a-white-a35);
   --color-text-accent-attention: var(--color-yellow-75);
   --color-text-accent-danger: var(--color-red-85);
   --color-text-accent-positive: var(--color-green-75);
@@ -794,10 +799,14 @@
 
   /* Accordion */
   --accordion-surface: var(--color-core-transparent);
-  --accordion-border-color: var(--color-border-subtle);        /* 1px divider between items */
-  --accordion-border-width: 1px;
+  /* Divider between items — the Figma accordion-item consumes the separator
+     instance's own tokens, so these alias the separator rule. They stay as
+     named hooks so an accordion can still be restyled on its own. */
+  --accordion-border-color: var(--separator-color);
+  --accordion-border-width: var(--separator-height);
   --accordion-padding-x: var(--linear-sp-linear-4);            /* 16px — trigger + panel horizontal inset */
   --accordion-padding-y: var(--linear-sp-linear-5);            /* 20px below 768px → 24px from 768px up (see override at end of file) */
+  --accordion-compact-padding-x: var(--linear-sp-linear-0);    /* 0 — size="compact" rows run edge to edge */
   --accordion-icon-size: var(--pixel-px-20);                   /* 20px — kept under the heading line box so type drives row height */
   --accordion-panel-padding-bottom: var(--linear-sp-linear-5); /* 20px — below the open panel */
   --accordion-gap: var(--linear-sp-linear-4);                  /* 16px — heading ↔ chevron */
@@ -809,7 +818,7 @@
   --accordion-transition-duration: 200ms;
 
   /* Separator (upcoming component) */
-  --separator-color: var(--color-border-subtle);
+  --separator-color: var(--color-separator-default);   /* black 5% / white 35% in dark */
   --separator-height: var(--border-width-thin);           /* 1px */
 
   /* Card grid (upcoming component) */

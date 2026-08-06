@@ -543,6 +543,54 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-08-06 (separator: opacity-based colour)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-08-06" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-06</h2>
+        <button class="cl-copy-btn" data-anchor="2026-08-06">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Accordion — <code>size="compact"</code> variant (no horizontal inset)</h3>
+      <p>A compact row for accordions nested inside an already-padded container (card, narrow column, drawer), where the default 16px inset stacks on the parent's padding and knocks the headings out of alignment with everything around them.</p>
+      <ul>
+        <li><strong><code>size</code> on both <code>&lt;minis-accordion&gt;</code> and <code>&lt;minis-accordion-item&gt;</code></strong> — <code>'default' | 'compact'</code>, default <code>'default'</code>, reflected. Set it on the container and it is pushed down to every item (same mechanism as <code>heading-level</code>); set it per item only for a deliberately mixed list.</li>
+        <li><strong><code>compact</code> zeroes the horizontal padding only</strong> — trigger and panel left/right go to 0. Vertical padding, type scale, chevron and dividers are untouched: despite the name it trims the <em>inset</em>, not the density — rows stay exactly as tall as they are at <code>default</code>.</li>
+        <li><strong>Naming</strong> — the accordion is the one component <em>not</em> on the abbreviated <code>xs/sm/md/lg/xl</code> scale: the values are <code>default</code> and <code>compact</code> in Figma <em>and</em> in code, identical strings on both sides.</li>
+        <li><strong>Tokens</strong> — new <code>--accordion-compact-padding-x</code> → <code>var(--linear-sp-linear-0)</code> (0) · Figma <code>.Components → Accordion/compact/padding/x</code>.</li>
+        <li><strong>Figma</strong> — <code>accordion-item</code> (<code>4984:9556</code>) gained a <code>Size</code> property (6 variants → 12), and the <code>accordion</code> container is now a component set with <code>Size=default</code> / <code>Size=compact</code>. Existing instances are unaffected: the originals became the <code>default</code> variants. Note the container's <code>Size</code> cannot reach items dropped into its Slot — Figma has no property forwarding into slot content — whereas in code <code>&lt;minis-accordion size="compact"&gt;</code> always wins over its children.</li>
+        <li>New <strong>Size — compact</strong> story comparing both sizes in the same padded card, plus a <code>size</code> control on the Playground.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Code Connect — <code>figma connect publish</code> was failing for every component</h3>
+      <p><code>page-header.figma.ts</code> used ternaries inside its <code>html</code> template (<code>${"${description ? 'description=\"…\"' : ''}"}</code>). The HTML parser only accepts prop placeholders there, so it threw <em>"Expected a call expression as a placeholder in the template, got ConditionalExpression"</em> — and because the CLI parses every mapping file as one batch, that one file took down the whole publish, including components whose mappings were fine.</p>
+      <ul>
+        <li><strong>Conditional markup now lives in the boolean's value mapping</strong> — the pattern <code>button.figma.ts</code> already used for its counter: <code>figma.boolean('Description', { true: 'description="…"', false: undefined })</code>, and likewise for <code>Tag</code>, <code>Button</code> and the inverted <code>Badge</code> → <code>no-badge</code>.</li>
+        <li>The accordion container mapping moved to the new component set (<code>5136-9716</code>) — mapping the <code>Size=default</code> variant would only have covered half the set.</li>
+        <li><strong>Rule for new <code>.figma.ts</code> files</strong>: no ternaries and no logic of any kind inside the <code>html</code> template — only <code>${'${prop}'}</code> placeholders. <code>pnpm figma:parse</code> catches it before a publish does.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Separator — opacity-based colour, and the accordion now follows it</h3>
+      <p>The separator rule was a solid grey (<code>--color-border-subtle</code> → <code>#e3e4e6</code>), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the <code>accordion-item</code> divider dropped its colour/height override, so the accordion consumes the same rule.</p>
+      <ul>
+        <li><strong>Tokens</strong>
+          <ul>
+            <li><strong>New <code>--color-white-a-white-a35</code></strong> (primitive) → <code>oklch(1 0 0 / 0.35)</code> = <code>rgba(255,255,255,0.35)</code> · Figma <code>.Primitives → Color/white-a/white-a35</code>.</li>
+            <li><strong>New <code>--color-separator-default</code></strong> (foundation) → light <code>var(--color-black-a-black-a5)</code> (black 5%, <code>#0000000d</code>), dark <code>var(--color-white-a-white-a35)</code> (white 35%) · Figma <code>Foundation → Color/Separator/default</code>.</li>
+            <li><code>--separator-color</code> — <code>var(--color-border-subtle)</code> → <code>var(--color-separator-default)</code>. <code>--separator-height</code> unchanged (<code>var(--border-width-thin)</code>, 1px).</li>
+            <li>Both new tokens listed on the <strong>Design Tokens</strong> page (Border table and White Alpha palette).</li>
+          </ul>
+        </li>
+        <li><strong>Accordion dividers are now the shared separator rule</strong> — black 5% instead of solid grey-90, visibly lighter and correct on non-white surfaces. Matches Figma, where the divider is now an <em>unmodified</em> <code>separator</code> instance: <code>accordion-item</code> no longer binds <code>Accordion/default/border</code> / <code>Accordion/border/width</code> at all. <code>--accordion-border-color</code> → <code>var(--separator-color)</code> and <code>--accordion-border-width</code> → <code>var(--separator-height)</code>; the names stay as hooks so a single accordion can still be restyled without touching every rule in the system.</li>
+        <li><strong>Docs — Borders vs. Separators</strong>. Borders wrap content (cards, inputs, buttons) and are <em>solid</em>, because a border defines an object's edge. Separators (dividers) split content inside a block (accordion rows, list items, section breaks) and use an <em>alpha</em> colour, because a divider only has to read as a break and must do so on every surface it lands on — one alpha token covers a faded panel, a tinted banner and a photo, where a solid grey tuned for white goes muddy on a mid-tone and vanishes on a dark one. Written up in <code>docs/ai-prompts/getting-started.md</code> (comparison table + example), on the <strong>Design Tokens → Colors</strong> page (Border table lead-in, plus a separate <strong>Separator</strong> section), and as a <code>CLAUDE.md</code> pitfall.</li>
+        <li>No Lit <code>&lt;minis-separator&gt;</code> yet — these tokens stay registered ahead of the component.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-07-30 (brand font: Kensington out of repo, Bebas Neue fallback)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

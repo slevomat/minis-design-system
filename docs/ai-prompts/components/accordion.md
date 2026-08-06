@@ -12,9 +12,10 @@ Figma properties → code:
 | `Body` (TEXT)  | string | default slot (panel content) |
 | `Open`         | `True` / `False` | `open` attribute |
 | `State`        | `Default` / `Hover` / `Disabled` | `Hover` is CSS-only; `Disabled` → `disabled` |
+| `Size`         | `default` / `compact` | `size` attribute — same two values in Figma and code. |
 | `Show divider` | boolean, default `true` | No attribute — CSS handles it via `:last-of-type`. Turn it off on the **last row** of a list. |
 
-The divider is a nested instance of the [separator](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4987-147) component (page `4977:346`), with its colour and height overridden to `Accordion/default/border` / `Accordion/border/width` so the accordion's own tokens stay the source of truth.
+The divider is a nested instance of the [separator](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4987-147) component (page `4977:346`). It carries **no colour/height override** — it uses the separator's own `Separator/default/color` (black 5%) and `Separator/height` (1px), so every rule in the system stays in one place.
 
 > **Why a boolean and not an `Item + Separator + Item` structure**: in the DOM there is no separator element — the rule is `border-bottom` on the item, hidden on `:last-of-type`. A sibling separator would be a Figma-only node with no code counterpart, and would force designers to hand-maintain the alternation on every add/remove/reorder.
 
@@ -27,6 +28,7 @@ The divider is a nested instance of the [separator](https://www.figma.com/design
 | `single`        | `boolean` | `false` | Exclusive mode — opening an item closes every other one.                    |
 | `bordered`      | `boolean` | `false` | Also draws a rule above the first and below the last item.                  |
 | `heading-level` | `number`  | `3`     | ARIA heading level applied to every child item. `0` omits the heading role. |
+| `size`          | `'default' \| 'compact'` | `'default'` | Row density, pushed down to every child item. `compact` drops the horizontal inset to 0. |
 
 Read-only getter: `items` → `MinisAccordionItem[]` in DOM order.
 
@@ -38,6 +40,23 @@ Read-only getter: `items` → `MinisAccordionItem[]` in DOM order.
 | `open`          | `boolean` | `false` | Expanded state. Reflected — style with `minis-accordion-item[open]`.          |
 | `disabled`      | `boolean` | `false` | Prevents opening/closing; trigger is a disabled `<button>`.                   |
 | `heading-level` | `number`  | `3`     | Overwritten by the parent `<minis-accordion>` when it has one.                |
+| `size`          | `'default' \| 'compact'` | `'default'` | Row density. Reflected. Overwritten by the parent `<minis-accordion>` when it has one. |
+
+### `size="compact"` — no horizontal inset
+
+`compact` sets the trigger's and panel's left/right padding to 0 (`--accordion-compact-padding-x`), so headings, chevrons and panel text align with the container's own edge. Vertical padding, type scale and dividers are unchanged — despite the name it trims the *inset*, not the density: rows stay exactly as tall as they are at `default`.
+
+Reach for it when the accordion sits inside something that already provides horizontal padding (a card, a narrow column, a drawer); otherwise the two insets stack and the accordion text no longer lines up with its neighbours. A full-width, standalone accordion should stay `default`.
+
+```html
+<div class="card" style="padding: 24px">
+  <minis-accordion size="compact" single>
+    <minis-accordion-item heading="…">…</minis-accordion-item>
+  </minis-accordion>
+</div>
+```
+
+Set it on the container and every item follows; setting it per item is possible but only worth it for a deliberately mixed list.
 
 ## Slots
 
@@ -67,8 +86,9 @@ The event bubbles and is composed, so it can be listened for on `<minis-accordio
 Component-level tokens (defined in `@minis/tokens`):
 
 - `--accordion-surface` → transparent
-- `--accordion-border-color` → `--color-border-subtle` (grey-90 light / grey-35 dark) · `--accordion-border-width` → 1px
-- `--accordion-padding-x` → 16px (`--linear-sp-linear-4`)
+- `--accordion-border-color` → `--separator-color` → `--color-separator-default` (black 5% light / white 35% dark — alpha, so the rule reads on any surface) · `--accordion-border-width` → `--separator-height` (1px). The two `--accordion-border-*` names stay as hooks for restyling a single accordion; by default they follow the shared separator rule, matching Figma where the divider is an unmodified `separator` instance.
+- `--accordion-padding-x` → 16px (`--linear-sp-linear-4`) — the `default` inset
+- `--accordion-compact-padding-x` → 0 (`--linear-sp-linear-0`) — the `size="compact"` inset · Figma `Accordion/compact/padding/x`
 - `--accordion-padding-y` → **responsive**: 20px (`--linear-sp-linear-5`) below 768px, 24px (`--linear-sp-linear-6`) from 768px up. The override lives in a media block at the **end** of `tokens.css` — `:root` inside a media query has the same specificity as a bare `:root`, so it has to come after the component block or the default silently wins.
 - `--accordion-icon-size` → 20px (`--pixel-px-20`)
 - `--accordion-panel-padding-bottom` → 20px (`--linear-sp-linear-5`)
@@ -148,4 +168,4 @@ document.querySelector('minis-accordion').addEventListener('toggle', (e) => {
 
 ## Copy-paste prompt
 
-> Build an FAQ section with the Mini*S design system. Use `<minis-accordion single>` with one `<minis-accordion-item heading="…">` per question and the answer as the item's default-slot content. Set `heading-level` to match the surrounding outline. Do not restyle the headings or dividers — the component already uses `--typography-heading-sm-*` (16px mobile → 18px desktop) and `--accordion-border-color`. Import with `import '@minis/components'` and make sure `@minis/tokens/tokens.css` is loaded.
+> Build an FAQ section with the Mini*S design system. Use `<minis-accordion single>` with one `<minis-accordion-item heading="…">` per question and the answer as the item's default-slot content. Set `heading-level` to match the surrounding outline. If the accordion sits inside an already-padded container (card, narrow column, drawer), add `size="compact"` so the rows sit flush with that padding instead of insetting a further 16px. Do not restyle the headings or dividers — the component already uses `--typography-heading-sm-*` (16px mobile → 18px desktop) and `--accordion-border-color`. Import with `import '@minis/components'` and make sure `@minis/tokens/tokens.css` is loaded.

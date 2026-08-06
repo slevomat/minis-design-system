@@ -5,6 +5,9 @@ import '@minis/icons';
 
 let uid = 0;
 
+/** Row density — matches the Figma `Size` variant. */
+export type AccordionSize = 'default' | 'compact';
+
 /**
  * Mini*S Accordion Item
  *
@@ -46,6 +49,15 @@ export class MinisAccordionItem extends LitElement {
   /** Disables interaction — the item can no longer be opened or closed. */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Row density. `default` insets the heading and panel by
+   * `--accordion-padding-x`; `compact` drops that inset to 0 so the row runs
+   * edge to edge — for accordions nested in an already-padded container.
+   * Set it on `<minis-accordion>` to apply it to every item at once.
+   */
+  @property({ type: String, reflect: true })
+  size: AccordionSize = 'default';
 
   /**
    * Heading level rendered around the trigger, for document outline purposes.

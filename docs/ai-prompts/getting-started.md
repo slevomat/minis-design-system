@@ -76,6 +76,27 @@ Specific needs:
 --color-background                     /* Page background */
 --color-surface-primary                /* Component background */
 --color-border                         /* Borders */
+--color-separator-default              /* Separators / dividers */
+```
+
+#### Borders vs. Separators
+
+Two different jobs, two different token families — don't substitute one for the other.
+
+| | **Border** | **Separator** (divider) |
+| --- | --- | --- |
+| Purpose | Wraps content — cards, inputs, buttons, any enclosed block | Splits content inside a block — accordion rows, list items, section breaks |
+| Colour | **Solid** (`--color-border`, `--color-border-subtle`, `--color-border-strong`, plus the `-focus` / `-valid` / `-invalid` states) | **Alpha** (`--color-separator-default` — black 5% light, white 35% dark) |
+| Component tokens | `--{component}-border` / `-border-color` | `--separator-color`, `--separator-height` |
+
+A border defines an object's edge, so it needs an opaque colour that stays put against whatever it encloses. A separator only has to be *visible enough to read as a break*, and it has to do that on every surface it lands on — a faded panel, a tinted banner, a photo. An alpha colour tints whatever is behind it instead of fighting it, so one token covers all of them; a solid grey tuned for white goes muddy on a mid-tone and disappears on a dark one.
+
+```css
+/* Border — encloses */
+.card { border: var(--border-width-thin) solid var(--color-border-subtle); }
+
+/* Separator — divides */
+.faq-item + .faq-item { border-top: var(--separator-height) solid var(--separator-color); }
 ```
 
 ### Spacing

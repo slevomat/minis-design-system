@@ -37,7 +37,7 @@ docs/
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
 - **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
-- **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
+- **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-separator-default` (alpha — black 5% light / white 35% dark, so rules read on any surface; `--separator-color` and the accordion divider both resolve to it), `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
 
 > There is NO bare numeric `--spacing-{n}` scale. The only `--spacing-*` tokens are the responsive `--spacing-layout-*` set. For fixed values use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
@@ -66,7 +66,9 @@ All components use **abbreviated size values matching the Figma `Size` variant n
 
 Each component exposes only the subset it supports (e.g. `<minis-button>` = `sm | md | lg | xl`, `<minis-badge>` = `sm | md | xl`, `<minis-pill-counter>` = `xs | sm | md`).
 
-> Never use full words `small`, `medium`, `large` as component `size` attribute values — they don't match the Figma variants and components will fall back to their default size.
+> **The rule is: whatever the Figma `Size` variant is called, the `size` attribute uses the same string.** Never invent full words (`small`, `medium`, `large`) for a component whose Figma variants are abbreviated — the value won't match and the component falls back to its default size.
+
+**Exception — accordion**: `<minis-accordion>` / `<minis-accordion-item>` use `default | compact`, matching their Figma `Size` variant names one-to-one (owner's choice, 2026-08-06). It is the only component not on the abbreviated scale; don't copy the pattern to a new component without asking, and don't "fix" it to `md | sm` — that would break the Figma mapping.
 
 ## Changelog rules
 
@@ -97,8 +99,8 @@ Every change to components or tokens **must** be recorded in two places, in the 
 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
-- Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container `4984:9557`
-- Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet)
+- Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
+- Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator-default`, not `--color-border-subtle`)
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
 ## Figma Code Connect
@@ -188,6 +190,7 @@ The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-
 
 ## Common pitfalls
 
+- **Borders wrap, separators divide** — a border encloses content (cards, inputs, buttons) and is always a **solid** `--color-border-*`; a separator/divider splits content inside a block (accordion rows, list items, section breaks) and is always the **alpha** `--separator-color` → `--color-separator-default`, so it reads on faded panels, tinted banners and photos alike. Never use a `--color-border-*` for a divider or `--separator-color` for an edge. See `docs/ai-prompts/getting-started.md` → "Borders vs. Separators".
 - **No bare `--spacing-{n}` scale** — the only `--spacing-*` tokens are the responsive `--spacing-layout-*` set; a numeric `--spacing-4`-style scale does not exist.
 - **Never commit font binaries** — Kensington is proprietary; `packages/tokens/src/fonts/*.woff2` is git-ignored and the `@font-face` lives in a build-generated `dist/fonts/kensington.css`, never in `tokens.css`. See `packages/tokens/src/fonts/README.md`.
 - **Dark mode = `<html data-mode="dark">`** — `tokens.css` contains the `[data-mode="dark"]` override block. Never link `dist/foundation/dark.css` (deprecated legacy file, hardcoded hex, no toggle).

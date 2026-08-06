@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement, property, queryAssignedElements } from 'lit/decorators.js';
 import { accordionStyles } from './accordion.styles.js';
 import './accordion-item.js';
-import type { MinisAccordionItem } from './accordion-item.js';
+import type { AccordionSize, MinisAccordionItem } from './accordion-item.js';
 
 /**
  * Mini*S Accordion
@@ -43,6 +43,15 @@ export class MinisAccordion extends LitElement {
   @property({ type: Number, attribute: 'heading-level' })
   headingLevel = 3;
 
+  /**
+   * Row density, applied to every child item. `default` insets the heading
+   * and panel by `--accordion-padding-x`; `compact` drops that inset to 0 so
+   * rows run edge to edge — for an accordion nested in a container that
+   * already provides the padding.
+   */
+  @property({ type: String, reflect: true })
+  size: AccordionSize = 'default';
+
   @queryAssignedElements({ selector: 'minis-accordion-item' })
   private _items!: MinisAccordionItem[];
 
@@ -53,6 +62,7 @@ export class MinisAccordion extends LitElement {
 
   private _onSlotChange = () => {
     this._applyHeadingLevel();
+    this._applySize();
     if (this.single) this._enforceSingle();
   };
 
@@ -68,6 +78,10 @@ export class MinisAccordion extends LitElement {
     for (const item of this.items) item.headingLevel = this.headingLevel;
   }
 
+  private _applySize() {
+    for (const item of this.items) item.size = this.size;
+  }
+
   /** Keeps at most the first open item open when entering `single` mode. */
   private _enforceSingle() {
     let seen = false;
@@ -80,6 +94,7 @@ export class MinisAccordion extends LitElement {
 
   updated(changed: Map<string, unknown>) {
     if (changed.has('headingLevel')) this._applyHeadingLevel();
+    if (changed.has('size')) this._applySize();
     if (changed.has('single') && this.single) this._enforceSingle();
   }
 

@@ -7,7 +7,7 @@ export const accordionItemStyles = css`
     /* Divider sits *below* every item; the parent <minis-accordion> hides the
        last one so the list never ends on a stray rule. */
     border-bottom: var(--accordion-border-width, 1px) solid
-      var(--accordion-border-color, #e6e6e6);
+      var(--accordion-border-color, rgba(0, 0, 0, 0.05));
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
   }
 
@@ -51,6 +51,16 @@ export const accordionItemStyles = css`
     /* Allow long Czech headings to wrap onto several lines (XS breakpoint). */
     min-width: 0;
     overflow-wrap: break-word;
+  }
+
+  /* Compact size — the row runs edge to edge. For an accordion that already
+     sits inside a padded container (a card, a narrow column), the trigger's
+     own inset would double up on the parent's. Only the horizontal padding
+     goes; the vertical rhythm and the divider are unchanged. */
+  :host([size='compact']) .trigger,
+  :host([size='compact']) .panel-content {
+    padding-left: var(--accordion-compact-padding-x, 0);
+    padding-right: var(--accordion-compact-padding-x, 0);
   }
 
   /* =====================
