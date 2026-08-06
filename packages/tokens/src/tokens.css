@@ -806,6 +806,7 @@
   --accordion-border-width: var(--separator-height);
   --accordion-padding-x: var(--linear-sp-linear-4);            /* 16px — trigger + panel horizontal inset */
   --accordion-padding-y: var(--linear-sp-linear-5);            /* 20px below 768px → 24px from 768px up (see override at end of file) */
+  --accordion-compact-padding-x: var(--linear-sp-linear-0);    /* 0 — size="compact" rows run edge to edge */
   --accordion-icon-size: var(--pixel-px-20);                   /* 20px — kept under the heading line box so type drives row height */
   --accordion-panel-padding-bottom: var(--linear-sp-linear-5); /* 20px — below the open panel */
   --accordion-gap: var(--linear-sp-linear-4);                  /* 16px — heading ↔ chevron */

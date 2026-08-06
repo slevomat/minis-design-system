@@ -553,6 +553,17 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Accordion — <code>size="compact"</code> variant (no horizontal inset)</h3>
+      <p>A compact row for accordions nested inside an already-padded container (card, narrow column, drawer), where the default 16px inset stacks on the parent's padding and knocks the headings out of alignment with everything around them.</p>
+      <ul>
+        <li><strong><code>size</code> on both <code>&lt;minis-accordion&gt;</code> and <code>&lt;minis-accordion-item&gt;</code></strong> — <code>'default' | 'compact'</code>, default <code>'default'</code>, reflected. Set it on the container and it is pushed down to every item (same mechanism as <code>heading-level</code>); set it per item only for a deliberately mixed list.</li>
+        <li><strong><code>compact</code> zeroes the horizontal padding only</strong> — trigger and panel left/right go to 0. Vertical padding, type scale, chevron and dividers are untouched: despite the name it trims the <em>inset</em>, not the density — rows stay exactly as tall as they are at <code>default</code>.</li>
+        <li><strong>Naming</strong> — the accordion is the one component <em>not</em> on the abbreviated <code>xs/sm/md/lg/xl</code> scale: the values are <code>default</code> and <code>compact</code> in Figma <em>and</em> in code, identical strings on both sides.</li>
+        <li><strong>Tokens</strong> — new <code>--accordion-compact-padding-x</code> → <code>var(--linear-sp-linear-0)</code> (0) · Figma <code>.Components → Accordion/compact/padding/x</code>.</li>
+        <li><strong>Figma</strong> — <code>accordion-item</code> (<code>4984:9556</code>) gained a <code>Size</code> property (6 variants → 12), and the <code>accordion</code> container is now a component set with <code>Size=default</code> / <code>Size=compact</code>. Existing instances are unaffected: the originals became the <code>default</code> variants. Note the container's <code>Size</code> cannot reach items dropped into its Slot — Figma has no property forwarding into slot content — whereas in code <code>&lt;minis-accordion size="compact"&gt;</code> always wins over its children.</li>
+        <li>New <strong>Size — compact</strong> story comparing both sizes in the same padded card, plus a <code>size</code> control on the Playground.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Separator — opacity-based colour, and the accordion now follows it</h3>
       <p>The separator rule was a solid grey (<code>--color-border-subtle</code> → <code>#e3e4e6</code>), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the <code>accordion-item</code> divider dropped its colour/height override, so the accordion consumes the same rule.</p>
       <ul>

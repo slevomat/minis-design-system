@@ -53,6 +53,16 @@ export const accordionItemStyles = css`
     overflow-wrap: break-word;
   }
 
+  /* Compact size — the row runs edge to edge. For an accordion that already
+     sits inside a padded container (a card, a narrow column), the trigger's
+     own inset would double up on the parent's. Only the horizontal padding
+     goes; the vertical rhythm and the divider are unchanged. */
+  :host([size='compact']) .trigger,
+  :host([size='compact']) .panel-content {
+    padding-left: var(--accordion-compact-padding-x, 0);
+    padding-right: var(--accordion-compact-padding-x, 0);
+  }
+
   /* =====================
      CHEVRON
      ===================== */

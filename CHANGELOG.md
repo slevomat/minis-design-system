@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-08-06
 
+### Accordion — `size="compact"` variant (no horizontal inset)
+
+A compact row for accordions nested inside an already-padded container (card, narrow column, drawer), where the default 16px inset would stack on the parent's padding and knock the headings out of alignment with everything around them.
+
+- **`size` property on both `<minis-accordion>` and `<minis-accordion-item>`** — `'default' | 'compact'`, default `'default'`, reflected. Set it on the container and it is pushed down to every item (same mechanism as `heading-level`: applied on `slotchange` and whenever `size` changes); set it per item only for a deliberately mixed list.
+- **`compact` zeroes the horizontal padding only** — trigger and panel left/right go to 0. Vertical padding, type scale, chevron and dividers are untouched, so despite the name it trims the *inset*, not the density — rows stay exactly as tall as they are at `default`.
+- New **Size — compact** story showing both sizes in the same padded card, plus a `size` control on the Playground.
+- **Naming**: the accordion is the one component **not** on the abbreviated `xs/sm/md/lg/xl` scale — the values are `default` and `compact` in Figma *and* in code, identical strings on both sides. Recorded as an explicit exception in `CLAUDE.md` → Size naming convention.
+
+#### Tokens
+
+- **`--accordion-compact-padding-x`** (new) → `var(--linear-sp-linear-0)` (0) · Figma `.Components → Accordion/compact/padding/x` → `linear/sp-linear-0`.
+
+#### Figma
+
+- **New `Size` variant property on the `accordion-item` component set** (`4984:9556`), values `default` / `compact` — 6 variants became 12. The originals were renamed to carry `Size=default`, so every instance already on a canvas keeps its look. The `compact` variants bind `trigger` and `panel` `paddingLeft` / `paddingRight` to the new variable.
+- **The `accordion` list container is now a component set too** (`5136:9716`), variants `Size=default` / `Size=compact`; the original component (`4984:9557`) *is* the `Size=default` variant, so existing instances follow it unbroken. Its slot items are pre-set to the matching size.
+  - ⚠️ **The container's `Size` does not reach items a designer drops into the Slot** — Figma has no property forwarding into slot content. It sets the size of the default content only; swapped-in items keep their own `Size`. The component description says so. Code has no such limit: `<minis-accordion size="compact">` always wins over its children.
+  - The empty `Frame 42` wrapper that held the old container was removed by Figma when the component moved out of it.
+- ⚠️ **Known gap in the three `Size=compact, Open=True` item variants**: their `panel` is a plain frame, not a slot. Cloning a variant through the Plugin API drops slot-ness (and the `Label` / `Show divider` property wiring — those two I rebound, verified rendering). Practical effect: panel content in a compact *open* row can be edited directly but not replaced through the `panel` slot property. There is no `createSlot` in the Plugin API, so fixing it means duplicating those three variants by hand in the Figma UI. Everything else — labels, dividers, states, padding — is correct.
+- `accordion.figma.ts` maps `figma.enum('Size', { compact: 'compact' })` on the item, and the container mapping moved from `4984-9557` to the new set `5136-9716` (mapping the `Size=default` variant would only have covered half the set) with the same `Size` enum.
+
 ### Separator — opacity-based colour, and the accordion now follows it
 
 The separator rule was a solid grey (`--color-border-subtle` → `#e3e4e6`), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the `accordion-item` divider dropped its colour/height override, so the accordion consumes the same rule.

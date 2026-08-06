@@ -19,6 +19,7 @@ const meta: Meta = {
 <ul>
   <li>Compose <code>&lt;minis-accordion&gt;</code> with one or more <code>&lt;minis-accordion-item&gt;</code> children.</li>
   <li>Add <code>single</code> for exclusive mode — opening one item closes the others.</li>
+  <li><code>size="compact"</code> drops the row's horizontal inset to 0, so headings and panels run edge to edge. Use it when the accordion already sits inside a padded container and the two insets would otherwise stack. Row height is unchanged — it trims the inset, not the density.</li>
   <li>The heading scales with the viewport: <strong>16px</strong> below 768px, <strong>18px</strong> from 768px up (<code>--typography-heading-sm-size</code>). Long headings wrap onto several lines.</li>
   <li>The trigger is a real <code>&lt;button aria-expanded&gt;</code>; the panel is a labelled <code>role="region"</code>.</li>
 </ul>
@@ -40,11 +41,18 @@ const meta: Meta = {
       control: { type: 'number', min: 0, max: 6 },
       description: 'ARIA heading level applied to each item trigger. `0` omits the role.',
     },
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['default', 'compact'],
+      description:
+        'Row density, applied to every item. `compact` drops the horizontal inset to 0 so rows run edge to edge.',
+    },
   },
   args: {
     single: false,
     bordered: false,
     headingLevel: 3,
+    size: 'default',
   },
 };
 
@@ -100,6 +108,7 @@ export const Playground: Story = {
       ?single=${args.single}
       ?bordered=${args.bordered}
       heading-level=${args.headingLevel}
+      size=${args.size}
     >
       ${faq.map(
         (item) => html`
@@ -140,6 +149,65 @@ export const MultipleOpen: Story = {
       )}
     </minis-accordion>
   `,
+};
+
+/**
+ * `size="compact"` removes the row's horizontal inset (`--accordion-padding-x` → 0)
+ * so headings, chevrons and panels align with the container's own edge. The
+ * vertical rhythm and the dividers are untouched.
+ *
+ * Both accordions below sit in the same 24px-padded card. The `default` one
+ * insets a further 16px, so its text no longer lines up with the card's title;
+ * the `compact` one does.
+ */
+export const CompactSize: Story = {
+  name: 'Size — compact (no horizontal inset)',
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const card = `
+      background: var(--color-surface-primary, #fff);
+      border: 1px solid var(--color-border-subtle, #e3e4e6);
+      border-radius: var(--border-radius-md, 8px);
+      padding: 24px;
+      max-width: 520px;
+    `;
+    const title = `
+      margin: 0 0 8px;
+      font: inherit;
+      font-size: var(--typography-size-sm, 14px);
+      font-weight: var(--typography-weight-semibold, 600);
+      color: var(--color-text-secondary, #6b6b70);
+    `;
+    return html`
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style=${card}>
+          <p style=${title}>size="default" — insets a further 16px</p>
+          <minis-accordion>
+            ${faq.slice(0, 3).map(
+              (item, i) => html`
+                <minis-accordion-item heading=${item.q} ?open=${i === 0}>
+                  ${item.a}
+                </minis-accordion-item>
+              `
+            )}
+          </minis-accordion>
+        </div>
+
+        <div style=${card}>
+          <p style=${title}>size="compact" — flush with the card padding</p>
+          <minis-accordion size="compact">
+            ${faq.slice(0, 3).map(
+              (item, i) => html`
+                <minis-accordion-item heading=${item.q} ?open=${i === 0}>
+                  ${item.a}
+                </minis-accordion-item>
+              `
+            )}
+          </minis-accordion>
+        </div>
+      </div>
+    `;
+  },
 };
 
 /** All states side by side: closed, open, disabled. */
