@@ -26,6 +26,14 @@ A compact row for accordions nested inside an already-padded container (card, na
 - ⚠️ **Known gap in the three `Size=compact, Open=True` item variants**: their `panel` is a plain frame, not a slot. Cloning a variant through the Plugin API drops slot-ness (and the `Label` / `Show divider` property wiring — those two I rebound, verified rendering). Practical effect: panel content in a compact *open* row can be edited directly but not replaced through the `panel` slot property. There is no `createSlot` in the Plugin API, so fixing it means duplicating those three variants by hand in the Figma UI. Everything else — labels, dividers, states, padding — is correct.
 - `accordion.figma.ts` maps `figma.enum('Size', { compact: 'compact' })` on the item, and the container mapping moved from `4984-9557` to the new set `5136-9716` (mapping the `Size=default` variant would only have covered half the set) with the same `Size` enum.
 
+### Code Connect — `figma connect publish` was failing for every component
+
+`page-header.figma.ts` used ternaries inside its `html` template (`${description ? 'description="…"' : ''}`). The HTML parser only accepts prop placeholders there, so it threw `Expected a call expression as a placeholder in the template, got ConditionalExpression` — and because the CLI parses all files as one batch, that single file took down the whole publish, including components whose own mappings were fine.
+
+- **Conditional markup now lives in the boolean's value mapping**, the pattern `button.figma.ts` already used for its counter: `figma.boolean('Description', { true: 'description="…"', false: undefined })`, and likewise for `Tag`, `Button` and the inverted `Badge` → `no-badge`.
+- The `Button` mapping is kept on one line and marked `prettier-ignore` — the mapped value is emitted into the Dev Mode snippet verbatim, newlines and indentation included.
+- `pnpm figma:parse` now reports all five mapping files clean. **Rule for new `.figma.ts` files**: no ternaries, no logic of any kind inside the `html` template — only `${prop}` placeholders.
+
 ### Separator — opacity-based colour, and the accordion now follows it
 
 The separator rule was a solid grey (`--color-border-subtle` → `#e3e4e6`), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the `accordion-item` divider dropped its colour/height override, so the accordion consumes the same rule.

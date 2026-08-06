@@ -564,6 +564,14 @@ const changelogHTML = `
         <li>New <strong>Size — compact</strong> story comparing both sizes in the same padded card, plus a <code>size</code> control on the Playground.</li>
       </ul>
 
+      <h3 style="margin-top:1rem">Code Connect — <code>figma connect publish</code> was failing for every component</h3>
+      <p><code>page-header.figma.ts</code> used ternaries inside its <code>html</code> template (<code>${"${description ? 'description=\"…\"' : ''}"}</code>). The HTML parser only accepts prop placeholders there, so it threw <em>"Expected a call expression as a placeholder in the template, got ConditionalExpression"</em> — and because the CLI parses every mapping file as one batch, that one file took down the whole publish, including components whose mappings were fine.</p>
+      <ul>
+        <li><strong>Conditional markup now lives in the boolean's value mapping</strong> — the pattern <code>button.figma.ts</code> already used for its counter: <code>figma.boolean('Description', { true: 'description="…"', false: undefined })</code>, and likewise for <code>Tag</code>, <code>Button</code> and the inverted <code>Badge</code> → <code>no-badge</code>.</li>
+        <li>The accordion container mapping moved to the new component set (<code>5136-9716</code>) — mapping the <code>Size=default</code> variant would only have covered half the set.</li>
+        <li><strong>Rule for new <code>.figma.ts</code> files</strong>: no ternaries and no logic of any kind inside the <code>html</code> template — only <code>${'${prop}'}</code> placeholders. <code>pnpm figma:parse</code> catches it before a publish does.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Separator — opacity-based colour, and the accordion now follows it</h3>
       <p>The separator rule was a solid grey (<code>--color-border-subtle</code> → <code>#e3e4e6</code>), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the <code>accordion-item</code> divider dropped its colour/height override, so the accordion consumes the same rule.</p>
       <ul>
