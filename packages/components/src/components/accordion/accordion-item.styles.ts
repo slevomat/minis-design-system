@@ -7,7 +7,7 @@ export const accordionItemStyles = css`
     /* Divider sits *below* every item; the parent <minis-accordion> hides the
        last one so the list never ends on a stray rule. */
     border-bottom: var(--accordion-border-width, 1px) solid
-      var(--accordion-border-color, #e6e6e6);
+      var(--accordion-border-color, rgba(0, 0, 0, 0.05));
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
   }
 

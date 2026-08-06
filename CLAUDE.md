@@ -37,7 +37,7 @@ docs/
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
 - **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
-- **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
+- **Color**: `--color-text-*`, `--color-surface-*`, `--color-border-*`, `--color-separator-default` (alpha — black 5% light / white 35% dark, so rules read on any surface; `--separator-color` and the accordion divider both resolve to it), `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
 
 > There is NO bare numeric `--spacing-{n}` scale. The only `--spacing-*` tokens are the responsive `--spacing-layout-*` set. For fixed values use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
@@ -97,8 +97,8 @@ Every change to components or tokens **must** be recorded in two places, in the 
 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
-- Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container `4984:9557`
-- Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet)
+- Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container `4984:9557` (the item's divider is an unmodified `separator` instance — no colour/height override)
+- Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator-default`, not `--color-border-subtle`)
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
 ## Figma Code Connect

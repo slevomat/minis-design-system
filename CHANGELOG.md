@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-08-06
+
+### Separator — opacity-based colour, and the accordion now follows it
+
+The separator rule was a solid grey (`--color-border-subtle` → `#e3e4e6`), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the `accordion-item` divider dropped its colour/height override, so the accordion consumes the same rule.
+
+#### Tokens
+
+- **`--color-white-a-white-a35`** (new primitive) → `oklch(1 0 0 / 0.35)` (`rgba(255,255,255,0.35)`) · Figma `.Primitives → Color/white-a/white-a35`.
+- **`--color-separator-default`** (new foundation token) → light `var(--color-black-a-black-a5)` (black 5%, `#0000000d`), dark `var(--color-white-a-white-a35)` (white 35%) · Figma `Foundation → Color/Separator/default`.
+- **`--separator-color`**: `var(--color-border-subtle)` → `var(--color-separator-default)`.
+- `--separator-height` unchanged (`var(--border-width-thin)`, 1px).
+- Both new tokens added to the Storybook **Design Tokens** page (Border table and White Alpha palette).
+
+#### Accordion
+
+- **Dividers are now the shared separator rule**, black 5% instead of solid grey-90 — visibly lighter, and correct on non-white surfaces. Matches Figma, where the divider is now an **unmodified** `separator` instance: `accordion-item` no longer binds `Accordion/default/border` / `Accordion/border/width` at all (verified on the component set `4984:9556` — it resolves `--separator-color` `#0000000d` and `--separator-height` `1`).
+- `--accordion-border-color` → `var(--separator-color)`, `--accordion-border-width` → `var(--separator-height)`. The names are kept as hooks so a single accordion can still be restyled without touching every rule in the system; the component CSS is unchanged apart from its hard-coded fallback (`#e6e6e6` → `rgba(0, 0, 0, 0.05)`).
+- The unused `Accordion/default/border` and `Accordion/border/width` variables still exist in the Figma `.Components` collection — worth deleting there if nothing else binds them.
+
+#### Not changed
+
+- No Lit `<minis-separator>` yet; these tokens remain registered ahead of the component.
+- `tokens.json` / `tokens.rgb.json` were **not** replaced from the new export. That export renames every variable (`--color-black-a-black-a10` → `--color-primitives-black-a-black-a10`, `--button-*` → `--components-button-*`, `--linear-sp-linear-*` → `--scales-linear-sp-linear-*`), which no longer matches `tokens.css`; adopting it is a separate migration, and `tokens.rgb.json` would go stale in the meantime.
+
 ## 2026-07-30
 
 ### Brand font — Kensington removed from the repository, Bebas Neue fallback

@@ -14,7 +14,7 @@ Figma properties → code:
 | `State`        | `Default` / `Hover` / `Disabled` | `Hover` is CSS-only; `Disabled` → `disabled` |
 | `Show divider` | boolean, default `true` | No attribute — CSS handles it via `:last-of-type`. Turn it off on the **last row** of a list. |
 
-The divider is a nested instance of the [separator](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4987-147) component (page `4977:346`), with its colour and height overridden to `Accordion/default/border` / `Accordion/border/width` so the accordion's own tokens stay the source of truth.
+The divider is a nested instance of the [separator](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4987-147) component (page `4977:346`). It carries **no colour/height override** — it uses the separator's own `Separator/default/color` (black 5%) and `Separator/height` (1px), so every rule in the system stays in one place.
 
 > **Why a boolean and not an `Item + Separator + Item` structure**: in the DOM there is no separator element — the rule is `border-bottom` on the item, hidden on `:last-of-type`. A sibling separator would be a Figma-only node with no code counterpart, and would force designers to hand-maintain the alternation on every add/remove/reorder.
 
@@ -67,7 +67,7 @@ The event bubbles and is composed, so it can be listened for on `<minis-accordio
 Component-level tokens (defined in `@minis/tokens`):
 
 - `--accordion-surface` → transparent
-- `--accordion-border-color` → `--color-border-subtle` (grey-90 light / grey-35 dark) · `--accordion-border-width` → 1px
+- `--accordion-border-color` → `--separator-color` → `--color-separator-default` (black 5% light / white 35% dark — alpha, so the rule reads on any surface) · `--accordion-border-width` → `--separator-height` (1px). The two `--accordion-border-*` names stay as hooks for restyling a single accordion; by default they follow the shared separator rule, matching Figma where the divider is an unmodified `separator` instance.
 - `--accordion-padding-x` → 16px (`--linear-sp-linear-4`)
 - `--accordion-padding-y` → **responsive**: 20px (`--linear-sp-linear-5`) below 768px, 24px (`--linear-sp-linear-6`) from 768px up. The override lives in a media block at the **end** of `tokens.css` — `:root` inside a media query has the same specificity as a bare `:root`, so it has to come after the component block or the default silently wins.
 - `--accordion-icon-size` → 20px (`--pixel-px-20`)

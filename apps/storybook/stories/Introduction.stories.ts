@@ -543,6 +543,34 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-08-06 (separator: opacity-based colour)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-08-06" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-06</h2>
+        <button class="cl-copy-btn" data-anchor="2026-08-06">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Separator — opacity-based colour, and the accordion now follows it</h3>
+      <p>The separator rule was a solid grey (<code>--color-border-subtle</code> → <code>#e3e4e6</code>), which only reads correctly on white. It is now an alpha colour, so the same token works on faded surfaces, tinted banners and photography without a per-surface override. In Figma the <code>accordion-item</code> divider dropped its colour/height override, so the accordion consumes the same rule.</p>
+      <ul>
+        <li><strong>Tokens</strong>
+          <ul>
+            <li><strong>New <code>--color-white-a-white-a35</code></strong> (primitive) → <code>oklch(1 0 0 / 0.35)</code> = <code>rgba(255,255,255,0.35)</code> · Figma <code>.Primitives → Color/white-a/white-a35</code>.</li>
+            <li><strong>New <code>--color-separator-default</code></strong> (foundation) → light <code>var(--color-black-a-black-a5)</code> (black 5%, <code>#0000000d</code>), dark <code>var(--color-white-a-white-a35)</code> (white 35%) · Figma <code>Foundation → Color/Separator/default</code>.</li>
+            <li><code>--separator-color</code> — <code>var(--color-border-subtle)</code> → <code>var(--color-separator-default)</code>. <code>--separator-height</code> unchanged (<code>var(--border-width-thin)</code>, 1px).</li>
+            <li>Both new tokens listed on the <strong>Design Tokens</strong> page (Border table and White Alpha palette).</li>
+          </ul>
+        </li>
+        <li><strong>Accordion dividers are now the shared separator rule</strong> — black 5% instead of solid grey-90, visibly lighter and correct on non-white surfaces. Matches Figma, where the divider is now an <em>unmodified</em> <code>separator</code> instance: <code>accordion-item</code> no longer binds <code>Accordion/default/border</code> / <code>Accordion/border/width</code> at all. <code>--accordion-border-color</code> → <code>var(--separator-color)</code> and <code>--accordion-border-width</code> → <code>var(--separator-height)</code>; the names stay as hooks so a single accordion can still be restyled without touching every rule in the system.</li>
+        <li>No Lit <code>&lt;minis-separator&gt;</code> yet — these tokens stay registered ahead of the component.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-07-30 (brand font: Kensington out of repo, Bebas Neue fallback)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
