@@ -2,8 +2,23 @@ import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { pageHeaderStyles } from './page-header.styles.js';
 import '../badge/badge.js';
+import type { BadgeColor } from '../badge/badge.js';
 
-export type PageHeaderTheme = 'brand' | 'blue' | 'yellow' | 'pink' | 'green';
+export type PageHeaderTheme = 'brand' | 'blue' | 'yellow' | 'pink' | 'green' | 'summer';
+
+/**
+ * Badge seal colour per theme — each pairing is taken straight from Figma and
+ * chosen so the seal reads against its own theme surface rather than blending
+ * into it. Note the `green` theme also recolours the checkmark (see the styles).
+ */
+const BADGE_COLOR_BY_THEME: Record<PageHeaderTheme, BadgeColor> = {
+  brand: 'pink',
+  blue: 'brand',
+  yellow: 'summer',
+  pink: 'blue',
+  green: 'yellow',
+  summer: 'green',
+};
 
 /**
  * Mini*S Page Header component.
@@ -52,9 +67,9 @@ export class MinisPageHeader extends LitElement {
   @property({ type: Boolean, attribute: 'no-badge', reflect: true })
   noBadge = false;
 
-  /** Badge color: red (pink) seal on every theme; brand (cyan) seal on the pink theme for contrast. */
-  private get _badgeColor(): 'pink' | 'brand' {
-    return this.theme === 'pink' ? 'brand' : 'pink';
+  /** Badge seal colour for the current theme. */
+  private get _badgeColor(): BadgeColor {
+    return BADGE_COLOR_BY_THEME[this.theme] ?? BADGE_COLOR_BY_THEME.brand;
   }
 
   firstUpdated() {

@@ -35,6 +35,14 @@ export const pageHeaderStyles = css`
   :host([theme='green']) {
     --page-header-surface: var(--color-branding-green);
     --page-header-text: var(--color-green-95);
+    /* The only theme whose seal takes a coloured checkmark — yellow seal,
+       blue check, so the mark stays legible on the pale gold. */
+    --page-header-badge-check: var(--color-branding-blue);
+  }
+
+  :host([theme='summer']) {
+    --page-header-surface: var(--color-branding-summer);
+    --page-header-text: var(--color-green-95);
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -160,6 +168,7 @@ export const pageHeaderStyles = css`
   .badge {
     flex: none;
     --badge-size: var(--page-header-badge-size, 0.8em);
+    --badge-check-color: var(--page-header-badge-check, var(--color-core-white));
   }
 
   /* ──────────────────────────────────────────────────────────

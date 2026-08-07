@@ -377,6 +377,7 @@
   --color-branding-blue: var(--color-blue-45);
   --color-branding-brand: var(--color-blue-65);
   --color-branding-green: var(--color-green-45);
+  --color-branding-summer: var(--color-yellow-45);
   --color-feedback-error: var(--color-red-45);
   --color-feedback-error-light: var(--color-red-95);
   --color-feedback-info: var(--color-blue-45);

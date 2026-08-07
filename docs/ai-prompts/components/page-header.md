@@ -48,7 +48,7 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `theme` | `'brand' \| 'blue' \| 'yellow' \| 'pink' \| 'green'` | `'brand'` | Background color theme |
+| `theme` | `'brand' \| 'blue' \| 'yellow' \| 'pink' \| 'green' \| 'summer'` | `'brand'` | Background color theme |
 | `description` | `string` | `''` | Body copy shown below the heading. Omit to hide. |
 | `tag` | `string` | `''` | Countdown/label text shown as a pill above the heading. Omit to hide. |
 | `no-badge` | `boolean` | `false` | Hide the Brand/Badge checkmark seal next to the heading (shown by default) |
@@ -69,6 +69,7 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 | `--page-header-text` | per theme | Heading and description text color |
 | `--page-header-badge-size` | `0.8em` | Badge seal size. Relative to the heading font-size — keep it in `em` so it stays proportional at every breakpoint. |
 | `--page-header-badge-gap` | `0.27em` | Horizontal gap between the end of the heading's last line and the badge. Also `em`-relative. |
+| `--page-header-badge-check` | white (blue on `theme="green"`) | Colour of the badge's checkmark. |
 
 ### CSS shadow parts
 
@@ -82,13 +83,19 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 
 ## Theme color mapping
 
-| `theme` | Background token | Text color token |
-|---|---|---|
-| `brand` | `--color-branding-brand` (cyan) | `--color-blue-25` (dark) |
-| `yellow` | `--color-branding-yellow` | `--color-blue-25` (dark) |
-| `blue` | `--color-branding-blue` | `--color-blue-95` (light) |
-| `pink` | `--color-branding-pink` | `--color-pink-95` (light) |
-| `green` | `--color-branding-green` | `--color-green-95` (light) |
+| `theme` | Background token | Text color token | Badge seal |
+|---|---|---|---|
+| `brand` | `--color-branding-brand` (cyan) | `--color-blue-25` (dark) | `pink` |
+| `yellow` | `--color-branding-yellow` | `--color-blue-25` (dark) | `summer` |
+| `blue` | `--color-branding-blue` | `--color-blue-95` (light) | `brand` |
+| `pink` | `--color-branding-pink` | `--color-pink-95` (light) | `blue` |
+| `green` | `--color-branding-green` | `--color-green-95` (light) | `yellow`, blue checkmark |
+| `summer` | `--color-branding-summer` (orange) | `--color-green-95` (light) | `green` |
+
+The seal colour is **derived from the theme** — there is no attribute for it. Each pairing
+comes from Figma and is picked so the seal reads against its own surface rather than
+disappearing into it. The `green` theme is the only one that also recolours the checkmark
+(blue instead of white), because a white mark on the pale gold seal has too little contrast.
 
 ---
 

@@ -9,6 +9,8 @@ figma.connect(
         yellow: 'yellow',
         blue: 'blue',
         brand: 'brand',
+        green: 'green',
+        summer: 'summer',
       }),
       size: figma.enum('Size', {
         sm: 'sm',

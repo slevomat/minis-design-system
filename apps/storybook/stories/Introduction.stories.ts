@@ -563,7 +563,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-08-07 (topbar variants, page header definition, action row xs)
+           2026-08-07 (summer branding, badge & page header colours, topbar variants, action row xs)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-08-07" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-07</h2>
@@ -572,6 +572,30 @@ const changelogHTML = `
           <span class="copy-label">Copy link</span>
         </button>
       </div>
+
+      <h3 style="margin-top:1rem">Summer branding colour — new token, badge variant, page header theme</h3>
+      <p>Figma added <code>Color/Branding/summer</code> and rebuilt the Badge and PageHeader component sets around it. The design system follows.</p>
+
+      <h4 style="margin-top:.75rem">Tokens</h4>
+      <ul>
+        <li><strong>New <code>--color-branding-summer</code></strong> → <code>var(--color-yellow-45)</code> (<code>#ffa400</code>), a campaign orange. Joins <code>--color-branding-{pink,yellow,blue,brand,green}</code>. Light and dark resolve to the same value, matching the Figma export.</li>
+        <li><em>Not the same as <code>--color-branding-yellow</code>:</em> <code>yellow</code> is <code>--color-yellow-75</code> (<code>#ffd666</code>, pale gold), <code>summer</code> is <code>--color-yellow-45</code> (<code>#ffa400</code>, saturated orange).</li>
+      </ul>
+
+      <h4 style="margin-top:.75rem"><code>minis-badge</code></h4>
+      <ul>
+        <li><strong>Two new <code>color</code> values: <code>green</code> and <code>summer</code></strong> — the full set is now <code>pink</code> (default) · <code>yellow</code> · <code>blue</code> · <code>brand</code> · <code>green</code> · <code>summer</code>, matching the Figma <code>color</code> variant one-to-one.</li>
+        <li><strong>New <code>--badge-check-color</code> custom property</strong> (default <code>var(--color-core-white)</code>) — the checkmark was a hardcoded <code>white</code> in the SVG and could not be recoloured. It is a variable now because the page header's <code>green</code> theme needs a blue mark on its yellow seal. Existing usage is unchanged.</li>
+        <li>New <strong>Custom Checkmark Color</strong> story; <em>All Variants</em> shows all six colours.</li>
+      </ul>
+
+      <h4 style="margin-top:.75rem"><code>minis-page-header</code></h4>
+      <ul>
+        <li><strong>New <code>summer</code> theme</strong> — surface <code>--color-branding-summer</code>, text <code>--color-green-95</code> (the same pale tone the <code>green</code> theme uses, per Figma). Themes are now <code>brand</code> (default) · <code>yellow</code> · <code>blue</code> · <code>pink</code> · <code>green</code> · <code>summer</code>.</li>
+        <li><strong>The badge seal colour per theme was rebuilt.</strong> It used to be "pink on everything, brand on the pink theme". Figma now specifies a distinct pairing per theme, each chosen so the seal reads against its own surface: <code>brand</code>→<code>pink</code>, <code>yellow</code>→<code>summer</code> (was <code>pink</code>), <code>blue</code>→<code>brand</code> (was <code>pink</code>), <code>pink</code>→<code>blue</code> (was <code>brand</code>), <code>green</code>→<code>yellow</code> with a blue checkmark (was <code>pink</code>), <code>summer</code>→<code>green</code>.</li>
+        <li><strong>New <code>--page-header-badge-check</code> custom property</strong> — the checkmark colour, forwarded to the badge's <code>--badge-check-color</code>. Defaults to white; <code>theme="green"</code> sets it to <code>--color-branding-blue</code>, because a white mark on the pale gold seal has too little contrast.</li>
+        <li>The mapping lives in one <code>BADGE_COLOR_BY_THEME</code> record rather than a ternary, so adding a theme is a single line.</li>
+      </ul>
 
       <h3 style="margin-top:1rem"><code>minis-app</code> skill — scaffold and build an app end to end</h3>
       <ul>

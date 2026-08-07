@@ -7,6 +7,10 @@ export const badgeStyles = css`
        that tracks the surrounding font-size. The size attribute sets it too. */
     --badge-size: 82px;
     --badge-color: var(--color-branding-pink);
+    /* The checkmark. White on every seal by default; override it when the seal
+       sits on a background that needs a different contrast pairing — the
+       page-header's green theme does exactly that. */
+    --badge-check-color: var(--color-core-white);
     width: var(--badge-size);
     height: var(--badge-size);
   }
@@ -30,6 +34,14 @@ export const badgeStyles = css`
 
   :host([color='brand']) {
     --badge-color: var(--color-branding-brand);
+  }
+
+  :host([color='green']) {
+    --badge-color: var(--color-branding-green);
+  }
+
+  :host([color='summer']) {
+    --badge-color: var(--color-branding-summer);
   }
 
   svg {

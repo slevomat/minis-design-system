@@ -18,7 +18,8 @@ const meta: Meta = {
 <p>Page headers — some call them <strong>heroes</strong>. Full-width branded banners in the brand colour themes, meant to sit at the top of a page as its <strong>first content element</strong>, directly under the Slevomat header (<code>&lt;minis-topbar&gt;</code>) and the main navigation (<code>&lt;minis-navigation&gt;</code>). Typically used on category and campaign pages. Responsive: horizontal layout on desktop (≥768 px) with content left and image right; stacked layout on mobile with the image on top.</p>
 <p><strong>Placement:</strong> <strong>one per page</strong>, at the very top of the content area — never mid-page, never two stacked. It sits <strong>outside</strong> <code>&lt;minis-container&gt;</code>: its root is already a full-bleed colour strip that applies <code>--container-padding</code> itself and centres a 1240px inner container, so nesting it would inset the background from the viewport edges and double the padding.</p>
 <ul>
-  <li><strong>5 themes</strong>: <code>brand</code> (cyan, default), <code>yellow</code>, <code>blue</code>, <code>pink</code>, <code>green</code>.</li>
+  <li><strong>6 themes</strong>: <code>brand</code> (cyan, default), <code>yellow</code>, <code>blue</code>, <code>pink</code>, <code>green</code>, <code>summer</code> (orange).</li>
+  <li><strong>The badge seal colour is picked by the theme</strong>, not by you — each pairing comes from Figma and is chosen so the seal reads against its own surface: brand→pink, blue→brand, yellow→summer, pink→blue, green→yellow (with a blue checkmark), summer→green.</li>
   <li><strong>Default slot</strong>: heading HTML — supports <code>&lt;br&gt;</code> for line breaks.</li>
   <li><strong><code>image</code> slot</strong>: decorative photo. Provide a PNG with a transparent blob-shaped background for the signature organic look.</li>
   <li><strong><code>button</code> slot</strong>: optional CTA — use <code>&lt;minis-button variant="transparent" size="xl"&gt;</code>.</li>
@@ -40,7 +41,7 @@ const meta: Meta = {
   argTypes: {
     theme: {
       control: 'select',
-      options: ['brand', 'blue', 'yellow', 'pink', 'green'],
+      options: ['brand', 'blue', 'yellow', 'pink', 'green', 'summer'],
       description: 'Color theme — sets background and text colors',
     },
     description: {
@@ -93,12 +94,15 @@ export const AllThemes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: 'All five color themes with description and badge.' },
+      description: {
+        story:
+          'All six color themes with description and badge. Note how the seal colour changes with the theme — each pairing is set by the component.',
+      },
     },
   },
   render: () => html`
     <div style="display:flex;flex-direction:column;gap:0">
-      ${(['brand', 'yellow', 'blue', 'pink', 'green'] as const).map(
+      ${(['brand', 'yellow', 'blue', 'pink', 'green', 'summer'] as const).map(
         (theme) => html`
           <minis-page-header
             theme="${theme}"
