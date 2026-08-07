@@ -58,6 +58,23 @@ claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user
 
 > Tip: In Figma, right-click any frame or component → **Copy link to selection** to get the URL.
 
+## 🤖 AI Skills
+
+A **skill** is a set of instructions your AI assistant (Claude Code) loads on demand — you describe what you want in plain language and it picks the right one up, or you invoke it by name with a slash.
+
+| Skill | What it does | Say something like |
+|---|---|---|
+| `minis-app` | Builds a whole app or prototype from scratch: scaffolds the project, picks the right topbar variant, writes the screens with real Mini*S components and tokens, and verifies the result in a browser (desktop, mobile, dark mode) before reporting done. | *"Build me an app for handling refund requests"* |
+| `slevomat-design-principles` | Reviews a feature description or screenshot against the 7 Slevomat design principles. Not shipped in this repo — part of the wider Slevomat AI setup. | *"Check this screen against our design principles"* |
+
+`minis-app` lives at `.claude/skills/minis-app/` and works automatically when your AI tool runs inside this repo. To use it from anywhere:
+
+```bash
+cp -r .claude/skills/minis-app ~/.claude/skills/
+```
+
+Full details: the Storybook **Vibe Coding Guide → Skills**.
+
 ## 🚀 Quick Start
 
 ```bash

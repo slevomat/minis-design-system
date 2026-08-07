@@ -8,10 +8,25 @@ const meta: Meta = {
   title: 'Components/Topbar',
   component: 'minis-topbar',
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['web', 'vibe-apps'],
+      description: 'Where the header is used — Slevomat website or a vibe-coded app',
+    },
+    'app-name': {
+      control: 'text',
+      description: 'App name shown on the right (vibe-apps variant only)',
+    },
+  },
+  args: {
+    variant: 'web',
+    'app-name': 'My app',
+  },
   parameters: {
     docs: {
       description: {
-        component: '<a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3510-495" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4"><svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg> Open in Figma ↗</a>',
+        component: '<a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5156-9287" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4"><svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg> Open in Figma ↗</a>\n<p>The top bar is meant to be used at the top of any Slevomat web page or vibe-coded app — both purposes have their own variant. It sits above <code>&lt;minis-navigation&gt;</code> and <code>&lt;minis-page-header&gt;</code>.</p>\n<ul>\n  <li><strong><code>variant="web"</code></strong> (default) — the Slevomat website header: logo, optional search, and action buttons (shortcuts, account, cart) on the right.</li>\n  <li><strong><code>variant="vibe-apps"</code></strong> — the header for vibe-coded apps and prototypes: logo left, the app\'s own name right via <code>app-name</code>.</li>\n</ul>\n<p><strong>Slots:</strong> <code>logo</code> (left, max-height 30px), <code>search</code> (<code>web</code> only — the design system has no input component yet, so slot your own; the slot reserves no width while empty), <code>actions</code> (right).</p>\n<p><strong>Not done yet</strong> (Figma roadmap): the <code>web</code> variant is not yet fully aligned with production, and there are no breakpoint variants — both variants are desktop layouts.</p>\n<p><strong>Placement:</strong> the topbar is layout-neutral — no background, no max-width of its own. Put it inside <code>&lt;minis-container&gt;</code> (or your own full-bleed white band) to get the page\'s 1240px measure and responsive padding.</p>',
       },
     },
   },
@@ -34,11 +49,44 @@ const slevomatLogo = html`
   </svg>
 `;
 
+/** Placeholder search field — the design system has no input component yet. */
+const searchField = html`
+  <input
+    slot="search"
+    type="search"
+    placeholder="Co potřebujete nalézt?"
+    aria-label="Hledat"
+    style="width:100%;height:34px;box-sizing:border-box;padding:0 12px;border:1px solid var(--color-border-subtle,#e4e5e7);border-radius:var(--border-radius-sm,4px);font-family:var(--typography-font-family-sans);font-size:var(--typography-size-sm,14px);color:var(--color-text-primary,#000);background:var(--color-surface-primary,#fff)"
+  />
+`;
+
 export const Playground: Story = {
   name: 'Playground',
+  render: (args) => html`
+    <minis-topbar variant=${args.variant} app-name=${args['app-name']}>
+      ${slevomatLogo} ${args.variant === 'web' ? searchField : ''}
+      ${args.variant === 'web'
+        ? html`
+            <minis-button slot="actions" variant="tertiary" size="sm">
+              <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
+              Oblíbené
+            </minis-button>
+            <minis-button slot="actions" variant="cta-buy" size="sm">
+              <minis-icon slot="icon" name="cart-fill"></minis-icon>
+              Košík
+            </minis-button>
+          `
+        : ''}
+    </minis-topbar>
+  `,
+};
+
+export const Web: Story = {
+  name: 'Web — logo, search, actions',
+  parameters: { controls: { disable: true } },
   render: () => html`
-    <minis-topbar>
-      ${slevomatLogo}
+    <minis-topbar variant="web">
+      ${slevomatLogo} ${searchField}
       <minis-button slot="actions" variant="tertiary" size="sm">
         <minis-icon slot="icon" name="heart-fill" size="16"></minis-icon>
         Oblíbené
@@ -49,14 +97,34 @@ export const Playground: Story = {
       </minis-button>
       <minis-button slot="actions" variant="cta-buy" size="sm">
         <minis-icon slot="icon" name="cart-fill"></minis-icon>
-        Kosik
+        Košík
       </minis-button>
+    </minis-topbar>
+  `,
+};
+
+export const VibeApps: Story = {
+  name: 'Vibe apps — logo + app name',
+  parameters: { controls: { disable: true } },
+  render: () => html`
+    <minis-topbar variant="vibe-apps" app-name="My app"> ${slevomatLogo} </minis-topbar>
+  `,
+};
+
+export const VibeAppsWithAction: Story = {
+  name: 'Vibe apps — with an action',
+  parameters: { controls: { disable: true } },
+  render: () => html`
+    <minis-topbar variant="vibe-apps" app-name="My app">
+      ${slevomatLogo}
+      <minis-button slot="actions" variant="tertiary" size="sm">Sign in</minis-button>
     </minis-topbar>
   `,
 };
 
 export const LogoOnly: Story = {
   name: 'Logo only',
+  parameters: { controls: { disable: true } },
   render: () => html`
     <minis-topbar>
       ${slevomatLogo}

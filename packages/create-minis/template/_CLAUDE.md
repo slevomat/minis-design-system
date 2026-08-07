@@ -10,11 +10,32 @@ All components, tokens, and icons are pre-loaded in `public/vendor/` (served as 
 - Style with `var(--token-name)` CSS custom properties
 - Run `pnpm dev` for hot-reloading dev server
 
+## Two rules that apply to every page — no exceptions
+
+1. **Page background is `var(--color-background)`.** Never `#fff`, `white`, or a hand-picked
+   grey — the token carries dark mode and the colour schemas, a hardcoded value opts out of both.
+   (`--color-surface-primary` is for *components* on top of the page: cards, panels, the band
+   behind the topbar.)
+2. **The page opens with `<minis-topbar>`, set to the right variant:**
+
+   | You are building… | `variant` |
+   |---|---|
+   | Something on the **Slevomat website** | `web` (default) |
+   | **Any other app** — internal tool, dashboard, admin, client-facing app, one-off prototype | `vibe-apps` + `app-name="…"` |
+
+   Never hand-roll a header bar, and never leave the page without one.
+
+```html
+<minis-topbar variant="vibe-apps" app-name="Refund Console">
+  <svg slot="logo">...</svg>
+</minis-topbar>
+```
+
 ## Available Components
 
 | Tag | Description |
 |-----|-------------|
-| `<minis-topbar>` | Brand identity bar — logo (left) + action buttons (right) |
+| `<minis-topbar>` | Top bar for any Slevomat page or app — logo (left) + actions / app name (right). `variant="web"` \| `variant="vibe-apps"` |
 | `<minis-navigation>` | Scrollable nav bar (`variant="horizontal"` or `variant="tabs"`) |
 | `<minis-navigation-item>` | Nav link/tab inside `<minis-navigation>` |
 | `<minis-container>` | Responsive layout wrapper (auto padding + max-width) |
@@ -90,7 +111,9 @@ Every Slevomat page follows this structure:
 <!-- Full-width header band -->
 <div style="background: var(--color-surface-primary); border-bottom: 1px solid var(--color-border-subtle);">
   <minis-container>
-    <minis-topbar>
+    <!-- variant="web" for the Slevomat website;
+         variant="vibe-apps" app-name="…" for any other app -->
+    <minis-topbar variant="web">
       <svg slot="logo">...</svg>
       <minis-button slot="actions" variant="cta-buy" size="sm">Cart</minis-button>
     </minis-topbar>

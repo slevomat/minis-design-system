@@ -8,7 +8,10 @@ export type PageHeaderTheme = 'brand' | 'blue' | 'yellow' | 'pink' | 'green';
 /**
  * Mini*S Page Header component.
  *
- * A full-width branded banner used at the top of category/campaign pages.
+ * Also known as a *hero*. A full-width branded banner in one of the brand colour
+ * themes, used as the **first content element** of a page — placed directly under
+ * the Slevomat header (`<minis-topbar>`) and the main navigation
+ * (`<minis-navigation>`), typically on category and campaign pages.
  * Switches between horizontal (desktop) and stacked (mobile) layout automatically.
  *
  * @slot           - Heading content — supports rich HTML including `<br>` for line breaks.

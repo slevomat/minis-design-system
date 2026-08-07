@@ -40,12 +40,26 @@ Every HTML file using Mini*S should start with:
   </style>
 </head>
 <body>
-  
+
+  <!-- Every Mini*S page opens with the topbar.
+       variant="web"       → you are building on the Slevomat website
+       variant="vibe-apps" → any other app: internal tool, dashboard, client app, prototype -->
+  <minis-container>
+    <minis-topbar variant="vibe-apps" app-name="My app">
+      <img slot="logo" src="/logo.svg" alt="Slevomat" />
+    </minis-topbar>
+  </minis-container>
+
   <!-- Your content here -->
-  
+
 </body>
 </html>
 ```
+
+> **Two rules that apply to every prototype**, no exceptions: the page background is
+> `var(--color-background)` (never a hardcoded colour — it carries dark mode and the
+> colour schemas), and the page starts with `<minis-topbar>` set to the right variant.
+> See [principles.md](./principles.md#every-prototype-starts-with-the-background-token-and-a-topbar).
 
 ## AI Prompt Template
 
@@ -56,6 +70,9 @@ Create a [component/pattern/template name] using Mini*S Design System.
 
 Requirements:
 - Use Web Components with <minis-*> prefix
+- Page background must be var(--color-background) — never a hardcoded colour
+- Start the page with <minis-topbar>: variant="web" for the Slevomat website,
+  variant="vibe-apps" app-name="…" for any other app or prototype
 - Apply Mini*S design tokens (--color-*, --spacing-layout-*, --linear-sp-linear-*, etc.)
 - Follow the structure from [relevant .md file]
 - Make it responsive with the viewport-scaling layout tokens

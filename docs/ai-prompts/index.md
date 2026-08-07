@@ -16,19 +16,27 @@ Individual UI elements with props and variants.
 - [Tag](./components/tag.md) - Compact pill label: static, clickable (with toggle), or dismissible
 - [Card Grid](./components/card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
 - [Container](./components/container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding
-- [Topbar](./components/topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
+- [Topbar](./components/topbar.md) - The bar at the top of any Slevomat web page or vibe-coded app; `web` + `vibe-apps` variants, logo / search / actions slots
 - [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 - [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants (pink, yellow, blue)
-- [Page Header](./components/page-header.md) - Full-width branded banner for category/campaign pages; 5 themes, responsive layout, image + CTA slots
+- [Page Header](./components/page-header.md) - Hero banner; first content element under the topbar + navigation; 5 brand themes, responsive layout, image + CTA slots
 - [Accordion](./components/accordion.md) - Expand/collapse list for FAQ sections; bold heading + blue chevron, optional exclusive (`single`) mode
 
 [→ All Components](./components/README.md)
 
+### 🤖 Skills
+
+Packaged multi-step routines your AI assistant loads on demand.
+
+- **`minis-app`** — scaffold and build a whole app or prototype end to end (project setup → topbar variant → screens → browser verification). Lives in the design system repo at `.claude/skills/minis-app/`; copy it to `~/.claude/skills/` to use it from any project.
+- **`slevomat-design-principles`** — review a feature or screenshot against the 7 Slevomat design principles. Not part of this repo.
+
 ### 💡 Principles
 Design decisions and rules for how to use components correctly.
 
+- [Every prototype starts with the background token and a topbar](./principles.md#every-prototype-starts-with-the-background-token-and-a-topbar) — `var(--color-background)` for the page, `<minis-topbar>` at the top: `web` on the Slevomat website, `vibe-apps` for any other app
 - [Prefer active states over disabled](./principles.md#prefer-active-states-over-disabled) — keep components interactive and show contextual guidance instead of silently disabling them
 - [Style with tokens, never hardcoded values](./principles.md#style-with-tokens-never-hardcoded-values) — tokens carry dark mode and responsive scaling; raw hex/px silently opts out
 - [Dark mode comes free](./principles.md#dark-mode-comes-free--if-you-follow-the-token-rule) — `<html data-mode="dark">` is the entire integration; never write per-component dark CSS

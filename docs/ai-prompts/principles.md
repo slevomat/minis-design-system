@@ -4,6 +4,64 @@ Design decisions and rules for how to use components correctly and consistently.
 
 ---
 
+## Every prototype starts with the background token and a topbar
+
+**Rule:** Whenever you vibe-code anything with this design system — a prototype, a demo page, an internal tool, a full app — two things are non-negotiable:
+
+1. **The page background is `var(--color-background)`.** Never `#fff`, never `white`, never a hand-picked grey. The token carries dark mode and the colour schemas; a hardcoded value silently opts out of both.
+2. **The page opens with `<minis-topbar>`, set to the right variant:**
+
+| You are building… | `variant` |
+|---|---|
+| Something on the **Slevomat website** | `web` |
+| **Any other app** — internal tools, dashboards, admin, client-facing apps, one-off prototypes | `vibe-apps` (add `app-name="…"`) |
+
+### Prefer this
+
+```html
+<style>
+  body {
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--typography-font-family-sans);
+  }
+</style>
+
+<minis-container>
+  <minis-topbar variant="vibe-apps" app-name="Refund Console">
+    <img slot="logo" src="/logo.svg" alt="Slevomat" />
+  </minis-topbar>
+</minis-container>
+
+<!-- page content follows -->
+```
+
+### Over this
+
+```html
+<!-- Avoid: hardcoded background — breaks dark mode and the colour schemas -->
+<body style="background:#fff">
+
+<!-- Avoid: a hand-rolled header bar instead of the component -->
+<header class="my-header"><img src="/logo.svg"><h1>Refund Console</h1></header>
+
+<!-- Avoid: no topbar at all — every Mini*S page has one -->
+```
+
+### Why
+
+The topbar is what makes a page read as Slevomat rather than as a generic bootstrap of components, and its two variants exist precisely so one component covers both jobs: the `web` variant matches the production site, `vibe-apps` gives an internal or external app its own name in the same frame. Rolling your own header, or skipping it, is the fastest way to make a prototype look off-system.
+
+`--color-background` is the page-level surface; `--color-surface-primary` is for *components* sitting on top of it (cards, panels, the white band behind the topbar). Don't swap them.
+
+### Related
+
+- [`components/topbar.md`](./components/topbar.md) — full API, both variants
+- [`getting-started.md`](./getting-started.md) — the HTML skeleton with both rules already applied
+
+---
+
 ## Prefer active states over disabled
 
 **Rule:** Use `disabled` only when interaction is truly impossible — not just conditional or blocked by an incomplete prerequisite. When a component *could* work but requires something from the user first, keep it active and explain the requirement instead.

@@ -56,15 +56,10 @@
     }
 
     /* ── Top bar ── */
+    /* White band behind the topbar — the component itself is layout-neutral */
     .topbar {
+      background: var(--color-surface-primary, #fff);
       border-bottom: 1px solid var(--color-border-subtle, #e5e5e5);
-      padding: var(--linear-sp-linear-3, 12px) 0;
-    }
-
-    .topbar-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .logo {
@@ -72,12 +67,6 @@
       font-weight: var(--typography-weight-bold, 700);
       color: var(--color-text-accent-link, #006eb9);
       text-decoration: none;
-    }
-
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: var(--linear-sp-linear-3, 12px);
     }
 
     /* ── Category nav ── */
@@ -253,16 +242,16 @@
 </head>
 <body>
 
-  <!-- ═══ Top bar ═══ -->
+  <!-- ═══ Top bar — every Mini*S page opens with <minis-topbar>.
+       variant="web" here because this is the Slevomat website;
+       use variant="vibe-apps" app-name="…" for any other app. ═══ -->
   <header class="topbar">
     <div class="container">
-      <div class="topbar-inner">
-        <a class="logo" href="/">Slevomat</a>
-        <div class="topbar-actions">
-          <minis-button variant="tertiary" size="small">Přihlásit se</minis-button>
-          <minis-button variant="primary" size="small">Registrovat</minis-button>
-        </div>
-      </div>
+      <minis-topbar variant="web">
+        <a class="logo" slot="logo" href="/">Slevomat</a>
+        <minis-button slot="actions" variant="tertiary" size="sm">Přihlásit se</minis-button>
+        <minis-button slot="actions" variant="primary" size="sm">Registrovat</minis-button>
+      </minis-topbar>
     </div>
   </header>
 
@@ -350,7 +339,7 @@
             <span class="card-price-orig">5 200 Kč</span>
             <span class="card-discount">Ušetříte 44 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 
@@ -374,7 +363,7 @@
             <span class="card-price-orig">7 800 Kč</span>
             <span class="card-discount">Ušetříte 42 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 
@@ -399,7 +388,7 @@
             <span class="card-price-orig">5 900 Kč</span>
             <span class="card-discount">Ušetříte 44 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 
@@ -422,7 +411,7 @@
             <span class="card-price-orig">9 400 Kč</span>
             <span class="card-discount">Ušetříte 39 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 
@@ -445,7 +434,7 @@
             <span class="card-price-orig">4 200 Kč</span>
             <span class="card-discount">Ušetříte 41 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 
@@ -470,7 +459,7 @@
             <span class="card-price-orig">15 600 Kč</span>
             <span class="card-discount">Ušetříte 42 %</span>
           </div>
-          <minis-button variant="cta-buy" size="small">Koupit</minis-button>
+          <minis-button variant="cta-buy" size="sm">Koupit</minis-button>
         </div>
       </article>
 

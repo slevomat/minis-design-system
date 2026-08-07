@@ -446,6 +446,26 @@ export const DesignPrinciples: Story = {
       <h1 id="design-patterns" style="font-size:2rem;margin-bottom:.5rem;scroll-margin-top:1rem">Design patterns</h1>
       <p>Rules for using components correctly and consistently — beyond the API.</p>
 
+      <h2>Every prototype starts with the background token and a topbar</h2>
+      <p><strong>Rule:</strong> Whenever you vibe-code anything with this design system — a prototype, a demo page, an internal tool, a full app — two things are non-negotiable: the page background is <code>var(--color-background)</code> (never <code>#fff</code>, never a hand-picked grey — the token carries dark mode and the colour schemas), and the page opens with <code>&lt;minis-topbar&gt;</code> set to the right variant.</p>
+      <table style="border-collapse:collapse;margin:.75rem 0">
+        <thead><tr><th style="text-align:left;padding:.35rem .75rem .35rem 0">You are building…</th><th style="text-align:left;padding:.35rem 0"><code>variant</code></th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.35rem .75rem .35rem 0">Something on the <strong>Slevomat website</strong></td><td style="padding:.35rem 0"><code>web</code></td></tr>
+          <tr><td style="padding:.35rem .75rem .35rem 0"><strong>Any other app</strong> — internal tools, dashboards, admin, client-facing apps, one-off prototypes</td><td style="padding:.35rem 0"><code>vibe-apps</code> + <code>app-name="…"</code></td></tr>
+        </tbody>
+      </table>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>body { background: var(--color-background); color: var(--color-text-primary); }
+
+&lt;minis-container&gt;
+  &lt;minis-topbar variant="vibe-apps" app-name="Refund Console"&gt;
+    &lt;img slot="logo" src="/logo.svg" alt="Slevomat" /&gt;
+  &lt;/minis-topbar&gt;
+&lt;/minis-container&gt;</code></pre>
+      <p>The topbar is what makes a page read as Slevomat rather than as a generic bootstrap of components, and its two variants exist precisely so one component covers both jobs. Rolling your own header bar — or skipping it — is the fastest way to make a prototype look off-system. Note <code>--color-background</code> is the <em>page</em> surface; <code>--color-surface-primary</code> is for components sitting on top of it.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <h2>Prefer active states over disabled</h2>
       <p><strong>Rule:</strong> Use <code>disabled</code> only when interaction is truly impossible — not just conditional or blocked by an incomplete prerequisite. When a component <em>could</em> work but requires something from the user first, keep it active and explain the requirement instead.</p>
 
@@ -543,7 +563,7 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
-           2026-08-07 (action row: xs breakpoint + full state matrix)
+           2026-08-07 (topbar variants, page header definition, action row xs)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
         <h2 id="2026-08-07" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-07</h2>
@@ -552,6 +572,57 @@ const changelogHTML = `
           <span class="copy-label">Copy link</span>
         </button>
       </div>
+
+      <h3 style="margin-top:1rem"><code>minis-app</code> skill — scaffold and build an app end to end</h3>
+      <ul>
+        <li><strong>New skill at <code>.claude/skills/minis-app/SKILL.md</code></strong>, committed with the design system so it can't drift from the components it describes. Invoked when someone asks to create, start or vibe-code an app/prototype/page with Mini*S. It asks what is being built (which decides the topbar variant), runs <code>pnpm build &amp;&amp; pnpm create-prototype</code>, starts the dev server in the browser, builds the requested screens from <code>docs/ai-prompts/</code>, and verifies the result (console, screenshot, mobile width, dark mode) before reporting done.</li>
+        <li>Carries the non-negotiables as a checklist: background token, topbar variant, tokens-only styling, abbreviated sizes, page-header outside the container / topbar inside it, borders vs separators, avoid <code>disabled</code>, no per-component dark CSS.</li>
+        <li><strong>Human-readable skill listing</strong> — skills were only discoverable by reading source files. Added a <strong>Skills</strong> section to the Vibe Coding Guide (what a skill is, what each one does, what to say to trigger it, where it lives), an <strong>AI Skills</strong> table in the repo <code>README.md</code>, and a pointer in <code>docs/ai-prompts/index.md</code>. Both <code>minis-app</code> and the externally-provided <code>slevomat-design-principles</code> are listed.</li>
+        <li><strong>Scaffold fix found while testing it:</strong> <code>packages/create-minis/template/_index.html</code> loaded <code>&lt;minis-icon&gt;</code> twice — both <code>/vendor/components/index.js</code> and <code>/vendor/icons/index.js</code>, though the components bundle already inlines the icon component. Every generated prototype threw <code>NotSupportedError: … "minis-icon" has already been used with this registry</code> on load. Dropped the second script tag; icons render unchanged.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">AI docs — the vibe-coding rule: background token + topbar</h3>
+      <p>A single rule now stated in every place an agent (Claude Code, Cursor, or a human) looks, so generated prototypes stop drifting off-system: <em>whatever you vibe-code — prototype, demo, internal tool, full app — the page background is <code>var(--color-background)</code> (never a hardcoded colour), and the page opens with <code>&lt;minis-topbar&gt;</code>: <code>variant="web"</code> when working on the Slevomat website, <code>variant="vibe-apps"</code> + <code>app-name="…"</code> for any other internal or external app.</em></p>
+      <ul>
+        <li><strong><code>docs/ai-prompts/principles.md</code></strong> — new first principle, "Every prototype starts with the background token and a topbar", with prefer/avoid examples and the reasoning (<code>--color-background</code> is the page surface, <code>--color-surface-primary</code> is for components on top of it).</li>
+        <li><strong><code>docs/ai-prompts/getting-started.md</code></strong> — the HTML skeleton now includes the topbar, and the copy-paste AI prompt template carries both requirements.</li>
+        <li><strong><code>CLAUDE.md</code></strong> — new "Vibe-coding rule" section; <strong><code>docs/ai-prompts/index.md</code></strong> lists the principle first.</li>
+        <li><strong>Prototype scaffold</strong> — <code>packages/create-minis/template/_CLAUDE.md</code> (the generated project's own AI context file) leads with the two rules; <code>_index.html</code> sets <code>variant="web"</code> explicitly with a comment pointing at <code>vibe-apps</code>.</li>
+        <li><strong>Design Principles page</strong> (this Storybook) — same rule as the first design pattern.</li>
+        <li><strong><code>docs/examples/simple-landing.html</code></strong> — replaced its hand-rolled <code>&lt;header class="topbar"&gt;</code> with <code>&lt;minis-topbar variant="web"&gt;</code>, and fixed six <code>size="small"</code> values that violated the abbreviated-size rule.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Topbar (Figma: <strong>Header</strong>) — <code>web</code> and <code>vibe-apps</code> variants</h3>
+      <p>The Figma <em>Header</em> component set (<code>5156:9287</code>) gained a second variant for vibe-coded apps. <code>&lt;minis-topbar&gt;</code> now covers both — the tag keeps its name (renamed from <code>&lt;minis-header&gt;</code> in March 2026 to keep it apart from <code>&lt;minis-page-header&gt;</code>), and existing markup is unaffected: <code>web</code> is the default and renders exactly as before.</p>
+      <ul>
+        <li><strong><code>variant</code> property</strong> — <code>'web' | 'vibe-apps'</code>, default <code>'web'</code>, reflected. Maps 1:1 to the Figma <code>Property 1</code> variant. <code>web</code> is the Slevomat website header (logo, optional search, action buttons); <code>vibe-apps</code> is the header for vibe-coded apps and prototypes (logo left, app name right).</li>
+        <li><strong><code>app-name</code> attribute</strong> — <code>vibe-apps</code> only. Right-aligned <code>&lt;span&gt;</code> (not a heading, so it doesn't compete with the page <code>&lt;h1&gt;</code>) in Heading/lg: <code>--typography-heading-lg-size</code>, <code>--typography-weight-semibold</code>, line-height 1.25, letter-spacing <code>-0.01em</code> (Figma's −1%).</li>
+        <li><strong>New <code>search</code> slot</strong> (<code>web</code> only) — the design system has no input component yet, so nothing is rendered for you. The slot is hidden while empty, so a topbar without search keeps the original logo-left / actions-right layout with no phantom gap.</li>
+        <li><strong><code>actions</code> slot works in both variants</strong> — in <code>vibe-apps</code> the buttons render after the app name.</li>
+        <li><strong>Bar height is now <code>min-height</code></strong> instead of a fixed <code>height</code>, so tall slotted content grows the bar instead of overflowing it.</li>
+        <li><strong><code>topbar.figma.ts</code> added</strong> — the component had no Code Connect file at all.</li>
+        <li>New <strong>Web — logo, search, actions</strong>, <strong>Vibe apps — logo + app name</strong> and <strong>Vibe apps — with an action</strong> stories; the Playground gained <code>variant</code> and <code>app-name</code> controls.</li>
+        <li><strong>Figma component set renamed <em>Header</em> → <em>TopBar</em></strong> (<code>5156:9287</code>), matching the code tag. The variant property is unchanged (<code>Property 1</code> = <code>web</code> | <code>vibe-apps</code>), so the Code Connect mapping still resolves.</li>
+        <li>Documented the Figma roadmap gaps: the <code>web</code> variant is not yet fully aligned with production, and there are no breakpoint variants — both variants are desktop-only layouts.</li>
+        <li>Docs rewritten (<code>docs/ai-prompts/components/topbar.md</code>) — variant table, Figma↔code naming note, placement (topbar → navigation → page-header, wrapped in <code>&lt;minis-container&gt;</code>), and a warning that the search field and avatar in the Figma frame are pasted screenshots of the live site, not design-system components.</li>
+      </ul>
+
+      <h4 style="margin-bottom:.25rem">Tokens</h4>
+      <ul>
+        <li><strong><code>--topbar-logo-gap</code></strong> (new) → <code>16px</code> — space after the logo, previously hardcoded as <code>--linear-sp-linear-4</code>.</li>
+        <li><strong><code>--topbar-search-width</code></strong> (new) → <code>300px</code> — search slot width (Figma: 300px).</li>
+        <li><strong><code>--topbar-search-gap</code></strong> (new) → <code>48px</code> — space between search and the actions group.</li>
+        <li><strong><code>--topbar-app-name-size</code></strong> (new) → <code>var(--typography-heading-lg-size)</code> — <code>vibe-apps</code> app name size.</li>
+        <li><strong><code>--topbar-app-name-color</code></strong> (new) → <code>var(--color-text-primary)</code> — <code>vibe-apps</code> app name colour.</li>
+        <li><strong><code>--topbar-height</code></strong> — unchanged at <code>64px</code>, now applied as <code>min-height</code> rather than <code>height</code>.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Page Header — definition and placement clarified</h3>
+      <ul>
+        <li>Documented that page headers are also known as <strong>heroes</strong>, come in the brand colour themes, and are the <strong>first content element</strong> of a page — placed directly under the Slevomat header (<code>&lt;minis-topbar&gt;</code>) and the main navigation (<code>&lt;minis-navigation&gt;</code>).</li>
+        <li>Added a <strong>Placement</strong> section: <strong>one page header per page</strong>, at the very top of the content area, never mid-page and never two stacked; it sits <strong>outside</strong> <code>&lt;minis-container&gt;</code> — its root is already a full-bleed colour strip that applies <code>--container-padding</code> and centres a 1240px inner container, so nesting it would inset the background from the viewport edges and double the padding.</li>
+        <li>Wording synced across the component JSDoc, this Storybook docs page, <code>docs/ai-prompts/components/page-header.md</code> and both AI-prompt indexes. No API or visual change.</li>
+      </ul>
 
       <h3 style="margin-top:1rem">Action Row — <code>breakpoint="xs"</code> mobile layout, and the full state matrix in Figma</h3>
       <p>The Figma set already had an <code>xs</code> (mobile) breakpoint but only in its <code>Default</code> state, and the web component knew nothing about it at all. Both sides now cover the same 24 combinations.</p>
@@ -1825,11 +1896,53 @@ export const VibeCodingGuide: Story = {
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!--  PART 0 — SKILLS                                             -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <h2 id="skills" style="scroll-margin-top:1rem">Skills — shortcuts you can just ask for</h2>
+      <p>A <strong>skill</strong> is a set of instructions your AI assistant loads on demand. You don't run a command or read the file — you describe what you want in plain language, and the assistant picks the matching skill up automatically. You can also invoke one by name with a slash, e.g. <code>/minis-app</code>.</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:18%">Skill</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">What it does</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:28%">Say something like</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-app</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Builds a whole app or prototype from scratch: sets the project up, picks the right topbar variant, writes your screens with real Mini*S components and tokens, then checks the result in a browser (desktop, mobile and dark mode) before telling you it's done.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Build me an app for handling refund requests"</em><br/><br/><em>"Make a landing page for the summer campaign"</em></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>slevomat-design-principles</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Reviews a feature description or a screenshot against the 7 Slevomat design principles and gives structured feedback.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Check this screen against our design principles"</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Where they live</h3>
+      <ul>
+        <li><strong><code>minis-app</code></strong> ships with this design system, at <code>.claude/skills/minis-app/</code>. It works automatically when your AI tool runs inside the design system repo. To use it from another folder, copy it once:
+          <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;margin:.5rem 0"><code>cp -r &lt;design-system-repo&gt;/.claude/skills/minis-app ~/.claude/skills/</code></pre>
+          Re-copy it after the design system changes, so the skill keeps matching the components.</li>
+        <li><strong><code>slevomat-design-principles</code></strong> is not shipped in this repo — it comes from the wider Slevomat AI setup. If your assistant doesn't know it, ask whoever set up your tooling.</li>
+      </ul>
+
+      <p style="color:var(--color-text-secondary,#6b6b70)">Skills are added as the design system grows. If you find yourself explaining the same multi-step routine to your AI assistant more than twice, that routine probably wants to be a skill — see the <strong>Contribution guide</strong>.</p>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
       <!--  PART 1 — QUICK START                                        -->
       <!-- ═══════════════════════════════════════════════════════════════ -->
 
       <h2>Quick Start (5 minutes)</h2>
-      <p>Get a working prototype running in three steps.</p>
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        <strong>Using Claude Code?</strong> Skip the manual steps — the <code>minis-app</code> skill (in the design system repo at <code>.claude/skills/minis-app/</code>) does all of this for you: it asks what you're building, scaffolds the project, picks the right topbar variant, builds your screens from the component docs, and checks the result in a browser. Just say what you want to build.
+      </blockquote>
+      <p>Prefer to do it by hand? Three steps.</p>
 
       <h3>Step 1 — Prerequisites</h3>
       <p>You need two things installed on your machine:</p>

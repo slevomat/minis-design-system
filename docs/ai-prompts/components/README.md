@@ -14,11 +14,11 @@ Individual UI components for building interfaces. Every component has a full AI-
 - [Icon](./icon.md) - SVG icons via `<minis-icon>`, currentColor theming, a11y
 - [Message](./message.md) - Notification card with visual, title, description and close button
 - [Navigation](./navigation.md) - Horizontal scrollable nav bar: category nav or tab switcher
-- [Page Header](./page-header.md) - Full-width branded banner for category/campaign pages; 5 themes, responsive layout
+- [Page Header](./page-header.md) - Hero banner; first content element under the topbar + navigation; 5 brand themes, responsive layout
 - [Pill Counter](./pill-counter.md) - Numeric badge used in buttons and standalone
 - [Tag](./tag.md) - Compact pill label: static, clickable, toggle, or dismissible
 - [Tile](./tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically in a grid
-- [Topbar](./topbar.md) - Brand identity bar with logo and action buttons, sits above navigation
+- [Topbar](./topbar.md) - The bar at the top of any Slevomat web page or vibe-coded app; `web` + `vibe-apps` variants, logo / search / actions slots
 
 ## Component Naming
 

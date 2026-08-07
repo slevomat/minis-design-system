@@ -4,6 +4,64 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-08-07
 
+### `minis-app` skill — scaffold and build an app end to end
+
+- **New skill at `.claude/skills/minis-app/SKILL.md`**, committed with the design system so it can't drift from the components it describes. Invoked when someone asks to create, start or vibe-code an app/prototype/page with Mini*S. It: asks what is being built (which decides the topbar variant), runs `pnpm build && pnpm create-prototype`, writes the project's `.claude/launch.json`, starts the dev server in the Browser pane, builds the requested screens from `docs/ai-prompts/`, and verifies the result (console, screenshot, mobile width, dark mode) before reporting done.
+- Carries the non-negotiables as a checklist: background token, topbar variant, tokens-only styling, abbreviated sizes, page-header outside the container / topbar inside it, borders vs separators, avoid `disabled`, no per-component dark CSS.
+- Tells the agent to say so explicitly when it has to build something the design system lacks (input, modal, table, avatar) — prototype-local, not design system.
+- Includes the one-line copy into `~/.claude/skills/` for use outside the monorepo.
+- **Human-readable skill listing** — skills were only discoverable by reading source files. Added a **Skills** section to the Storybook *Vibe Coding Guide* (what a skill is, what each one does, what to say to trigger it, where it lives), an **AI Skills** table in the repo `README.md`, and a short pointer in `docs/ai-prompts/index.md`. Both `minis-app` and the externally-provided `slevomat-design-principles` are listed.
+
+#### Scaffold fix (found while testing the skill)
+
+- **`packages/create-minis/template/_index.html` loaded `<minis-icon>` twice.** The template pulled in both `/vendor/components/index.js` and `/vendor/icons/index.js`, but the components bundle already inlines the icon component — so every generated prototype threw `NotSupportedError: … "minis-icon" has already been used with this registry` on load. Dropped the second script tag and documented why in a comment. Icons render unchanged.
+
+### AI docs — the vibe-coding rule: background token + topbar
+
+A single rule now stated in every place an agent (Claude Code, Cursor, or a human) looks, so generated prototypes stop drifting off-system:
+
+> Whatever you vibe-code — prototype, demo, internal tool, full app — the page background is `var(--color-background)` (never a hardcoded colour), and the page opens with `<minis-topbar>`: `variant="web"` when working on the Slevomat website, `variant="vibe-apps"` + `app-name="…"` for any other internal or external app.
+
+Written into:
+
+- **`docs/ai-prompts/principles.md`** — new first principle, "Every prototype starts with the background token and a topbar", with prefer/avoid examples and the reasoning (`--color-background` is the page surface, `--color-surface-primary` is for components on top of it).
+- **`docs/ai-prompts/getting-started.md`** — the HTML skeleton now includes the topbar, and the copy-paste AI prompt template carries both requirements.
+- **`docs/ai-prompts/index.md`** — listed first in the principles index.
+- **`CLAUDE.md`** — new "Vibe-coding rule" section.
+- **`packages/create-minis/template/_CLAUDE.md`** — the scaffolded project's own AI context file leads with the two rules; `_index.html` sets `variant="web"` explicitly with a comment pointing at `vibe-apps`.
+- **Storybook → Design Principles** — same rule as the first design pattern.
+- **`docs/examples/simple-landing.html`** — replaced its hand-rolled `<header class="topbar">` with `<minis-topbar variant="web">`, and fixed six `size="small"` values that violated the abbreviated-size rule.
+
+### Topbar — `web` and `vibe-apps` variants
+
+The Figma component set (`5156:9287`) gained a second variant for vibe-coded apps, and was renamed *Header* → **TopBar** so the two sides finally match. `<minis-topbar>` now covers both variants, and existing markup is unaffected: `web` is the default and renders exactly as before.
+
+- **`variant` property** — `'web' | 'vibe-apps'`, default `'web'`, reflected. Maps 1:1 to the Figma `Property 1` variant. `web` is the Slevomat website header (logo, optional search, action buttons); `vibe-apps` is the header for vibe-coded apps and prototypes (logo left, app name right).
+- **`app-name` attribute** — string, `vibe-apps` only. Rendered right-aligned as a `<span>` (not a heading, so it doesn't compete with the page `<h1>`) in Heading/lg: `--typography-heading-lg-size`, `--typography-weight-semibold`, line-height 1.25, letter-spacing `-0.01em` (Figma's −1%).
+- **New `search` slot** (`web` only) — the design system has no input component yet, so nothing is rendered for you. The slot is `hidden` while empty (tracked via `slotchange`), so a topbar without search keeps the original logo-left / actions-right layout with no phantom gap.
+- **`actions` slot works in both variants** — in `vibe-apps` the buttons render after the app name.
+- **Bar height is now `min-height`** instead of a fixed `height`, so tall slotted content grows the bar instead of overflowing it.
+- **`topbar.figma.ts` added** — the component had no Code Connect file. Maps `Property 1` to `variant`, the app name and the per-variant trailing content.
+- New stories: **Web — logo, search, actions**, **Vibe apps — logo + app name**, **Vibe apps — with an action**; the Playground gained `variant` and `app-name` controls.
+- **Figma component set renamed *Header* → *TopBar*** (`5156:9287`), matching the code tag. The variant property is unchanged (`Property 1` = `web` \| `vibe-apps`), so the Code Connect mapping still resolves.
+- Documented the Figma roadmap gaps: the `web` variant is not yet fully aligned with production, and there are no breakpoint variants — both variants are desktop-only layouts.
+- Docs: `docs/ai-prompts/components/topbar.md` rewritten — variant table, Figma↔code naming note, placement (topbar → navigation → page-header, wrapped in `<minis-container>`), and a warning that the search field and avatar in the Figma frame are pasted screenshots of the live site, not design-system components.
+
+#### Tokens
+
+- **`--topbar-logo-gap`** (new) → `16px` — space after the logo, previously hardcoded as `--linear-sp-linear-4`.
+- **`--topbar-search-width`** (new) → `300px` — search slot width (Figma: 300px).
+- **`--topbar-search-gap`** (new) → `48px` — space between search and the actions group.
+- **`--topbar-app-name-size`** (new) → `var(--typography-heading-lg-size)` — `vibe-apps` app name size.
+- **`--topbar-app-name-color`** (new) → `var(--color-text-primary)` — `vibe-apps` app name colour.
+- **`--topbar-height`** — unchanged at `64px`, now applied as `min-height` rather than `height`.
+
+### Page Header — definition and placement clarified
+
+- Documented that page headers are also known as **heroes**, come in the brand colour themes, and are the **first content element** of a page — placed directly under the Slevomat header (`<minis-topbar>`) and the main navigation (`<minis-navigation>`).
+- Added a **Placement** section: **one page header per page**, at the very top of the content area, never mid-page and never two stacked; it sits **outside** `<minis-container>` — its root is already a full-bleed colour strip that applies `--container-padding` and centres a 1240px inner container, so nesting it would inset the background from the viewport edges and double the padding.
+- Wording synced across the component JSDoc, the Storybook docs page, `docs/ai-prompts/components/page-header.md`, `docs/ai-prompts/index.md` and `docs/ai-prompts/components/README.md`. No API, token or visual change.
+
 ### Action Row — `breakpoint="xs"` mobile layout, and the full state matrix in Figma
 
 The Figma set already had an `xs` (mobile) breakpoint but only in its `Default` state, and the web component knew nothing about it at all. Both sides now cover the same 24 combinations.

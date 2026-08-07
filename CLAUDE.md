@@ -42,6 +42,19 @@ docs/
 
 > There is NO bare numeric `--spacing-{n}` scale. The only `--spacing-*` tokens are the responsive `--spacing-layout-*` set. For fixed values use `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}`, or `--pixel-px-{n}`.
 
+## Vibe-coding rule (prototypes, demos, apps)
+
+Anything generated with this design system — a prototype, a demo page, an internal tool, a full app — must:
+
+1. Use `var(--color-background)` for the page background. Never a hardcoded colour: the token carries dark mode and the colour schemas. (`--color-surface-primary` is for components sitting on top of it, not for the page.)
+2. Open with `<minis-topbar>`, variant chosen by purpose:
+   - `variant="web"` — working on the **Slevomat website**
+   - `variant="vibe-apps"` + `app-name="…"` — **any other app**: internal tools, dashboards, admin, client-facing apps, one-off prototypes
+
+Never hand-roll a header bar and never omit it. See `docs/ai-prompts/principles.md` → "Every prototype starts with the background token and a topbar".
+
+To scaffold and build a whole app from scratch, use the **`minis-app` skill** (`.claude/skills/minis-app/SKILL.md`) — it drives `pnpm create-prototype`, the topbar-variant choice, and browser verification.
+
 ## Component conventions
 
 - Custom element prefix: `minis-` (e.g. `<minis-button>`)

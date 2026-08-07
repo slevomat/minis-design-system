@@ -1,6 +1,25 @@
 # `<minis-page-header>` — AI prompt reference
 
-Full-width branded banner used at the top of category and campaign pages. Switches between a horizontal layout (desktop ≥768 px: content left, image right) and a stacked layout (mobile: image top, content below).
+Page headers — also called **heroes** — come in the brand colour themes and open a page: they are the **first content element**, placed directly under the Slevomat header (`<minis-topbar>`) and the main navigation (`<minis-navigation>`). Full-width branded banner that switches between a horizontal layout (desktop ≥768 px: content left, image right) and a stacked layout (mobile: image top, content below).
+
+---
+
+## Placement
+
+```
+<minis-topbar>          ← Slevomat header
+<minis-navigation>      ← main navigation
+<minis-page-header>     ← hero — first content element on the page
+… rest of the page content …
+```
+
+- **One page header per page**, at the very top of the content area — never mid-page and never stacked with a second one.
+- It sits **outside** `<minis-container>`. The component's root is already a full-bleed colour strip that applies `--container-padding` itself and centres a 1240px inner container — the same job `<minis-container>` does. Nesting it would inset the coloured background from the viewport edges and double the horizontal padding.
+  ```html
+  <minis-page-header theme="brand">…</minis-page-header>
+  <minis-container>… rest of the page …</minis-container>
+  ```
+- Not every page needs one — it marks category and campaign pages. Ordinary detail or transactional pages start straight with content.
 
 ---
 
