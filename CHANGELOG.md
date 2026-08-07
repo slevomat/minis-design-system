@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-08-07
+
+### Action Row — `breakpoint="xs"` mobile layout, and the full state matrix in Figma
+
+The Figma set already had an `xs` (mobile) breakpoint but only in its `Default` state, and the web component knew nothing about it at all. Both sides now cover the same 24 combinations.
+
+- **`breakpoint` property** — `'desktop' | 'xs'`, default `'desktop'`, reflected. Maps 1:1 to the Figma `Breakpoint` variant. It is an explicit attribute, not a container query: the row is used inside dropdowns and narrow sidebars where a width-driven switch would fire at the wrong moment, and Storybook / Code Connect need to address both layouts directly.
+- **`xs` layout** — 56px row (up from 32px), plain 8px padding on both sides (the desktop leading inset is dropped), and a **trailing action pinned to the right edge**: an `arrow-right` chevron, or the checkbox when `variant="checkbox"`. The label group (icon, label, counter) stays left.
+- **The leading icon is no longer mutually exclusive with the checkbox.** Figma's `w/ Checkbox` variant has always shown a checkbox *and* a leading icon; the component rendered one or the other. The `icon` slot now renders in every variant whenever something is slotted into it, detected via `slotchange`. Existing markup is unaffected — a row with no slotted icon renders exactly as before, and the icon box collapses so the flex gap leaves no hole.
+- **Leading inset now follows the icon, not the variant** — `padding-left` drops to 3px whenever an icon is present (previously only for `variant="icon"`), with `variant="checkbox"` still overriding to 5px. Matches Figma's per-variant padding (8 / 3 / 5).
+- **`role`/ARIA corrected for the checkbox variant** — `variant="checkbox"` now exposes `role="checkbox"` + `aria-checked` instead of `role="button"` + `aria-pressed`. Other variants keep `role="button"` + `aria-pressed`.
+- New stories: **All variants — xs** (the full 3×4 grid), **xs — mobile list**, **xs — filter list**, plus a `breakpoint` control on the Playground and a `Disabled` row added to the desktop grid, which previously stopped at `Active`.
+- **`action-row.figma.ts` added** — the component had no Code Connect file. Maps `Variant`, `Breakpoint` and `State` (`Hover` falls through to the default rendering, as it is a CSS `:hover`).
+- Storybook filter-list labels translated to English.
+
+#### Tokens
+
+- **`--action-row-height`** (new) → `var(--pixel-px-32)` (32px) — desktop row height, previously hardcoded in the stylesheet.
+- **`--action-row-xs-height`** (new) → `var(--linear-sp-linear-14)` (56px) — xs row height.
+- **`--action-row-xs-action-size`** (new) → `var(--pixel-px-24)` (24px) — xs trailing action box.
+- **`--action-row-xs-action`** (new) → `var(--action-row-icon)` — xs trailing chevron colour, the same tertiary blue (`#006eb9`) Figma binds to the arrow.
+
+#### Figma
+
+- **9 variants added to the `ActionRow` component set** (`4202:3867`), taking it from 15 to the full 24: `State` = `Hover` / `Active` / `Disabled` for each of `Label`, `w/ Icon`, `w/ Checkbox` at `Breakpoint=xs`. The `State` property already declared all four values — only the `xs` rows were missing.
+- No new Figma variables: the xs states reuse exactly what desktop uses — the hover surface (`--action-row-hover-surface`, `#e6f7fc`), the active surface (`--action-row-active-surface`, `#f1f3f5`), and the same absolutely-positioned white `disabler` overlay at 60% opacity for `Disabled`.
+
 ## 2026-08-06
 
 ### Accordion — `size="compact"` variant (no horizontal inset)
