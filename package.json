@@ -9,6 +9,7 @@
     "storybook": "pnpm --filter storybook storybook",
     "build-storybook": "pnpm --filter storybook build-storybook",
     "test": "pnpm --filter \"./packages/**\" test",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,css,md}\"",
     "lint": "eslint \"**/*.{ts,tsx,js,jsx}\"",
     "create-prototype": "node packages/create-minis/bin/create.js",
