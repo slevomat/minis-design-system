@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-08-07
 
+### Summer branding colour — new token, badge variant, page header theme
+
+Figma added `Color/Branding/summer` and rebuilt the Badge and PageHeader component sets around it. The design system follows.
+
+#### Tokens
+
+- **New `--color-branding-summer`** → `var(--color-yellow-45)` (`#ffa400`), a campaign orange. Joins `--color-branding-{pink,yellow,blue,brand,green}`. Light and dark resolve to the same value, matching the Figma export — so it lives in the light foundation block only, like the rest of the branding palette.
+
+> Note: `--color-branding-yellow` (`--color-yellow-75`, `#ffd666`) and `--color-branding-summer` (`--color-yellow-45`, `#ffa400`) are two different warm tones. `yellow` is the pale gold; `summer` is the saturated orange.
+
+#### `minis-badge`
+
+- **Two new `color` values: `green` and `summer`** — `<minis-badge color="green">` paints the seal `--color-branding-green` (`#088107`), `color="summer"` paints it `--color-branding-summer` (`#ffa400`). The full set is now `pink` (default) · `yellow` · `blue` · `brand` · `green` · `summer`, matching the Figma `color` variant one-to-one.
+- **New `--badge-check-color` custom property** (default `var(--color-core-white)`) — the checkmark was a hardcoded `white` in the SVG and could not be recoloured. It is now a variable, because the page header's `green` theme needs a blue mark on its yellow seal. Existing usage is unchanged: the default resolves to the same white.
+- Storybook: *All Variants* shows all six colours; new **Custom Checkmark Color** story demonstrates `--badge-check-color`.
+- Code Connect (`badge.figma.ts`): `green` and `summer` added to the `color` enum mapping.
+
+#### `minis-page-header`
+
+- **New `summer` theme** — `--page-header-surface: var(--color-branding-summer)`, text `--color-green-95` (the same pale text tone the `green` theme uses, per Figma). Themes are now `brand` (default) · `yellow` · `blue` · `pink` · `green` · `summer`.
+- **Badge seal colour per theme was rebuilt.** It used to be "pink on everything, brand on the pink theme". Figma now specifies a distinct pairing per theme, each chosen so the seal reads against its own surface:
+
+  | theme | badge seal (was) | badge seal (now) |
+  |---|---|---|
+  | `brand` | `pink` | `pink` |
+  | `yellow` | `pink` | `summer` |
+  | `blue` | `pink` | `brand` |
+  | `pink` | `brand` | `blue` |
+  | `green` | `pink` | `yellow` + blue checkmark |
+  | `summer` | — | `green` |
+
+- **New `--page-header-badge-check` custom property** — the checkmark colour, forwarded to the badge's `--badge-check-color`. Defaults to white; `theme="green"` sets it to `--color-branding-blue`, because a white mark on the pale gold seal has too little contrast.
+- The mapping lives in one `BADGE_COLOR_BY_THEME` record in `page-header.ts` rather than a ternary, so adding a theme is a single line.
+- Storybook: *All Themes* covers all six; the theme control gained `summer`.
+- Code Connect (`page-header.figma.ts`): `summer` added to the `Theme` enum mapping.
+
 ### `minis-app` skill — scaffold and build an app end to end
 
 - **New skill at `.claude/skills/minis-app/SKILL.md`**, committed with the design system so it can't drift from the components it describes. Invoked when someone asks to create, start or vibe-code an app/prototype/page with Mini*S. It: asks what is being built (which decides the topbar variant), runs `pnpm build && pnpm create-prototype`, writes the project's `.claude/launch.json`, starts the dev server in the Browser pane, builds the requested screens from `docs/ai-prompts/`, and verifies the result (console, screenshot, mobile width, dark mode) before reporting done.

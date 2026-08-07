@@ -18,6 +18,7 @@ figma.connect(
         Yellow: 'yellow',
         Pink: 'pink',
         Green: 'green',
+        summer: 'summer',
       }),
       // `no-badge` is the inverse of the Figma boolean: the badge shows by default.
       noBadge: figma.boolean('Badge', {
