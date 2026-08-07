@@ -543,6 +543,45 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-08-07 (action row: xs breakpoint + full state matrix)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-08-07" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-07</h2>
+        <button class="cl-copy-btn" data-anchor="2026-08-07">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Action Row — <code>breakpoint="xs"</code> mobile layout, and the full state matrix in Figma</h3>
+      <p>The Figma set already had an <code>xs</code> (mobile) breakpoint but only in its <code>Default</code> state, and the web component knew nothing about it at all. Both sides now cover the same 24 combinations.</p>
+      <ul>
+        <li><strong><code>breakpoint</code> property</strong> — <code>'desktop' | 'xs'</code>, default <code>'desktop'</code>, reflected. Maps 1:1 to the Figma <code>Breakpoint</code> variant. It is an explicit attribute, not a container query: the row is used inside dropdowns and narrow sidebars where a width-driven switch would fire at the wrong moment.</li>
+        <li><strong><code>xs</code> layout</strong> — 56px row (up from 32px), plain 8px padding on both sides, and a <strong>trailing action pinned to the right edge</strong>: an <code>arrow-right</code> chevron, or the checkbox when <code>variant="checkbox"</code>. The label group (icon, label, counter) stays left.</li>
+        <li><strong>The leading icon is no longer mutually exclusive with the checkbox.</strong> Figma's <code>w/ Checkbox</code> variant has always shown a checkbox <em>and</em> a leading icon; the component rendered one or the other. The <code>icon</code> slot now renders in every variant whenever something is slotted into it. Existing markup is unaffected — the icon box collapses when empty, so the flex gap leaves no hole.</li>
+        <li><strong>Leading inset now follows the icon, not the variant</strong> — <code>padding-left</code> drops to 3px whenever an icon is present, with <code>variant="checkbox"</code> still overriding to 5px. Matches Figma's per-variant padding (8 / 3 / 5).</li>
+        <li><strong>ARIA corrected for the checkbox variant</strong> — <code>variant="checkbox"</code> now exposes <code>role="checkbox"</code> + <code>aria-checked</code> instead of <code>role="button"</code> + <code>aria-pressed</code>.</li>
+        <li>New <strong>All variants — xs</strong>, <strong>xs — mobile list</strong> and <strong>xs — filter list</strong> stories, a <code>breakpoint</code> control on the Playground, and a <code>Disabled</code> row added to the desktop grid, which previously stopped at <code>Active</code>.</li>
+        <li><strong><code>action-row.figma.ts</code> added</strong> — the component had no Code Connect file at all.</li>
+      </ul>
+
+      <h4 style="margin-bottom:.25rem">Tokens</h4>
+      <ul>
+        <li><strong><code>--action-row-height</code></strong> (new) → <code>var(--pixel-px-32)</code> (32px) — desktop row height, previously hardcoded in the stylesheet.</li>
+        <li><strong><code>--action-row-xs-height</code></strong> (new) → <code>var(--linear-sp-linear-14)</code> (56px) — xs row height.</li>
+        <li><strong><code>--action-row-xs-action-size</code></strong> (new) → <code>var(--pixel-px-24)</code> (24px) — xs trailing action box.</li>
+        <li><strong><code>--action-row-xs-action</code></strong> (new) → <code>var(--action-row-icon)</code> — xs trailing chevron colour, the same tertiary blue (<code>#006eb9</code>) Figma binds to the arrow.</li>
+      </ul>
+
+      <h4 style="margin-bottom:.25rem">Figma</h4>
+      <ul>
+        <li><strong>9 variants added to the <code>ActionRow</code> component set</strong> (<code>4202:3867</code>), taking it from 15 to the full 24: <code>State</code> = <code>Hover</code> / <code>Active</code> / <code>Disabled</code> for each of <code>Label</code>, <code>w/ Icon</code>, <code>w/ Checkbox</code> at <code>Breakpoint=xs</code>. The <code>State</code> property already declared all four values — only the <code>xs</code> rows were missing.</li>
+        <li>No new Figma variables: the xs states reuse exactly what desktop uses — the hover surface (<code>#e6f7fc</code>), the active surface (<code>#f1f3f5</code>), and the same white <code>disabler</code> overlay at 60% opacity for <code>Disabled</code>.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-08-06 (separator: opacity-based colour)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

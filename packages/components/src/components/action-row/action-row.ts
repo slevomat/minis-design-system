@@ -1,22 +1,32 @@
 import { LitElement, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { actionRowStyles } from './action-row.styles.js';
 import '../checkbox/checkbox.js';
 import '../pill-counter/pill-counter.js';
+import '@minis/icons';
 
 export type ActionRowVariant = 'none' | 'icon' | 'checkbox';
 export type ActionRowState = 'default' | 'hover' | 'active';
+export type ActionRowBreakpoint = 'desktop' | 'xs';
 
 /**
  * Mini*S ActionRow
  *
  * Interactive list-style row used in vertical menus, filters and similar option
- * lists. Always clickable. Supports an optional leading icon OR checkbox
- * (mutually exclusive) and an optional trailing counter pill that always sits
- * after the label.
+ * lists. Always clickable. Supports an optional leading icon, an optional
+ * checkbox and an optional counter pill that always sits after the label.
+ *
+ * Two breakpoint layouts, matching the Figma `Breakpoint` variant:
+ *
+ * - `desktop` (default) — 32px row, everything packed to the left:
+ *   `[checkbox] [icon] label [counter]`
+ * - `xs` — 56px row with a trailing action pinned right:
+ *   `[icon] label [counter] … [chevron | checkbox]`
+ *   The trailing action is a checkbox for `variant="checkbox"` and an
+ *   `arrow-right` chevron otherwise.
  *
  * @slot         - Label text
- * @slot icon    - Leading icon (use with `variant="icon"`)
+ * @slot icon    - Leading icon (24×24). Renders in every variant when slotted.
  *
  * @fires change - Fires when the checkbox is toggled (only for `variant="checkbox"`). detail: `{ checked: boolean }`
  *
@@ -29,16 +39,23 @@ export type ActionRowState = 'default' | 'hover' | 'active';
  *   Settings
  * </minis-action-row>
  *
- * <minis-action-row variant="checkbox" checked>Filter option</minis-action-row>
+ * <minis-action-row breakpoint="xs" variant="checkbox" checked>
+ *   <minis-icon slot="icon" name="bell"></minis-icon>
+ *   Filter option
+ * </minis-action-row>
  * ```
  */
 @customElement('minis-action-row')
 export class MinisActionRow extends LitElement {
   static styles = actionRowStyles;
 
-  /** Leading content variant. Only one of `icon` / `checkbox` is allowed. */
+  /** Leading content variant. `checkbox` renders a checkbox in addition to any slotted icon. */
   @property({ type: String, reflect: true })
   variant: ActionRowVariant = 'none';
+
+  /** Layout breakpoint. `xs` is the 56px mobile row with a trailing action. */
+  @property({ type: String, reflect: true })
+  breakpoint: ActionRowBreakpoint = 'desktop';
 
   /** Force a visual state (useful for documentation / hover preview). */
   @property({ type: String, reflect: true })
@@ -62,6 +79,14 @@ export class MinisActionRow extends LitElement {
    */
   @property({ type: String })
   counter?: string;
+
+  @state()
+  private _hasIcon = false;
+
+  private _onIconSlotChange = (e: Event) => {
+    const slot = e.target as HTMLSlotElement;
+    this._hasIcon = slot.assignedNodes({ flatten: true }).length > 0;
+  };
 
   private _onClick = (e: MouseEvent) => {
     if (this.disabled) {
@@ -105,32 +130,35 @@ export class MinisActionRow extends LitElement {
     }
   };
 
+  private _renderCheckbox() {
+    return html`<minis-checkbox
+      ?checked=${this.checked}
+      ?disabled=${this.disabled}
+      tabindex="-1"
+      @change=${this._onCheckboxChange}
+    ></minis-checkbox>`;
+  }
+
   render() {
     const showCounter = this.counter != null && this.counter !== '';
     const isCheckbox = this.variant === 'checkbox';
-    const isIcon = this.variant === 'icon';
+    const isXs = this.breakpoint === 'xs';
 
     return html`
       <div
-        class="row"
-        role="button"
+        class="row ${this._hasIcon ? 'has-icon' : ''}"
+        role=${isCheckbox ? 'checkbox' : 'button'}
         tabindex=${this.disabled ? -1 : 0}
         aria-disabled=${this.disabled ? 'true' : 'false'}
-        aria-pressed=${this.active ? 'true' : 'false'}
+        aria-checked=${isCheckbox ? String(this.checked) : nothing}
+        aria-pressed=${isCheckbox ? nothing : String(this.active)}
         @click=${this._onClick}
         @keydown=${this._onKeydown}
       >
-        ${isCheckbox
-          ? html`<minis-checkbox
-              ?checked=${this.checked}
-              ?disabled=${this.disabled}
-              tabindex="-1"
-              @change=${this._onCheckboxChange}
-            ></minis-checkbox>`
-          : nothing}
-        ${isIcon
-          ? html`<slot name="icon"></slot>`
-          : nothing}
+        ${isCheckbox && !isXs ? this._renderCheckbox() : nothing}
+        <span class="icon"
+          ><slot name="icon" @slotchange=${this._onIconSlotChange}></slot
+        ></span>
         <span class="content">
           <span class="label"><slot></slot></span>
           ${showCounter
@@ -141,6 +169,13 @@ export class MinisActionRow extends LitElement {
               >${this.counter}</minis-pill-counter>`
             : nothing}
         </span>
+        ${isXs
+          ? html`<span class="action" part="action">
+              ${isCheckbox
+                ? this._renderCheckbox()
+                : html`<minis-icon name="arrow-right" size="24"></minis-icon>`}
+            </span>`
+          : nothing}
       </div>
     `;
   }

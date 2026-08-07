@@ -1,6 +1,15 @@
 # Action Row — `<minis-action-row>`
 
-Interactive list-style row for building vertical menus, dropdown items, filter lists and similar option groups. Always clickable. The row may lead with an **icon** OR a **checkbox** (mutually exclusive) and may end with a **counter pill**.
+Interactive list-style row for building vertical menus, dropdown items, filter lists and similar option groups. Always clickable. The row may lead with an **icon**, carry a **checkbox**, and end with a **counter pill**.
+
+Two layouts, matching the Figma `Breakpoint` variant:
+
+| `breakpoint` | Height | Layout |
+| --- | --- | --- |
+| `desktop` (default) | 32px | `[checkbox] [icon] label [counter]` — everything packed left |
+| `xs` | 56px | `[icon] label [counter] … [chevron \| checkbox]` — action pinned to the right edge |
+
+On `xs` the trailing action is a checkbox for `variant="checkbox"` and an `arrow-right` chevron otherwise. It is an explicit attribute, not a container query — the row is used inside dropdowns and narrow sidebars where a width-driven switch would fire at the wrong moment.
 
 > ListItems are read-only; ActionRow is always interactive.
 
@@ -10,7 +19,8 @@ Interactive list-style row for building vertical menus, dropdown items, filter l
 
 | Prop       | Type                                 | Default     | Description                                                                  |
 | ---------- | ------------------------------------ | ----------- | ---------------------------------------------------------------------------- |
-| `variant`  | `'none' \| 'icon' \| 'checkbox'`     | `'none'`    | Leading content. Only one of `icon` / `checkbox` allowed.                    |
+| `variant`  | `'none' \| 'icon' \| 'checkbox'`     | `'none'`    | `checkbox` adds a checkbox (leading on desktop, trailing on `xs`). A slotted `icon` renders in **every** variant. |
+| `breakpoint` | `'desktop' \| 'xs'`                | `'desktop'` | Layout breakpoint. `xs` is the 56px mobile row with a trailing action.       |
 | `state`    | `'default' \| 'hover' \| 'active'`   | `undefined` | Force a visual state (useful for docs / demos). Hover otherwise applied on `:hover`. |
 | `active`   | `boolean`                            | `false`     | Persistent active highlight (e.g. currently selected menu item).             |
 | `checked`  | `boolean`                            | `false`     | Checkbox checked state (only with `variant="checkbox"`).                     |
@@ -22,7 +32,7 @@ Interactive list-style row for building vertical menus, dropdown items, filter l
 | Slot        | Purpose                                                           |
 | ----------- | ----------------------------------------------------------------- |
 | (default)   | Label text                                                        |
-| `icon`      | Leading icon (24×24). Use with `variant="icon"`.                  |
+| `icon`      | Leading icon (24×24). Renders in every variant when slotted.       |
 
 ## Events
 
@@ -44,8 +54,11 @@ Component-level tokens (defined in `@minis/tokens`):
 - `--action-row-padding-x-checkbox` (5px) — leading inset when `variant="checkbox"`
 - `--action-row-gap-icon` (8px) — icon ↔ label and label ↔ counter
 - `--action-row-gap-checkbox` (13px) — checkbox ↔ label
+- `--action-row-height` (32px) / `--action-row-xs-height` (56px) — row height per breakpoint
+- `--action-row-xs-action-size` (24px) — `xs` trailing action box
+- `--action-row-xs-action` → `--action-row-icon` — `xs` trailing chevron colour
 
-Row height is fixed at 32px (`--pixel-px-32`). Typography: `--typography-size-sm` (14px), `--typography-weight-medium` (500), Inter. The trailing counter is rendered as `<minis-pill-counter size="lg">` (18×18) with white background and primary-text foreground.
+The leading inset follows the *icon*, not the variant: `padding-left` drops to `--action-row-padding-x-icon-only` (3px) whenever an icon is slotted, and `variant="checkbox"` overrides it to `--action-row-padding-x-checkbox` (5px). On `xs` both insets are dropped — padding is a plain 8px on each side. Typography: `--typography-size-sm` (14px), `--typography-weight-medium` (500), Inter. The trailing counter is rendered as `<minis-pill-counter size="lg">` (18×18) with white background and primary-text foreground.
 
 ## Examples
 
@@ -68,12 +81,25 @@ Row height is fixed at 32px (`--pixel-px-32`). Typography: `--typography-size-sm
   <minis-icon slot="icon" name="settings"></minis-icon>
   Settings
 </minis-action-row>
+
+<!-- xs (mobile) — navigates, so it ends with a chevron -->
+<minis-action-row breakpoint="xs" variant="icon">
+  <minis-icon slot="icon" name="settings"></minis-icon>
+  Settings
+</minis-action-row>
+
+<!-- xs (mobile) — selects, so it ends with a checkbox; the icon still leads -->
+<minis-action-row breakpoint="xs" variant="checkbox" counter="128" checked>
+  <minis-icon slot="icon" name="bell"></minis-icon>
+  Travel
+</minis-action-row>
 ```
 
 ## Accessibility
 
 - `role="button"`, focusable (`tabindex=0`); `Enter` / `Space` activate the row.
-- Active rows expose `aria-pressed="true"`.
+- `variant="checkbox"` exposes `role="checkbox"` + `aria-checked` instead; other variants expose `aria-pressed` for `active`.
+- On `xs` the row is 56px tall, comfortably above the 44px minimum tap target.
 - Disabled rows expose `aria-disabled="true"` and are removed from tab order.
 
 ## When to use

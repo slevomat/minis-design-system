@@ -780,6 +780,10 @@
   --action-row-padding-x-checkbox: var(--fibonachi-sp-fib-4);                /*  5px — leading inset when checkbox is present */
   --action-row-gap-icon: var(--linear-sp-linear-2);                          /*  8px — icon ↔ label and label ↔ counter */
   --action-row-gap-checkbox: var(--fibonachi-sp-fib-6);                      /* 13px — checkbox ↔ label */
+  --action-row-height: var(--pixel-px-32);                                   /* 32px — desktop row height */
+  --action-row-xs-height: var(--linear-sp-linear-14);                        /* 56px — xs (mobile) row height */
+  --action-row-xs-action-size: var(--pixel-px-24);                           /* 24px — xs trailing action box */
+  --action-row-xs-action: var(--action-row-icon);                            /* xs trailing chevron colour (blue) */
 
   /* Tile */
   --tile-padding-top: var(--linear-sp-linear-3);     /* 12px — top/bottom symmetric */
