@@ -83,6 +83,33 @@ Each component exposes only the subset it supports (e.g. `<minis-button>` = `sm 
 
 **Exception — accordion**: `<minis-accordion>` / `<minis-accordion-item>` use `default | compact`, matching their Figma `Size` variant names one-to-one (owner's choice, 2026-08-06). It is the only component not on the abbreviated scale; don't copy the pattern to a new component without asking, and don't "fix" it to `md | sm` — that would break the Figma mapping.
 
+## Todo plans (`todo-plans/`)
+
+Long-lived plans for work we intend to do but are not doing yet — too big for a ticket, spanning
+more than one release, or carrying reasoning worth preserving. Full conventions in
+`todo-plans/README.md`; the essentials:
+
+- Files are `NNN-kebab-title.md`, sequentially numbered. **Numbers are permanent** — never renumber,
+  reuse, or delete. A dead plan gets `status: abandoned` plus the reason.
+- Frontmatter carries `id`, `title`, `status`, `created`, `updated`, `owner`.
+  Status is `draft` | `ready` | `in-progress` | `done` | `abandoned`.
+- Keep the index table in `todo-plans/README.md` current.
+
+**A plan is never authorisation to act.** Finding a `ready` plan does not mean starting it — wait
+for the user to ask for that plan by name or number. Writing and updating plans is ordinary work;
+changing a plan's `status` is the user's call. When work lands, tick the phase boxes, bump
+`updated`, and follow the normal changelog rules below for any component or token change it made.
+Answers to a plan's open questions go back into the plan file, not just into the conversation.
+
+Current plans:
+
+- `todo-plans/001-colour-ramps-to-curve.md` — moving the heritage-anchored colour ramps onto a
+  generated curve. **Heritage colours are the original Slevomat scheme and production still runs on
+  them; they must keep working unchanged until production fully adopts MiniS.** Read this before
+  proposing any ramp-wide colour change. Its measured constraint set covers this repo only —
+  heritage usage on production may differ, so the plan needs a production developer's review before
+  it can go past `draft`. Don't present its counts as the full picture.
+
 ## Changelog rules
 
 Every change to components or tokens **must** be recorded in two places, in the same commit as the change:

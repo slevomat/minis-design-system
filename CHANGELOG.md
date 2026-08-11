@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-08-11
 
+### New `todo-plans/` folder
+
+Long-lived plans for work we intend to do but are not doing yet now live in `todo-plans/`, numbered
+`NNN-kebab-title.md` with a status in frontmatter. Conventions are in `todo-plans/README.md` and
+summarised in `CLAUDE.md`. Numbers are permanent and plans are never deleted — a dead plan is marked
+`abandoned` with the reason, because the dead end is the useful part.
+
+- **[001 — Move the colour ramps onto a curve](todo-plans/001-colour-ramps-to-curve.md)** (`draft`).
+  The ramps are not generated: 40 of 94 primitives are heritage anchors — the original Slevomat
+  colour scheme, slotted into whichever step number they landed nearest — so a step number is a
+  position in the ramp rather than a lightness, and there is no rule to extend when adding steps.
+  The plan splits the two jobs those tokens are doing: heritage colours get a frozen namespace,
+  ramps become generated output fitted to stay within a small ΔE of the 24 values that are both
+  heritage-anchored and actually consumed. **Heritage values must keep working unchanged until
+  production has fully adopted MiniS and its tokens** — every phase is built around that.
+
+### Colour primitives — new darkest `-10` step on every ramp
+
+#### Tokens
+
+Eight new primitives extend each colour ramp one step below its current darkest value. `--color-grey-10` already existed and is unchanged.
+
+- **`--color-blue-10`** → `oklch(0.21 0.04 239)` (`#041b29`)
+- **`--color-gold-10`** → `oklch(0.49 0.1 111)` (`#636512`)
+- **`--color-green-10`** → `oklch(0.26 0.08 142)` (`#062d04`)
+- **`--color-orange-10`** → `oklch(0.27 0.08 37)` (`#451405`)
+- **`--color-pink-10`** → `oklch(0.27 0.09 15)` (`#490c18`)
+- **`--color-purple-10`** → `oklch(0.15 0.07 279)` (`#070427`)
+- **`--color-red-10`** → `oklch(0.28 0.1 27)` (`#4f0a0a`)
+- **`--color-yellow-10`** → `oklch(0.36 0.07 75)` (`#523709`)
+
+Each value continues the straight-line L and C slope of its ramp's two darkest existing steps, holding hue fixed, with chroma clamped to what sRGB can express at that lightness. All eight are in gamut and clear 4.5:1 against white text (lowest is `gold-10` at 6.18:1).
+
+> **The step number is a position in the ramp, not a lightness.** `blue-25` sits at L 0.34 while `gold-25` sits at L 0.56, so `-10` is not a uniform darkness tier — `purple-10` is L 0.15 while `gold-10` is L 0.49. This matches how the existing palette already behaves.
+
+> **`gold-10` and `yellow-10` do not read as gold and yellow.** sRGB has no dark saturated yellow; below roughly L 0.45 the hue turns olive/brown. They exist to complete the ramps — do not use them as brand gold or brand yellow. The Color Palette story carries the same caveat.
+
+No semantic/Foundation tokens point at these yet — nothing consumes them.
+
+**Figma follow-up:** `tokens.css` is a Figma export. These eight need to be added as Figma variables, or the next export will drop them.
+
 ### `minis-topbar`
 
 - **`vibe-apps`: the app name moved to the left.** Figma redesigned the vibe-apps header ([node `5156:9285`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5156-9285)) so `app-name` sits directly beside the logo instead of on the right-hand side. The name is now rendered outside the `actions` group, 32px from the logo artwork (the logo's existing 16px right padding plus a new 16px gap), matching the Figma frame's 156px text offset.

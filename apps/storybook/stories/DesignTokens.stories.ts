@@ -75,6 +75,16 @@ const paletteRow = (v: string) => {
   </tr>`;
 };
 
+/**
+ * Shown under the Yellow and Gold ramps. sRGB has no dark saturated yellow, so both
+ * -10 steps fall outside what the hue can express at that lightness and render olive/brown.
+ */
+const darkYellowNote = `<p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">
+  <code>--color-gold-10</code> and <code>--color-yellow-10</code> sit below the sRGB gamut's
+  dark-yellow limit and read as olive/brown rather than gold and yellow. They exist to
+  complete the ramps — <strong>do not use them as brand gold or brand yellow</strong>.
+</p>`;
+
 const interactionRow = (label: string, surface: string, border: string, accent: string) =>
   `<tr>
     <td style="${td}"><strong>${label}</strong></td>
@@ -271,6 +281,7 @@ export const Palette: Story = {
 
       <h2>Blue</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-blue-10')}
         ${paletteRow('--color-blue-25')}
         ${paletteRow('--color-blue-35')}
         ${paletteRow('--color-blue-45')}
@@ -285,6 +296,7 @@ export const Palette: Story = {
 
       <h2>Green</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-green-10')}
         ${paletteRow('--color-green-25')}
         ${paletteRow('--color-green-35')}
         ${paletteRow('--color-green-45')}
@@ -315,6 +327,7 @@ export const Palette: Story = {
 
       <h2>Red</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-red-10')}
         ${paletteRow('--color-red-15')}
         ${paletteRow('--color-red-25')}
         ${paletteRow('--color-red-35')}
@@ -329,6 +342,7 @@ export const Palette: Story = {
 
       <h2>Yellow</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-yellow-10')}
         ${paletteRow('--color-yellow-25')}
         ${paletteRow('--color-yellow-35')}
         ${paletteRow('--color-yellow-45')}
@@ -338,9 +352,11 @@ export const Palette: Story = {
         ${paletteRow('--color-yellow-85')}
         ${paletteRow('--color-yellow-95')}
       </tbody></table>
+      ${darkYellowNote}
 
       <h2>Gold</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-gold-10')}
         ${paletteRow('--color-gold-25')}
         ${paletteRow('--color-gold-35')}
         ${paletteRow('--color-gold-45')}
@@ -350,9 +366,11 @@ export const Palette: Story = {
         ${paletteRow('--color-gold-85')}
         ${paletteRow('--color-gold-95')}
       </tbody></table>
+      ${darkYellowNote}
 
       <h2>Orange</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-orange-10')}
         ${paletteRow('--color-orange-25')}
         ${paletteRow('--color-orange-35')}
         ${paletteRow('--color-orange-45')}
@@ -365,6 +383,7 @@ export const Palette: Story = {
 
       <h2>Pink</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-pink-10')}
         ${paletteRow('--color-pink-25')}
         ${paletteRow('--color-pink-35')}
         ${paletteRow('--color-pink-45')}
@@ -378,6 +397,7 @@ export const Palette: Story = {
 
       <h2>Purple</h2>
       <table style="${ts}"><thead><tr><th style="${th}">Token</th><th style="${th}">Values</th></tr></thead><tbody>
+        ${paletteRow('--color-purple-10')}
         ${paletteRow('--color-purple-15')}
         ${paletteRow('--color-purple-20')}
         ${paletteRow('--color-purple-25')}

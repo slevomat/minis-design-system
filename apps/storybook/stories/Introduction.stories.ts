@@ -573,6 +573,33 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">New <code>todo-plans/</code> folder</h3>
+      <p>Long-lived plans for work we intend to do but are not doing yet now live in <code>todo-plans/</code>, numbered <code>NNN-kebab-title.md</code> with a status in frontmatter. Conventions are in <code>todo-plans/README.md</code> and summarised in <code>CLAUDE.md</code>. Numbers are permanent and plans are never deleted — a dead plan is marked <code>abandoned</code> with the reason, because the dead end is the useful part.</p>
+      <ul>
+        <li><strong>001 — Move the colour ramps onto a curve</strong> (<code>draft</code>). The ramps are not generated: 40 of 94 primitives are heritage anchors — the original Slevomat colour scheme, slotted into whichever step number they landed nearest — so a step number is a position in the ramp rather than a lightness, and there is no rule to extend when adding steps. The plan splits the two jobs those tokens are doing: heritage colours get a frozen namespace, ramps become generated output fitted to stay within a small ΔE of the 24 values that are both heritage-anchored and actually consumed. <strong>Heritage values must keep working unchanged until production has fully adopted MiniS and its tokens</strong> — every phase is built around that.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Colour primitives — new darkest <code>-10</code> step on every ramp</h3>
+      <p>Eight new primitives extend each colour ramp one step below its current darkest value. <code>--color-grey-10</code> already existed and is unchanged.</p>
+
+      <h4 style="margin-top:.75rem">Tokens</h4>
+      <ul>
+        <li><strong>New <code>--color-blue-10</code></strong> → <code>oklch(0.21 0.04 239)</code> (<code>#041b29</code>)</li>
+        <li><strong>New <code>--color-gold-10</code></strong> → <code>oklch(0.49 0.1 111)</code> (<code>#636512</code>)</li>
+        <li><strong>New <code>--color-green-10</code></strong> → <code>oklch(0.26 0.08 142)</code> (<code>#062d04</code>)</li>
+        <li><strong>New <code>--color-orange-10</code></strong> → <code>oklch(0.27 0.08 37)</code> (<code>#451405</code>)</li>
+        <li><strong>New <code>--color-pink-10</code></strong> → <code>oklch(0.27 0.09 15)</code> (<code>#490c18</code>)</li>
+        <li><strong>New <code>--color-purple-10</code></strong> → <code>oklch(0.15 0.07 279)</code> (<code>#070427</code>)</li>
+        <li><strong>New <code>--color-red-10</code></strong> → <code>oklch(0.28 0.1 27)</code> (<code>#4f0a0a</code>)</li>
+        <li><strong>New <code>--color-yellow-10</code></strong> → <code>oklch(0.36 0.07 75)</code> (<code>#523709</code>)</li>
+      </ul>
+      <p>Each value continues the straight-line L and C slope of its ramp's two darkest existing steps, holding hue fixed, with chroma clamped to what sRGB can express at that lightness. All eight are in gamut and clear 4.5:1 against white text (lowest is <code>gold-10</code> at 6.18:1).</p>
+      <ul>
+        <li><strong>The step number is a position in the ramp, not a lightness.</strong> <code>blue-25</code> sits at L 0.34 while <code>gold-25</code> sits at L 0.56, so <code>-10</code> is not a uniform darkness tier — <code>purple-10</code> is L 0.15 while <code>gold-10</code> is L 0.49. This matches how the existing palette already behaves.</li>
+        <li><strong><code>gold-10</code> and <code>yellow-10</code> do not read as gold and yellow.</strong> sRGB has no dark saturated yellow; below roughly L 0.45 the hue turns olive/brown. They exist to complete the ramps — do not use them as brand gold or brand yellow. The <em>Color Palette</em> story carries the same caveat.</li>
+        <li>No semantic/Foundation tokens point at these yet — nothing consumes them.</li>
+      </ul>
+
       <h3 style="margin-top:1rem"><code>minis-topbar</code> — the vibe-apps app name moved to the left</h3>
       <ul>
         <li><strong><code>variant="vibe-apps"</code>: <code>app-name</code> now sits directly beside the logo</strong> instead of on the right-hand side, following the redesigned Figma frame (<code>5156:9285</code>). The name renders outside the <code>actions</code> group, 32px from the logo artwork — the logo's existing 16px right padding plus a new 16px gap.</li>

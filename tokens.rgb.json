@@ -32,6 +32,12 @@
           "origin": "--color-black-a-black-a60"
         }
       },
+      "blue-10": {
+        "value": "#041b29",
+        "type": "color",
+        "cssName": "--color-blue-10",
+        "origin": "--color-blue-10"
+      },
       "blue-25": {
         "value": "#003d5c",
         "type": "color",
@@ -118,6 +124,12 @@
           "origin": "--color-core-white"
         }
       },
+      "gold-10": {
+        "value": "#636512",
+        "type": "color",
+        "cssName": "--color-gold-10",
+        "origin": "--color-gold-10"
+      },
       "gold-25": {
         "value": "#797b09",
         "type": "color",
@@ -168,6 +180,12 @@
         "type": "color",
         "cssName": "--color-gold-95",
         "origin": "--color-gold-95"
+      },
+      "green-10": {
+        "value": "#062d04",
+        "type": "color",
+        "cssName": "--color-green-10",
+        "origin": "--color-green-10"
       },
       "green-25": {
         "value": "#0d4a0a",
@@ -317,6 +335,12 @@
         "comment": "for ultra-light backgrounds",
         "origin": "--color-grey-98"
       },
+      "orange-10": {
+        "value": "#451405",
+        "type": "color",
+        "cssName": "--color-orange-10",
+        "origin": "--color-orange-10"
+      },
       "orange-25": {
         "value": "#8b2500",
         "type": "color",
@@ -368,6 +392,12 @@
         "type": "color",
         "cssName": "--color-orange-95",
         "origin": "--color-orange-95"
+      },
+      "pink-10": {
+        "value": "#490c18",
+        "type": "color",
+        "cssName": "--color-pink-10",
+        "origin": "--color-pink-10"
       },
       "pink-25": {
         "value": "#7a1b2e",
@@ -424,6 +454,12 @@
         "type": "color",
         "cssName": "--color-pink-95",
         "origin": "--color-pink-95"
+      },
+      "purple-10": {
+        "value": "#070427",
+        "type": "color",
+        "cssName": "--color-purple-10",
+        "origin": "--color-purple-10"
       },
       "purple-15": {
         "value": "#110a40",
@@ -493,6 +529,12 @@
         "type": "color",
         "cssName": "--color-purple-95",
         "origin": "--color-purple-95"
+      },
+      "red-10": {
+        "value": "#4f0a0a",
+        "type": "color",
+        "cssName": "--color-red-10",
+        "origin": "--color-red-10"
       },
       "red-15": {
         "value": "#5c0a0a",
@@ -583,6 +625,12 @@
           "cssName": "--color-white-a-white-a5",
           "origin": "--color-white-a-white-a5"
         }
+      },
+      "yellow-10": {
+        "value": "#523709",
+        "type": "color",
+        "cssName": "--color-yellow-10",
+        "origin": "--color-yellow-10"
       },
       "yellow-25": {
         "value": "#996600",
