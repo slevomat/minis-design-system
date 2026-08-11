@@ -563,6 +563,31 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-08-11 (topbar vibe-apps app name moves left)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-08-11" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-11</h2>
+        <button class="cl-copy-btn" data-anchor="2026-08-11">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem"><code>minis-topbar</code> — the vibe-apps app name moved to the left</h3>
+      <ul>
+        <li><strong><code>variant="vibe-apps"</code>: <code>app-name</code> now sits directly beside the logo</strong> instead of on the right-hand side, following the redesigned Figma frame (<code>5156:9285</code>). The name renders outside the <code>actions</code> group, 32px from the logo artwork — the logo's existing 16px right padding plus a new 16px gap.</li>
+        <li><strong>The vibe-apps bar carries no actions.</strong> The variant is logo + app name and nothing else, so it no longer renders the <code>actions</code> slot (it already did not render <code>search</code>). Anything passed to <code>slot="actions"</code> on a vibe-apps topbar stays unassigned and is not displayed — put those controls in the page body instead. <strong>Breaking</strong> for prototypes that slotted buttons into a vibe-apps bar; the <code>web</code> variant is unchanged.</li>
+        <li>The <em>Vibe apps — with an action</em> story was removed, since the arrangement it showed no longer exists.</li>
+      </ul>
+
+      <h4 style="margin-top:.75rem">Tokens</h4>
+      <ul>
+        <li><strong>New <code>--topbar-app-name-gap</code></strong> (default <code>var(--linear-sp-linear-4)</code> = 16px) — the space between the logo group and the app name. A fixed step rather than <code>--spacing-layout-*</code>, because Figma specifies 16px at desktop where the responsive layout tokens are 24px/32px.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-08-07 (summer branding, badge & page header colours, topbar variants, action row xs)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">
