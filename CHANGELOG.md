@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-08-11
+
+### `minis-topbar`
+
+- **`vibe-apps`: the app name moved to the left.** Figma redesigned the vibe-apps header ([node `5156:9285`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5156-9285)) so `app-name` sits directly beside the logo instead of on the right-hand side. The name is now rendered outside the `actions` group, 32px from the logo artwork (the logo's existing 16px right padding plus a new 16px gap), matching the Figma frame's 156px text offset.
+- **`vibe-apps` carries no actions.** The variant is logo + app name and nothing else, so it no longer renders the `actions` slot (it already did not render `search`). Anything passed to `slot="actions"` on a `vibe-apps` topbar stays unassigned and is not displayed — put those controls in the page body instead. **Breaking** for any prototype that slotted buttons into a `vibe-apps` bar; the `web` variant is unchanged.
+- Storybook: the *Vibe apps — with an action* story was removed, since the arrangement it showed no longer exists.
+
+#### Tokens
+
+- **New `--topbar-app-name-gap`** (default `var(--linear-sp-linear-4)` = 16px) — the space between the logo group and the app name. A fixed step rather than `--spacing-layout-*` because the Figma frame specifies 16px at desktop, where the responsive layout tokens are 24px/32px.
+
 ## 2026-08-07
 
 ### Summer branding colour — new token, badge variant, page header theme

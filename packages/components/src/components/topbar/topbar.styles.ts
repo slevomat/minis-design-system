@@ -13,6 +13,12 @@ export const topbarStyles = css`
     box-sizing: border-box;
   }
 
+  /* vibe-apps is logo + app name, both left-aligned — with only two children,
+     space-between would throw the name to the far right. */
+  :host([variant='vibe-apps']) .topbar {
+    justify-content: flex-start;
+  }
+
   /* =====================
      LOGO
      ===================== */
@@ -71,9 +77,14 @@ export const topbarStyles = css`
 
   /* =====================
      APP NAME (vibe-apps variant)
+     Sits immediately after the logo — Figma has it left-aligned, 16px after
+     the logo's own 16px right padding (32px from the logo artwork).
      ===================== */
 
   .app-name {
+    margin-left: var(--topbar-app-name-gap, var(--linear-sp-linear-4));
+    min-width: 0;
+    overflow-wrap: break-word;
     font-family: var(--typography-font-family-sans);
     font-size: var(--topbar-app-name-size, var(--typography-heading-lg-size));
     font-weight: var(--typography-weight-semibold);

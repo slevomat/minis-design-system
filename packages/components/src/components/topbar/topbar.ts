@@ -14,7 +14,8 @@ export type TopbarVariant = 'web' | 'vibe-apps';
  * - `web` (default) — the Slevomat website header: logo, optional search,
  *   and action buttons (shortcuts, account, cart) on the right.
  * - `vibe-apps` — the header for vibe-coded apps and prototypes: logo on the
- *   left, the app's own name on the right (`app-name`).
+ *   left with the app's own name (`app-name`) directly beside it, and nothing
+ *   else — this variant carries no search and no actions.
  *
  * The topbar is layout-neutral: it has no background and no max-width of its
  * own, so place it inside `<minis-container>` (or your own full-bleed band) to
@@ -24,7 +25,7 @@ export type TopbarVariant = 'web' | 'vibe-apps';
  * @slot search  - Optional search field, `web` variant only. The design system has no
  *                 input component yet, so nothing is rendered for you — slot your own.
  * @slot actions - Right-side action buttons — several `<minis-button>` elements.
- *                 Available in both variants; in `vibe-apps` they render after the app name.
+ *                 `web` variant only; `vibe-apps` renders no actions.
  *
  * @example
  * ```html
@@ -49,7 +50,7 @@ export class MinisTopbar extends LitElement {
   @property({ type: String, reflect: true })
   variant: TopbarVariant = 'web';
 
-  /** App name shown on the right. `vibe-apps` variant only — ignored in `web`. */
+  /** App name shown next to the logo. `vibe-apps` variant only — ignored in `web`. */
   @property({ type: String, attribute: 'app-name' })
   appName = '';
 
@@ -63,7 +64,22 @@ export class MinisTopbar extends LitElement {
   };
 
   render() {
-    const isVibeApps = this.variant === 'vibe-apps';
+    // `vibe-apps` is the whole bar: logo + app name, nothing else. It has no
+    // search and no actions, so neither slot is rendered — anything passed to
+    // them stays unassigned and is not displayed.
+    if (this.variant === 'vibe-apps') {
+      return html`
+        <div class="topbar" part="topbar">
+          <div class="logo" part="logo">
+            <slot name="logo"></slot>
+          </div>
+
+          ${this.appName
+            ? html`<span class="app-name" part="app-name">${this.appName}</span>`
+            : nothing}
+        </div>
+      `;
+    }
 
     return html`
       <div class="topbar" part="topbar">
@@ -71,18 +87,11 @@ export class MinisTopbar extends LitElement {
           <slot name="logo"></slot>
         </div>
 
-        ${isVibeApps
-          ? nothing
-          : html`
-              <div class="search" part="search" ?hidden=${!this._hasSearch}>
-                <slot name="search" @slotchange=${this._onSearchSlotChange}></slot>
-              </div>
-            `}
+        <div class="search" part="search" ?hidden=${!this._hasSearch}>
+          <slot name="search" @slotchange=${this._onSearchSlotChange}></slot>
+        </div>
 
         <div class="actions" part="actions">
-          ${isVibeApps && this.appName
-            ? html`<span class="app-name" part="app-name">${this.appName}</span>`
-            : nothing}
           <slot name="actions"></slot>
         </div>
       </div>

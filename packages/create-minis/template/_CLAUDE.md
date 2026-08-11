@@ -35,7 +35,7 @@ All components, tokens, and icons are pre-loaded in `public/vendor/` (served as 
 
 | Tag | Description |
 |-----|-------------|
-| `<minis-topbar>` | Top bar for any Slevomat page or app — logo (left) + actions / app name (right). `variant="web"` \| `variant="vibe-apps"` |
+| `<minis-topbar>` | Top bar for any Slevomat page or app. `variant="web"` = logo, optional search, actions on the right; `variant="vibe-apps"` = logo + `app-name` on the left, nothing else |
 | `<minis-navigation>` | Scrollable nav bar (`variant="horizontal"` or `variant="tabs"`) |
 | `<minis-navigation-item>` | Nav link/tab inside `<minis-navigation>` |
 | `<minis-container>` | Responsive layout wrapper (auto padding + max-width) |

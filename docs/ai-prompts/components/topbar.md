@@ -3,7 +3,7 @@
 ## Component Overview
 
 **Tag:** `<minis-topbar>` (Figma: **TopBar**)
-**Description:** The top bar is meant to be used at the top of any Slevomat web page or vibe-coded app — both purposes have their own variant. Logo on the left, actions (or the app name) on the right. It sits above `<minis-navigation>` and `<minis-page-header>`.
+**Description:** The top bar is meant to be used at the top of any Slevomat web page or vibe-coded app — both purposes have their own variant. On the website it is logo, search and actions; in a vibe-coded app it is just the logo and the app name, side by side on the left. It sits above `<minis-navigation>` and `<minis-page-header>`.
 
 > **Naming.** The tag was `<minis-header>` until 2026-03-20, when it was renamed to `<minis-topbar>` so it would not be confused with `<minis-page-header>` (the hero). The Figma component followed on 2026-08-07 (*Header* → *TopBar*), so both sides now use the same name.
 
@@ -11,10 +11,10 @@
 
 ### Variants — one per place it is used
 
-| `variant` | Used for | Right-hand side |
+| `variant` | Used for | Layout |
 |---|---|---|
-| `web` (default) | The Slevomat website | Action buttons — shortcuts, account, cart |
-| `vibe-apps` | Vibe-coded apps and prototypes built on this design system | The app's own name (`app-name`) |
+| `web` (default) | The Slevomat website | Logo, optional search, action buttons on the right — shortcuts, account, cart |
+| `vibe-apps` | Vibe-coded apps and prototypes built on this design system | Logo, then the app's own name (`app-name`) beside it on the **left** — nothing else. No search, **no actions**. |
 
 ---
 
@@ -44,7 +44,7 @@
 | Attribute | Type | Default | Description |
 |---|---|---|---|
 | `variant` | `'web' \| 'vibe-apps'` | `'web'` | Where the header is used. Reflected. |
-| `app-name` | `string` | `''` | App name shown on the right. **`vibe-apps` only** — ignored in `web`. |
+| `app-name` | `string` | `''` | App name shown on the left, next to the logo. **`vibe-apps` only** — ignored in `web`. |
 
 ### Slots
 
@@ -52,7 +52,7 @@
 |------|-------------|
 | `logo` | Brand logo (left) — typically an `<img>` or `<svg>`, max-height 30px |
 | `search` | Optional search field, **`web` variant only**. The design system has no input component yet, so nothing is rendered for you — slot your own. The slot reserves no width while it is empty. |
-| `actions` | Right-side action buttons — several `<minis-button>` elements. Available in both variants; in `vibe-apps` they render after the app name. |
+| `actions` | Right-side action buttons — several `<minis-button>` elements. **`web` variant only** — `vibe-apps` does not render this slot, so anything you pass to it in that variant simply does not appear. |
 
 ### CSS Custom Properties
 
@@ -63,12 +63,13 @@
 | `--topbar-search-width` | `300px` | Search slot width (shrinks on narrow bars) |
 | `--topbar-search-gap` | `48px` | Space between search and the actions group |
 | `--topbar-actions-gap` | `10px` | Gap between action items |
+| `--topbar-app-name-gap` | `--linear-sp-linear-4` (16px) | Space between the logo group and the app name (`vibe-apps`) — on top of `--topbar-logo-gap`, so 32px from the logo artwork |
 | `--topbar-app-name-size` | `--typography-heading-lg-size` | App name font size (`vibe-apps`) |
 | `--topbar-app-name-color` | `--color-text-primary` | App name colour (`vibe-apps`) |
 
 ### CSS shadow parts
 
-`topbar`, `logo`, `search`, `actions`, `app-name`
+`topbar`, `logo`, `app-name` (`vibe-apps`), `search`, `actions` (`web`)
 
 ---
 
@@ -112,6 +113,8 @@ The topbar is **layout-neutral**: no background and no max-width of its own. Wra
 
 ### Vibe apps — logo and app name
 
+The whole variant is these two things. Don't try to add buttons, a search field or a user menu to it — put those in the page body instead.
+
 ```html
 <minis-container>
   <minis-topbar variant="vibe-apps" app-name="My app">
@@ -147,7 +150,8 @@ The topbar is **layout-neutral**: no background and no max-width of its own. Wra
 - Right-side buttons use `variant="tertiary" size="sm"` for secondary actions (Oblíbené, Neoblíbené) and `variant="cta-buy"` for the cart button
 - Icons in tertiary buttons use `size="16"` (sm button size)
 - Actions gap is 10px
-- `vibe-apps` app name: Heading/lg — `--typography-heading-lg-size` (20px → 24px at ≥1480px), `--typography-weight-semibold`, line-height 1.25, letter-spacing −1% (`-0.01em`)
+- `vibe-apps` is logo + app name and nothing else — the Figma frame has no search, no buttons and no avatar on that variant
+- `vibe-apps` app name: **left-aligned**, directly after the logo — 32px from the logo artwork (the logo's own 16px right padding + a 16px gap). Heading/lg — `--typography-heading-lg-size` (20px → 24px at ≥1480px), `--typography-weight-semibold`, line-height 1.25, letter-spacing −1% (`-0.01em`)
 - The search field in the Figma frame is a **screenshot of the live site**, not a design-system component (Roboto italic, hardcoded black border) — do not copy its styling. Slot a real input and style it with the DS tokens.
 - The avatar + credit pill in the Figma frame are likewise a pasted screenshot; build them from `<minis-button>` / your own markup in the `actions` slot.
 
@@ -169,4 +173,4 @@ The topbar is **layout-neutral**: no background and no max-width of its own. Wra
 
 ---
 
-**Last updated:** 2026-08-07
+**Last updated:** 2026-08-11
