@@ -1,5 +1,7 @@
 # Alert Component — AI Prompt Reference
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=2513-8007)
+
 ## Component Overview
 
 **Tag:** `<minis-alert>`

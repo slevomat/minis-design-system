@@ -1,5 +1,7 @@
 # Button Component - AI Prompt Guide
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=378-4416) · [Component node ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=284-5283)
+
 ## Component Overview
 
 The `<minis-button>` component provides primary interface actions with multiple variants, sizes,

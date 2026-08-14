@@ -1,5 +1,7 @@
 # Badge — AI Prompt Reference
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4605-692&t=rkdTibDNQvxbBYPb-11) · [Component node ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4605-441)
+
 A decorative brand symbol: a scalloped seal badge with a white checkmark. Purely visual — no interaction, no slots, no events. Used to communicate trust, verification, or quality certification.
 
 ---

@@ -1,5 +1,7 @@
 # Tile — AI Prompt Reference
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4208-4230&t=mtbinHhK8psdU6hq-11)
+
 > Last updated: 2026-05-15
 
 ---
