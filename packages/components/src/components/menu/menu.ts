@@ -63,9 +63,27 @@ export class MinisMenu extends LitElement {
 
   private readonly _id = `minis-menu-${++uid}`;
 
-  /** Assigned children, flattened so items forwarded through a nested slot count. */
+  /**
+   * Assigned children, resolving nested slots by hand.
+   *
+   * `<minis-navigation>` forwards its overflow items through its own
+   * `<slot name="overflow">`, so what is *directly* assigned here is that slot
+   * element, not the items. `assignedElements({ flatten: true })` is supposed to
+   * see through that, but WebKit's flattening across nested slots is not
+   * dependable — walking it explicitly behaves the same everywhere.
+   */
   private get _items(): HTMLElement[] {
-    return (this._slot?.assignedElements({ flatten: true }) ?? []) as HTMLElement[];
+    const items: HTMLElement[] = [];
+
+    const collect = (slot: HTMLSlotElement) => {
+      for (const node of slot.assignedNodes()) {
+        if (node instanceof HTMLSlotElement) collect(node);
+        else if (node instanceof HTMLElement) items.push(node);
+      }
+    };
+
+    if (this._slot) collect(this._slot);
+    return items;
   }
 
   override connectedCallback() {
