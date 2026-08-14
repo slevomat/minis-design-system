@@ -1,5 +1,7 @@
 # Pill Counter Component - AI Prompt Guide
 
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=583-11887)
+
 ## Component Overview
 
 The `<minis-pill-counter>` component displays a numeric badge (pill). It is a sub-component used
