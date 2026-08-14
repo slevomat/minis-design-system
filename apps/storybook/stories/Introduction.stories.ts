@@ -563,6 +563,67 @@ const changelogHTML = `
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- ═══════════════════════════════════════════════════════════
+           2026-08-14 (navigation realigned with Figma)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="cl-heading">
+        <h2 id="2026-08-14" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-08-14</h2>
+        <button class="cl-copy-btn" data-anchor="2026-08-14">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">New component <code>&lt;minis-menu&gt;</code></h3>
+      <p>A labelled trigger that opens a panel of items below it. Built for the navigation overflow and usable on its own.</p>
+      <ul>
+        <li><strong>Props</strong>: <code>label</code>, <code>open</code> (reflected), <code>placement</code> (<code>start | end</code>). <strong>Slots</strong>: default (menu items), <code>icon</code>. <strong>Fires</strong> <code>toggle</code> with <code>{ open: boolean }</code>. <strong>Parts</strong>: <code>trigger</code>, <code>panel</code>.</li>
+        <li><strong>Item handling</strong> — slotted children get <code>role="menuitem"</code>, <code>tabindex="-1"</code> and an <code>in-menu</code> attribute. <code>in-menu</code> is the styling hook a component reads to render itself as a full-width panel row.</li>
+        <li><strong>Keyboard</strong>: arrow keys move between items, <code>Home</code>/<code>End</code> jump to the ends, <code>Escape</code> closes and returns focus to the trigger, <code>Tab</code> lets focus leave, a click outside closes.</li>
+        <li><strong>No Figma component exists yet</strong>, so this is the one component without a <code>.figma.ts</code> — a known gap, recorded in its docs.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Navigation — overflow behaviour</h3>
+      <p>A bar with eleven categories does not fit every screen. <code>main-nav</code> now has two behaviours, split by the new <code>breakpoint</code> prop and measured against the component's <strong>own width</strong>. <strong><code>tabs</code> is unaffected</strong> — a tab bar scrolls at every width, matching Figma, where the <code>Tabs</code> variant has no "Další" item.</p>
+      <ul>
+        <li><strong>New <code>breakpoint</code> prop</strong> (<code>2xs … 4xl</code>, default <code>md</code>). At or below it the bar scrolls horizontally as before; above it, items that don't fit collapse into a trailing <code>&lt;minis-menu&gt;</code>. <code>main-nav</code> only.</li>
+        <li><strong>New <code>overflow-label</code> prop</strong> (default <code>Další</code>) — the label of that menu. <code>main-nav</code> only.</li>
+        <li><strong>The active item is never hidden in the menu.</strong> If it would overflow, it stays in the row and the last item that fits is pushed into the menu instead.</li>
+        <li><strong>Above the breakpoint the bar is no longer a scroll container</strong> — <code>overflow-x: auto</code> makes the vertical axis a scrollport too, which would clip the open panel.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Navigation — realigned with the updated Figma component</h3>
+      <p>The Figma component set now carries two variants, <code>main nav</code> and <code>Tabs</code>. The component follows.</p>
+      <ul>
+        <li><strong><code>variant="horizontal"</code> → <code>variant="main-nav"</code></strong>, matching the Figma variant name. The old value still works — it is silently normalised to <code>main-nav</code>, so existing prototypes keep rendering.</li>
+        <li><strong><code>main-nav</code> distributes its items across the full container width</strong> (<code>justify-content: space-between</code>), as in Figma. <code>tabs</code> keeps items left-aligned with the 24px gap.</li>
+        <li><strong>Items no longer shrink</strong> — the bar scrolls instead, which is what makes the distributed <code>main-nav</code> layout hold.</li>
+        <li><strong>An empty <code>actions</code> slot is dropped from the layout.</strong> The slot is a flex item with <code>margin-inline-start: auto</code>; while empty, that auto margin absorbed all the free space and <code>main-nav</code> had nothing left to distribute. It is now hidden until something is slotted into it; with content it still pushes to the right edge as before.</li>
+        <li><strong>Item box matches Figma</strong>: fixed 38px height with a 2px gap above the underline, replacing the previous <code>8px 0</code> vertical padding.</li>
+        <li><strong>Item icons are 24px</strong>, up from 20px; the icon ↔ label gap is 4px, down from 8px.</li>
+        <li><strong>Placement rule documented</strong>: <code>main-nav</code> appears exactly once per page, directly under <code>&lt;minis-topbar&gt;</code>, and the two together are mandatory on every Slevomat web page. <code>tabs</code> is for in-page switching, may repeat, and never sits at the top.</li>
+        <li><strong>Code Connect added</strong> — the component had no <code>.figma.ts</code> before.</li>
+      </ul>
+
+      <h4 style="margin-top:.75rem">Tokens</h4>
+      <ul>
+        <li><strong><code>--navigation-item-gap</code></strong> — <code>var(--linear-sp-linear-2)</code> (8px) → <code>var(--menu-item-gap)</code> (4px)</li>
+        <li><strong><code>--navigation-item-icon-size</code></strong> — <code>var(--pixel-px-20)</code> (20px) → <code>var(--pixel-px-24)</code> (24px)</li>
+        <li><strong>New <code>--navigation-item-height</code></strong> → <code>38px</code> (literal — 38 is not on the pixel scale)</li>
+        <li><strong>New <code>--navigation-item-padding-bottom</code></strong> → <code>var(--fibonachi-sp-fib-2)</code> (2px)</li>
+        <li><strong>Removed <code>--navigation-item-padding-y</code></strong> — replaced by the height + bottom-padding pair above</li>
+      </ul>
+
+      <h4 style="margin-top:.75rem">Tokens — menu</h4>
+      <p><code>--menu-item-gap</code> existed already (commented "upcoming component"); the rest are new and back <code>&lt;minis-menu&gt;</code>.</p>
+      <ul>
+        <li><strong>Panel</strong>: <code>--menu-surface</code> → <code>var(--color-surface-primary)</code>, <code>--menu-border-color</code> → <code>var(--color-border)</code>, <code>--menu-border-radius</code> → <code>var(--border-radius-md)</code>, <code>--menu-shadow</code> → <code>var(--effect-elevation)</code>, <code>--menu-padding</code> → <code>var(--linear-sp-linear-2)</code>, <code>--menu-offset</code> → <code>var(--linear-sp-linear-1)</code>, <code>--menu-min-width</code> → <code>200px</code>, <code>--menu-max-height</code> → <code>70vh</code>, <code>--menu-z-index</code> → <code>100</code></li>
+        <li><strong>Trigger</strong>: <code>--menu-trigger-height</code> → <code>var(--navigation-item-height)</code>, <code>--menu-trigger-padding-bottom</code> → <code>var(--navigation-item-padding-bottom)</code>, <code>--menu-trigger-gap</code> → <code>var(--menu-item-gap)</code>, <code>--menu-trigger-icon-size</code> → <code>var(--navigation-item-icon-size)</code>, <code>--menu-trigger-text</code> → <code>var(--color-text-primary)</code>, <code>--menu-trigger-accent</code> → <code>var(--color-text-accent-link)</code></li>
+        <li><strong>Item</strong>: <code>--menu-item-padding-y</code> → <code>var(--linear-sp-linear-2)</code>, <code>--menu-item-padding-x</code> → <code>var(--linear-sp-linear-3)</code>, <code>--menu-item-border-radius</code> → <code>var(--border-radius-sm)</code>, <code>--menu-item-hover-surface</code> → <code>var(--color-surface-faded)</code></li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
+      <!-- ═══════════════════════════════════════════════════════════
            2026-08-11 (topbar vibe-apps app name moves left)
            ═══════════════════════════════════════════════════════════ -->
       <div class="cl-heading">

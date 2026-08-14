@@ -62,7 +62,7 @@ The component consumes responsive tokens defined in `@minis/tokens`. The tokens 
 
 ```html
 <minis-container>
-  <minis-navigation variant="horizontal">
+  <minis-navigation variant="main-nav">
     <minis-navigation-item href="/" active>Home</minis-navigation-item>
     <minis-navigation-item href="/deals">Deals</minis-navigation-item>
   </minis-navigation>

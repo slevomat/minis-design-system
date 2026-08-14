@@ -35,7 +35,7 @@ This is **identical on every page** — see [layouts/index.md](./index.md) for t
     </minis-topbar>
 
     <!-- Main category navigation (no href = renders as buttons, no page refresh) -->
-    <minis-navigation variant="horizontal" aria-label="Hlavní menu">
+    <minis-navigation variant="main-nav" aria-label="Hlavní menu">
       <minis-navigation-item active>
         <minis-icon slot="icon" name="star" size="20"></minis-icon>
         Extra slevy
@@ -345,7 +345,7 @@ body {
           Košík
         </minis-button>
       </minis-topbar>
-      <minis-navigation variant="horizontal" aria-label="Hlavní menu">
+      <minis-navigation variant="main-nav" aria-label="Hlavní menu">
         <minis-navigation-item active>
           <minis-icon slot="icon" name="star" size="20"></minis-icon>
           Extra slevy
@@ -472,7 +472,7 @@ body {
 
 > Create a deal detail page for **[Hotel Name]** using the Mini*S design system.
 > Use the deal-detail layout:
-> 1. Header band with `<minis-topbar>` + `<minis-navigation variant="horizontal">` (full 11 Slevomat categories)
+> 1. Header band with `<minis-topbar>` + `<minis-navigation variant="main-nav">` (full 11 Slevomat categories)
 > 2. Breadcrumbs row with `<minis-tag variant="toggle">` save button (heart icon) on the right
 > 3. Photo gallery with `<minis-card-grid variant="photogallery">` (exactly 4 photos)
 > 4. Deal title as `<h1>` using `--typography-heading-xl-size`

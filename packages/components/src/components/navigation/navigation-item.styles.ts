@@ -12,8 +12,11 @@ export const navigationItemStyles = css`
   .item {
     display: inline-flex;
     align-items: center;
-    gap: var(--navigation-item-gap, 8px);
-    padding: var(--navigation-item-padding-y, 8px) 0;
+    justify-content: center;
+    gap: var(--navigation-item-gap, 4px);
+    /* Figma: 38px tall box, label sitting 2px above the 2px underline. */
+    height: var(--navigation-item-height, 38px);
+    padding: 0 0 var(--navigation-item-padding-bottom, 2px);
     box-sizing: border-box;
     white-space: nowrap;
     text-decoration: none;
@@ -64,6 +67,41 @@ export const navigationItemStyles = css`
   }
 
   /* =====================
+     INSIDE A MENU PANEL
+     minis-menu stamps the in-menu attribute on every item it holds — both the
+     overflow items minis-navigation hands it, and items slotted into a
+     standalone menu.
+     In the panel an item is a full-width row: no underline (there is no row to
+     underline), and hover is a surface instead.
+     ===================== */
+
+  :host([in-menu]) {
+    display: block;
+  }
+
+  :host([in-menu]) .item {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    padding: var(--menu-item-padding-y, 8px) var(--menu-item-padding-x, 12px);
+    border-bottom: none;
+    border-radius: var(--menu-item-border-radius, var(--border-radius-sm, 4px));
+  }
+
+  :host([in-menu]) .item:hover {
+    background: var(--menu-item-hover-surface, var(--color-surface-faded, #f1f3f5));
+  }
+
+  :host([in-menu][active]) .item {
+    color: var(--navigation-item-active-accent, var(--color-text-accent-link, #006eb9));
+  }
+
+  :host([in-menu][color='positive']) .item:hover,
+  :host([in-menu][color='positive'][active]) .item {
+    border-bottom-color: transparent;
+  }
+
+  /* =====================
      FOCUS STATE
      ===================== */
 
@@ -82,8 +120,8 @@ export const navigationItemStyles = css`
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: var(--navigation-item-icon-size, 20px);
-    height: var(--navigation-item-icon-size, 20px);
+    width: var(--navigation-item-icon-size, 24px);
+    height: var(--navigation-item-icon-size, 24px);
     overflow: hidden;
   }
 

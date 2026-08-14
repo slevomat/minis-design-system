@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-08-14
+
+### New component `<minis-menu>`
+
+A labelled trigger that opens a panel of items below it. Built for the navigation overflow and usable on its own.
+
+- **Props**: `label`, `open` (reflected), `placement` (`start | end`).
+- **Slots**: default (menu items), `icon` (leading icon in the trigger).
+- **Fires** `toggle` with `{ open: boolean }`. **CSS parts**: `trigger`, `panel`.
+- **Item handling** — slotted children get `role="menuitem"`, `tabindex="-1"` and an `in-menu` attribute. `in-menu` is the styling hook a component reads to render itself as a full-width panel row; `syncItems()` is public so `<minis-navigation>` can re-stamp items after it moves them.
+- **Keyboard**: arrow keys move between items (wrapping), `Home`/`End` jump to the ends, `Escape` closes and returns focus to the trigger, `Tab` lets focus leave and closes behind it, a click outside closes. `Escape` is bound on `document` while open, so it works even when focus never entered the panel.
+- **No Figma component exists yet**, so this is the one component without a `.figma.ts`. Documented as a known gap in `docs/ai-prompts/components/menu.md`; the chevron uses `arrow-down` because the icon set has no chevron.
+
+### Navigation — overflow behaviour
+
+A bar with eleven categories does not fit every screen. `main-nav` now has two behaviours, split by the new `breakpoint` prop and measured against the component's **own width** (a `ResizeObserver`, since deciding how many items fit is measurement CSS cannot do). **`tabs` is unaffected** — a tab bar scrolls at every width, matching Figma, where the `Tabs` variant has no "Další" item.
+
+- **New `breakpoint` prop** (`2xs | xs | sm | md | lg | xl | 2xl | 3xl | 4xl`, default `md`). At or below it the bar scrolls horizontally as before; above it, items that don't fit collapse into a trailing `<minis-menu>`. `main-nav` only — ignored by `tabs`.
+- **New `overflow-label` prop** (default `Další`) — the label of that menu. `main-nav` only.
+- **The active item is never hidden in the menu.** If it would overflow, it stays in the row and the last item that fits is pushed into the menu instead, so the current page is always visible.
+- **Above the breakpoint the bar is no longer a scroll container** (`overflow: visible`). It has to be: `overflow-x: auto` makes the vertical axis a scrollport too, which would clip the open panel.
+- `<minis-navigation-item>` renders as a full-width panel row when the menu stamps `in-menu` on it — no underline, hover is a surface.
+
+### Navigation — realigned with the updated Figma component
+
+The Figma component set ([5226:5557](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5226-5557)) now carries two variants, `main nav` and `Tabs`. The component follows.
+
+- **`variant="horizontal"` → `variant="main-nav"`**, matching the Figma variant name. The old value still works: it is silently normalised to `main-nav`, so existing prototypes keep rendering. Docs, stories and the `create-minis` template have moved to the new name.
+- **`main-nav` now distributes its items across the full container width** (`justify-content: space-between`), as in Figma. `tabs` keeps items left-aligned with the 24px gap. Both variants keep the bottom border.
+- **Items no longer shrink** — the bar scrolls instead (`flex-shrink: 0` on slotted items), which is what makes the distributed `main-nav` layout hold.
+- **An empty `actions` slot is dropped from the layout.** The slot is a flex item with `margin-inline-start: auto`; while empty, that auto margin absorbed all the free space and `main-nav` had nothing left to distribute, so items stayed packed left. It is now `hidden` (`display: none`) until something is slotted into it. With content, it still pushes to the right edge as before.
+- **Item box matches Figma**: fixed 38px height with a 2px gap above the underline, replacing the previous `8px 0` vertical padding.
+- **Item icons are 24px**, up from 20px. Story and doc examples now use `<minis-icon slot="icon" size="24">`.
+- **Icon ↔ label gap is 4px**, down from 8px, and now reads the existing `--menu-item-gap` token.
+- **Placement rule documented**: `main-nav` appears exactly once per page, directly under `<minis-topbar>`, and the two together are mandatory on every Slevomat web page; `tabs` is for in-page switching, may repeat, and never sits at the top. Written into `docs/ai-prompts/components/navigation.md`, `docs/ai-prompts/principles.md`, `CLAUDE.md` and the `minis-app` skill.
+- **Code Connect added** — `packages/components/src/components/navigation/navigation.figma.ts` maps the Figma `Variant` property to the `variant` attribute. The component had no `.figma.ts` before.
+- Figma links in the docs and the story now point at `5226-5557` instead of the retired `4135-3385`.
+
+#### Tokens
+
+- **`--navigation-item-gap`** — `var(--linear-sp-linear-2)` (8px) → `var(--menu-item-gap)` (4px)
+- **`--navigation-item-icon-size`** — `var(--pixel-px-20)` (20px) → `var(--pixel-px-24)` (24px)
+- **New `--navigation-item-height`** → `38px` (literal — 38 is not on the pixel scale)
+- **New `--navigation-item-padding-bottom`** → `var(--fibonachi-sp-fib-2)` (2px)
+- **Removed `--navigation-item-padding-y`** — replaced by the height + bottom-padding pair above
+
+#### Tokens — menu
+
+The `--menu-item-gap` token existed already (commented "upcoming component"); the rest are new and back `<minis-menu>`.
+
+- **`--menu-surface`** → `var(--color-surface-primary)`
+- **`--menu-border-color`** → `var(--color-border)`
+- **`--menu-border-radius`** → `var(--border-radius-md)` (8px)
+- **`--menu-shadow`** → `var(--effect-elevation)`
+- **`--menu-padding`** → `var(--linear-sp-linear-2)` (8px)
+- **`--menu-offset`** → `var(--linear-sp-linear-1)` (4px)
+- **`--menu-min-width`** → `200px` (literal — off the pixel scale)
+- **`--menu-max-height`** → `70vh`
+- **`--menu-z-index`** → `100`
+- **`--menu-trigger-height`** → `var(--navigation-item-height)` (38px)
+- **`--menu-trigger-padding-bottom`** → `var(--navigation-item-padding-bottom)` (2px)
+- **`--menu-trigger-gap`** → `var(--menu-item-gap)` (4px)
+- **`--menu-trigger-icon-size`** → `var(--navigation-item-icon-size)` (24px)
+- **`--menu-trigger-text`** → `var(--color-text-primary)`
+- **`--menu-trigger-accent`** → `var(--color-text-accent-link)`
+- **`--menu-item-padding-y`** → `var(--linear-sp-linear-2)` (8px)
+- **`--menu-item-padding-x`** → `var(--linear-sp-linear-3)` (12px)
+- **`--menu-item-border-radius`** → `var(--border-radius-sm)` (4px)
+- **`--menu-item-hover-surface`** → `var(--color-surface-faded)`
+
 ## 2026-08-11
 
 ### New `todo-plans/` folder

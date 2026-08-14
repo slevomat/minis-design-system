@@ -12,7 +12,8 @@ Individual UI elements with props and variants.
 - [Icon](./components/icon.md) - SVG icons via `<minis-icon>`, currentColor theming, a11y
 - [Message](./components/message.md) - Notification card with visual, title, description and close button
 - [Pill Counter](./components/pill-counter.md) - Numeric badge used in buttons and standalone
-- [Navigation](./components/navigation.md) - Horizontal scrollable nav bar: category nav or tab switcher
+- [Navigation](./components/navigation.md) - Main site nav or in-page tab switcher; scrolls on narrow widths, collapses overflow into a menu on wide ones
+- [Menu](./components/menu.md) - Dropdown panel behind a labelled trigger; powers the navigation overflow
 - [Tag](./components/tag.md) - Compact pill label: static, clickable (with toggle), or dismissible
 - [Card Grid](./components/card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
 - [Container](./components/container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding

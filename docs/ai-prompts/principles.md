@@ -16,6 +16,23 @@ Design decisions and rules for how to use components correctly and consistently.
 | Something on the **Slevomat website** | `web` |
 | **Any other app** — internal tools, dashboards, admin, client-facing apps, one-off prototypes | `vibe-apps` (add `app-name="…"`) |
 
+### On the Slevomat website, the main navigation is part of that opening
+
+A Slevomat **web page** opens with two components, in this order, always:
+
+```html
+<minis-topbar variant="web">…</minis-topbar>
+<minis-navigation variant="main-nav" aria-label="Hlavní menu">…</minis-navigation>
+```
+
+`variant="main-nav"` is the site's category menu. It appears **exactly once per page, at the very
+top**, and no Slevomat web page ships without it. For switching between sections *inside* a page —
+product detail tabs, filters — use `<minis-navigation variant="tabs">`, which may appear more than
+once and never sits at the top.
+
+Vibe-coded apps (`variant="vibe-apps"` topbar) are not Slevomat web pages, so a main nav is
+optional there — add one only if the app genuinely has top-level sections.
+
 ### Prefer this
 
 ```html
@@ -58,6 +75,7 @@ The topbar is what makes a page read as Slevomat rather than as a generic bootst
 ### Related
 
 - [`components/topbar.md`](./components/topbar.md) — full API, both variants
+- [`components/navigation.md`](./components/navigation.md) — `main-nav` vs `tabs`, and where each may appear
 - [`getting-started.md`](./getting-started.md) — the HTML skeleton with both rules already applied
 
 ---
