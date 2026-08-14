@@ -50,6 +50,7 @@ Anything generated with this design system — a prototype, a demo page, an inte
 2. Open with `<minis-topbar>`, variant chosen by purpose:
    - `variant="web"` — working on the **Slevomat website**
    - `variant="vibe-apps"` + `app-name="…"` — **any other app**: internal tools, dashboards, admin, client-facing apps, one-off prototypes
+3. On a **Slevomat web page**, follow the topbar with `<minis-navigation variant="main-nav">`. Topbar + main nav are mandatory on every page of the site, and the main nav appears **exactly once, at the top**. In-page switching (product tabs, filters) uses `variant="tabs"`, which may repeat and never sits at the top. Vibe apps may skip the main nav.
 
 Never hand-roll a header bar and never omit it. See `docs/ai-prompts/principles.md` → "Every prototype starts with the background token and a topbar".
 
@@ -254,6 +255,7 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/alert.md`
 - `docs/ai-prompts/components/message.md`
 - `docs/ai-prompts/components/navigation.md`
+- `docs/ai-prompts/components/menu.md`
 - `docs/ai-prompts/components/container.md`
 - `docs/ai-prompts/components/topbar.md`
 - `docs/ai-prompts/components/checkbox.md`

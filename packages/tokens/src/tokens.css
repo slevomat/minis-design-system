@@ -765,9 +765,10 @@
   --tag-toggle-icon-size: var(--pixel-px-24);
 
   /* Navigation */
-  --navigation-item-gap: var(--linear-sp-linear-2);               /*  8px — gap between icon and label */
-  --navigation-item-icon-size: var(--pixel-px-20);                /* 20px */
-  --navigation-item-padding-y: var(--linear-sp-linear-2);         /*  8px — vertical only, no horizontal padding */
+  --navigation-item-gap: var(--menu-item-gap);                    /*  4px — gap between icon and label */
+  --navigation-item-icon-size: var(--pixel-px-24);                /* 24px */
+  --navigation-item-height: 38px;                                 /* 38px — off the pixel scale, taken from Figma */
+  --navigation-item-padding-bottom: var(--fibonachi-sp-fib-2);    /*  2px — gap between label and underline */
   --navigation-item-accent: var(--color-text-primary);
   --navigation-item-active-accent: var(--color-text-accent-link);
   --navigation-item-active-border-color: var(--color-text-accent-link);
@@ -837,8 +838,27 @@
   /* Card grid (upcoming component) */
   --cardgrid-gap: var(--spacing-layout-xs);
 
-  /* Menu item (upcoming component) */
-  --menu-item-gap: var(--linear-sp-linear-1);
+  /* Menu */
+  --menu-item-gap: var(--linear-sp-linear-1);             /*  4px — icon ↔ label inside a menu/nav item */
+  --menu-surface: var(--color-surface-primary);
+  --menu-border-color: var(--color-border);
+  --menu-border-radius: var(--border-radius-md);          /*  8px */
+  --menu-shadow: var(--effect-elevation);
+  --menu-padding: var(--linear-sp-linear-2);              /*  8px — panel inset */
+  --menu-offset: var(--linear-sp-linear-1);               /*  4px — gap below the trigger */
+  --menu-min-width: 200px;                                /* off the pixel scale — panel minimum */
+  --menu-max-height: 70vh;
+  --menu-z-index: 100;
+  --menu-trigger-height: var(--navigation-item-height);   /* 38px — sits in a nav row */
+  --menu-trigger-padding-bottom: var(--navigation-item-padding-bottom);
+  --menu-trigger-gap: var(--menu-item-gap);
+  --menu-trigger-icon-size: var(--navigation-item-icon-size);
+  --menu-trigger-text: var(--color-text-primary);
+  --menu-trigger-accent: var(--color-text-accent-link);
+  --menu-item-padding-y: var(--linear-sp-linear-2);       /*  8px */
+  --menu-item-padding-x: var(--linear-sp-linear-3);       /* 12px */
+  --menu-item-border-radius: var(--border-radius-sm);     /*  4px */
+  --menu-item-hover-surface: var(--color-surface-faded);
 
   /* Effects */
   --effect-background-blur-10: blur(var(--blur-blur-10));

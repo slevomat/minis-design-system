@@ -70,6 +70,7 @@ Start from the scaffolded `index.html` (it already has a topbar, navigation and 
 |---|---|
 | Background | `body { background: var(--color-background); }` — never `#fff`, `white`, or a hand-picked grey. `--color-surface-primary` is for components *on top of* the page (cards, panels, the band behind the topbar). |
 | Topbar | The page opens with `<minis-topbar>` on the variant decided above. Never hand-roll a header bar, never omit it. |
+| Main nav | On a **Slevomat web page**, `<minis-navigation variant="main-nav">` goes directly under the topbar — mandatory, and exactly once per page. In-page switching uses `variant="tabs"`. Vibe apps may skip the main nav. |
 | Tokens only | Every colour, space, radius and font comes from a `var(--…)` token. A raw hex or px value silently opts out of dark mode and the responsive scale. |
 | Sizes | `xs \| sm \| md \| lg \| xl` only — never `small`/`medium`/`large`, which fail silently and fall back to the default size. (Accordion is the one exception: `default \| compact`.) |
 | Page header | `<minis-page-header>` is the hero: one per page, first content element, **outside** `<minis-container>` (it is full-bleed and owns its own padding). The topbar, by contrast, goes **inside** the container. |

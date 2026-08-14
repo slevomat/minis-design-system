@@ -134,7 +134,7 @@ The whole variant is these two things. Don't try to add buttons, a search field 
       Košík
     </minis-button>
   </minis-topbar>
-  <minis-navigation variant="horizontal">
+  <minis-navigation variant="main-nav">
     <minis-navigation-item href="/" active>Home</minis-navigation-item>
     <minis-navigation-item href="/deals">Deals</minis-navigation-item>
   </minis-navigation>

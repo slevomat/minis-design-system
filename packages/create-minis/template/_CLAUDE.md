@@ -36,7 +36,7 @@ All components, tokens, and icons are pre-loaded in `public/vendor/` (served as 
 | Tag | Description |
 |-----|-------------|
 | `<minis-topbar>` | Top bar for any Slevomat page or app. `variant="web"` = logo, optional search, actions on the right; `variant="vibe-apps"` = logo + `app-name` on the left, nothing else |
-| `<minis-navigation>` | Scrollable nav bar (`variant="horizontal"` or `variant="tabs"`) |
+| `<minis-navigation>` | Nav bar. `variant="main-nav"` = the site menu, once per page under the topbar; `variant="tabs"` = in-page tab switcher |
 | `<minis-navigation-item>` | Nav link/tab inside `<minis-navigation>` |
 | `<minis-container>` | Responsive layout wrapper (auto padding + max-width) |
 | `<minis-button>` | Button with variants: `primary`, `secondary`, `tertiary`, `danger`, `cta-buy`, `transparent` |
@@ -117,7 +117,7 @@ Every Slevomat page follows this structure:
       <svg slot="logo">...</svg>
       <minis-button slot="actions" variant="cta-buy" size="sm">Cart</minis-button>
     </minis-topbar>
-    <minis-navigation variant="horizontal" aria-label="Main menu">
+    <minis-navigation variant="main-nav" aria-label="Main menu">
       <minis-navigation-item active>Category</minis-navigation-item>
     </minis-navigation>
   </minis-container>

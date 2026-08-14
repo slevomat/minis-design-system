@@ -1,6 +1,6 @@
 # Navigation & Navigation Item
 
-[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4135-3385&t=mtbinHhK8psdU6hq-11)
+[Open in Figma ↗](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5226-5557&t=pHPts4rDDA6R6smX-11)
 
 The Navigation component consists of a set of elements used to build the main Slevomat menu, as well as contextual tab navigation on product detail pages.
 
@@ -15,7 +15,9 @@ The Navigation component consists of a set of elements used to build the main Sl
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'horizontal' \| 'tabs'` | `'horizontal'` | Visual pattern |
+| `variant` | `'main-nav' \| 'tabs'` | `'main-nav'` | Visual pattern. The legacy value `horizontal` is accepted and normalised to `main-nav` |
+| `breakpoint` | `'2xs' \| 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl'` | `'md'` | **`main-nav` only.** Width at which the bar stops scrolling and starts collapsing overflow into the menu. Measured against the component's **own width**. Ignored by `tabs` |
+| `overflow-label` | `string` | `'Další'` | **`main-nav` only.** Label of the menu holding the items that did not fit |
 | `aria-label` | `string` | `'Navigation'` | Accessible label for the inner `<nav>` element — always provide a meaningful value |
 
 ### Slots
@@ -27,8 +29,68 @@ The Navigation component consists of a set of elements used to build the main Sl
 
 ### Variants
 
-- **`horizontal`** — top-level category navigation bar (homepage). Bottom border under the whole bar; active item gets a blue underline + bold text.
-- **`tabs`** — product detail tab switcher (e.g. Nabídka / Hodnocení / O hotelu). Same border and active indicator.
+- **`main-nav`** — the site's main category navigation. Items are **distributed across the full container width** (`justify-content: space-between`). Bottom border under the whole bar; active item gets a blue underline + bold text.
+- **`tabs`** — in-page contextual tab switcher (e.g. Nabídka / Hodnocení / O hotelu). Items are **left-aligned with a 24px gap**. Same border and active indicator.
+
+### Too many items to fit — `main-nav` only
+
+A nav bar with eleven categories will not fit every screen. `main-nav` has two behaviours, split by
+`breakpoint`:
+
+| Component width | Behaviour |
+|---|---|
+| **at or below** the breakpoint | The bar **scrolls horizontally** — swipe or drag sideways. No menu, every item stays in the row. |
+| **above** the breakpoint | Items that do not fit **collapse into a `<minis-menu>`** at the trailing end, labelled by `overflow-label` ("Další"). |
+
+Three things worth knowing:
+
+- **The breakpoint is measured on the component's own width, not the viewport**, so a nav placed in
+  a narrow column behaves like a nav on a narrow screen. The comparison happens in JS (a
+  `ResizeObserver`), because deciding how many items fit needs measurement that CSS cannot do.
+- **The active item is never hidden in the menu.** If it would overflow, it stays in the row and the
+  last item that fits is pushed into the menu instead — so the current page is always visible. That
+  is why the row can read `Extra slevy · Cestování · Zážitky · Krása · Benefity · Další` with the
+  middle categories in the menu.
+- **Above the breakpoint the bar is no longer a scroll container.** It has to be: `overflow-x: auto`
+  makes the vertical axis a scrollport too, which would clip the open panel.
+
+**`tabs` never collapses.** A tab bar scrolls at every width, so no tab is ever hidden behind a
+menu — tabs are in-page content and burying one is more surprising than a bar that scrolls. This
+also matches Figma, where the `Tabs` variant has no "Další" item. `breakpoint` and `overflow-label`
+have no effect on `tabs`.
+
+```html
+<!-- Collapse from lg (1008px) up; scroll below it -->
+<minis-navigation variant="main-nav" breakpoint="lg" aria-label="Hlavní menu">…</minis-navigation>
+
+<!-- Rename the overflow trigger -->
+<minis-navigation variant="main-nav" overflow-label="More" aria-label="Main menu">…</minis-navigation>
+```
+
+The menu itself is [`<minis-menu>`](./menu.md) — the same public component you can use on its own.
+Items it holds get `role="menuitem"`, `tabindex="-1"` and an `in-menu` attribute;
+`<minis-navigation-item>` reads `in-menu` to render as a full-width panel row instead of an
+underlined tab.
+
+### Where each variant may appear
+
+**`main-nav` appears exactly once per page, at the very top, directly under `<minis-topbar>`.**
+Together they are the mandatory opening of every Slevomat web page:
+
+```
+<minis-topbar variant="web">   ← always first
+<minis-navigation variant="main-nav">  ← always second, only once
+<minis-page-header>            ← hero, first content element
+… rest of the page …
+```
+
+Never place a second `main-nav` further down the page, never use it for in-page section
+switching, and never open a Slevomat web page without it. For anything contextual inside the
+page — product detail tabs, filter switchers — use `variant="tabs"`, which may appear more than
+once and never sits at the top of the page.
+
+Vibe-coded apps (`<minis-topbar variant="vibe-apps">`) are the exception: they are not Slevomat
+web pages, so a main nav is optional there.
 
 ---
 
@@ -56,7 +118,13 @@ The `positive` value is for special tabs like "Pro přírodu" (eco/sustainabilit
 | Slot | Description |
 |---|---|
 | _(default)_ | Label text |
-| `icon` | Leading icon (20×20px). Use `<minis-icon slot="icon" size="20">` or `<svg slot="icon">` |
+| `icon` | Leading icon (24×24px). Use `<minis-icon slot="icon" size="24">` or `<svg slot="icon">` |
+
+### `in-menu` attribute
+
+Set by `<minis-menu>` on every item it holds — you never write it yourself. It switches the item
+from a nav-row tab (fixed 38px box, underline) to a panel row (full width, left-aligned, hover
+surface, no underline).
 
 ### Render element
 
@@ -75,11 +143,13 @@ Active items are bold (`font-weight: 700`). To prevent sibling items from shifti
 
 | Token | Default | Description |
 |---|---|---|
-| `--navigation-gap` | `24px` | Gap between items in the nav bar |
+| `--navigation-gap` | `--linear-sp-linear-6` (24px) | Gap between items (`tabs`); minimum gap before scrolling for `main-nav` |
+| `--menu-*` | see [`menu.md`](./menu.md) | The overflow menu's panel, trigger and row tokens |
 | `--navigation-border-color` | `--color-border` | Bottom border of the nav bar |
-| `--navigation-item-padding-y` | `8px` | Vertical padding inside each item (no horizontal padding) |
-| `--navigation-item-gap` | `8px` | Gap between icon and label within an item |
-| `--navigation-item-icon-size` | `20px` | Icon width/height |
+| `--navigation-item-height` | `38px` | Item box height (off the pixel scale — Figma value) |
+| `--navigation-item-padding-bottom` | `--fibonachi-sp-fib-2` (2px) | Gap between label and underline (no horizontal padding) |
+| `--navigation-item-gap` | `--menu-item-gap` (4px) | Gap between icon and label within an item |
+| `--navigation-item-icon-size` | `--pixel-px-24` (24px) | Icon width/height |
 | `--navigation-item-accent` | `--color-text-primary` | Default item text colour |
 | `--navigation-item-active-accent` | `--color-text-accent-link` | Active item text colour (blue) |
 | `--navigation-item-active-border-color` | `--color-text-accent-link` | Active underline colour |
@@ -95,9 +165,9 @@ Positive (green) states use `--color-text-accent-positive` directly (no override
 ### Horizontal category nav
 
 ```html
-<minis-navigation variant="horizontal" aria-label="Hlavní menu">
+<minis-navigation variant="main-nav" aria-label="Hlavní menu">
   <minis-navigation-item href="/extra-slevy">
-    <minis-icon slot="icon" name="star" size="20"></minis-icon>
+    <minis-icon slot="icon" name="star" size="24"></minis-icon>
     Extra slevy
   </minis-navigation-item>
   <minis-navigation-item href="/cestovani" active>Cestování</minis-navigation-item>
@@ -122,7 +192,7 @@ Positive (green) states use `--color-text-accent-positive` directly (no override
   <minis-navigation-item href="?tab=o-podniku">O hotelu</minis-navigation-item>
   <minis-navigation-item href="?tab=dotazy">Dotazy</minis-navigation-item>
   <minis-navigation-item href="?tab=pro-prirodu" color="positive">
-    <minis-icon slot="icon" name="leaf" size="20"></minis-icon>
+    <minis-icon slot="icon" name="leaf" size="24"></minis-icon>
     Pro přírodu
   </minis-navigation-item>
 </minis-navigation>
@@ -182,10 +252,13 @@ Positive (green) states use `--color-text-accent-positive` directly (no override
 ## AI copy-paste prompt
 
 ```
-Using Mini*S Lit Web Components, build a [horizontal category nav / product detail tab bar].
-Container: <minis-navigation variant="[horizontal|tabs]" aria-label="...">
+Using Mini*S Lit Web Components, build a [main site navigation / in-page tab bar].
+Container: <minis-navigation variant="[main-nav|tabs]" aria-label="...">
+main-nav goes once per page directly under <minis-topbar>; tabs are for in-page switching.
 Items: <minis-navigation-item [href="..."] [active] [color="positive"]>Label</minis-navigation-item>
 For eco/sustainability items use color="positive" with an icon in the icon slot.
 For a right-aligned favourite button use: <minis-tag slot="actions" variant="toggle">...</minis-tag>
 Mark the current page/tab with the active attribute.
+Overflow: set breakpoint="md" (default) to scroll below that width and collapse into the
+"Další" menu above it; overflow-label renames that trigger.
 ```
