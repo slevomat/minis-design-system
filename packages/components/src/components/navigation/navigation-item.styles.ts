@@ -73,13 +73,15 @@ export const navigationItemStyles = css`
      standalone menu.
      In the panel an item is a full-width row: no underline (there is no row to
      underline), and hover is a surface instead.
+
+     Keyed off a class on .item, NOT :host([in-menu]): WebKit does not reliably
+     re-evaluate :host() attribute selectors when the attribute is added after
+     first render, which is exactly what happens here. The host's own display is
+     set by the shadow root that slots the item (see navigation.styles.ts and
+     menu.styles.ts), for the same reason.
      ===================== */
 
-  :host([in-menu]) {
-    display: block;
-  }
-
-  :host([in-menu]) .item {
+  .item.in-menu {
     width: 100%;
     height: auto;
     justify-content: flex-start;
@@ -88,16 +90,16 @@ export const navigationItemStyles = css`
     border-radius: var(--menu-item-border-radius, var(--border-radius-sm, 4px));
   }
 
-  :host([in-menu]) .item:hover {
+  .item.in-menu:hover {
     background: var(--menu-item-hover-surface, var(--color-surface-faded, #f1f3f5));
   }
 
-  :host([in-menu][active]) .item {
+  :host([active]) .item.in-menu {
     color: var(--navigation-item-active-accent, var(--color-text-accent-link, #006eb9));
   }
 
-  :host([in-menu][color='positive']) .item:hover,
-  :host([in-menu][color='positive'][active]) .item {
+  :host([color='positive']) .item.in-menu:hover,
+  :host([color='positive'][active]) .item.in-menu {
     border-bottom-color: transparent;
   }
 

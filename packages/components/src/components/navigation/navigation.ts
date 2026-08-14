@@ -215,6 +215,21 @@ export class MinisNavigation extends LitElement {
   }
 
   /**
+   * Move an item into the menu panel.
+   *
+   * The menu stamps these too, from its own side. We do it here as well because
+   * we already know exactly which items moved, so the panel styling never has to
+   * wait on slot resolution or a slotchange that some engines skip for forwarded
+   * slots.
+   */
+  private _moveToMenu(item: HTMLElement) {
+    item.setAttribute('slot', 'overflow');
+    item.setAttribute('in-menu', '');
+    item.setAttribute('role', 'menuitem');
+    item.setAttribute('tabindex', '-1');
+  }
+
+  /**
    * Decide which items fit and move the rest into the menu.
    *
    * Everything here runs in one synchronous block: items are put back in the row,
@@ -293,7 +308,7 @@ export class MinisNavigation extends LitElement {
       const keep = new Set(visible);
       items.forEach((item, i) => {
         if (keep.has(i)) this._restoreToRow(item);
-        else item.setAttribute('slot', 'overflow');
+        else this._moveToMenu(item);
       });
 
       this._hasOverflow = keep.size < items.length;

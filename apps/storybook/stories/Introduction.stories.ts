@@ -573,6 +573,14 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Menu / navigation — dropdown rows had no hover in Safari</h3>
+      <p>Menu rows styled and hovered correctly in Chrome but not in Safari. Two WebKit-sensitive mechanisms, both replaced with engine-independent ones:</p>
+      <ul>
+        <li><strong><code>:host([in-menu])</code> styling → a class inside the shadow tree.</strong> WebKit does not reliably re-evaluate <code>:host()</code> attribute selectors when the attribute is added after first render — exactly what the menu does when it stamps <code>in-menu</code> at runtime. <code>&lt;minis-navigation-item&gt;</code> now exposes <code>in-menu</code> as a reactive property and mirrors it to a class on its internal <code>.item</code>.</li>
+        <li><strong><code>assignedElements({ flatten: true })</code> → an explicit nested-slot walk.</strong> Navigation forwards overflow items through its own slot, so what is directly assigned to the menu is that slot element, not the items. The menu now resolves nested slots by hand.</li>
+        <li>The item's host <code>display</code> is set by the shadow root that slots it, via <code>::slotted()</code>, rather than by a <code>:host()</code> rule.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">New component <code>&lt;minis-menu&gt;</code></h3>
       <p>A labelled trigger that opens a panel of items below it. Built for the navigation overflow and usable on its own.</p>
       <ul>

@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-08-14
 
+### Menu / navigation — dropdown rows had no hover in Safari
+
+Menu rows styled and hovered correctly in Chrome but not in Safari. Two WebKit-sensitive mechanisms, both replaced with engine-independent ones:
+
+- **`:host([in-menu])` styling → a class inside the shadow tree.** WebKit does not reliably re-evaluate `:host()` attribute selectors when the attribute is added after first render, which is exactly what the menu does when it stamps `in-menu` at runtime. `<minis-navigation-item>` now exposes `in-menu` as a reactive property and mirrors it to a class on its internal `.item`; the styles key off `.item.in-menu`. Attribute → property → re-render runs through `attributeChangedCallback`, which every engine handles correctly.
+- **`assignedElements({ flatten: true })` → an explicit nested-slot walk.** `<minis-navigation>` forwards overflow items through its own `<slot name="overflow">`, so what is directly assigned to the menu is that slot element, not the items. The menu now resolves nested slots by hand instead of trusting WebKit's flattening.
+- The item's host `display` is now set by the shadow root that slots it (`slot[name="overflow"]::slotted(*)` in navigation, `.panel ::slotted(*)` in the menu), rather than by a `:host([in-menu])` rule.
+- `<minis-navigation>` also stamps `in-menu`, `role` and `tabindex` on items as it moves them, so panel styling never waits on slot resolution or a slotchange that some engines skip for forwarded slots.
+
 ### New component `<minis-menu>`
 
 A labelled trigger that opens a panel of items below it. Built for the navigation overflow and usable on its own.

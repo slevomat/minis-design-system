@@ -57,6 +57,13 @@ Slotted children are treated as menu items. On slotchange and on open, each one 
   instead of whatever they look like in place. `<minis-navigation-item>` uses it to drop its
   underline and switch to a hover surface.
 
+> **Read `in-menu` as a property, not with a `:host([in-menu])` rule.** WebKit does not reliably
+> re-evaluate `:host()` attribute selectors when the attribute lands *after* first render, which is
+> exactly what happens here — the result is a component that styles correctly in Chrome and not in
+> Safari. Mirror it to a class on an element inside your shadow tree and style that;
+> `<minis-navigation-item>` does this. For the same reason the host's own `display` is set by the
+> shadow root that slots the item, via `::slotted()`.
+
 Give items an `href` (or make them buttons) so they still work without JavaScript.
 
 ---

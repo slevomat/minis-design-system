@@ -52,6 +52,14 @@ export class MinisNavigationItem extends LitElement {
   @property({ type: String, reflect: true })
   color: NavigationItemColor = 'default';
 
+  /**
+   * Set by `<minis-menu>` on the items it holds — you never write it yourself.
+   * Switches the item from a nav-row tab (fixed box, underline) to a panel row
+   * (full width, left-aligned, hover surface).
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'in-menu' })
+  inMenu = false;
+
   @state()
   private _hasIcon = false;
 
@@ -90,11 +98,19 @@ export class MinisNavigationItem extends LitElement {
       <span class="label"><slot @slotchange=${this._onLabelSlotChange}></slot></span>
     `;
 
+    // The menu appearance rides on a class inside the shadow tree rather than a
+    // `:host([in-menu])` rule. WebKit has long-standing style-invalidation bugs
+    // with :host() attribute selectors that change after first render — which is
+    // exactly what happens here, since the menu stamps `in-menu` at runtime.
+    // Attribute → property → class re-render goes through
+    // attributeChangedCallback, which every engine gets right.
+    const itemClass = this.inMenu ? 'item in-menu' : 'item';
+
     if (this.href) {
-      return html`<a class="item" href=${this.href}>${content}</a>`;
+      return html`<a class=${itemClass} href=${this.href}>${content}</a>`;
     }
 
-    return html`<button class="item" type="button">${content}</button>`;
+    return html`<button class=${itemClass} type="button">${content}</button>`;
   }
 }
 

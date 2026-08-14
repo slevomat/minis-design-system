@@ -55,6 +55,15 @@ export const navigationStyles = css`
     flex-shrink: 0;
   }
 
+  /* Items in the panel stack full width. Set here, in the shadow root that
+     actually assigns them, because ::slotted only reaches directly assigned
+     nodes — and because the item cannot set its own host display through a
+     :host([in-menu]) rule that WebKit may not re-evaluate. */
+  slot[name='overflow']::slotted(*) {
+    display: block;
+    width: 100%;
+  }
+
   .overflow[hidden] {
     display: none;
   }
