@@ -68,3 +68,4 @@ usually a plan that hasn't been thought about hard enough.
 | # | Plan | Status | Updated |
 |---|---|---|---|
 | 001 | [Move the colour ramps onto a curve](001-colour-ramps-to-curve.md) | `draft` | 2026-08-11 |
+| 002 | [Deal Card and Promo Card components](002-deal-card-and-promo-card.md) | `draft` | 2026-09-10 |

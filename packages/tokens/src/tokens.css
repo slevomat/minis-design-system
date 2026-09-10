@@ -431,7 +431,7 @@
   --color-interaction-transparent-hover-border: var(--color-interaction-transparent-hover-surface);
   --color-interaction-transparent-hover-surface: var(--color-blue-95);
   /* Separator — alpha, so it works on any surface colour */
-  --color-separator-default: var(--color-black-a-black-a5);
+  --color-separator: var(--color-black-a-black-a5);
   --color-surface-faded: var(--theme-surface-faded);
   --color-surface-primary: var(--theme-surface-primary);
   --color-text-accent-attention: var(--color-yellow-25);
@@ -512,7 +512,7 @@
   --color-interaction-tertiary-hover-border: var(--color-grey-60);
   --color-interaction-tertiary-hover-surface: var(--color-grey-20);
   /* Separator — alpha, so it works on any surface colour */
-  --color-separator-default: var(--color-white-a-white-a35);
+  --color-separator: var(--color-white-a-white-a35);
   --color-text-accent-attention: var(--color-yellow-75);
   --color-text-accent-danger: var(--color-red-85);
   --color-text-accent-positive: var(--color-green-75);
@@ -832,7 +832,7 @@
   --accordion-transition-duration: 200ms;
 
   /* Separator (upcoming component) */
-  --separator-color: var(--color-separator-default);   /* black 5% / white 35% in dark */
+  --separator-color: var(--color-separator);           /* black 5% / white 35% in dark */
   --separator-height: var(--border-width-thin);           /* 1px */
 
   /* Card grid (upcoming component) */

@@ -562,6 +562,25 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-09-10 (separator token renamed to the exporter naming rule) -->
+      <div class="cl-heading">
+        <h2 id="2026-09-10" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-09-10</h2>
+        <button class="cl-copy-btn" data-anchor="2026-09-10">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens — separator colour follows the exporter naming rule</h3>
+      <p>The Figma token exporter drops every <code>default</code> path segment, so <code>Foundation → Color/Separator/default</code> exports as <code>--color-separator</code>. The shipped name <code>--color-separator-default</code> was hand-added and would have disappeared on the next export.</p>
+      <ul>
+        <li><strong><code>--color-separator-default</code> → <code>--color-separator</code></strong> (renamed, <strong>no alias</strong>). Values unchanged: light <code>var(--color-black-a-black-a5)</code> (black 5%), dark <code>var(--color-white-a-white-a35)</code> (white 35%).</li>
+        <li><code>--separator-color</code> — <code>var(--color-separator-default)</code> → <code>var(--color-separator)</code>.</li>
+        <li><strong>Breaking</strong> only for code that references <code>--color-separator-default</code> directly — switch to <code>--color-separator</code>, or to <code>--separator-color</code> for dividers. Components consume <code>--separator-color</code> (the accordion divider included) and are unaffected.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- ═══════════════════════════════════════════════════════════
            2026-08-14 (navigation realigned with Figma)
            ═══════════════════════════════════════════════════════════ -->

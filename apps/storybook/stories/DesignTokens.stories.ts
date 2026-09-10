@@ -229,7 +229,7 @@ export const Colors: Story = {
       <table style="${ts}">
         <thead><tr><th style="${th}">Token</th><th style="${th}">Role</th></tr></thead>
         <tbody>
-          ${colorRow('--color-separator-default', 'Divider rule — black 5% light / white 35% dark')}
+          ${colorRow('--color-separator', 'Divider rule — black 5% light / white 35% dark')}
         </tbody>
       </table>
       <p style="font-size:.875em;color:var(--color-text-secondary,#6b6b70)">Component-level: <code>--separator-color</code> (→ this token) and <code>--separator-height</code> (1px). The accordion divider resolves to both.</p>

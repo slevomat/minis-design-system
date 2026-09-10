@@ -86,7 +86,7 @@ The event bubbles and is composed, so it can be listened for on `<minis-accordio
 Component-level tokens (defined in `@minis/tokens`):
 
 - `--accordion-surface` → transparent
-- `--accordion-border-color` → `--separator-color` → `--color-separator-default` (black 5% light / white 35% dark — alpha, so the rule reads on any surface) · `--accordion-border-width` → `--separator-height` (1px). The two `--accordion-border-*` names stay as hooks for restyling a single accordion; by default they follow the shared separator rule, matching Figma where the divider is an unmodified `separator` instance.
+- `--accordion-border-color` → `--separator-color` → `--color-separator` (black 5% light / white 35% dark — alpha, so the rule reads on any surface) · `--accordion-border-width` → `--separator-height` (1px). The two `--accordion-border-*` names stay as hooks for restyling a single accordion; by default they follow the shared separator rule, matching Figma where the divider is an unmodified `separator` instance.
 - `--accordion-padding-x` → 16px (`--linear-sp-linear-4`) — the `default` inset
 - `--accordion-compact-padding-x` → 0 (`--linear-sp-linear-0`) — the `size="compact"` inset · Figma `Accordion/compact/padding/x`
 - `--accordion-padding-y` → **responsive**: 20px (`--linear-sp-linear-5`) below 768px, 24px (`--linear-sp-linear-6`) from 768px up. The override lives in a media block at the **end** of `tokens.css` — `:root` inside a media query has the same specificity as a bare `:root`, so it has to come after the component block or the default silently wins.
