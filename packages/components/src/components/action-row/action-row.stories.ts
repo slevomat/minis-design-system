@@ -196,7 +196,7 @@ export const AsMenu: Story = {
   parameters: { controls: { disable: true } },
   render: () => html`
     <div
-      style="width:240px; padding:8px; border:1px solid var(--color-border-default, #e2e4e8); border-radius:12px; background:#fff; display:flex; flex-direction:column; gap:2px;"
+      style="width:240px; padding:8px; border:1px solid var(--color-border-subtle); border-radius:var(--border-radius-lg); background:var(--color-surface-primary); display:flex; flex-direction:column; gap:2px;"
     >
       <minis-action-row variant="icon">${wheelIcon} Profile</minis-action-row>
       <minis-action-row variant="icon" ?active=${true}>${wheelIcon} Settings</minis-action-row>
