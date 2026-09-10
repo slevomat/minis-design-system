@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-09-10
+
+### Tokens — separator colour follows the exporter naming rule
+
+The Figma token exporter drops every `default` path segment, so `Foundation → Color/Separator/default` exports as `--color-separator`. The shipped name `--color-separator-default` was hand-added and would have disappeared on the next export.
+
+- **`--color-separator-default` → `--color-separator`** (renamed, **no alias**). Values unchanged: light `var(--color-black-a-black-a5)` (black 5%), dark `var(--color-white-a-white-a35)` (white 35%).
+- **`--separator-color`**: `var(--color-separator-default)` → `var(--color-separator)`.
+- **Breaking** only for code that references `--color-separator-default` directly — switch to `--color-separator`, or to `--separator-color` for dividers. Components consume `--separator-color` (the accordion divider included) and are unaffected.
+
 ## 2026-08-14
 
 ### Menu / navigation — dropdown rows had no hover in Safari
