@@ -562,6 +562,26 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-10-01 (pill counter lg text size) -->
+      <div class="cl-heading">
+        <h2 id="2026-10-01" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-01</h2>
+        <button class="cl-copy-btn" data-anchor="2026-10-01">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Pill counter — <code>lg</code> text size 14px</h3>
+      <p>Synced <code>size="lg"</code> with the updated Figma variant (<code>Pill_counter</code> → <code>Size=lg</code>).</p>
+      <ul>
+        <li><strong>Font size</strong>: <code>--typography-size-xs</code> (12px) → <code>--typography-size-sm</code> (14px).</li>
+        <li><strong>Horizontal padding</strong>: <code>--pixel-px-3</code> (3px) → <code>--pixel-px-4</code> (4px). Height and min-width stay 18px (<code>--pixel-px-18</code>).</li>
+        <li>AI docs now list <code>lg</code>, which was missing from the size table.</li>
+        <li>No token changes — only existing tokens are referenced.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-09-10 (separator token renamed to the exporter naming rule) -->
       <div class="cl-heading">
         <h2 id="2026-09-10" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-09-10</h2>

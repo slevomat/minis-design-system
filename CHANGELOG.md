@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-01
+
+### Pill counter — `lg` text size 14px
+
+Synced `size="lg"` with the updated Figma variant (`Pill_counter` → `Size=lg`, node `3382:2805`).
+
+- **Font size**: `--typography-size-xs` (12px) → `--typography-size-sm` (14px).
+- **Horizontal padding**: `--pixel-px-3` (3px) → `--pixel-px-4` (4px). Height and min-width stay 18px (`--pixel-px-18`).
+- Docs (`docs/ai-prompts/components/pill-counter.md`) now list `lg`, which was missing from the size table.
+- No token changes — only existing tokens are referenced.
+
 ## 2026-09-10
 
 ### Tokens — separator colour follows the exporter naming rule

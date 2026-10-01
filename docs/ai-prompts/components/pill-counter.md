@@ -16,7 +16,7 @@ list items, headlines, etc.
 
 | Attribute | Type   | Default | Values                                                  |
 |-----------|--------|---------|---------------------------------------------------------|
-| `size`    | string | `"md"`  | `md`, `sm`, `xs`                                        |
+| `size`    | string | `"md"`  | `lg`, `md`, `sm`, `xs`                                  |
 
 ### Slots
 
@@ -30,6 +30,7 @@ Each size has a designated context — do not mix them:
 
 | Size | Dimensions | Use in                                                         |
 |------|------------|----------------------------------------------------------------|
+| `lg` | 18×18px    | Larger standalone use — 14px text, 4px horizontal padding      |
 | `md` | 15×15px    | General use — standalone, lists, headlines; md/lg label buttons |
 | `sm` | 11×11px    | Inside sm label buttons (icon + label); md/lg icon-only buttons |
 | `xs` | 8×8px      | Inside sm icon-only buttons                                    |
@@ -48,12 +49,15 @@ Single-digit values render as a circle; multi-digit values expand horizontally i
 --pill-counter-color    /* defaults to --color-text-primary */
 
 /* Pixel tokens used for sizing */
+--pixel-px-18   /* lg height, min-width */
+--pixel-px-14   /* lg font-size (--typography-size-sm) */
 --pixel-px-15   /* md height, min-width */
 --pixel-px-12   /* md font-size */
 --pixel-px-11   /* sm height, min-width */
 --pixel-px-10   /* sm font-size */
 --pixel-px-8    /* xs height, min-width, font-size */
---pixel-px-4    /* md horizontal padding */
+--pixel-px-4    /* lg horizontal padding */
+--pixel-px-3    /* md horizontal padding */
 --pixel-px-2    /* sm horizontal padding */
 --pixel-px-1    /* xs horizontal padding */
 ```
@@ -69,6 +73,7 @@ Single-digit values render as a circle; multi-digit values expand horizontally i
 ### All sizes
 
 ```html
+<minis-pill-counter size="lg">12</minis-pill-counter>
 <minis-pill-counter size="md">12</minis-pill-counter>
 <minis-pill-counter size="sm">12</minis-pill-counter>
 <minis-pill-counter size="xs">12</minis-pill-counter>
@@ -127,6 +132,7 @@ Add a pill counter badge using the Mini*S pill-counter component:
 <minis-pill-counter size="md">3</minis-pill-counter>
 
 Sizes:
+  lg (18×18px, 14px text) — larger standalone use
   md (15×15px) — general use, standalone, md/lg label buttons
   sm (11×11px) — sm label buttons, md/lg icon-only buttons
   xs  (8×8px)  — sm icon-only buttons
