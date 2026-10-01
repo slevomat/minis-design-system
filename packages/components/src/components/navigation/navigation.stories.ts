@@ -251,6 +251,28 @@ export const ItemColors: Story = {
   },
 };
 
+// ─── With counter ─────────────────────────────────────────────────────────────
+
+export const WithCounter: Story = {
+  name: 'With counter',
+  render: () => {
+    const nav = document.createElement('minis-navigation') as HTMLElement;
+    nav.setAttribute('variant', 'tabs');
+    nav.setAttribute('aria-label', 'Counter demo');
+    nav.innerHTML = `
+      <minis-navigation-item counter="3" active>Default (active)</minis-navigation-item>
+      <minis-navigation-item counter="12">Default</minis-navigation-item>
+      <minis-navigation-item color="positive" counter="5" active>Positive (active)</minis-navigation-item>
+      <minis-navigation-item color="positive" counter="5">
+        <minis-icon slot="icon" name="star" size="24"></minis-icon>
+        Positive + icon
+      </minis-navigation-item>
+    `;
+    activateOnClick(nav);
+    return nav;
+  },
+};
+
 // ─── No active item ────────────────────────────────────────────────────────────
 
 export const NoActiveItem: Story = {

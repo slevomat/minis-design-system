@@ -134,6 +134,28 @@ export const navigationItemStyles = css`
   }
 
   /* =====================
+     COUNTER PILL
+     Figma: Pill_counter lg (18px, 14px bold) after the label, 4px gap.
+     Colours ride on the pill's own custom properties, which inherit through
+     the shadow boundary: dark at rest/hover, blue when active, green when
+     active + positive.
+     ===================== */
+
+  .counter {
+    flex-shrink: 0;
+    --pill-counter-bg: var(--navigation-item-counter-surface, var(--button-secondary-text));
+    --pill-counter-color: var(--navigation-item-counter-text, var(--button-secondary-surface));
+  }
+
+  :host([active]) .counter {
+    --pill-counter-bg: var(--navigation-item-counter-active-surface, var(--button-primary-surface));
+  }
+
+  :host([color='positive'][active]) .counter {
+    --pill-counter-bg: var(--navigation-item-counter-positive-active-surface, var(--button-cta-buy-surface));
+  }
+
+  /* =====================
      LABEL
      Reserve bold width via ::after ghost so items don't shift on active
      ===================== */

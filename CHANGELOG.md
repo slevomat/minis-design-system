@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-01
 
+### Navigation item — optional counter pill
+
+Synced with the updated Figma `navigation-item` component set (node `3470:607`), which gained a `Pill_counter` boolean.
+
+- **New prop `counter`** on `<minis-navigation-item>` (string, default `''`): renders a `<minis-pill-counter size="lg">` after the label, 4px gap. Empty = no pill.
+- Pill colour follows the item state — black at rest/hover, blue when `active`, green when `active` + `color="positive"`.
+- New Storybook story **With counter**; docs in `docs/ai-prompts/components/navigation.md` updated.
+- **Tokens (new)**:
+  - `--navigation-item-counter-surface`: `var(--button-secondary-text)` — pill surface at rest / hover.
+  - `--navigation-item-counter-text`: `var(--button-secondary-surface)` — pill number.
+  - `--navigation-item-counter-active-surface`: `var(--button-primary-surface)` — pill on the active item.
+  - `--navigation-item-counter-positive-active-surface`: `var(--button-cta-buy-surface)` — pill on the active `positive` item.
+
 ### Pill counter — `lg` text size 14px
 
 Synced `size="lg"` with the updated Figma variant (`Pill_counter` → `Size=lg`, node `3382:2805`).
