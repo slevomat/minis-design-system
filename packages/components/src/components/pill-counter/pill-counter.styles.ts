@@ -23,12 +23,12 @@ export const pillCounterStyles = css`
     white-space: nowrap;
   }
 
-  /* lg — 18×18px */
+  /* lg — 18×18px, 14px text */
   :host([size="lg"]) .pill {
     height: var(--pixel-px-18, 18px);
     min-width: var(--pixel-px-18, 18px);
-    padding: 0 var(--pixel-px-3, 3px);
-    font-size: var(--typography-size-xs, 12px);
+    padding: 0 var(--pixel-px-4, 4px);
+    font-size: var(--typography-size-sm, 14px);
   }
 
   /* md — default, 15×15px */

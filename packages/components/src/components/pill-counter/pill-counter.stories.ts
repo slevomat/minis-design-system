@@ -18,7 +18,7 @@ const meta: Meta = {
     size: {
       control: 'select',
       options: ['lg', 'md', 'sm', 'xs'],
-      description: 'lg — 18px · md — 15px · sm — 11px (inside icon+label buttons) · xs — 8px (inside icon-only buttons)',
+      description: 'lg — 18px, 14px text · md — 15px · sm — 11px (inside icon+label buttons) · xs — 8px (inside icon-only buttons)',
     },
     'bg-color': {
       control: 'text',

@@ -11,6 +11,7 @@ export type PillCounterSize = 'lg' | 'md' | 'sm' | 'xs';
  * and can also be used standalone (e.g. behind labels or list items).
  *
  * Size context:
+ * - `lg`  — 18px, 14px text — larger standalone use
  * - `md`  — default, general use cases
  * - `sm`  — for use inside icon + label buttons
  * - `xs`  — for use inside icon-only buttons
