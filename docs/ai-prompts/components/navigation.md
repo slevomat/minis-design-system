@@ -103,6 +103,7 @@ web pages, so a main nav is optional there.
 | `href` | `string` | `''` | Destination URL. Renders `<a href>` when set, `<button>` otherwise |
 | `active` | `boolean` | `false` | Marks the current/active item — blue underline (2px) + bold text |
 | `color` | `'default' \| 'positive'` | `'default'` | Colour accent. See details below |
+| `counter` | `string` | `''` | Optional counter pill after the label, e.g. `counter="3"`. Empty / omitted = no pill. See "Counter pill" below |
 
 ### `color` prop
 
@@ -112,6 +113,25 @@ web pages, so a main nav is optional there.
 | `positive` | Normal text colour, **icon is green** | Green text + green underline | Green text + green underline + bold |
 
 The `positive` value is for special tabs like "Pro přírodu" (eco/sustainability): the icon is green at rest, but the text only turns green on hover or when active.
+
+### Counter pill
+
+Setting `counter` renders a `<minis-pill-counter size="lg">` (18px, 14px bold) after the label with a
+4px gap — the Figma `Pill_counter` boolean on the item. The pill colour follows the item state:
+
+| Item state | Pill surface | Number |
+|---|---|---|
+| default / hover (either `color`) | `--button-secondary-text` (black) | `--button-secondary-surface` (white) |
+| `active` | `--button-primary-surface` (blue) | white |
+| `active` + `color="positive"` | `--button-cta-buy-surface` (green) | white |
+
+```html
+<minis-navigation-item counter="3">Oblíbené</minis-navigation-item>
+<minis-navigation-item counter="5" color="positive" active>Pro přírodu</minis-navigation-item>
+```
+
+The value is shown as-is — format it yourself (`9+`, `99+`) if it can get large. The label's
+bold-width reservation is unaffected, so activating an item still causes no layout shift.
 
 ### Slots
 
@@ -155,6 +175,10 @@ Active items are bold (`font-weight: 700`). To prevent sibling items from shifti
 | `--navigation-item-active-border-color` | `--color-text-accent-link` | Active underline colour |
 | `--navigation-item-active-border-width` | `2px` | Active underline thickness |
 | `--navigation-item-hover-border-color` | `--color-text-accent-link` | Hover underline colour |
+| `--navigation-item-counter-surface` | `--button-secondary-text` | Counter pill surface at rest / hover (black) |
+| `--navigation-item-counter-text` | `--button-secondary-surface` | Counter pill number colour (white) |
+| `--navigation-item-counter-active-surface` | `--button-primary-surface` | Counter pill surface on the active item (blue) |
+| `--navigation-item-counter-positive-active-surface` | `--button-cta-buy-surface` | Counter pill surface on the active `positive` item (green) |
 
 Positive (green) states use `--color-text-accent-positive` directly (no override token needed).
 

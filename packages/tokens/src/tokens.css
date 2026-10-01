@@ -774,6 +774,10 @@
   --navigation-item-active-border-color: var(--color-text-accent-link);
   --navigation-item-active-border-width: 2px;
   --navigation-item-hover-border-color: var(--color-text-accent-link);
+  --navigation-item-counter-surface: var(--button-secondary-text);                 /* pill at rest / hover — black */
+  --navigation-item-counter-text: var(--button-secondary-surface);                 /* pill number — white */
+  --navigation-item-counter-active-surface: var(--button-primary-surface);         /* pill on the active item — blue */
+  --navigation-item-counter-positive-active-surface: var(--button-cta-buy-surface); /* pill on active + positive — green */
   --navigation-gap: var(--linear-sp-linear-6);                    /* 24px — gap between items */
   --navigation-border-color: var(--color-border);
 

@@ -571,6 +571,15 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Navigation item — optional counter pill</h3>
+      <p>Synced with the updated Figma <code>navigation-item</code> component set, which gained a <code>Pill_counter</code> boolean.</p>
+      <ul>
+        <li><strong>New prop <code>counter</code></strong> on <code>&lt;minis-navigation-item&gt;</code> (string, default empty): renders a <code>&lt;minis-pill-counter size="lg"&gt;</code> after the label, 4px gap. Empty = no pill.</li>
+        <li>Pill colour follows the item state — black at rest/hover, blue when <code>active</code>, green when <code>active</code> + <code>color="positive"</code>.</li>
+        <li>New story <strong>With counter</strong>; AI docs updated.</li>
+        <li><strong>Tokens (new)</strong>: <code>--navigation-item-counter-surface</code> → <code>var(--button-secondary-text)</code>, <code>--navigation-item-counter-text</code> → <code>var(--button-secondary-surface)</code>, <code>--navigation-item-counter-active-surface</code> → <code>var(--button-primary-surface)</code>, <code>--navigation-item-counter-positive-active-surface</code> → <code>var(--button-cta-buy-surface)</code>.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Pill counter — <code>lg</code> text size 14px</h3>
       <p>Synced <code>size="lg"</code> with the updated Figma variant (<code>Pill_counter</code> → <code>Size=lg</code>).</p>
       <ul>
