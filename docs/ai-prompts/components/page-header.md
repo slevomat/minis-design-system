@@ -1,6 +1,17 @@
 # `<minis-page-header>` — AI prompt reference
 
-Page headers — also called **heroes** — come in the brand colour themes and open a page: they are the **first content element**, placed directly under the Slevomat header (`<minis-topbar>`) and the main navigation (`<minis-navigation>`). Full-width branded banner that switches between a horizontal layout (desktop ≥768 px: content left, image right) and a stacked layout (mobile: image top, content below).
+Page headers — also called **heroes** — come in the brand colour themes and open a page: they are the **first content element**, placed directly under the Slevomat header (`<minis-topbar>`) and the main navigation (`<minis-navigation>`).
+
+## Layouts
+
+Figma is getting three layouts — *Simple*, *With Controls* and *Centered simple*. Only *With Controls* is finished so far; its Figma variant is named `Layout=Inspirations`, and the attribute value mirrors that.
+
+| `layout` | Figma | Status | Look |
+|---|---|---|---|
+| `inspirations` | `Layout=Inspirations` ("With Controls") | **Current** — use for new work | Left-aligned at every width; photo cropped into the top-right corner; optional `controls` row, `message`, `location`, `more` toggle |
+| `default` (attribute omitted) | — (no longer in Figma) | Legacy, kept so existing pages don't change | Desktop: content left, blob-masked image right, vertically centred. Mobile: image on top, centred stack |
+
+*Simple* and *Centered simple* will be added as further `layout` values once designed; until then the `default` layout stays the default.
 
 ---
 
@@ -25,7 +36,8 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 
 ## Figma
 
-- Component node: `4642:396`
+- Component set: `4642:396` — variants `Breakpoint` (`xs` | `md-lg-xl-2xl`) × `Theme` × `Layout` (`Inspirations`)
+- Booleans: `Badge`, `Tag`, `Message`, `Location`, `Description`, `Collapsible`, `Button`, `Visuals`, `Controls` (+ the `Controls body` instance slot, default `_Default controls`)
 - File: `mfiAVMWkxiBRGnegjqLMNW`
 - URL: https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396
 
@@ -48,10 +60,21 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `theme` | `'brand' \| 'blue' \| 'yellow' \| 'pink' \| 'green' \| 'summer'` | `'brand'` | Background color theme |
+| `layout` | `'default' \| 'inspirations'` | `'default'` | Layout — see [Layouts](#layouts). Use `inspirations` for new work. |
+| `theme` | `'brand' \| 'yellow' \| 'summer' \| 'pink' \| 'green' \| 'blue'` | `'brand'` | Background color theme |
 | `description` | `string` | `''` | Body copy shown below the heading. Omit to hide. |
 | `tag` | `string` | `''` | Countdown/label text shown as a pill above the heading. Omit to hide. |
 | `no-badge` | `boolean` | `false` | Hide the Brand/Badge checkmark seal next to the heading (shown by default) |
+| `location` | `string` | `''` | Location switcher under the heading — bold, underlined, with an `expand` chevron. A `<button>`; fires `location-click`. Omit to hide. |
+| `expanded` | `boolean` | `false` | Whether the `more` slot is revealed. Reflected; toggled by the "more" button. |
+| `more-label` | `string` | `'Více informací'` | Label of the toggle that reveals the `more` slot. |
+
+### Events
+
+| Event | Detail | Fired when |
+|---|---|---|
+| `location-click` | — | The location switcher is clicked — open your location picker. |
+| `more-toggle` | `{ expanded: boolean }` | The "more" toggle is clicked (after `expanded` has flipped). |
 
 ### Slots
 
@@ -60,6 +83,9 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 | *(default)* | **Heading HTML** — supports `<br>` for line breaks and any inline markup |
 | `image` | Decorative photo. Ideally a PNG with a transparent blob-shaped background; any `<img>` is clipped to the container. |
 | `button` | Optional CTA. Use `<minis-button variant="transparent" size="xl">`. |
+| `message` | Figma `Message` — the draft "Message on product" banner, first in the content column (`max-width: 746px`). No component yet: use the markup recipe in [`message.md`](message.md#message-on-product-draft-no-component). |
+| `more` | Figma `Collapsible` — extra content hidden behind the "Více informací" toggle. The toggle **only renders when this slot has content**. |
+| `controls` | Figma `Controls` / `Controls body` — controls row below the content (24px gap). **Mobile:** stacked, every child stretched. **Desktop:** a row up to 600px wide; `<minis-button>` children hug their label, every other child (the input) shares the rest. Give the button `full-width` so it fills the row on mobile — the component cancels that stretch on desktop. |
 
 ### CSS custom properties (overridable)
 
@@ -67,15 +93,18 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 |---|---|---|
 | `--page-header-surface` | per theme | Background color |
 | `--page-header-text` | per theme | Heading and description text color |
-| `--page-header-badge-size` | `0.8em` | Badge seal size. Relative to the heading font-size — keep it in `em` so it stays proportional at every breakpoint. |
-| `--page-header-badge-gap` | `0.27em` | Horizontal gap between the end of the heading's last line and the badge. Also `em`-relative. |
-| `--page-header-badge-check` | white (blue on `theme="green"`) | Colour of the badge's checkmark. |
+| `--page-header-badge-size` | `0.8em` (`inspirations`: 32px → 43px) | Badge seal size. Relative to the heading font-size — keep it in `em` so it stays proportional at every breakpoint. |
+| `--page-header-badge-gap` | `0.27em` (`inspirations`: 4px → 16px) | Horizontal gap between the end of the heading's last line and the badge. Also `em`-relative. |
+| `--page-header-badge-check` | white | Colour of the badge's checkmark. |
 
 ### CSS shadow parts
 
 | Part | Description |
 |---|---|
 | `root`, `container`, `content`, `heading-row`, `heading`, `tag`, `description`, `image-area` | Layout elements |
+| `location` | The location switcher button |
+| `more`, `more-toggle` | The collapsible content wrapper and its toggle button |
+| `controls` | The controls row wrapper |
 | `badge-anchor` | Inline box that positions the badge on the heading's last line |
 | `badge` | The `<minis-badge>` seal itself |
 
@@ -86,16 +115,16 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 | `theme` | Background token | Text color token | Badge seal |
 |---|---|---|---|
 | `brand` | `--color-branding-brand` (cyan) | `--color-blue-25` (dark) | `pink` |
-| `yellow` | `--color-branding-yellow` | `--color-blue-25` (dark) | `summer` |
-| `blue` | `--color-branding-blue` | `--color-blue-95` (light) | `brand` |
-| `pink` | `--color-branding-pink` | `--color-pink-95` (light) | `blue` |
-| `green` | `--color-branding-green` | `--color-green-95` (light) | `yellow`, blue checkmark |
-| `summer` | `--color-branding-summer` (orange) | `--color-green-95` (light) | `green` |
+| `yellow` | `--color-branding-yellow` | `--color-blue-25` (dark) | `pink` |
+| `summer` | `--color-branding-summer` (orange) | `--color-blue-25` (dark) | `green` |
+| `pink` | `--color-branding-pink` | `--color-core-white` | `brand` |
+| `green` | `--color-branding-green` | `--color-core-white` | `summer` |
+| `blue` | `--color-branding-blue` | `--color-core-white` | `brand` |
 
-The seal colour is **derived from the theme** — there is no attribute for it. Each pairing
-comes from Figma and is picked so the seal reads against its own surface rather than
-disappearing into it. The `green` theme is the only one that also recolours the checkmark
-(blue instead of white), because a white mark on the pale gold seal has too little contrast.
+The text and seal colours are **derived from the theme** — there is no attribute for them.
+Each pairing comes from Figma and is picked so the seal reads against its own surface
+rather than disappearing into it. The checkmark is white on every theme. Both layouts
+share this palette.
 
 ---
 
@@ -104,6 +133,35 @@ disappearing into it. The `green` theme is the only one that also recolours the 
 The layout switch is a **CSS container query** on the component's own width
 (`@container page-header (min-width: 768px)`), not a viewport media query — the
 component adapts to the width of whatever it is placed in.
+
+### `layout="inspirations"`
+
+Figma order of the content column: message → tag → heading (+ badge) → location →
+description → "more" toggle → button. The controls row follows the column.
+
+**Desktop (container ≥768 px)** — Figma `Breakpoint=md-lg-xl-2xl`
+- Root: full-bleed surface, `overflow: hidden`, no padding, no min-height — height comes from the content
+- Container: `max-width: var(--container-width)` with `padding: var(--spacing-layout-lg) var(--container-padding)` — the same box as `<minis-container>`, so the text lines up with the page below
+- Content: flex column, `gap: --spacing-layout-sm`, left-aligned; description `max-width: 507px`
+- Controls: `gap: --spacing-layout-xxl` (24px) below the content; row, `max-width: 600px`
+- Photo: `280×280px`, absolutely positioned `top: -32px; right: var(--container-padding)` — its top is cropped by the banner edge and it never affects the height
+
+**Mobile (container <768 px)** — Figma `Breakpoint=xs`
+- Container: `padding: var(--linear-sp-linear-3) var(--container-padding)` (12px / 8px at xs)
+- Controls: stacked, every child stretched to full width
+- Photo: `144×144px` at `top: -34px; right: calc(var(--container-padding) - 44px)` — cropped top and right, sits **behind** the text (the description runs over it)
+
+**Photo:** no mask is applied in this layout. Supply a transparent PNG with the blob
+shape baked in (the Figma demo image is in `apps/storybook/public/page-header-rimini.png`).
+Content and controls stack above the photo (`z-index`).
+
+**Badge:** Figma uses a 32px seal with a 4px gap at the 32px heading, and a 43px seal
+with a 16px gap at the 56px heading. The layout interpolates linearly on the heading
+font-size (`calc(0.4583em + 17.333px)` / `calc(0.5em - 12px)`), so both Figma points
+are exact and in-between tiers stay proportional. `--page-header-badge-size` /
+`--page-header-badge-gap` still override it.
+
+### `layout="default"` (legacy)
 
 **Desktop (container ≥768 px)**
 - Root: full width, `min-height: 328px`, `padding: 0 var(--container-padding)`, centered inner container
@@ -117,8 +175,8 @@ component adapts to the width of whatever it is placed in.
 - Image area (top): `160×160px`, clipped to the same blob shape via CSS `mask-image` (smaller variant)
 - Content (below): centered text
 
-The badge is **not** breakpoint-specific — the same em-relative seal is used at every
-size (see below).
+In the `default` layout the badge is **not** breakpoint-specific — the same em-relative
+seal is used at every size (see below).
 
 ---
 
@@ -215,7 +273,50 @@ without re-measuring.
 
 ## Usage examples
 
-### Minimal
+### Inspirations ("With Controls") — the current layout
+
+```html
+<minis-page-header
+  layout="inspirations"
+  theme="brand"
+  description="Dnešní 30% sleva navíc vám nesmí uniknout. Pořiďte si dovolenou u moře za ještě lepší cenu."
+>
+  Ušetřete za pobyt<br>v italském Rimini
+  <img slot="image" src="rimini-blob.png" alt="">
+  <input slot="controls" type="search" placeholder="Kam chcete vyrazit?" aria-label="Kam chcete vyrazit?">
+  <minis-button slot="controls" variant="transparent" size="lg" full-width>Vyhledat</minis-button>
+</minis-page-header>
+```
+
+There is no input component yet (Figma "🚧 Input") — style a native `<input>` from the
+`--input-*` tokens: 40px tall, `--input-border`, `--border-radius-sm`, `--input-surface`,
+`--input-placeholder`.
+
+### Inspirations — every part
+
+```html
+<minis-page-header
+  layout="inspirations"
+  theme="yellow"
+  tag="Do 1. června zbývá 6 dní"
+  location="v Rosovicích a okolí"
+  description="Dnešní 30% sleva navíc vám nesmí uniknout."
+>
+  Ušetřete za pobyt<br>v italském Rimini
+  <div slot="message" role="status">…Message on product markup…</div>
+  <p slot="more">Podmínky akce…</p>
+  <minis-button slot="button" variant="transparent" size="xl">Mrknout na volné židle</minis-button>
+  <img slot="image" src="rimini-blob.png" alt="">
+  <input slot="controls" type="search" placeholder="Kam chcete vyrazit?">
+  <minis-button slot="controls" variant="transparent" size="lg" full-width>Vyhledat</minis-button>
+</minis-page-header>
+
+<script>
+  header.addEventListener('location-click', () => openLocationPicker());
+</script>
+```
+
+### Minimal (default layout)
 
 ```html
 <minis-page-header theme="brand">
@@ -254,6 +355,8 @@ without re-measuring.
 - The heading inside the component uses `<h1>`. If the page already has an `<h1>`, override the heading level by styling with CSS or wrapping in a custom heading slot.
 - The `image` slot should include meaningful `alt` text or `alt=""` if decorative.
 - The tag pill is a `<span>`, not an interactive element — purely informational.
+- The location switcher and the "more" toggle are real `<button>`s. The toggle carries `aria-expanded` and `aria-controls`.
+- Give the controls input an accessible name (`aria-label` or a visually hidden `<label>`) — the placeholder is not one.
 
 ---
 
@@ -261,11 +364,14 @@ without re-measuring.
 
 ```
 Create a <minis-page-header> with:
+- layout="inspirations"
 - theme="brand"
 - Heading: "Ušetřete za pobyt<br>v italském Rimini"
 - description="Dnešní 30% sleva vám nesmí uniknout."
-- tag="Do 1. června zbývá 6 dní"
+- tag="Do 1. června zbývá 6 dní" (optional)
+- location="v Rosovicích a okolí" (optional; listen for location-click)
 - no-badge (absent by default — badge is shown)
-- button slot: <minis-button variant="transparent" size="xl">Zjistit více</minis-button>
-- image slot: <img src="photo.png" alt="Rimini beach">
+- image slot: <img src="photo.png" alt=""> — a transparent PNG with the blob shape baked in
+- controls slot: a native search <input> styled from --input-* tokens +
+  <minis-button variant="transparent" size="lg" full-width>Vyhledat</minis-button>
 ```

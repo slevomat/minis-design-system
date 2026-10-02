@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-02
 
+### Page header — new `inspirations` layout (Figma "With Controls"), new theme palette
+
+Synced with the reworked Figma `PageHeader` set (`4642:396`). Figma will have three layouts — *Simple*, *With Controls* and *Centered simple*; only *With Controls* is finished, as variant `Layout=Inspirations`.
+
+- **New `layout` attribute**: `default` (no attribute — the original hero, unchanged, no longer in Figma; kept until Simple / Centered simple land) and `inspirations`. `inspirations`: left-aligned at every width; the container has the same box as `<minis-container>` (`max-width: var(--container-width)`, `--container-padding` inside); vertical padding `--spacing-layout-lg` on desktop, `--linear-sp-linear-3` on mobile; photo 280×280 (desktop) / 144×144 (mobile) absolutely positioned in the top-right corner, cropped by the banner and never affecting its height, with **no mask** — the blob shape comes baked into a transparent PNG. Badge seal 32px / 4px gap at the 32px heading → 43px / 16px gap at the 56px heading.
+- **New parts** (all optional, Figma booleans in brackets): `message` slot [Message] for the draft "Message on product" banner; `location` attribute [Location] — bold underlined button with an `expand` chevron, fires `location-click`; `more` slot [Collapsible] behind a "Více informací" toggle (`more-label`, reflected `expanded`, fires `more-toggle`; the toggle only appears when the slot has content); `controls` slot [Controls] — stacked full-width on mobile, a row up to 600px on desktop where `<minis-button>`s hug and other children grow.
+- **Theme palette changed (both layouts)**: text on `pink` / `green` / `blue` is now `--color-core-white` (was `--color-pink-95` / `--color-green-95` / `--color-blue-95`); text on `summer` is now `--color-blue-25` (was `--color-green-95`). Seals: `yellow` → pink (was summer), `pink` → brand (was blue), `green` → summer (was yellow); `brand`, `summer`, `blue` unchanged. The green theme's blue checkmark is gone — every check is white.
+- **Fix**: the tag pill referenced the non-existent `--color-interaction-secondary-default-accent` and always fell back to black; it now uses `--color-interaction-secondary-accent` (same in light mode, white in dark mode).
+- **Storybook**: new stories **Inspirations — With Controls / All Themes / All Parts / Mobile** with the Figma demo photo (`apps/storybook/public/page-header-rimini.png`); Playground gains `layout` (default `inspirations`), `location` and `more-label`; the old stories are relabelled **Default — …**.
+- **Code Connect**: `page-header.figma.ts` remapped to the new set — `Layout`, `Theme` (`Summer` capitalised), `Badge`, `Description`, `Tag`, `Location`, `Message`, `Collapsible`, `Button`, `Visuals`, `Controls`. `Breakpoint` is unmapped (container query).
+- No token changes.
+
 ### Message standalone — close button works, `no-visual`, `no-close`
 
 Bug fixes found while reviewing the new stories.

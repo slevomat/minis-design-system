@@ -90,8 +90,7 @@ export const CheckColor: Story = {
       description: {
         story: `
 The checkmark is white on every seal by default. Set <code>--badge-check-color</code> to recolour it
-when white does not carry enough contrast — this is what <code>&lt;minis-page-header theme="green"&gt;</code>
-does with its yellow seal.
+when white does not carry enough contrast on a light seal such as <code>yellow</code>.
         `,
       },
     },
