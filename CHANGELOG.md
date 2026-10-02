@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-02
 
+### Badge — colour order matches Figma
+
+Reordered the `color` variants to match the updated Figma `Brand/Badge` set (node `4605:441`) and the other components / styleguides.
+
+- **New order**: `brand`, `yellow`, `summer`, `pink`, `green`, `blue` (was `pink`, `yellow`, `blue`, `brand`, `green`, `summer`).
+- Applied to the `BadgeColor` type, Storybook controls and the **All colors** story, `badge.figma.ts`, the variant CSS and `docs/ai-prompts/components/badge.md`.
+- No behaviour or token changes — `pink` is still the default.
+
 ### Tokens — new `--spacing-layout-xxl`
 
 Synced with the new `Spacing/layout/xxl` variable in Figma.

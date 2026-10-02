@@ -31,7 +31,7 @@ Headline companion (43 px):
 
 | Attribute | Type                                      | Default  | Description                       |
 |-----------|-------------------------------------------|----------|-----------------------------------|
-| `color`   | `'pink' \| 'yellow' \| 'blue' \| 'brand' \| 'green' \| 'summer'` | `'pink'` | Color variant of the seal badge   |
+| `color`   | `'brand' \| 'yellow' \| 'summer' \| 'pink' \| 'green' \| 'blue'` | `'pink'` | Color variant of the seal badge   |
 | `size`    | `'sm' \| 'md' \| 'xl'`                    | `'xl'`   | Size: sm 32 px · md 43 px · xl 82 px |
 
 ### CSS custom properties
@@ -56,12 +56,12 @@ None.
 
 | Value    | Token           | Hex       | Usage                          |
 |----------|-----------------|-----------|--------------------------------|
-| `pink`   | `--color-branding-pink`   | `#cf2e41` | Default — Slevomat brand red |
-| `yellow` | `--color-branding-yellow` | `#ffd666` | Warm golden accent           |
-| `blue`   | `--color-branding-blue`   | `#006eb9` | Slevomat brand blue          |
 | `brand`  | `--color-branding-brand`  | `#00b2e5` | Slevomat brand cyan          |
-| `green`  | `--color-branding-green`  | `#088107` | Brand green                  |
+| `yellow` | `--color-branding-yellow` | `#ffd666` | Warm golden accent           |
 | `summer` | `--color-branding-summer` | `#ffa400` | Summer campaign orange       |
+| `pink`   | `--color-branding-pink`   | `#cf2e41` | Default — Slevomat brand red |
+| `green`  | `--color-branding-green`  | `#088107` | Brand green                  |
+| `blue`   | `--color-branding-blue`   | `#006eb9` | Slevomat brand blue          |
 
 ---
 
@@ -109,12 +109,12 @@ The component uses the branding semantic tokens (added 2026-06-11). These alias 
 
 | Variant  | Branding token          | Primitive alias       | Resolved hex |
 |----------|-------------------------|-----------------------|--------------|
-| `pink`   | `--color-branding-pink`   | `--color-pink-45`   | `#cf2e41` |
-| `yellow` | `--color-branding-yellow` | `--color-yellow-75` | `#ffd666` |
-| `blue`   | `--color-branding-blue`   | `--color-blue-45`   | `#006eb9` |
 | `brand`  | `--color-branding-brand`  | `--color-blue-65`   | `#00b2e5` |
-| `green`  | `--color-branding-green`  | `--color-green-45`  | `#088107` |
+| `yellow` | `--color-branding-yellow` | `--color-yellow-75` | `#ffd666` |
 | `summer` | `--color-branding-summer` | `--color-yellow-45` | `#ffa400` |
+| `pink`   | `--color-branding-pink`   | `--color-pink-45`   | `#cf2e41` |
+| `green`  | `--color-branding-green`  | `--color-green-45`  | `#088107` |
+| `blue`   | `--color-branding-blue`   | `--color-blue-45`   | `#006eb9` |
 
 > Note: `yellow` resolves to `--color-yellow-75` (a warm golden amber). `summer` is the one
 > that takes `--color-yellow-45` — the same primitive the warning/alert feedback colour uses.

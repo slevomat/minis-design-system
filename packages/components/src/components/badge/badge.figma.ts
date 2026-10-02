@@ -5,12 +5,12 @@ figma.connect(
   {
     props: {
       color: figma.enum('color', {
-        pink: 'pink',
-        yellow: 'yellow',
-        blue: 'blue',
         brand: 'brand',
-        green: 'green',
+        yellow: 'yellow',
         summer: 'summer',
+        pink: 'pink',
+        green: 'green',
+        blue: 'blue',
       }),
       size: figma.enum('Size', {
         sm: 'sm',

@@ -571,6 +571,14 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Badge — colour order matches Figma</h3>
+      <p>Reordered the <code>color</code> variants to match the updated Figma <code>Brand/Badge</code> set and the other components / styleguides.</p>
+      <ul>
+        <li><strong>New order</strong>: <code>brand</code>, <code>yellow</code>, <code>summer</code>, <code>pink</code>, <code>green</code>, <code>blue</code> (was <code>pink</code>, <code>yellow</code>, <code>blue</code>, <code>brand</code>, <code>green</code>, <code>summer</code>).</li>
+        <li>Applied to the <code>BadgeColor</code> type, Storybook controls and the <strong>All colors</strong> story, <code>badge.figma.ts</code>, the variant CSS and the AI docs.</li>
+        <li>No behaviour or token changes — <code>pink</code> is still the default.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Tokens — new <code>--spacing-layout-xxl</code></h3>
       <p>Synced with the new <code>Spacing/layout/xxl</code> variable in Figma.</p>
       <ul>

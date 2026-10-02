@@ -24,24 +24,24 @@ export const badgeStyles = css`
     --badge-size: 43px;
   }
 
+  :host([color='brand']) {
+    --badge-color: var(--color-branding-brand);
+  }
+
   :host([color='yellow']) {
     --badge-color: var(--color-branding-yellow);
   }
 
-  :host([color='blue']) {
-    --badge-color: var(--color-branding-blue);
-  }
-
-  :host([color='brand']) {
-    --badge-color: var(--color-branding-brand);
+  :host([color='summer']) {
+    --badge-color: var(--color-branding-summer);
   }
 
   :host([color='green']) {
     --badge-color: var(--color-branding-green);
   }
 
-  :host([color='summer']) {
-    --badge-color: var(--color-branding-summer);
+  :host([color='blue']) {
+    --badge-color: var(--color-branding-blue);
   }
 
   svg {

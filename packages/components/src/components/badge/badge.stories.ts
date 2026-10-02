@@ -15,7 +15,7 @@ const meta: Meta = {
 <p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4605-692&t=rkdTibDNQvxbBYPb-11" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4"><svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg> Open in Figma ↗</a></p>
 <p>A decorative brand symbol — a scalloped seal badge with a white checkmark — used to communicate trust or verification. Purely visual, no interaction.</p>
 <ul>
-  <li>Six color variants: <code>pink</code> (default), <code>yellow</code>, <code>blue</code>, <code>brand</code>, <code>green</code>, <code>summer</code>.</li>
+  <li>Six color variants: <code>brand</code>, <code>yellow</code>, <code>summer</code>, <code>pink</code> (default), <code>green</code>, <code>blue</code>.</li>
   <li>Three sizes via the <code>size</code> attribute: <code>sm</code> 32 px (XS/SM headline), <code>md</code> 43 px (headline companion), <code>xl</code> 82 px (default).</li>
   <li>No slots, no events — place it inline next to text or inside a card.</li>
   <li>The checkmark is white by default. Override <code>--badge-check-color</code> when the seal needs a coloured mark — the page-header's green theme pairs a yellow seal with a blue check.</li>
@@ -27,7 +27,7 @@ const meta: Meta = {
   argTypes: {
     color: {
       control: 'select',
-      options: ['pink', 'yellow', 'blue', 'brand', 'green', 'summer'],
+      options: ['brand', 'yellow', 'summer', 'pink', 'green', 'blue'],
       description: 'Color variant of the badge symbol',
     },
     size: {
@@ -68,7 +68,7 @@ export const AllVariants: Story = {
   },
   render: () => html`
     <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
-      ${['pink', 'yellow', 'blue', 'brand', 'green', 'summer'].map(
+      ${['brand', 'yellow', 'summer', 'pink', 'green', 'blue'].map(
         (color) => html`
           <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
             <minis-badge color=${color}></minis-badge>
