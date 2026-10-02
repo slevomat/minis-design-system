@@ -571,6 +571,14 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Action row — Code Connect mapping fixed</h3>
+      <p><code>pnpm figma:publish</code> failed validation on <code>action-row.figma.ts</code>: <em>The property "Label" does not exist on the Figma component</em>. The label is plain text inside the Figma component, not a text property, so <code>figma.string('Label')</code> pointed at nothing — and because the CLI validates all mapping files as one batch, that one error blocked every component.</p>
+      <ul>
+        <li><strong><code>Label</code> prop removed</strong>; the snippet now hard-codes the label text.</li>
+        <li><strong><code>Show Counter</code> → <code>counter="3"</code></strong> added (the component already had a <code>counter</code> attribute). <code>Show visuals</code> stays unmapped — no code equivalent.</li>
+        <li>All eight mapping files now validate against Figma. No component or token changes.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Navigation item — optional counter pill</h3>
       <p>Synced with the updated Figma <code>navigation-item</code> component set, which gained a <code>Pill_counter</code> boolean.</p>
       <ul>

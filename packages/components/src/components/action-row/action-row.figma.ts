@@ -10,12 +10,13 @@ import figma, { html } from '@figma/code-connect/html';
 //
 // Hover has no code equivalent — it is a CSS :hover state, so it maps to the
 // default rendering. `desktop` is the default breakpoint and `Label` the
-// default variant, so both are left out of the snippet.
+// default variant, so both are left out of the snippet. The label is plain text
+// inside the Figma component (not a text property), so the snippet hard-codes it.
+// Show visuals has no code equivalent and is left unmapped.
 figma.connect(
   'https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4202-3867',
   {
     props: {
-      label: figma.string('Label'),
       variant: figma.enum('Variant', {
         'w/ Icon': 'icon',
         'w/ Checkbox': 'checkbox',
@@ -29,16 +30,21 @@ figma.connect(
       disabled: figma.enum('State', {
         Disabled: true,
       }),
+      counter: figma.boolean('Show Counter', {
+        true: 'counter="3"',
+        false: undefined,
+      }),
     },
-    example: ({ label, variant, breakpoint, active, disabled }) => html`
+    example: ({ variant, breakpoint, active, disabled, counter }) => html`
       <minis-action-row
         variant=${variant}
         breakpoint=${breakpoint}
         ?active=${active}
         ?disabled=${disabled}
+        ${counter}
       >
         <minis-icon slot="icon" name="settings"></minis-icon>
-        ${label}
+        ActionRow label
       </minis-action-row>
     `,
   },

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-01
 
+### Action row — Code Connect mapping fixed
+
+`pnpm figma:publish` failed validation on `action-row.figma.ts`: `The property "Label" does not exist on the Figma component`. The label is plain text inside the Figma component, not a text property, so `figma.string('Label')` pointed at nothing — and because the CLI validates all mapping files as one batch, that one error blocked every component.
+
+- **`Label` prop removed**; the snippet now hard-codes the label text.
+- **`Show Counter` → `counter="3"`** added (the component already had a `counter` attribute). `Show visuals` stays unmapped — no code equivalent.
+- All eight mapping files now validate against Figma. No component or token changes.
+
 ### Navigation item — optional counter pill
 
 Synced with the updated Figma `navigation-item` component set (node `3470:607`), which gained a `Pill_counter` boolean.
