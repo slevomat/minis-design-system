@@ -553,6 +553,7 @@
   --spacing-layout-md:   var(--linear-sp-linear-4); /* 16px */
   --spacing-layout-lg:   var(--linear-sp-linear-5); /* 20px */
   --spacing-layout-xl:   var(--linear-sp-linear-8); /* 32px */
+  --spacing-layout-xxl:  var(--linear-sp-linear-6); /* 24px — fixed, same at every breakpoint */
   --container-padding:         var(--linear-sp-linear-2); /*  8px */
   --container-narrow-padding:  var(--linear-sp-linear-2); /*  8px */
   --container-bleeding-edge-padding: var(--linear-sp-linear-0); /* 0 — flush to viewport */

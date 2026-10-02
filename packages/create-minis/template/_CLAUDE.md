@@ -78,6 +78,7 @@ var(--spacing-layout-sm)                 /* 12→16px */
 var(--spacing-layout-md)                 /* 16→24px */
 var(--spacing-layout-lg)                 /* 20→32px */
 var(--spacing-layout-xl)                 /* 32→48px */
+var(--spacing-layout-xxl)                /* 24px, fixed at every breakpoint */
 
 /* Fixed spacing */
 var(--linear-sp-linear-3)               /* 12px */

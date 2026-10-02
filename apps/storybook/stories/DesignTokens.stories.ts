@@ -470,6 +470,7 @@ export const Spacing: Story = {
             ['--spacing-layout-md', '24px'],
             ['--spacing-layout-lg', '32px'],
             ['--spacing-layout-xl', '48px'],
+            ['--spacing-layout-xxl', '24px'],
           ].map(([token, val]) => `<tr>
             <td style="${td}"><code>${token}</code></td>
             <td style="${td}">${val}</td>

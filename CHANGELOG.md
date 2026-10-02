@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-02
+
+### Tokens — new `--spacing-layout-xxl`
+
+Synced with the new `Spacing/layout/xxl` variable in Figma.
+
+- **Tokens (new)**: `--spacing-layout-xxl` → `var(--linear-sp-linear-6)` (24px), defined once in the base `:root` block of `tokens.css`.
+- **Fixed across breakpoints** — unlike `xs`–`xl`, it does not change at 408px / 768px / 1256px.
+- **Note**: 24px is smaller than `--spacing-layout-xl` (32px base, 48px from 408px up), so `xxl` is not the largest step in the scale.
+- Added to `tokens.json` / `tokens.rgb.json`, the Spacing & Layout page, `docs/ai-prompts/layouts/index.md` and the `create-minis` template `CLAUDE.md`.
+
 ## 2026-10-01
 
 ### Action row — Code Connect mapping fixed

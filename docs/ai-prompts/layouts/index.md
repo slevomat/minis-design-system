@@ -38,6 +38,7 @@ These tokens automatically scale with the viewport tier:
 | `--spacing-layout-md` | 16px | 24px | 24px | 24px |
 | `--spacing-layout-lg` | 20px | 32px | 32px | 32px |
 | `--spacing-layout-xl` | 32px | 48px | 48px | 48px |
+| `--spacing-layout-xxl` | 24px | 24px | 24px | 24px |
 
 ### Container Tokens
 

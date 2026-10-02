@@ -1433,6 +1433,12 @@
     "oklch": "var(--linear-sp-linear-2)",
     "heritage": ""
   },
+  "--spacing-layout-xxl": {
+    "hex": "24px",
+    "rgb": null,
+    "oklch": "var(--linear-sp-linear-6)",
+    "heritage": ""
+  },
   "--typography-body-sm-line-height": {
     "hex": "1.5700000524520874",
     "rgb": null,
