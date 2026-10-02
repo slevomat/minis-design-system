@@ -11,6 +11,7 @@ Synced with the updated Figma `navigation-item` component set (node `3470:607`),
 - **New prop `counter`** on `<minis-navigation-item>` (string, default `''`): renders a `<minis-pill-counter size="lg">` after the label, 4px gap. Empty = no pill.
 - Pill colour follows the item state — black at rest/hover, blue when `active`, green when `active` + `color="positive"`.
 - New Storybook story **With counter**; docs in `docs/ai-prompts/components/navigation.md` updated.
+- **Code Connect** — `navigation.figma.ts` now also maps the `Navigation-item` set (`3470-607`): `State` → `active` (`default` and `hover` fall through, hover is a CSS pseudo-state), `Variant` → `color`, `Icon` → the `icon` slot, `Pill counter` → `counter`. Parses clean via `pnpm figma:parse`.
 - **Tokens (new)**:
   - `--navigation-item-counter-surface`: `var(--button-secondary-text)` — pill surface at rest / hover.
   - `--navigation-item-counter-text`: `var(--button-secondary-surface)` — pill number.

@@ -577,6 +577,7 @@ const changelogHTML = `
         <li><strong>New prop <code>counter</code></strong> on <code>&lt;minis-navigation-item&gt;</code> (string, default empty): renders a <code>&lt;minis-pill-counter size="lg"&gt;</code> after the label, 4px gap. Empty = no pill.</li>
         <li>Pill colour follows the item state — black at rest/hover, blue when <code>active</code>, green when <code>active</code> + <code>color="positive"</code>.</li>
         <li>New story <strong>With counter</strong>; AI docs updated.</li>
+        <li><strong>Code Connect</strong> — <code>navigation.figma.ts</code> now also maps the <code>Navigation-item</code> set: <code>State</code> → <code>active</code> (<code>default</code> and <code>hover</code> fall through, hover is a CSS pseudo-state), <code>Variant</code> → <code>color</code>, <code>Icon</code> → the <code>icon</code> slot, <code>Pill counter</code> → <code>counter</code>.</li>
         <li><strong>Tokens (new)</strong>: <code>--navigation-item-counter-surface</code> → <code>var(--button-secondary-text)</code>, <code>--navigation-item-counter-text</code> → <code>var(--button-secondary-surface)</code>, <code>--navigation-item-counter-active-surface</code> → <code>var(--button-primary-surface)</code>, <code>--navigation-item-counter-positive-active-surface</code> → <code>var(--button-cta-buy-surface)</code>.</li>
       </ul>
 
