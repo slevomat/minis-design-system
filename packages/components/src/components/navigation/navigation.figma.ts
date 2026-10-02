@@ -32,3 +32,39 @@ figma.connect(
     `,
   },
 );
+
+// ── Navigation item ───────────────────────────────────────────────────────────
+// Figma component set "Navigation-item" (3470:607). Properties:
+// State = default | hover | active, Variant = default | positive,
+// Icon (boolean), Pill counter (boolean).
+// `hover` is a pseudo-state in code, so only `active` maps to an attribute.
+figma.connect(
+  'https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3470-607',
+  {
+    props: {
+      active: figma.enum('State', {
+        default: undefined,
+        hover: undefined,
+        active: 'active',
+      }),
+      color: figma.enum('Variant', {
+        default: undefined,
+        positive: 'color="positive"',
+      }),
+      icon: figma.boolean('Icon', {
+        true: html`<minis-icon slot="icon" name="star" size="24"></minis-icon>`,
+        false: undefined,
+      }),
+      counter: figma.boolean('Pill counter', {
+        true: 'counter="3"',
+        false: undefined,
+      }),
+    },
+    example: ({ active, color, icon, counter }) => html`
+      <minis-navigation-item href="#" ${active} ${color} ${counter}>
+        ${icon}
+        Menu item
+      </minis-navigation-item>
+    `,
+  },
+);
