@@ -40,7 +40,7 @@ Headline companion (43 px):
 |---|---|---|
 | `--badge-size` | `82px` (`sm` 32px · `md` 43px) | Width and height of the square seal. Set it directly for fluid sizing — e.g. `0.8em` to track the surrounding font-size. Overrides `size`. |
 | `--badge-color` | `var(--color-branding-pink)` | Seal fill. Prefer the `color` attribute. |
-| `--badge-check-color` | `var(--color-core-white)` | The checkmark. Override only when white does not read on the seal — `<minis-page-header theme="green">` pairs its yellow seal with a blue check. |
+| `--badge-check-color` | `var(--color-core-white)` | The checkmark. Override only when white does not read on the seal (e.g. a light `yellow` seal). |
 
 ### Slots
 

@@ -15,19 +15,29 @@ const meta: Meta = {
       description: {
         component: `
 <p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4"><svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-10-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg> Open in Figma ↗</a></p>
-<p>Page headers — some call them <strong>heroes</strong>. Full-width branded banners in the brand colour themes, meant to sit at the top of a page as its <strong>first content element</strong>, directly under the Slevomat header (<code>&lt;minis-topbar&gt;</code>) and the main navigation (<code>&lt;minis-navigation&gt;</code>). Typically used on category and campaign pages. Responsive: horizontal layout on desktop (≥768 px) with content left and image right; stacked layout on mobile with the image on top.</p>
+<p>Page headers — some call them <strong>heroes</strong>. Full-width branded banners in the brand colour themes, meant to sit at the top of a page as its <strong>first content element</strong>, directly under the Slevomat header (<code>&lt;minis-topbar&gt;</code>) and the main navigation (<code>&lt;minis-navigation&gt;</code>). Typically used on category and campaign pages.</p>
+<p><strong>Layouts</strong> — Figma will have three: <em>Simple</em>, <em>With Controls</em> and <em>Centered simple</em>. Only <em>With Controls</em> is finished; its Figma variant is <code>Layout=Inspirations</code>, so the attribute is <code>layout="inspirations"</code>.</p>
+<ul>
+  <li><strong><code>layout="inspirations"</code></strong> (Figma "With Controls") — left-aligned content, the photo cropped into the top-right corner, and an optional <code>controls</code> row (e.g. search input + button). Adds a <code>message</code> slot, a <code>location</code> switcher and a <code>more</code> toggle ("Více informací").</li>
+  <li><strong><code>layout="default"</code></strong> (no attribute) — the original hero: image right and vertically centred on desktop, stacked and centred on mobile. <em>No longer in Figma</em>; kept so existing pages don't change until Simple / Centered simple land.</li>
+</ul>
+<p>The layout switch is a container query on the component's own width (768px), not the viewport.</p>
 <p><strong>Placement:</strong> <strong>one per page</strong>, at the very top of the content area — never mid-page, never two stacked. It sits <strong>outside</strong> <code>&lt;minis-container&gt;</code>: its root is already a full-bleed colour strip that applies <code>--container-padding</code> itself and centres a 1240px inner container, so nesting it would inset the background from the viewport edges and double the padding.</p>
 <ul>
   <li><strong>6 themes</strong>: <code>brand</code> (cyan, default), <code>yellow</code>, <code>blue</code>, <code>pink</code>, <code>green</code>, <code>summer</code> (orange).</li>
-  <li><strong>The badge seal colour is picked by the theme</strong>, not by you — each pairing comes from Figma and is chosen so the seal reads against its own surface: brand→pink, blue→brand, yellow→summer, pink→blue, green→yellow (with a blue checkmark), summer→green.</li>
+  <li><strong>Text colour and badge seal colour are picked by the theme</strong>, not by you — each pairing comes from Figma: brand / yellow / summer use dark blue text, pink / green / blue use white text. Seals: brand→pink, yellow→pink, summer→green, pink→brand, green→summer, blue→brand.</li>
   <li><strong>Default slot</strong>: heading HTML — supports <code>&lt;br&gt;</code> for line breaks.</li>
   <li><strong><code>image</code> slot</strong>: decorative photo. Provide a PNG with a transparent blob-shaped background for the signature organic look.</li>
   <li><strong><code>button</code> slot</strong>: optional CTA — use <code>&lt;minis-button variant="transparent" size="xl"&gt;</code>.</li>
   <li><strong><code>description</code></strong> attribute: optional body copy below the heading.</li>
   <li><strong><code>tag</code></strong> attribute: optional countdown/label pill above the heading.</li>
   <li><strong><code>no-badge</code></strong> boolean (default <code>false</code>): hides the Brand/Badge checkmark seal next to the heading.</li>
+  <li><strong><code>location</code></strong> attribute: underlined location switcher with a chevron under the heading; fires <code>location-click</code>.</li>
+  <li><strong><code>more</code> slot</strong>: extra content hidden behind a "Více informací" toggle (<code>more-label</code>); the toggle only appears when the slot has content. <code>expanded</code> reflects the state; fires <code>more-toggle</code>.</li>
+  <li><strong><code>message</code> slot</strong>: the draft "Message on product" banner above the tag.</li>
+  <li><strong><code>controls</code> slot</strong>: controls row below the content — stacked full-width on mobile, a row up to 600px wide on desktop where buttons hug and everything else grows.</li>
 </ul>
-<p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>--page-header-badge-size</code>, default <code>0.8em</code>), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a <code>0.27em</code> gap after that line's text (<code>--page-header-badge-gap</code>) — for any number of heading lines, at every breakpoint. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
+<p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>--page-header-badge-size</code>, default <code>0.8em</code>; in <code>inspirations</code> 32px→43px as the heading goes 32px→56px), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a gap after that line's text (<code>--page-header-badge-gap</code>, default <code>0.27em</code>; in <code>inspirations</code> 4px→16px) — for any number of heading lines, at every breakpoint. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
 <blockquote style="border-left:4px solid var(--color-interaction-danger-accent,#e8112d);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
   <p style="margin:0 0 .5rem"><strong>⚠️ The heading needs the licensed Kensington font for a 1:1 match with Figma.</strong></p>
   <p style="margin:0 0 .5rem">Kensington Compressed Bold is Slevomat-proprietary and is <strong>not shipped with this design system</strong>. If it is not available on the machine rendering the page, the heading falls back to <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener noreferrer">Bebas Neue</a> (Google Fonts) — a close condensed all-caps substitute, but <strong>taller and narrower</strong>. Headlines re-flow slightly and <strong>will not match the Figma design pixel-for-pixel</strong>. Judge final brand typography only on a machine that has the real font.</p>
@@ -39,9 +49,14 @@ const meta: Meta = {
     },
   },
   argTypes: {
+    layout: {
+      control: 'select',
+      options: ['default', 'inspirations'],
+      description: 'Layout — matches the Figma `Layout` variant (`inspirations` = "With Controls")',
+    },
     theme: {
       control: 'select',
-      options: ['brand', 'blue', 'yellow', 'pink', 'green', 'summer'],
+      options: ['brand', 'yellow', 'summer', 'pink', 'green', 'blue'],
       description: 'Color theme — sets background and text colors',
     },
     description: {
@@ -56,53 +71,254 @@ const meta: Meta = {
       control: 'boolean',
       description: 'Hide the Brand/Badge checkmark seal (shown by default)',
     },
+    location: {
+      control: 'text',
+      description: 'Optional location switcher under the heading (fires `location-click`)',
+    },
+    'more-label': {
+      control: 'text',
+      description: 'Label of the toggle that reveals the `more` slot',
+    },
   },
   args: {
+    layout: 'inspirations',
     theme: 'brand',
     description: 'Dnešní 30% sleva navíc vám nesmí uniknout. Pořiďte si dovolenou u moře za ještě lepší cenu. Ale pozor – akce platí jen dnes.',
     tag: '',
     'no-badge': false,
+    location: '',
+    'more-label': 'Více informací',
   },
 };
 
 export default meta;
 type Story = StoryObj;
 
+// ─── Shared demo content ──────────────────────────────────────────────────────
+
+const DESCRIPTION =
+  'Dnešní 30% sleva navíc vám nesmí uniknout. Pořiďte si dovolenou u moře za ještě lepší cenu. Ale pozor – akce platí jen dnes.';
+
+// Demo photo from Figma — the blob shape is baked into the transparent PNG.
+const PHOTO = 'page-header-rimini.png';
+
+// There is no input component yet (Figma "🚧 Input"), so the demo controls use a
+// native <input> styled from the --input-* tokens.
+const demoStyles = html`
+  <style>
+    .ph-demo-input {
+      box-sizing: border-box;
+      height: 40px;
+      padding: 0 var(--linear-sp-linear-2, 8px);
+      border: 1px solid var(--input-border, #cbccce);
+      border-radius: var(--border-radius-sm, 4px);
+      background: var(--input-surface, #fff);
+      color: var(--input-value, #000);
+      font-family: var(--typography-font-family-sans, Inter, sans-serif);
+      font-size: var(--typography-size-md, 16px);
+    }
+    .ph-demo-input::placeholder { color: var(--input-placeholder, #6b6b70); }
+    .ph-demo-input:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 1px; }
+    .ph-demo-message {
+      background: var(--alert-warning-color-surface);
+      border: 1px solid var(--color-gold-85);
+      border-radius: var(--border-radius-lg);
+      padding: var(--linear-sp-linear-4) var(--spacing-layout-xxl);
+      font-family: var(--typography-font-family-sans);
+      font-size: var(--typography-size-sm);
+      font-weight: var(--typography-weight-bold);
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+    .ph-demo-message a { color: var(--color-orange-65); text-decoration: none; }
+    .ph-demo-message a:hover { text-decoration: underline; }
+  </style>
+`;
+
+/** Figma "_Default controls": search input + transparent lg button. */
+const defaultControls = html`
+  <input slot="controls" class="ph-demo-input" type="search" placeholder="Kam chcete vyrazit?" aria-label="Kam chcete vyrazit?">
+  <minis-button slot="controls" variant="transparent" size="lg" full-width>Vyhledat</minis-button>
+`;
+
+const photo = html`<img slot="image" src="${PHOTO}" alt="">`;
+
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 export const Playground: Story = {
   name: 'Playground',
   render: (args) => html`
+    ${demoStyles}
     <minis-page-header
+      layout="${args.layout}"
       theme="${args.theme}"
       description="${args.description}"
       tag="${args.tag}"
+      location="${args.location}"
+      more-label="${args['more-label']}"
       ?no-badge="${args['no-badge']}"
     >
       Ušetřete za pobyt<br>v italském Rimini
-      <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.6);text-align:center">
-        image slot
-      </div>
+      ${photo}
+      ${args.layout === 'inspirations' ? defaultControls : ''}
     </minis-page-header>
   `,
 };
 
-// ─── All Themes ───────────────────────────────────────────────────────────────
+// ─── Inspirations — With Controls ─────────────────────────────────────────────
 
-export const AllThemes: Story = {
-  name: 'All Themes',
+export const Inspirations: Story = {
+  name: 'Inspirations — With Controls',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+The Figma <code>Layout=Inspirations</code> variant in its default configuration: heading with badge,
+description, photo and the default controls (search input + <code>&lt;minis-button variant="transparent" size="lg" full-width&gt;</code>).
+<br><br>
+Content is left-aligned at every width. The photo sits in the top-right corner (280×280 desktop, 144×144 mobile),
+partly cropped by the banner edge, and <strong>never affects the height</strong> — use a transparent PNG with the blob
+shape baked in; no mask is applied in this layout.
+        `,
+      },
+    },
+  },
+  render: () => html`
+    ${demoStyles}
+    <minis-page-header layout="inspirations" theme="brand" description="${DESCRIPTION}">
+      Ušetřete za pobyt<br>v italském Rimini
+      ${photo}
+      ${defaultControls}
+    </minis-page-header>
+  `,
+};
+
+// ─── Inspirations — All Themes ────────────────────────────────────────────────
+
+export const InspirationsAllThemes: Story = {
+  name: 'Inspirations — All Themes',
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story:
-          'All six color themes with description and badge. Note how the seal colour changes with the theme — each pairing is set by the component.',
+          'All six themes. Text is dark blue on brand / yellow / summer and white on pink / green / blue; the seal colour is set per theme. The search button is the transparent variant, so it picks up a dark tint of each surface.',
+      },
+    },
+  },
+  render: () => html`
+    ${demoStyles}
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-layout-md, 24px)">
+      ${(['brand', 'yellow', 'summer', 'pink', 'green', 'blue'] as const).map(
+        (theme) => html`
+          <minis-page-header layout="inspirations" theme="${theme}" description="${DESCRIPTION}">
+            Ušetřete za pobyt<br>v italském Rimini
+            ${photo}
+            ${defaultControls}
+          </minis-page-header>
+        `,
+      )}
+    </div>
+  `,
+};
+
+// ─── Inspirations — All Parts ─────────────────────────────────────────────────
+
+export const InspirationsAllParts: Story = {
+  name: 'Inspirations — All Parts',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+<p>Every optional part switched on, in Figma order:</p>
+<ol>
+  <li><strong>Message</strong> — <code>message</code> slot. "Message on product" is a draft with no component yet; this is the markup recipe from the Message docs.</li>
+  <li><strong>Tag</strong> — <code>tag</code> attribute.</li>
+  <li><strong>Heading + badge</strong> — default slot.</li>
+  <li><strong>Location</strong> — <code>location</code> attribute. A button; listen for <code>location-click</code> to open your location picker.</li>
+  <li><strong>Description</strong> — <code>description</code> attribute.</li>
+  <li><strong>Collapsible</strong> — put extra content in the <code>more</code> slot and a "Více informací" toggle appears (<code>more-label</code> to rename it). Click it: the content expands, <code>expanded</code> is reflected and <code>more-toggle</code> fires.</li>
+  <li><strong>Button</strong> — <code>button</code> slot, <code>&lt;minis-button variant="transparent" size="xl"&gt;</code>.</li>
+  <li><strong>Controls</strong> — <code>controls</code> slot.</li>
+</ol>
+        `,
+      },
+    },
+  },
+  render: () => html`
+    ${demoStyles}
+    <minis-page-header
+      layout="inspirations"
+      theme="brand"
+      tag="Do 1. června zbývá 6 dní"
+      location="v Rosovicích a okolí"
+      description="${DESCRIPTION}"
+    >
+      Ušetřete za pobyt<br>v italském Rimini
+      <div slot="message" class="ph-demo-message" role="status">
+        Nový poklad je tu a s ním i pořádná porce kreditů. Jste zvědaví, co na vás čeká?
+        <a href="#">Vyzvednout poklad</a>
+      </div>
+      <p slot="more" style="margin:0">
+        Sleva platí na vybrané pobyty v Rimini a okolí s nástupem do konce června. Kombinovat ji
+        nelze s jinými akcemi.
+      </p>
+      <minis-button slot="button" variant="transparent" size="xl">Mrknout na volné židle</minis-button>
+      ${photo}
+      ${defaultControls}
+    </minis-page-header>
+  `,
+};
+
+// ─── Inspirations — Mobile ────────────────────────────────────────────────────
+
+export const InspirationsMobile: Story = {
+  name: 'Inspirations — Mobile',
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: 'iphone6' },
+    docs: {
+      description: {
+        story: `
+Below 768px (container width) the controls stack and stretch — give the button <code>full-width</code> so its face fills
+the row (the component cancels the stretch again on desktop). The 144px photo overlaps the top-right corner and
+the text runs over it. Opens with the Storybook viewport set to iPhone 6 (375px).
+        `,
+      },
+    },
+  },
+  render: () => html`
+    ${demoStyles}
+    <minis-page-header layout="inspirations" theme="pink" description="${DESCRIPTION}">
+      Ušetřete za pobyt<br>v italském Rimini
+      ${photo}
+      ${defaultControls}
+    </minis-page-header>
+  `,
+};
+
+// ─── Default layout ───────────────────────────────────────────────────────────
+// The original hero layout (no `layout` attribute). No longer in Figma — kept
+// until the Simple / Centered simple layouts are designed.
+
+// ─── All Themes ───────────────────────────────────────────────────────────────
+
+export const AllThemes: Story = {
+  name: 'Default — All Themes',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'All six color themes in the default layout. Text and seal colours are set by the theme — the same palette as the Inspirations layout.',
       },
     },
   },
   render: () => html`
     <div style="display:flex;flex-direction:column;gap:0">
-      ${(['brand', 'yellow', 'blue', 'pink', 'green', 'summer'] as const).map(
+      ${(['brand', 'yellow', 'summer', 'pink', 'green', 'blue'] as const).map(
         (theme) => html`
           <minis-page-header
             theme="${theme}"
@@ -123,7 +339,7 @@ export const AllThemes: Story = {
 // ─── With CTA Button ──────────────────────────────────────────────────────────
 
 export const WithButton: Story = {
-  name: 'With CTA Button',
+  name: 'Default — With CTA Button',
   parameters: {
     controls: { disable: true },
     docs: {
@@ -147,7 +363,7 @@ export const WithButton: Story = {
 // ─── With Tag ─────────────────────────────────────────────────────────────────
 
 export const WithTag: Story = {
-  name: 'With Tag',
+  name: 'Default — With Tag',
   parameters: {
     controls: { disable: true },
     docs: {
@@ -172,7 +388,7 @@ export const WithTag: Story = {
 // ─── No Badge ─────────────────────────────────────────────────────────────────
 
 export const NoBadge: Story = {
-  name: 'No Badge',
+  name: 'Default — No Badge',
   parameters: {
     controls: { disable: true },
     docs: {
@@ -194,7 +410,7 @@ export const NoBadge: Story = {
 // ─── Badge Anchoring ──────────────────────────────────────────────────────────
 
 export const BadgeAnchoring: Story = {
-  name: 'Badge Anchoring',
+  name: 'Default — Badge Anchoring',
   parameters: {
     controls: { disable: true },
     docs: {
@@ -243,7 +459,7 @@ Override per instance with <code>--page-header-badge-size</code> and
 // ─── Mobile Layout ────────────────────────────────────────────────────────────
 
 export const MobileLayout: Story = {
-  name: 'Mobile Layout',
+  name: 'Default — Mobile Layout',
   parameters: {
     controls: { disable: true },
     viewport: { defaultViewport: 'iphone6' },
@@ -269,7 +485,7 @@ export const MobileLayout: Story = {
 // ─── Content Variants ─────────────────────────────────────────────────────────
 
 export const ContentVariants: Story = {
-  name: 'Content Variants',
+  name: 'Default — Content Variants',
   parameters: {
     controls: { disable: true },
     docs: {

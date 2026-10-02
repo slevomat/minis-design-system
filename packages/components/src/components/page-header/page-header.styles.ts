@@ -17,32 +17,29 @@ export const pageHeaderStyles = css`
     --page-header-text: var(--color-blue-25);
   }
 
-  :host([theme='blue']) {
-    --page-header-surface: var(--color-branding-blue);
-    --page-header-text: var(--color-blue-95);
-  }
-
   :host([theme='yellow']) {
     --page-header-surface: var(--color-branding-yellow);
     --page-header-text: var(--color-blue-25);
   }
 
+  :host([theme='summer']) {
+    --page-header-surface: var(--color-branding-summer);
+    --page-header-text: var(--color-blue-25);
+  }
+
   :host([theme='pink']) {
     --page-header-surface: var(--color-branding-pink);
-    --page-header-text: var(--color-pink-95);
+    --page-header-text: var(--color-core-white);
   }
 
   :host([theme='green']) {
     --page-header-surface: var(--color-branding-green);
-    --page-header-text: var(--color-green-95);
-    /* The only theme whose seal takes a coloured checkmark — yellow seal,
-       blue check, so the mark stays legible on the pale gold. */
-    --page-header-badge-check: var(--color-branding-blue);
+    --page-header-text: var(--color-core-white);
   }
 
-  :host([theme='summer']) {
-    --page-header-surface: var(--color-branding-summer);
-    --page-header-text: var(--color-green-95);
+  :host([theme='blue']) {
+    --page-header-surface: var(--color-branding-blue);
+    --page-header-text: var(--color-core-white);
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -101,7 +98,7 @@ export const pageHeaderStyles = css`
     font-size: var(--typography-size-sm, 14px);
     font-weight: var(--typography-weight-regular, 400);
     line-height: 1.33;
-    color: var(--color-interaction-secondary-default-accent, #000);
+    color: var(--color-interaction-secondary-accent, #000);
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -156,18 +153,18 @@ export const pageHeaderStyles = css`
        line-height token, approximated */
     height: 1.1em;
     height: 1lh;
-    width: var(--page-header-badge-size, 0.8em);
+    width: var(--page-header-badge-size, var(--_badge-size, 0.8em));
     /* One word space always precedes the anchor; --_space-advance is its width
        (measured in JS, as a ratio of the font size) so the visible gap is
        exactly --page-header-badge-gap. */
     margin-left: calc(
-      var(--page-header-badge-gap, 0.27em) - var(--_space-advance, 0) * 1em
+      var(--page-header-badge-gap, var(--_badge-gap, 0.27em)) - var(--_space-advance, 0) * 1em
     );
   }
 
   .badge {
     flex: none;
-    --badge-size: var(--page-header-badge-size, 0.8em);
+    --badge-size: var(--page-header-badge-size, var(--_badge-size, 0.8em));
     --badge-check-color: var(--page-header-badge-check, var(--color-core-white));
   }
 
@@ -185,6 +182,113 @@ export const pageHeaderStyles = css`
     text-align: center;
     margin: 0;
     width: 100%;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     LOCATION switcher — sits directly under the heading
+  ────────────────────────────────────────────────────────── */
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: var(--linear-sp-linear-2, 8px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
+    font-size: var(--typography-heading-lg-size, 20px);
+    font-weight: var(--typography-weight-bold, 700);
+    line-height: var(--typography-heading-lg-line-height, 1.3);
+    letter-spacing: -0.02em;
+    color: var(--page-header-text);
+    text-align: left;
+  }
+
+  .location-label {
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+    text-underline-position: from-font;
+  }
+
+  .location-icon {
+    --minis-icon-size: 16px;
+  }
+
+  .location:focus-visible,
+  .more-toggle:focus-visible {
+    outline: 2px solid var(--page-header-text);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-sm, 4px);
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     MORE — collapsible extra content + its toggle
+  ────────────────────────────────────────────────────────── */
+
+  .more {
+    width: 100%;
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
+    font-size: var(--typography-size-md, 16px);
+    line-height: 1.5;
+    letter-spacing: -0.003em;
+    color: var(--page-header-text);
+  }
+
+  .more[hidden] {
+    display: none;
+  }
+
+  .more-toggle {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
+    font-size: var(--typography-size-md, 16px);
+    font-weight: var(--typography-weight-regular, 400);
+    line-height: 1.5;
+    letter-spacing: -0.003em;
+    color: var(--page-header-text);
+    text-decoration: underline;
+    text-decoration-thickness: from-font;
+    text-underline-position: from-font;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     MESSAGE slot — "Message on product" banner
+  ────────────────────────────────────────────────────────── */
+
+  .message-slot {
+    display: contents;
+  }
+
+  ::slotted([slot='message']) {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 746px;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     CONTROLS — stacked on mobile, a row on desktop
+  ────────────────────────────────────────────────────────── */
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-layout-sm, 12px);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .controls[hidden] {
+    display: none;
+  }
+
+  .controls ::slotted(*) {
+    min-width: 0;
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -278,6 +382,125 @@ export const pageHeaderStyles = css`
       -webkit-mask-position: 0 0;
       mask-position: 0 0;
       mask-mode: luminance;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     LAYOUT = INSPIRATIONS  (Figma "With Controls")
+
+     Left-aligned at every width. The container carries the
+     padding itself (like <minis-container>), and the photo is
+     absolutely positioned into the top-right corner and cropped
+     by the root — it never affects the height. The photo is
+     expected to carry its own blob shape (transparent PNG), so
+     no mask is applied.
+  ══════════════════════════════════════════════════════════ */
+
+  :host([layout='inspirations']) .root {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  :host([layout='inspirations']) .container {
+    position: relative;
+    align-items: flex-start;
+    gap: var(--spacing-layout-xxl, 24px);
+    max-width: var(--container-width, 100%);
+    margin: 0 auto;
+    padding: var(--linear-sp-linear-3, 12px) var(--container-padding, 8px);
+    box-sizing: border-box;
+  }
+
+  :host([layout='inspirations']) .content {
+    order: 0;
+    position: relative;
+    z-index: 1;
+    align-items: flex-start;
+  }
+
+  :host([layout='inspirations']) .controls {
+    position: relative;
+    z-index: 1;
+  }
+
+  :host([layout='inspirations']) .heading,
+  :host([layout='inspirations']) .description {
+    text-align: left;
+  }
+
+  /* Badge — Figma: 32px seal, 4px gap at the 32px heading; 43px seal, 16px
+     gap at the 56px heading. Interpolated linearly on the heading font-size
+     so it is exact at both Figma points and sensible on any tier in between. */
+  :host([layout='inspirations']) .heading {
+    --_badge-size: calc(0.4583em + 17.333px);
+    --_badge-gap: calc(0.5em - 12px);
+  }
+
+  :host([layout='inspirations']) .image-area {
+    order: 0;
+    position: absolute;
+    z-index: 0;
+    top: -34px;
+    right: calc(var(--container-padding, 8px) - 44px);
+    width: 144px;
+    height: 144px;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  :host([layout='inspirations']) .image-area ::slotted(*) {
+    object-fit: contain;
+  }
+
+  /* Mobile: stretch every control; a <minis-button full-width> fills the row. */
+  :host([layout='inspirations']) .controls {
+    align-items: stretch;
+  }
+
+  @container page-header (min-width: 768px) {
+    :host([layout='inspirations']) .root {
+      min-height: 0;
+    }
+
+    :host([layout='inspirations']) .container {
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: var(--spacing-layout-lg, 32px) var(--container-padding, 32px);
+    }
+
+    :host([layout='inspirations']) .content {
+      max-width: none;
+    }
+
+    :host([layout='inspirations']) .image-area {
+      top: -32px;
+      right: var(--container-padding, 32px);
+      width: 280px;
+      height: 280px;
+    }
+
+    :host([layout='inspirations']) .controls {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--spacing-layout-sm, 16px);
+    }
+
+    /* Buttons hug their label; every other control (the input) shares the
+       remaining width. (:first-child can't be used — it counts the host's
+       other children, e.g. the heading's <br>.) */
+    :host([layout='inspirations']) .controls ::slotted(*) {
+      flex: 1 1 0;
+    }
+
+    :host([layout='inspirations']) .controls ::slotted(minis-button) {
+      flex: none;
+    }
+
+    /* Undo a full-width button's stretch on desktop — outer-tree styles beat
+       the button's own :host([full-width]) rule. */
+    :host([layout='inspirations']) .controls ::slotted(minis-button[full-width]) {
+      width: auto;
     }
   }
 `;
