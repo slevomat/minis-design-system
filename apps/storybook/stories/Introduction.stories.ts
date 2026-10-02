@@ -571,6 +571,25 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Message standalone — close button works, <code>no-visual</code>, <code>no-close</code></h3>
+      <p>Bug fixes found while reviewing the new stories.</p>
+      <ul>
+        <li><strong>Close icon centred</strong>: the button held a hand-inlined 24px SVG in a 20px icon slot, so it overflowed down-right (visible on hover). Now <code>&lt;minis-icon name="circle-close-fill"&gt;</code> at the button's 20px icon size, matching Figma. The invalid <code>size="medium"</code> is now <code>size="md"</code>.</li>
+        <li><strong>Breaking — <code>visual</code> / <code>closable</code> replaced by <code>no-visual</code> / <code>no-close</code></strong>: both were Boolean properties that defaulted to <code>true</code>, so <code>visual="false"</code>, <code>closable="false"</code> or <code>?visual=\${false}</code> could never switch them off. The thumbnail box and close button always rendered, reserving empty space. Follows the <code>no-*</code> convention of <code>&lt;minis-alert no-icon&gt;</code>. With either attribute set, the element is not rendered and takes no space.</li>
+        <li><strong>Close button now closes the message</strong>: it used to only fire a <code>close</code> event, so without a listener nothing happened. The message now hides itself (sets <code>hidden</code>). The <code>close</code> event is now cancelable — <code>event.preventDefault()</code> keeps the message visible so the page can animate, persist or confirm the dismissal itself. New story <strong>Standalone — Dismiss</strong>.</li>
+        <li><strong>Message on product</strong>: the inline link is now underlined on hover.</li>
+        <li>No token changes.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Message — split into “standalone” and “on product” (draft)</h3>
+      <p>Documented the quick Figma change on the Message page. Both variants are <strong>draft concepts</strong> — no design decision on communication components yet.</p>
+      <ul>
+        <li><strong>Message standalone</strong> — the former Figma <code>Message</code> set was renamed <code>Message/Message standalone</code>. Still <code>&lt;minis-message&gt;</code>, API unchanged; stories renamed <code>Standalone — …</code>.</li>
+        <li><strong>Message on product</strong> — new Figma variant for page headers: warning-tinted banner, bold 14px text, inline orange link. <strong>No Lit component</strong>; a markup-only <strong>On product (draft)</strong> story and a recipe in the AI docs document it.</li>
+        <li>The Message page now opens with a draft notice and Figma links.</li>
+        <li>No component code or token changes — the recipe uses existing tokens (<code>--alert-warning-color-surface</code>, <code>--color-gold-85</code>, <code>--color-orange-65</code>, <code>--border-radius-lg</code>, <code>--linear-sp-linear-4</code>, <code>--spacing-layout-xxl</code>).</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Badge — colour order matches Figma</h3>
       <p>Reordered the <code>color</code> variants to match the updated Figma <code>Brand/Badge</code> set and the other components / styleguides.</p>
       <ul>
@@ -2330,8 +2349,8 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Message</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Notification card with image, title, description</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>vertical</code>, <code>horizontal</code> layout</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Notification card with image, title, description (draft)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Standalone: <code>vertical</code>, <code>horizontal</code> layout · On product: markup only (page headers)</td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Icon</strong></td>
