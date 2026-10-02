@@ -6,6 +6,11 @@ export const messageStyles = css`
     font-family: var(--typography-font-family-sans, 'SF Pro Display', sans-serif);
   }
 
+  /* The :host display rule above would otherwise beat the UA [hidden] style. */
+  :host([hidden]) {
+    display: none;
+  }
+
   .message {
     display: inline-flex;
     align-items: flex-start;

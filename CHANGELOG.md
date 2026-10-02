@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-02
 
+### Message standalone — close button works, `no-visual`, `no-close`
+
+Bug fixes found while reviewing the new stories.
+
+- **Close icon centred**: the button held a hand-inlined 24px SVG in a 20px icon slot, so it overflowed down-right (visible on hover). Now `<minis-icon name="circle-close-fill">` at the button's 20px icon size, matching Figma. The invalid `size="medium"` is now `size="md"`.
+- **Breaking — `visual` / `closable` replaced by `no-visual` / `no-close`**: both were Boolean properties that defaulted to `true`, so `visual="false"`, `closable="false"` or `?visual=${false}` could never switch them off. The thumbnail box and close button always rendered, reserving empty space. Follows the `no-*` convention of `<minis-alert no-icon>`. With either attribute set, the element is not rendered and takes no space.
+- **Close button now closes the message**: it used to only fire a `close` event, so without a listener nothing happened. The message now hides itself (sets `hidden`). The `close` event is now cancelable — `event.preventDefault()` keeps the message visible so the page can animate, persist or confirm the dismissal itself. New story **Standalone — Dismiss**.
+- **Message on product**: the inline link is now underlined on hover.
+- No token changes.
+
+### Message — split into "standalone" and "on product" (draft)
+
+Documented the quick Figma change on the Message page (overview node `2513:8181`). Both variants are **draft concepts** — no design decision on communication components yet.
+
+- **Message standalone** — the former Figma `Message` set was renamed `Message/Message standalone` (`2517:9568`). It is still `<minis-message>`; API unchanged. Storybook stories renamed `Standalone — …`.
+- **Message on product** (`5651:2996`) — new Figma variant for page headers: warning-tinted banner, bold 14px text, inline orange link. **No Lit component**; a markup-only **On product (draft)** story and a recipe in `docs/ai-prompts/components/message.md` document it.
+- Storybook Message page now opens with a draft notice and Figma links.
+- No component code or token changes — the recipe uses existing tokens (`--alert-warning-color-surface`, `--color-gold-85`, `--color-orange-65`, `--border-radius-lg`, `--linear-sp-linear-4`, `--spacing-layout-xxl`).
+
 ### Badge — colour order matches Figma
 
 Reordered the `color` variants to match the updated Figma `Brand/Badge` set (node `4605:441`) and the other components / styleguides.
