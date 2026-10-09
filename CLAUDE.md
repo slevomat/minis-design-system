@@ -207,6 +207,12 @@ pnpm figma:publish
 
 Scripts use `$FIGMA_ACCESS_TOKEN` from `.env.local` (never commit that file).
 
+### Plan limitation — Dev Mode uses Storybook links instead
+
+Slevomat is on the **Figma Professional** plan, and Code Connect requires Organization or Enterprise, so **`pnpm figma:publish` cannot succeed** (confirmed 2026-10-09). The `.figma.ts` files stay, kept ready for a possible plan upgrade: every new component still gets one, and they must keep passing `pnpm figma:parse`.
+
+Dev Mode gets Figma **dev resources** instead: a link named `Storybook — <Component>` on each published component set, pointing to `https://slevomat.github.io/minis-design-system/?path=/docs/<story-id>`. They are managed through the REST API (`GET /v1/files/:key/dev_resources`, `POST /v1/dev_resources`) with the same `.env.local` token, which has `file_dev_resources:write`. Before adding a link, GET first: a node can't hold the same URL twice. When you add a component that has a Figma component set, add its link too. When you rename a story title, the docs id changes, so update the matching link.
+
 ## Token exports
 
 When tokens are updated in Figma, they are exported to two JSON files at the repo root:
