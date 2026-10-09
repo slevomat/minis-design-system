@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './page-header.js';
 import '../button/button.js';
+import '../tag/tag.js';
 
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
@@ -16,9 +17,11 @@ const meta: Meta = {
         component: `
 <p><a href="https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.35em;font-size:.875em;color:var(--color-text-accent-link,#006eb9);text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:.2em .55em;line-height:1.4"><svg width="13" height="13" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 57c5.523 0 10-4.477 10-10v-10H10c-5.523 0-10 4.477-10 10s4.477 10 10 10z" fill="#0ACF83"/><path d="M0 29c0-5.523 4.477-10 10-10h10v20H10C4.477 39 0 34.523 0 29z" fill="#A259FF"/><path d="M0 10C0 4.477 4.477 0 10 0h10v20H10C4.477 20 0 15.523 0 10z" fill="#F24E1E"/><path d="M20 0h10c5.523 0 10 4.477 10 10s-4.477 10-10 10H20V0z" fill="#FF7262"/><path d="M40 29c0 5.523-4.477 10-10 10s-10-10-10-10 4.477-10 10-10 10 4.477 10 10z" fill="#1ABCFE"/></svg> Open in Figma ↗</a></p>
 <p>Page headers — some call them <strong>heroes</strong>. Full-width branded banners in the brand colour themes, meant to sit at the top of a page as its <strong>first content element</strong>, directly under the Slevomat header (<code>&lt;minis-topbar&gt;</code>) and the main navigation (<code>&lt;minis-navigation&gt;</code>). Typically used on category and campaign pages.</p>
-<p><strong>Layouts</strong> — Figma will have three: <em>Simple</em>, <em>With Controls</em> and <em>Centered simple</em>. Only <em>With Controls</em> is finished; its Figma variant is <code>Layout=Inspirations</code>, so the attribute is <code>layout="inspirations"</code>.</p>
+<p><strong>Layouts</strong> — the Figma <code>Layout</code> variant maps to the <code>layout</code> attribute: <code>Inspirations</code> → <code>layout="inspirations"</code>, <code>Content left</code> → <code>layout="content-left"</code>.</p>
 <ul>
   <li><strong><code>layout="inspirations"</code></strong> (Figma "With Controls") — left-aligned content, the photo cropped into the top-right corner, and an optional <code>controls</code> row (e.g. search input + button). Adds a <code>message</code> slot, a <code>location</code> switcher and a <code>more</code> toggle ("Více informací").</li>
+  <li><strong><code>layout="content-left"</code></strong> (Figma "Content left") — Inspirations <strong>without controls</strong> (the <code>controls</code> slot is not rendered). From 768px the photo is vertically centred, cropped top and bottom when the content is shorter, and stays put while "Více informací" is open. On mobile it behaves like Inspirations.</li>
+  <li><strong><code>layout="centric"</code></strong> (Figma "Centric") — <strong>no photo</strong>, everything centred; the badge follows the last character of the centred heading. Controls are a row of category tags that <strong>wraps on desktop</strong> and <strong>swipes on mobile</strong>, with a fade on each edge that has more to scroll to.</li>
   <li><strong><code>layout="default"</code></strong> (no attribute) — the original hero: image right and vertically centred on desktop, stacked and centred on mobile. <em>No longer in Figma</em>; kept so existing pages don't change until Simple / Centered simple land.</li>
 </ul>
 <p>The layout switch is a container query on the component's own width (768px), not the viewport.</p>
@@ -51,8 +54,8 @@ const meta: Meta = {
   argTypes: {
     layout: {
       control: 'select',
-      options: ['default', 'inspirations'],
-      description: 'Layout — matches the Figma `Layout` variant (`inspirations` = "With Controls")',
+      options: ['default', 'inspirations', 'content-left', 'centric'],
+      description: 'Layout — matches the Figma `Layout` variant (`inspirations` = "With Controls", `content-left` = "Content left", `centric` = "Centric")',
     },
     theme: {
       control: 'select',
@@ -143,6 +146,13 @@ const defaultControls = html`
 
 const photo = html`<img slot="image" src="${PHOTO}" alt="">`;
 
+/** Figma "_Centered controls" (Content=Categories): a row of category tags.
+ *  `clickable` = the updated Figma Clickable tag: tinted, grey border, white on hover. */
+const CATEGORIES = ['Benefity', 'Papírové poukázky', 'FKSP', 'Dárkové poukazy'];
+const categoryTags = (labels: string[]) =>
+  labels.map((label) => html`<minis-tag slot="controls" variant="clickable">${label}</minis-tag>`);
+const categoryControls = categoryTags(CATEGORIES);
+
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 export const Playground: Story = {
@@ -161,6 +171,7 @@ export const Playground: Story = {
       Ušetřete za pobyt<br>v italském Rimini
       ${photo}
       ${args.layout === 'inspirations' ? defaultControls : ''}
+      ${args.layout === 'centric' ? categoryControls : ''}
     </minis-page-header>
   `,
 };
@@ -296,6 +307,239 @@ the text runs over it. Opens with the Storybook viewport set to iPhone 6 (375px)
       ${photo}
       ${defaultControls}
     </minis-page-header>
+  `,
+};
+
+// ─── Content left ─────────────────────────────────────────────────────────────
+
+const MORE_TEXT = html`
+  <p slot="more" style="margin:0">
+    Sleva platí na vybrané pobyty v Rimini a okolí s nástupem do konce června. Kombinovat ji
+    nelze s jinými akcemi. Voucher uplatníte nejpozději 14 dní před příjezdem, termín si
+    rezervujete přímo u hotelu. Storno je zdarma do 30 dní před nástupem.
+  </p>
+`;
+
+export const ContentLeft: Story = {
+  name: 'Content left',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+The Figma <code>Layout=Content left</code> variant: Inspirations without the controls row. Any
+<code>slot="controls"</code> children are ignored.
+<br><br>
+From 768px the 280px photo follows three rules:
+<ol>
+  <li>it is <strong>vertically centred</strong> in the banner, right-aligned to the container padding;</li>
+  <li>the banner height comes from the <strong>content only</strong> — when the content is shorter than the photo, the photo is cropped top and bottom;</li>
+  <li>opening "Více informací" grows the banner but the photo <strong>stays where it was</strong> (see <em>Content left — Collapsible</em>).</li>
+</ol>
+        `,
+      },
+    },
+  },
+  render: () => html`
+    <minis-page-header layout="content-left" theme="brand" description="${DESCRIPTION}">
+      Ušetřete za pobyt<br>v italském Rimini
+      ${photo}
+    </minis-page-header>
+  `,
+};
+
+export const ContentLeftAllThemes: Story = {
+  name: 'Content left — All Themes',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'All six themes. Text and seal colours follow the same theme palette as the other layouts.',
+      },
+    },
+  },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-layout-md, 24px)">
+      ${(['brand', 'yellow', 'summer', 'pink', 'green', 'blue'] as const).map(
+        (theme) => html`
+          <minis-page-header layout="content-left" theme="${theme}" description="${DESCRIPTION}">
+            Ušetřete za pobyt<br>v italském Rimini
+            ${photo}
+          </minis-page-header>
+        `,
+      )}
+    </div>
+  `,
+};
+
+export const ContentLeftCollapsible: Story = {
+  name: 'Content left — Collapsible',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+Click "Více informací": the banner grows by the revealed text, but the photo keeps its position — it stays
+centred on the <em>collapsed</em> height. CSS can't express that (the <code>more</code> block sits between the
+description and the toggle), so the component measures it with a <code>ResizeObserver</code> and sets
+<code>--_visual-center</code>. The second banner has a tag and a CTA so the content is taller than the photo.
+        `,
+      },
+    },
+  },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-layout-md, 24px)">
+      <minis-page-header layout="content-left" theme="brand" description="${DESCRIPTION}">
+        Ušetřete za pobyt<br>v italském Rimini
+        ${MORE_TEXT}
+        ${photo}
+      </minis-page-header>
+      <minis-page-header
+        layout="content-left"
+        theme="blue"
+        tag="Do 1. června zbývá 6 dní"
+        location="v Rosovicích a okolí"
+        description="${DESCRIPTION}"
+      >
+        Ušetřete za pobyt<br>v italském Rimini
+        ${MORE_TEXT}
+        <minis-button slot="button" variant="transparent" size="xl">Mrknout na volné židle</minis-button>
+        ${photo}
+      </minis-page-header>
+    </div>
+  `,
+};
+
+export const ContentLeftMobile: Story = {
+  name: 'Content left — Mobile',
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: 'iphone6' },
+    docs: {
+      description: {
+        story:
+          'Below 768px (container width) Content left behaves like Inspirations: the 144px photo overlaps the top-right corner and the text runs over it. Opens with the Storybook viewport set to iPhone 6 (375px).',
+      },
+    },
+  },
+  render: () => html`
+    <minis-page-header layout="content-left" theme="pink" description="${DESCRIPTION}">
+      Ušetřete za pobyt<br>v italském Rimini
+      ${MORE_TEXT}
+      ${photo}
+    </minis-page-header>
+  `,
+};
+
+// ─── Centric ──────────────────────────────────────────────────────────────────
+
+export const Centric: Story = {
+  name: 'Centric',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: `
+The Figma <code>Layout=Centric</code> variant: <strong>no photo</strong> (the <code>image</code> slot is not rendered)
+and every part centred. The heading wraps freely and the badge sits right after its last character, so it
+travels with the centred last line.
+<br><br>
+The controls are a row of category tags (Figma <code>_Centered controls</code>, Content=Categories). On desktop
+the row is centred and <strong>wraps</strong>; on mobile it becomes a <strong>swipeable</strong> row (see
+<em>Centric — Mobile</em>).
+        `,
+      },
+    },
+  },
+  render: () => html`
+    <minis-page-header layout="centric" theme="brand" description="${DESCRIPTION}">
+      Ušetřete za pobyt<br>v italském Rimini
+      ${categoryControls}
+    </minis-page-header>
+  `,
+};
+
+export const CentricAllThemes: Story = {
+  name: 'Centric — All Themes',
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'All six themes, same palette as the other layouts.' } },
+  },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-layout-md, 24px)">
+      ${(['brand', 'yellow', 'summer', 'pink', 'green', 'blue'] as const).map(
+        (theme) => html`
+          <minis-page-header layout="centric" theme="${theme}" description="${DESCRIPTION}">
+            Ušetřete za pobyt<br>v italském Rimini
+            ${categoryControls}
+          </minis-page-header>
+        `,
+      )}
+    </div>
+  `,
+};
+
+export const CentricAllParts: Story = {
+  name: 'Centric — All Parts',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Every optional part switched on, all centred: message, tag, heading + badge, location, description, collapsible, button and a long category row that wraps onto a second line on desktop.',
+      },
+    },
+  },
+  render: () => html`
+    ${demoStyles}
+    <minis-page-header
+      layout="centric"
+      theme="blue"
+      tag="Do 1. června zbývá 6 dní"
+      location="v Rosovicích a okolí"
+      description="${DESCRIPTION}"
+    >
+      Ušetřete za pobyt v italském Rimini a na celém jaderském pobřeží
+      <div slot="message" class="ph-demo-message" role="status">
+        Nový poklad je tu a s ním i pořádná porce kreditů. Jste zvědaví, co na vás čeká?
+        <a href="#">Vyzvednout poklad</a>
+      </div>
+      <p slot="more" style="margin:0">
+        Sleva platí na vybrané pobyty v Rimini a okolí s nástupem do konce června. Kombinovat ji
+        nelze s jinými akcemi.
+      </p>
+      <minis-button slot="button" variant="transparent" size="xl">Mrknout na volné židle</minis-button>
+      ${categoryTags([...CATEGORIES, 'Wellness', 'Hory', 'Moře', 'Last minute', 'Pro rodiny', 'Romantika', 'Gastro', 'Zážitky'])}
+    </minis-page-header>
+  `,
+};
+
+export const CentricMobile: Story = {
+  name: 'Centric — Mobile',
+  parameters: {
+    controls: { disable: true },
+    viewport: { defaultViewport: 'iphone6' },
+    docs: {
+      description: {
+        story: `
+Below 768px (container width) the category row does not wrap: it scrolls sideways, edge to edge of the banner.
+A 32px fade in the theme surface marks each side that still has tags to scroll to — at rest only the right one
+shows. A row that fits stays centred. Opens with the Storybook viewport set to iPhone 6 (375px).
+        `,
+      },
+    },
+  },
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-layout-md, 24px)">
+      <minis-page-header layout="centric" theme="brand" description="${DESCRIPTION}">
+        Ušetřete za pobyt<br>v italském Rimini
+        ${categoryControls}
+      </minis-page-header>
+      <minis-page-header layout="centric" theme="pink" description="${DESCRIPTION}">
+        Ušetřete za pobyt<br>v italském Rimini
+        ${categoryTags(['Benefity', 'FKSP'])}
+      </minis-page-header>
+    </div>
   `,
 };
 

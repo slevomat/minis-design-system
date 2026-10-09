@@ -387,6 +387,8 @@ export const pageHeaderStyles = css`
 
   /* ══════════════════════════════════════════════════════════
      LAYOUT = INSPIRATIONS  (Figma "With Controls")
+     and CONTENT-LEFT (Figma "Content left"), which shares
+     everything here and adds its own photo rules below.
 
      Left-aligned at every width. The container carries the
      padding itself (like <minis-container>), and the photo is
@@ -396,13 +398,17 @@ export const pageHeaderStyles = css`
      no mask is applied.
   ══════════════════════════════════════════════════════════ */
 
-  :host([layout='inspirations']) .root {
+  :host([layout='inspirations']) .root,
+  :host([layout='content-left']) .root,
+  :host([layout='centric']) .root {
     display: block;
     padding: 0;
     overflow: hidden;
   }
 
-  :host([layout='inspirations']) .container {
+  :host([layout='inspirations']) .container,
+  :host([layout='content-left']) .container,
+  :host([layout='centric']) .container {
     position: relative;
     align-items: flex-start;
     gap: var(--spacing-layout-xxl, 24px);
@@ -412,7 +418,8 @@ export const pageHeaderStyles = css`
     box-sizing: border-box;
   }
 
-  :host([layout='inspirations']) .content {
+  :host([layout='inspirations']) .content,
+  :host([layout='content-left']) .content {
     order: 0;
     position: relative;
     z-index: 1;
@@ -425,19 +432,24 @@ export const pageHeaderStyles = css`
   }
 
   :host([layout='inspirations']) .heading,
-  :host([layout='inspirations']) .description {
+  :host([layout='content-left']) .heading,
+  :host([layout='inspirations']) .description,
+  :host([layout='content-left']) .description {
     text-align: left;
   }
 
   /* Badge — Figma: 32px seal, 4px gap at the 32px heading; 43px seal, 16px
      gap at the 56px heading. Interpolated linearly on the heading font-size
      so it is exact at both Figma points and sensible on any tier in between. */
-  :host([layout='inspirations']) .heading {
+  :host([layout='inspirations']) .heading,
+  :host([layout='content-left']) .heading,
+  :host([layout='centric']) .heading {
     --_badge-size: calc(0.4583em + 17.333px);
     --_badge-gap: calc(0.5em - 12px);
   }
 
-  :host([layout='inspirations']) .image-area {
+  :host([layout='inspirations']) .image-area,
+  :host([layout='content-left']) .image-area {
     order: 0;
     position: absolute;
     z-index: 0;
@@ -449,7 +461,8 @@ export const pageHeaderStyles = css`
     mask-image: none;
   }
 
-  :host([layout='inspirations']) .image-area ::slotted(*) {
+  :host([layout='inspirations']) .image-area ::slotted(*),
+  :host([layout='content-left']) .image-area ::slotted(*) {
     object-fit: contain;
   }
 
@@ -459,21 +472,61 @@ export const pageHeaderStyles = css`
   }
 
   @container page-header (min-width: 768px) {
-    :host([layout='inspirations']) .root {
+    :host([layout='inspirations']) .root,
+    :host([layout='content-left']) .root,
+    :host([layout='centric']) .root {
       min-height: 0;
     }
 
-    :host([layout='inspirations']) .container {
+    :host([layout='inspirations']) .container,
+    :host([layout='content-left']) .container,
+    :host([layout='centric']) .container {
       flex-direction: column;
       justify-content: flex-start;
       padding: var(--spacing-layout-lg, 32px) var(--container-padding, 32px);
     }
 
-    :host([layout='inspirations']) .content {
+    :host([layout='inspirations']) .content,
+    :host([layout='content-left']) .content {
       max-width: none;
     }
 
-    :host([layout='inspirations']) .image-area {
+    /* Text never runs under the 280px photo: each block keeps its Figma
+       width (description 507, _Collapsible 660, message 746) but stops a
+       column gap short of the photo on narrow desktops. The heading wraps
+       (instead of the base nowrap) once it reaches that limit. */
+    :host([layout='inspirations']) .content,
+    :host([layout='content-left']) .content {
+      --_text-limit: calc(100% - 280px - var(--spacing-layout-xxl, 24px));
+    }
+
+    :host([layout='inspirations']) .heading-row,
+    :host([layout='content-left']) .heading-row {
+      max-width: var(--_text-limit);
+    }
+
+    :host([layout='inspirations']) .heading,
+    :host([layout='content-left']) .heading {
+      white-space: normal;
+    }
+
+    :host([layout='inspirations']) .description,
+    :host([layout='content-left']) .description {
+      max-width: min(507px, var(--_text-limit));
+    }
+
+    :host([layout='inspirations']) .more,
+    :host([layout='content-left']) .more {
+      max-width: min(660px, var(--_text-limit));
+    }
+
+    :host([layout='inspirations']) ::slotted([slot='message']),
+    :host([layout='content-left']) ::slotted([slot='message']) {
+      max-width: min(746px, var(--_text-limit));
+    }
+
+    :host([layout='inspirations']) .image-area,
+    :host([layout='content-left']) .image-area {
       top: -32px;
       right: var(--container-padding, 32px);
       width: 280px;
@@ -501,6 +554,173 @@ export const pageHeaderStyles = css`
        the button's own :host([full-width]) rule. */
     :host([layout='inspirations']) .controls ::slotted(minis-button[full-width]) {
       width: auto;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     LAYOUT = CONTENT-LEFT  (Figma "Content left")
+
+     Inspirations without controls (the template doesn't render
+     them). Mobile keeps the Inspirations top-right photo. From
+     768px the photo follows three rules Figma can only fake:
+     1. vertically centred in the banner, right on the container
+        padding;
+     2. the banner height comes from the content alone — a taller
+        photo is cropped top and bottom by .root's overflow;
+     3. opening "more" grows the banner, but the photo stays where
+        it was: --_visual-center (set by _positionVisual()) is the
+        collapsed centre. Before it runs, 50% is the same value.
+  ══════════════════════════════════════════════════════════ */
+
+  @container page-header (min-width: 768px) {
+    :host([layout='content-left']) .image-area {
+      top: var(--_visual-center, 50%);
+      right: var(--container-padding, 32px);
+      width: 280px;
+      height: 280px;
+      transform: translateY(-50%);
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     LAYOUT = CENTRIC  (Figma "Centric")
+
+     No photo (the template doesn't render the image area) —
+     every part is centred. Shares the Inspirations root,
+     container box and badge sizing. The heading wraps freely;
+     the badge stays inline after the last character of the last
+     line, so it travels with the centred line.
+
+     Controls are a centred row of category tags (Figma
+     "_Centered controls"): they wrap on desktop and become a
+     swipeable row on mobile, bleeding to the banner edges with
+     a fade on each side that has more to scroll to
+     (data-fade-start / data-fade-end, set by _updateSwipeFades()).
+  ══════════════════════════════════════════════════════════ */
+
+  :host([layout='centric']) .container {
+    align-items: center;
+  }
+
+  :host([layout='centric']) .content {
+    order: 0; /* the base layout puts content after the image on mobile */
+    align-items: center;
+    text-align: center;
+  }
+
+  :host([layout='centric']) .location {
+    margin-inline: auto;
+  }
+
+  :host([layout='centric']) .heading-row {
+    align-items: center;
+    max-width: 100%;
+  }
+
+  /* balance: even line lengths suit a centred headline, and the balancing
+     keeps the badge on the last line with the last word — never alone. */
+  :host([layout='centric']) .heading {
+    text-align: center;
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  :host([layout='centric']) .description,
+  :host([layout='centric']) .more {
+    text-align: center;
+  }
+
+  :host([layout='centric']) .controls {
+    position: relative;
+    max-width: none;
+    /* <minis-tag> takes its type from context — Figma tags are 14px Inter regular */
+    font-family: var(--typography-font-family-sans, Inter, sans-serif);
+    font-size: var(--typography-size-sm, 14px);
+    font-weight: var(--typography-weight-regular, 400);
+    line-height: var(--typography-line-height-138, 138%);
+    /* bleed to the banner edges so the row swipes edge to edge */
+    width: calc(100% + 2 * var(--container-padding, 8px));
+    margin-inline: calc(-1 * var(--container-padding, 8px));
+  }
+
+  /* Mobile: one swipeable row. The slot itself is the scroller. */
+  :host([layout='centric']) .controls-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--linear-sp-linear-3, 12px);
+    /* start-aligned where safe-centre is unsupported, so nothing is cut off */
+    justify-content: flex-start;
+    justify-content: safe center;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-inline: var(--container-padding, 8px);
+    scroll-padding-inline: var(--container-padding, 8px);
+  }
+
+  :host([layout='centric']) .controls-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  :host([layout='centric']) .controls ::slotted(*) {
+    flex: none;
+  }
+
+  /* Swipe fades — Figma: 32px, surface at 0 → 50% at 75% → 100% at the edge. */
+  :host([layout='centric']) .controls::before,
+  :host([layout='centric']) .controls::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    width: var(--linear-sp-linear-8, 32px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, var(--page-header-surface) 50%, transparent) 75%,
+      var(--page-header-surface)
+    );
+  }
+
+  :host([layout='centric']) .controls::before {
+    left: 0;
+    transform: scaleX(-1);
+  }
+
+  :host([layout='centric']) .controls::after {
+    right: 0;
+  }
+
+  :host([layout='centric']) .controls[data-fade-start]::before,
+  :host([layout='centric']) .controls[data-fade-end]::after {
+    opacity: 1;
+  }
+
+  @container page-header (min-width: 768px) {
+    :host([layout='centric']) .content {
+      max-width: none;
+    }
+
+    /* Desktop: the row wraps, centred, inside the container padding. */
+    :host([layout='centric']) .controls {
+      width: 100%;
+      margin-inline: 0;
+    }
+
+    :host([layout='centric']) .controls-row {
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow: visible;
+      padding-inline: 0;
+    }
+
+    :host([layout='centric']) .controls::before,
+    :host([layout='centric']) .controls::after {
+      display: none;
     }
   }
 `;

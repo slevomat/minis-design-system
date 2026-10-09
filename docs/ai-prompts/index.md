@@ -22,7 +22,7 @@ Individual UI elements with props and variants.
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 - [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; three color variants (pink, yellow, blue)
-- [Page Header](./components/page-header.md) - Hero banner; first content element under the topbar + navigation; 5 brand themes, responsive layout, image + CTA slots
+- [Page Header](./components/page-header.md) - Hero banner; first content element under the topbar + navigation; 6 brand themes; layouts `inspirations` (search controls), `content-left` (no controls) and `centric` (no photo, category tags)
 - [Accordion](./components/accordion.md) - Expand/collapse list for FAQ sections; bold heading + blue chevron, optional exclusive (`single`) mode
 
 [→ All Components](./components/README.md)

@@ -47,17 +47,21 @@ export const tagStyles = css`
      VARIANT: CLICKABLE
      ===================== */
 
+  /* Figma: tinted at rest (the static surface, so it reads on coloured
+     surfaces like the page header) with the neutral border that marks it as
+     interactive; hover / active lift to the plain secondary surface. */
   :host([variant="clickable"]) .tag {
-    background: transparent;
+    background: var(--tag-clickable-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
     border-color: var(--tag-clickable-border, var(--color-interaction-secondary-border, #cbccce));
     color: var(--tag-clickable-accent, var(--color-interaction-secondary-accent, #000));
     cursor: pointer;
     transition: background 150ms ease, border-color 150ms ease;
   }
 
-  :host([variant="clickable"]) .tag:hover {
-    background: var(--tag-clickable-hover-surface, var(--color-interaction-secondary-hover-surface, #e6f7fc));
-    border-color: var(--tag-clickable-hover-border, var(--color-interaction-secondary-hover-surface, #e6f7fc));
+  :host([variant="clickable"]) .tag:hover,
+  :host([variant="clickable"]) .tag:active {
+    background: var(--tag-clickable-hover-surface, var(--color-interaction-secondary-surface, #fff));
+    border-color: var(--tag-clickable-hover-border, var(--color-interaction-secondary-border, #cbccce));
   }
 
   :host([variant="clickable"]) .tag:focus-visible {

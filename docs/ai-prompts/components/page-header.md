@@ -4,14 +4,35 @@ Page headers — also called **heroes** — come in the brand colour themes and 
 
 ## Layouts
 
-Figma is getting three layouts — *Simple*, *With Controls* and *Centered simple*. Only *With Controls* is finished so far; its Figma variant is named `Layout=Inspirations`, and the attribute value mirrors that.
+The Figma `Layout` variant maps one-to-one to the `layout` attribute: `Inspirations` → `inspirations`, `Content left` → `content-left`, `Centric` → `centric`.
 
 | `layout` | Figma | Status | Look |
 |---|---|---|---|
 | `inspirations` | `Layout=Inspirations` ("With Controls") | **Current** — use for new work | Left-aligned at every width; photo cropped into the top-right corner; optional `controls` row, `message`, `location`, `more` toggle |
+| `content-left` | `Layout=Content left` | **Current** — use for new work | Inspirations **without controls**. Desktop: photo vertically centred, cropped top and bottom when the content is shorter, and fixed in place while `more` is open. Mobile: same as Inspirations |
+| `centric` | `Layout=Centric` | **Current** — use for new work | **No photo**, everything centred; the badge follows the last character of the balanced, centred heading. Controls = category tags that **wrap on desktop** and **swipe on mobile** (edge fades) |
 | `default` (attribute omitted) | — (no longer in Figma) | Legacy, kept so existing pages don't change | Desktop: content left, blob-masked image right, vertically centred. Mobile: image on top, centred stack |
 
-*Simple* and *Centered simple* will be added as further `layout` values once designed; until then the `default` layout stays the default.
+### Search and filters live only in `controls`
+
+The `controls` slot is **the** place for a search box, filters, a date/location picker,
+category tags or any other control that drives the page. Two layouts have it, each with
+its own kind of controls — pick the layout by that need:
+
+- Search box / form controls (input + button) → **`inspirations`**.
+- Category tags / quick filters → **`centric`** (a centred row of `<minis-tag>`s that wraps on
+  desktop and swipes on mobile).
+- No search or filters → **`content-left`** (or either layout above without controls).
+
+`content-left` has no controls area, and that is the design — not a gap to work around.
+**Never** put an `<input>`, search box, filter chip, `<select>` or similar into its
+`button`, `more`, `message` or default slot, and don't fake a controls row with markup
+right under the banner. If such a page needs search or filters, switch it to
+`inspirations` or `centric`. The
+component logs a console warning when `content-left` receives `slot="controls"`
+children (they are not rendered).
+
+Further Figma layouts will be added as further `layout` values once designed; until then the `default` layout stays the default.
 
 ---
 
@@ -36,8 +57,10 @@ Figma is getting three layouts — *Simple*, *With Controls* and *Centered simpl
 
 ## Figma
 
-- Component set: `4642:396` — variants `Breakpoint` (`xs` | `md-lg-xl-2xl`) × `Theme` × `Layout` (`Inspirations`)
-- Booleans: `Badge`, `Tag`, `Message`, `Location`, `Description`, `Collapsible`, `Button`, `Visuals`, `Controls` (+ the `Controls body` instance slot, default `_Default controls`)
+- Component set: `4642:396` — variants `Breakpoint` (`xs` | `md-lg-xl-2xl`) × `Theme` × `Layout` (`Inspirations` | `Content left` | `Centric`)
+- Booleans: `Badge`, `Tag`, `Message`, `Location`, `Description`, `Collapsible`, `Button`, `Visuals`, `Controls` (+ the `Controls body` instance slot, default `_Default controls`). `Controls` / `Controls body` exist on every variant but are hidden and unmapped in `Content left` — that layout has no controls. `Centric` has no visual layer (`Visuals` unmapped); its `Controls body` defaults to `_Centered controls` (`5678:4088`, Content=Categories: `tag` `Clickable` pills → `<minis-tag variant="clickable">`, 12px gap; mobile variant scrolls horizontally with 32px `Swipe fade / left|right` gradients).
+- Code Connect: one `figma.connect` per `Layout` (filtered with `variant`), so the snippet carries a literal `layout="…"`.
+- Slots: `Slot [brandCheckmark]` — holds the Brand/Badge seal; visibility bound to `Badge`. **Figma-only workaround, not part of the code API** — see [Badge positioning → Figma](#figma-the-seal-is-a-slot).
 - File: `mfiAVMWkxiBRGnegjqLMNW`
 - URL: https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=4642-396
 
@@ -60,7 +83,7 @@ Figma is getting three layouts — *Simple*, *With Controls* and *Centered simpl
 
 | Attribute | Type | Default | Description |
 |---|---|---|---|
-| `layout` | `'default' \| 'inspirations'` | `'default'` | Layout — see [Layouts](#layouts). Use `inspirations` for new work. |
+| `layout` | `'default' \| 'inspirations' \| 'content-left' \| 'centric'` | `'default'` | Layout — see [Layouts](#layouts). Use `inspirations`, `content-left` or `centric` for new work. |
 | `theme` | `'brand' \| 'yellow' \| 'summer' \| 'pink' \| 'green' \| 'blue'` | `'brand'` | Background color theme |
 | `description` | `string` | `''` | Body copy shown below the heading. Omit to hide. |
 | `tag` | `string` | `''` | Countdown/label text shown as a pill above the heading. Omit to hide. |
@@ -85,7 +108,7 @@ Figma is getting three layouts — *Simple*, *With Controls* and *Centered simpl
 | `button` | Optional CTA. Use `<minis-button variant="transparent" size="xl">`. |
 | `message` | Figma `Message` — the draft "Message on product" banner, first in the content column (`max-width: 746px`). No component yet: use the markup recipe in [`message.md`](message.md#message-on-product-draft-no-component). |
 | `more` | Figma `Collapsible` — extra content hidden behind the "Více informací" toggle. The toggle **only renders when this slot has content**. |
-| `controls` | Figma `Controls` / `Controls body` — controls row below the content (24px gap). **Mobile:** stacked, every child stretched. **Desktop:** a row up to 600px wide; `<minis-button>` children hug their label, every other child (the input) shares the rest. Give the button `full-width` so it fills the row on mobile — the component cancels that stretch on desktop. |
+| `controls` | Figma `Controls` / `Controls body` — controls row below the content (24px gap). **Mobile:** stacked, every child stretched. **Desktop:** a row up to 600px wide; `<minis-button>` children hug their label, every other child (the input) shares the rest. Give the button `full-width` so it fills the row on mobile — the component cancels that stretch on desktop. **Not rendered with `layout="content-left"`** — anything slotted here is ignored. **`centric`:** a centred row of category tags — wraps on desktop, swipes on mobile (see below). |
 
 ### CSS custom properties (overridable)
 
@@ -142,7 +165,13 @@ description → "more" toggle → button. The controls row follows the column.
 **Desktop (container ≥768 px)** — Figma `Breakpoint=md-lg-xl-2xl`
 - Root: full-bleed surface, `overflow: hidden`, no padding, no min-height — height comes from the content
 - Container: `max-width: var(--container-width)` with `padding: var(--spacing-layout-lg) var(--container-padding)` — the same box as `<minis-container>`, so the text lines up with the page below
-- Content: flex column, `gap: --spacing-layout-sm`, left-aligned; description `max-width: 507px`
+- Content: flex column, `gap: --spacing-layout-sm`, left-aligned
+- **Text never runs under the photo** (applies to `content-left` too). Each block keeps its
+  Figma width but stops one column gap short of the photo:
+  `max-width: min(<figma width>, calc(100% - 280px - var(--spacing-layout-xxl)))` —
+  description 507px, `more` 660px (Figma `_Collapsible`), `message` 746px. The heading row
+  gets the same limit without a Figma width, and the heading drops the base layout's
+  `nowrap` so a long headline wraps instead (the badge follows its last line).
 - Controls: `gap: --spacing-layout-xxl` (24px) below the content; row, `max-width: 600px`
 - Photo: `280×280px`, absolutely positioned `top: -32px; right: var(--container-padding)` — its top is cropped by the banner edge and it never affects the height
 
@@ -160,6 +189,63 @@ with a 16px gap at the 56px heading. The layout interpolates linearly on the hea
 font-size (`calc(0.4583em + 17.333px)` / `calc(0.5em - 12px)`), so both Figma points
 are exact and in-between tiers stay proportional. `--page-header-badge-size` /
 `--page-header-badge-gap` still override it.
+
+### `layout="content-left"`
+
+Shares every Inspirations rule above (container box, content column, badge
+interpolation, mobile photo) except two:
+
+- **No controls.** The template doesn't render the controls wrapper at all.
+- **The desktop photo (container ≥768px)** follows three rules that Figma can only fake
+  by hand:
+  1. **Vertically centred** in the banner: `top: 50%; transform: translateY(-50%)`,
+     `280×280px`, `right: var(--container-padding)`.
+  2. **The banner height comes from the content only.** The photo is absolutely
+     positioned, so when the content is shorter than 280px the root's `overflow: hidden`
+     crops it **top and bottom**.
+  3. **It stays put when `more` opens.** The banner grows, and the photo stays centred on
+     the *collapsed* height.
+
+Rule 3 is the one place that needs JS. `more` sits mid-column (description → more →
+toggle → button), so there is no box that spans "everything except `more`" to centre on.
+A `ResizeObserver` on `.container` and `.more` runs `_positionVisual()`, which sets
+`--_visual-center = (container height − open more height − content row-gap) / 2` on
+`.container`; the photo uses `top: var(--_visual-center, 50%)`. Collapsed, the value
+equals 50%, which is also the fallback before the script runs, so rules 1 and 2 never
+depend on JS. Resizes and font loads while `more` is open re-run the same formula, so
+no state is frozen.
+
+**Mobile (<768px)** is identical to Inspirations: 144px photo in the top-right corner
+(`top: -34px`), behind the text.
+
+
+### `layout="centric"`
+
+Shares the Inspirations root, container box (`--container-width`, `--spacing-layout-lg` /
+`--container-padding` on desktop, 12px / `--container-padding` on mobile) and badge sizing.
+Everything else:
+
+- **No photo.** The image area is not rendered; anything in `slot="image"` is ignored.
+- **Everything centred**: message, tag, heading, location, description, `more`, toggle,
+  button and the controls row. Description keeps its 507px Figma width, `message` 746px.
+- **Heading** wraps freely with `text-wrap: balance` (even line lengths, the natural look
+  for a centred headline). The badge stays inline after the **last character of the last
+  line**, so it travels with that centred line — and balancing keeps it from ever ending up
+  alone on a line. (Browsers without `text-wrap: balance` wrap normally; on a nearly full
+  last line the badge could then drop to its own line.)
+- **Controls** (Figma `_Centered controls`, Content=Categories): a row of tags, 12px gap.
+  - **Desktop (≥768px)**: centred, **wraps** onto further centred lines.
+  - **Mobile (<768px)**: one row that **scrolls sideways**. It bleeds to the banner edges
+    (negative `--container-padding` margins, the same padding inside), so the first tag
+    lines up with the content at rest. A row that fits stays centred
+    (`justify-content: safe center`, with a `flex-start` fallback so nothing is ever
+    unreachable). A 32px fade in `--page-header-surface` covers each edge that still has
+    tags to scroll to — `_updateSwipeFades()` sets `data-fade-start` / `data-fade-end` on
+    `.controls` from the scroll position, on scroll, resize and slot changes, so the first
+    and last tags are never dimmed at rest. The scrollbar is hidden.
+  - Use `<minis-tag variant="clickable">` — the Figma `Clickable` tag: tinted with a grey
+    border, white on hover. The controls area sets the tags' type to 14px Inter regular
+    (`<minis-tag>` inherits its typography from context).
 
 ### `layout="default"` (legacy)
 
@@ -234,6 +320,22 @@ margin-left: calc(var(--page-header-badge-gap, 0.27em) - var(--_space-advance, 0
 The ratio is stored relative to the font size, so it survives the responsive size step
 without re-measuring.
 
+### Figma: the seal is a slot
+
+In Figma the seal sits in a slot layer, `Slot [brandCheckmark]` (inside `Title`), whose
+visibility is bound to the `Badge` boolean. That is a workaround for a Figma limitation:
+auto layout cannot flow an inner layer to the end of the text's last line, so designers
+place the seal by hand in each instance.
+
+**Code does not mirror it.** The component positions the seal itself (above), so there is
+no `badge` slot and there must not be one — arbitrary slotted content would break the
+gap measurement and the theme → seal colour pairing. The code API stays `no-badge` only,
+and Code Connect maps it from the `Badge` boolean; the slot properties are unmapped.
+
+Figma currently carries **seven** slot properties for it (`Slot [brandCheckmark]` …
+`Slot [brandCheckmark]7`): one per desktop theme variant, plus one shared by all `xs`
+variants. They are a by-product of the Figma setup, not seven code concepts.
+
 ### Consequences to know
 
 - **Keep the heading slot inline-level.** A block-level child would push the badge onto
@@ -291,6 +393,32 @@ without re-measuring.
 There is no input component yet (Figma "🚧 Input") — style a native `<input>` from the
 `--input-*` tokens: 40px tall, `--input-border`, `--border-radius-sm`, `--input-surface`,
 `--input-placeholder`.
+
+### Content left
+
+```html
+<minis-page-header
+  layout="content-left"
+  theme="brand"
+  description="Dnešní 30% sleva navíc vám nesmí uniknout. Pořiďte si dovolenou u moře za ještě lepší cenu."
+>
+  Ušetřete za pobyt<br>v italském Rimini
+  <img slot="image" src="rimini-blob.png" alt="">
+  <p slot="more">Sleva platí na vybrané pobyty v Rimini a okolí s nástupem do konce června.</p>
+</minis-page-header>
+```
+
+### Centric
+
+```html
+<minis-page-header layout="centric" theme="brand" description="Dnešní 30% sleva navíc vám nesmí uniknout.">
+  Ušetřete za pobyt<br>v italském Rimini
+  <minis-tag slot="controls" variant="clickable">Benefity</minis-tag>
+  <minis-tag slot="controls" variant="clickable">Papírové poukázky</minis-tag>
+  <minis-tag slot="controls" variant="clickable">FKSP</minis-tag>
+  <minis-tag slot="controls" variant="clickable">Dárkové poukazy</minis-tag>
+</minis-page-header>
+```
 
 ### Inspirations — every part
 
@@ -364,7 +492,9 @@ There is no input component yet (Figma "🚧 Input") — style a native `<input>
 
 ```
 Create a <minis-page-header> with:
-- layout="inspirations"
+- layout="inspirations" (search/controls row), layout="content-left" (no controls;
+  photo vertically centred, stays put when "Více informací" opens) or layout="centric"
+  (no photo, all centred, category <minis-tag variant="clickable"> row in controls)
 - theme="brand"
 - Heading: "Ušetřete za pobyt<br>v italském Rimini"
 - description="Dnešní 30% sleva vám nesmí uniknout."
@@ -372,6 +502,6 @@ Create a <minis-page-header> with:
 - location="v Rosovicích a okolí" (optional; listen for location-click)
 - no-badge (absent by default — badge is shown)
 - image slot: <img src="photo.png" alt=""> — a transparent PNG with the blob shape baked in
-- controls slot: a native search <input> styled from --input-* tokens +
+- controls slot (inspirations only): a native search <input> styled from --input-* tokens +
   <minis-button variant="transparent" size="lg" full-width>Vyhledat</minis-button>
 ```
