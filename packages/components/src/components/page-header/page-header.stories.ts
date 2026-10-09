@@ -690,8 +690,8 @@ Override per instance with <code>--page-header-badge-size</code> and
 
       <minis-page-header
         theme="pink"
-        style="--page-header-badge-size:1em;--page-header-badge-gap:0.4em"
-        description="--page-header-badge-size: 1em · --page-header-badge-gap: 0.4em"
+        style="--page-header-badge-size:0.6em;--page-header-badge-gap:0.5em"
+        description="--page-header-badge-size: 0.6em · --page-header-badge-gap: 0.5em"
       >
         Custom size<br>and gap
         <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
