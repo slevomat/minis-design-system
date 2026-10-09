@@ -14,7 +14,7 @@ const meta: Meta = {
 <p>A compact pill-shaped label for displaying metadata, applied filters, or lightweight interactive states.</p>
 <ul>
   <li><strong>static</strong> — read-only label for displaying metadata or category badges. No interaction.</li>
-  <li><strong>clickable</strong> — same look, but clickable. Use for subtle actions like opening a modal or tooltip with more info about the tag. Returns to default state after click — no persistent state. Do NOT use as a form submit button.</li>
+  <li><strong>clickable</strong> — tinted like static with a grey border; turns white on hover / press. Use for subtle actions like opening a modal or tooltip with more info about the tag. Returns to default state after click — no persistent state. Do NOT use as a form submit button.</li>
   <li><strong>toggle</strong> — works like a toggle/checkbox button. Persists pressed/unpressed state. Use for active selection: Like button, favourite, active filter. Icon typically switches between outline and filled version (e.g. heart ↔ heart-fill).</li>
   <li><strong>dismissible</strong> — applied filter the user can remove. Built-in ✕ button fires a <code>dismiss</code> event.</li>
 </ul>`,

@@ -13,7 +13,7 @@ A compact pill-shaped label used to display metadata, applied filters, or lightw
 | Variant | Use case |
 |---|---|
 | `static` | Read-only label for displaying metadata or category badges (e.g. "Platba na zálohu"). No interaction. |
-| `clickable` | Same visual as static, but clickable. Use for subtle actions like opening a modal or a tooltip with more info about the tag. **Returns to default state after click — no persistent state.** Do NOT use as a form submit button. |
+| `clickable` | Tinted like static, plus a neutral grey border that marks it as interactive; turns white on hover / press. Reads on white and on coloured surfaces (e.g. the `centric` page-header category row). Use for subtle actions like opening a modal or a tooltip with more info about the tag. **Returns to default state after click — no persistent state.** Do NOT use as a form submit button. |
 | `toggle` | Works like a toggle/checkbox button visually. Persists pressed/unpressed state. Use for active selection (e.g. Like button, favourite, active filter). The icon typically switches between outline and filled version (e.g. `heart` ↔ `heart-fill`). Add `in-color` to render the icon in the brand/red accent. |
 | `dismissible` | Applied filter that the user can remove. Built-in ✕ button fires a `dismiss` event. |
 
@@ -62,10 +62,11 @@ All tokens fall back to semantic interaction tokens that respect light/dark mode
 | `--tag-static-surface` | `--color-interaction-secondary-hover-surface` | Static background |
 | `--tag-static-border` | `--color-interaction-secondary-hover-surface` | Static border |
 | `--tag-static-accent` | `--color-interaction-secondary-accent` | Static text/icon colour |
-| `--tag-clickable-border` | `--color-interaction-secondary-border` | Clickable default border |
+| `--tag-clickable-surface` | `--color-interaction-secondary-hover-surface` | Clickable resting background (tinted) |
+| `--tag-clickable-border` | `--color-interaction-secondary-border` | Clickable border (all states) |
 | `--tag-clickable-accent` | `--color-interaction-secondary-accent` | Clickable text/icon colour |
-| `--tag-clickable-hover-surface` | `--color-interaction-secondary-hover-surface` | Hover background |
-| `--tag-clickable-hover-border` | `--color-interaction-secondary-hover-surface` | Hover border |
+| `--tag-clickable-hover-surface` | `--color-interaction-secondary-surface` | Hover / pressed background (white) |
+| `--tag-clickable-hover-border` | `--color-interaction-secondary-border` | Hover / pressed border |
 | `--tag-toggle-surface` | `transparent` | Toggle resting background (default **and** toggled — the filled icon is the indicator, not a surface change) |
 | `--tag-toggle-border` | `--color-interaction-secondary-border` | Toggle border |
 | `--tag-toggle-accent` | `--color-interaction-secondary-accent` | Toggle text/icon colour |

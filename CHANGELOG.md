@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-09
+
+### Page header — new `content-left` and `centric` layouts (Figma “Content left”, “Centric”)
+
+- **New `layout="content-left"`**: Figma `Layout=Content left`: Inspirations **without controls** — the controls wrapper isn't rendered, so `slot="controls"` children are ignored.
+- **Desktop photo rules (≥768px container)**: 280×280, right-aligned to the container padding and **vertically centred**; the banner height comes from the content only, so a taller photo is cropped top and bottom; opening “Více informací” grows the banner but the photo **stays where it was**. That last rule is measured: a `ResizeObserver` sets `--_visual-center` (collapsed height ÷ 2), with `50%` as the CSS fallback.
+- **Search and filters belong in `inspirations` only**: `content-left` has no controls area by design. The docs and the `minis-app` skill now say so explicitly (never put inputs into its other slots; switch to `inspirations` when a page needs search), and the component logs a console warning when `content-left` receives `slot="controls"` children.
+- **Mobile**: same as Inspirations — 144px photo in the top-right corner.
+- **Storybook**: new stories **Content left / — All Themes / — Collapsible / — Mobile**; the Playground `layout` control gains `content-left`.
+- **Code Connect**: `page-header.figma.ts` is split into one `figma.connect` per `Layout` (`variant` filter); the snippets now carry a literal `layout="inspirations"` / `layout="content-left"`, and Content left leaves out `Controls`. Also documented that the Figma `Slot [brandCheckmark]` slot properties (the badge seal's Figma-only workaround) are intentionally unmapped.
+- **Text no longer runs under the photo (`inspirations` and `content-left`, desktop)**: heading row, description, opened `more` text and `message` stop one column gap (`--spacing-layout-xxl`) short of the 280px photo — `max-width: min(<Figma width>, calc(100% - 280px - var(--spacing-layout-xxl)))` with Figma widths 507px (description), 660px (`more`, Figma `_Collapsible`, previously unlimited) and 746px (`message`). The heading now wraps instead of staying `nowrap`.
+- **New `layout="centric"`**: Figma `Layout=Centric`: **no photo** (the image area isn't rendered) and every part centred. The heading wraps with `text-wrap: balance`, so the badge stays after the last character of the centred last line and never ends up alone on a line.
+- **Centric controls**: a row of category tags (Figma `_Centered controls`), 12px gap. Desktop: centred and wrapping. Mobile: one row that scrolls sideways edge to edge, centred when it fits (`justify-content: safe center`), with a 32px fade in `--page-header-surface` on each edge that still has tags to scroll to (`data-fade-start` / `data-fade-end`, set from the scroll position).
+- **Search-and-filters rule updated**: the `controls` slot of `inspirations` (search box) and `centric` (category tags) is the only place for them; `content-left` still has none. The console warning now points to both layouts.
+- **Storybook (Centric)**: new stories **Centric / — All Themes / — All Parts / — Mobile**; Playground `layout` gains `centric` (with demo category tags).
+- **Code Connect (Centric)**: a third `figma.connect` for `Layout=Centric` — no `Visuals`; `Controls` maps to four `<minis-tag variant="clickable">`, matching the Figma `Clickable` tags in `_Centered controls`.
+- **Tag — `clickable` restyled to the updated Figma `Clickable`** (`2523:339`): resting background is now tinted `--color-interaction-secondary-hover-surface` (was transparent); hover and press turn it white `--color-interaction-secondary-surface` (was the tint); the border stays the grey `--color-interaction-secondary-border` in every state (hover border was the tint). New override `--tag-clickable-surface`; `--tag-clickable-hover-surface` / `--tag-clickable-hover-border` fallbacks changed accordingly. No `tokens.css` change — these are component-level fallbacks.
+- **Centric padding fix**: the banner inherited the legacy layout's desktop `min-height: 328px`, so short content got extra space at the bottom (53px instead of 32px). Centric now resets it like Inspirations / Content left, so the padding is 32px top and bottom on desktop and 12px on mobile.
+- **Centric controls type**: the controls area sets 14px Inter regular (`--typography-size-sm`, `--typography-weight-regular`, `--typography-line-height-138`), so slotted tags match Figma (they inherited 16px before).
+- No token changes.
+
 ## 2026-10-02
 
 ### Page header — new `inspirations` layout (Figma "With Controls"), new theme palette

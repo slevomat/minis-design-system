@@ -15,7 +15,7 @@ Individual UI components for building interfaces. Every component has a full AI-
 - [Message](./message.md) - Notification card with visual, title, description and close button
 - [Navigation](./navigation.md) - Main site nav or in-page tab switcher; scrolls on narrow widths, collapses overflow into a menu on wide ones
 - [Menu](./menu.md) - Dropdown panel behind a labelled trigger; powers the navigation overflow
-- [Page Header](./page-header.md) - Hero banner; first content element under the topbar + navigation; 5 brand themes, responsive layout
+- [Page Header](./page-header.md) - Hero banner; first content element under the topbar + navigation; 6 brand themes; layouts `inspirations`, `content-left`, `centric`
 - [Pill Counter](./pill-counter.md) - Numeric badge used in buttons and standalone
 - [Tag](./tag.md) - Compact pill label: static, clickable, toggle, or dismissible
 - [Tile](./tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically in a grid

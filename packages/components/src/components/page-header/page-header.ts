@@ -13,8 +13,13 @@ export type PageHeaderTheme = 'brand' | 'blue' | 'yellow' | 'pink' | 'green' | '
  * simple layouts land.
  * `inspirations` — Figma `Layout=Inspirations` ("With Controls"): left-aligned
  * content, photo cropped into the top-right corner, optional controls row.
+ * `content-left` — Figma `Layout=Content left`: Inspirations without controls.
+ * From 768px the photo is vertically centred, cropped top and bottom when the
+ * content is shorter, and it holds its position while `more` is expanded.
+ * `centric` — Figma `Layout=Centric`: no photo, everything centred. Controls
+ * (category filters) wrap on desktop and become a swipeable row on mobile.
  */
-export type PageHeaderLayout = 'default' | 'inspirations';
+export type PageHeaderLayout = 'default' | 'inspirations' | 'content-left' | 'centric';
 
 /**
  * Badge seal colour per theme — each pairing is taken straight from Figma and
@@ -44,7 +49,7 @@ const BADGE_COLOR_BY_THEME: Record<PageHeaderTheme, BadgeColor> = {
  *                   last line of this content, so a block-level child would push it
  *                   onto a line of its own.
  * @slot button    - Optional CTA button (`<minis-button variant="transparent" size="xl">`).
- * @slot image     - Decorative photo. Provide a PNG with transparent blob-shaped background
+ * @slot image     - Decorative photo (not rendered with `layout="centric"`). Provide a PNG with transparent blob-shaped background
  *                   for the signature organic look; any `<img>` works and will be cropped
  *                   to the container bounds.
  * @slot message   - Optional "Message on product" banner above the tag (draft markup,
@@ -53,7 +58,11 @@ const BADGE_COLOR_BY_THEME: Record<PageHeaderTheme, BadgeColor> = {
  *                   only renders when this slot has content.
  * @slot controls  - Controls row below the content, e.g. a search input + button.
  *                   Stacks full-width on mobile, a row up to 600px wide on desktop
- *                   (buttons hug, everything else grows). Designed for `layout="inspirations"`.
+ *                   (buttons hug, everything else grows). Designed for `layout="inspirations"`;
+ *                   not rendered at all with `layout="content-left"` (a console warning
+ *                   flags it). The only place for search and filters in the header.
+ *                   With `layout="centric"`: a centred row (e.g. category tags) that
+ *                   wraps on desktop and scrolls sideways with edge fades on mobile.
  *
  * @fires location-click - The location switcher (`location` attribute) was clicked.
  * @fires more-toggle    - The "more" toggle was clicked; `detail.expanded` is the new state.
@@ -72,6 +81,13 @@ const BADGE_COLOR_BY_THEME: Record<PageHeaderTheme, BadgeColor> = {
  *   <img slot="image" src="blob-photo.png" alt="">
  *   <input slot="controls" type="search" placeholder="Kam chcete vyrazit?">
  *   <minis-button slot="controls" variant="transparent" size="lg" full-width>Vyhledat</minis-button>
+ * </minis-page-header>
+ *
+ * <!-- Content left -->
+ * <minis-page-header layout="content-left" theme="brand" description="…">
+ *   Ušetřete za pobyt<br>v italském Rimini
+ *   <img slot="image" src="blob-photo.png" alt="">
+ *   <p slot="more">…</p>
  * </minis-page-header>
  * ```
  */
@@ -119,6 +135,22 @@ export class MinisPageHeader extends LitElement {
     return BADGE_COLOR_BY_THEME[this.theme] ?? BADGE_COLOR_BY_THEME.brand;
   }
 
+  private _resizeObserver?: ResizeObserver;
+
+  /** (Re)observe the boxes whose size drives `_positionVisual` and the swipe fades. */
+  private _observe() {
+    if (typeof ResizeObserver === 'undefined') return;
+    this._resizeObserver ??= new ResizeObserver(() => {
+      this._positionVisual();
+      this._updateSwipeFades();
+    });
+    this._resizeObserver.disconnect();
+    for (const sel of ['.container', '.more', '.controls-row']) {
+      const el = this.renderRoot.querySelector(sel);
+      if (el) this._resizeObserver.observe(el);
+    }
+  }
+
   firstUpdated() {
     this._measureSpace();
     // The brand face (Kensington, or the Bebas Neue fallback) usually resolves
@@ -154,13 +186,81 @@ export class MinisPageHeader extends LitElement {
     heading.style.setProperty('--_space-advance', `${(withSpace - withoutSpace) / fontSize}`);
   };
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._resizeObserver?.disconnect();
+    this._resizeObserver = undefined;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // Re-attach after a DOM move (disconnectedCallback dropped the observer).
+    if (this.hasUpdated) this._observe();
+  }
+
+  updated(changed: Map<string, unknown>) {
+    if (changed.has('layout')) this._observe();
+    if (changed.has('layout') || changed.has('expanded')) this._positionVisual();
+    if (changed.has('layout')) this._updateSwipeFades();
+    if (changed.has('layout') && this.layout === 'content-left' && this.querySelector(':scope > [slot="controls"]')) {
+      // Search and filters belong in the `controls` slot of `inspirations` / `centric` only.
+      console.warn(
+        '<minis-page-header layout="content-left"> has no controls area — slot="controls" content is not rendered. Use layout="inspirations" (search) or layout="centric" (category tags).',
+        this,
+      );
+    }
+  }
+
+  /**
+   * `content-left`: the photo is centred on the banner as it would be with
+   * `more` collapsed, so opening it grows the banner without moving the photo.
+   * CSS alone can't do it — `more` sits mid-column (toggle and button follow
+   * it), so there is no box that spans everything except `more`. Instead,
+   * subtract the open `more` block and its gap from the container height.
+   * Collapsed, this equals 50%, which is also the CSS fallback.
+   */
+  private _positionVisual = () => {
+    const container = this.renderRoot?.querySelector('.container') as HTMLElement | null;
+    if (!container) return;
+    if (this.layout !== 'content-left') {
+      container.style.removeProperty('--_visual-center');
+      return;
+    }
+
+    let height = container.getBoundingClientRect().height;
+    const more = this.renderRoot.querySelector('.more') as HTMLElement | null;
+    if (more && !more.hidden) {
+      const content = this.renderRoot.querySelector('.content') as HTMLElement;
+      height -= more.getBoundingClientRect().height + (parseFloat(getComputedStyle(content).rowGap) || 0);
+    }
+    container.style.setProperty('--_visual-center', `${height / 2}px`);
+  };
+
   private _onMoreSlotChange(e: Event) {
     this._hasMore = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
   }
 
   private _onControlsSlotChange(e: Event) {
     this._hasControls = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
+    this._updateSwipeFades();
   }
+
+  /**
+   * `centric` on mobile: the controls row scrolls sideways. A fade at each edge
+   * signals more content that way — shown only while there is something left to
+   * scroll to, so the first and last items are never dimmed at rest.
+   */
+  private _updateSwipeFades = () => {
+    const controls = this.renderRoot?.querySelector('.controls') as HTMLElement | null;
+    const row = this.renderRoot?.querySelector('.controls-row') as HTMLElement | null;
+    if (!controls || !row) return;
+    const max = row.scrollWidth - row.clientWidth;
+    const scrollable = this.layout === 'centric' && max > 1;
+    // scrollLeft is negative in RTL; compare magnitudes.
+    const pos = Math.abs(row.scrollLeft);
+    controls.toggleAttribute('data-fade-start', scrollable && pos > 1);
+    controls.toggleAttribute('data-fade-end', scrollable && pos < max - 1);
+  };
 
   private _toggleMore() {
     this.expanded = !this.expanded;
@@ -226,13 +326,22 @@ export class MinisPageHeader extends LitElement {
             <slot name="button" class="button-slot"></slot>
           </div>
 
-          <div class="image-area" part="image-area">
-            <slot name="image"></slot>
-          </div>
+          ${this.layout !== 'centric' ? html`
+            <div class="image-area" part="image-area">
+              <slot name="image"></slot>
+            </div>
+          ` : nothing}
 
-          <div class="controls" part="controls" ?hidden="${!this._hasControls}">
-            <slot name="controls" @slotchange="${this._onControlsSlotChange}"></slot>
-          </div>
+          ${this.layout !== 'content-left' ? html`
+            <div class="controls" part="controls" ?hidden="${!this._hasControls}">
+              <slot
+                name="controls"
+                class="controls-row"
+                @slotchange="${this._onControlsSlotChange}"
+                @scroll="${this._updateSwipeFades}"
+              ></slot>
+            </div>
+          ` : nothing}
 
         </div>
       </div>
