@@ -665,8 +665,9 @@ line's line-height, with a <code>0.27em</code> gap after the text — one line o
 breakpoint. Size (<code>0.8em</code>) and gap (<code>0.27em</code>) are <code>em</code>-relative, so both scale
 with the responsive heading font-size.
 <br><br>
-Override per instance with <code>--page-header-badge-size</code> and
-<code>--page-header-badge-gap</code> (last example below).
+Every banner uses the same default seal. If a page ever needs a different one, override it per
+instance with <code>--page-header-badge-size</code> and <code>--page-header-badge-gap</code> — keep them
+in <code>em</code> so they scale with the heading.
         `,
       },
     },
@@ -688,12 +689,8 @@ Override per instance with <code>--page-header-badge-size</code> and
         <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
       </minis-page-header>
 
-      <minis-page-header
-        theme="pink"
-        style="--page-header-badge-size:0.6em;--page-header-badge-gap:0.5em"
-        description="--page-header-badge-size: 0.6em · --page-header-badge-gap: 0.5em"
-      >
-        Custom size<br>and gap
+      <minis-page-header theme="pink" description="With a description below the heading.">
+        Two lines<br>and a description
         <div slot="image" style="width:100%;height:100%;background:rgba(0,0,0,.15)"></div>
       </minis-page-header>
     </div>
