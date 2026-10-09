@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-09
 
+### Page header — badge seal size is fixed (breaking)
+
+The seal's size and gap are set by the design system, not per page.
+
+- **Removed** the public `--page-header-badge-size` and `--page-header-badge-gap` properties. The seal now always uses the internal `--_badge-size` / `--_badge-gap` (`0.8em` / `0.27em`; the `inspirations`, `content-left` and `centric` layouts interpolate them to Figma's 32px→43px seal and 4px→16px gap). Any page setting the old properties gets the standard seal.
+- **Storybook**: the pink banner in **Default — Badge Anchoring** no longer overrides the seal (it was the only one, so its seal never matched the others); it is now a normal two-line example with a description. Docs say the seal is not adjustable.
+- `--page-header-badge-check` (checkmark colour) is unchanged.
+- No `tokens.css` change — these were component-level properties.
+
 ### Alert, Card grid — Figma links fixed
 
 - **Alert**: the "Open in Figma" link (Storybook docs page and `alert.md`) pointed at `2513:8007`, a colour-swatch frame. It now opens the `alert` component set (`1751:351`).

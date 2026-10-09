@@ -40,7 +40,7 @@ const meta: Meta = {
   <li><strong><code>message</code> slot</strong>: the draft "Message on product" banner above the tag.</li>
   <li><strong><code>controls</code> slot</strong>: controls row below the content — stacked full-width on mobile, a row up to 600px wide on desktop where buttons hug and everything else grows.</li>
 </ul>
-<p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>--page-header-badge-size</code>, default <code>0.8em</code>; in <code>inspirations</code> 32px→43px as the heading goes 32px→56px), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a gap after that line's text (<code>--page-header-badge-gap</code>, default <code>0.27em</code>; in <code>inspirations</code> 4px→16px) — for any number of heading lines, at every breakpoint. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
+<p>The badge seal is <strong>typography-relative</strong>: it sizes off the heading font-size (<code>0.8em</code>; in the newer layouts 32px→43px as the heading goes 32px→56px), sits exactly centred on the <strong>last line's line-height</strong>, and keeps a gap after that line's text (<code>0.27em</code>; in the newer layouts 4px→16px) — for any number of heading lines, at every breakpoint. The seal size and gap are fixed by the design system and cannot be overridden. Keep the heading slot inline-level; a block-level child pushes the badge onto its own line.</p>
 <blockquote style="border-left:4px solid var(--color-interaction-danger-accent,#e8112d);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
   <p style="margin:0 0 .5rem"><strong>⚠️ The heading needs the licensed Kensington font for a 1:1 match with Figma.</strong></p>
   <p style="margin:0 0 .5rem">Kensington Compressed Bold is Slevomat-proprietary and is <strong>not shipped with this design system</strong>. If it is not available on the machine rendering the page, the heading falls back to <a href="https://fonts.google.com/specimen/Bebas+Neue" target="_blank" rel="noopener noreferrer">Bebas Neue</a> (Google Fonts) — a close condensed all-caps substitute, but <strong>taller and narrower</strong>. Headlines re-flow slightly and <strong>will not match the Figma design pixel-for-pixel</strong>. Judge final brand typography only on a machine that has the real font.</p>
@@ -665,9 +665,8 @@ line's line-height, with a <code>0.27em</code> gap after the text — one line o
 breakpoint. Size (<code>0.8em</code>) and gap (<code>0.27em</code>) are <code>em</code>-relative, so both scale
 with the responsive heading font-size.
 <br><br>
-Every banner uses the same default seal. If a page ever needs a different one, override it per
-instance with <code>--page-header-badge-size</code> and <code>--page-header-badge-gap</code> — keep them
-in <code>em</code> so they scale with the heading.
+Every banner uses the same seal — its size and gap are fixed by the design system, with no
+per-instance override.
         `,
       },
     },

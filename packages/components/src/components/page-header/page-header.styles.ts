@@ -153,18 +153,18 @@ export const pageHeaderStyles = css`
        line-height token, approximated */
     height: 1.1em;
     height: 1lh;
-    width: var(--page-header-badge-size, var(--_badge-size, 0.8em));
+    /* Seal size and gap are fixed by the design system — no public override.
+       --_badge-size / --_badge-gap are internal (layouts set them). */
+    width: var(--_badge-size, 0.8em);
     /* One word space always precedes the anchor; --_space-advance is its width
        (measured in JS, as a ratio of the font size) so the visible gap is
-       exactly --page-header-badge-gap. */
-    margin-left: calc(
-      var(--page-header-badge-gap, var(--_badge-gap, 0.27em)) - var(--_space-advance, 0) * 1em
-    );
+       exactly the badge gap. */
+    margin-left: calc(var(--_badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
   }
 
   .badge {
     flex: none;
-    --badge-size: var(--page-header-badge-size, var(--_badge-size, 0.8em));
+    --badge-size: var(--_badge-size, 0.8em);
     --badge-check-color: var(--page-header-badge-check, var(--color-core-white));
   }
 
