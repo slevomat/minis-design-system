@@ -2,7 +2,7 @@
 
 **Custom element**: `minis-card-grid`
 **Package**: `@minis/components`
-**Figma**: [Card grid component](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3583-12247)
+**Figma**: [Card Grids page](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=2513-7484) — three component sets: [`card grid/navigation`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3729-5817) · [`card grid/photogallery`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3729-5830) · [`card grid/carousel`](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3729-5897)
 
 ---
 

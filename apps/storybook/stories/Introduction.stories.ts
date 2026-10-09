@@ -587,6 +587,12 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Alert, Card grid — Figma links fixed</h3>
+      <ul>
+        <li><strong>Alert</strong>: the "Open in Figma" link on the docs page and in <code>alert.md</code> pointed at <code>2513:8007</code>, a colour-swatch frame. It now opens the <code>alert</code> component set (<code>1751:351</code>).</li>
+        <li><strong>Card grid</strong>: <code>3583:12247</code> no longer exists. The docs page now links the <em>Card Grids</em> page (<code>2513:7484</code>), and <code>card-grid.md</code> also lists its three component sets: <code>card grid/navigation</code> <code>3729:5817</code>, <code>/photogallery</code> <code>3729:5830</code>, <code>/carousel</code> <code>3729:5897</code>.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Page header — new <code>content-left</code> and <code>centric</code> layouts (Figma “Content left”, “Centric”)</h3>
       <ul>
         <li><strong>New <code>layout="content-left"</code></strong>: Figma <code>Layout=Content left</code>: Inspirations <strong>without controls</strong> — the controls wrapper isn't rendered, so <code>slot="controls"</code> children are ignored.</li>

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-09
 
+### Alert, Card grid — Figma links fixed
+
+- **Alert**: the "Open in Figma" link (Storybook docs page and `alert.md`) pointed at `2513:8007`, a colour-swatch frame. It now opens the `alert` component set (`1751:351`).
+- **Card grid**: `3583:12247` no longer exists. The Storybook docs page now links the *Card Grids* page (`2513:7484`), and `card-grid.md` also lists its three component sets: `card grid/navigation` `3729:5817`, `card grid/photogallery` `3729:5830`, `card grid/carousel` `3729:5897`.
+
 ### Page header — new `content-left` and `centric` layouts (Figma “Content left”, “Centric”)
 
 - **New `layout="content-left"`**: Figma `Layout=Content left`: Inspirations **without controls** — the controls wrapper isn't rendered, so `slot="controls"` children are ignored.
