@@ -587,6 +587,15 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Page header — badge seal size is fixed (breaking)</h3>
+      <p>The seal's size and gap are set by the design system, not per page.</p>
+      <ul>
+        <li><strong>Removed</strong> the public <code>--page-header-badge-size</code> and <code>--page-header-badge-gap</code> properties. The seal now always uses the internal <code>--_badge-size</code> / <code>--_badge-gap</code> (<code>0.8em</code> / <code>0.27em</code>; the <code>inspirations</code>, <code>content-left</code> and <code>centric</code> layouts interpolate them to Figma's 32px→43px seal and 4px→16px gap). Any page setting the old properties gets the standard seal.</li>
+        <li><strong>Storybook</strong>: the pink banner in <strong>Default — Badge Anchoring</strong> no longer overrides the seal (it was the only one, so its seal never matched the others); it is now a normal two-line example with a description. Docs say the seal is not adjustable.</li>
+        <li><code>--page-header-badge-check</code> (checkmark colour) is unchanged.</li>
+        <li>No <code>tokens.css</code> change — these were component-level properties.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Alert, Card grid — Figma links fixed</h3>
       <ul>
         <li><strong>Alert</strong>: the "Open in Figma" link on the docs page and in <code>alert.md</code> pointed at <code>2513:8007</code>, a colour-swatch frame. It now opens the <code>alert</code> component set (<code>1751:351</code>).</li>

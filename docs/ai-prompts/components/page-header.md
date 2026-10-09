@@ -116,9 +116,9 @@ Further Figma layouts will be added as further `layout` values once designed; un
 |---|---|---|
 | `--page-header-surface` | per theme | Background color |
 | `--page-header-text` | per theme | Heading and description text color |
-| `--page-header-badge-size` | `0.8em` (`inspirations`: 32px → 43px) | Badge seal size. Relative to the heading font-size — keep it in `em` so it stays proportional at every breakpoint. |
-| `--page-header-badge-gap` | `0.27em` (`inspirations`: 4px → 16px) | Horizontal gap between the end of the heading's last line and the badge. Also `em`-relative. |
 | `--page-header-badge-check` | white | Colour of the badge's checkmark. |
+
+The badge **seal size and gap are fixed** by the design system — there is no public property for them (see [Badge positioning](#badge-positioning)).
 
 ### CSS shadow parts
 
@@ -187,8 +187,7 @@ Content and controls stack above the photo (`z-index`).
 **Badge:** Figma uses a 32px seal with a 4px gap at the 32px heading, and a 43px seal
 with a 16px gap at the 56px heading. The layout interpolates linearly on the heading
 font-size (`calc(0.4583em + 17.333px)` / `calc(0.5em - 12px)`), so both Figma points
-are exact and in-between tiers stay proportional. `--page-header-badge-size` /
-`--page-header-badge-gap` still override it.
+are exact and in-between tiers stay proportional. (`content-left` and `centric` share it.)
 
 ### `layout="content-left"`
 
@@ -271,12 +270,16 @@ seal is used at every size (see below).
 The Brand/Badge seal is rendered **inline, at the end of the heading's last line**.
 Three rules hold at every breakpoint and for any number of heading lines:
 
-1. **Size tracks the font size** — `--page-header-badge-size` defaults to `0.8em`, so
+1. **Size tracks the font size** — `0.8em` (internal `--_badge-size`), so
    the seal scales automatically with the responsive heading (≈26px at the 32px
    heading, ≈45px at the 56px heading). No `size` attribute is set on the badge; the
    page header drives `--badge-size` directly.
 2. **Vertically centred on the last line's line-height** — exactly, not approximately.
-3. **`0.27em` gap after the last line's text** — `--page-header-badge-gap`.
+3. **`0.27em` gap after the last line's text** (internal `--_badge-gap`).
+
+Size and gap are **fixed by the design system**: there is no public override. The newer
+layouts set the internal values to the Figma interpolation (see Layout details); pages
+must not change them.
 
 ### How it works (CSS, plus one measurement)
 
@@ -288,7 +291,7 @@ The centring and sizing are **pure CSS**, no JS:
   align-items: center;
   vertical-align: top;
   height: 1lh;          /* one line-height, the CSS `lh` unit */
-  width: var(--page-header-badge-size, 0.8em);
+  width: var(--_badge-size, 0.8em);
 }
 ```
 
@@ -314,7 +317,7 @@ for others, depending purely on how they formatted their HTML. So the component:
   `--_space-advance` ratio, which the anchor's margin subtracts:
 
 ```css
-margin-left: calc(var(--page-header-badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
+margin-left: calc(var(--_badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
 ```
 
 The ratio is stored relative to the font size, so it survives the responsive size step
@@ -342,11 +345,9 @@ variants. They are a by-product of the Figma setup, not seven code concepts.
   its own line.
 - **The badge can wrap.** On narrow viewports, if the last line plus the gap plus the
   seal doesn't fit, the badge wraps to a line of its own — the same as any inline
-  content. Shorten the heading or lower `--page-header-badge-size` if that's unwanted.
-- To override per instance:
-  ```css
-  minis-page-header.hero { --page-header-badge-size: 1em; --page-header-badge-gap: 0.5em; }
-  ```
+  content. Shorten the heading if that's unwanted (`centric` balances its lines, so there
+  the badge never ends up alone).
+- **The seal size is not adjustable.** Don't try to change it per page.
 
 ---
 

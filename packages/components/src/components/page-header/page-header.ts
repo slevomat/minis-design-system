@@ -163,8 +163,8 @@ export class MinisPageHeader extends LitElement {
    * space (the template emits one; any trailing space in the slotted markup
    * collapses into it). CSS cannot know that space's advance, so measure it in
    * the heading's own font and let the badge's margin subtract it — that is what
-   * makes the visible gap land on `--page-header-badge-gap` instead of
-   * `--page-header-badge-gap` plus an arbitrary space.
+   * makes the visible gap land on the badge gap instead of the gap plus an
+   * arbitrary space.
    */
   private _measureSpace = () => {
     const heading = this.renderRoot?.querySelector('.heading') as HTMLElement | null;
