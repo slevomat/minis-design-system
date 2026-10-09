@@ -184,15 +184,13 @@ description → "more" toggle → button. The controls row follows the column.
 shape baked in (the Figma demo image is in `apps/storybook/public/page-header-rimini.png`).
 Content and controls stack above the photo (`z-index`).
 
-**Badge:** Figma uses a 32px seal with a 4px gap at the 32px heading, and a 43px seal
-with a 16px gap at the 56px heading. The layout interpolates linearly on the heading
-font-size (`calc(0.4583em + 17.333px)` / `calc(0.5em - 12px)`), so both Figma points
-are exact and in-between tiers stay proportional. (`content-left` and `centric` share it.)
+**Badge:** the badge's own sizes, paired with the heading as in Figma — see
+[Badge positioning](#badge-positioning). Same in every layout.
 
 ### `layout="content-left"`
 
-Shares every Inspirations rule above (container box, content column, badge
-interpolation, mobile photo) except two:
+Shares every Inspirations rule above (container box, content column, badge,
+mobile photo) except two:
 
 - **No controls.** The template doesn't render the controls wrapper at all.
 - **The desktop photo (container ≥768px)** follows three rules that Figma can only fake
@@ -260,8 +258,7 @@ Everything else:
 - Image area (top): `160×160px`, clipped to the same blob shape via CSS `mask-image` (smaller variant)
 - Content (below): centered text
 
-In the `default` layout the badge is **not** breakpoint-specific — the same em-relative
-seal is used at every size (see below).
+The `default` layout uses the same badge sizing as every other layout (see below).
 
 ---
 
@@ -270,20 +267,27 @@ seal is used at every size (see below).
 The Brand/Badge seal is rendered **inline, at the end of the heading's last line**.
 Three rules hold at every breakpoint and for any number of heading lines:
 
-1. **Size tracks the font size** — `0.8em` (internal `--_badge-size`), so
-   the seal scales automatically with the responsive heading (≈26px at the 32px
-   heading, ≈45px at the 56px heading). No `size` attribute is set on the badge; the
-   page header drives `--badge-size` directly.
-2. **Vertically centred on the last line's line-height** — exactly, not approximately.
-3. **`0.27em` gap after the last line's text** (internal `--_badge-gap`).
+1. **One of the badge's own sizes, paired with the heading** (Figma `Brand/Badge`
+   `4605:441` has `sm` 32px, `md` 43px, `xl` 82px):
 
-Size and gap are **fixed by the design system**: there is no public override. The newer
-layouts set the internal values to the Figma interpolation (see Layout details); pages
-must not change them.
+   | Heading | Seal | Gap after the last character |
+   |---|---|---|
+   | 32px (below a 1480px viewport) | `size="sm"` — 32px | 4px (`--linear-sp-linear-1`) |
+   | 56px (1480px viewport and up) | `size="md"` — 43px | 8px (`--linear-sp-linear-2`) |
+
+   The heading steps up on a **viewport** media query (`--typography-brand-xl-size`), not
+   on the component's width, so the component reads the heading's computed font-size
+   (`_updateBadgeSize()`: `md` from 44px, midway between the two) and sets the badge's
+   `size` attribute. It re-runs whenever the heading resizes (a `ResizeObserver` on
+   `.heading`), so it follows viewport changes even inside a fixed-width column. The gap
+   comes from the `.badge-anchor--md` class. No in-between sizes, no `em` scaling.
+2. **Vertically centred on the last line's line-height** — exactly, not approximately.
+3. **Fixed by the design system**: there is no public property for the seal size or gap,
+   and pages must not change them.
 
 ### How it works (CSS, plus one measurement)
 
-The centring and sizing are **pure CSS**, no JS:
+The centring is **pure CSS**, no JS:
 
 ```css
 .badge-anchor {
@@ -291,7 +295,6 @@ The centring and sizing are **pure CSS**, no JS:
   align-items: center;
   vertical-align: top;
   height: 1lh;          /* one line-height, the CSS `lh` unit */
-  width: var(--_badge-size, 0.8em);
 }
 ```
 
@@ -317,7 +320,7 @@ for others, depending purely on how they formatted their HTML. So the component:
   `--_space-advance` ratio, which the anchor's margin subtracts:
 
 ```css
-margin-left: calc(var(--_badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
+margin-left: calc(var(--_badge-gap) - var(--_space-advance, 0) * 1em); /* 4px or 8px */
 ```
 
 The ratio is stored relative to the font size, so it survives the responsive size step

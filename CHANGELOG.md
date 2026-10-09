@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-09
 
+### Page header — badge seal uses the badge's own sizes
+
+Matches Figma: the seal is never an in-between size.
+
+- **Seal size follows the heading**: the 32px heading gets `<minis-badge size="sm">` (32px) with a 4px gap; the 56px heading (1480px viewport and up) gets `size="md"` (43px) with an 8px gap (`--linear-sp-linear-1` / `--linear-sp-linear-2`). Applies to every layout, `default` included.
+- **Was**: a size computed from the heading font-size — `0.8em` / `0.27em` gap in `default` (≈26px / ≈45px seals), and a 32→43px / 4→16px interpolation in the newer layouts, so mid-size viewports got seals no badge size defines.
+- The component reads the heading's computed font-size and sets the badge's `size` attribute; a `ResizeObserver` on the heading re-checks it, so it follows viewport changes even inside a fixed-width column.
+- Internal `--_badge-size` removed. No `tokens.css` change.
+
 ### Page header — badge seal size is fixed (breaking)
 
 The seal's size and gap are set by the design system, not per page.

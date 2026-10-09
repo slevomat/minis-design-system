@@ -139,8 +139,10 @@ export const pageHeaderStyles = css`
      (1lh) aligned to the top of the line box, so it covers the
      same vertical band as the heading's strut. Centring the seal
      inside it therefore centres it on the last line's
-     line-height, whatever the font metrics are. The seal itself
-     is sized in em, so it tracks the responsive heading size,
+     line-height, whatever the font metrics are. The seal uses
+     the badge's own Figma sizes, paired with the heading — sm
+     (32px) with the 32px heading, md (43px) with the 56px one;
+     the component sets the size attribute —
      and may overflow the line band without changing line height.
   ────────────────────────────────────────────────────────── */
 
@@ -153,18 +155,20 @@ export const pageHeaderStyles = css`
        line-height token, approximated */
     height: 1.1em;
     height: 1lh;
-    /* Seal size and gap are fixed by the design system — no public override.
-       --_badge-size / --_badge-gap are internal (layouts set them). */
-    width: var(--_badge-size, 0.8em);
-    /* One word space always precedes the anchor; --_space-advance is its width
-       (measured in JS, as a ratio of the font size) so the visible gap is
-       exactly the badge gap. */
-    margin-left: calc(var(--_badge-gap, 0.27em) - var(--_space-advance, 0) * 1em);
+    /* Gap is fixed by Figma: 4px with the sm seal, 8px with the md seal
+       (.badge-anchor--md). One word space always precedes the anchor;
+       --_space-advance is its width (measured in JS, as a ratio of the font
+       size), so the visible gap is exactly --_badge-gap. */
+    --_badge-gap: var(--linear-sp-linear-1, 4px);
+    margin-left: calc(var(--_badge-gap) - var(--_space-advance, 0) * 1em);
+  }
+
+  .badge-anchor--md {
+    --_badge-gap: var(--linear-sp-linear-2, 8px);
   }
 
   .badge {
     flex: none;
-    --badge-size: var(--_badge-size, 0.8em);
     --badge-check-color: var(--page-header-badge-check, var(--color-core-white));
   }
 
@@ -436,16 +440,6 @@ export const pageHeaderStyles = css`
   :host([layout='inspirations']) .description,
   :host([layout='content-left']) .description {
     text-align: left;
-  }
-
-  /* Badge — Figma: 32px seal, 4px gap at the 32px heading; 43px seal, 16px
-     gap at the 56px heading. Interpolated linearly on the heading font-size
-     so it is exact at both Figma points and sensible on any tier in between. */
-  :host([layout='inspirations']) .heading,
-  :host([layout='content-left']) .heading,
-  :host([layout='centric']) .heading {
-    --_badge-size: calc(0.4583em + 17.333px);
-    --_badge-gap: calc(0.5em - 12px);
   }
 
   :host([layout='inspirations']) .image-area,
