@@ -129,6 +129,13 @@ export class MinisPageHeader extends LitElement {
 
   @state() private _hasMore = false;
   @state() private _hasControls = false;
+  /**
+   * Badge seal size, paired with the heading size as in Figma: the 32px heading
+   * gets `sm` (32px seal, 4px gap), the 56px heading gets `md` (43px seal, 8px
+   * gap). The heading steps up on the viewport (brand-xl token, 1480px+), so
+   * this follows the heading's computed font-size rather than a breakpoint.
+   */
+  @state() private _badgeSize: 'sm' | 'md' = 'sm';
 
   /** Badge seal colour for the current theme. */
   private get _badgeColor(): BadgeColor {
@@ -141,17 +148,29 @@ export class MinisPageHeader extends LitElement {
   private _observe() {
     if (typeof ResizeObserver === 'undefined') return;
     this._resizeObserver ??= new ResizeObserver(() => {
+      this._updateBadgeSize();
       this._positionVisual();
       this._updateSwipeFades();
     });
     this._resizeObserver.disconnect();
-    for (const sel of ['.container', '.more', '.controls-row']) {
+    // .heading resizes whenever its font-size steps (a viewport media query),
+    // even when the host's own width doesn't change — that drives the seal size.
+    for (const sel of ['.heading', '.container', '.more', '.controls-row']) {
       const el = this.renderRoot.querySelector(sel);
       if (el) this._resizeObserver.observe(el);
     }
   }
 
+  /** Pick the seal size from the heading's font-size (see `_badgeSize`). */
+  private _updateBadgeSize = () => {
+    const heading = this.renderRoot?.querySelector('.heading') as HTMLElement | null;
+    if (!heading) return;
+    // Midway between the two heading sizes (32px / 56px).
+    this._badgeSize = parseFloat(getComputedStyle(heading).fontSize) >= 44 ? 'md' : 'sm';
+  };
+
   firstUpdated() {
+    this._updateBadgeSize();
     this._measureSpace();
     // The brand face (Kensington, or the Bebas Neue fallback) usually resolves
     // after first paint — re-measure once whichever one lands.
@@ -292,9 +311,9 @@ export class MinisPageHeader extends LitElement {
             <div class="heading-row" part="heading-row">
               <h1 class="heading" part="heading">
                 <slot @slotchange="${this._measureSpace}"></slot>${!this.noBadge ? html` <span
-                  class="badge-anchor"
+                  class="badge-anchor ${this._badgeSize === 'md' ? 'badge-anchor--md' : ''}"
                   part="badge-anchor"
-                  ><minis-badge class="badge" part="badge" color="${this._badgeColor}"></minis-badge
+                  ><minis-badge class="badge" part="badge" color="${this._badgeColor}" size="${this._badgeSize}"></minis-badge
                 ></span>` : nothing}
               </h1>
               ${this.location ? html`

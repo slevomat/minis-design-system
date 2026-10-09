@@ -97,9 +97,9 @@ usefully in `em`, so it tracks the surrounding font-size:
 <minis-badge style="--badge-size: 0.8em"></minis-badge>
 ```
 
-`--badge-size` beats the `size` attribute when both are set. This is how
-`<minis-page-header>` keeps its seal proportional to the responsive heading — see
-[page-header.md](./page-header.md#badge-positioning).
+`--badge-size` beats the `size` attribute when both are set. (`<minis-page-header>` does
+**not** use it: it picks `sm` or `md` to match its heading — see
+[page-header.md](./page-header.md#badge-positioning).)
 
 ---
 
