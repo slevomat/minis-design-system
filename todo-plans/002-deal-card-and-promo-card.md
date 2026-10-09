@@ -3,7 +3,7 @@ id: 002
 title: Deal Card and Promo Card components
 status: draft
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-10-09
 owner: Lexislav
 ---
 
@@ -446,6 +446,11 @@ Deal Card composes these, so they land first. Each gets the full file set (`.ts`
       2026-09-10), so the rename above comes from the owner and hasn't been checked in the file yet.
       Find the current Card grid component set, fix the link, and check the new variant names
       before touching `card-grid.figma.ts`.
+      *Update 2026-10-09:* link fixed. Card grid is now three separate published component sets
+      on the `↳ Card Grids` page (`2513:7484`): `card grid/navigation` `3729:5817`,
+      `card grid/photogallery` `3729:5830`, `card grid/carousel` `3729:5897`. So `carousel`
+      exists in Figma, but as its own set rather than a variant. Their properties are still
+      unchecked, and the component has no `card-grid.figma.ts` yet.
 11. **What do `_Price Label` `Highlight`, `Reverse` and `Just Price` / `Just Sale` look like, and
     which file are the label sources in?** They are unpublished (`_` prefix), so they can't be
     imported by key or found through library search. Not needed for v1.

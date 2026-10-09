@@ -245,6 +245,22 @@ export const AIDesignIntegration: Story = {
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <h2 id="figma-dev-mode-storybook">Figma Dev Mode ↔ Storybook</h2>
+      <p>Every Figma component set that has a Lit counterpart carries a <strong>Storybook — &lt;Component&gt;</strong> link in Dev Mode (a Figma <em>dev resource</em>). It opens that component's docs page here. Components with no Figma design (Container, Menu, Icons) have no link.</p>
+
+      <h3 style="margin-top:1rem">Why links instead of Code Connect</h3>
+      <p>Every component has a <code>*.figma.ts</code> Code Connect mapping, and it must keep passing <code>pnpm figma:parse</code>. Slevomat is on the <strong>Figma Professional</strong> plan, though, and Code Connect requires Organization or Enterprise, so <code>pnpm figma:publish</code> cannot succeed. Dev Mode therefore shows the Storybook link, not live code snippets. The mappings are kept for a possible plan upgrade.</p>
+
+      <h3 style="margin-top:1rem">Adding or updating a link</h3>
+      <ul>
+        <li>Links are managed through the Figma REST API with the <code>FIGMA_ACCESS_TOKEN</code> from <code>.env.local</code> (needs the <code>file_dev_resources:write</code> scope).</li>
+        <li>First <code>GET /v1/files/:key/dev_resources</code>. A node can't hold the same URL twice.</li>
+        <li>Then <code>POST /v1/dev_resources</code> with the name <code>Storybook — &lt;Component&gt;</code>, the component set's <code>node_id</code> and <code>https://slevomat.github.io/minis-design-system/?path=/docs/&lt;story-id&gt;</code>.</li>
+        <li>Renaming a story title changes its docs id, so update the matching link too.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <h2>Example AI Prompts</h2>
       <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code># Extract design tokens from a Figma file
 "Extract all color and spacing tokens from this Figma file and compare with our existing tokens: https://www.figma.com/..."
@@ -570,6 +586,12 @@ const changelogHTML = `
           <span class="copy-label">Copy link</span>
         </button>
       </div>
+
+      <h3 style="margin-top:1rem">Alert, Card grid — Figma links fixed</h3>
+      <ul>
+        <li><strong>Alert</strong>: the "Open in Figma" link on the docs page and in <code>alert.md</code> pointed at <code>2513:8007</code>, a colour-swatch frame. It now opens the <code>alert</code> component set (<code>1751:351</code>).</li>
+        <li><strong>Card grid</strong>: <code>3583:12247</code> no longer exists. The docs page now links the <em>Card Grids</em> page (<code>2513:7484</code>), and <code>card-grid.md</code> also lists its three component sets: <code>card grid/navigation</code> <code>3729:5817</code>, <code>/photogallery</code> <code>3729:5830</code>, <code>/carousel</code> <code>3729:5897</code>.</li>
+      </ul>
 
       <h3 style="margin-top:1rem">Page header — new <code>content-left</code> and <code>centric</code> layouts (Figma “Content left”, “Centric”)</h3>
       <ul>
@@ -2612,6 +2634,7 @@ export const ContributionGuide: Story = {
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Theme &amp; mode</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Does it work correctly in both light/dark mode and classic/gift theme?</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Design + code aligned</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the intent clear to both a designer and a developer?</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Documented</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the change reflected in the Storybook story and/or <code>docs/ai-prompts/</code>?</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Figma Dev Mode link</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">New component? Add its <strong>Storybook — &lt;Component&gt;</strong> dev-resource link to the Figma component set. See <em>Introduction → AI &amp; Figma integration → Figma Dev Mode ↔ Storybook</em>.</td></tr>
         </tbody>
       </table>
 
