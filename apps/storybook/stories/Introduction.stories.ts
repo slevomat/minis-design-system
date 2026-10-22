@@ -578,6 +578,25 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-10-22 (page header content-left mobile padding) -->
+      <div class="cl-heading">
+        <h2 id="2026-10-22" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-22</h2>
+        <button class="cl-copy-btn" data-anchor="2026-10-22">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Page header — <code>content-left</code> mobile text keeps clear of the photo</h3>
+      <p>Matches Figma (<code>Layout=Content left</code>, <code>Breakpoint=xs</code>, node <code>5678:2832</code>).</p>
+      <ul>
+        <li><strong>Mobile (container below 768px)</strong>: the content column gets <code>padding-right: var(--linear-sp-linear-16)</code> (64px), so the heading, description and "more" text wrap before the top-right photo instead of running under it.</li>
+        <li>Desktop is unchanged (the existing <code>--_text-limit</code> already keeps text off the 280px photo). <code>inspirations</code> is unchanged.</li>
+        <li>No <code>tokens.css</code> change.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-10-09 (page header content-left) -->
       <div class="cl-heading">
         <h2 id="2026-10-09" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-09</h2>

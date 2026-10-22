@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-22
+
+### Page header — `content-left` mobile text keeps clear of the photo
+
+Matches Figma (`Layout=Content left`, `Breakpoint=xs`, node `5678:2832`).
+
+- **Mobile (container below 768px)**: the content column gets `padding-right: var(--linear-sp-linear-16)` (64px), so the heading, description and "more" text wrap before the top-right photo instead of running under it.
+- Desktop is unchanged (the existing `--_text-limit` already keeps text off the 280px photo). `inspirations` is unchanged.
+- No `tokens.css` change.
+
 ## 2026-10-09
 
 ### Page header — badge seal uses the badge's own sizes
