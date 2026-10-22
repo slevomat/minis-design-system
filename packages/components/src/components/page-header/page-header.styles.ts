@@ -566,7 +566,18 @@ export const pageHeaderStyles = css`
         collapsed centre. Before it runs, 50% is the same value.
   ══════════════════════════════════════════════════════════ */
 
+  /* Mobile: the content keeps 64px clear on the right, so the text
+     doesn't run under the top-right photo (Figma Content padding-right). */
+  :host([layout='content-left']) .content {
+    padding-right: var(--linear-sp-linear-16, 64px);
+    box-sizing: border-box;
+  }
+
   @container page-header (min-width: 768px) {
+    :host([layout='content-left']) .content {
+      padding-right: 0;
+    }
+
     :host([layout='content-left']) .image-area {
       top: var(--_visual-center, 50%);
       right: var(--container-padding, 32px);

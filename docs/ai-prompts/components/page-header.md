@@ -9,7 +9,7 @@ The Figma `Layout` variant maps one-to-one to the `layout` attribute: `Inspirati
 | `layout` | Figma | Status | Look |
 |---|---|---|---|
 | `inspirations` | `Layout=Inspirations` ("With Controls") | **Current** — use for new work | Left-aligned at every width; photo cropped into the top-right corner; optional `controls` row, `message`, `location`, `more` toggle |
-| `content-left` | `Layout=Content left` | **Current** — use for new work | Inspirations **without controls**. Desktop: photo vertically centred, cropped top and bottom when the content is shorter, and fixed in place while `more` is open. Mobile: same as Inspirations |
+| `content-left` | `Layout=Content left` | **Current** — use for new work | Inspirations **without controls**. Desktop: photo vertically centred, cropped top and bottom when the content is shorter, and fixed in place while `more` is open. Mobile: same as Inspirations, plus 64px right padding on the content |
 | `centric` | `Layout=Centric` | **Current** — use for new work | **No photo**, everything centred; the badge follows the last character of the balanced, centred heading. Controls = category tags that **wrap on desktop** and **swipe on mobile** (edge fades) |
 | `default` (attribute omitted) | — (no longer in Figma) | Legacy, kept so existing pages don't change | Desktop: content left, blob-masked image right, vertically centred. Mobile: image on top, centred stack |
 
@@ -190,9 +190,12 @@ Content and controls stack above the photo (`z-index`).
 ### `layout="content-left"`
 
 Shares every Inspirations rule above (container box, content column, badge,
-mobile photo) except two:
+mobile photo) except three:
 
 - **No controls.** The template doesn't render the controls wrapper at all.
+- **Mobile content padding (container <768px).** The content column has
+  `padding-right: var(--linear-sp-linear-16)` (64px, Figma `Content` layer), so text
+  wraps before the top-right photo. Reset to 0 from 768px, where `--_text-limit` takes over.
 - **The desktop photo (container ≥768px)** follows three rules that Figma can only fake
   by hand:
   1. **Vertically centred** in the banner: `top: 50%; transform: translateY(-50%)`,
