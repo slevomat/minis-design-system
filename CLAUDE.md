@@ -123,6 +123,8 @@ Current plans:
 - `todo-plans/009-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 003–008).
 - `todo-plans/010-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
 - `todo-plans/011-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 010).
+- `todo-plans/012-registry.md` — `registry.json` in shadcn format with Mini*S fields in `meta`: the
+  single inventory every tool checks before building new (unblocks 003–005).
 
 ## Changelog rules
 
