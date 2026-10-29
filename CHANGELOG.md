@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-29
+
+### Icons — synced with the Slevomat Icons 2.0 Figma library
+
+Source: [Slevomat Icons → Icons](https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4). The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.
+
+- **All 194 existing icons redrawn** from the new Figma artwork. Same names, but glyphs are now consistently sized and centred, so most render a little larger or shifted compared to before. Some names now carry a different drawing because Figma kept the clearer twin of a duplicate pair: `calendar`, `document`, `home`, `mail`, `plane` and `position` changed style (outline ↔ filled).
+- **93 new icons**, 287 in total. New: 12 Core icons (e.g. `explore`, `like-outline`, `moon`, `sun`, `practical`), 39 UI icons drawn in Figma only (e.g. `plus`, `minus`, `eye-outline`, `login`, `sign-out`, `settings-outline`, `home-outline`) and the S-icons, Premise, USP, HR, Admins and Allergens sets.
+- **25 deprecated aliases**: names Figma merged into another icon still render, as their merge target: `bus1`, `calendar1`, `calendar2`, `car1`, `car2`, `chest` → `chest-outline`, `children1`, `circle-dollar-fill` → `circle-dolar-fill`, `document1`, `document2`, `error` → `error-fill`, `eye1`, `like`, `like1` → `like-fill`, `mail1`, `meal1`, `no-signal` → `no-wifi`, `photo-gallery` → `photo-library-gallery-images`, `plane1`, `plane2`, `position1`, `term` → `calendar`, `train1`, `train2`, `wifi1`. The full table is in `docs/ai-prompts/components/icon.md`. Use the target name in new code.
+- **New exports** from `@minis/icons`: `iconSets` (names grouped by Figma section) and `iconAliases` (deprecated name → target). The `error` path export is now a deprecated alias of the new `errorFill`.
+- **Not shipped**: colour sets (flags, colour allergens, socials, brand logos, menu, benefits) because `<minis-icon>` is mono; `usp/fortune-wheel` (multicolour); `hr/bulb` (name clash with `usp/bulb`); the provisional Legacy and Uncategorised sections.
+- `plus`, `minus` and `chat-outline` are stroke-based in Figma; they render with `stroke="currentColor"`, so colour inheritance works as for every other icon.
+- Storybook **Components → Icons** now groups the grid by Figma section and lists the deprecated aliases.
+- No `tokens.css` change.
+
 ## 2026-10-22
 
 ### Page header — `content-left` mobile text keeps clear of the photo

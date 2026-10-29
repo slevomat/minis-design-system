@@ -2,46 +2,12 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import '@minis/icons';
 import '@minis/components'; // resolved to src via Vite alias in main.ts
+// From source: @minis/icons ships no .d.ts yet (root tsconfig noEmit), so the
+// package import would type these as `any` and fail `pnpm typecheck`.
+import { iconSets, iconAliases } from '../../../packages/icons/src/registry.js';
 
-const ALL_ICONS = [
-  'airballoon', 'animation-program', 'apple-pay', 'arrival', 'arrow-classic', 'arrow-down',
-  'arrow-left', 'arrow-right', 'arrow-up', 'avatar', 'babysitting', 'beauty',
-  'bed', 'bell', 'benefits', 'bestseller', 'bike-cableway', 'bike-rental',
-  'bike-room', 'bike-trails', 'bin', 'box', 'bubble', 'building',
-  'bulb', 'bus', 'bus1', 'cake', 'calendar', 'calendar-upcoming',
-  'calendar1', 'calendar2', 'camera', 'car', 'car1', 'car2',
-  'card', 'cart-fill', 'cart-outline', 'cashback', 'categories', 'check',
-  'checkbox', 'checkbox-partly', 'chest', 'children', 'children-lift', 'children-lift-poma',
-  'children-pool', 'children1', 'childrens-cot', 'circle-arrow', 'circle-check', 'circle-check-fill',
-  'circle-close', 'circle-close-fill', 'circle-dollar-fill', 'circle-info-fill', 'circle-plus', 'circle-plus-fill',
-  'circle-question', 'clock', 'close', 'closed', 'club', 'contract-signing',
-  'copy', 'countryside', 'credit-card', 'cross-country-trails', 'crossroads', 'czech',
-  'default', 'departure', 'deposit', 'dislike', 'document', 'document1',
-  'document2', 'download', 'edit', 'error', 'ev-charger', 'event-busy',
-  'expand', 'eye', 'eye-off', 'eye1', 'feedback', 'file-text',
-  'filters', 'fitness', 'fksp', 'flag', 'flake', 'food',
-  'fun', 'game-room', 'gift', 'globus', 'golf', 'goods',
-  'growth', 'handicap', 'heart', 'heart-fill', 'hearts', 'home',
-  'home1', 'iceberg', 'indoor-pool', 'kids-corner', 'light', 'like',
-  'like1', 'lock', 'mail', 'mail1', 'meal', 'meal1',
-  'menu', 'menuburger', 'message', 'microfon', 'no', 'no-credit-card',
-  'no-parking', 'no-signal', 'no-smoking', 'no-transfer', 'no-wifi', 'not-pet-friendly',
-  'on-map', 'one-contract', 'other-services', 'outdoor-pool', 'outside', 'own-kitchen',
-  'package', 'parking', 'partnership', 'paw', 'percentage', 'person-outline',
-  'phone', 'photo-gallery', 'plane', 'plane1', 'plane2', 'playground',
-  'position', 'position1', 'printer', 'qr-code', 'radio-checked', 'radio-unchecked',
-  'refresh', 'reload', 'reservation', 'restaurant', 'sad', 'salt-cave',
-  'sauna', 'scooter-rental', 'sea', 'search', 'settings', 'share',
-  'share-ios', 'signal', 'single-image', 'ski-pass', 'ski-room', 'ski-school',
-  'ski-slopes', 'skibus', 'slevomat', 'slovakia', 'smartphone', 'smile',
-  'snowpark', 'sort', 'spa-procedures', 'star', 'star-fill', 'stay',
-  'stick', 'stop', 'suitcase', 'suitcase-checked', 'surroundings', 'swimming-areas',
-  'switch', 'team', 'term', 'thermal-pool', 'train', 'train1',
-  'train2', 'travel', 'truck', 'tumblr', 'user', 'userpc',
-  'users', 'verified', 'voucher-outline', 'walk', 'wallet', 'water-park',
-  'wellness', 'wellness-procedures', 'wheelchair', 'wheelchair-not-accessible', 'whirlpool-bath', 'wifi',
-  'wifi1', 'wine-cellar', 'wooden-soaking-tub',
-] as const;
+// Grouped and ordered like the Figma library sections (Slevomat Icons → Icons 2.0).
+const ALL_ICONS = Object.values(iconSets).flat().sort();
 
 const meta: Meta = {
   title: 'Components/Icons',
@@ -78,6 +44,21 @@ export const AllIcons: Story = {
       .icon-cell:hover {
         background: var(--color-surface-faded, #f1f3f5);
       }
+      .icon-set {
+        font-family: var(--typography-font-family-sans);
+        font-size: var(--typography-size-md);
+        margin: var(--linear-sp-linear-6) 0 var(--linear-sp-linear-3);
+      }
+      .icon-set span,
+      .icon-note {
+        color: var(--color-text-secondary, #666);
+        font-weight: var(--typography-weight-regular);
+      }
+      .icon-note {
+        font-family: var(--typography-font-family-sans);
+        font-size: var(--typography-size-sm);
+        margin: 0 0 var(--linear-sp-linear-3);
+      }
       .icon-name {
         font-family: monospace;
         font-size: 10px;
@@ -86,11 +67,24 @@ export const AllIcons: Story = {
         word-break: break-all;
       }
     </style>
+    ${Object.entries(iconSets).map(([set, names]) => html`
+      <h3 class="icon-set">${set} <span>${names.length}</span></h3>
+      <div class="icon-grid">
+        ${names.map(name => html`
+          <div class="icon-cell" title="${name}">
+            <minis-icon name="${name}" size="24"></minis-icon>
+            <span class="icon-name">${name}</span>
+          </div>
+        `)}
+      </div>
+    `)}
+    <h3 class="icon-set">Deprecated aliases <span>${Object.keys(iconAliases).length}</span></h3>
+    <p class="icon-note">Merged into another icon in Icons 2.0. They still render — use the name after the arrow in new code.</p>
     <div class="icon-grid">
-      ${ALL_ICONS.map(name => html`
-        <div class="icon-cell" title="${name}">
-          <minis-icon name="${name}" size="24"></minis-icon>
-          <span class="icon-name">${name}</span>
+      ${Object.entries(iconAliases).map(([alias, target]) => html`
+        <div class="icon-cell" title="${alias} → ${target}">
+          <minis-icon name="${alias}" size="24"></minis-icon>
+          <span class="icon-name">${alias} → ${target}</span>
         </div>
       `)}
     </div>

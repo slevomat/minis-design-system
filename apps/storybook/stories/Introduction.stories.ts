@@ -578,6 +578,30 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-10-29 (icons synced with Slevomat Icons 2.0) -->
+      <div class="cl-heading">
+        <h2 id="2026-10-29" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-29</h2>
+        <button class="cl-copy-btn" data-anchor="2026-10-29">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Icons — synced with the Slevomat Icons 2.0 Figma library</h3>
+      <p>Source: <a href="https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4" target="_blank" rel="noopener">Slevomat Icons → Icons</a>. The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.</p>
+      <ul>
+        <li><strong>All 194 existing icons redrawn</strong> from the new Figma artwork. Same names, but glyphs are now consistently sized and centred, so most render a little larger or shifted compared to before. Some names now carry a different drawing because Figma kept the clearer twin of a duplicate pair: <code>calendar</code>, <code>document</code>, <code>home</code>, <code>mail</code>, <code>plane</code> and <code>position</code> changed style (outline ↔ filled).</li>
+        <li><strong>93 new icons</strong>, 287 in total. New: 12 Core icons (e.g. <code>explore</code>, <code>like-outline</code>, <code>moon</code>, <code>sun</code>, <code>practical</code>), 39 UI icons drawn in Figma only (e.g. <code>plus</code>, <code>minus</code>, <code>eye-outline</code>, <code>login</code>, <code>sign-out</code>, <code>settings-outline</code>, <code>home-outline</code>) and the S-icons, Premise, USP, HR, Admins and Allergens sets.</li>
+        <li><strong>25 deprecated aliases</strong>: names Figma merged into another icon still render, as their merge target: <code>bus1</code>, <code>calendar1</code>, <code>calendar2</code>, <code>car1</code>, <code>car2</code>, <code>chest</code> → <code>chest-outline</code>, <code>children1</code>, <code>circle-dollar-fill</code> → <code>circle-dolar-fill</code>, <code>document1</code>, <code>document2</code>, <code>error</code> → <code>error-fill</code>, <code>eye1</code>, <code>like</code>, <code>like1</code> → <code>like-fill</code>, <code>mail1</code>, <code>meal1</code>, <code>no-signal</code> → <code>no-wifi</code>, <code>photo-gallery</code> → <code>photo-library-gallery-images</code>, <code>plane1</code>, <code>plane2</code>, <code>position1</code>, <code>term</code> → <code>calendar</code>, <code>train1</code>, <code>train2</code>, <code>wifi1</code>. The full table is in <code>docs/ai-prompts/components/icon.md</code>. Use the target name in new code.</li>
+        <li><strong>New exports</strong> from <code>@minis/icons</code>: <code>iconSets</code> (names grouped by Figma section) and <code>iconAliases</code> (deprecated name → target). The <code>error</code> path export is now a deprecated alias of the new <code>errorFill</code>.</li>
+        <li><strong>Not shipped</strong>: colour sets (flags, colour allergens, socials, brand logos, menu, benefits) because <code>&lt;minis-icon&gt;</code> is mono; <code>usp/fortune-wheel</code> (multicolour); <code>hr/bulb</code> (name clash with <code>usp/bulb</code>); the provisional Legacy and Uncategorised sections.</li>
+        <li><code>plus</code>, <code>minus</code> and <code>chat-outline</code> are stroke-based in Figma; they render with <code>stroke="currentColor"</code>, so colour inheritance works as for every other icon.</li>
+        <li>Storybook <strong>Components → Icons</strong> now groups the grid by Figma section and lists the deprecated aliases.</li>
+        <li>No <code>tokens.css</code> change.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-10-22 (page header content-left mobile padding) -->
       <div class="cl-heading">
         <h2 id="2026-10-22" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-22</h2>
