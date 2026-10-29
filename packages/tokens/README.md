@@ -56,7 +56,9 @@ pnpm add @minis/tokens
 ## Updating Tokens
 
 1. Export from Figma with the `minis-designtokens-exporter` plugin (`tokens.json`, `tokens.rgb.json`, CSS)
-2. Replace `src/tokens.css`, keeping its `HAND-MAINTAINED` blocks
+2. Replace `src/tokens.css`, keeping its hand-maintained parts: the `FONTS` comment block (the only
+   one marked `HAND-MAINTAINED`), `--typography-brand-*`, `--typography-font-family-*` and
+   `--container-bleeding-edge-padding` — see `CLAUDE.md` → "Token exports"
 3. Run `pnpm --filter tokens build`
 
 ## Legacy source files

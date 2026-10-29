@@ -120,16 +120,16 @@ pnpm add @minis/components
 
 ## 🔄 Workflow: Figma → Code
 
-To export Tokens, use Mini*S tokens exporter from [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins). 
+To export Tokens, use Mini*S tokens exporter from [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins).
 
 ### 1. Update Tokens
-```bash
-# Export CSS from Figma
-# Replace files in packages/tokens/src/
+Follow [QUICK-START.md](QUICK-START.md) → "Updating tokens from Figma". It covers the two exporter
+settings that must be ON, where the export lands (`tokens.json`, `tokens.rgb.json` and
+`packages/tokens/src/tokens.css`), the hand-maintained parts of `tokens.css` to keep, and the
+rebuild:
 
-# Rebuild
-cd packages/tokens
-pnpm build
+```bash
+cd packages/tokens && pnpm build
 ```
 
 ### 2. Components Auto-Update
@@ -142,13 +142,16 @@ pnpm storybook
 
 ## 🎨 Token Architecture
 
-- **Foundation** - Colors, Typography, Sizing (light/dark themes)
-  - Light mode: `foundation/light/`
-  - Dark mode: `foundation/dark/`
-  - Includes: border, feedback, interaction, surface, text, background
-- **Layout** - Spacing, Border, Elevation (responsive)
-- **Breakpoints** - Responsive breakpoints
-- **Themes** - default (light), gift
+All tokens ship in one file, `packages/tokens/src/tokens.css`, exported from the Figma variables:
+
+- **Colour** - primitives, foundation (`--color-text-*`, `--color-surface-*`, `--color-border*`, `--color-interaction-*`, `--color-background`) and component tokens
+- **Dark mode** - a `[data-mode="dark"]` override block in the same file, toggled with `<html data-mode="dark">`
+- **Colour schemas** - `[data-theme="gift"]`, set on `<html>`
+- **Layout** - spacing (`--linear-sp-linear-*`, `--fibonachi-sp-fib-*`, responsive `--spacing-layout-*`), border radius, containers
+- **Typography** - families, sizes, weights, line-heights, responsive composites
+- **Breakpoints** - `--breakpoint-2xs` … `--breakpoint-4xl`
+
+Build output and package exports are listed in [`packages/tokens/README.md`](packages/tokens/README.md).
 
 ## 🧩 Creating Components
 
@@ -161,7 +164,7 @@ export class MyComponent extends LitElement {
   static styles = css`
     :host {
       display: block;
-      padding: var(--spacing-md);
+      padding: var(--spacing-layout-md);
       background: var(--color-surface-primary);
       border-radius: var(--border-radius-md);
     }

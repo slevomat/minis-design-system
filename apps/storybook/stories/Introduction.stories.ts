@@ -2336,7 +2336,7 @@ export const VibeCodingGuide: Story = {
       <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
         <strong>Using Claude Code?</strong> Skip the manual steps — the <code>minis-app</code> skill (in the design system repo at <code>.claude/skills/minis-app/</code>) does all of this for you: it asks what you're building, scaffolds the project, picks the right topbar variant, builds your screens from the component docs, and checks the result in a browser. Just say what you want to build.
       </blockquote>
-      <p>Prefer to do it by hand? Three steps.</p>
+      <p>Prefer to do it by hand, or using Cursor? Get a working prototype running in three steps.</p>
 
       <h3>Step 1 — Prerequisites</h3>
       <p>You need two things installed on your machine:</p>
@@ -2387,13 +2387,16 @@ pnpm build
 
 # Create your prototype project
 pnpm create-prototype ~/prototypy/my-deal-page</code></pre>
-      <p>This creates a complete project folder with all Mini*S components, tokens, icons, and AI documentation pre-loaded.</p>
+      <p>This creates a complete project folder with all Mini*S components, tokens, icons, and AI documentation pre-loaded. Pick a folder that doesn't exist yet — the command never overwrites an existing one.</p>
 
       <h3>Step 3 — Start coding</h3>
       <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>cd ~/prototypy/my-deal-page
 pnpm install
 pnpm dev</code></pre>
-      <p>Open <code>http://localhost:5173</code> in your browser — you should see a page with the Slevomat topbar, navigation, and sample components. Now open the same folder in your AI tool and start describing what you want to build.</p>
+      <p>Open <code>http://localhost:5173</code> in your browser — you should see a sample Slevomat deal page with the topbar, the main navigation, a photo gallery, tabs, and a few buttons. Now open the same folder in your AI tool and start describing what you want to build.</p>
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        <strong>Not building a Slevomat web page?</strong> The sample is a page of the Slevomat website, so it starts with the website topbar and the main navigation. For any other app, tell the AI so in your first prompt — see <a href="#choosing-the-topbar" style="color:var(--color-interaction-primary-surface,#006eb9)">Choosing the topbar</a>.
+      </blockquote>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
@@ -2412,7 +2415,7 @@ pnpm dev</code></pre>
         </tr></thead>
         <tbody>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>index.html</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Your page — edit this file to build your prototype</td></tr>
-          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>CLAUDE.md</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">AI context file — automatically read by Claude Code and Cursor. Contains component list, token reference, and page structure patterns.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>CLAUDE.md</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">AI context file — automatically read by Claude Code and Cursor. Contains the page rules, a component overview, token reference, and page structure patterns.</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>public/vendor/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Pre-built design system files (tokens CSS, components JS, icons JS). Don't edit these.</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>docs/ai-prompts/</code></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Detailed API docs for every component — the AI reads these to know exactly how each component works.</td></tr>
         </tbody>
@@ -2431,6 +2434,11 @@ pnpm dev</code></pre>
 - Description section with bullet points
 - An info alert saying 'Limited time offer'"</code></pre>
 
+      <h4>Starting an app that isn't the Slevomat website</h4>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"This is an internal tool called Refund Console, not a Slevomat web page.
+Switch the topbar to vibe-apps with that app name and remove the main navigation.
+Then show a list of refund requests, each row with a checkbox."</code></pre>
+
       <h4>Modifying a section</h4>
       <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto"><code>"Add a sidebar to the right of the main content.
 Put a secondary button 'Add to favorites' with a heart icon,
@@ -2447,7 +2455,9 @@ Use the light grey background for the sidebar."</code></pre>
 
 "Change the alert from notice to success and update the text."
 
-"Make the navigation item 'Cestovani' active instead of 'Extra slevy'."
+"Make the navigation item 'Cestování' active instead of 'Extra slevy'."
+
+"Add a yellow page header under the navigation with the title 'Letní slevy'."
 
 "Remove the description section and replace it with a tab switcher
 that has three tabs: Overview, Reviews, Location."</code></pre>
@@ -2465,13 +2475,18 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
         <tbody>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Topbar</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Top blue logo bar with action buttons (favorites, cart)</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Slots: logo, actions</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">The bar at the very top of every page. On the website: logo, optional search and action buttons (favourites, cart). In an app: logo and the app's name.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>web</code> (Slevomat website), <code>vibe-apps</code> + <code>app-name</code> (any other app) — see <a href="#choosing-the-topbar" style="color:var(--color-interaction-primary-surface,#006eb9)">Choosing the topbar</a></td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Navigation</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Horizontal scrollable category nav or tab switcher</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>horizontal</code> (categories), <code>tabs</code> (tab switcher)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Category menu or tab switcher. Scrolls sideways on narrow screens; on wide ones the main nav folds extra items into a "Další" menu.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>main-nav</code> (the site menu, under the topbar), <code>tabs</code> (in-page tab switcher). <code>horizontal</code> is an old name for <code>main-nav</code> — it still works, but don't use it.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Page Header</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Big coloured hero banner with a heading, optional photo, badge seal, search box or category tags</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Layouts: <code>inspirations</code> (with search), <code>content-left</code> (no search or filters), <code>centric</code> (no photo, category tags). Themes: <code>brand</code>, <code>blue</code>, <code>yellow</code>, <code>pink</code>, <code>green</code>, <code>summer</code></td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Container</strong></td>
@@ -2481,11 +2496,11 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Button</strong></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Clickable button with optional icon and counter badge</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>danger</code>, <code>cta-buy</code> (green)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>primary</code>, <code>secondary</code>, <code>tertiary</code>, <code>danger</code>, <code>cta-buy</code> (green), <code>transparent</code> · sizes <code>sm</code>, <code>md</code> (default), <code>lg</code>, <code>xl</code></td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Tag</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Compact pill label/badge</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Compact pill label</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>static</code>, <code>clickable</code>, <code>toggle</code> (like/favourite), <code>dismissible</code></td>
           </tr>
           <tr>
@@ -2495,13 +2510,38 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Message</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Notification card with image, title, description (draft)</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Standalone: <code>vertical</code>, <code>horizontal</code> layout · On product: markup only (page headers)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Notification card with image, title, description (design still a draft)</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>vertical</code>, <code>horizontal</code> layout</td>
           </tr>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Icon</strong></td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">SVG icon from the icon library</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Set <code>name</code> (e.g. "heart-fill", "cart-fill", "star") and optional <code>size</code></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Accordion</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">FAQ-style list of rows that open and close: bold heading, blue chevron</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Sizes <code>default</code>, <code>compact</code> (no side padding) · <code>single</code> = only one row open at a time</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Action Row</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Clickable row for vertical menus and filter lists, with an optional counter</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>none</code>, <code>icon</code>, <code>checkbox</code> · <code>desktop</code> or <code>xs</code> (mobile) row</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Checkbox</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Tick box with a label</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Unchecked, checked, or indeterminate (a dash)</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Menu</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">A labelled button that opens a small dropdown panel</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Panel opens from the <code>start</code> or <code>end</code> edge. No Figma design yet.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Tile</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Vertical tile with a big icon and a label — for shortcuts, usually in a grid</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">No variants; optional link and counter</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Badge</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Decorative scalloped seal with a white checkmark</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Colours <code>brand</code>, <code>yellow</code>, <code>summer</code>, <code>pink</code> (default), <code>green</code>, <code>blue</code> · sizes <code>sm</code>, <code>md</code>, <code>xl</code> (default)</td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Card Grid</strong></td>
@@ -2511,30 +2551,74 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Pill Counter</strong></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Small numeric badge (usually inside buttons)</td>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Sizes: <code>xs</code>, <code>sm</code>, <code>md</code></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Sizes: <code>xs</code>, <code>sm</code>, <code>md</code> (default), <code>lg</code></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><strong>Icon</strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">SVG icon from the icon library</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Set <code>name</code> (e.g. "heart-fill", "cart-fill", "star") and optional <code>size</code> in pixels (default 24)</td>
           </tr>
         </tbody>
       </table>
+      <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
+        <strong>Sizes are always short codes</strong> — <code>sm</code>, <code>md</code>, <code>lg</code> and so on, never <code>small</code> or <code>large</code>. A full word is silently ignored and the component falls back to its default size. The one exception is the accordion, which uses <code>default</code> and <code>compact</code>.
+      </blockquote>
       <p>Browse the <strong>Components</strong> section in this Storybook sidebar to see live interactive examples of each component.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <h3>Page structure</h3>
-      <p>Every Slevomat page follows a consistent structure. The AI already knows this, but it helps to understand the building blocks:</p>
+      <p>Every Mini*S page follows a consistent structure. The AI already knows this, but it helps to understand the building blocks. A Slevomat web page looks like this:</p>
       <div style="background:var(--color-surface-faded,#f1f3f5);padding:1.5rem;border-radius:8px;margin:1rem 0;font-family:monospace;font-size:14px;line-height:2">
         <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;margin-bottom:8px;border-radius:4px">
-          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">TOPBAR</strong> — Slevomat logo + Favorites + Cart
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">TOPBAR</strong> — Slevomat logo + Favorites + Cart <span style="color:var(--color-text-secondary,#6b6b70)">· every page</span>
         </div>
         <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;margin-bottom:8px;border-radius:4px">
-          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">NAVIGATION</strong> — Extra slevy | Cestovani | Zazitky | ... | Benefity
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">NAVIGATION</strong> — Extra slevy | Cestování | Zážitky | ... | Benefity <span style="color:var(--color-text-secondary,#6b6b70)">· Slevomat web pages only, exactly once</span>
+        </div>
+        <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;margin-bottom:8px;border-radius:4px">
+          <strong style="color:var(--color-interaction-primary-surface,#006eb9)">PAGE HEADER</strong> — coloured hero banner <span style="color:var(--color-text-secondary,#6b6b70)">· one per page, full width, outside the container</span>
         </div>
         <div style="border:2px dashed var(--color-border,#cbccce);padding:8px 12px;border-radius:4px">
           <strong style="color:var(--color-interaction-primary-surface,#006eb9)">CONTAINER</strong> — Your page content goes here
           <div style="border:1px dotted var(--color-border,#cbccce);padding:8px 12px;margin-top:8px;border-radius:4px;opacity:0.7">
-            Headings, text, buttons, alerts, grids, cards...
+            Headings, text, buttons, alerts, grids, cards, tabs...
           </div>
         </div>
+        <div style="color:var(--color-text-secondary,#6b6b70);margin-top:8px">The whole page sits on <code>var(--color-background)</code></div>
       </div>
+
+      <h4 id="choosing-the-topbar" style="scroll-margin-top:1rem">Choosing the topbar</h4>
+      <p>Every page starts with a topbar — never a home-made header, and never no header at all. Which one depends on a single question: <strong>is this a page of the Slevomat website?</strong></p>
+      <table style="width:100%;border-collapse:collapse;margin:1rem 0">
+        <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">You are building…</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Topbar</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">Main navigation</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">A page of the <strong>Slevomat website</strong> — category, campaign, deal, checkout…</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><code>variant="web"</code></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Required, directly under the topbar</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong>Any other app</strong> — internal tool, dashboard, admin, client-facing app, one-off prototype</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><code>variant="vibe-apps"</code> with <code>app-name="Your app name"</code></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Optional — only if the app really has top-level sections</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>If you're not sure, it's almost certainly the second row: most things you build that have a name of their own are apps, not website pages.</p>
+
+      <h4>The main navigation appears once, at the top</h4>
+      <p>On a Slevomat web page, the main navigation (<code>variant="main-nav"</code>) goes directly under the topbar — <strong>exactly once per page</strong>, never lower down. Switching between sections <em>inside</em> a page (product tabs, filters) uses the tab switcher (<code>variant="tabs"</code>) instead, which can appear as many times as you need.</p>
+
+      <h4>The page background is a token, never a colour</h4>
+      <p>The page background is always <code>var(--color-background)</code> — never white, and never a colour code. That token is what makes dark mode and the colour themes work; a fixed colour quietly switches them off. Cards and panels sitting <em>on top of</em> the page use <code>var(--color-surface-primary)</code>. If you want "a white page", ask the AI for the background token instead.</p>
+
+      <h4>The page header goes outside the container</h4>
+      <p>The page header (the big coloured hero) is the first thing under the topbar and navigation. A page has only one, and it sits <strong>outside</strong> the content container — it runs the full width of the screen and handles its own padding.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
@@ -2545,6 +2629,10 @@ that has three tabs: Overview, Reviews, Location."</code></pre>
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:50%">Don't</th>
         </tr></thead>
         <tbody>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Say <strong>what you're building</strong> — a Slevomat web page or another app — so the AI picks the right topbar</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Ask for a white page or a colour code for the background — ask for the background token</td>
+          </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Describe the <strong>layout</strong> you want: "two columns, sidebar on the right"</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Write HTML or CSS yourself — let the AI do it</td>
@@ -2603,6 +2691,10 @@ but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Check browser console for errors. The import map in <code>index.html</code> must be present. Ask the AI to fix it.</td>
           </tr>
           <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Console error saying <code>minis-icon</code> "has already been defined"</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">The page loads the icons twice. The components script already includes every icon — remove the extra <code>&lt;script&gt;</code> tag for <code>/vendor/icons/index.js</code>.</td>
+          </tr>
+          <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>pnpm dev</code> fails</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Run <code>pnpm install</code> first. If that fails, check that Node.js and pnpm are installed.</td>
           </tr>
@@ -2611,8 +2703,24 @@ but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Run <code>pnpm build</code> in the design system repo first — the CLI copies built files.</td>
           </tr>
           <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)"><code>create-prototype</code> says "Directory already exists"</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Choose a new folder name. The command never overwrites an existing folder.</td>
+          </tr>
+          <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Colors or fonts look wrong</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Make sure the <code>&lt;link&gt;</code> tags for tokens CSS and Google Fonts are in the <code>&lt;head&gt;</code>. The template includes them by default.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">In dark mode, part of the page stays light</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Something uses a fixed colour instead of a token. Ask the AI to replace it — the page background must be <code>var(--color-background)</code>.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">A size you asked for has no effect</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Sizes are short codes (<code>sm</code>, <code>md</code>, <code>lg</code>…). A full word like <code>small</code> or <code>large</code> is ignored and the default size is used.</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Banner headlines aren't in the Slevomat brand font</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Expected: Kensington is proprietary and not shipped, so headlines fall back to Bebas Neue. To get the real face, install Kensington on your machine or drop the woff2 into the design system's <code>packages/tokens/src/fonts/</code> and re-run <code>pnpm build</code> before scaffolding — see <code>packages/tokens/src/fonts/README.md</code>.</td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">The AI doesn't know a component</td>
@@ -2626,7 +2734,7 @@ but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre
       <h3>Example workflow</h3>
       <p>Here's a typical 15-minute session building a deal detail page:</p>
       <ol style="line-height:2">
-        <li><strong>Scaffold:</strong> <code>pnpm create-prototype ~/prototypy/hotel-deal</code></li>
+        <li><strong>Scaffold:</strong> in the design system repo, <code>pnpm build</code> (first time only), then <code>pnpm create-prototype ~/prototypy/hotel-deal</code></li>
         <li><strong>Start:</strong> <code>cd ~/prototypy/hotel-deal && pnpm install && pnpm dev</code></li>
         <li><strong>Open AI tool</strong> in the project folder</li>
         <li><strong>Prompt:</strong> <em>"Replace the sample content with a hotel deal page. Show a big photo at the top, the hotel name, price with a green buy button, and a description."</em></li>
@@ -2636,6 +2744,7 @@ but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre
         <li><strong>Refine:</strong> <em>"Make it look more like the Slevomat deal page — add a sidebar with the price card on the right."</em></li>
         <li><strong>Done!</strong> Share the HTML file or keep iterating.</li>
       </ol>
+      <p>In Claude Code you can skip steps 1–3: ask the <code>minis-app</code> skill for <em>"a hotel deal page on the Slevomat website"</em> and continue from step 5.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
