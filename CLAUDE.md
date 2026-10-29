@@ -79,7 +79,7 @@ All components use **abbreviated size values matching the Figma `Size` variant n
 | `lg`  | Spacious             |
 | `xl`  | Extra spacious       |
 
-Each component exposes only the subset it supports (e.g. `<minis-button>` = `sm | md | lg | xl`, `<minis-badge>` = `sm | md | xl`, `<minis-pill-counter>` = `xs | sm | md`).
+Each component exposes only the subset it supports (e.g. `<minis-button>` = `sm | md | lg | xl`, `<minis-badge>` = `sm | md | xl`, `<minis-pill-counter>` = `xs | sm | md | lg`).
 
 > **The rule is: whatever the Figma `Size` variant is called, the `size` attribute uses the same string.** Never invent full words (`small`, `medium`, `large`) for a component whose Figma variants are abbreviated — the value won't match and the component falls back to its default size.
 
@@ -245,7 +245,7 @@ Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the comp
 | `--typography-mega-poster-size` | `--typography-heading-2xl-size` |
 | `--typography-poster-size` | `--typography-heading-xl-size` |
 
-The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-brand-weight`, the `--typography-font-family-*` set, the hand-written `FONTS` comment block at the top of `tokens.css`, and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. **A Figma re-export must preserve them** (they are marked `HAND-MAINTAINED` in the file). `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-brand-weight`, the `--typography-font-family-*` set, the hand-written `FONTS` comment block at the top of `tokens.css`, and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. **A Figma re-export must preserve them.** Only the `FONTS` comment block carries a `HAND-MAINTAINED` marker in the file; the token blocks themselves are unmarked, so check for each of them by name after a re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
 
 ## Common pitfalls
 

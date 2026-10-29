@@ -120,16 +120,16 @@ pnpm add @minis/components
 
 ## 🔄 Workflow: Figma → Code
 
-To export Tokens, use Mini*S tokens exporter from [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins). 
+To export Tokens, use Mini*S tokens exporter from [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins).
 
 ### 1. Update Tokens
-```bash
-# Export CSS from Figma
-# Replace files in packages/tokens/src/
+Follow [QUICK-START.md](QUICK-START.md) → "Updating tokens from Figma". It covers the two exporter
+settings that must be ON, where the export lands (`tokens.json`, `tokens.rgb.json` and
+`packages/tokens/src/tokens.css`), the hand-maintained parts of `tokens.css` to keep, and the
+rebuild:
 
-# Rebuild
-cd packages/tokens
-pnpm build
+```bash
+cd packages/tokens && pnpm build
 ```
 
 ### 2. Components Auto-Update
@@ -161,7 +161,7 @@ export class MyComponent extends LitElement {
   static styles = css`
     :host {
       display: block;
-      padding: var(--spacing-md);
+      padding: var(--spacing-layout-md);
       background: var(--color-surface-primary);
       border-radius: var(--border-radius-md);
     }

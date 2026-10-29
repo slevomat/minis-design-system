@@ -75,13 +75,17 @@ pnpm add @minis/tokens
 --color-background
 ```
 
-### Layout (Mode-independent)
+### Layout
 ```css
---spacing-md
---spacing-inset-lg
+--spacing-layout-md       /* responsive — scales with the viewport breakpoint tier */
+--linear-sp-linear-4      /* fixed 16px */
+--fibonachi-sp-fib-8      /* fixed 34px */
+--pixel-px-22             /* fixed 22px */
 --border-radius-md
---elevation-sm
 ```
+
+There is no bare `--spacing-{n}` / `--spacing-md` scale: the only `--spacing-*` tokens are the
+responsive `--spacing-layout-*` set.
 
 ### Breakpoints
 ```css
