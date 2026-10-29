@@ -84,3 +84,4 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 010 | [Enforce "tokens only" with Stylelint](010-stylelint-tokens-only.md) | `draft` | 2026-10-29 |
 | 011 | [Distribute tokens as a versioned package with a Style Dictionary source](011-token-distribution.md) | `draft` | 2026-10-29 |
 | 012 | [registry.json — the single inventory of everything Mini*S has](012-registry.md) | `draft` | 2026-10-29 |
+| 013 | [Porting rules — carrying tokens and recipes into each environment](013-porting-rules.md) | `draft` | 2026-10-29 |

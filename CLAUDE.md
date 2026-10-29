@@ -125,6 +125,8 @@ Current plans:
 - `todo-plans/011-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 010).
 - `todo-plans/012-registry.md` — `registry.json` in shadcn format with Mini*S fields in `meta`: the
   single inventory every tool checks before building new (unblocks 003–005).
+- `todo-plans/013-porting-rules.md` — one-page guides (common, Latte, web components, Figma) for
+  carrying tokens and recipes into each environment, and which side wins when they diverge.
 
 ## Changelog rules
 
