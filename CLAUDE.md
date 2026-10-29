@@ -111,6 +111,13 @@ Current plans:
   proposing any ramp-wide colour change. Its measured constraint set covers this repo only —
   heritage usage on production may differ, so the plan needs a production developer's review before
   it can go past `draft`. Don't present its counts as the full picture.
+- `todo-plans/003-latte-ui-skill.md` — skill for building UI from Latte recipes in the Nette repo (needs recipes + registry).
+- `todo-plans/004-contribution-skill.md` — search the registry → extend and flag the gap → build new as Local (needs registry).
+- `todo-plans/005-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
+- `todo-plans/006-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
+- `todo-plans/007-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
+- `todo-plans/008-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
+- `todo-plans/009-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 003–008).
 
 ## Changelog rules
 
