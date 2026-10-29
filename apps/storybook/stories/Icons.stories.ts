@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
-import { iconSets, iconAliases } from '@minis/icons';
+import '@minis/icons';
 import '@minis/components'; // resolved to src via Vite alias in main.ts
+// From source: @minis/icons ships no .d.ts yet (root tsconfig noEmit), so the
+// package import would type these as `any` and fail `pnpm typecheck`.
+import { iconSets, iconAliases } from '../../../packages/icons/src/registry.js';
 
 // Grouped and ordered like the Figma library sections (Slevomat Icons → Icons 2.0).
 const ALL_ICONS = Object.values(iconSets).flat().sort();
