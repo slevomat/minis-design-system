@@ -82,3 +82,4 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 008 | [Token-update skill (optional)](008-token-update-skill.md) | `draft` | 2026-10-29 |
 | 009 | [Distributing Mini*S skills and commands](009-skill-distribution.md) | `draft` | 2026-10-29 |
 | 010 | [Enforce "tokens only" with Stylelint](010-stylelint-tokens-only.md) | `draft` | 2026-10-29 |
+| 011 | [Distribute tokens as a versioned package with a Style Dictionary source](011-token-distribution.md) | `draft` | 2026-10-29 |
