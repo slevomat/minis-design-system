@@ -142,13 +142,16 @@ pnpm storybook
 
 ## 🎨 Token Architecture
 
-- **Foundation** - Colors, Typography, Sizing (light/dark themes)
-  - Light mode: `foundation/light/`
-  - Dark mode: `foundation/dark/`
-  - Includes: border, feedback, interaction, surface, text, background
-- **Layout** - Spacing, Border, Elevation (responsive)
-- **Breakpoints** - Responsive breakpoints
-- **Themes** - default (light), gift
+All tokens ship in one file, `packages/tokens/src/tokens.css`, exported from the Figma variables:
+
+- **Colour** - primitives, foundation (`--color-text-*`, `--color-surface-*`, `--color-border*`, `--color-interaction-*`, `--color-background`) and component tokens
+- **Dark mode** - a `[data-mode="dark"]` override block in the same file, toggled with `<html data-mode="dark">`
+- **Colour schemas** - `[data-theme="gift"]`, set on `<html>`
+- **Layout** - spacing (`--linear-sp-linear-*`, `--fibonachi-sp-fib-*`, responsive `--spacing-layout-*`), border radius, containers
+- **Typography** - families, sizes, weights, line-heights, responsive composites
+- **Breakpoints** - `--breakpoint-2xs` … `--breakpoint-4xl`
+
+Build output and package exports are listed in [`packages/tokens/README.md`](packages/tokens/README.md).
 
 ## 🧩 Creating Components
 
