@@ -587,6 +587,18 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Packages — <code>@minis/icons</code> and <code>@minis/components</code> ship their type declarations</h3>
+      <p>Both <code>package.json</code> files point <code>types</code> at <code>dist/index.d.ts</code>, but no build ever wrote one.</p>
+      <ul>
+        <li><strong>Cause</strong>: both packages extend the root <code>tsconfig.json</code>, whose <code>noEmit: true</code> silenced the <code>declaration: true</code> in their own config. Their <code>tsc</code> step only type-checked. TypeScript consumers got <code>any</code> for everything (TS7016), and <code>IconName</code> gave no autocomplete.</li>
+        <li><strong>Fix</strong>: each package's <code>tsconfig.json</code> sets <code>noEmit: false</code> + <code>emitDeclarationOnly: true</code>, and the build runs <code>vite build &amp;&amp; tsc</code>, because Vite empties <code>dist</code> first. <code>dist</code> now has a <code>.d.ts</code> (+ map) next to every module: 291 in icons, 39 in components.</li>
+        <li><strong><code>dist</code> mirrors <code>src</code> file names</strong>: Vite's <code>fileName: 'index'</code> was applied to every preserved module, so <code>dist</code> held <code>index.js</code> … <code>index294.js</code>. Files are now named after their source (<code>dist/icons/plus.js</code>, <code>dist/components/button/button.js</code>). This also makes the <code>@minis/components/button</code> subpath export and the documented <code>@minis/icons/dist/icon.js</code> import resolve; both pointed at files that did not exist. <code>dist/index.js</code> is unchanged, so <code>create-minis</code> prototypes are unaffected.</li>
+        <li><strong>Lit is no longer bundled</strong>: <code>external: ['lit']</code> matched only bare <code>lit</code>, so <code>lit/decorators.js</code> and <code>lit/directives/*</code> (with their <code>lit-html</code> / <code>@lit/reactive-element</code> internals) were copied into <code>dist</code>, a second Lit next to the <code>lit</code> dependency. <code>external</code> now covers every <code>lit/…</code> entry point. The <code>create-minis</code> import map already maps <code>lit/</code>.</li>
+        <li><strong>Root <code>pnpm typecheck</code></strong> resolves <code>@minis/icons</code> / <code>@minis/components</code> to their <code>src</code>, like Storybook's Vite alias, and skips <code>dist</code>. With declarations present it would otherwise see every custom element declared twice. The package <code>tsconfig</code>s reset <code>paths</code>, so their declaration build stays inside their own <code>src</code>.</li>
+        <li>The Storybook icon story imports <code>iconSets</code> / <code>iconAliases</code> from <code>@minis/icons</code> again, replacing the source-path workaround from the Icons 2.0 sync.</li>
+        <li>No component, icon or token change.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Icons — synced with the Slevomat Icons 2.0 Figma library</h3>
       <p>Source: <a href="https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4" target="_blank" rel="noopener">Slevomat Icons → Icons</a>. The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.</p>
       <ul>
