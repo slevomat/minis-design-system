@@ -1,233 +1,103 @@
-# 🚀 Mini*S Design System - Quick Start
+# Mini*S Design System — Contributor Quick Start
 
-Projekt byl úspěšně vytvořen! Všechny soubory jsou připraveny.
+For people working **on** the design system: components, tokens, Storybook. Building a prototype
+or app **with** it instead? Read [`docs/vibe-coding-guide.md`](docs/vibe-coding-guide.md).
 
-## 📦 Co bylo vytvořeno
+`CLAUDE.md` is the full rulebook (token naming, size values, Storybook rules, common pitfalls).
+This page is the short path through it.
 
-✅ **Packages:**
-- `packages/tokens/` - Design tokeny (Foundation light/dark, Layout, Breakpoints, Themes)
-- `packages/components/` - Lit Web Components (Button komponenta jako příklad)
+## 1. Install, build, run Storybook
 
-✅ **Apps:**
-- `apps/storybook/` - Storybook pro dokumentaci a prototypování
-
-✅ **Docs:**
-- `docs/ai-prompts/` - AI-friendly dokumentace pro Cursor/Claude Code
-- `docs/examples/` - Fungující příklady (simple-landing.html)
-
-✅ **Config:**
-- Root package.json, pnpm-workspace.yaml
-- TypeScript, ESLint, Prettier konfigurace
-- Build scripty
-
-## 🎯 Instalace v tvém projektu
-
-### 1. Extrahuj archiv
+You need Node.js and **pnpm** — never npm or yarn.
 
 ```bash
-# Ve tvé složce
-cd "/Users/lexislav/Projekty/Slevomat/"
-tar -xzf minis-design-system.tar.gz
-cd minis-design-system
+pnpm install       # all workspace dependencies
+pnpm build         # builds every package: tokens, icons, components
+pnpm storybook     # http://localhost:6006
 ```
 
-### 2. Nainstaluj závislosti
+Storybook loads component stories straight from `packages/components/src/**/*.stories.ts` and the
+pages in `apps/storybook/stories/`. **Restart it** after adding a new `*.stories.ts` file or after
+a token re-export — the story list and the Tier toolbar values are both built at startup.
+
+## 2. Updating tokens from Figma
+
+Tokens are designed as Figma variables and exported with the in-house plugin
+**`minis-designtokens-exporter`** (from the [Mini*S Figma plugin set](https://github.com/slevomat/figma-plugins)).
+
+**Before exporting, check the plugin settings.** Two of them shape every CSS name, are **OFF by
+default**, and are stored per machine — an export from a fresh install renames every token:
+
+| Setting | Must be |
+|---|---|
+| Remove collection name from variables | ON |
+| Omit "default" from variable names | ON |
+
+Then:
+
+1. **Export** from Figma. The export lands in three places:
+   - `tokens.json` (repo root) — `oklch()` values with `var()` references; read this for names and relationships
+   - `tokens.rgb.json` (repo root) — fully resolved `#hex` / `rgba()` values
+   - `packages/tokens/src/tokens.css` — the CSS custom properties the components use
+2. **Keep the hand-maintained parts of `tokens.css`.** These are not in Figma and must survive the
+   re-export: the `FONTS` comment block at the top (marked `HAND-MAINTAINED`), the brand
+   typography composites `--typography-brand-*`, the `--typography-font-family-*` set and
+   `--container-bleeding-edge-padding`. Dark mode must stay on the `[data-mode="dark"]` selector.
+3. **Spot-check** that `--color-border`, `--color-separator` and
+   `--color-interaction-primary-surface` still exist. If they don't, the settings above were off.
+4. **Rebuild the tokens:**
+
+   ```bash
+   cd packages/tokens && pnpm build
+   ```
+
+   This copies `tokens.css` into `dist/` and generates `dist/tokens.rgb.css` and the Storybook
+   palette data from the two JSON files.
+5. **Log every added, renamed, removed or re-valued token** in `CHANGELOG.md` and in the Storybook
+   Changelog page, in the same commit (see "Changelog rules" in `CLAUDE.md`).
+
+Some Layout-collection names in `tokens.json` differ from the ones `tokens.css` uses (e.g.
+`--typography-heading-large-*` → `--typography-heading-lg-*`). The translation table is in
+`CLAUDE.md` → "Figma-export naming drift".
+
+## 3. Adding a component
+
+Every component lives in `packages/components/src/components/{name}/` with four files:
+
+| File | What it is |
+|---|---|
+| `{name}.ts` | Lit component class with `@customElement('minis-{name}')` |
+| `{name}.styles.ts` | `css` tagged template, imported by the component |
+| `{name}.stories.ts` | Storybook stories |
+| `{name}.figma.ts` | Figma Code Connect mapping — import from `@figma/code-connect/html`; must pass `pnpm figma:parse` |
+
+A small existing component such as `badge/` shows the shape. Then, **in the same commit**:
+
+- **Export it** from `packages/components/src/index.ts` — a component committed without its export
+  fails CI.
+- **Document it** in `docs/ai-prompts/components/{name}.md` (API table, tokens, usage, copy-paste
+  prompt), and add it to `docs/ai-prompts/index.md` and to the AI-agent docs list in `CLAUDE.md`.
+- **Log it** in `CHANGELOG.md` and the Storybook Changelog page.
+
+Conventions that catch people out:
+
+- **Sizes use the Figma `Size` variant names** — `xs | sm | md | lg | xl`, never `small` / `large`.
+- **Tokens only** — no hardcoded colours or pixel values. There is no bare `--spacing-{n}` scale;
+  use `--spacing-layout-*`, `--linear-sp-linear-{n}`, `--fibonachi-sp-fib-{n}` or `--pixel-px-{n}`.
+- **Check the tag name is free** — a duplicate `@customElement` registration throws.
+- **TypeScript is strict** — an unused import or parameter fails the build.
+- **Figma Dev Mode link** — if the component has a Figma component set, add a
+  `Storybook — <Component>` dev resource link to it (see `CLAUDE.md` → "Plan limitation").
+
+## Before opening a PR
+
+CI runs the first three on every pull request (Node 20, pnpm 9):
 
 ```bash
-pnpm install
-```
-
-### 3. Build tokeny
-
-```bash
-cd packages/tokens
 pnpm build
-cd ../..
+pnpm typecheck
+pnpm lint
+pnpm figma:parse    # only if you touched a .figma.ts file
 ```
 
-### 4. Spusť Storybook
-
-```bash
-pnpm storybook
-```
-
-Otevře se na `http://localhost:6006`
-
-## 🎨 Aktualizace tokenů z Figmy
-
-### Export z Figmy
-1. V Figma použij Design Tokens plugin
-2. Exportuj CSS
-3. Nahraj do správných složek:
-   - Light mode → `packages/tokens/src/foundation/light/`
-   - Dark mode → `packages/tokens/src/foundation/dark/`
-
-### Rebuild
-```bash
-cd packages/tokens
-pnpm build
-```
-
-Komponenty se aktualizují automaticky! ✨
-
-## 🧩 Vývoj komponent
-
-### Přidání nové komponenty
-
-1. Vytvoř složku v `packages/components/src/components/[název]/`
-2. Vytvoř soubory:
-   - `[název].ts` - Lit komponenta
-   - `[název].styles.ts` - Styly s tokeny
-   - `[název].stories.ts` - Storybook stories
-
-3. Exportuj v `packages/components/src/index.ts`
-
-### Příklad nové komponenty
-
-```typescript
-// packages/components/src/components/input/input.ts
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-
-@customElement('minis-input')
-export class MinisInput extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-    }
-    
-    input {
-      padding: var(--spacing-inset-sm);
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius-md);
-    }
-  `;
-
-  @property() value = '';
-  @property() placeholder = '';
-
-  render() {
-    return html`
-      <input 
-        .value=${this.value}
-        placeholder=${this.placeholder}
-      />
-    `;
-  }
-}
-```
-
-## 🤖 AI Prototyping
-
-### Pro Cursor
-
-1. Otevři `docs/ai-prompts/index.md`
-2. Vyber komponentu/pattern/template
-3. Zkopíruj AI prompt
-4. Vlož do Cursoru
-
-### Pro Claude Code
-
-```bash
-# V terminálu
-claude-code docs/ai-prompts/components/button.md
-
-# Prompt
-"Vytvoř login stránku s button komponentou podle této dokumentace"
-```
-
-## 📚 Struktura projektu
-
-```
-minis-design-system/
-├── packages/
-│   ├── tokens/              ← Design tokeny (CSS)
-│   │   ├── src/
-│   │   │   ├── foundation/
-│   │   │   │   ├── light/   ← Light mode barvy
-│   │   │   │   └── dark/    ← Dark mode barvy
-│   │   │   ├── layout/      ← Spacing, Border, Elevation
-│   │   │   ├── breakpoints/ ← Responzivní body
-│   │   │   └── themes/      ← Themes (default, gift)
-│   │   └── dist/            ← Build output
-│   │
-│   └── components/          ← Web Components (Lit)
-│       ├── src/
-│       │   └── components/
-│       │       └── button/  ← Příklad komponenty
-│       └── dist/            ← Build output
-│
-├── apps/
-│   └── storybook/           ← Dokumentace a prototypy
-│
-├── docs/
-│   ├── ai-prompts/          ← AI dokumentace
-│   │   ├── components/      ← Komponenty pro AI
-│   │   ├── patterns/        ← Patterns pro AI
-│   │   └── templates/       ← Templates pro AI
-│   └── examples/            ← Hotové příklady
-│
-└── README.md                ← Tento soubor
-```
-
-## 🎨 Token Collections
-
-### Foundation (Light/Dark modes)
-- **Border** - `--color-border`, `--color-border-focus`, `--color-border-invalid`
-- **Feedback** - `--color-feedback-error`, `--color-feedback-success`
-- **Interaction** - `--color-interaction-primary-surface`, `--color-interaction-primary-hover-surface`
-- **Surface** - `--color-surface-primary`, `--color-surface-faded`
-- **Text** - `--color-text-primary`, `--color-text-secondary`
-- **Background** - `--color-background`
-
-### Layout (Responzivní)
-- **Spacing** - `--spacing-xs` až `--spacing-3xl`, `--spacing-inset-*`, `--spacing-stack-*`
-- **Border** - `--border-radius-*`, `--border-width-*`
-- **Elevation** - `--elevation-xs` až `--elevation-xl`
-
-### Breakpoints
-- `--breakpoint-xs` (320px) až `--breakpoint-2xl` (1536px)
-
-## 🔄 Workflow
-
-### 1. Design v Figmě
-Uprav barvy, spacing, typography
-
-### 2. Export tokenů
-Export CSS z Figmy → Nahraj do `src/`
-
-### 3. Build
-```bash
-cd packages/tokens && pnpm build
-```
-
-### 4. Komponenty se updatují
-Automaticky používají nové tokeny! ✨
-
-### 5. Testuj ve Storybook
-```bash
-pnpm storybook
-```
-
-## 🎯 Příští kroky
-
-1. ✅ Projekt je připraven
-2. ⬜ Nahraj do svého repozitáře
-3. ⬜ Přidej další komponenty (Input, Card, Modal...)
-4. ⬜ Vytvoř patterns (Form Group, Hero Section...)
-5. ⬜ Vytvoř templates (Dashboard, Auth Page...)
-6. ⬜ Rozšiř AI dokumentaci
-
-## 📝 Poznámky
-
-- **Tokeny jsou aktuální** - Obsahují všechny hodnoty z Figma JSON
-- **Button je plně funkční** - Všechny varianty (primary, secondary, tertiary, danger, cta-buy)
-- **Storybook ready** - Přepínání light/dark mode v toolbaru
-- **AI dokumentace připravena** - Použitelná v Cursor, Claude Code
-- **Příklad landing page** - V `docs/examples/simple-landing.html`
-
-## 🚀 Hotovo!
-
-Projekt **Mini*S Design System** je kompletně připraven!
-
-**Ke stažení:** `minis-design-system.tar.gz`
+Work on a branch and open a PR against `master`.
