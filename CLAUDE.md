@@ -118,6 +118,7 @@ Current plans:
 - `todo-plans/007-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
 - `todo-plans/008-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
 - `todo-plans/009-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 003–008).
+- `todo-plans/010-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
 
 ## Changelog rules
 

@@ -76,3 +76,4 @@ usually a plan that hasn't been thought about hard enough.
 | 007 | [Bug-reporting skill and /minis-bug command](007-bug-report-skill.md) | `draft` | 2026-10-29 |
 | 008 | [Token-update skill (optional)](008-token-update-skill.md) | `draft` | 2026-10-29 |
 | 009 | [Distributing Mini*S skills and commands](009-skill-distribution.md) | `draft` | 2026-10-29 |
+| 010 | [Enforce "tokens only" with Stylelint](010-stylelint-tokens-only.md) | `draft` | 2026-10-29 |
