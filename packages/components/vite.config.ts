@@ -6,10 +6,12 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
-      fileName: 'index',
+      // Mirror src paths (dist/icons/plus.js) so each file lines up with its .d.ts.
+      fileName: (_format, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
-      external: ['lit'],
+      // Every lit entry point (lit/decorators.js, lit/directives/…), not just bare 'lit'.
+      external: [/^lit(\/|$)/],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',

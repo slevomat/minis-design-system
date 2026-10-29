@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-29
 
+### Packages — `@minis/icons` and `@minis/components` ship their type declarations
+
+Both `package.json` files point `types` at `dist/index.d.ts`, but no build ever wrote one.
+
+- **Cause**: both packages extend the root `tsconfig.json`, whose `noEmit: true` silenced the `declaration: true` in their own config. Their `tsc` step only type-checked. TypeScript consumers got `any` for everything (TS7016), and `IconName` gave no autocomplete.
+- **Fix**: each package's `tsconfig.json` sets `noEmit: false` + `emitDeclarationOnly: true`, and the build runs `vite build && tsc`, because Vite empties `dist` first. `dist` now has a `.d.ts` (+ map) next to every module: 291 in icons, 39 in components.
+- **`dist` mirrors `src` file names**: Vite's `fileName: 'index'` was applied to every preserved module, so `dist` held `index.js` … `index294.js`. Files are now named after their source (`dist/icons/plus.js`, `dist/components/button/button.js`). This also makes the `@minis/components/button` subpath export and the documented `@minis/icons/dist/icon.js` import resolve; both pointed at files that did not exist. `dist/index.js` is unchanged, so `create-minis` prototypes are unaffected.
+- **Lit is no longer bundled**: `external: ['lit']` matched only bare `lit`, so `lit/decorators.js` and `lit/directives/*` (with their `lit-html` / `@lit/reactive-element` internals) were copied into `dist`, a second Lit next to the `lit` dependency. `external` now covers every `lit/…` entry point. The `create-minis` import map already maps `lit/`.
+- **Root `pnpm typecheck`** resolves `@minis/icons` / `@minis/components` to their `src`, like Storybook's Vite alias, and skips `dist`. With declarations present it would otherwise see every custom element declared twice. The package `tsconfig`s reset `paths`, so their declaration build stays inside their own `src`.
+- The Storybook icon story imports `iconSets` / `iconAliases` from `@minis/icons` again, replacing the source-path workaround from the Icons 2.0 sync.
+- No component, icon or token change.
+
 ### Icons — synced with the Slevomat Icons 2.0 Figma library
 
 Source: [Slevomat Icons → Icons](https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4). The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.
