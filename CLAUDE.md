@@ -96,6 +96,9 @@ more than one release, or carrying reasoning worth preserving. Full conventions 
 - Frontmatter carries `id`, `title`, `status`, `created`, `updated`, `owner`.
   Status is `draft` | `ready` | `in-progress` | `done` | `abandoned`.
 - Keep the index table in `todo-plans/README.md` current.
+- **Plans are committed straight to `master`, never on a branch** — in their own commit, touching only
+  `todo-plans/` and the "Current plans" list below, so they never conflict with feature work and
+  plan numbers can't collide.
 
 **A plan is never authorisation to act.** Finding a `ready` plan does not mean starting it — wait
 for the user to ask for that plan by name or number. Writing and updating plans is ordinary work;
@@ -111,6 +114,14 @@ Current plans:
   proposing any ramp-wide colour change. Its measured constraint set covers this repo only —
   heritage usage on production may differ, so the plan needs a production developer's review before
   it can go past `draft`. Don't present its counts as the full picture.
+- `todo-plans/003-latte-ui-skill.md` — skill for building UI from Latte recipes in the Nette repo (needs recipes + registry).
+- `todo-plans/004-contribution-skill.md` — search the registry → extend and flag the gap → build new as Local (needs registry).
+- `todo-plans/005-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
+- `todo-plans/006-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
+- `todo-plans/007-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
+- `todo-plans/008-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
+- `todo-plans/009-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 003–008).
+- `todo-plans/010-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
 
 ## Changelog rules
 

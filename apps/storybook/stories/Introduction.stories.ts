@@ -578,6 +578,52 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-10-29 (icons synced with Slevomat Icons 2.0) -->
+      <div class="cl-heading">
+        <h2 id="2026-10-29" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-29</h2>
+        <button class="cl-copy-btn" data-anchor="2026-10-29">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens package — exports only what the build writes</h3>
+      <p><code>@minis/tokens</code> advertised files its build stopped writing on 2026-02-27, when the build switched to copying the Figma-exported <code>tokens.css</code>. Their content ships in <code>tokens.css</code> now.</p>
+      <ul>
+        <li><strong>Removed package exports</strong> (all 404'd): <code>./foundation</code>, <code>./foundation/light</code>, <code>./foundation/dark</code>, <code>./layout</code>, <code>./breakpoints</code>, <code>./themes/default</code>, <code>./themes/gift</code>. Use <code>tokens.css</code> instead: dark mode is <code>&lt;html data-mode="dark"&gt;</code>, the gift schema is <code>[data-theme="gift"]</code>, breakpoints and layout tokens are in the same file. Remaining exports: <code>.</code> (<code>dist/index.css</code>), <code>./tokens.rgb</code>, <code>./fonts/*</code>.</li>
+        <li><strong><code>create-prototype</code> fix</strong>: the template no longer links <code>/vendor/layout.css</code>, so a freshly scaffolded prototype loads without a 404. The same dead link was removed from the page skeleton in <code>docs/ai-prompts/layouts/deal-detail.md</code>.</li>
+        <li>The build no longer creates empty <code>dist/foundation/</code> and <code>dist/themes/</code> directories.</li>
+        <li><code>packages/tokens/README.md</code> rewritten for the single-file package; the legacy <code>src/foundation</code>, <code>src/layout</code>, <code>src/breakpoints</code> and <code>src/themes</code> files are marked as not built (their values have drifted from <code>tokens.css</code>).</li>
+        <li>No token added, renamed or re-valued; <code>tokens.css</code> unchanged.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Packages — <code>@minis/icons</code> and <code>@minis/components</code> ship their type declarations</h3>
+      <p>Both <code>package.json</code> files point <code>types</code> at <code>dist/index.d.ts</code>, but no build ever wrote one.</p>
+      <ul>
+        <li><strong>Cause</strong>: both packages extend the root <code>tsconfig.json</code>, whose <code>noEmit: true</code> silenced the <code>declaration: true</code> in their own config. Their <code>tsc</code> step only type-checked. TypeScript consumers got <code>any</code> for everything (TS7016), and <code>IconName</code> gave no autocomplete.</li>
+        <li><strong>Fix</strong>: each package's <code>tsconfig.json</code> sets <code>noEmit: false</code> + <code>emitDeclarationOnly: true</code>, and the build runs <code>vite build &amp;&amp; tsc</code>, because Vite empties <code>dist</code> first. <code>dist</code> now has a <code>.d.ts</code> (+ map) next to every module: 291 in icons, 39 in components.</li>
+        <li><strong><code>dist</code> mirrors <code>src</code> file names</strong>: Vite's <code>fileName: 'index'</code> was applied to every preserved module, so <code>dist</code> held <code>index.js</code> … <code>index294.js</code>. Files are now named after their source (<code>dist/icons/plus.js</code>, <code>dist/components/button/button.js</code>). This also makes the <code>@minis/components/button</code> subpath export and the documented <code>@minis/icons/dist/icon.js</code> import resolve; both pointed at files that did not exist. <code>dist/index.js</code> is unchanged, so <code>create-minis</code> prototypes are unaffected.</li>
+        <li><strong>Lit is no longer bundled</strong>: <code>external: ['lit']</code> matched only bare <code>lit</code>, so <code>lit/decorators.js</code> and <code>lit/directives/*</code> (with their <code>lit-html</code> / <code>@lit/reactive-element</code> internals) were copied into <code>dist</code>, a second Lit next to the <code>lit</code> dependency. <code>external</code> now covers every <code>lit/…</code> entry point. The <code>create-minis</code> import map already maps <code>lit/</code>.</li>
+        <li><strong>Root <code>pnpm typecheck</code></strong> resolves <code>@minis/icons</code> / <code>@minis/components</code> to their <code>src</code>, like Storybook's Vite alias, and skips <code>dist</code>. With declarations present it would otherwise see every custom element declared twice. The package <code>tsconfig</code>s reset <code>paths</code>, so their declaration build stays inside their own <code>src</code>.</li>
+        <li>The Storybook icon story imports <code>iconSets</code> / <code>iconAliases</code> from <code>@minis/icons</code> again, replacing the source-path workaround from the Icons 2.0 sync.</li>
+        <li>No component, icon or token change.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Icons — synced with the Slevomat Icons 2.0 Figma library</h3>
+      <p>Source: <a href="https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4" target="_blank" rel="noopener">Slevomat Icons → Icons</a>. The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.</p>
+      <ul>
+        <li><strong>All 194 existing icons redrawn</strong> from the new Figma artwork. Same names, but glyphs are now consistently sized and centred, so most render a little larger or shifted compared to before. Some names now carry a different drawing because Figma kept the clearer twin of a duplicate pair: <code>calendar</code>, <code>document</code>, <code>home</code>, <code>mail</code>, <code>plane</code> and <code>position</code> changed style (outline ↔ filled).</li>
+        <li><strong>93 new icons</strong>, 287 in total. New: 12 Core icons (e.g. <code>explore</code>, <code>like-outline</code>, <code>moon</code>, <code>sun</code>, <code>practical</code>), 39 UI icons drawn in Figma only (e.g. <code>plus</code>, <code>minus</code>, <code>eye-outline</code>, <code>login</code>, <code>sign-out</code>, <code>settings-outline</code>, <code>home-outline</code>) and the S-icons, Premise, USP, HR, Admins and Allergens sets.</li>
+        <li><strong>25 deprecated aliases</strong>: names Figma merged into another icon still render, as their merge target: <code>bus1</code>, <code>calendar1</code>, <code>calendar2</code>, <code>car1</code>, <code>car2</code>, <code>chest</code> → <code>chest-outline</code>, <code>children1</code>, <code>circle-dollar-fill</code> → <code>circle-dolar-fill</code>, <code>document1</code>, <code>document2</code>, <code>error</code> → <code>error-fill</code>, <code>eye1</code>, <code>like</code>, <code>like1</code> → <code>like-fill</code>, <code>mail1</code>, <code>meal1</code>, <code>no-signal</code> → <code>no-wifi</code>, <code>photo-gallery</code> → <code>photo-library-gallery-images</code>, <code>plane1</code>, <code>plane2</code>, <code>position1</code>, <code>term</code> → <code>calendar</code>, <code>train1</code>, <code>train2</code>, <code>wifi1</code>. The full table is in <code>docs/ai-prompts/components/icon.md</code>. Use the target name in new code.</li>
+        <li><strong>New exports</strong> from <code>@minis/icons</code>: <code>iconSets</code> (names grouped by Figma section) and <code>iconAliases</code> (deprecated name → target). The <code>error</code> path export is now a deprecated alias of the new <code>errorFill</code>.</li>
+        <li><strong>Not shipped</strong>: colour sets (flags, colour allergens, socials, brand logos, menu, benefits) because <code>&lt;minis-icon&gt;</code> is mono; <code>usp/fortune-wheel</code> (multicolour); <code>hr/bulb</code> (name clash with <code>usp/bulb</code>); the provisional Legacy and Uncategorised sections.</li>
+        <li><code>plus</code>, <code>minus</code> and <code>chat-outline</code> are stroke-based in Figma; they render with <code>stroke="currentColor"</code>, so colour inheritance works as for every other icon.</li>
+        <li>Storybook <strong>Components → Icons</strong> now groups the grid by Figma section and lists the deprecated aliases.</li>
+        <li>No <code>tokens.css</code> change.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-10-22 (page header content-left mobile padding) -->
       <div class="cl-heading">
         <h2 id="2026-10-22" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-22</h2>

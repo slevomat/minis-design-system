@@ -1,5 +1,5 @@
 // ─── Registry & types ─────────────────────────────────────────────────────────
-export { iconRegistry } from './registry.js';
+export { iconRegistry, iconSets, iconAliases } from './registry.js';
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export { MinisIcon } from './icon.js';
@@ -18,7 +18,9 @@ export { circleCheckFill } from './icons/circle-check-fill.js';
 export { circleCloseFill } from './icons/circle-close-fill.js';
 export { circleInfoFill } from './icons/circle-info-fill.js';
 export { close } from './icons/close.js';
-export { error } from './icons/error.js';
+export { errorFill } from './icons/error-fill.js';
+/** @deprecated Merged into `error-fill` in Icons 2.0 — use `errorFill`. */
+export { errorFill as error } from './icons/error-fill.js';
 export { heart } from './icons/heart.js';
 export { heartFill } from './icons/heart-fill.js';
 export { search } from './icons/search.js';

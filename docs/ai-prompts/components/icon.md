@@ -21,43 +21,88 @@
 | `size`    | number | `24`     | Width and height in px. |
 | `label`   | string | —        | Accessible label. When set: `role="img" aria-label="{label}"`. When absent: `aria-hidden="true"` (decorative). |
 
-## Available icons (219 total)
+## Available icons (287 + 25 deprecated aliases)
 
-### UI / Actions
-`arrow-classic` `arrow-down` `arrow-left` `arrow-right` `arrow-up` `bin` `check` `checkbox` `checkbox-partly` `circle-arrow` `circle-check` `circle-check-fill` `circle-close` `circle-close-fill` `circle-plus` `circle-plus-fill` `close` `closed` `copy` `dislike` `download` `edit` `error` `expand` `eye` `eye-off` `eye1` `feedback` `filters` `like` `like1` `lock` `menu` `menuburger` `no` `radio-checked` `radio-unchecked` `refresh` `reload` `search` `settings` `share` `share-ios` `single-image` `sort` `stop` `switch`
+Grouped by section of the [Slevomat Icons](https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4) Figma library (Icons 2.0). The `name` is the Figma component name without its set prefix — `Icon/figma-only/plus` → `plus`, `Icon/usp/rocket` → `rocket`. The same grouping is exported at runtime as `iconSets`.
 
-### Navigation & Location
-`arrival` `circle-question` `crossroads` `departure` `globus` `home` `home1` `on-map` `position` `position1`
+### Core (193)
+General UI icons — the main production set.
 
-### Commerce & Finance
-`apple-pay` `card` `cart-fill` `cart-outline` `cashback` `circle-dollar-fill` `credit-card` `deposit` `fksp` `gift` `no-credit-card` `package` `percentage` `qr-code` `voucher-outline` `wallet`
+`ai-charles` `airballoon` `animation-program` `apple-pay` `arrival` `arrow-classic` `arrow-left` `arrow-right` `avatar` `babysitting` `beauty` `bed` `bell` `benefits` `bestseller` `bike-cableway` `bike-rental` `bike-room` `bike-trails` `bin` `birthday` `box` `bubble` `building` `bus` `cake` `calendar` `calendar-upcoming` `camera` `car` `card` `cart-fill` `cart-outline` `cashback` `categories` `check` `checkbox` `checkbox-partly` `children` `children-lift` `children-lift-poma` `children-pool` `childrens-cot` `circle-arrow` `circle-check` `circle-check-fill` `circle-close-fill` `circle-info-fill` `circle-plus` `circle-plus-fill` `circle-question` `clock` `close` `closed` `club` `contract-signing` `copy` `countryside` `credit-card` `credits-outline` `cross-country-trails` `crossroads` `czech` `default` `departure` `deposit` `document` `download` `edit` `ev-charger` `expand` `explore` `eye` `eye-off` `feedback` `file-text` `filters` `fitness` `fksp` `flake` `food` `fun` `game-room` `gift` `globus` `golf` `goods` `growth` `handicap` `heart` `heart-fill` `hearts` `home` `iceberg` `indoor-pool` `kids-corner` `light` `like-outline` `like-fill` `lock` `mail` `meal` `menu` `menuburger` `message` `money-bag-outline` `moon` `no` `no-credit-card` `no-parking` `no-smoking` `no-wifi` `not-pet-friendly` `on-map` `one-contract` `other-services` `outdoor-pool` `outside` `own-kitchen` `package` `parking` `paw` `percentage` `phone` `photo-library-gallery-images` `plane` `playground` `position` `practical` `printer` `qr-code` `radio-checked` `radio-unchecked` `refresh` `reload` `reservation` `restaurant` `sad` `salt-cave` `sauna` `scooter-rental` `sea` `search` `settings` `share` `share-ios` `signal` `single-image` `ski-pass` `ski-room` `ski-school` `ski-slopes` `skibus` `slovakia` `smartphone` `smile` `snowpark` `sort` `spa-procedures` `star` `star-fill` `stay` `stick` `stop` `suitcase` `suitcase-checked` `sun` `surroundings` `swimming-areas` `switch` `team` `thermal-pool` `train` `travel` `truck` `tumblr` `user` `userpc` `users` `verified` `voucher-outline` `walk` `wallet` `water-park` `wellness` `wellness-procedures` `wheel` `wheelchair` `wheelchair-not-accessible` `whirlpool-bath` `wifi` `wine-cellar` `wooden-soaking-tub`
 
-### Communication & Media
-`bell` `bubble` `camera` `file-text` `flag` `mail` `mail1` `message` `microfon` `photo-gallery` `printer` `signal` `no-signal` `no-wifi` `smartphone` `tumblr` `wifi` `wifi1`
+### UI icons (51)
+Figma `Icon/figma-only/*` — drawn in Figma, not yet in the production webfont (plus, minus, outline variants, login/sign-out…).
 
-### People & Identity
-`avatar` `children` `children1` `club` `handicap` `person-outline` `team` `user` `userpc` `users` `wheelchair` `wheelchair-not-accessible`
+`anniversary` `arrow-down` `arrow-up` `bell-outline` `book` `chat-outline` `checkmark` `chest-outline` `circle-close` `circle-dolar-fill` `dislike` `download-outline` `error-fill` `event-busy` `eye-off-outline` `eye-outline` `flag` `foodstuff` `form-review` `gifted-voucher` `home-outline` `home1` `local-activity-icon-1` `lock-outline` `login` `loyalty` `mail-drafts` `mail-outline` `microfon` `minus` `money-bag-fill` `my-location` `news-paper-outline` `no-transfer` `other-services-filled` `partnership` `person-outline` `phone-outline` `plus` `redeem` `search-outline` `settings-outline` `share-outline` `sign-out` `slevomat` `smartphone-2` `smartphone-icon-1` `star-shine` `stars` `support-agent-icon` `whatsapp`
 
-### Travel & Transport
-`bike-cableway` `bike-rental` `bike-room` `bike-trails` `bus` `bus1` `car` `car1` `car2` `cross-country-trails` `ev-charger` `no-parking` `no-transfer` `parking` `plane` `plane1` `plane2` `scooter-rental` `skibus` `train` `train1` `train2` `travel` `truck` `walk`
+### S-icons (8)
+From the `icon-slevomat-frontend` webfont.
 
-### Accommodation & Amenities
-`bed` `childrens-cot` `game-room` `indoor-pool` `kids-corner` `outdoor-pool` `own-kitchen` `salt-cave` `sauna` `ski-pass` `ski-room` `ski-school` `ski-slopes` `snowpark` `spa-procedures` `swimming-areas` `thermal-pool` `water-park` `wellness` `wellness-procedures` `whirlpool-bath` `wine-cellar` `wooden-soaking-tub`
+`calendar-lock` `circle-check-outline` `detect-location` `gift-replacement` `robot` `symbol` `trophy` `user-outline`
 
-### Food & Dining
-`cake` `food` `meal` `meal1` `restaurant`
+### Premise (6)
+Venue amenities on accommodation detail.
 
-### Nature & Outdoors
-`countryside` `flake` `iceberg` `sea` `ski-slopes` `surroundings`
+`bike-trail` `car-charger` `chair` `family-room` `kid` `pool`
 
-### Documents & Business
-`benefits` `box` `building` `calendar` `calendar-upcoming` `calendar1` `calendar2` `categories` `chest` `contract-signing` `document` `document1` `document2` `goods` `growth` `one-contract` `other-services` `partnership` `reservation` `term` `verified`
+### USP (9)
+Marketing benefits and selling points.
 
-### Status & Feedback
-`circle-info-fill` `default` `dislike` `error` `event-busy` `no-smoking` `not-pet-friendly` `sad` `smile` `stop`
+`bulb` `calendar-with-clock` `contact-place` `customer-support` `fast-delivery` `rating` `rocket` `safety` `star-discount`
 
-### Misc / Brand
-`airballoon` `animation-program` `babysitting` `beauty` `bestseller` `bulb` `children-lift` `children-lift-poma` `children-pool` `circle-dollar-fill` `clock` `czech` `fitness` `fun` `golf` `heart` `heart-fill` `hearts` `light` `paw` `phone` `playground` `qr-code` `slevomat` `slovakia` `star` `star-fill` `stay` `stick` `suitcase` `suitcase-checked` `switch`
+### HR (5)
+HR / careers icons.
+
+`code` `gear` `image` `palette` `thumbs-up`
+
+### Admins (1)
+From the admins icon webfont.
+
+`nigh-lock`
+
+### Allergens (14)
+EU allergens 1–14, mono.
+
+`brokoli` `coconut` `cow` `egg-holder` `fish` `grayscale` `lobster` `mussels` `mustard` `nut` `nuts` `nuts2` `peas` `s02`
+
+### Not included
+
+- **Colour sets** — flags, colour allergens, socials, brand & third-party logos, menu and benefits keep their own colours in Figma; `<minis-icon>` is mono (`currentColor`), so they are not shipped.
+- `usp/fortune-wheel` — multicolour.
+- `hr/bulb` — clashes with `usp/bulb`, which is the drawing `bulb` has always rendered.
+- **Legacy** and **Uncategorised** sections — Figma marks their names as provisional.
+
+### Deprecated aliases
+
+Icons 2.0 merged duplicate drawings. The old names still render — as the icon they were merged into — but use the target name in new code. Exported at runtime as `iconAliases`.
+
+| Deprecated name | Renders as |
+|---|---|
+| `bus1` | `bus` |
+| `calendar1` | `calendar` |
+| `calendar2` | `calendar` |
+| `car1` | `car` |
+| `car2` | `car` |
+| `chest` | `chest-outline` |
+| `children1` | `children` |
+| `circle-dollar-fill` | `circle-dolar-fill` |
+| `document1` | `document` |
+| `document2` | `document` |
+| `error` | `error-fill` |
+| `eye1` | `eye` |
+| `like` | `like-fill` |
+| `like1` | `like-fill` |
+| `mail1` | `mail` |
+| `meal1` | `meal` |
+| `no-signal` | `no-wifi` |
+| `photo-gallery` | `photo-library-gallery-images` |
+| `plane1` | `plane` |
+| `plane2` | `plane` |
+| `position1` | `position` |
+| `term` | `calendar` |
+| `train1` | `train` |
+| `train2` | `train` |
+| `wifi1` | `wifi` |
 
 ## Usage examples
 
@@ -106,13 +151,15 @@ Icons inherit color from their CSS context via `currentColor`. No tokens needed 
 - **Semantic** (with `label`): `role="img" aria-label="{label}"` — screen readers announce the label.
 - When an icon is the only content inside a button, either set `label` on the icon **or** add `aria-label` directly on the button.
 
-## Adding new icons
-1. Export the path template from `packages/icons/src/icons/{name}.ts`
-2. Add the import + key to `packages/icons/src/registry.ts`
-3. Add to `ALL_ICONS` in `apps/storybook/stories/Icons.stories.ts`
+## Adding or updating icons
+The Figma library is the source of truth: [Slevomat Icons → Icons](https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4). Every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, with a single black fill.
 
-**Note:** `default`, `package`, `switch`, `document` are JavaScript reserved words — their export variable names use an `Icon` suffix (e.g. `defaultIcon`) but their registry key and `name` attribute remain unchanged.
+1. Export the component as SVG from Figma and put its inner markup in `packages/icons/src/icons/{name}.ts` as an `svg` template. Drop `fill="black"` so it inherits `currentColor`; a stroke becomes `stroke="currentColor"` plus `fill="none"`.
+2. Add the import, the `icons` key, and the name to its section in `iconSets` in `packages/icons/src/registry.ts`.
+3. The Storybook grid reads `iconSets`, so nothing else needs editing.
+
+**Note:** JavaScript reserved words (`default`, `package`, `switch`, `document`) get an `Icon` suffix on their export variable (e.g. `defaultIcon`); the registry key and `name` attribute stay unchanged.
 
 ## Copy-paste prompt for AI agents
 
-> Render a `<minis-icon>` with `name="cart-fill"` inside a `<minis-button variant="primary">` using the `slot="icon"` attribute. Import `@minis/icons` as a side-effect before using it. Do not pass `aria-hidden` manually — the component handles accessibility automatically. Available icon names are listed in `docs/ai-prompts/components/icon.md`.
+> Render a `<minis-icon>` with `name="cart-fill"` inside a `<minis-button variant="primary">` using the `slot="icon"` attribute. Import `@minis/icons` as a side-effect before using it. Do not pass `aria-hidden` manually — the component handles accessibility automatically. Available icon names are listed in `docs/ai-prompts/components/icon.md`; avoid the deprecated aliases.

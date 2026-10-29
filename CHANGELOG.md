@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-10-29
+
+### Tokens package — exports only what the build writes
+
+`@minis/tokens` advertised files its build stopped writing on 2026-02-27, when the build switched to copying the Figma-exported `tokens.css`. Their content ships in `tokens.css` now.
+
+- **Removed package exports** (all 404'd): `./foundation`, `./foundation/light`, `./foundation/dark`, `./layout`, `./breakpoints`, `./themes/default`, `./themes/gift`. Use `tokens.css` instead: dark mode is `<html data-mode="dark">`, the gift schema is `[data-theme="gift"]`, breakpoints and layout tokens are in the same file. Remaining exports: `.` (`dist/index.css`), `./tokens.rgb`, `./fonts/*`.
+- **`create-prototype` fix**: the template no longer links `/vendor/layout.css`, so a freshly scaffolded prototype loads without a 404. The same dead link was removed from the page skeleton in `docs/ai-prompts/layouts/deal-detail.md`.
+- The build no longer creates empty `dist/foundation/` and `dist/themes/` directories.
+- `packages/tokens/README.md` rewritten for the single-file package; the legacy `src/foundation`, `src/layout`, `src/breakpoints` and `src/themes` files are marked as not built (their values have drifted from `tokens.css`).
+- No token added, renamed or re-valued; `tokens.css` unchanged.
+
+### Packages — `@minis/icons` and `@minis/components` ship their type declarations
+
+Both `package.json` files point `types` at `dist/index.d.ts`, but no build ever wrote one.
+
+- **Cause**: both packages extend the root `tsconfig.json`, whose `noEmit: true` silenced the `declaration: true` in their own config. Their `tsc` step only type-checked. TypeScript consumers got `any` for everything (TS7016), and `IconName` gave no autocomplete.
+- **Fix**: each package's `tsconfig.json` sets `noEmit: false` + `emitDeclarationOnly: true`, and the build runs `vite build && tsc`, because Vite empties `dist` first. `dist` now has a `.d.ts` (+ map) next to every module: 291 in icons, 39 in components.
+- **`dist` mirrors `src` file names**: Vite's `fileName: 'index'` was applied to every preserved module, so `dist` held `index.js` … `index294.js`. Files are now named after their source (`dist/icons/plus.js`, `dist/components/button/button.js`). This also makes the `@minis/components/button` subpath export and the documented `@minis/icons/dist/icon.js` import resolve; both pointed at files that did not exist. `dist/index.js` is unchanged, so `create-minis` prototypes are unaffected.
+- **Lit is no longer bundled**: `external: ['lit']` matched only bare `lit`, so `lit/decorators.js` and `lit/directives/*` (with their `lit-html` / `@lit/reactive-element` internals) were copied into `dist`, a second Lit next to the `lit` dependency. `external` now covers every `lit/…` entry point. The `create-minis` import map already maps `lit/`.
+- **Root `pnpm typecheck`** resolves `@minis/icons` / `@minis/components` to their `src`, like Storybook's Vite alias, and skips `dist`. With declarations present it would otherwise see every custom element declared twice. The package `tsconfig`s reset `paths`, so their declaration build stays inside their own `src`.
+- The Storybook icon story imports `iconSets` / `iconAliases` from `@minis/icons` again, replacing the source-path workaround from the Icons 2.0 sync.
+- No component, icon or token change.
+
+### Icons — synced with the Slevomat Icons 2.0 Figma library
+
+Source: [Slevomat Icons → Icons](https://www.figma.com/design/lZsWlkVSBRTlpI2vKpnAXT/Slevomat-Icons?node-id=2-4). The library was rebuilt as "Icons 2.0": every glyph sits on a 24×24 frame with a 20px live area, centred on its ink, and duplicate drawings were merged.
+
+- **All 194 existing icons redrawn** from the new Figma artwork. Same names, but glyphs are now consistently sized and centred, so most render a little larger or shifted compared to before. Some names now carry a different drawing because Figma kept the clearer twin of a duplicate pair: `calendar`, `document`, `home`, `mail`, `plane` and `position` changed style (outline ↔ filled).
+- **93 new icons**, 287 in total. New: 12 Core icons (e.g. `explore`, `like-outline`, `moon`, `sun`, `practical`), 39 UI icons drawn in Figma only (e.g. `plus`, `minus`, `eye-outline`, `login`, `sign-out`, `settings-outline`, `home-outline`) and the S-icons, Premise, USP, HR, Admins and Allergens sets.
+- **25 deprecated aliases**: names Figma merged into another icon still render, as their merge target: `bus1`, `calendar1`, `calendar2`, `car1`, `car2`, `chest` → `chest-outline`, `children1`, `circle-dollar-fill` → `circle-dolar-fill`, `document1`, `document2`, `error` → `error-fill`, `eye1`, `like`, `like1` → `like-fill`, `mail1`, `meal1`, `no-signal` → `no-wifi`, `photo-gallery` → `photo-library-gallery-images`, `plane1`, `plane2`, `position1`, `term` → `calendar`, `train1`, `train2`, `wifi1`. The full table is in `docs/ai-prompts/components/icon.md`. Use the target name in new code.
+- **New exports** from `@minis/icons`: `iconSets` (names grouped by Figma section) and `iconAliases` (deprecated name → target). The `error` path export is now a deprecated alias of the new `errorFill`.
+- **Not shipped**: colour sets (flags, colour allergens, socials, brand logos, menu, benefits) because `<minis-icon>` is mono; `usp/fortune-wheel` (multicolour); `hr/bulb` (name clash with `usp/bulb`); the provisional Legacy and Uncategorised sections.
+- `plus`, `minus` and `chat-outline` are stroke-based in Figma; they render with `stroke="currentColor"`, so colour inheritance works as for every other icon.
+- Storybook **Components → Icons** now groups the grid by Figma section and lists the deprecated aliases.
+- No `tokens.css` change.
+
 ## 2026-10-22
 
 ### Page header — `content-left` mobile text keeps clear of the photo

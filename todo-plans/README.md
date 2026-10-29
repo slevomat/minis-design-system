@@ -44,6 +44,11 @@ usually a plan that hasn't been thought about hard enough.
 
 **Keep the index below current** — one row per plan.
 
+**Plans live on `master`, never on a branch.** Commit a new or updated plan straight to `master`
+in its own commit, touching only `todo-plans/` and the CLAUDE.md "Current plans" list — never
+mixed into a feature branch. On a branch, two plans written in parallel grab the same number and
+collide in the index; on `master` the next number is always visible to everyone.
+
 ---
 
 ## Working with plans (for AI agents)
@@ -69,3 +74,11 @@ usually a plan that hasn't been thought about hard enough.
 |---|---|---|---|
 | 001 | [Move the colour ramps onto a curve](001-colour-ramps-to-curve.md) | `draft` | 2026-08-11 |
 | 002 | [Deal Card and Promo Card components](002-deal-card-and-promo-card.md) | `draft` | 2026-09-10 |
+| 003 | [Latte UI-building skill for the Nette repo](003-latte-ui-skill.md) | `draft` | 2026-10-29 |
+| 004 | [Contribution skill — reuse, extend, or register as Local](004-contribution-skill.md) | `draft` | 2026-10-29 |
+| 005 | [minis-app — sandbox skill that registers new work as Local](005-minis-app-register-local.md) | `draft` | 2026-10-29 |
+| 006 | [Todo-plan writing skill](006-todo-plan-skill.md) | `draft` | 2026-10-29 |
+| 007 | [Bug-reporting skill and /minis-bug command](007-bug-report-skill.md) | `draft` | 2026-10-29 |
+| 008 | [Token-update skill (optional)](008-token-update-skill.md) | `draft` | 2026-10-29 |
+| 009 | [Distributing Mini*S skills and commands](009-skill-distribution.md) | `draft` | 2026-10-29 |
+| 010 | [Enforce "tokens only" with Stylelint](010-stylelint-tokens-only.md) | `draft` | 2026-10-29 |

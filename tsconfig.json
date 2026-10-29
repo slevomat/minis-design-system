@@ -14,6 +14,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
-    "useDefineForClassFields": false
-  }
+    "useDefineForClassFields": false,
+    // Type-check the workspace packages from source, like Storybook's Vite alias.
+    // Resolving them to dist/*.d.ts as well would declare every element twice.
+    "paths": {
+      "@minis/icons": ["./packages/icons/src/index.ts"],
+      "@minis/components": ["./packages/components/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "**/dist", "**/storybook-static", ".claude/worktrees"]
 }
