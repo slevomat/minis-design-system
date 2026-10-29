@@ -46,11 +46,27 @@ All components, tokens, and icons are pre-loaded in `public/vendor/` (served as 
 | `<minis-icon>` | SVG icon: `<minis-icon name="heart-fill" size="20">` |
 | `<minis-pill-counter>` | Numeric badge (used inside buttons or standalone) |
 | `<minis-card-grid>` | Responsive grid: `navigation`, `navigation-small`, `photogallery` |
+| `<minis-menu>` | Labelled trigger that opens a dropdown of links/buttons; `placement="start\|end"` |
+| `<minis-checkbox>` | Checkbox with `checked`, `indeterminate`, `disabled`; form-associated (`name`, `value`) |
+| `<minis-action-row>` | Full-width clickable list row: `variant="none\|icon\|checkbox"`, optional `counter` |
+| `<minis-tile>` | Icon + label shortcut tile, `<a>` with `href` or `<button>` without; optional `counter` |
+| `<minis-badge>` | Decorative scalloped seal with a checkmark: `color="brand\|yellow\|summer\|pink\|green\|blue"` |
+| `<minis-page-header>` | Page hero, the first content element under the topbar + nav: `theme`, `layout="default\|inspirations\|content-left\|centric"` |
+| `<minis-accordion>` | Container for accordion items: `single`, `bordered`, `size` |
+| `<minis-accordion-item>` | One collapsible row inside `<minis-accordion>`: `heading`, `open`, `disabled` |
 
 ## Component Size Values
 
-All components use full English words for sizes: `small`, `medium` (default), `large`.
-Exception: `<minis-button>` uses `sm`, `md`, `lg`, `xl`.
+The `size` attribute uses the abbreviated Figma `Size` variant names — `xs`, `sm`, `md`, `lg`, `xl` —
+never full words like `small` or `large` (an unknown value silently falls back to the default size).
+Each component supports only a subset:
+
+| Component | `size` values |
+|---|---|
+| `<minis-button>` | `sm`, `md` (default), `lg`, `xl` |
+| `<minis-pill-counter>` | `xs`, `sm`, `md` (default), `lg` |
+| `<minis-badge>` | `sm`, `md`, `xl` (default) |
+| `<minis-accordion>` / `<minis-accordion-item>` | `default` (default), `compact` — the one exception to the abbreviated scale |
 
 ## Key Token Patterns
 
