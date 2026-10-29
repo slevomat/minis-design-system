@@ -56,6 +56,35 @@ The redefinition is still in ideation, so this plan is a draft.
 - **The web components and Storybook keep working throughout.** They consume `tokens.css`, and
   Storybook's Tier toolbar reads `tokens.json`.
 
+## Findings (first read, 2026-10-29)
+
+Found while reading the token build and the exporter docs. Nothing here is fixed or decided yet;
+each item says where it's handled in this plan.
+
+- **Only one `HAND-MAINTAINED` marker.** `tokens.css` marks only the FONTS comment block. The
+  font families (`--typography-font-family-*`), the brand composites (`--typography-brand-*`)
+  and `--container-bleeding-edge-padding` have no marker, so a re-export or a Style Dictionary
+  build drops them without warning. → Phase 1 lists them; open question 5 decides where they live.
+  Marking them in `tokens.css` would be a cheap fix even before this plan starts.
+- **Dark-mode selector clash.** The exporter's docs show dark mode as `[data-theme="dark"]`.
+  In Mini*S, `data-theme` is the colour-schema hook (`[data-theme="gift"]`) and dark mode is
+  `[data-mode="dark"]`. → Phase 2 config must emit `data-mode`.
+- **`tokens.css` is more than `:root`.** It has `@media` blocks for the Layout breakpoint tiers
+  (the `tokens.json` Layout modes `default`, `2xs` … `2xl`) and the gift schema block. Stock Style
+  Dictionary CSS formats emit neither. → Phase 2 needs custom formats.
+- **`cssName` is already in the export.** Every token in `tokens.json` carries its final CSS name
+  (e.g. `color.foundation.light.border.default` → `--color-border`), so the CSS name transform
+  might just read it. The drift table still applies on top (`heading-large` → `heading-lg`).
+  → Phase 0.
+- **The export uses the old token shape** (`value` / `type`, not the W3C `$value` / `$type`).
+  Style Dictionary v4 reads both, but the choice affects which version Nette can run. → Phase 2.
+- **`build.js` does more than CSS.** It also writes `apps/storybook/stories/palette-data.json`
+  (hex, rgb, oklch and heritage notes per colour) for the Storybook palette pages. → Switching the
+  build in Phase 2 has to keep producing it.
+- **`@minis/tokens` isn't ready to publish.** No `repository` field, and `files` is `["dist"]`,
+  so the root `NOTICE` (the Kensington and Slevomat-marks carve-out from MIT) wouldn't ship.
+  → Phase 3.
+
 ## Approach
 
 **Recommended: (c) move this repo's build onto Style Dictionary**, so Mini*S and Nette run one
