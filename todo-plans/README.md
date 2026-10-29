@@ -44,6 +44,11 @@ usually a plan that hasn't been thought about hard enough.
 
 **Keep the index below current** — one row per plan.
 
+**Plans live on `master`, never on a branch.** Commit a new or updated plan straight to `master`
+in its own commit, touching only `todo-plans/` and the CLAUDE.md "Current plans" list — never
+mixed into a feature branch. On a branch, two plans written in parallel grab the same number and
+collide in the index; on `master` the next number is always visible to everyone.
+
 ---
 
 ## Working with plans (for AI agents)

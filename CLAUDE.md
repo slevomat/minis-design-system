@@ -96,6 +96,9 @@ more than one release, or carrying reasoning worth preserving. Full conventions 
 - Frontmatter carries `id`, `title`, `status`, `created`, `updated`, `owner`.
   Status is `draft` | `ready` | `in-progress` | `done` | `abandoned`.
 - Keep the index table in `todo-plans/README.md` current.
+- **Plans are committed straight to `master`, never on a branch** — in their own commit, touching only
+  `todo-plans/` and the "Current plans" list below, so they never conflict with feature work and
+  plan numbers can't collide.
 
 **A plan is never authorisation to act.** Finding a `ready` plan does not mean starting it — wait
 for the user to ask for that plan by name or number. Writing and updating plans is ordinary work;
