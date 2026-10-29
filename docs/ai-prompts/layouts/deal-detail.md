@@ -266,7 +266,6 @@ body {
   <title>Hotel Marvelous — Slevomat</title>
   <link rel="stylesheet" href="/vendor/tokens.rgb.css" />
   <link rel="stylesheet" href="/vendor/tokens.css" />
-  <link rel="stylesheet" href="/vendor/layout.css" />
   <script type="importmap">
     {
       "imports": {
