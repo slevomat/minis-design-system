@@ -9,8 +9,6 @@ const distDir = path.join(__dirname, '../dist');
 // Create dist directories
 const dirs = [
   distDir,
-  path.join(distDir, 'foundation'),
-  path.join(distDir, 'themes'),
   path.join(distDir, 'fonts'),
 ];
 

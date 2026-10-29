@@ -6,13 +6,6 @@
   "main": "dist/index.css",
   "exports": {
     ".": "./dist/index.css",
-    "./foundation": "./dist/foundation.css",
-    "./foundation/light": "./dist/foundation/light.css",
-    "./foundation/dark": "./dist/foundation/dark.css",
-    "./layout": "./dist/layout.css",
-    "./breakpoints": "./dist/breakpoints.css",
-    "./themes/default": "./dist/themes/default.css",
-    "./themes/gift": "./dist/themes/gift.css",
     "./tokens.rgb": "./dist/tokens.rgb.css",
     "./fonts/*": "./dist/fonts/*"
   },

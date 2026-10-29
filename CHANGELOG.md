@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-10-29
 
+### Tokens package — exports only what the build writes
+
+`@minis/tokens` advertised files its build stopped writing on 2026-02-27, when the build switched to copying the Figma-exported `tokens.css`. Their content ships in `tokens.css` now.
+
+- **Removed package exports** (all 404'd): `./foundation`, `./foundation/light`, `./foundation/dark`, `./layout`, `./breakpoints`, `./themes/default`, `./themes/gift`. Use `tokens.css` instead: dark mode is `<html data-mode="dark">`, the gift schema is `[data-theme="gift"]`, breakpoints and layout tokens are in the same file. Remaining exports: `.` (`dist/index.css`), `./tokens.rgb`, `./fonts/*`.
+- **`create-prototype` fix**: the template no longer links `/vendor/layout.css`, so a freshly scaffolded prototype loads without a 404. The same dead link was removed from the page skeleton in `docs/ai-prompts/layouts/deal-detail.md`.
+- The build no longer creates empty `dist/foundation/` and `dist/themes/` directories.
+- `packages/tokens/README.md` rewritten for the single-file package; the legacy `src/foundation`, `src/layout`, `src/breakpoints` and `src/themes` files are marked as not built (their values have drifted from `tokens.css`).
+- No token added, renamed or re-valued; `tokens.css` unchanged.
+
 ### Packages — `@minis/icons` and `@minis/components` ship their type declarations
 
 Both `package.json` files point `types` at `dist/index.d.ts`, but no build ever wrote one.

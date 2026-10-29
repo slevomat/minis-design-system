@@ -587,6 +587,16 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tokens package — exports only what the build writes</h3>
+      <p><code>@minis/tokens</code> advertised files its build stopped writing on 2026-02-27, when the build switched to copying the Figma-exported <code>tokens.css</code>. Their content ships in <code>tokens.css</code> now.</p>
+      <ul>
+        <li><strong>Removed package exports</strong> (all 404'd): <code>./foundation</code>, <code>./foundation/light</code>, <code>./foundation/dark</code>, <code>./layout</code>, <code>./breakpoints</code>, <code>./themes/default</code>, <code>./themes/gift</code>. Use <code>tokens.css</code> instead: dark mode is <code>&lt;html data-mode="dark"&gt;</code>, the gift schema is <code>[data-theme="gift"]</code>, breakpoints and layout tokens are in the same file. Remaining exports: <code>.</code> (<code>dist/index.css</code>), <code>./tokens.rgb</code>, <code>./fonts/*</code>.</li>
+        <li><strong><code>create-prototype</code> fix</strong>: the template no longer links <code>/vendor/layout.css</code>, so a freshly scaffolded prototype loads without a 404. The same dead link was removed from the page skeleton in <code>docs/ai-prompts/layouts/deal-detail.md</code>.</li>
+        <li>The build no longer creates empty <code>dist/foundation/</code> and <code>dist/themes/</code> directories.</li>
+        <li><code>packages/tokens/README.md</code> rewritten for the single-file package; the legacy <code>src/foundation</code>, <code>src/layout</code>, <code>src/breakpoints</code> and <code>src/themes</code> files are marked as not built (their values have drifted from <code>tokens.css</code>).</li>
+        <li>No token added, renamed or re-valued; <code>tokens.css</code> unchanged.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Packages — <code>@minis/icons</code> and <code>@minis/components</code> ship their type declarations</h3>
       <p>Both <code>package.json</code> files point <code>types</code> at <code>dist/index.d.ts</code>, but no build ever wrote one.</p>
       <ul>

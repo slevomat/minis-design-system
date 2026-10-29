@@ -4,27 +4,14 @@ Design tokens for Mini*S Design System.
 
 ## Structure
 
-### Foundation
-Color tokens with light/dark mode variants:
-- **Border** - border colors, focus, validation
-- **Feedback** - error, info, success, warning
-- **Interaction** - button states (primary, secondary, tertiary, danger, cta-buy)
-- **Surface** - background surfaces
-- **Text** - text colors and accents
-- **Background** - page background
+Everything ships in one file, `tokens.css`, exported from the Figma variables:
 
-### Layout
-Responsive layout tokens:
-- **Spacing** - padding, margin, gaps
-- **Border** - radius, width
-- **Elevation** - shadows
-
-### Breakpoints
-Responsive breakpoints (xs, sm, md, lg, xl, 2xl)
-
-### Themes
-- **default** - Light mode (default)
-- **gift** - Special gift theme
+- **Colour** — primitives, foundation (`--color-text-*`, `--color-surface-*`, `--color-border*`, `--color-interaction-*`, `--color-background`) and component tokens
+- **Dark mode** — a `[data-mode="dark"]` override block, toggled with `<html data-mode="dark">`
+- **Colour schemas** — e.g. `[data-theme="gift"]`
+- **Layout** — spacing (`--linear-sp-linear-*`, `--fibonachi-sp-fib-*`, responsive `--spacing-layout-*`), border radius, containers
+- **Typography** — families, sizes, weights, line-heights, responsive composites
+- **Breakpoints** — `--breakpoint-2xs` … `--breakpoint-4xl`
 
 ## Installation
 
@@ -34,90 +21,46 @@ pnpm add @minis/tokens
 
 ## Usage
 
-### Basic (Light Mode)
 ```html
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/index.css">
+<!-- Optional hex/rgb fallback for browsers without OKLCH, loaded first -->
+<link rel="stylesheet" href="node_modules/@minis/tokens/dist/tokens.rgb.css">
+
+<!-- All tokens, light + dark -->
+<link rel="stylesheet" href="node_modules/@minis/tokens/dist/tokens.css">
+
+<!-- Optional Kensington brand-font overlay (see src/fonts/README.md) -->
+<link rel="stylesheet" href="node_modules/@minis/tokens/dist/fonts/kensington.css">
 ```
 
-### With Theme Selection
+`dist/index.css` is an identical copy of `dist/tokens.css` and is the package's main entry
+(`@import '@minis/tokens';`).
+
+### Dark mode and schemas
+
 ```html
-<!-- Layout & Breakpoints -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/layout.css">
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/breakpoints.css">
-
-<!-- Light Mode -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/foundation/light.css">
-
-<!-- OR Dark Mode -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/foundation/dark.css">
+<html data-mode="dark">          <!-- dark mode -->
+<html data-theme="gift">         <!-- gift colour schema -->
 ```
 
-### Using Themes
-```html
-<!-- Default theme (light) -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/themes/default.css">
+## Build output
 
-<!-- Gift theme -->
-<link rel="stylesheet" href="node_modules/@minis/tokens/dist/themes/gift.css">
-```
+| File | Package export |
+|---|---|
+| `dist/index.css` | `@minis/tokens` |
+| `dist/tokens.css` | — (link the file directly) |
+| `dist/tokens.rgb.css` | `@minis/tokens/tokens.rgb` |
+| `dist/fonts/kensington.css` | `@minis/tokens/fonts/kensington.css` |
 
-## Token Naming
-
-### Foundation (Mode-specific)
-```css
---color-border
---color-border-focus
---color-feedback-error
---color-interaction-primary-surface
---color-interaction-primary-hover-accent
---color-surface-primary
---color-text-primary
---color-background
-```
-
-### Layout (Mode-independent)
-```css
---spacing-md
---spacing-inset-lg
---border-radius-md
---elevation-sm
-```
-
-### Breakpoints
-```css
---breakpoint-md
---breakpoint-lg
-```
+`tokens.rgb.css` is generated from `tokens.rgb.json` at the repo root.
 
 ## Updating Tokens
 
-1. Export CSS from Figma
-2. Replace files in `src/foundation/light/` or `src/foundation/dark/`
-3. Run `pnpm build`
+1. Export from Figma with the `minis-designtokens-exporter` plugin (`tokens.json`, `tokens.rgb.json`, CSS)
+2. Replace `src/tokens.css`, keeping its `HAND-MAINTAINED` blocks
+3. Run `pnpm --filter tokens build`
 
-## File Structure
+## Legacy source files
 
-```
-src/
-├── foundation/
-│   ├── light/              # Light mode tokens
-│   │   ├── border.css
-│   │   ├── feedback.css
-│   │   ├── interaction.css
-│   │   ├── surface.css
-│   │   ├── text.css
-│   │   └── background.css
-│   ├── dark/               # Dark mode tokens
-│   │   └── (same structure)
-│   └── index.css
-├── layout/
-│   ├── spacing.css
-│   ├── border.css
-│   └── elevation.css
-├── breakpoints/
-│   └── breakpoints.css
-├── themes/
-│   ├── default.css
-│   └── gift.css
-└── index.css
-```
+`src/foundation/`, `src/layout/`, `src/breakpoints/`, `src/themes/` and `src/index.css` are
+pre-Figma-export leftovers. They are **not built or published** and their values have drifted from
+`tokens.css` (different breakpoints, a bare `--spacing-*` scale that no longer exists). Don't use them.
