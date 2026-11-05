@@ -59,15 +59,15 @@ typography/<role>/  ─┘                                              │
 1. **New Layout variables, one per role whose ratio changes between modes.** Today that's
    heading lg/md/sm and body md/sm. Each is
    `typography/<role>/line-height-px`, scoped to `LINE_HEIGHT` only. Its value in each mode =
-   resolved size × resolved ratio for that mode:
+   resolved size × resolved ratio for that mode, **rounded to whole pixels**:
 
    | Role | default … sm | md … 4xl |
    |---|---|---|
    | Heading/lg | 20 × 1.30 = **26** | 24 × 1.25 = **30** |
-   | Heading/md | 18 × 1.33 = **23.94** | 20 × 1.30 = **26** |
-   | Heading/sm | 16 × 1.38 = **22.08** | 18 × 1.33 = **23.94** |
-   | Body/md | 16 × 1.38 = **22.08** | 16 × 1.50 = **24** |
-   | Body/sm | 14 × 1.43 = **20.02** | 14 × 1.57 = **21.98** |
+   | Heading/md | 18 × 1.33 = 23.94 → **24** | 20 × 1.30 = **26** |
+   | Heading/sm | 16 × 1.38 = 22.08 → **22** | 18 × 1.33 = 23.94 → **24** |
+   | Body/md | 16 × 1.38 = 22.08 → **22** | 16 × 1.50 = **24** |
+   | Body/sm | 14 × 1.43 = 20.02 → **20** | 14 × 1.57 = 21.98 → **22** |
 
    (Values read from the Figma file on 2026-11-05.)
 2. **Bind them** in the five text styles' line height.
@@ -108,7 +108,7 @@ The exporter has to know about the `-px` variables, or they leak into CSS as bro
 | `formatFloat()` | A name containing `height` exports the raw number as unitless. `…/line-height-px` = 26 would become `line-height: 26` (26 × font size). | Skip `*/line-height-px` variables in every output (CSS, `tokens.json`, `tokens.rgb.json`). Or emit them only as a comment, if wanted for reference. |
 | `buildLayoutLineHeightMap()` | Matches names ending in `/line-height`. | Unchanged. `-px` doesn't match, and the style → `var(--typography-<role>-line-height)` reference keeps working. |
 | `formatTextStyleToken()`, `resolved` mode | Uses `style.lineHeight`, which is a percentage today. | Once bound, this reads `{unit: PIXELS, value: 26}` for whichever mode is current. Use the ratio variable's name-derived percentage instead (fall back to the style value). |
-| New: "Recalculate line heights" | — | For each `typography/<role>/line-height` with a matching text style: resolve size × ratio per Layout mode and write `…/line-height-px`. Create it if it's missing and the ratio varies. Report what changed. |
+| New: "Recalculate line heights" | — | For each `typography/<role>/line-height` with a matching text style: resolve size × ratio per Layout mode, round to whole pixels and write `…/line-height-px`. Create it if it's missing and the ratio varies. Report what changed. |
 
 A text style bound to a `-px` variable must still export
 `--typography-heading-lg-line-height: var(--typography-line-height-130)` and so on, exactly as it
@@ -154,12 +154,13 @@ fixes.
   neither has `tokens.json`, `tokens.css` or Storybook's `palette-data.json` (both are
   `normal`). The values have to be created first, as Layout variables (and so in CSS). Phase 0a
   is the natural source. Until then these two styles stay `auto` and outside this plan.
+- **Round to whole pixels** (owner). 23.94 → 24. Figma can differ from the browser by up
+  to about 0.1 px, which is invisible, and the redlines show clean numbers. CSS is unaffected:
+  it keeps computing size × ratio.
 - **Letter spacing** is split out into plan 015 (high priority).
 - **A skill for future typography updates:** yes, as phase 7.
 
 ## Open questions
 
-1. **Rounding.** Answered "YES" on 2026-11-05 to "keep 23.94, or round to 24?". Still to confirm
-   which of the two that means.
-2. **Drift cleanup.** After binding, the five styles are exact in every mode. Should Caption/* and
+1. **Drift cleanup.** After binding, the five styles are exact in every mode. Should Caption/* and
    .Label/* be checked against the CSS at the same time? Phase 0a will show whether they differ.
