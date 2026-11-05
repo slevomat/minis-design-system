@@ -122,8 +122,7 @@ fixes.
 - [ ] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Release before any `-px`
       variable exists in the file, so an export in between can't break CSS.
 - [ ] **2. Figma: create the `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`.
-- [ ] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm (plus Heading xl/2xl once they have
-      a token), and narrow the ratio variables' scopes.
+- [ ] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm, and narrow the ratio variables' scopes.
 - [ ] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export
       produces the same `tokens.css`; Storybook Tier toolbar values are unchanged.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
@@ -162,9 +161,10 @@ The values this plan generates are therefore the production values.
    and body sm 150 % instead of 143 %. Heading md/sm happen to have the mobile ratio in the style
    and are correct. **This is the same drift this plan removes.** Once phase 1 makes the resolved
    export take the `default`-mode ratio, the next export fixes it.
-2. **Heading/xl and Heading/2xl are `line-height: normal` in production too.** Figma's `auto` and CSS
+2. **Heading/xl and Heading/2xl are `line-height: normal` in production too** (decided 2026-11-05:
+   keep `auto`, see Answers). Figma's `auto` and CSS
    `normal` both use the font's own line metrics (Inter ≈ 121 %), so Figma, CSS and production
-   already agree. *Proposed:* keep `auto` and leave them out of the `-px` set. If a fixed ratio is
+   already agree. Kept as `auto`, outside the `-px` set. If a fixed ratio is
    wanted, that's a new token and a visible change on ~230 production uses, so it's a design
    decision rather than part of this plan.
 3. **Brand heading xl is hand-written in production:** `font-size: clamp(32px, 7vw, 56px)` (fluid,
@@ -183,11 +183,10 @@ in `_variables.styl`. So phase 1 has to cover the Style Dictionary JSON, not onl
   from publishing. Both are invisible in the variables panel and easy to lose on a rename, and
   hiding it might stop the variable from resolving in published styles. The suffix is visible
   wherever the name is.
-- **Heading/xl and Heading/2xl: take the values from the Layout variables** (owner). Checked on
-  2026-11-05: the Layout collection has no `typography/heading/xl/line-height` or `…/2xl/…`, and
-  neither has `tokens.json`, `tokens.css` or Storybook's `palette-data.json` (both are
-  `normal`). The values have to be created first, as Layout variables (and so in CSS). Phase 0a
-  is the natural source. Until then these two styles stay `auto` and outside this plan.
+- **Heading/xl and Heading/2xl keep `auto`** (owner, 2026-11-05). There are no intended
+  line-height values in the Layout collection, `tokens.json`, `tokens.css` or Storybook, and production
+  renders them with `line-height: normal`. Figma's `auto` and CSS `normal` both use Inter's own
+  metrics (≈ 121 %), so the three already agree. They stay outside the `-px` set.
 - **Round to whole pixels** (owner). 23.94 → 24. Figma can differ from the browser by up
   to about 0.1 px, which is invisible, and the redlines show clean numbers. CSS is unaffected:
   it keeps computing size × ratio.
@@ -196,8 +195,7 @@ in `_variables.styl`. So phase 1 has to cover the Style Dictionary JSON, not onl
 
 ## Open questions
 
-1. **Heading/xl and Heading/2xl.** Keep `auto` (matches production's `normal`, proposed), or
-   introduce a fixed ratio token? See audit item 2.
+None.
 
 Answered by the audit: Caption/* match production (sm 150 %, xs 133 %, xxs 140 %, no breakpoint
 change), so they keep their typed percentage. The .Label/* styles are Figma-internal (dot
