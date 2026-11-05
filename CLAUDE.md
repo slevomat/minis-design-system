@@ -127,6 +127,9 @@ Current plans:
   single inventory every tool checks before building new (unblocks 003–005).
 - `todo-plans/013-porting-rules.md` — one-page guides (common, Latte, web components, Figma) for
   carrying tokens and recipes into each environment, and which side wins when they diverge.
+- `todo-plans/014-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
+  Figma text styles follow Layout modes; needs exporter changes first (Figma treats every bound
+  line-height value as pixels).
 
 ## Changelog rules
 
