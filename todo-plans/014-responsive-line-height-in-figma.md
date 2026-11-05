@@ -117,31 +117,49 @@ fixes.
 
 ## Phases
 
-- [ ] **0. Decide** the open questions below.
+- [ ] **0a. Production audit first.** Read the real typography on https://www.slevomat.cz
+      (computed `font-size`, `line-height`, `letter-spacing` per text role, on a mobile and a
+      desktop viewport) and compare with `tokens.css`. Production still runs on the heritage
+      scheme, so a difference isn't automatically a token bug: record each difference and decide
+      which side wins, following plan 013's porting rules. It is read-only and cheap, and it may
+      change the values this plan generates and supply the missing Heading/xl and Heading/2xl line
+      heights. The mechanism below doesn't depend on the values, because the `-px` variables are
+      regenerated from whatever the tokens say.
+- [ ] **0b. Decide** the remaining open questions.
 - [ ] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Release before any `-px`
       variable exists in the file, so an export in between can't break CSS.
-- [ ] **2. Figma: create the five `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`.
-- [ ] **3. Figma: bind** them in Heading lg/md/sm and Body md/sm, and narrow the ratio variables'
-      scopes.
+- [ ] **2. Figma: create the `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`.
+- [ ] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm (plus Heading xl/2xl once they have
+      a token), and narrow the ratio variables' scopes.
 - [ ] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export
       produces the same `tokens.css`; Storybook Tier toolbar values are unchanged.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
 - [ ] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
+- [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
+      (edit in Figma → Recalculate → export → check the `tokens.css` diff → both changelogs) as a
+      section of the token-update skill in plan 008, not as a separate skill or agent. A
+      typography change is a token change, and splitting the two procedures would let them drift.
+      008 is optional today; this step is the reason to do at least its typography part.
+
+## Answers (2026-11-05)
+
+- **Skip by name suffix.** The exporter recognises Figma-only variables by the name ending
+  `-px`. Considered instead: a text label in the variable's description, or hiding the variable
+  from publishing. Both are invisible in the variables panel and easy to lose on a rename, and
+  hiding it might stop the variable from resolving in published styles. The suffix is visible
+  wherever the name is.
+- **Heading/xl and Heading/2xl: take the values from the Layout variables** (owner). Checked on
+  2026-11-05: the Layout collection has no `typography/heading/xl/line-height` or `…/2xl/…`, and
+  neither has `tokens.json`, `tokens.css` or Storybook's `palette-data.json` (both are
+  `normal`). The values have to be created first, as Layout variables (and so in CSS). Phase 0a
+  is the natural source. Until then these two styles stay `auto` and outside this plan.
+- **Letter spacing** is split out into plan 015 (high priority).
+- **A skill for future typography updates:** yes, as phase 7.
 
 ## Open questions
 
-1. **Rounding.** Keep fractions (23.94, matching the browser) or round to whole pixels (24, cleaner
-   redlines)? Leaning towards fractions.
-2. **Heading/xl and Heading/2xl** are `auto` and have no line-height token, in Figma or in CSS.
-   What should they be? Without a token they can't be part of this.
-3. **Skip by name suffix, or by marker?** The suffix `-px` is simple. An explicit marker
-   (description tag such as `[figma-only]`, or `hiddenFromPublishing`) is sturdier. Need to check
-   that a hidden variable still resolves inside a published text style for library consumers.
-4. **Letter spacing.** Styles use percentages, which already scale, so no `-px` set is planned. But
-   the three sources disagree about `typography/spacing/*`. Figma applies a bound value as pixels
-   (`-0.32 px`). `tokens.css` has `--typography-spacing-tighter: -0.32px`. The current exporter
-   code would emit `-0.0032em`, because it treats the value as a percentage. Which is intended, and
-   would the next export change `tokens.css`? Only the Brand styles bind letter spacing today.
-5. **Drift cleanup.** After binding, the five styles are exact in every mode. Should Caption/* and
-   .Label/* be checked against the CSS at the same time?
+1. **Rounding.** Answered "YES" on 2026-11-05 to "keep 23.94, or round to 24?". Still to confirm
+   which of the two that means.
+2. **Drift cleanup.** After binding, the five styles are exact in every mode. Should Caption/* and
+   .Label/* be checked against the CSS at the same time? Phase 0a will show whether they differ.

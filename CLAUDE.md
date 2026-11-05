@@ -130,6 +130,9 @@ Current plans:
 - `todo-plans/014-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
   Figma text styles follow Layout modes; needs exporter changes first (Figma treats every bound
   line-height value as pixels).
+- `todo-plans/015-letter-spacing-tokens.md` — **high priority.** `--typography-spacing-*` means
+  px in `tokens.css`, em in the exporter and px in Figma, and `wide` has different values in Figma
+  and CSS. Check the `--typography-spacing-*` lines of every token export diff by hand until it's resolved.
 
 ## Changelog rules
 
