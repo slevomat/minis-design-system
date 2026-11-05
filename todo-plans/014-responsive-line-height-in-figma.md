@@ -107,7 +107,7 @@ The exporter has to know about the `-px` variables, or they leak into CSS as bro
 |---|---|---|
 | `formatFloat()` | A name containing `height` exports the raw number as unitless. `…/line-height-px` = 26 would become `line-height: 26` (26 × font size). | Skip `*/line-height-px` variables in every output (CSS, `tokens.json`, `tokens.rgb.json`). Or emit them only as a comment, if wanted for reference. |
 | `buildLayoutLineHeightMap()` | Matches names ending in `/line-height`. | Unchanged. `-px` doesn't match, and the style → `var(--typography-<role>-line-height)` reference keeps working. |
-| `formatTextStyleToken()`, `resolved` mode | Uses `style.lineHeight`, which is a percentage today. | Once bound, this reads `{unit: PIXELS, value: 26}` for whichever mode is current. Use the ratio variable's name-derived percentage instead (fall back to the style value). |
+| `formatTextStyleToken()`, `resolved` mode (what production consumes) | Uses `style.lineHeight`, which is a percentage today. | Once bound, this reads `{unit: PIXELS, value: 26}` for whichever mode is current. Use the ratio variable's name-derived percentage instead (fall back to the style value). |
 | New: "Recalculate line heights" | — | For each `typography/<role>/line-height` with a matching text style: resolve size × ratio per Layout mode, round to whole pixels and write `…/line-height-px`. Create it if it's missing and the ratio varies. Report what changed. |
 
 A text style bound to a `-px` variable must still export
@@ -117,14 +117,7 @@ fixes.
 
 ## Phases
 
-- [ ] **0a. Production audit first.** Read the real typography on https://www.slevomat.cz
-      (computed `font-size`, `line-height`, `letter-spacing` per text role, on a mobile and a
-      desktop viewport) and compare with `tokens.css`. Production still runs on the heritage
-      scheme, so a difference isn't automatically a token bug: record each difference and decide
-      which side wins, following plan 013's porting rules. It is read-only and cheap, and it may
-      change the values this plan generates and supply the missing Heading/xl and Heading/2xl line
-      heights. The mechanism below doesn't depend on the values, because the `-px` variables are
-      regenerated from whatever the tokens say.
+- [x] **0a. Production audit first.** Done 2026-11-05. The results are in "Production audit" below.
 - [ ] **0b. Decide** the remaining open questions.
 - [ ] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Release before any `-px`
       variable exists in the file, so an export in between can't break CSS.
@@ -141,6 +134,47 @@ fixes.
       section of the token-update skill in plan 008, not as a separate skill or agent. A
       typography change is a token change, and splitting the two procedures would let them drift.
       008 is optional today; this step is the reason to do at least its typography part.
+
+## Production audit (2026-11-05)
+
+Source: the production repo (`slevomat/slevomat`, master at `fe4f1d6b3d4`, 2026-11-05), read-only.
+slevomat.cz itself blocks the automated browser with a Cloudflare check, so nothing was measured
+in a browser. The code is the better source anyway, because it shows the breakpoints directly.
+
+**How production gets its typography.** `build/style-dictionary/tokens/*.json` are **this
+exporter's JSON output** (`exportMode: "resolved"`, exported 2026-06-04). Style Dictionary turns
+them into `app/stylus/settings/_variables.styl` ("auto-generated"). The `$typo-*` mixins in
+`app/stylus/plugins/typography.styl` combine the composite values with the `$layout-<tier>-*`
+overrides. The Mini*S type classes are used in about 826 Latte files (`typo-body-md` 1632×,
+`typo-body-sm` 1345×, `typo-heading-md` 690×, `typo-heading-lg` 580×, …).
+
+**What matches.** The breakpoints are identical: 360 / 408 / 600 / 768 / 1008 / 1256 / 1480 px.
+Every responsive size and line height matches `tokens.css` and the Figma Layout variables. For
+example, heading lg is 20 px / 130 % → 24 px / 125 % from 768 px, and body md is 138 % → 150 %.
+The values this plan generates are therefore the production values.
+
+**What differs:**
+
+1. **Below 360 px, production uses the Figma *text style's* line height.** The mixins start
+   from the composite value, which the resolved export takes from the text style, and only override it
+   from `mobile-small` (360 px). Heading lg and Body md/sm have the desktop ratio typed into the
+   style, so a 320 px phone gets heading lg 125 % instead of 130 %, body md 150 % instead of 138 %,
+   and body sm 150 % instead of 143 %. Heading md/sm happen to have the mobile ratio in the style
+   and are correct. **This is the same drift this plan removes.** Once phase 1 makes the resolved
+   export take the `default`-mode ratio, the next export fixes it.
+2. **Heading/xl and Heading/2xl are `line-height: normal` in production too.** Figma's `auto` and CSS
+   `normal` both use the font's own line metrics (Inter ≈ 121 %), so Figma, CSS and production
+   already agree. *Proposed:* keep `auto` and leave them out of the `-px` set. If a fixed ratio is
+   wanted, that's a new token and a visible change on ~230 production uses, so it's a design
+   decision rather than part of this plan.
+3. **Brand heading xl is hand-written in production:** `font-size: clamp(32px, 7vw, 56px)` (fluid,
+   not the 32 → 56 px step at 1480 px), and weight `700` (Mini*S says brand text is always 400).
+   This is outside this plan. It belongs to the porting rules (plan 013).
+
+**Why phase 1 matters for production.** If the styles were bound to `-px` variables before the
+exporter changes, the next resolved export would hand production `line-height: 26px` for the
+heading lg composite. The `-px` variables would also appear in `layout.json`, and from there
+in `_variables.styl`. So phase 1 has to cover the Style Dictionary JSON, not only `tokens.css`.
 
 ## Answers (2026-11-05)
 
@@ -162,5 +196,9 @@ fixes.
 
 ## Open questions
 
-1. **Drift cleanup.** After binding, the five styles are exact in every mode. Should Caption/* and
-   .Label/* be checked against the CSS at the same time? Phase 0a will show whether they differ.
+1. **Heading/xl and Heading/2xl.** Keep `auto` (matches production's `normal`, proposed), or
+   introduce a fixed ratio token? See audit item 2.
+
+Answered by the audit: Caption/* match production (sm 150 %, xs 133 %, xxs 140 %, no breakpoint
+change), so they keep their typed percentage. The .Label/* styles are Figma-internal (dot
+prefix, not exported).
