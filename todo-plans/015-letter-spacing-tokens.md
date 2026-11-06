@@ -103,7 +103,7 @@ components would have to become per-size px values.
       warning when bound, so production keeps its current values until phase 3 renames them. The
       minus/dot rule also applies to JSON and Style Dictionary keys, and renames none of the existing
       449 names.
-- [ ] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
+- [x] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
       `LETTER_SPACING` scope), unbind both Brand styles and type 3 %.
       Progress 2026-11-06:
       - [x] Created `Typography/spacing/-2%`, `-1%`, `0%`, `3%` (`VariableID:6087:150`–`153`) in the
@@ -112,7 +112,8 @@ components would have to become per-size px values.
       - [x] **`-0.3%` → `Typography/spacing/-0,3%`** (owner, 2026-11-06; `VariableID:6088:142`).
             Figma doesn't allow `.` in variable names, so the decimal is written with a comma. The CSS
             name stays `--typography-spacing-n0_3`. No other variable name in the file contains a comma.
-      - [ ] **Exporter change needed (1.1.0/1.2.0 can't handle the comma):**
+      - [x] **Exporter change, done:** 1.2.1 (`slevomat/figma-plugins` master `feef435`, 44 tests).
+            It was needed because 1.1.0/1.2.0 couldn't handle the comma:
             - `letterSpacingFromName()`: accept `,` as well as `.` as the decimal separator
               (`-0,3%` → `-0.003em`). Today it doesn't match, and the name falls through to the old
               ÷ 100 path (right only by coincidence, because the stored value is −0.3).
@@ -120,16 +121,19 @@ components would have to become per-size px values.
               `--typography-spacing-n0,3`, and a comma is invalid in a custom property name. The same
               applies to JSON and Style Dictionary keys.
             - Add tests for `-0,3%` → `--typography-spacing-n0_3: -0.003em`.
-      - [ ] **Brand styles need Kensington.** Figma can't edit a text style whose font isn't
+      - [x] **Brand styles need Kensington.** Done by the owner on 2026-11-06: both are at `3%`,
+            typed, with no binding. Figma can't edit a text style whose font isn't
             installed, and the scripting environment doesn't have Kensington. Manual step in Figma
             with the font installed: on `Brand/Heading/lg` and `Brand/Heading/xl`, detach the
             letter-spacing variable and type `3%`.
-      - [ ] Remove the seven old variables (`tighter … ultra-wide`) only **after** the Brand styles
+      - [x] Removed 2026-11-06, after checking that no style or alias referenced them. Rule followed: remove the seven old variables (`tighter … ultra-wide`) only **after** the Brand styles
             are unbound. Only the two Brand styles reference them; no variable aliases them. Deleting
             them earlier would leave the styles with a typed 1 px (≈ 0.03–0.04em on export). Nodes
             bound directly on the canvas keep their current value when a variable is deleted. Library
             consumers lose the link, but nothing is scoped to bind them any more.
-- [ ] **4. Export and diff.** Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
+- [ ] **4. Export and diff.** Expected from a resolved export with exporter ≥ 1.2.1: `--typography-spacing-n2`
+      `-0.02em`, `n1` `-0.01em`, `n0_3` `-0.003em`, `0` `0`, `3` `0.03em`; Brand lg/xl `0.03em`;
+      no warnings. Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
       change goes into `CHANGELOG.md` and the Storybook Changelog story (old → new). The rename
       is a breaking token change.
 - [ ] **5. Components:** `page-header` (`var(--typography-spacing-extra-wide, 1px)` →
