@@ -148,8 +148,15 @@ fixes.
             the five styles export `var(--typography-<role>-line-height)`; the Layout line-height
             and size values in all ten modes equal `tokens.css` (138/143/130/133/138 % → 150/157/
             125/130/133 % from `md`).
-      - [ ] Resolved-mode export (JSON, which production consumes): heading lg `130%` (not `26px`), no
-            `-px` anywhere, no fallback warnings.
+      - [x] Resolved-mode JSON export (v1.2.0, 2026-11-06T15:19): heading lg `130%`, md `133%`, sm
+            `138%`, body md `138%`, body sm `143%`. These are the `default`-mode ratios, never pixels. No `-px`
+            anywhere. Compared with production's `typography.json` (export of 2026-06-04), the only
+            differences in the type styles are:
+            - body md 150 → 138 %, body sm 150 → 143 %, heading lg 125 → 130 %. Intended: this is
+              production's base value, used below 360 px, so the audit's < 360 px bug is fixed.
+            - **brand lg letter spacing 0.03em → 0.01em. Unintended.** The Figma style is bound to
+              `extra-wide` (see plan 015). **Don't hand an export to production before plan 015 phase 3**,
+              or brand lg loses its tracking until the next export.
       - [x] `tokens.css` unchanged by the line-height part (checked against the references export
             above). Storybook Tier values come from `tokens.json`, which hasn't been re-exported, so
             they can't have changed yet. Re-check when it is.
@@ -160,7 +167,10 @@ fixes.
         `:root`, that is a CSS cycle and the value becomes invalid. `tokens.css` isn't affected,
         because it is merged by hand and has no composite block, and production consumes resolved JSON. But the
         exporter should skip a composite line that would reference its own name. Exporter follow-up.
-      - [ ] Production's Style Dictionary build ignores the new `$metadata` block.
+      - [ ] Production's Style Dictionary build ignores the new `$metadata` block. Production's JSON
+            already carries `$metadata` (exportDate, exportMode, figmaFile) without trouble. New in it are
+            `exporterVersion` and a nested `settings` object, so one build run is needed to confirm. That
+            needs the production side.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
       It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
       for any new `-px` variable. Before building it, compare it with the community plugin "Unitless Line
