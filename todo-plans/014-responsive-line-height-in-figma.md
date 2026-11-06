@@ -1,7 +1,7 @@
 ---
 id: 014
 title: Responsive line height in Figma text styles
-status: draft
+status: in-progress
 created: 2026-11-05
 updated: 2026-11-06
 owner: Lexislav
