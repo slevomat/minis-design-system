@@ -65,17 +65,18 @@ Treat letter spacing like the line-height ratios:
   2026-11-06), exactly like `line-height/130%` → `130%`. The exporter derives the CSS value from
   the name, so the stored number doesn't matter. Only the values the styles actually use:
 
-  | Figma variable | CSS name (proposed) | CSS value | Used by |
+  | Figma variable | CSS name | CSS value | Used by |
   |---|---|---|---|
-  | `Typography/spacing/-2%` | `--typography-spacing-minus-2` | `-0.02em` | Heading 2xl/xl/md/sm |
-  | `Typography/spacing/-1%` | `--typography-spacing-minus-1` | `-0.01em` | Heading lg |
-  | `Typography/spacing/-0.3%` | `--typography-spacing-minus-0-3` | `-0.003em` | Body md/sm |
+  | `Typography/spacing/-2%` | `--typography-spacing-n2` | `-0.02em` | Heading 2xl/xl/md/sm |
+  | `Typography/spacing/-1%` | `--typography-spacing-n1` | `-0.01em` | Heading lg |
+  | `Typography/spacing/-0.3%` | `--typography-spacing-n0_3` | `-0.003em` | Body md/sm |
   | `Typography/spacing/0%` | `--typography-spacing-0` | `0` | Captions, labels |
   | `Typography/spacing/3%` | `--typography-spacing-3` | `0.03em` | Brand lg/xl |
 
   The CSS names need one exporter rule. Today `sanitizeCSSSegment()` only strips `%` and spaces,
   so `-0.3%` would become `--typography-spacing--0.3`, and a dot isn't valid in a custom
-  property name. Proposed: a leading `-` becomes `minus-`, and `.` becomes `-`.
+  property name. Rule (owner, 2026-11-06): a leading `-` becomes `n`, and `.` becomes `_`.
+  So `-0.3%` → `--typography-spacing-n0_3`.
   The old `tighter … ultra-wide` names are removed.
 - **Text styles keep a typed-in percentage.** A percentage already scales with size, so there's
   no need for a `-px` set as in plan 014. The spacing variables get no `LETTER_SPACING` scope, so
@@ -95,8 +96,8 @@ components would have to become per-size px values.
 
 - [x] **0. Production values.** Done 2026-11-05 (see "Production audit" below).
 - [x] **1. Decide** the unit, the names and the Brand value. Done 2026-11-06, see "Decisions".
-- [ ] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the `minus-` /
-      `.` → `-` name rule, drop the "bound = percent" special case, fix the `formatFloat()` comment,
+- [ ] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the name rule
+      (leading `-` → `n`, `.` → `_`), drop the "bound = percent" special case, fix the `formatFloat()` comment,
       update `TOKEN_CHANGES.md`. Ship it in the same release as plan 014 phase 1.
 - [ ] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
       `LETTER_SPACING` scope), unbind both Brand styles and type 3 %.
@@ -108,7 +109,7 @@ components would have to become per-size px values.
       (`-0.01em`) switch to the tokens.
 - [ ] **6. Docs:** `docs/ai-prompts/components/page-header.md` (letter-spacing row:
       `--typography-spacing-extra-wide` 1px → `--typography-spacing-3` 0.03em),
-      `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-minus-1`), and a
+      `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-n1`), and a
       letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
       part of the 008 skill (plan 014 phase 7). Remove the "outdated" comment from `tokens.css`.
 
@@ -158,6 +159,7 @@ What this means:
 
 ## Open questions
 
-1. **CSS names for minus and decimal values.** Proposed: `--typography-spacing-minus-2`,
-   `…-minus-0-3`, `…-0`, `…-3`. Alternatives: `…-n2`, or per-mille without decimals
-   (`…-minus-30` for −3 ‰). Settle this before phase 2, because it's the exporter's rule.
+None. The last one, CSS names for minus and decimal values, was answered on 2026-11-06: a leading
+`-` becomes `n` and `.` becomes `_` (`--typography-spacing-n0_3`). An `n` prefix keeps the
+names short. An underscore is valid in a custom property name and visibly isn't a word
+separator, so `n0_3` can't be misread as 0 and 3.
