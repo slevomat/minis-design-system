@@ -125,7 +125,7 @@ export const pageHeaderStyles = css`
     /* responsive token: 32px at base → 56px at xl+ breakpoint */
     font-size: var(--typography-brand-xl-size, 32px);
     line-height: var(--typography-brand-xl-line-height, 1.1);
-    letter-spacing: var(--typography-spacing-extra-wide, 1px);
+    letter-spacing: var(--typography-spacing-3, 0.03em);
     text-transform: uppercase;
     color: var(--page-header-text);
     text-align: center;
@@ -181,7 +181,7 @@ export const pageHeaderStyles = css`
     font-size: var(--typography-size-md, 16px);
     font-weight: var(--typography-weight-regular, 400);
     line-height: 1.5;
-    letter-spacing: -0.003em;
+    letter-spacing: var(--typography-spacing-n0_3, -0.003em);
     color: var(--page-header-text);
     text-align: center;
     margin: 0;
@@ -205,7 +205,7 @@ export const pageHeaderStyles = css`
     font-size: var(--typography-heading-lg-size, 20px);
     font-weight: var(--typography-weight-bold, 700);
     line-height: var(--typography-heading-lg-line-height, 1.3);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--typography-spacing-n2, -0.02em);
     color: var(--page-header-text);
     text-align: left;
   }
@@ -236,7 +236,7 @@ export const pageHeaderStyles = css`
     font-family: var(--typography-font-family-sans, Inter, sans-serif);
     font-size: var(--typography-size-md, 16px);
     line-height: 1.5;
-    letter-spacing: -0.003em;
+    letter-spacing: var(--typography-spacing-n0_3, -0.003em);
     color: var(--page-header-text);
   }
 
@@ -254,7 +254,7 @@ export const pageHeaderStyles = css`
     font-size: var(--typography-size-md, 16px);
     font-weight: var(--typography-weight-regular, 400);
     line-height: 1.5;
-    letter-spacing: -0.003em;
+    letter-spacing: var(--typography-spacing-n0_3, -0.003em);
     color: var(--page-header-text);
     text-decoration: underline;
     text-decoration-thickness: from-font;

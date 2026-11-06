@@ -36,6 +36,7 @@ docs/
 - **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (`'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` — banner headlines only). **Kensington is Slevomat-proprietary and NOT in the repo** — Bebas Neue (Google Fonts) is the public fallback. Both faces are all-caps and single-weight, so brand text is always `text-transform: uppercase` at `--typography-brand-weight` (400) — never `--typography-weight-bold`, which synthesises a fake bold. To use the real font locally, see `packages/tokens/src/fonts/README.md`.
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
+- **Typography letter spacing**: `--typography-spacing-{n2|n1|n0_3|0|3}` (em; the name is the percentage of the font size, `n` = minus, `_` = decimal point: `n0_3` = −0.3 % = `-0.003em`). In Figma they are `Typography/spacing/-2%` … `-0,3%` (Figma forbids `.` in names) and are **not bindable**: text styles type the percentage.
 - **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
 - **Figma `default` has no CSS suffix**: the exporter drops every path segment named `default`, so `Color/Border/default` → `--color-border` (grey-80) and `Interaction/primary/default/surface` → `--color-interaction-primary-surface`. **`--color-border-default` does not exist** — never guess a `-default` name from Figma. See "Token exports" → exporter settings.
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border` + `--color-border-{subtle|strong|focus|invalid|valid}`, `--color-separator` (alpha — black 5% light / white 35% dark, so rules read on any surface; `--separator-color` and the accordion divider both resolve to it), `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
@@ -130,9 +131,9 @@ Current plans:
 - `todo-plans/014-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
   Figma text styles follow Layout modes; needs exporter changes first (Figma treats every bound
   line-height value as pixels).
-- `todo-plans/015-letter-spacing-tokens.md` — **high priority.** `--typography-spacing-*` means
-  px in `tokens.css`, em in the exporter and px in Figma, and `wide` has different values in Figma
-  and CSS. Check the `--typography-spacing-*` lines of every token export diff by hand until it's resolved.
+- `todo-plans/015-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
+  (`--typography-spacing-n2` …). Phase 4 landed 2026-11-06; phases 5–6 (components, docs) mostly done
+  with it — check the plan for what is left.
 
 ## Changelog rules
 

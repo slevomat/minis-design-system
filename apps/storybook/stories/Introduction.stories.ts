@@ -578,6 +578,41 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-06 (letter spacing named by percentage; Figma line height per Layout mode) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-06" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-06</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-06">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens — letter spacing named by percentage</h3>
+      <p>The old <code>--typography-spacing-*</code> block was a February 2026 leftover: px values and names that no longer matched Figma or production. Letter spacing is now em, so it scales with the font size, and each name carries its percentage: <code>n</code> = minus, <code>_</code> = decimal point.</p>
+      <ul>
+        <li><strong>Removed</strong>: <code>--typography-spacing-normal</code> (<code>0px</code>), <code>-tight</code> (<code>-0.16px</code>), <code>-tighter</code> (<code>-0.32px</code>), <code>-wide</code> (<code>0.4px</code>), <code>-wider</code> (<code>0.8px</code>). Nothing in the components used them.</li>
+        <li><strong>Added</strong>: <code>--typography-spacing-0: 0</code>, <code>--typography-spacing-3: 0.03em</code> (Brand heading lg/xl), <code>--typography-spacing-n0_3: -0.003em</code> (Body md/sm), <code>--typography-spacing-n1: -0.01em</code> (Heading lg), <code>--typography-spacing-n2: -0.02em</code> (Heading 2xl/xl/md/sm).</li>
+        <li>Figma: <code>Typography/spacing/-2%</code>, <code>-1%</code>, <code>-0,3%</code> (Figma forbids a dot in names), <code>0%</code>, <code>3%</code>. Text styles type the percentage instead of binding them, because Figma applies a bound number as pixels. Brand heading lg/xl are now 3 %. Needs exporter 1.2.1 or newer.</li>
+      </ul>
+
+      <h3>Page header</h3>
+      <ul>
+        <li><strong>Heading letter spacing</strong>: <code>var(--typography-spacing-extra-wide, 1px)</code> → <code>var(--typography-spacing-3, 0.03em)</code>. The old token never existed, so the heading always used 1px. <strong>Visible change</strong> at the 56px desktop size: 1px → 1.68px (at 32px it stays about 1px).</li>
+        <li>Location switcher <code>-0.02em</code> → <code>--typography-spacing-n2</code>; description, "more" content and its toggle <code>-0.003em</code> → <code>--typography-spacing-n0_3</code>. Same values.</li>
+      </ul>
+
+      <h3>Topbar</h3>
+      <ul>
+        <li><code>vibe-apps</code> app name: <code>-0.01em</code> → <code>--typography-spacing-n1</code>. Same value.</li>
+      </ul>
+
+      <h3>Figma — line height follows the Layout modes</h3>
+      <ul>
+        <li>Heading lg/md/sm and Body md/sm bind new Figma-only variables <code>typography/&lt;role&gt;/line-height-px</code> (rounded size × ratio per Layout mode), so their line height changes with the mode, as font size already did. The exporter (1.1.0 or newer) skips them; <code>tokens.css</code> is unchanged.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-10-29 (icons synced with Slevomat Icons 2.0) -->
       <div class="cl-heading">
         <h2 id="2026-10-29" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-10-29</h2>

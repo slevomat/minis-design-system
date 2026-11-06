@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-06
+
+### Tokens — letter spacing named by percentage (todo-plans/015)
+
+The old `--typography-spacing-*` block was a February 2026 leftover: px values and names that no longer matched Figma or production (`wide` was 0.4px here but 0.8 in Figma). Letter spacing is now em, so it scales with the font size, and each name carries its percentage: `n` = minus, `_` = decimal point.
+
+- **Removed**: `--typography-spacing-normal` (`0px`), `--typography-spacing-tight` (`-0.16px`), `--typography-spacing-tighter` (`-0.32px`), `--typography-spacing-wide` (`0.4px`), `--typography-spacing-wider` (`0.8px`). Nothing in `packages/components` used them.
+- **Added**: `--typography-spacing-0: 0`, `--typography-spacing-3: 0.03em` (Brand heading lg/xl), `--typography-spacing-n0_3: -0.003em` (Body md/sm), `--typography-spacing-n1: -0.01em` (Heading lg), `--typography-spacing-n2: -0.02em` (Heading 2xl/xl/md/sm). Production's Stylus build already used em with the old names; it gets the new names on its next export.
+- Figma: the variables are `Typography/spacing/-2%`, `-1%`, `-0,3%` (Figma forbids `.` in names), `0%` and `3%`. Text styles type the percentage instead of binding them, because Figma applies a bound number as pixels. Brand heading lg/xl are now 3 % (were bound to a 1px variable). Needs exporter ≥ 1.2.1.
+
+### Page header
+
+- **Heading letter spacing**: `var(--typography-spacing-extra-wide, 1px)` → `var(--typography-spacing-3, 0.03em)`. The old token never existed, so the heading always used the 1px fallback. **Visible change**: about 1px at 32px is unchanged (0.96px), but at the 56px desktop size it grows from 1px to 1.68px.
+- Location switcher `-0.02em` → `--typography-spacing-n2`; description, "more" content and its toggle `-0.003em` → `--typography-spacing-n0_3`. Same values, no visual change.
+
+### Topbar
+
+- `vibe-apps` app name: `-0.01em` → `--typography-spacing-n1`. Same value, no visual change.
+
+### Figma — line height follows the Layout modes (todo-plans/014)
+
+- Heading lg/md/sm and Body md/sm bind new Figma-only variables `typography/<role>/line-height-px` (rounded size × ratio per Layout mode), so their line height now changes with the mode, as font size already did. The exporter (≥ 1.1.0) skips them; `tokens.css` is unchanged.
+
 ## 2026-10-29
 
 ### Tokens package — exports only what the build writes

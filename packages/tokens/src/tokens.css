@@ -291,11 +291,14 @@
   --typography-size-3xl: var(--linear-sp-linear-8);
   --typography-size-4xl: var(--linear-sp-linear-10);
   --typography-size-5xl: var(--linear-sp-linear-14);
-  --typography-spacing-normal: 0px;
-  --typography-spacing-tight: -0.16px;
-  --typography-spacing-tighter: -0.32px;
-  --typography-spacing-wide: 0.4px;
-  --typography-spacing-wider: 0.8px;
+  /* Letter spacing as a share of the font size (em), so it scales with every size.
+     The name carries the percentage: n = minus, _ = decimal point (Figma: "-0,3%").
+     Figma text styles type the percentage; these variables are not bindable there. */
+  --typography-spacing-0: 0;
+  --typography-spacing-3: 0.03em;       /* Brand heading lg/xl */
+  --typography-spacing-n0_3: -0.003em;  /* Body md/sm */
+  --typography-spacing-n1: -0.01em;     /* Heading lg */
+  --typography-spacing-n2: -0.02em;     /* Heading 2xl/xl/md/sm */
   --typography-weight-light: 300;
   --typography-weight-regular: 400;
   --typography-weight-medium: 500;

@@ -365,7 +365,7 @@ variants. They are a by-product of the Figma setup, not seven code concepts.
 | Font weight | `--typography-brand-weight` | 400 |
 | Font size | `--typography-brand-xl-size` | 32px (mobile) → 56px (desktop ≥xl) |
 | Line height | `--typography-brand-xl-line-height` | 1.1 |
-| Letter spacing | `--typography-spacing-extra-wide` | 1px |
+| Letter spacing | `--typography-spacing-3` | 0.03em (3 % of the font size) |
 | Transform | — | `uppercase` |
 
 > **The brand face is not distributed.** Kensington Compressed Bold is
