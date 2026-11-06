@@ -151,7 +151,7 @@ The whole variant is these two things. Don't try to add buttons, a search field 
 - Icons in tertiary buttons use `size="16"` (sm button size)
 - Actions gap is 10px
 - `vibe-apps` is logo + app name and nothing else — the Figma frame has no search, no buttons and no avatar on that variant
-- `vibe-apps` app name: **left-aligned**, directly after the logo — 32px from the logo artwork (the logo's own 16px right padding + a 16px gap). Heading/lg — `--typography-heading-lg-size` (20px → 24px at ≥1480px), `--typography-weight-semibold`, line-height 1.25, letter-spacing −1% (`--typography-spacing-n1`, `-0.01em`)
+- `vibe-apps` app name: **left-aligned**, directly after the logo — 32px from the logo artwork (the logo's own 16px right padding + a 16px gap). Heading/lg — `--typography-heading-lg-size` (20px → 24px at ≥768px), `--typography-weight-semibold`, line-height 1.25, letter-spacing −1% (`--typography-spacing-n1`, `-0.01em`)
 - The search field in the Figma frame is a **screenshot of the live site**, not a design-system component (Roboto italic, hardcoded black border) — do not copy its styling. Slot a real input and style it with the DS tokens.
 - The avatar + credit pill in the Figma frame are likewise a pasted screenshot; build them from `<minis-button>` / your own markup in the `actions` slot.
 

@@ -609,6 +609,17 @@ const changelogHTML = `
       <h3>Figma — line height follows the Layout modes</h3>
       <ul>
         <li>Heading lg/md/sm and Body md/sm bind new Figma-only variables <code>typography/&lt;role&gt;/line-height-px</code> (rounded size × ratio per Layout mode), so their line height changes with the mode, as font size already did. The exporter (1.1.0 or newer) skips them; <code>tokens.css</code> is unchanged.</li>
+        <li>The <code>-px</code> and new <code>Typography/spacing/*</code> variables carry Web Code Syntax, so Dev Mode shows the CSS token (<code>var(--typography-heading-lg-line-height)</code>) instead of a pixel value.</li>
+        <li>Ratio variables have no scopes any more, so they can't be bound by accident (binding gave e.g. 1.3px).</li>
+        <li>Line-height primitive values corrected to match their names: <code>140%</code> 1.96 → 1.40, <code>90%</code> −0.10 → 0.90, <code>130%</code> / <code>110%</code> restored. CSS unaffected.</li>
+        <li>Requires the token exporter <strong>1.2.1</strong>.</li>
+      </ul>
+
+      <h3>Docs</h3>
+      <ul>
+        <li>New <code>docs/ai-prompts/typography.md</code>: a self-contained guide covering type roles per breakpoint, CSS tokens, the Figma rules, the exporter, the production (Nette/Stylus) mapping, and how to change typography. Linked from <code>index.md</code>, <code>getting-started.md</code> and <code>CLAUDE.md</code>.</li>
+        <li>Design Tokens: a <strong>Letter Spacing</strong> table on the Typography page; Text Styles rows show their letter-spacing token.</li>
+        <li>Topbar docs: Heading/lg steps at ≥768px (was wrongly ≥1480px).</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>

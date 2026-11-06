@@ -90,7 +90,7 @@ export const topbarStyles = css`
     font-weight: var(--typography-weight-semibold);
     line-height: var(--typography-heading-lg-line-height);
     /* Figma: letterSpacing -1% of the heading size — an em token keeps it
-       correct when --typography-heading-lg-size steps 20px → 24px at ≥1480px. */
+       correct when --typography-heading-lg-size steps 20px → 24px at ≥768px. */
     letter-spacing: var(--typography-spacing-n1);
     color: var(--topbar-app-name-color, var(--color-text-primary));
   }

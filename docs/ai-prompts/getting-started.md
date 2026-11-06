@@ -166,6 +166,23 @@ Load both webfonts with a single Google Fonts request:
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap">
 ```
 
+**Sizes, line heights and letter spacing** come from role tokens that change with the viewport.
+Apply a role through its part tokens:
+
+```css
+.title {
+  font-size: var(--typography-heading-lg-size);          /* 20px → 24px from 768px */
+  font-weight: var(--typography-weight-semibold);
+  line-height: var(--typography-heading-lg-line-height); /* 130% → 125% from 768px */
+  letter-spacing: var(--typography-spacing-n1);          /* -0.01em */
+}
+```
+
+Line height is always a percentage and letter spacing always em, never px. Letter-spacing tokens are
+named by percentage: `--typography-spacing-n2` (−2 %), `-n1`, `-n0_3` (−0.3 %), `-0`, `-3` (3 %).
+The full role table, the Figma rules and the production mapping are in
+[typography.md](./typography.md).
+
 ### Interactive States
 ```css
 --color-interaction-primary-surface

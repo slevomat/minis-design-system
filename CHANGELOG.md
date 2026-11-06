@@ -24,6 +24,17 @@ The old `--typography-spacing-*` block was a February 2026 leftover: px values a
 ### Figma — line height follows the Layout modes (todo-plans/014)
 
 - Heading lg/md/sm and Body md/sm bind new Figma-only variables `typography/<role>/line-height-px` (rounded size × ratio per Layout mode), so their line height now changes with the mode, as font size already did. The exporter (≥ 1.1.0) skips them; `tokens.css` is unchanged.
+- The `-px` and the new `Typography/spacing/*` variables carry Web Code Syntax (`var(--typography-heading-lg-line-height)`, `var(--typography-spacing-n2)` …), so Dev Mode shows the CSS token instead of a pixel value.
+- Ratio variables (`Typography/line-height/N%`, Layout `typography/*/*/line-height`) have no scopes any more, so they can't be bound by accident; binding them gave e.g. 1.3px.
+- Line-height primitive values corrected to match their names (CSS unaffected, the exporter reads the name): `Typography/line-height/140%` 1.96 → 1.40, `90%` −0.10 → 0.90, `130%` and `110%` restored to 1.30 and 1.10 after an experiment.
+- Requires the token exporter **1.2.1** (`slevomat/figma-plugins`).
+
+### Docs
+
+- New `docs/ai-prompts/typography.md`: a self-contained guide covering the type roles with sizes, line heights and letter spacing per breakpoint, the CSS tokens, the Figma rules (`-px` variables, typed percentages), the exporter, the production (Nette/Stylus) mapping, and how to change typography. It is linked from `index.md`, `getting-started.md` (which also gained a short sizes / line height / letter spacing section) and `CLAUDE.md`.
+- `CLAUDE.md` → Token exports: a typography subsection (Figma-only `-px` variables, values from names, exporter ≥ 1.2.1).
+- Storybook Design Tokens: a **Letter Spacing** table on the Typography page, and each Text Styles row shows its letter-spacing token.
+- Topbar docs and comment: Heading/lg steps 20 → 24px at ≥768px (was wrongly ≥1480px).
 
 ## 2026-10-29
 

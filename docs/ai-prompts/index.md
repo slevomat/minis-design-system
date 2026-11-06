@@ -4,6 +4,9 @@ Complete guide for using Mini*S with AI code generation tools (Cursor, Claude Co
 
 ## Quick Navigation
 
+### 🔤 Foundations
+- [Typography](./typography.md) - Type roles with their sizes, line heights and letter spacing per breakpoint; CSS tokens; how Figma, the token exporter and production (Nette/Stylus) represent them; how to change typography
+
 ### 📦 Components
 Individual UI elements with props and variants.
 
@@ -73,6 +76,7 @@ without CLAUDE.md or repository access. Load files in this order:
 
 1. **Always**: this file (`index.md`) + [`getting-started.md`](./getting-started.md) + [`principles.md`](./principles.md)
    — setup, token reference, and the rules that keep generated code on-system.
+   For anything involving text styles, also [`typography.md`](./typography.md).
 2. **Per task**: the `components/*.md` file for each component you're using.
 3. **For full pages**: the relevant `layouts/*.md` guide (breakpoint tiers, grid, page structure).
 

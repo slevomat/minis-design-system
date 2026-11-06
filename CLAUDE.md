@@ -256,6 +256,12 @@ The export comes from the in-house Figma plugin `minis-designtokens-exporter` (s
 
 After a re-export, spot-check that `--color-border`, `--color-separator` and `--color-interaction-primary-surface` still exist before committing.
 
+### Typography in the export (exporter ≥ 1.2.1 required)
+
+- **`typography/<role>/line-height-px`** (Layout collection) are **Figma-only**. They are generated (round(size × ratio) per Layout mode) so text styles can follow the modes, because Figma applies any bound number as px. The exporter skips them in every output, and in resolved mode it exports the role's mobile ratio as a percentage instead. Never copy a `-px` value into CSS.
+- **Line-height and letter-spacing values come from the variable name**, not the stored number: `Typography/line-height/130%` → `130%`, `Typography/spacing/-0,3%` → `--typography-spacing-n0_3: -0.003em` (leading `-` → `n`, `.`/`,` → `_`; Figma forbids `.` in names, so decimals use a comma).
+- Full method: `docs/ai-prompts/typography.md`.
+
 ### Figma-export naming drift (Layout collection)
 
 Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the components actually use. When reading `tokens.json`, translate:
@@ -290,6 +296,7 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/index.md` — navigation index
 - `docs/ai-prompts/getting-started.md` — setup and token reference
 - `docs/ai-prompts/principles.md` — design principles (e.g. prefer active over disabled)
+- `docs/ai-prompts/typography.md` — type roles, tokens, Figma `-px` / typed-% rules, exporter, production mapping; self-contained, portable
 - `docs/ai-prompts/components/button.md`
 - `docs/ai-prompts/components/pill-counter.md`
 - `docs/ai-prompts/components/icon.md`

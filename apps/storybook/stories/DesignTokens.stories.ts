@@ -107,6 +107,8 @@ type StyleRowDef = {
   sizeFallback: string;
   lhToken?: string;
   lhValue: string;
+  /** Letter-spacing token (em, named by percentage). */
+  ls: string;
   weight: string;
   preview: string;
 };
@@ -125,11 +127,12 @@ const styleRow = (d: StyleRowDef) => {
         <div style="font-size:.75em;color:var(--color-text-secondary,#6b6b70);line-height:1.7">
           <div>size&nbsp;·&nbsp;<code>${d.sizeToken}</code></div>
           <div>line-height&nbsp;·&nbsp;${lhDisplay}</div>
+          <div>letter-spacing&nbsp;·&nbsp;<code>${d.ls}</code></div>
         </div>
       </div>
     </td>
     <td style="${td}"><span data-live-spec="${d.sizeToken}" data-weight="${d.weight}" data-lh="${lhAttr}"></span></td>
-    <td style="${td}"><span style="font-size:var(${d.sizeToken}, ${d.sizeFallback});font-weight:${d.weight};line-height:${lhCss};display:block">${d.preview}</span></td>
+    <td style="${td}"><span style="font-size:var(${d.sizeToken}, ${d.sizeFallback});font-weight:${d.weight};line-height:${lhCss};letter-spacing:var(${d.ls});display:block">${d.preview}</span></td>
   </tr>`;
 };
 
@@ -684,6 +687,26 @@ export const Typography: Story = {
           </tr>`).join('')}
         </tbody>
       </table>
+
+      <h2>Letter Spacing</h2>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">A share of the font size (em), so it scales with every size. The name carries the percentage: <code>n</code> = minus, <code>_</code> = decimal point. In Figma these are <code>Typography/spacing/-2%</code> … <code>-0,3%</code>; they can't be bound there (Figma would apply them as pixels), so text styles type the percentage instead.</p>
+      <table style="${ts}">
+        <thead><tr><th style="${th}">Token</th><th style="${th}">Value</th><th style="${th}">Used by</th><th style="${th}">Preview</th></tr></thead>
+        <tbody>
+          ${[
+            ['--typography-spacing-n2', '-0.02em', 'Heading 2xl / xl / md / sm'],
+            ['--typography-spacing-n1', '-0.01em', 'Heading lg'],
+            ['--typography-spacing-n0_3', '-0.003em', 'Body md / sm'],
+            ['--typography-spacing-0', '0', 'Captions'],
+            ['--typography-spacing-3', '0.03em', 'Brand heading lg / xl'],
+          ].map(([token, val, use]) => `<tr>
+            <td style="${td}"><code>${token}</code></td>
+            <td style="${td}">${val}</td>
+            <td style="${td}">${use}</td>
+            <td style="${td}"><span style="font-size:20px;font-weight:600;letter-spacing:var(${token},${val})">Víkend v Tatrách</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
     </div>
   `),
 };
@@ -730,11 +753,11 @@ export const TextStyles: Story = {
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
-            { label: 'Heading / 2XL', composite: '--typography-heading-2xl', sizeToken: '--typography-heading-2xl-size', sizeFallback: '40px', lhValue: 'normal', weight: '600', preview: 'Heading 2XL' },
-            { label: 'Heading / XL', composite: '--typography-heading-xl', sizeToken: '--typography-heading-xl-size', sizeFallback: '32px', lhValue: 'normal', weight: '600', preview: 'Heading XL' },
-            { label: 'Heading / LG', composite: '--typography-heading-lg', sizeToken: '--typography-heading-lg-size', sizeFallback: '24px', lhToken: '--typography-heading-lg-line-height', lhValue: '125%', weight: '600', preview: 'Heading LG' },
-            { label: 'Heading / MD', composite: '--typography-heading-md', sizeToken: '--typography-heading-md-size', sizeFallback: '20px', lhToken: '--typography-heading-md-line-height', lhValue: '130%', weight: '600', preview: 'Heading MD' },
-            { label: 'Heading / SM', composite: '--typography-heading-sm', sizeToken: '--typography-heading-sm-size', sizeFallback: '18px', lhToken: '--typography-heading-sm-line-height', lhValue: '133%', weight: '600', preview: 'Heading SM' },
+            { label: 'Heading / 2XL', composite: '--typography-heading-2xl', ls: '--typography-spacing-n2', sizeToken: '--typography-heading-2xl-size', sizeFallback: '40px', lhValue: 'normal', weight: '600', preview: 'Heading 2XL' },
+            { label: 'Heading / XL', composite: '--typography-heading-xl', ls: '--typography-spacing-n2', sizeToken: '--typography-heading-xl-size', sizeFallback: '32px', lhValue: 'normal', weight: '600', preview: 'Heading XL' },
+            { label: 'Heading / LG', composite: '--typography-heading-lg', ls: '--typography-spacing-n1', sizeToken: '--typography-heading-lg-size', sizeFallback: '24px', lhToken: '--typography-heading-lg-line-height', lhValue: '125%', weight: '600', preview: 'Heading LG' },
+            { label: 'Heading / MD', composite: '--typography-heading-md', ls: '--typography-spacing-n2', sizeToken: '--typography-heading-md-size', sizeFallback: '20px', lhToken: '--typography-heading-md-line-height', lhValue: '130%', weight: '600', preview: 'Heading MD' },
+            { label: 'Heading / SM', composite: '--typography-heading-sm', ls: '--typography-spacing-n2', sizeToken: '--typography-heading-sm-size', sizeFallback: '18px', lhToken: '--typography-heading-sm-line-height', lhValue: '133%', weight: '600', preview: 'Heading SM' },
           ].map(styleRow).join('')}
         </tbody>
       </table>
@@ -783,13 +806,13 @@ export const TextStyles: Story = {
       ${hr}
 
       <h2 style="font-size:22px;font-weight:700;margin:0 0 4px">Brand Headings</h2>
-      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Banner headlines using the brand font — Kensington where it is installed, otherwise Bebas Neue. Responsive — scales up significantly at 1480px+. Line-height is always 110% (tight, compressed feel matching the typeface). Weight is always <code>--typography-brand-weight</code> (400): both faces are single-weight, so asking for bold only produces synthetic bolding.</p>
+      <p style="font-size:14px;color:var(--color-text-secondary,#666);margin:0 0 16px">Banner headlines using the brand font — Kensington where it is installed, otherwise Bebas Neue. Responsive — scales up significantly at 1480px+. Line-height is always 110% (tight, compressed feel matching the typeface); letter spacing 3% (<code>--typography-spacing-3</code>). Weight is always <code>--typography-brand-weight</code> (400): both faces are single-weight, so asking for bold only produces synthetic bolding.</p>
       <table style="${ts}">
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
-            { label: 'Brand / LG', composite: '--typography-brand-lg', sizeToken: '--typography-brand-lg-size', sizeFallback: '24px', lhToken: '--typography-brand-lg-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky' },
-            { label: 'Brand / XL', composite: '--typography-brand-xl', sizeToken: '--typography-brand-xl-size', sizeFallback: '32px', lhToken: '--typography-brand-xl-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky každý den' },
+            { label: 'Brand / LG', composite: '--typography-brand-lg', ls: '--typography-spacing-3', sizeToken: '--typography-brand-lg-size', sizeFallback: '24px', lhToken: '--typography-brand-lg-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky' },
+            { label: 'Brand / XL', composite: '--typography-brand-xl', ls: '--typography-spacing-3', sizeToken: '--typography-brand-xl-size', sizeFallback: '32px', lhToken: '--typography-brand-xl-line-height', lhValue: '110%', weight: '400', preview: 'Skvělé nabídky každý den' },
           ].map(d => `<tr>
             <td style="${td}"><strong>${d.label}</strong></td>
             <td style="${td}">
@@ -800,11 +823,12 @@ export const TextStyles: Story = {
                   <div>size&nbsp;·&nbsp;<code>${d.sizeToken}</code></div>
                   <div>weight&nbsp;·&nbsp;<code>--typography-brand-weight</code></div>
                   <div>line-height&nbsp;·&nbsp;<code>${d.lhToken}</code></div>
+                  <div>letter-spacing&nbsp;·&nbsp;<code>${d.ls}</code></div>
                 </div>
               </div>
             </td>
             <td style="${td}"><span data-live-spec="${d.sizeToken}" data-weight="${d.weight}" data-lh="${d.lhToken}"></span></td>
-            <td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington','Bebas Neue',sans-serif);font-size:var(${d.sizeToken},${d.sizeFallback});font-weight:var(--typography-brand-weight,${d.weight});line-height:var(${d.lhToken},${d.lhValue});display:block">${d.preview}</span></td>
+            <td style="${td}"><span style="font-family:var(--typography-font-family-brand,'Kensington','Bebas Neue',sans-serif);font-size:var(${d.sizeToken},${d.sizeFallback});font-weight:var(--typography-brand-weight,${d.weight});line-height:var(${d.lhToken},${d.lhValue});letter-spacing:var(${d.ls});text-transform:uppercase;display:block">${d.preview}</span></td>
           </tr>`).join('')}
         </tbody>
       </table>
@@ -817,8 +841,8 @@ export const TextStyles: Story = {
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
-            { label: 'Body / MD', composite: '--typography-body-md', sizeToken: '--typography-size-md', sizeFallback: '16px', lhToken: '--typography-body-md-line-height', lhValue: '150%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
-            { label: 'Body / SM', composite: '--typography-body-sm', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhToken: '--typography-body-sm-line-height', lhValue: '157%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
+            { label: 'Body / MD', composite: '--typography-body-md', ls: '--typography-spacing-n0_3', sizeToken: '--typography-size-md', sizeFallback: '16px', lhToken: '--typography-body-md-line-height', lhValue: '150%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
+            { label: 'Body / SM', composite: '--typography-body-sm', ls: '--typography-spacing-n0_3', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhToken: '--typography-body-sm-line-height', lhValue: '157%', weight: '400', preview: 'The quick brown fox jumps over the lazy dog' },
           ].map(styleRow).join('')}
         </tbody>
       </table>
@@ -831,9 +855,9 @@ export const TextStyles: Story = {
         <thead><tr><th style="${th}">Style</th><th style="${th}">Token</th><th style="${th}">Spec</th><th style="${th}">Preview</th></tr></thead>
         <tbody>
           ${[
-            { label: 'Caption / SM', composite: '--typography-caption-sm', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhValue: '150%', weight: '400', preview: 'Caption small text' },
-            { label: 'Caption / XS', composite: '--typography-caption-xs', sizeToken: '--typography-size-xs', sizeFallback: '12px', lhValue: '133%', weight: '400', preview: 'Caption extra small text' },
-            { label: 'Caption / XXS', composite: '--typography-caption-xxs', sizeToken: '--typography-size-2xs', sizeFallback: '10px', lhValue: '140%', weight: '400', preview: 'Caption extra extra small text' },
+            { label: 'Caption / SM', composite: '--typography-caption-sm', ls: '--typography-spacing-0', sizeToken: '--typography-size-sm', sizeFallback: '14px', lhValue: '150%', weight: '400', preview: 'Caption small text' },
+            { label: 'Caption / XS', composite: '--typography-caption-xs', ls: '--typography-spacing-0', sizeToken: '--typography-size-xs', sizeFallback: '12px', lhValue: '133%', weight: '400', preview: 'Caption extra small text' },
+            { label: 'Caption / XXS', composite: '--typography-caption-xxs', ls: '--typography-spacing-0', sizeToken: '--typography-size-2xs', sizeFallback: '10px', lhValue: '140%', weight: '400', preview: 'Caption extra extra small text' },
           ].map(styleRow).join('')}
         </tbody>
       </table>
