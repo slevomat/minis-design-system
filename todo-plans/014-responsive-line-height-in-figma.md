@@ -130,6 +130,11 @@ fixes.
       2026-11-06: `typography/{heading/lg,heading/md,heading/sm,body/md,body/sm}/line-height-px`
       (`VariableID:6084:142`–`146`) in the Layout collection, all ten modes, rounded size × ratio. Each
       has a description saying it is Figma-only, generated, and skipped by exporter ≥ 1.1.0.
+      **Code Syntax (Web)** is set to the responsive CSS variable, e.g. `var(--typography-heading-lg-line-height)`,
+      so Dev Mode shows the token instead of the pixel value. One value covers every mode, because the
+      CSS variable itself changes per breakpoint. The idea comes from Andii Hei, "Going Unitless in Figma
+      — A Workaround" (Design Systems Collective, Jan 2026), which uses fixed variables without modes.
+      The exporter doesn't read Code Syntax.
 - [x] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm, and narrow the ratio variables' scopes.
       Done 2026-11-06. Scopes set to none (hidden from every picker) on all 11
       `Typography/line-height/N%` primitives and all 7 Layout `typography/*/*/line-height` ratios,
@@ -144,6 +149,9 @@ fixes.
       - [ ] `tokens.css` unchanged by the line-height part, and Storybook Tier values unchanged.
       - [ ] Production's Style Dictionary build ignores the new `$metadata` block.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
+      It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
+      for any new `-px` variable. Before building it, compare it with the community plugin "Unitless Line
+      Height & Tokens" (linked from the article above).
 - [ ] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
 - [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
