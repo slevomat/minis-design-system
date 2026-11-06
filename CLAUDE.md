@@ -134,6 +134,9 @@ Current plans:
 - `todo-plans/015-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
   (`--typography-spacing-n2` …). Phase 4 landed 2026-11-06; phases 5–6 (components, docs) mostly done
   with it — check the plan for what is left.
+- `todo-plans/016-production-reference-audit.md` — a repeatable audit of the read-only production
+  clone (`../slevomat`): component usage, primitive → semantic map, production's existing
+  Stylelint/KSS/BackstopJS guardrails. Feeds 001, 010–013. Never write to the production repo.
 
 ## Changelog rules
 

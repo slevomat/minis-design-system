@@ -3,7 +3,7 @@ id: 010
 title: Enforce "tokens only" with Stylelint
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -90,3 +90,10 @@ whose list of valid names is read from the built tokens — so new tokens need n
    inline styles in HTML need a different custom syntax.
 5. **Does the Nette repo use CSS, SCSS or both?** SCSS needs `postcss-scss` and has its own
    variables, which the config has to treat as literals or as tokens.
+   **Answered 2026-11-06 (plan 016):** neither — it's **Stylus**, and it already runs Stylelint on
+   it (`postcss-styl` + `stylelint-stylus`, config `build/stylelint-options.cjs`), with
+   `declaration-strict-value` on colour, `box-shadow`, `border-radius` and `font-weight`, and
+   10 custom plugins (incl. `no-deprecated-variable`). Tokens arrive as Stylus `$variables`
+   compiled to literal CSS, so the production check must accept `$variables`, not `var(--…)`.
+   Phase 3 should extend that config rather than ship a separate one; plan 016 Phase 4 lists the
+   candidate rules.
