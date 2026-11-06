@@ -126,10 +126,23 @@ fixes.
       open: a **resolved-mode** export after phase 3, where heading lg must read `130%` and not
       `26px`. Also run production's Style Dictionary build once on the next export, to confirm the new
       `$metadata.exporterVersion` / `$metadata.settings` block produces no variables.
-- [ ] **2. Figma: create the `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`.
-- [ ] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm, and narrow the ratio variables' scopes.
+- [x] **2. Figma: create the `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`. Done
+      2026-11-06: `typography/{heading/lg,heading/md,heading/sm,body/md,body/sm}/line-height-px`
+      (`VariableID:6084:142`–`146`) in the Layout collection, all ten modes, rounded size × ratio. Each
+      has a description saying it is Figma-only, generated, and skipped by exporter ≥ 1.1.0.
+- [x] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm, and narrow the ratio variables' scopes.
+      Done 2026-11-06. Scopes set to none (hidden from every picker) on all 11
+      `Typography/line-height/N%` primitives and all 7 Layout `typography/*/*/line-height` ratios,
+      brand included. Existing bindings are untouched.
 - [ ] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export
       produces the same `tokens.css`; Storybook Tier toolbar values are unchanged.
+      - [x] Figma, 2026-11-06: all five styles × three modes read back the expected size and line
+            height, and two lines measure exactly 2 × line height (15/15). The board's section 05
+            "After" row is now live.
+      - [ ] Resolved-mode export: heading lg `130%` (not `26px`), no `-px` anywhere, no fallback
+            warnings. References mode is still `var(--typography-<role>-line-height)`.
+      - [ ] `tokens.css` unchanged by the line-height part, and Storybook Tier values unchanged.
+      - [ ] Production's Style Dictionary build ignores the new `$metadata` block.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
 - [ ] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
