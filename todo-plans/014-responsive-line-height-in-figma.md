@@ -175,8 +175,10 @@ fixes.
       It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
       for any new `-px` variable. Before building it, compare it with the community plugin "Unitless Line
       Height & Tokens" (linked from the article above).
-- [ ] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
+- [x] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
+      Done 2026-11-06: the Figma board, the exporter's own docs, `CLAUDE.md` → Token exports →
+      "Typography in the export", and the portable `docs/ai-prompts/typography.md`.
 - [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
       (edit in Figma → Recalculate → export → check the `tokens.css` diff → both changelogs) as a
       section of the token-update skill in plan 008, not as a separate skill or agent. A
