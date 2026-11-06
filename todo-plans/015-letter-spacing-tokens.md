@@ -131,19 +131,27 @@ components would have to become per-size px values.
             them earlier would leave the styles with a typed 1 px (≈ 0.03–0.04em on export). Nodes
             bound directly on the canvas keep their current value when a variable is deleted. Library
             consumers lose the link, but nothing is scoped to bind them any more.
-- [ ] **4. Export and diff.** Expected from a resolved export with exporter ≥ 1.2.1: `--typography-spacing-n2`
+- [x] **4. Export and diff.** Expected from a resolved export with exporter ≥ 1.2.1: `--typography-spacing-n2`
       `-0.02em`, `n1` `-0.01em`, `n0_3` `-0.003em`, `0` `0`, `3` `0.03em`; Brand lg/xl `0.03em`;
       no warnings. Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
       change goes into `CHANGELOG.md` and the Storybook Changelog story (old → new). The rename
       is a breaking token change.
-- [ ] **5. Components:** `page-header` (`var(--typography-spacing-extra-wide, 1px)` →
+      Done 2026-11-06 (`51f51f1`). The resolved export (exporter 1.2.1, 16:05) matched exactly, the
+      `-0,3%` comma name included. `tokens.css` got the five new tokens by hand-merge (it is merged by
+      hand, see plan 014), and the old block and its "outdated" comment are gone. Both changelogs are
+      updated. **Not done:** `tokens.json` / `tokens.rgb.json` weren't re-exported. They are
+      references-mode and hex exports, and neither holds spacing tokens today (the old ones never
+      reached them). Re-export them with the next token update.
+- [x] **5. Components:** `page-header` (`var(--typography-spacing-extra-wide, 1px)` →
       `var(--typography-spacing-3)`, plus the raw `-0.02em` / `-0.003em`) and `topbar`
-      (`-0.01em`) switch to the tokens.
+      (`-0.01em`) switch to the tokens. Done in `51f51f1`. Checked in Storybook: heading 0.96px at 32px,
+      location −0.4px at 20px, text −0.048px at 16px, topbar app name −0.2px at 20px.
 - [ ] **6. Docs:** `docs/ai-prompts/components/page-header.md` (letter-spacing row:
       `--typography-spacing-extra-wide` 1px → `--typography-spacing-3` 0.03em),
       `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-n1`), and a
       letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
       part of the 008 skill (plan 014 phase 7). Remove the "outdated" comment from `tokens.css`.
+      Done in `51f51f1` except the 008 skill part, which waits for plan 014 phase 7.
 
 ## Production audit (2026-11-05)
 
