@@ -69,7 +69,7 @@ Treat letter spacing like the line-height ratios:
   |---|---|---|---|
   | `Typography/spacing/-2%` | `--typography-spacing-n2` | `-0.02em` | Heading 2xl/xl/md/sm |
   | `Typography/spacing/-1%` | `--typography-spacing-n1` | `-0.01em` | Heading lg |
-  | `Typography/spacing/-0.3%` | `--typography-spacing-n0_3` | `-0.003em` | Body md/sm |
+  | `Typography/spacing/-0,3%` (Figma forbids `.`) | `--typography-spacing-n0_3` | `-0.003em` | Body md/sm |
   | `Typography/spacing/0%` | `--typography-spacing-0` | `0` | Captions, labels |
   | `Typography/spacing/3%` | `--typography-spacing-3` | `0.03em` | Brand lg/xl |
 
@@ -109,11 +109,17 @@ components would have to become per-size px values.
       - [x] Created `Typography/spacing/-2%`, `-1%`, `0%`, `3%` (`VariableID:6087:150`–`153`) in the
             Typography collection: no scopes, Web Code Syntax `var(--typography-spacing-n2)` etc., and a
             description saying the value comes from the name.
-      - [ ] **`-0.3%` can't be created: Figma doesn't allow `.` in variable names.** Proposed
-            `Typography/spacing/-0_3%`. The underscore matches the CSS rule, so the CSS name stays
-            `--typography-spacing-n0_3`. Needs an exporter change: `letterSpacingFromName()` only
-            accepts a dot as the decimal separator. Without it the name falls through to the old ÷ 100
-            path (correct only by coincidence: stored −0.3 → −0.003em).
+      - [x] **`-0.3%` → `Typography/spacing/-0,3%`** (owner, 2026-11-06; `VariableID:6088:142`).
+            Figma doesn't allow `.` in variable names, so the decimal is written with a comma. The CSS
+            name stays `--typography-spacing-n0_3`. No other variable name in the file contains a comma.
+      - [ ] **Exporter change needed (1.1.0/1.2.0 can't handle the comma):**
+            - `letterSpacingFromName()`: accept `,` as well as `.` as the decimal separator
+              (`-0,3%` → `-0.003em`). Today it doesn't match, and the name falls through to the old
+              ÷ 100 path (right only by coincidence, because the stored value is −0.3).
+            - `encodeSignAndDecimal()`: map `,` → `_` like `.`. Today `-0,3%` would become
+              `--typography-spacing-n0,3`, and a comma is invalid in a custom property name. The same
+              applies to JSON and Style Dictionary keys.
+            - Add tests for `-0,3%` → `--typography-spacing-n0_3: -0.003em`.
       - [ ] **Brand styles need Kensington.** Figma can't edit a text style whose font isn't
             installed, and the scripting environment doesn't have Kensington. Manual step in Figma
             with the font installed: on `Brand/Heading/lg` and `Brand/Heading/xl`, detach the
