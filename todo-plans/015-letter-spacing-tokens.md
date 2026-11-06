@@ -105,6 +105,24 @@ components would have to become per-size px values.
       449 names.
 - [ ] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
       `LETTER_SPACING` scope), unbind both Brand styles and type 3 %.
+      Progress 2026-11-06:
+      - [x] Created `Typography/spacing/-2%`, `-1%`, `0%`, `3%` (`VariableID:6087:150`–`153`) in the
+            Typography collection: no scopes, Web Code Syntax `var(--typography-spacing-n2)` etc., and a
+            description saying the value comes from the name.
+      - [ ] **`-0.3%` can't be created: Figma doesn't allow `.` in variable names.** Proposed
+            `Typography/spacing/-0_3%`. The underscore matches the CSS rule, so the CSS name stays
+            `--typography-spacing-n0_3`. Needs an exporter change: `letterSpacingFromName()` only
+            accepts a dot as the decimal separator. Without it the name falls through to the old ÷ 100
+            path (correct only by coincidence: stored −0.3 → −0.003em).
+      - [ ] **Brand styles need Kensington.** Figma can't edit a text style whose font isn't
+            installed, and the scripting environment doesn't have Kensington. Manual step in Figma
+            with the font installed: on `Brand/Heading/lg` and `Brand/Heading/xl`, detach the
+            letter-spacing variable and type `3%`.
+      - [ ] Remove the seven old variables (`tighter … ultra-wide`) only **after** the Brand styles
+            are unbound. Only the two Brand styles reference them; no variable aliases them. Deleting
+            them earlier would leave the styles with a typed 1 px (≈ 0.03–0.04em on export). Nodes
+            bound directly on the canvas keep their current value when a variable is deleted. Library
+            consumers lose the link, but nothing is scoped to bind them any more.
 - [ ] **4. Export and diff.** Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
       change goes into `CHANGELOG.md` and the Storybook Changelog story (old → new). The rename
       is a breaking token change.
