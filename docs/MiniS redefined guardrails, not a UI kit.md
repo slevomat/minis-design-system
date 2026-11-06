@@ -1,6 +1,6 @@
 # Mini\*S re-definice: Kompletní re-fit design systému. Mantinely, ne UI kit.
 
-Oct 23, 2026 · @Alexandr Hudeček
+Oct 23, 2026 · @Alexandr Hudeček · aktualizováno 6. 11. 2026 (typografie: plány 014 a 015)
 
 > **Poznámka:** Tato redefinice shrnuje, co jsme se naučili za zhruba rok, kdy jsme MiniS budovali tradičně: design systém jako UI kit, kód a dokumentace. V našem prostředí tento model nefunguje tak, jak bychom potřebovali. Alespoň ne v plném rozsahu. Proto je potřeba MiniS redefinovat, případně přenastavit (re-fit), aby se stal větší oporou při rozvoji služeb Slevomatu.
 
@@ -240,7 +240,7 @@ Vrstva tokenů je vyspělá; skoro všechno, co nový model přidává nad ni, z
 
 | Oblast | Hotovo | Chybí pro tento model |
 | --- | --- | --- |
-| Tokeny | Proměnné ve Figmě (Foundation light/dark, Layout s režimy breakpointů, Theme Classic/Gift, Typography, Scales); export do tokens.json a packages/tokens; OKLCH primitivní škály | Publikovaný nebo do Nette repozitáře vložený balíček tokenů; automatický export místo ručního; tokeny za běhu (CSS custom properties) pro témata; adopce typografie |
+| Tokeny | Proměnné ve Figmě (Foundation light/dark, Layout s režimy breakpointů, Theme Classic/Gift, Typography, Scales); export do tokens.json a packages/tokens; OKLCH primitivní škály. Typografie (6. 11. 2026): textové styly ve Figmě reagují na breakpointy i řádkováním, prostrkání je v em s názvem podle procenta, exportér 1.2.1 a přenosný návod `docs/ai-prompts/typography.md` (plány 014, 015) | Publikovaný nebo do Nette repozitáře vložený balíček tokenů; automatický export místo ručního; tokeny za běhu (CSS custom properties) pro témata; dotáhnout typografii v produkci (Brand XL, přejmenované proměnné prostrkání) |
 | Recepty | Webové komponenty ve Storybooku jako reference | Latte verze stejných vzorů |
 | Skilly | Nic | Skill pro stavění, skill pro přispívání, AGENTS.md v kořeni, ideálně generované z tokenů a popisů |
 | Automatické kontroly | Nic v CI | Stylelint pravidlo pro tokeny, a11y test, kontrola AI popisů |
@@ -262,14 +262,16 @@ Analýza Nette týmu ukazuje, že adopce je skutečná, ale do cíle je daleko. 
 | `--theme-*` | 10 | 0 | 0 | 0 |
 | `--scales-*`, `--breakpoint-*` | 88 | 0 | 0 | 0 |
 
-Barvy a zaoblení se do produkce částečně dostaly, typografie téměř ne. Tokeny komponent, témat, škál a breakpointů se nepoužívají vůbec.
+Barvy a zaoblení se do produkce částečně dostaly. Tokeny komponent, témat, škál a breakpointů se nepoužívají vůbec.
+
+**Typografii tabulka podceňuje** (doplněno 6. 11. 2026). Řádek `--typography-*` počítá jen přímá použití proměnných. Produkce ale typografii MiniS používá nepřímo: mixiny `$typo-*` v `app/stylus/plugins/typography.styl` skládají role z generovaných proměnných MiniS a šablony je používají přes třídy `typo-*` zhruba v 826 souborech Latte (`typo-body-md` 1 632×, `typo-body-sm` 1 345×, `typo-heading-md` 690×, `typo-heading-lg` 580× …). Typografie tak patří spíš k nejlépe adoptovaným částem; měření adopce by mělo počítat i použití tříd.
 
 Co z toho plyne:
 
 - **Tokeny žijí jen při buildu.** Style Dictionary je převádí na Stylus proměnné a ty se vyrenderují do literálního CSS. V produkci za běhu žádné CSS custom properties MiniS nejsou, takže přepínání témat (Gift) ani tmavý režim takto nefungují.
 - **Tokeny se používají ve Stylusu, ne v Latte.** Šablony jen vybírají CSS bundle, recept proto musí být dvojice Latte + Stylus.
 - **Pravidlo „jen tokeny“ musí začít s baseline.** Při 14 tisících porušení by blokující kontrola zastavila všechno. Kontrola proto blokuje jen nová porušení a počet stávajících se sleduje jako metrika. Stylelint Stylus nativně nepodporuje, je potřeba plugin nebo vlastní kontrola.
-- **Pipeline se rozjíždí.** Exportér se spouští ručně a poslední export je novější než tokeny uložené v repozitáři.
+- **Pipeline se rozjíždí.** Exportér se spouští ručně a poslední export je novější než tokeny uložené v repozitáři. Od verze 1.2.1 (6. 11. 2026) každý export nese v `$metadata` verzi exportéru a jeho nastavení, takže je aspoň dohledatelné, čím a jak vznikl.
 - **Dobrá zpráva: jeden vstupní bod.** Web, admin, partner admin i partner guide importují společnou vrstvu `settings`, takže jedna změna zasáhne všechny povrchy.
 - **Nejrychlejší cesta k vyšší adopci.** 90 barevných aliasů v `colors.styl` lze přesměrovat na tokeny MiniS. Podíl MiniS tím vzroste bez zásahu do 279 souborů.
 - **Mobilní aplikace.** Style Dictionary už generuje i výstup pro Kotlin.
@@ -286,7 +288,7 @@ Podklady k rozhodnutím: Audit repozitáře (neověřeno)
 | --- | --- | --- | --- |
 | 1 | Heritage barvy vs. pravidlo 7 | Heritage barvy jsou součást MiniS jako vlastní vrstva tokenů označená jako legacy (ve Figmě už existuje skrytá kolekce `.heritage`). Pravidlo „jen tokeny“ pak platí v produkci hned a přechod z heritage je změna tokenů, ne výjimka z pravidla. | K validaci |
 | 2 | Fallback hodnoty ve `var()` (pravidlo 2) | Povolené jen tokenové fallbacky `var(--a, var(--b))`, literály `var(--a, #hex)` zakázané. Platí stejně pro Latte i webové komponenty. Stávající literály (75 hex, 212 px) se uklídí, dokud je Stylelint ve varovném režimu. | K validaci |
-| 3 | Kanonické názvy tokenů | Kanonický je `tokens.css`, protože ho používá kód. Názvy ve Figmě nebo exportér se upraví, aby `tokens.json` odpovídal. Registr a Stylelint čtou zbuildované CSS. | K validaci |
+| 3 | Kanonické názvy tokenů | Kanonický je `tokens.css`, protože ho používá kód. Názvy ve Figmě nebo exportér se upraví, aby `tokens.json` odpovídal. Registr a Stylelint čtou zbuildované CSS. První precedens (6. 11. 2026): pravidla exportéru pro názvy prostrkání (`-0,3%` → `--typography-spacing-n0_3`) platí stejně pro CSS, JSON i klíče pro Style Dictionary, viz plán 015. | K validaci |
 | 4 | Stávající AI vrstva (CLAUDE.md, docs/ai-prompts, skill minis-app) | Zdrojem popisů je registr a dokumentace pro AI se z něj generuje. CLAUDE.md se rozdělí na AGENTS.md se základními pravidly pro všechna prostředí a části pro jednotlivá prostředí (Latte, webové komponenty). Skill minis-app zůstává pro sandbox a dostane krok „zaregistruj jako Local“. | K validaci |
 | 5 | Code Connect | Přestat ho vyžadovat, plán Professional ho neumožňuje publikovat. Stávající `.figma.ts` zůstávají jako volitelné. Klíč komponenty ve Figmě a odkaz na Storybook patří do `meta.implementations.figma` v registru. | K validaci |
 | 6 | Mobilní aplikace | Mobilní aplikace je vydaná a už převzala hodnoty tokenů MiniS; v plánu je převzít i jejich názvy a strukturu. Je tedy třetím cílem portování tokenů. Zda převezme i webové komponenty, zůstává otevřené (viz otázky níže). | Přijato |
@@ -300,11 +302,11 @@ Návrh: změny zavádět po fázích, od dohody přes tokeny a kontroly k regist
 | Fáze | Kdy | Co | Hotovo, když | todo-plans |
 | --- | --- | --- | --- | --- |
 | 0. Dohoda | listopad 2026 | Projít brief s vedením designu a vývoje a potvrdit společnou odpovědnost; jmenovat schvalovací skupinu; dohodnout s Nette týmem, kde MiniS v jejich repozitáři žije; uzavřít rozhodnutí 1–3 | Závazek týmu potvrzený, schvalovací skupina jmenovaná, rozhodnutí 1–3 přijatá | Nový plán |
-| 1. Tokeny v Nette | listopad–prosinec | Automatický export tokenů místo ručního; distribuce jako verzovaný balíček a zdroj ve formátu Style Dictionary; přesměrovat barevné aliasy v colors.styl na MiniS; změřit baseline adopce | Export běží bez ruční práce; podíl MiniS roste z výchozích \~18 % \[cíl \_\_\_ %\] | 001 heritage (existuje); plán distribuce tokenů (ověřit) |
+| 1. Tokeny v Nette | listopad–prosinec | Automatický export tokenů místo ručního; distribuce jako verzovaný balíček a zdroj ve formátu Style Dictionary; přesměrovat barevné aliasy v colors.styl na MiniS; změřit baseline adopce | Export běží bez ruční práce; podíl MiniS roste z výchozích \~18 % \[cíl \_\_\_ %\] | 001 heritage (existuje); 011 distribuce tokenů (produkce už Style Dictionary používá); 014, 015 typografie |
 | 2. Kontroly | prosinec–leden | Kontrola tokenů pro Stylus s baseline, nejdřív varování a pak blokující; pravidlo pro fallbacky ve var(); a11y test v CI | CI blokuje nová porušení a počet stávajících klesá | Plán Stylelint (ověřit) |
 | 3. Registr a skilly | leden | registry.json ve formátu shadcn s JSON Schema pro meta; naplnit webovými komponentami a komponentami z produkce; kontrola registru v CI; AGENTS.md a skill pro přispívání v Nette repozitáři; skill minis-app s krokem registrace | AI session v Nette repozitáři najde existující prvek dřív, než postaví nový | Plány skillů (ověřit); registr: nový plán |
 | 4. Recepty a první revize | únor | Tři nejpoužívanější vzory jako recepty Latte + Stylus s AI popisem; návod portování pro Latte/Nette; první měsíční revize registru a první schválený návrh | První Local vzor prošel schválením a je v Základu | Nový plán |
-| 5. Rozšíření | od března 2027 | MiniS v Claude Design; adopce typografických tokenů; tokeny za běhu pro témata a tmavý režim; názvy tokenů v mobilní aplikaci; ikony do produkčního webfontu | Podle samostatných plánů | Nové plány |
+| 5. Rozšíření | od března 2027 | MiniS v Claude Design; dotažení typografie v produkci (základ hotový v listopadu, viz plány 014 a 015); tokeny za běhu pro témata a tmavý režim; názvy tokenů v mobilní aplikaci; ikony do produkčního webfontu | Podle samostatných plánů | 014, 015 (typografie); další nové plány |
 
 Sloupec todo-plans vychází z poznámek v tomto briefu, ne z aktuálního stavu repozitáře. Před startem je potřeba ho porovnat se složkou todo-plans/ v MiniS repozitáři.
 
@@ -332,7 +334,8 @@ Začít tam, kde teď designéři pracují: uvnitř Nette repozitáře.
 - [ ] Napojit exportér tokenů na automatický krok (např. PR z exportu), aby tokeny v repozitáři nezaostávaly
 - [ ] Změřit baseline pro pravidlo „jen tokeny“ (hex, px, font-size) a sledovat ji jako metriku adopce
 - [ ] Rozhodnout, zda produkce potřebuje tokeny za běhu (CSS custom properties) kvůli tématům a tmavému režimu
-- [ ] Naplánovat adopci typografických tokenů
+- [x] Typografie: metoda pro Figmu, exportér a CSS je hotová (plány 014 a 015, `docs/ai-prompts/typography.md`, 6. 11. 2026)
+- [ ] Dotáhnout typografii v produkci: ověřit Stylus export po dalším exportu, rozhodnout Brand XL (`clamp`, váha 700 vs. MiniS 400) v pravidlech portování (plán 013), měřit adopci i přes třídy `typo-*`
 
 Otevřené otázky:
 
@@ -348,4 +351,4 @@ Otevřené otázky:
 - Jak skilly distribuovat do Nette repozitáře a k lidem: plugin pro Claude Code, kopie souborů, nebo součást balíčku MiniS?
 - Kdo a jak dostává nové ikony do produkčního webfontu? Bez toho sada figma-only v produkci chybí.
 - Jak ikony zapsat do registry.json: jedna položka za celou sadu, nebo položka pro každou ikonu?
-- Style Dictionary export drží v cestě názvy kolekcí (color.foundation.surface.primary), CSS má --color-surface-primary. Jaká transformace názvů platí pro Nette, aby tam tokeny nevznikly pod jinými jmény? (navazuje na rozhodnutí 3)
+- Style Dictionary export drží v cestě názvy kolekcí (color.foundation.surface.primary), CSS má --color-surface-primary. Jaká transformace názvů platí pro Nette, aby tam tokeny nevznikly pod jinými jmény? (navazuje na rozhodnutí 3) Částečně zodpovězeno: produkce už Style Dictionary z JSON exportéru používá (`build/style-dictionary/`) a exportér od 1.1.0 používá pro klíče Style Dictionary stejná pravidla názvů jako pro CSS.
