@@ -3,7 +3,7 @@ id: 015
 title: Letter-spacing tokens — one meaning in Figma, the exporter and CSS
 status: draft
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -50,29 +50,42 @@ Five separate problems:
 
 ## Constraints
 
-- **CSS letter spacing should scale with font size** (em), like the components already do. A
-  fixed px value looks right at one size and wrong at the others. *(Proposed: confirm in
-  phase 1.)*
+- **CSS letter spacing is em** (decided 2026-11-06), so it scales with font size, like the
+  components and production already do.
 - **Figma can only bind pixels.** A token that must scale with size can't be bound in Figma. That's
   the same wall as plan 014.
 - Production's real values decide what the tokens should be. The production audit in plan 014
   phase 0a covers letter spacing too.
 
-## Approach (proposed)
+## Approach
 
 Treat letter spacing like the line-height ratios:
 
-- **The tokens are percentages of font size, and the meaning is in the name.** For example
-  `typography/spacing/tight-2` → `-0.02em`, in the same way `line-height/130%` → `130%`. The
-  exporter derives the CSS value from the name, so the stored number doesn't matter. The exact
-  naming is an open question.
+- **The tokens are percentages of font size, and the meaning is in the name** (decided
+  2026-11-06), exactly like `line-height/130%` → `130%`. The exporter derives the CSS value from
+  the name, so the stored number doesn't matter. Only the values the styles actually use:
+
+  | Figma variable | CSS name (proposed) | CSS value | Used by |
+  |---|---|---|---|
+  | `Typography/spacing/-2%` | `--typography-spacing-minus-2` | `-0.02em` | Heading 2xl/xl/md/sm |
+  | `Typography/spacing/-1%` | `--typography-spacing-minus-1` | `-0.01em` | Heading lg |
+  | `Typography/spacing/-0.3%` | `--typography-spacing-minus-0-3` | `-0.003em` | Body md/sm |
+  | `Typography/spacing/0%` | `--typography-spacing-0` | `0` | Captions, labels |
+  | `Typography/spacing/3%` | `--typography-spacing-3` | `0.03em` | Brand lg/xl |
+
+  The CSS names need one exporter rule. Today `sanitizeCSSSegment()` only strips `%` and spaces,
+  so `-0.3%` would become `--typography-spacing--0.3`, and a dot isn't valid in a custom
+  property name. Proposed: a leading `-` becomes `minus-`, and `.` becomes `-`.
+  The old `tighter … ultra-wide` names are removed.
 - **Text styles keep a typed-in percentage.** A percentage already scales with size, so there's
   no need for a `-px` set as in plan 014. The spacing variables get no `LETTER_SPACING` scope, so
   they can't be bound by mistake.
-- **The Brand styles unbind** and type the percentage that matches the intended look. Phase 0
-  decides whether that is 1 px at 32 px (≈ 3 %) or something else.
-- **CSS** gets the full, renamed set, including `extra-wide` / `ultra-wide` or whatever replaces
-  them. `page-header` and `topbar` then use the tokens instead of raw em values.
+- **Brand lg and Brand xl are both 3 %** (decided 2026-11-06). Both styles unbind `extra-wide`
+  and type 3 %. Docs and tokens follow production's brand lg value. **Visible change in
+  production:** brand xl goes from `0.01em` to `0.03em` (≈ 0.3 px → 1 px at 32 px) on the first
+  export after phase 4 (`$typo-brand-heading-xl`, ~5 Latte uses).
+- **CSS** gets the renamed set above. `page-header` and `topbar` then use the tokens instead of
+  raw em values.
 
 Rejected: **px everywhere** (fix the exporter to emit px). It's simple and matches what Figma
 renders, but letter spacing then stops scaling with size, and the existing em values in the
@@ -81,19 +94,23 @@ components would have to become per-size px values.
 ## Phases
 
 - [x] **0. Production values.** Done 2026-11-05 (see "Production audit" below).
-- [ ] **1. Decide** the unit (em proposed), the names, and the Brand value. Write the
-      answers here.
-- [ ] **2. Exporter:** derive em from the name, drop the "bound = percent" special case, fix the
-      `formatFloat()` comment, update `TOKEN_CHANGES.md`.
-- [ ] **3. Figma:** rename and revalue `typography/spacing/*`, remove the `LETTER_SPACING` scope,
-      unbind the Brand styles and type their percentage.
+- [x] **1. Decide** the unit, the names and the Brand value. Done 2026-11-06, see "Decisions".
+- [ ] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the `minus-` /
+      `.` → `-` name rule, drop the "bound = percent" special case, fix the `formatFloat()` comment,
+      update `TOKEN_CHANGES.md`. Ship it in the same release as plan 014 phase 1.
+- [ ] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
+      `LETTER_SPACING` scope), unbind both Brand styles and type 3 %.
 - [ ] **4. Export and diff.** Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
       change goes into `CHANGELOG.md` and the Storybook Changelog story (old → new). The rename
       is a breaking token change.
-- [ ] **5. Components:** `page-header` and `topbar` switch from raw em to the tokens, and the
-      `extra-wide` fallback goes.
-- [ ] **6. Docs:** `CLAUDE.md` → Token naming gets a letter-spacing line. The procedure goes into
-      the typography part of the 008 skill (plan 014 phase 7).
+- [ ] **5. Components:** `page-header` (`var(--typography-spacing-extra-wide, 1px)` →
+      `var(--typography-spacing-3)`, plus the raw `-0.02em` / `-0.003em`) and `topbar`
+      (`-0.01em`) switch to the tokens.
+- [ ] **6. Docs:** `docs/ai-prompts/components/page-header.md` (letter-spacing row:
+      `--typography-spacing-extra-wide` 1px → `--typography-spacing-3` 0.03em),
+      `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-minus-1`), and a
+      letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
+      part of the 008 skill (plan 014 phase 7). Remove the "outdated" comment from `tokens.css`.
 
 ## Production audit (2026-11-05)
 
@@ -118,8 +135,7 @@ body md/sm `-0.003em`, captions `0`, **brand lg `0.03em`, brand xl `0.01em`**.
 What this means:
 
 - **Production already uses em**, with the exporter's names. `tokens.css` is the odd one out, with
-  px and an older naming (`wide`/`wider`). This settles open question 1 in favour of em, unless
-  someone objects.
+  px and an older naming (`wide`/`wider`). This is why em was chosen (Decisions 1).
 - **The `$typography-spacing-*` variables aren't used anywhere in production's Stylus.** Only
   the composite values reach the page through the `$typo-*` mixins. Renaming the spacing tokens is
   low-risk for production.
@@ -128,17 +144,20 @@ What this means:
   values were probably meant as percentages (−0.32 % ≈ −0.003em, the same as body's −0.3 %), which
   supports encoding the percentage in the name.
 - **Brand lg drift.** Production's brand lg is `0.03em` (`ultra-wide`), but the Figma style is now
-  bound to `extra-wide` (1 → `0.01em`). One of them changed after the June export. Which one is
-  intended is part of open question 3.
+  bound to `extra-wide` (1 → `0.01em`). One of them changed after the June export. Decided: 3 % for
+  both (Decisions 3).
+
+## Decisions (owner, 2026-11-06)
+
+1. **Unit: em** in CSS. Figma text styles keep a typed-in percentage.
+2. **Names carry the percentage**, the same way line height works. See the table in Approach.
+3. **Brand: 3 %** for both Brand lg and Brand xl, following production's brand lg value. Docs
+   and tokens are synced to that.
+4. **The old `tokens.css` spacing block** gets a comment saying it's outdated and will be replaced
+   by this plan. Done 2026-11-06; it isn't a token change, so it has no changelog entry.
 
 ## Open questions
 
-1. **em or px in CSS?** Production already uses em (see the audit), so em is proposed. Anyone relying
-   on `--typography-spacing-*` being px? Nothing in `packages/components` uses them, apart from the
-   missing `extra-wide`.
-2. **Names.** Keep `tighter … ultra-wide` with fixed meanings, or encode the value in the name
-   (`spacing/-2`, `spacing/-0.3`) the way line height does? Name-encoded is honest about Figma
-   ignoring the value. Semantic names read better.
-3. **Brand.** Is the intended look 1 px fixed (what Figma shows today) or a share of the size?
-4. **Was `tokens.css`'s spacing block hand-written?** If yes, mark it `HAND-MAINTAINED` like the
-   `FONTS` block until phase 4, so a re-export doesn't silently overwrite it.
+1. **CSS names for minus and decimal values.** Proposed: `--typography-spacing-minus-2`,
+   `…-minus-0-3`, `…-0`, `…-3`. Alternatives: `…-n2`, or per-mille without decimals
+   (`…-minus-30` for −3 ‰). Settle this before phase 2, because it's the exporter's rule.
