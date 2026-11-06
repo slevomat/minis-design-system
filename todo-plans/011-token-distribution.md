@@ -3,7 +3,7 @@ id: 011
 title: Distribute tokens as a versioned package with a Style Dictionary source
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -16,7 +16,14 @@ owner: Lexislav
 
 Mini*S is being redefined as shared rules rather than a UI kit, and those rules have to live
 where UI is actually built: the production Nette/Latte repo. Tokens are the first rule that has
-to arrive there intact. The Nette team has said they want to use Style Dictionary. The exporter
+to arrive there intact. The Nette team has said they want to use Style Dictionary — and
+**production already does** (checked 2026-11-05, plan 014 → "Production audit"): its
+`build/style-dictionary/tokens/*.json` are this exporter's **resolved-mode JSON** (last typography
+export 2026-06-04), and Style Dictionary turns them into `app/stylus/settings/_variables.styl` and a
+Kotlin file for the mobile app. So the starting point is "align the two builds", not "introduce
+Style Dictionary". Since exporter 1.2.1 every export also records the exporter version and settings
+in `$metadata`, and the name rules (`n` = minus, `_` = decimal) apply to Style Dictionary keys too
+(plan 015). The exporter
 plugin (`Figma plugins/minis-designtokens-exporter`) can already export Style Dictionary JSON,
 including light/dark modes, but this repo doesn't use it: `packages/tokens/scripts/build.js`
 copies the Figma-exported `tokens.css` and generates `tokens.rgb.css` from `tokens.rgb.json`.

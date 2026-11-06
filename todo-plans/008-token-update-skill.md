@@ -3,7 +3,7 @@ id: 008
 title: Token-update skill (optional)
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -47,6 +47,15 @@ A checklist skill:
    flag any heritage value change.
 6. Log every change in both changelogs; restart Storybook so the Tier toolbar picks up new values.
 
+**Typography part** (from plan 014 phase 7, added 2026-11-06). When a font size or a line-height
+ratio changes in Figma, the skill also: regenerates the Figma-only `typography/<role>/line-height-px`
+variables (round(size × ratio) per Layout mode; set Code Syntax and description on any new one),
+checks the styles in `default`, `md` and `xl` frames, insists on exporter ≥ 1.2.1, checks that no
+`-px` value reached `tokens.css` and that the five `--typography-spacing-*` tokens are intact, and
+reminds that production picks the change up through its own Style Dictionary build. The steps are
+already written in `docs/ai-prompts/typography.md` §6; the skill packages them. A typography change
+is a token change, so it stays in this skill rather than a separate one.
+
 **Rejected:** fully automated import in CI (the export is a manual plugin run in Figma); leaving it
 as prose in `CLAUDE.md` if the optional bar is met.
 
@@ -63,4 +72,6 @@ as prose in `CLAUDE.md` if the optional bar is met.
    something the agent does by hand each time?
 3. **Who runs token updates?** If it's only the owner, the skill's value is mostly as a memory aid.
 4. **How do token updates reach production** once production consumes Mini*S tokens — does this
-   skill end with a release/publish step?
+   skill end with a release/publish step? (Production already consumes them: it builds its Stylus
+   from the exporter's resolved JSON with Style Dictionary — plan 011. Today that is a hand-over
+   to the Nette team, not a step this skill can run.)

@@ -3,7 +3,7 @@ id: 013
 title: Porting rules — carrying tokens and recipes into each environment
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -81,6 +81,16 @@ Short written guides, one page each, in `docs/porting/` (location is open questi
    web components mirror the Latte recipe's behaviour; Storybook requirements.
 4. **`figma.md`** — the Figma ↔ code property table and the exporter settings, moved here from
    CLAUDE.md.
+
+**First worked example: typography** (added 2026-11-06). `docs/ai-prompts/typography.md` already
+covers one property family across all environments: Figma (Figma-only `-px` line heights, typed
+percentages, non-bindable name-encoded variables), the exporter (≥ 1.2.1: values from names, `-px`
+skipped), CSS tokens, and production (`typo-*` classes, `$typo-*` mixins generated from the
+resolved JSON). Its structure (rules per environment plus "which side wins") is the template for
+`common.md`, `latte.md` and `figma.md`, and its production section is a starting point for
+`latte.md`. **Divergences to settle here:** production's Brand heading xl is hand-written as
+`font-size: clamp(32px, 7vw, 56px)` and `font-weight: 700`, while Mini*S says 32 → 56px at 1480px
+and weight 400 (plan 014 → "Production audit", item 3).
 5. **Later: `mobile.md`** — iOS/Android outputs from the same source.
 
 **Rejected:** keeping the rules in CLAUDE.md (only Claude Code in this repo reads it; the Nette
