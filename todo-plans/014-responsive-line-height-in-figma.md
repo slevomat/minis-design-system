@@ -144,9 +144,22 @@ fixes.
       - [x] Figma, 2026-11-06: all five styles × three modes read back the expected size and line
             height, and two lines measure exactly 2 × line height (15/15). The board's section 05
             "After" row is now live.
-      - [ ] Resolved-mode export: heading lg `130%` (not `26px`), no `-px` anywhere, no fallback
-            warnings. References mode is still `var(--typography-<role>-line-height)`.
-      - [ ] `tokens.css` unchanged by the line-height part, and Storybook Tier values unchanged.
+      - [x] References-mode CSS export (exporter v1.2.0, 2026-11-06T15:17): no `-px` anywhere;
+            the five styles export `var(--typography-<role>-line-height)`; the Layout line-height
+            and size values in all ten modes equal `tokens.css` (138/143/130/133/138 % → 150/157/
+            125/130/133 % from `md`).
+      - [ ] Resolved-mode export (JSON, which production consumes): heading lg `130%` (not `26px`), no
+            `-px` anywhere, no fallback warnings.
+      - [x] `tokens.css` unchanged by the line-height part (checked against the references export
+            above). Storybook Tier values come from `tokens.json`, which hasn't been re-exported, so
+            they can't have changed yet. Re-check when it is.
+      - **Found in that export, older than this plan:** in references mode, a text-style composite
+        whose name equals its Layout variable references itself:
+        `--typography-heading-lg-line-height: var(--typography-heading-lg-line-height)` (likewise
+        heading md/sm, body md/sm, and `.Components` `--accordion-padding-y`). Pasted into one
+        `:root`, that is a CSS cycle and the value becomes invalid. `tokens.css` isn't affected,
+        because it is merged by hand and has no composite block, and production consumes resolved JSON. But the
+        exporter should skip a composite line that would reference its own name. Exporter follow-up.
       - [ ] Production's Style Dictionary build ignores the new `$metadata` block.
 - [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
       It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
