@@ -3,7 +3,7 @@ id: 014
 title: Responsive line height in Figma text styles
 status: draft
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-06
 owner: Lexislav
 ---
 
@@ -118,9 +118,14 @@ fixes.
 ## Phases
 
 - [x] **0a. Production audit first.** Done 2026-11-05. The results are in "Production audit" below.
-- [ ] **0b. Decide** the remaining open questions.
-- [ ] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Release before any `-px`
-      variable exists in the file, so an export in between can't break CSS.
+- [x] **0b. Decide** the remaining open questions. Done 2026-11-06, see "Answers".
+- [x] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Done 2026-11-06:
+      exporter 1.1.0 (figma-plugins PR #1, merge `fed1340`), shipped together with plan 015 phase 2.
+      The owner ran a references-mode export of the real file, and the output was as expected apart from
+      two warnings: Brand lg/xl are still bound to `extra-wide`, which plan 015 phase 3 removes. Still
+      open: a **resolved-mode** export after phase 3, where heading lg must read `130%` and not
+      `26px`. Also run production's Style Dictionary build once on the next export, to confirm the new
+      `$metadata.exporterVersion` / `$metadata.settings` block produces no variables.
 - [ ] **2. Figma: create the `-px` variables** (script via MCP), scoped to `LINE_HEIGHT`.
 - [ ] **3. Figma: bind** them in Heading lg/md/sm, Body md/sm, and narrow the ratio variables' scopes.
 - [ ] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export

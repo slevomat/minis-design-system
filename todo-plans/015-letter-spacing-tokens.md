@@ -96,9 +96,13 @@ components would have to become per-size px values.
 
 - [x] **0. Production values.** Done 2026-11-05 (see "Production audit" below).
 - [x] **1. Decide** the unit, the names and the Brand value. Done 2026-11-06, see "Decisions".
-- [ ] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the name rule
+- [x] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the name rule
       (leading `-` → `n`, `.` → `_`), drop the "bound = percent" special case, fix the `formatFloat()` comment,
-      update `TOKEN_CHANGES.md`. Ship it in the same release as plan 014 phase 1.
+      update `TOKEN_CHANGES.md`. Ship it in the same release as plan 014 phase 1. Done 2026-11-06:
+      exporter 1.1.0 (`fed1340`). The old names (`tighter … ultra-wide`) still export ÷ 100, with a
+      warning when bound, so production keeps its current values until phase 3 renames them. The
+      minus/dot rule also applies to JSON and Style Dictionary keys, and renames none of the existing
+      449 names.
 - [ ] **3. Figma:** replace `typography/spacing/*` with the five variables above (no
       `LETTER_SPACING` scope), unbind both Brand styles and type 3 %.
 - [ ] **4. Export and diff.** Regenerate `tokens.css` / `tokens.json`. Every `--typography-spacing-*`
