@@ -107,6 +107,36 @@ return { cardId: card.id };
   set its `annotation` text.
 - Every frame you add inside the card needs `clipsContent = false`, or the dividers (0 px tall
   lines) get clipped and disappear.
+- **Replacing text inherits the first character's overrides.** If an old text started with a bold
+  word, the whole new text turns bold. Re-applying the same style does **not** clear it. Reset
+  the font first (`setRangeFontName(0, len, {family:'Inter', style:'Medium'})`), then set the style
+  again.
+
+## Migrating an old card (built before the kit)
+
+Older cards are one frame with hand-styled text, a detached `.button` pill, and sections named
+`colors/blue` / `colors/neutral`. Migrate them in place, keeping the card's node ID as the
+stack's `main`:
+
+1. **Bind the card shell:** padding to `padding-y` / `padding-x`, gap to `gap-section`, corners
+   to `border-radius`.
+2. **Bind inner spacing:** gaps of 18/16 → `gap-block`, 7 → `gap-list`, horizontal 32 →
+   `gap-row`. Set `clipsContent = false` on every frame.
+3. **Map unstyled text by font:**
+   - Inter Bold 18 → `section-label` for fixed sections, `section-title` for the rest
+   - Inter Bold 15 → `column-title`
+   - Inter 15 → `small`
+   - PT Mono → `annotation`
+
+   Then bind every text fill (#172B4D → `heading`, everything else → `text`) and divider strokes.
+4. **Swap the pill:** replace the `.button` frame (or an old `.link`) with a clone of the
+   template pill, then set its link.
+5. **Split the stack:** wrap the card in a stack. Move each direct child whose first text is
+   Changelog / Roadmap / Dev notes into its own card, and delete that section's divider line.
+6. **Keep the column clear:** the stack grows by the gaps. Move nodes below it in the same column
+   down by the difference.
+7. **Then proofread** (see SKILL.md → Voice). Fill empty Dev notes from the repo, and delete an
+   empty Roadmap card.
 
 ## Audit snippet (run before reporting done)
 
