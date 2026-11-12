@@ -593,7 +593,7 @@ const changelogHTML = `
         <li><code>variant</code>: <code>default | broken | black-friday</code> (Figma <code>Variant</code>). <code>language</code>: <code>cz | sk</code> (Figma <code>Language</code>), switching segment labels and the spin button (ZATOČIT / ZATOČIŤ).</li>
         <li><code>spin(index?)</code> → <code>Promise&lt;{ index, label }&gt;</code>; events <code>minis-spin-start</code> (cancelable) and <code>minis-spin-end</code>. The result is announced to screen readers; reduced motion shortens the spin.</li>
         <li>Component-scoped custom properties, no <code>tokens.css</code> change: <code>--wheel-of-fortune-size</code> (<code>320px</code>), <code>--wheel-of-fortune-spin-duration</code> (<code>4.5s</code>), segment fills <code>-blue</code> → <code>var(--color-blue-65)</code>, <code>-orange</code> → <code>var(--color-orange-75)</code>, <code>-red</code> → <code>var(--color-pink-55)</code>, <code>-dark</code> → <code>var(--color-grey-20)</code>, <code>-button</code> → <code>var(--color-blue-45)</code>, <code>-button-hover</code> → <code>var(--color-orange-75)</code>.</li>
-        <li>Figma: the Kolotoč artwork became one <code>WheelOfFortune</code> component set (<code>Variant</code> × <code>Language</code>) with a <code>_Spin button</code> sub-component and a docs card.</li>
+        <li>Figma: the Kolotoč artwork became one <code>WheelOfFortune</code> component set (<code>Variant</code> × <code>Language</code> × <code>State</code>) with a <code>_Spin button</code> sub-component and a docs card. The wheel's <code>Language</code> sets the copy and the button together; <code>State</code> (hover) is Figma-only, plain CSS hover in code.</li>
       </ul>
 
       <h3>Docs — <code>minis-figma-docs</code> skill listed</h3>

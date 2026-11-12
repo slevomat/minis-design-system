@@ -93,4 +93,4 @@ None.
 
 ## Figma
 
-- Page `↳ Wheel of fortune` (`4112:2462`) · `WheelOfFortune` set `6135:1939` (`Variant` × `Language`, 2048 × 2048) · `_Spin button` set `6135:977` (`Language` × `State`).
+- Page `↳ Wheel of fortune` (`4112:2462`) · `WheelOfFortune` set `6135:1939` (`Variant` × `Language` × `State` default/hover, 2048 × 2048; `Language` drives the nested spin button too, which is not exposed) · `_Spin button` set `6135:977` (`Language` × `State`).
