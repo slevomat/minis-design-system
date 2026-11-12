@@ -169,6 +169,7 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
 - Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator`, not `--color-border-subtle`)
+- **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (`.claude/skills/minis-figma-docs/`). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
 ## Figma Code Connect
