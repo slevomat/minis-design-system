@@ -20,6 +20,7 @@ Individual UI components for building interfaces. Every component has a full AI-
 - [Tag](./tag.md) - Compact pill label: static, clickable, toggle, or dismissible
 - [Tile](./tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically in a grid
 - [Topbar](./topbar.md) - The bar at the top of any Slevomat web page or vibe-coded app; `web` (logo, search, actions) + `vibe-apps` (logo + app name only) variants
+- [Wheel of Fortune](./wheel-of-fortune.md) - Kolotoč game wheel; placeholder until the Rive animation lands
 
 ## Component Naming
 

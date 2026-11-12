@@ -314,3 +314,4 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/action-row.md`
 - `docs/ai-prompts/components/badge.md`
 - `docs/ai-prompts/components/accordion.md`
+- `docs/ai-prompts/components/wheel-of-fortune.md` — **placeholder** until the Rive version lands; keep its API stable

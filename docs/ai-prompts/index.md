@@ -26,6 +26,7 @@ Individual UI elements with props and variants.
 - [Tile](./components/tile.md) - Vertical icon-based navigation tile for primary shortcuts, typically arranged in a grid
 - [Badge](./components/badge.md) - Decorative scalloped seal badge with a white checkmark; six `color` values (brand, yellow, summer, pink, green, blue)
 - [Page Header](./components/page-header.md) - Hero banner; first content element under the topbar + navigation; 6 brand themes; layouts `inspirations` (search controls), `content-left` (no controls) and `centric` (no photo, category tags)
+- [Wheel of Fortune](./components/wheel-of-fortune.md) - Kolotoč game wheel, `default | broken | black-friday` × `cz | sk`; **placeholder** until the Rive animation lands — the API is the contract
 - [Accordion](./components/accordion.md) - Expand/collapse list for FAQ sections; bold heading + blue chevron, optional exclusive (`single`) mode
 
 [→ All Components](./components/README.md)

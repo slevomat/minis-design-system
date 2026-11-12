@@ -587,7 +587,16 @@ const changelogHTML = `
         </button>
       </div>
 
-      <h3 style="margin-top:1rem">Docs — <code>minis-figma-docs</code> skill listed</h3>
+      <h3 style="margin-top:1rem">Wheel of Fortune — new placeholder component <code>&lt;minis-wheel-of-fortune&gt;</code></h3>
+      <ul>
+        <li><strong>New component</strong>, standing in until the animated Rive wheel (built by a separate team) is ready. It draws a simplified SVG wheel and spins it with a CSS transition. The API is the contract the Rive version keeps; only the internals will change.</li>
+        <li><code>variant</code>: <code>default | broken | black-friday</code> (Figma <code>Variant</code>). <code>language</code>: <code>cz | sk</code> (Figma <code>Language</code>), switching segment labels and the spin button (ZATOČIT / ZATOČIŤ).</li>
+        <li><code>spin(index?)</code> → <code>Promise&lt;{ index, label }&gt;</code>; events <code>minis-spin-start</code> (cancelable) and <code>minis-spin-end</code>. The result is announced to screen readers; reduced motion shortens the spin.</li>
+        <li>Component-scoped custom properties, no <code>tokens.css</code> change: <code>--wheel-of-fortune-size</code> (<code>320px</code>), <code>--wheel-of-fortune-spin-duration</code> (<code>4.5s</code>), segment fills <code>-blue</code> → <code>var(--color-blue-65)</code>, <code>-orange</code> → <code>var(--color-orange-75)</code>, <code>-red</code> → <code>var(--color-pink-55)</code>, <code>-dark</code> → <code>var(--color-grey-20)</code>, <code>-button</code> → <code>var(--color-blue-45)</code>, <code>-button-hover</code> → <code>var(--color-orange-75)</code>.</li>
+        <li>Figma: the Kolotoč artwork became one <code>WheelOfFortune</code> component set (<code>Variant</code> × <code>Language</code>) with a <code>_Spin button</code> sub-component and a docs card.</li>
+      </ul>
+
+      <h3>Docs — <code>minis-figma-docs</code> skill listed</h3>
       <ul>
         <li><strong>New skill <code>minis-figma-docs</code></strong> (<code>.claude/skills/minis-figma-docs/</code>), for the design-system team: writes and updates the documentation cards in the Mini*S Figma file from the file's internal docs kit. Figma only; it never writes the code docs.</li>
         <li><strong>Vibe Coding Guide → Skills</strong>: the table gained a <strong>For</strong> column (anyone prototyping / anyone designing a feature / design-system team) and a <code>minis-figma-docs</code> row; "Where they live" says it needs the Figma MCP.</li>

@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-11-12
 
+### Wheel of Fortune — new placeholder component `<minis-wheel-of-fortune>`
+
+- **New component**, standing in until the animated Rive wheel (built by a separate team) is ready. Draws a simplified SVG wheel and spins it with a CSS transition. The API is the contract the Rive version keeps; only the internals will change.
+- `variant`: `default | broken | black-friday` (Figma `Variant`, "black friday" → `black-friday`). `language`: `cz | sk` (Figma `Language`), switching segment labels and the spin button (ZATOČIT / ZATOČIŤ).
+- `spin(index?)` → `Promise<{ index, label }>`; events `minis-spin-start` (cancelable) and `minis-spin-end` (`{ index, label }`). Result announced in a live region; reduced motion shortens the spin.
+- Component-scoped custom properties (no `tokens.css` change): `--wheel-of-fortune-size` (`320px`), `--wheel-of-fortune-spin-duration` (`4.5s`), segment fills `--wheel-of-fortune-blue` → `var(--color-blue-65)`, `-orange` → `var(--color-orange-75)`, `-red` → `var(--color-pink-55)`, `-dark` → `var(--color-grey-20)`, `-rim` → `var(--color-blue-65)`, `-label` / `-hub` → `var(--color-core-white)`, `-button` → `var(--color-blue-45)`, `-button-hover` → `var(--color-orange-75)`.
+- Storybook: **Components → Brand → Wheel of Fortune**. Docs: `docs/ai-prompts/components/wheel-of-fortune.md`. Code Connect: `wheel-of-fortune.figma.ts`.
+- Figma: the Kolotoč artwork became one `WheelOfFortune` component set (`Variant` × `Language`, 2048 × 2048) with a `_Spin button` sub-component (`Language` × `State` default/hover), plus a docs card. The original artwork is kept in an archive section on the page.
+
 ### Docs — `minis-figma-docs` skill listed
 
 - **New skill `minis-figma-docs`** (`.claude/skills/minis-figma-docs/`), for the design-system team: writes and updates the documentation cards in the Mini*S Figma file from the file's internal docs kit (`docs/*` variables, `.docs/*` text styles, helper components, template stack). Figma only; it never writes the code docs.
