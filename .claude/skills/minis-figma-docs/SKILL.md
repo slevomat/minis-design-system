@@ -149,6 +149,19 @@ Light, brief and factual: a colleague's note, not a manual.
    reflects a code change, remind them it belongs in `CHANGELOG.md` and the Storybook Changelog
    too (CLAUDE.md → Changelog rules). This skill doesn't write those.
 
+## READ-ME page and the skills list
+
+The READ-ME page (`1:2`, frame `Docs grid`) uses its own card layout: an eyebrow, a title,
+then a Line + Body pair per section, with `.docs/heading-4` section titles. Keep that layout
+there; don't turn READ-ME cards into component stacks.
+
+The **AI prototyping toolkit** card (`2507:6944`) has a **Skills** section listing every
+Mini*S skill: name, who it's for, one line on what it does, and what to say. It mirrors the
+Skills table in Storybook (Vibe Coding Guide → Skills), `README.md` and
+`docs/ai-prompts/index.md`. When a skill is added, renamed or removed, update the Figma list
+here, and tell the user the three code-side lists need the same change. This skill doesn't
+write those.
+
 ## Don'ts
 
 - Don't document what the component doesn't do yet as if it did. Put it on the roadmap.

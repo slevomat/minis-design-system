@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-12
+
+### Docs — `minis-figma-docs` skill listed
+
+- **New skill `minis-figma-docs`** (`.claude/skills/minis-figma-docs/`), for the design-system team: writes and updates the documentation cards in the Mini*S Figma file from the file's internal docs kit (`docs/*` variables, `.docs/*` text styles, helper components, template stack). Figma only; it never writes the code docs.
+- **Storybook → Vibe Coding Guide → Skills**: the table gained a **For** column (anyone prototyping / anyone designing a feature / design-system team) and a `minis-figma-docs` row; "Where they live" notes it needs the Figma MCP.
+- **Storybook → Contribution guide**: new checklist row, *Figma docs card*.
+- Same listing in `README.md` (AI Skills table, with the For column) and `docs/ai-prompts/index.md`.
+- The Figma READ-ME page (`1:2`) lists the skills too, in the *AI prototyping toolkit* card.
+- No component or token change.
+
 ## 2026-11-06
 
 ### Tokens — letter spacing named by percentage (todo-plans/015)

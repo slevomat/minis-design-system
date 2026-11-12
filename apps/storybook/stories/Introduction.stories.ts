@@ -578,6 +578,27 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-12 (minis-figma-docs skill listed) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-12" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-12</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-12">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Docs — <code>minis-figma-docs</code> skill listed</h3>
+      <ul>
+        <li><strong>New skill <code>minis-figma-docs</code></strong> (<code>.claude/skills/minis-figma-docs/</code>), for the design-system team: writes and updates the documentation cards in the Mini*S Figma file from the file's internal docs kit. Figma only; it never writes the code docs.</li>
+        <li><strong>Vibe Coding Guide → Skills</strong>: the table gained a <strong>For</strong> column (anyone prototyping / anyone designing a feature / design-system team) and a <code>minis-figma-docs</code> row; "Where they live" says it needs the Figma MCP.</li>
+        <li><strong>Contribution guide</strong>: new checklist row, <em>Figma docs card</em>.</li>
+        <li>Same listing in the repo <code>README.md</code> (AI Skills table, with the For column) and in <code>docs/ai-prompts/index.md</code>.</li>
+        <li>The Figma READ-ME page lists the skills too, in the <em>AI prototyping toolkit</em> card.</li>
+        <li>No component or token change.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-06 (letter spacing named by percentage; Figma line height per Layout mode) -->
       <div class="cl-heading">
         <h2 id="2026-11-06" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-06</h2>
@@ -2345,19 +2366,28 @@ export const VibeCodingGuide: Story = {
       <table style="width:100%;border-collapse:collapse;margin:1rem 0">
         <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:18%">Skill</th>
+          <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:14%">For</th>
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce)">What it does</th>
           <th style="padding:.75rem 1rem;text-align:left;border:1px solid var(--color-border,#cbccce);width:28%">Say something like</th>
         </tr></thead>
         <tbody>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-app</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Anyone prototyping</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Builds a whole app or prototype from scratch: sets the project up, picks the right topbar variant, writes your screens with real Mini*S components and tokens, then checks the result in a browser (desktop, mobile and dark mode) before telling you it's done.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Build me an app for handling refund requests"</em><br/><br/><em>"Make a landing page for the summer campaign"</em></td>
           </tr>
           <tr>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>slevomat-design-principles</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Anyone designing a feature</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Reviews a feature description or a screenshot against the 7 Slevomat design principles and gives structured feedback.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Check this screen against our design principles"</em></td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-figma-docs</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice. Builds only from the file's internal docs kit; it never touches the code docs.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Document the Tag component in Figma"</em><br/><br/><em>"Add today's change to the Checkbox changelog card"</em></td>
           </tr>
         </tbody>
       </table>
@@ -2367,6 +2397,7 @@ export const VibeCodingGuide: Story = {
         <li><strong><code>minis-app</code></strong> ships with this design system, at <code>.claude/skills/minis-app/</code>. It works automatically when your AI tool runs inside the design system repo. To use it from another folder, copy it once:
           <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;margin:.5rem 0"><code>cp -r &lt;design-system-repo&gt;/.claude/skills/minis-app ~/.claude/skills/</code></pre>
           Re-copy it after the design system changes, so the skill keeps matching the components.</li>
+        <li><strong><code>minis-figma-docs</code></strong> ships with this design system, at <code>.claude/skills/minis-figma-docs/</code>. It only works on the Mini*S Figma file and needs the Figma MCP connection described in <strong>AI &amp; Figma integration</strong>.</li>
         <li><strong><code>slevomat-design-principles</code></strong> is not shipped in this repo — it comes from the wider Slevomat AI setup. If your assistant doesn't know it, ask whoever set up your tooling.</li>
       </ul>
 
@@ -2873,6 +2904,7 @@ export const ContributionGuide: Story = {
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Design + code aligned</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the intent clear to both a designer and a developer?</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Documented</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the change reflected in the Storybook story and/or <code>docs/ai-prompts/</code>?</td></tr>
           <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Figma Dev Mode link</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">New component? Add its <strong>Storybook — &lt;Component&gt;</strong> dev-resource link to the Figma component set. See <em>Introduction → AI &amp; Figma integration → Figma Dev Mode ↔ Storybook</em>.</td></tr>
+          <tr><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">☐ <strong>Figma docs card</strong></td><td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce)">Is the component's docs card in Figma up to date (changelog, roadmap, dev notes)? Ask your assistant: the <code>minis-figma-docs</code> skill builds and updates these cards. See <em>Vibe Coding Guide → Skills</em>.</td></tr>
         </tbody>
       </table>
 

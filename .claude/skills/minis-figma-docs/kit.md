@@ -47,6 +47,7 @@ and titles, text colour for everything else.
 | `.docs/heading-1` | `S:78dcfdc152d432dfb34fc5c90f4f7ed38b9bd197,` | Inter Medium 80/88 | Card title |
 | `.docs/heading-2` | `S:1594b9cb04ac5fd398b02afb55758e4062ec9aa3,` | Inter Medium 50/64 | Report title |
 | `.docs/heading-3` | `S:ab956247a779047d8f131ffc46b9d99cbbb2d16f,` | Inter Bold 28/42 | Specimen group heading |
+| `.docs/heading-4` | `S:ac437a89356fc68bade7a36005261406bf81d255,` | Inter Bold 22/30 | Section titles on READ-ME cards |
 | `.docs/description` | `S:fdf5339166966b1297958dd42b5353d765524b8b,` | Inter Medium 20/28 | Description, body, changelog dates and entries |
 | `.docs/section-label` | `S:3985ea5c34109601ea941e608b0f76c6fa907eb3,` | Inter Bold 18/24, +10 %, UPPER | Fixed sections |
 | `.docs/section-title` | `S:dce7fd013f58bf405f43f3aa9b6d6f1927b5500c,` | Inter Bold 18/24 | Content sections |

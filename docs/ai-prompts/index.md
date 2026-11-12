@@ -35,6 +35,7 @@ Individual UI elements with props and variants.
 Packaged multi-step routines your AI assistant loads on demand.
 
 - **`minis-app`** — scaffold and build a whole app or prototype end to end (project setup → topbar variant → screens → browser verification). Lives in the design system repo at `.claude/skills/minis-app/`; copy it to `~/.claude/skills/` to use it from any project.
+- **`minis-figma-docs`** — for the design-system team: write and update the documentation cards in the Mini*S Figma file from the internal docs kit. Figma only; it never writes these code docs. Lives at `.claude/skills/minis-figma-docs/`.
 - **`slevomat-design-principles`** — review a feature or screenshot against the 7 Slevomat design principles. Not part of this repo.
 
 ### 💡 Principles
