@@ -109,8 +109,8 @@ return { cardId: card.id };
   lines) get clipped and disappear.
 - **Replacing text inherits the first character's overrides.** If an old text started with a bold
   word, the whole new text turns bold. Re-applying the same style does **not** clear it. Reset
-  the font first (`setRangeFontName(0, len, {family:'Inter', style:'Medium'})`), then set the style
-  again.
+  the font first (`setRangeFontName(0, len, {family:'Inter', style:'Medium'})`), which
+  **detaches the style**, then set the style again. Always re-run the audit afterwards.
 
 ## Migrating an old card (built before the kit)
 
