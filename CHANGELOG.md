@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file.
 
 - `--accordion-surface`: `var(--color-core-transparent)` → `var(--color-surface-transparent)`. It skipped the Foundation layer and pointed at a primitive; the rendered value is unchanged (fully transparent). Figma: `.Components` → `Accordion/default/surface` now aliases `Color/Surface/transparent`.
 
+### ActionRow
+
+#### Tokens
+
+- `--action-row-surface`: `var(--button-tertiary-surface)` → `var(--color-surface-transparent)`. It borrowed the Button's token instead of a Foundation one; the rendered value is unchanged (fully transparent). Figma: `.Components` → `ActionRow/default/surface` now aliases `Color/Surface/transparent` (was `Button/tertiary/default/surface`).
+
 ### Alert
 
 #### Tokens

@@ -598,6 +598,12 @@ const changelogHTML = `
         <li><code>--accordion-surface</code>: <code>var(--color-core-transparent)</code> → <code>var(--color-surface-transparent)</code>. It skipped the Foundation layer and pointed at a primitive; the rendered value is unchanged (fully transparent). Figma: <code>.Components</code> → <code>Accordion/default/surface</code> now aliases <code>Color/Surface/transparent</code>.</li>
       </ul>
 
+      <h3>ActionRow</h3>
+      <h4>Tokens</h4>
+      <ul>
+        <li><code>--action-row-surface</code>: <code>var(--button-tertiary-surface)</code> → <code>var(--color-surface-transparent)</code>. It borrowed the Button's token instead of a Foundation one; the rendered value is unchanged (fully transparent). Figma: <code>.Components</code> → <code>ActionRow/default/surface</code> now aliases <code>Color/Surface/transparent</code> (was <code>Button/tertiary/default/surface</code>).</li>
+      </ul>
+
       <h3>Alert</h3>
       <h4>Tokens</h4>
       <ul>
