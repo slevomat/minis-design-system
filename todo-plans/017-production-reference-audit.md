@@ -3,7 +3,7 @@ id: 017
 title: Production reference audit — what the Slevomat repo tells the refit
 status: draft
 created: 2026-11-06
-updated: 2026-11-06
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -177,3 +177,57 @@ What the script measures:
    001?
 6. **How often to re-run?** On demand before each plan that needs production facts, or on a
    schedule (e.g. monthly with the registry review the brief proposes)?
+
+## Completed slices
+
+### Layout — 2026-11-13
+
+The first slice of the audit that is finished. It was done by hand while writing the Mini*S layout
+guides, so it predates the Phase 0 script. Production code was at `bb1847f86e4`.
+
+**Result:** [`docs/ai-prompts/layouts/production-reference.md`](../docs/ai-prompts/layouts/production-reference.md).
+It covers the observed facts, the comparison with the Mini*S tokens, and proposals with open
+questions, each in its own section.
+
+Findings that matter beyond the layout guides:
+
+- **Three width levels.** The wide container (`grid-wrap--wide`, 1240px), the narrow container
+  (`grid-wrap`, 1008px; login, cart) and a ~704px reading/form column (cart). Side padding is
+  8 / 16 / 32px at 408 / 1008px.
+- **The token gap.** Mini*S `--container-padding` reaches 32px at 1256px, production at 1008px.
+  Mini*S `--container-narrow-width` (752px) matches production's reading column, and production's
+  1008px narrow container has no Mini*S equivalent. This is a candidate for plans 012 and 014.
+- **Main + sidebar is per component, not a shared grid.** Each page component splits with flex
+  (ratios 2.2 : 1 to 3 : 1, gaps 24–40px, sidebar on the right). The 12-column `_real-grid` loads
+  only in the admin and partner bundles. The public site has ½ ⅓ ⅔ column classes (¼ ¾ as
+  placeholders), and none of them rendered on the measured pages.
+- **Two of three container systems are effectively legacy.** `flex-wrapper` carries only the site
+  chrome. `layout-wrapper` (96 uses in the code) didn't render on any logged-out page measured.
+  That makes it a candidate for the Phase 1 "where is it used" check behind login.
+
+**Reusable method.** This is the part the Phase 0 script should adopt.
+
+1. **Code counts.** Walk `app/ui/**/*.latte`, split every `class="…"` / `n:class="…"` value into
+   tokens, and count exact class names (plus the number of files each appears in). Dynamic
+   classes from PHP or JS are missed, so say so next to the number.
+2. **Live measurements.** Use Claude in Chrome on www.slevomat.cz. The in-app browser pane
+   gets stuck in a Cloudflare challenge loop. Chrome windows can't shrink to phone widths, so
+   don't resize the window. From any slevomat.cz tab, load the page into a **hidden same-origin
+   `<iframe>` of fixed width** (e.g. 375 / 768 / 1280 / 1500px, height 900px, `left: -9999px`)
+   and wait about 2.5s after `load`. Then read through `iframe.contentDocument` / `contentWindow`:
+   - for each container class: rendered width (`getBoundingClientRect`), `max-width`, side
+     padding, `display`, `gap`, and which container it sits inside;
+   - every visible `display: grid` element with 2+ template columns (class, column count, gap);
+   - every non-column flex/grid row with two or more children larger than about 200 × 150px,
+     which finds the main + sidebar splits;
+   - `iframe.contentWindow.location.pathname`, to catch redirects.
+3. **Practicalities.** The tool returns about 1,000 characters at most, so keep results on
+   `window` and read them in chunks. Navigating the tab clears the helper functions, so define
+   them again after any navigation. The test frame shows an 11px classic scrollbar, so 375px
+   reads as 364px. An empty `/kosik` redirects to `/`, so measuring the cart needs one item in it,
+   which means asking the user, adding it, and removing it afterwards.
+4. **Record** the date, production hash, logged-out state, page URLs and widths next to the
+   numbers.
+
+Not covered yet: pages behind login (user account, checkout after the cart), travel and partner
+pages.
