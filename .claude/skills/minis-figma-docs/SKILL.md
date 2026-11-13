@@ -88,6 +88,12 @@ are in [kit.md](kit.md) → "Palette pages".
 - **Changelog card** = header + Changelog + Roadmap (the "Changelog card" type above). Follow
   "Changelog" below: a swatch rebound to its variable or a corrected value is a visible change and
   gets an entry; moving the card to the kit does not.
+- **Log on every page the change touches.** There is no Mini*S-wide changelog in Figma: each page
+  keeps its own. A token change goes on the changelog card of the page that owns the token's
+  collection (Foundation, Theme, .Components, Primitives, Heritage), **and** on the card of every
+  component whose look or tokens it changes. Example: re-aliasing `Accordion/default/surface` to a
+  new Foundation token = three entries: Foundation (token added), .Components (alias changed),
+  Accordion (surface now uses it). Before reporting done, list the cards you logged on.
 
 The old **Mini*S Color docs generator** plugin (separate plugins repo) produced the existing
 overviews. Don't run it on these pages: it makes a new page each run, hard-codes the chrome and
