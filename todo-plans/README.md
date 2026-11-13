@@ -92,3 +92,4 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 016 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](016-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-06 |
 | 017 | [Production reference audit — what the Slevomat repo tells the refit](017-production-reference-audit.md) | `draft` | 2026-11-13 |
 | 018 | [Changelog sync skill — one change, every changelog](018-changelog-sync-skill.md) | `draft` | 2026-11-12 |
+| 019 | [Mini*S for vibe-coders — one source, published to Claude Design, the Skill Hub and a plugin](019-minis-for-vibe-coders.md) | `draft` | 2026-11-13 |

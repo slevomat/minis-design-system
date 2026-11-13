@@ -143,6 +143,9 @@ Current plans:
 - `todo-plans/018-changelog-sync-skill.md` — a skill that writes one change to every changelog
   (`CHANGELOG.md`, the Storybook Changelog, the Figma docs changelog cards) and reconciles drift
   between them. Part of the MiniS redefinition; reuses `minis-figma-docs` for the Figma side.
+- `todo-plans/019-minis-for-vibe-coders.md` — gap G9 as a plan: one source published to Claude
+  Design, the Slevomat Skill Hub, a Claude Code plugin and a hosted `tokens.css` + component bundle,
+  so vibed apps link to Mini*S instead of copying it. Not for production developers (that's 010).
 
 ## Changelog rules
 

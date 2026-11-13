@@ -59,6 +59,17 @@ can review. Undecided.
   `doc/knowledge-base/` to `slevomat/claude-plugin-slevomat-documentation`. For Claude users
   outside the repo, joining that plugin is cheaper than starting our own (question 5).
 
+**Channels Slevomat already runs outside production (2026-11-13):** the **Skill Hub** for
+claude.ai and Claude Design (fed by `slevomat/design-skills`, with a validator that encodes its
+limits), the tool-agnostic **Slevomat AI Hub** (`slevomat-ai-hub/` in
+`slevomat/design-slevomat-context`), and the documentation plugin above. The owner can't see the
+plugin repo or `slevomat/slevomat-ai-hub` yet (access asked from Michal Strnadel, 2026-11-13).
+
+**Split by audience (2026-11-13):** this plan keeps the **production repo** (option B: their
+`doc/ai/skills/` format + an `AGENTS.md` row) and the Claude Code plugin for Mini*S's own skills.
+Vibe-coders outside production (Claude Design, the Skill Hub, the AI Hub, a hosted `tokens.css` and
+component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
+
 ## Phases
 
 - [ ] **Phase 1 — Answer questions 1–4** and pick a channel.

@@ -125,7 +125,7 @@ are set yet.
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint | **G3** a11y in CI |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync | **G4** AGENTS.md · **G5** rules hook |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) | **G6** recipes · **G7** review process |
-| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) | **G8** runtime tokens · **G9** Claude Design · **G10** icons · **G11** mobile app |
+| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) · 019 vibe-coders (G9, started early: the design system is already exported) | **G8** runtime tokens · **G10** icons · **G11** mobile app |
 
 **Plans that fit no phase:**
 
@@ -164,6 +164,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only the `page-header` docs row |
 | 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
+| 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
 
 **The three blockers that hold most of the rest:**
 
@@ -176,7 +177,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 ## Gaps — work the brief asks for that has no plan yet
 
 None of these exists as a file. They are proposals; each becomes a plan when the owner says so,
-and takes the next free number (019 onwards).
+and takes the next free number (020 onwards).
 
 | Gap | What | Phase | Notes |
 |---|---|---|---|
@@ -188,7 +189,7 @@ and takes the next free number (019 onwards).
 | **G6** | The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). A recipe in production is a Latte + Stylus partial with a KSS block, so BackstopJS covers it for free. |
 | **G7** | Monthly registry review and the proposal/approval process (`proposed` → decision in `meta`) | 4 | Fields belong in 013's schema; could be folded into 013 or 005. |
 | **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. Partly there already: dark mode switches at runtime through `light-dark()` and brand themes are CSS custom properties (017). |
-| **G9** | Mini*S in Claude Design | 5 | Mostly questions: what format it accepts, who can publish. |
+| ~~**G9**~~ | Mini*S in Claude Design | 5 | **Now plan 019** (2026-11-13), widened to every non-production channel: Claude Design, the Skill Hub, a Claude Code plugin, the AI Hub and a hosted runtime. |
 | **G10** | Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
 | **G11** | Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
 
