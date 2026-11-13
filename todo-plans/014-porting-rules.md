@@ -3,7 +3,7 @@ id: 014
 title: Porting rules — carrying tokens and recipes into each environment
 status: draft
 created: 2026-10-29
-updated: 2026-11-06
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -25,7 +25,7 @@ environments:
 - **The mobile app** has adopted token values and plans to adopt names and structure.
 
 **Reference rule for now: values come from Mini*S tokens, behaviour comes from production Latte.**
-Long term, Mini*S should own both. The redefinition is still in ideation, so this plan is a draft.
+Long term, Mini*S should own both. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

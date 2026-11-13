@@ -3,7 +3,7 @@ id: 004
 title: Latte UI-building skill for the Nette repo
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -20,7 +20,7 @@ human or AI, builds with". Production runs on **Nette/Latte**, not on our web co
 designers now vibe-code directly in the production Nette repo. The planned foundation is tokens,
 Latte recipes, skills, a contribution skill, porting rules, and a `registry.json` (shadcn format,
 MiniS fields in `meta`) listing everything that exists, which every tool checks before building
-anything new. All of this is ideation; nothing is decided.
+anything new. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

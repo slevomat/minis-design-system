@@ -17,7 +17,7 @@ owner: Lexislav
 Mini*S is being redefined from "a UI kit people import" to "shared rules and decisions anyone,
 human or AI, builds with". Production runs on Nette/Latte, and designers vibe-code directly in the
 production Nette repo. Skills are a core part of the planned foundation, next to tokens, Latte
-recipes, porting rules and a `registry.json`. Ideation only; nothing is decided.
+recipes, porting rules and a `registry.json`. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

@@ -112,6 +112,15 @@ What the script measures:
 4. **Guardrail inventory.** Stylelint rules and plugins, the strict-value property list,
    colorguard, KSS coverage, BackstopJS scenarios. Diffed on every run, so it shows when
    production adds a rule.
+5. **The three success metrics from the brief** (added 2026-11-13; this script is their only
+   owner). The brief says Mini*S succeeds when UI is consistent, measured three ways:
+   - **share of values from tokens** in production (measure 1 already gives it; the baseline is
+     open question 3 in plan 003);
+   - **new items built without a registry entry**: new partials and elements since the last run
+     (the harvest in plan 005) minus those with a KSS block or a `registry.json` entry;
+   - **Local items promoted**: count of `meta.decision.outcome = approved` with a tier change
+     since the last run, read from `registry.json` once it exists (plan 013).
+   Each run reports the three numbers with their trend; plan 021 puts them on the review agenda.
 
 **Rejected:**
 
@@ -156,6 +165,9 @@ What the script measures:
 - [ ] **Phase 6 — Hand-over and review.** Fold the results into the refit brief (section
       "Současný stav a mezery") and walk them with a production developer, together with plan
       001's review gate. Agree what, if anything, goes into the future PR to production.
+- [ ] **Phase 7 — Success metrics.** Report measure 5 on every run, starting with the token share
+      (available now) and adding the other two as the harvest (005) and the registry (013)
+      land.
 
 ## Dependencies
 

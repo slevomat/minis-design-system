@@ -18,8 +18,7 @@ owner: Lexislav
 Mini*S is being redefined as shared rules and decisions anyone, human or AI, builds with. The
 planned `registry.json` (shadcn format, MiniS fields in `meta`) lists everything that exists, and
 every tool checks it before building anything new. New work starts at tier **Local** and is
-promoted to **Recipe** or **Core** after 3+ uses, decided in a **monthly registry review**. All of
-this is ideation; nothing is decided.
+promoted to **Recipe** or **Core** after 3+ uses, decided in a **monthly registry review**. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

@@ -3,7 +3,7 @@ id: 013
 title: registry.json — the single inventory of everything Mini*S has
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -25,7 +25,7 @@ Three rules from the redefinition depend on it:
 - **Rule 6** — promotion to **Recipe** or **Core** after 3+ uses, decided in a monthly registry
   review.
 
-The redefinition is still in ideation, so this plan is a draft.
+The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 
@@ -61,6 +61,8 @@ questions below):
 | `variants` | Attribute → allowed values, matching the Figma variant names |
 | `tokens` | Component and semantic tokens the item uses |
 | `usedIn` | Where it is used — the input for the 3+ uses count |
+| `status` | Where the item stands in the review process: `local` work in use \| `proposed` (a proposal for Recipe/Core, with a link to its issue or PR) \| `approved` \| `merged` (folded into another item, named in `decision`) \| `returned` (back for changes) \| `rejected` \| `retired`. Set by the contribution skill (`proposed`) and the monthly review (everything else); plan 021 |
+| `decision` | The review's last word on the item: `{ date, outcome, reason, by }`, so it's traceable what belongs in Mini*S and why (brief, "Návrhy a schvalování"). Empty until a review has decided |
 | `implementations` | One **required** key per platform: Web, Web FE B2C, Admin, Slevomat for Partners, vibecoding (web components), mobile app, Figma. Each `{ status: done \| partial \| missing \| n/a \| unknown, ref? }`, with a path or identifier when `done` |
 
 CI rejects an entry with a missing platform key, so "not defined" is always stated as `unknown`
@@ -84,6 +86,8 @@ feeds adoption measurement. (Proposal under validation.)
     "variants": { "variant": ["primary", "secondary", "tertiary", "danger", "cta-buy", "transparent"], "size": ["sm", "md", "lg", "xl"] },
     "tokens": ["--button-primary-surface", "--button-primary-hover-surface", "--button-border-radius", "--button-padding-x"],
     "usedIn": [],
+    "status": "approved",
+    "decision": null,
     "implementations": {
       "web": { "status": "unknown" }, "web-fe-b2c": { "status": "unknown" },
       "admin": { "status": "unknown" }, "partners": { "status": "unknown" },
@@ -112,7 +116,8 @@ reject them).
       (preferred, one source) or docs → registry.
 - [ ] **Phase 2 — CI check:** every component directory has an entry, every `files` path exists,
       required `meta` fields are non-empty, every `implementations` key is present, every
-      `meta.tokens` entry exists in `tokens.css`.
+      `meta.tokens` entry exists in `tokens.css`, `meta.status` is a known value, and a
+      `proposed` item links its issue or PR.
 - [ ] **Phase 3 — Production components**, added as-is together with the lead developer.
 - [ ] **Phase 4 — Hosting and discovery.** Serve the index at a URL (e.g. GitHub Pages next to
       Storybook, which `deploy-storybook.yml` already publishes); try the shadcn MCP server
@@ -125,6 +130,7 @@ reject them).
 
 - **005** contribution skill — the registry's main client (its open question 1 is answered by
   this plan existing); **004** and **006** read the registry through it. Distribution: **010**.
+- **021** review and approval process — owns the `status` values and writes `decision`.
 - **011** Stylelint and **012** token distribution — `meta.tokens` is checked against the same
   canonical name list both are blocked on.
 

@@ -3,7 +3,7 @@ id: 006
 title: minis-app — sandbox skill that registers new work as Local
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -17,7 +17,7 @@ owner: Lexislav
 Mini*S is being redefined as shared rules and decisions anyone, human or AI, builds with.
 Production runs on Nette/Latte; the web components are not what production renders. A planned
 `registry.json` (shadcn format, MiniS fields in `meta`) will list everything that exists. New work
-starts at tier **Local** and is promoted after 3+ uses in a monthly registry review. Ideation only.
+starts at tier **Local** and is promoted after 3+ uses in a monthly registry review. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

@@ -38,7 +38,9 @@ So Mini*S is re-fitted as **shared rules and decisions anyone, human or AI, buil
 "a garden, not Lego": land (tokens), tools (skills, Stylelint, registry), rules of care, and
 anyone may plant freely, just not on the path. The goals don't change (one experience, faster
 development, fewer duplicates, accessibility, one language, easy rebrand); the route does.
-Success is measured by consistency, not by how many components run in production.
+Success is measured by consistency, not by how many components run in production. The brief's
+three measures (share of values from tokens, new items without a registry entry, Local items
+promoted) are reported by plan 017's script (measure 5) and reviewed monthly (plan 021).
 
 **Foundation — five things every person and environment gets:** tokens · recipes (Latte + Stylus
 pairs) · skills · a contribution skill · porting rules.
@@ -120,11 +122,11 @@ are set yet.
 
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
-| **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | — | **G1** |
+| **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
 | **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (optional) | **G2** automatic export |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint | **G3** a11y in CI |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync | **G4** AGENTS.md · **G5** rules hook |
-| **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) | **G6** recipes · **G7** review process |
+| **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval | **G6** recipes |
 | **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) · 019 vibe-coders (G9, started early: the design system is already exported) | **G8** runtime tokens · **G10** icons · **G11** mobile app |
 
 **Plans that fit no phase:**
@@ -165,6 +167,8 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
+| 020 | Team agreement | draft | 0 / 5 | the walkthrough meeting; who signs off |
+| 021 | Monthly review and approval | draft | 0 / 5 | 020 (approval group), 013 (`status`, `decision` added 2026-11-13) |
 
 **The three blockers that hold most of the rest:**
 
@@ -177,17 +181,17 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 ## Gaps — work the brief asks for that has no plan yet
 
 None of these exists as a file. They are proposals; each becomes a plan when the owner says so,
-and takes the next free number (020 onwards).
+and takes the next free number (022 onwards).
 
 | Gap | What | Phase | Notes |
 |---|---|---|---|
-| **G1** | Team agreement: walkthrough of the brief, name the approval group, agree where Mini*S lives in the Nette repo, close decisions 1–3 (then 4, 5, 8) | 0 | Gates 011–014. Open: who signs off; tie-break in the approval group. |
+| ~~**G1**~~ | **Now plan 020** (2026-11-13). Team agreement: walkthrough of the brief, name the approval group, agree where Mini*S lives in the Nette repo, close decisions 1–3 (then 4, 5, 8) | 0 | Gates 011–014. Open: who signs off; tie-break in the approval group. |
 | **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Production lags too: its import is manual and was last run 2026-08-12, and this repo's `tokens.rgb.json` is from 2026-03-13 (017). Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
 | **G3** | Accessibility in CI: contrast of token pairs (light, dark, Gift) and an axe run over Storybook, warning first | 2 | `@storybook/addon-a11y` exists but nothing fails a build; CI is build + typecheck + lint only. |
 | **G4** | `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. Their format is plain Markdown with an index row (no frontmatter), and Copilot is the main agent there, so a Claude-only channel misses most sessions (017). |
 | **G5** | Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config, and 011 itself should extend Nette's existing Stylelint config rather than add one (answered in 011, 2026-11-06). Complements CI. |
 | **G6** | The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). A recipe in production is a Latte + Stylus partial with a KSS block, so BackstopJS covers it for free. |
-| **G7** | Monthly registry review and the proposal/approval process (`proposed` → decision in `meta`) | 4 | Fields belong in 013's schema; could be folded into 013 or 005. |
+| ~~**G7**~~ | **Now plan 021** (2026-11-13). Monthly registry review and the proposal/approval process | 4 | `status` and `decision` added to 013's `meta` the same day. |
 | **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. Partly there already: dark mode switches at runtime through `light-dark()` and brand themes are CSS custom properties (017). |
 | ~~**G9**~~ | Mini*S in Claude Design | 5 | **Now plan 019** (2026-11-13), widened to every non-production channel: Claude Design, the Skill Hub, a Claude Code plugin, the AI Hub and a hosted runtime. |
 | **G10** | Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
@@ -232,8 +236,9 @@ Work for the redefinition that has no todo plan but should show up here:
 - [ ] **Phase 0 — Keep this file true.** On every plan added, renamed, closed or re-statused, and
       on every closed decision, update the tables above in the same commit.
 - [ ] **Phase 1 — Turn gaps into plans, one at a time**, in the owner's order. Suggested first: G1
-      (it unblocks the most), then G6 and G7 (they unblock 004–006).
-- [ ] **Phase 2 — Resolve the overlaps:** 009 vs G2; G7 into 013 or its own plan; 001 phase 5 vs
+      (it unblocks the most), then G6 and G7 (they unblock 004–006). *(2026-11-13: G1 → 020,
+      G7 → 021, G9 → 019. Next: G3 accessibility before phase 2, G6 recipes before phase 4.)*
+- [ ] **Phase 2 — Resolve the overlaps:** 009 vs G2; ~~G7 into 013 or its own plan~~ (own plan 021, fields in 013); 001 phase 5 vs
       decision 1; 017's measurement vs the Nette analysis.
 - [ ] **Phase 3 — Mirror into the brief.** Replace the brief's "todo-plans" column with a pointer
       to this file once the numbers are stable.

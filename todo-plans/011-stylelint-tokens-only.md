@@ -3,7 +3,7 @@ id: 011
 title: Enforce "tokens only" with Stylelint
 status: draft
 created: 2026-10-29
-updated: 2026-11-06
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -18,7 +18,7 @@ Mini*S is being redefined from "a UI kit people import" to "shared rules and dec
 human or AI, builds with". Rule 2, **tokens only**: no hardcoded hex, px or font values — every
 value comes from a Mini*S token. Where possible, rules are enforced automatically in CI. That
 matters most in the production Nette/Latte repo, where designers now vibe-code with AI; this repo
-is where the config is built, tested and dogfooded first. Ideation only; nothing is decided.
+is where the config is built, tested and dogfooded first. The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 

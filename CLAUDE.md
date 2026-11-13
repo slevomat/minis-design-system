@@ -146,6 +146,10 @@ Current plans:
 - `todo-plans/019-minis-for-vibe-coders.md` — gap G9 as a plan: one source published to Claude
   Design, the Slevomat Skill Hub, a Claude Code plugin and a hosted `tokens.css` + component bundle,
   so vibed apps link to Mini*S instead of copying it. Not for production developers (that's 010).
+- `todo-plans/020-team-agreement.md` — gap G1 as a plan: the written team commitment, the named
+  approval group, where Mini*S lives in the Nette repo, decisions 1–3. Comes first; gates 011–014 and 021.
+- `todo-plans/021-review-and-approval.md` — gap G7 as a plan: the monthly registry review, its
+  agenda, outcomes recorded in `meta.status` / `meta.decision` (plan 013), Markdown records until the registry exists.
 
 ## Changelog rules
 

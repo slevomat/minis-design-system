@@ -3,7 +3,7 @@ id: 012
 title: Distribute tokens as a versioned package with a Style Dictionary source
 status: draft
 created: 2026-10-29
-updated: 2026-11-06
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -27,7 +27,7 @@ in `$metadata`, and the name rules (`n` = minus, `_` = decimal) apply to Style D
 plugin (`Figma plugins/minis-designtokens-exporter`) can already export Style Dictionary JSON,
 including light/dark modes, but this repo doesn't use it: `packages/tokens/scripts/build.js`
 copies the Figma-exported `tokens.css` and generates `tokens.rgb.css` from `tokens.rgb.json`.
-The redefinition is still in ideation, so this plan is a draft.
+The direction is agreed (the Nette lead developer accepted the redefinition on 2026-11-02); the details here are proposals until the decisions in plan 003 are closed.
 
 ## The problem
 
