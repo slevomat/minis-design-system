@@ -1,5 +1,5 @@
 ---
-id: 010
+id: 011
 title: Enforce "tokens only" with Stylelint
 status: draft
 created: 2026-10-29
@@ -7,7 +7,7 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 010 — Enforce "tokens only" with Stylelint
+# 011 — Enforce "tokens only" with Stylelint
 
 > **Blocked on two decisions: open questions 1 and 2.** Phase 0 can run before they are answered
 > and should inform them; nothing from Phase 1 on can start until they are.
@@ -54,7 +54,7 @@ whose list of valid names is read from the built tokens — so new tokens need n
   breakpoint), no editor integration, no per-line disable, and every exception is a regex.
 - **ESLint rules on the Lit templates** — only sees CSS as template strings; doesn't cover plain CSS,
   inline styles or the Nette repo's stylesheets. Stylelint plus `postcss-lit` covers all of them.
-- **Only AI skills or PR review** — skills (plans 003–005) reduce violations but can't guarantee
+- **Only AI skills or PR review** — skills (plans 004–006) reduce violations but can't guarantee
   them; reviewers miss a mistyped token name. Useful alongside the linter, not instead of it.
 
 ## Phases
@@ -73,7 +73,7 @@ whose list of valid names is read from the built tokens — so new tokens need n
         changelog rules in CLAUDE.md.
   - [ ] Switch the CI step to blocking.
 - [ ] **Phase 3 — Roll out to the Nette repo.**
-  - [ ] Agree with the Nette team how the package gets there (cf. plan 009).
+  - [ ] Agree with the Nette team how the package gets there (cf. plan 010).
   - [ ] Start in warning mode; switch to blocking after about a month.
   - [ ] Measure the share of token-based values — also feeds the planned adoption analysis.
 - [ ] **Phase 4 — Keep in sync.** Confirm new tokens flow in from the build with no config change;
@@ -90,10 +90,10 @@ whose list of valid names is read from the built tokens — so new tokens need n
    inline styles in HTML need a different custom syntax.
 5. **Does the Nette repo use CSS, SCSS or both?** SCSS needs `postcss-scss` and has its own
    variables, which the config has to treat as literals or as tokens.
-   **Answered 2026-11-06 (plan 016):** neither — it's **Stylus**, and it already runs Stylelint on
+   **Answered 2026-11-06 (plan 017):** neither — it's **Stylus**, and it already runs Stylelint on
    it (`postcss-styl` + `stylelint-stylus`, config `build/stylelint-options.cjs`), with
    `declaration-strict-value` on colour, `box-shadow`, `border-radius` and `font-weight`, and
    10 custom plugins (incl. `no-deprecated-variable`). Tokens arrive as Stylus `$variables`
    compiled to literal CSS, so the production check must accept `$variables`, not `var(--…)`.
-   Phase 3 should extend that config rather than ship a separate one; plan 016 Phase 4 lists the
+   Phase 3 should extend that config rather than ship a separate one; plan 017 Phase 4 lists the
    candidate rules.

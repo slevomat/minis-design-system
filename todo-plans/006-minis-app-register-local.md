@@ -1,5 +1,5 @@
 ---
-id: 005
+id: 006
 title: minis-app — sandbox skill that registers new work as Local
 status: draft
 created: 2026-10-29
@@ -7,10 +7,10 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 005 — minis-app: sandbox skill that registers new work as Local
+# 006 — minis-app: sandbox skill that registers new work as Local
 
-> **Depends on the registry (`registry.json`) and on the contribution skill (004).** Neither exists
-> yet. Distribution: see plan 009.
+> **Depends on the registry (`registry.json`) and on the contribution skill (005).** Neither exists
+> yet. Distribution: see plan 010.
 
 ## Context
 
@@ -29,7 +29,7 @@ registry never hears of it, so it can never reach 3 uses and be promoted.
 ## Constraints
 
 - **minis-app stays the sandbox skill on web components.** It is not the production skill (that is
-  003) and must not fire in the Nette repo.
+  004) and must not fire in the Nette repo.
 - Registering is a registry entry, not a component. The skill still never adds components to the
   monorepo as a side effect.
 - Everything else in the skill (topbar variant, background token, non-negotiables, browser
@@ -40,19 +40,19 @@ registry never hears of it, so it can never reach 3 uses and be promoted.
 - Before Step 4 builds any screen, check `registry.json` — not only `docs/ai-prompts/components/` —
   for existing items.
 - Replace "When the design system itself is missing something" with a call to the contribution
-  path (004): extend if close, otherwise build in the prototype and **register as Local**.
-- Say up front, in the description, that this is the sandbox and point to 003 for the Nette repo.
-- Replace "Using this skill outside the monorepo" (`cp -r` by hand) with whatever 009 decides.
+  path (005): extend if close, otherwise build in the prototype and **register as Local**.
+- Say up front, in the description, that this is the sandbox and point to 004 for the Nette repo.
+- Replace "Using this skill outside the monorepo" (`cp -r` by hand) with whatever 010 decides.
 
 **Rejected:** retiring minis-app in favour of the Latte skill (the sandbox stays the fastest way to
 try an idea); letting it add components to the monorepo (that is the review's decision).
 
 ## Phases
 
-- [ ] **Phase 1 — Rewrite** the missing-component section and add the registry check, once 004
+- [ ] **Phase 1 — Rewrite** the missing-component section and add the registry check, once 005
       exists.
 - [ ] **Phase 2 — Scope the trigger:** update the description so it doesn't fire in the Nette repo.
-- [ ] **Phase 3 — Distribution:** swap the copy instructions for 009's channel.
+- [ ] **Phase 3 — Distribution:** swap the copy instructions for 010's channel.
 
 ## Open questions
 

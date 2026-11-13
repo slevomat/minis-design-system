@@ -11,7 +11,9 @@ scratch. Short-lived tasks belong in the issue tracker, not here.
 ## Rules
 
 **Naming** — `NNN-kebab-case-title.md`, three-digit zero-padded, allocated sequentially.
-Numbers are permanent: never renumber, never reuse a number, never delete a plan file. A plan that
+Numbers are permanent: never renumber, never reuse a number, never delete a plan file. (One
+exception, by the owner: on 2026-11-13 plans 003–017 became 004–018 to make room for the overview
+plan 003; the old → new table is at the end of that plan.) A plan that
 dies gets `status: abandoned` and a note explaining why — the dead end is the useful part.
 
 **Frontmatter** — every plan starts with:
@@ -74,18 +76,19 @@ collide in the index; on `master` the next number is always visible to everyone.
 |---|---|---|---|
 | 001 | [Move the colour ramps onto a curve](001-colour-ramps-to-curve.md) | `draft` | 2026-08-11 |
 | 002 | [Deal Card and Promo Card components](002-deal-card-and-promo-card.md) | `draft` | 2026-09-10 |
-| 003 | [Latte UI-building skill for the Nette repo](003-latte-ui-skill.md) | `draft` | 2026-10-29 |
-| 004 | [Contribution skill — reuse, extend, or register as Local](004-contribution-skill.md) | `draft` | 2026-10-29 |
-| 005 | [minis-app — sandbox skill that registers new work as Local](005-minis-app-register-local.md) | `draft` | 2026-10-29 |
-| 006 | [Todo-plan writing skill](006-todo-plan-skill.md) | `draft` | 2026-10-29 |
-| 007 | [Bug-reporting skill and /minis-bug command](007-bug-report-skill.md) | `draft` | 2026-10-29 |
-| 008 | [Token-update skill (optional)](008-token-update-skill.md) | `draft` | 2026-11-06 |
-| 009 | [Distributing Mini*S skills and commands](009-skill-distribution.md) | `draft` | 2026-10-29 |
-| 010 | [Enforce "tokens only" with Stylelint](010-stylelint-tokens-only.md) | `draft` | 2026-11-06 |
-| 011 | [Distribute tokens as a versioned package with a Style Dictionary source](011-token-distribution.md) | `draft` | 2026-11-06 |
-| 012 | [registry.json — the single inventory of everything Mini*S has](012-registry.md) | `draft` | 2026-10-29 |
-| 013 | [Porting rules — carrying tokens and recipes into each environment](013-porting-rules.md) | `draft` | 2026-11-06 |
-| 014 | [Responsive line height in Figma text styles](014-responsive-line-height-in-figma.md) | `in-progress` | 2026-11-06 |
-| 015 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](015-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-06 |
-| 016 | [Production reference audit — what the Slevomat repo tells the refit](016-production-reference-audit.md) | `draft` | 2026-11-06 |
-| 017 | [Changelog sync skill — one change, every changelog](017-changelog-sync-skill.md) | `draft` | 2026-11-12 |
+| 003 | [Mini*S redefinition — overview of the rollout and every plan in it](003-minis-redefinition-overview.md) — **start here** | `draft` | 2026-11-13 |
+| 004 | [Latte UI-building skill for the Nette repo](004-latte-ui-skill.md) | `draft` | 2026-10-29 |
+| 005 | [Contribution skill — reuse, extend, or register as Local](005-contribution-skill.md) | `draft` | 2026-10-29 |
+| 006 | [minis-app — sandbox skill that registers new work as Local](006-minis-app-register-local.md) | `draft` | 2026-10-29 |
+| 007 | [Todo-plan writing skill](007-todo-plan-skill.md) | `draft` | 2026-10-29 |
+| 008 | [Bug-reporting skill and /minis-bug command](008-bug-report-skill.md) | `draft` | 2026-10-29 |
+| 009 | [Token-update skill (optional)](009-token-update-skill.md) | `draft` | 2026-11-06 |
+| 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-10-29 |
+| 011 | [Enforce "tokens only" with Stylelint](011-stylelint-tokens-only.md) | `draft` | 2026-11-06 |
+| 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-06 |
+| 013 | [registry.json — the single inventory of everything Mini*S has](013-registry.md) | `draft` | 2026-10-29 |
+| 014 | [Porting rules — carrying tokens and recipes into each environment](014-porting-rules.md) | `draft` | 2026-11-06 |
+| 015 | [Responsive line height in Figma text styles](015-responsive-line-height-in-figma.md) | `in-progress` | 2026-11-06 |
+| 016 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](016-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-06 |
+| 017 | [Production reference audit — what the Slevomat repo tells the refit](017-production-reference-audit.md) | `draft` | 2026-11-06 |
+| 018 | [Changelog sync skill — one change, every changelog](018-changelog-sync-skill.md) | `draft` | 2026-11-12 |

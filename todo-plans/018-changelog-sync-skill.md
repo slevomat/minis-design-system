@@ -1,5 +1,5 @@
 ---
-id: 017
+id: 018
 title: Changelog sync skill — one change, every changelog
 status: draft
 created: 2026-11-12
@@ -7,11 +7,11 @@ updated: 2026-11-12
 owner: Lexislav
 ---
 
-# 017 — Changelog sync skill: one change, every changelog
+# 018 — Changelog sync skill: one change, every changelog
 
 > Part of the MiniS redefinition (`docs/MiniS redefined guardrails, not a UI kit.md`, "Skilly,
 > které MiniS potřebuje"). The brief's skills table doesn't list this skill yet; add a row when
-> this plan goes past `draft`. Distribution: see plan 009.
+> this plan goes past `draft`. Distribution: see plan 010.
 
 ## The problem
 
@@ -45,7 +45,7 @@ Each fix was manual detective work across the three sources.
 - **The audiences differ.** The repo changelog is for developers (token names, attributes,
   breaking notes). The Figma card is for whoever uses the component (one plain line per change).
   The same change is phrased differently per side; the skill must not copy text verbatim.
-- **Never write to the production repo** (`../slevomat`, read-only); see plan 016.
+- **Never write to the production repo** (`../slevomat`, read-only); see plan 017.
 - **The user commits and pushes.** The skill prepares the edits and the commit message; it never
   pushes.
 
@@ -63,7 +63,7 @@ One skill, `minis-changelog` (also as a `/minis-changelog` command), with three 
 2. **Reconcile.** For one component or all of them, read the three sources, match entries by
    date + component, and report the gaps: in the repo but not in Figma, the reverse, contradictory
    wording, and dates out of order. Fix them on request, never silently.
-3. **Release notes** (later, with plan 011). Collect the entries since the last version tag into
+3. **Release notes** (later, with plan 012). Collect the entries since the last version tag into
    release notes.
 
 Why not one structured source file (e.g. `changelog/*.json`) rendered to all three? It's cleaner,
@@ -86,7 +86,7 @@ as an open question.
       row. Ask whether the change also needs a repo entry, e.g. when a token or property changed.
 - [ ] **Phase 4: Hooks** (optional). A commit-time reminder when a component or token file
       changes without a `CHANGELOG.md` change, in line with the brief's rules-hook idea.
-- [ ] **Phase 5: Release notes** (with plan 011).
+- [ ] **Phase 5: Release notes** (with plan 012).
 
 ## Open questions
 
@@ -100,7 +100,7 @@ as an open question.
 4. **Granularity:** one Figma row per repo entry, or several repo bullets grouped into one user
    line? (`minis-figma-docs` voice says group related changes under one date.)
 5. **Production:** should Reconcile also read what production (`../slevomat`) has adopted, so the
-   changelog can say "adopted in production"? This ties into plan 016.
+   changelog can say "adopted in production"? This ties into plan 017.
 6. **Who runs it:** the DS owner only, or designers too? Designers may not have the repo, which
-   pushes towards a Figma-first entry point and plan 009 distribution.
+   pushes towards a Figma-first entry point and plan 010 distribution.
 7. **Name:** `minis-changelog`, or part of a wider `minis-release` skill?

@@ -1,5 +1,5 @@
 ---
-id: 008
+id: 009
 title: Token-update skill (optional)
 status: draft
 created: 2026-10-29
@@ -7,11 +7,11 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 008 — Token-update skill (optional)
+# 009 — Token-update skill (optional)
 
 > **Optional.** Worth doing only if token updates are done by more than one or two people, or the
 > checklist in `CLAUDE.md` keeps getting missed. No dependency on the registry or Latte recipes.
-> Distribution: see plan 009 (this one probably stays in this repo only).
+> Distribution: see plan 010 (this one probably stays in this repo only).
 
 ## The problem
 
@@ -47,7 +47,7 @@ A checklist skill:
    flag any heritage value change.
 6. Log every change in both changelogs; restart Storybook so the Tier toolbar picks up new values.
 
-**Typography part** (from plan 014 phase 7, added 2026-11-06). When a font size or a line-height
+**Typography part** (from plan 015 phase 7, added 2026-11-06). When a font size or a line-height
 ratio changes in Figma, the skill also: regenerates the Figma-only `typography/<role>/line-height-px`
 variables (round(size × ratio) per Layout mode; set Code Syntax and description on any new one),
 checks the styles in `default`, `md` and `xl` frames, insists on exporter ≥ 1.2.1, checks that no
@@ -73,5 +73,5 @@ as prose in `CLAUDE.md` if the optional bar is met.
 3. **Who runs token updates?** If it's only the owner, the skill's value is mostly as a memory aid.
 4. **How do token updates reach production** once production consumes Mini*S tokens — does this
    skill end with a release/publish step? (Production already consumes them: it builds its Stylus
-   from the exporter's resolved JSON with Style Dictionary — plan 011. Today that is a hand-over
+   from the exporter's resolved JSON with Style Dictionary — plan 012. Today that is a hand-over
    to the Nette team, not a step this skill can run.)

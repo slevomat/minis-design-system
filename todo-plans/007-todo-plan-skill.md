@@ -1,5 +1,5 @@
 ---
-id: 006
+id: 007
 title: Todo-plan writing skill
 status: draft
 created: 2026-10-29
@@ -7,9 +7,9 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 006 — Todo-plan writing skill
+# 007 — Todo-plan writing skill
 
-> No dependency on the registry or on Latte recipes. Distribution: see plan 009.
+> No dependency on the registry or on Latte recipes. Distribution: see plan 010.
 
 ## The problem
 
@@ -47,7 +47,7 @@ tracker (the point is reasoning kept next to the code, in review with it).
       the README by hand.
 - [ ] **Phase 3 — Single source:** make this repo's README the template plus the index (or point
       the README at the skill — question 2); shorten the `CLAUDE.md` section to a pointer.
-- [ ] **Phase 4 — Ship** through 009.
+- [ ] **Phase 4 — Ship** through 010.
 
 ## Open questions
 

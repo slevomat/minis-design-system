@@ -1,5 +1,5 @@
 ---
-id: 003
+id: 004
 title: Latte UI-building skill for the Nette repo
 status: draft
 created: 2026-10-29
@@ -7,11 +7,11 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 003 — Latte UI-building skill for the Nette repo
+# 004 — Latte UI-building skill for the Nette repo
 
 > **Depends on Latte recipes existing, and on the registry (`registry.json`).** Neither exists yet.
 > This skill cannot be written before there is at least a first set of recipes to point at.
-> Distribution: see plan 009. Unknown-item path: see plan 004.
+> Distribution: see plan 010. Unknown-item path: see plan 005.
 
 ## Context
 
@@ -43,25 +43,25 @@ One skill, loaded in the Nette repo, that:
 
 1. Checks `registry.json` for a Recipe/Core item matching the need, before writing markup.
 2. Uses the recipe as documented (its Latte `{include}`/`{embed}` and parameters).
-3. When nothing matches, hands over to the contribution skill (004) — no ad-hoc markup.
+3. When nothing matches, hands over to the contribution skill (005) — no ad-hoc markup.
 4. Carries the rules that hold on production (tokens only, borders vs separators, prefer active
    over `disabled`, size names) as a short table plus dos and don'ts collected from production devs.
 
 **Rejected:** a large `CLAUDE.md` section in the Nette repo (no triggering, mixes with the
 production team's own instructions, grows without bound); porting the web components into
 production (contradicts the redefinition); teaching `minis-app` Latte too (different runtime and
-verification; muddles when each fires — see 005).
+verification; muddles when each fires — see 006).
 
 ## Phases
 
 - [ ] **Phase 0 — Prerequisites (other work):** first Latte recipes exist; `registry.json` lists
-      them; distribution decided (009).
+      them; distribution decided (010).
 - [ ] **Phase 1 — Content:** go through `docs/ai-prompts/principles.md` rule by rule and mark
       production yes/no; collect dos and don'ts from production devs; define how the skill reads the
       recipe list out of the registry.
 - [ ] **Phase 2 — Pilot:** one designer, one real page in the Nette repo; log every place the agent
       went off-system and fix the skill, not the page.
-- [ ] **Phase 3 — Ship** through the channel chosen in 009.
+- [ ] **Phase 3 — Ship** through the channel chosen in 010.
 
 ## Open questions
 

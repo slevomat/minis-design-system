@@ -1,5 +1,5 @@
 ---
-id: 011
+id: 012
 title: Distribute tokens as a versioned package with a Style Dictionary source
 status: draft
 created: 2026-10-29
@@ -7,7 +7,7 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 011 — Distribute tokens as a versioned package with a Style Dictionary source
+# 012 — Distribute tokens as a versioned package with a Style Dictionary source
 
 > **Blocked on open question 1 (canonical names).** Phase 1 can run before it is answered and
 > should inform it; nothing from Phase 2 on can start until it is.
@@ -17,13 +17,13 @@ owner: Lexislav
 Mini*S is being redefined as shared rules rather than a UI kit, and those rules have to live
 where UI is actually built: the production Nette/Latte repo. Tokens are the first rule that has
 to arrive there intact. The Nette team has said they want to use Style Dictionary — and
-**production already does** (checked 2026-11-05, plan 014 → "Production audit"): its
+**production already does** (checked 2026-11-05, plan 015 → "Production audit"): its
 `build/style-dictionary/tokens/*.json` are this exporter's **resolved-mode JSON** (last typography
 export 2026-06-04), and Style Dictionary turns them into `app/stylus/settings/_variables.styl` and a
 Kotlin file for the mobile app. So the starting point is "align the two builds", not "introduce
 Style Dictionary". Since exporter 1.2.1 every export also records the exporter version and settings
 in `$metadata`, and the name rules (`n` = minus, `_` = decimal) apply to Style Dictionary keys too
-(plan 015). The exporter
+(plan 016). The exporter
 plugin (`Figma plugins/minis-designtokens-exporter`) can already export Style Dictionary JSON,
 including light/dark modes, but this repo doesn't use it: `packages/tokens/scripts/build.js`
 copies the Figma-exported `tokens.css` and generates `tokens.rgb.css` from `tokens.rgb.json`.
@@ -35,7 +35,7 @@ The redefinition is still in ideation, so this plan is a draft.
   mobile app got their token values by copying, so nobody can tell which version they have, and
   every update is manual.
 - **Copies drift.** Nothing flags a copy that has fallen behind or been edited locally.
-- **Nothing in Nette to measure or lint against.** Plan 010's unknown-property check and any
+- **Nothing in Nette to measure or lint against.** Plan 011's unknown-property check and any
   adoption count need a single token list that Nette actually installs.
 
 ## Constraints
@@ -144,7 +144,7 @@ the same source later.
   - [ ] Which outputs they need: CSS, SCSS, PHP constants?
   - [ ] Who owns their config (open question 4) and how updates arrive: a pinned version and
         an upgrade PR per release.
-  - [ ] Replace the copied values; plan 010's linter then measures against the installed list.
+  - [ ] Replace the copied values; plan 011's linter then measures against the installed list.
 - [ ] **Phase 5 — Later: the mobile app.** iOS and Android outputs from the same source and
       config, with their own platforms added.
 
@@ -153,7 +153,7 @@ the same source later.
 1. **Canonical token names (blocking).** The Style Dictionary export keeps the collection in the
    path (`color.foundation.surface.primary`), while the CSS uses `--color-surface-primary`.
    `tokens.json` drifts too. Which name set is canonical? Nette must end up with the same names
-   as Mini*S. Plan 010's question 2 is the same question, so answer it once for both.
+   as Mini*S. Plan 011's question 2 is the same question, so answer it once for both.
 2. **Does the Nette build have Node?** If not, option (c) still ships built CSS, but the Nette
    team can't run Style Dictionary themselves, and the PHP/SCSS outputs would have to be built
    here.

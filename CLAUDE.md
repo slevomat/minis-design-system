@@ -93,7 +93,7 @@ more than one release, or carrying reasoning worth preserving. Full conventions 
 `todo-plans/README.md`; the essentials:
 
 - Files are `NNN-kebab-title.md`, sequentially numbered. **Numbers are permanent** — never renumber,
-  reuse, or delete. A dead plan gets `status: abandoned` plus the reason.
+  reuse, or delete (one owner-approved exception on 2026-11-13: 003–017 → 004–018, map in plan 003). A dead plan gets `status: abandoned` plus the reason.
 - Frontmatter carries `id`, `title`, `status`, `created`, `updated`, `owner`.
   Status is `draft` | `ready` | `in-progress` | `done` | `abandoned`.
 - Keep the index table in `todo-plans/README.md` current.
@@ -115,29 +115,32 @@ Current plans:
   proposing any ramp-wide colour change. Its measured constraint set covers this repo only —
   heritage usage on production may differ, so the plan needs a production developer's review before
   it can go past `draft`. Don't present its counts as the full picture.
-- `todo-plans/003-latte-ui-skill.md` — skill for building UI from Latte recipes in the Nette repo (needs recipes + registry).
-- `todo-plans/004-contribution-skill.md` — search the registry → extend and flag the gap → build new as Local (needs registry).
-- `todo-plans/005-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
-- `todo-plans/006-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
-- `todo-plans/007-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
-- `todo-plans/008-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
-- `todo-plans/009-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 003–008).
-- `todo-plans/010-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
-- `todo-plans/011-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 010).
-- `todo-plans/012-registry.md` — `registry.json` in shadcn format with Mini*S fields in `meta`: the
-  single inventory every tool checks before building new (unblocks 003–005).
-- `todo-plans/013-porting-rules.md` — one-page guides (common, Latte, web components, Figma) for
+- `todo-plans/003-minis-redefinition-overview.md` — **start here for the Mini*S redefinition**: what it
+  is, the rollout phases, which plan covers which phase, what is blocked on what, and the gaps that
+  have no plan yet. Keep it current when a plan is added or changes status.
+- `todo-plans/004-latte-ui-skill.md` — skill for building UI from Latte recipes in the Nette repo (needs recipes + registry).
+- `todo-plans/005-contribution-skill.md` — search the registry → extend and flag the gap → build new as Local (needs registry).
+- `todo-plans/006-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
+- `todo-plans/007-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
+- `todo-plans/008-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
+- `todo-plans/009-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
+- `todo-plans/010-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 004–009).
+- `todo-plans/011-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
+- `todo-plans/012-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 011).
+- `todo-plans/013-registry.md` — `registry.json` in shadcn format with Mini*S fields in `meta`: the
+  single inventory every tool checks before building new (unblocks 004–006).
+- `todo-plans/014-porting-rules.md` — one-page guides (common, Latte, web components, Figma) for
   carrying tokens and recipes into each environment, and which side wins when they diverge.
-- `todo-plans/014-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
+- `todo-plans/015-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
   Figma text styles follow Layout modes; needs exporter changes first (Figma treats every bound
   line-height value as pixels).
-- `todo-plans/015-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
+- `todo-plans/016-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
   (`--typography-spacing-n2` …). Phase 4 landed 2026-11-06; phases 5–6 (components, docs) mostly done
   with it — check the plan for what is left.
-- `todo-plans/016-production-reference-audit.md` — a repeatable audit of the read-only production
+- `todo-plans/017-production-reference-audit.md` — a repeatable audit of the read-only production
   clone (`../slevomat`): component usage, primitive → semantic map, production's existing
-  Stylelint/KSS/BackstopJS guardrails. Feeds 001, 010–013. Never write to the production repo.
-- `todo-plans/017-changelog-sync-skill.md` — a skill that writes one change to every changelog
+  Stylelint/KSS/BackstopJS guardrails. Feeds 001, 011–014. Never write to the production repo.
+- `todo-plans/018-changelog-sync-skill.md` — a skill that writes one change to every changelog
   (`CHANGELOG.md`, the Storybook Changelog, the Figma docs changelog cards) and reconciles drift
   between them. Part of the MiniS redefinition; reuses `minis-figma-docs` for the Figma side.
 

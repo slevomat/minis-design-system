@@ -1,5 +1,5 @@
 ---
-id: 013
+id: 014
 title: Porting rules — carrying tokens and recipes into each environment
 status: draft
 created: 2026-10-29
@@ -7,10 +7,10 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 013 — Porting rules: carrying tokens and recipes into each environment
+# 014 — Porting rules: carrying tokens and recipes into each environment
 
-> **Depends on the canonical-names decision** (010 question 2 = 011 question 1) and on the
-> **registry** (012), which records implementation status per platform. Phases 0 and 1 can run
+> **Depends on the canonical-names decision** (011 question 2 = 012 question 1) and on the
+> **registry** (013), which records implementation status per platform. Phases 0 and 1 can run
 > before either is settled; `common.md` can't be final until canonical names are.
 
 ## Context
@@ -72,8 +72,8 @@ Short written guides, one page each, in `docs/porting/` (location is open questi
    - Modes and breakpoints: `data-mode="dark"`, `data-theme` schemas, viewport tokens vs container
      queries with breakpoints hardcoded from the `--breakpoint-*` scale.
    - The reference/conflict rule above, and how a divergence is reported (registry status, issue).
-   - A missing token: never invent one, flag the gap, build it as Local (plan 004).
-   - Version tracking: which token/recipe version each target has (plan 011).
+   - A missing token: never invent one, flag the gap, build it as Local (plan 005).
+   - Version tracking: which token/recipe version each target has (plan 012).
 2. **`latte.md`** — how Nette consumes tokens; the heritage → Mini*S mapping; component API names
    identical to Figma and the web components (`variant`, `size` `xs`–`xl`); slots → Latte blocks;
    accessibility carried over unchanged; icons via the webfont in production.
@@ -90,7 +90,7 @@ resolved JSON). Its structure (rules per environment plus "which side wins") is 
 `common.md`, `latte.md` and `figma.md`, and its production section is a starting point for
 `latte.md`. **Divergences to settle here:** production's Brand heading xl is hand-written as
 `font-size: clamp(32px, 7vw, 56px)` and `font-weight: 700`, while Mini*S says 32 → 56px at 1480px
-and weight 400 (plan 014 → "Production audit", item 3).
+and weight 400 (plan 015 → "Production audit", item 3).
 5. **Later: `mobile.md`** — iOS/Android outputs from the same source.
 
 **Rejected:** keeping the rules in CLAUDE.md (only Claude Code in this repo reads it; the Nette
@@ -104,15 +104,15 @@ environment's owner needs a page they can own).
 - [ ] **Phase 1 — Draft `common.md`.**
 - [ ] **Phase 2 — `latte.md`**, written together with the Nette lead developer.
 - [ ] **Phase 3 — `web-components.md` and `figma.md`**, then slim CLAUDE.md to link to them.
-- [ ] **Phase 4 — Link from `AGENTS.md`** (doesn't exist yet; cf. 009 question 2) **and the skills**
-      (003–005, `minis-app`).
+- [ ] **Phase 4 — Link from `AGENTS.md`** (doesn't exist yet; cf. 010 question 2) **and the skills**
+      (004–006, `minis-app`).
 
 ## Dependencies
 
-- **010 / 011** — the canonical-names decision; 011 also carries the version tracking and the
+- **011 / 012** — the canonical-names decision; 012 also carries the version tracking and the
   Style Dictionary transforms `common.md` describes.
-- **012** — the registry's `implementations` status per platform is where divergence shows up.
-- **001** — heritage colours; **009** — how the guides reach the Nette repo.
+- **013** — the registry's `implementations` status per platform is where divergence shows up.
+- **001** — heritage colours; **010** — how the guides reach the Nette repo.
 
 ## Open questions
 

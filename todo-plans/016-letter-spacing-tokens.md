@@ -1,5 +1,5 @@
 ---
-id: 015
+id: 016
 title: Letter-spacing tokens — one meaning in Figma, the exporter and CSS
 status: in-progress
 created: 2026-11-05
@@ -7,13 +7,13 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 015 — Letter-spacing tokens: one meaning in Figma, the exporter and CSS
+# 016 — Letter-spacing tokens: one meaning in Figma, the exporter and CSS
 
 > **High priority** (owner, 2026-11-05). The next token export from Figma may rewrite
 > `--typography-spacing-*` in `tokens.css` with different names and units. **Until phase 1 is
 > decided, check the `--typography-spacing-*` lines of every export diff by hand before
 > committing it.**
-> Related: plan 014 (same root cause for line height: Figma applies bound numbers as pixels).
+> Related: plan 015 (same root cause for line height: Figma applies bound numbers as pixels).
 
 ## The problem
 
@@ -53,8 +53,8 @@ Five separate problems:
 - **CSS letter spacing is em** (decided 2026-11-06), so it scales with font size, like the
   components and production already do.
 - **Figma can only bind pixels.** A token that must scale with size can't be bound in Figma. That's
-  the same wall as plan 014.
-- Production's real values decide what the tokens should be. The production audit in plan 014
+  the same wall as plan 015.
+- Production's real values decide what the tokens should be. The production audit in plan 015
   phase 0a covers letter spacing too.
 
 ## Approach
@@ -79,7 +79,7 @@ Treat letter spacing like the line-height ratios:
   So `-0.3%` → `--typography-spacing-n0_3`.
   The old `tighter … ultra-wide` names are removed.
 - **Text styles keep a typed-in percentage.** A percentage already scales with size, so there's
-  no need for a `-px` set as in plan 014. The spacing variables get no `LETTER_SPACING` scope, so
+  no need for a `-px` set as in plan 015. The spacing variables get no `LETTER_SPACING` scope, so
   they can't be bound by mistake.
 - **Brand lg and Brand xl are both 3 %** (decided 2026-11-06). Both styles unbind `extra-wide`
   and type 3 %. Docs and tokens follow production's brand lg value. **Visible change in
@@ -98,7 +98,7 @@ components would have to become per-size px values.
 - [x] **1. Decide** the unit, the names and the Brand value. Done 2026-11-06, see "Decisions".
 - [x] **2. Exporter:** derive em from the name (`spacing/-2%` → `-0.02em`), add the name rule
       (leading `-` → `n`, `.` → `_`), drop the "bound = percent" special case, fix the `formatFloat()` comment,
-      update `TOKEN_CHANGES.md`. Ship it in the same release as plan 014 phase 1. Done 2026-11-06:
+      update `TOKEN_CHANGES.md`. Ship it in the same release as plan 015 phase 1. Done 2026-11-06:
       exporter 1.1.0 (`fed1340`). The old names (`tighter … ultra-wide`) still export ÷ 100, with a
       warning when bound, so production keeps its current values until phase 3 renames them. The
       minus/dot rule also applies to JSON and Style Dictionary keys, and renames none of the existing
@@ -138,7 +138,7 @@ components would have to become per-size px values.
       is a breaking token change.
       Done 2026-11-06 (`51f51f1`). The resolved export (exporter 1.2.1, 16:05) matched exactly, the
       `-0,3%` comma name included. `tokens.css` got the five new tokens by hand-merge (it is merged by
-      hand, see plan 014), and the old block and its "outdated" comment are gone. Both changelogs are
+      hand, see plan 015), and the old block and its "outdated" comment are gone. Both changelogs are
       updated. **Not done:** `tokens.json` / `tokens.rgb.json` weren't re-exported. They are
       references-mode and hex exports, and neither holds spacing tokens today (the old ones never
       reached them). Re-export them with the next token update.
@@ -150,8 +150,8 @@ components would have to become per-size px values.
       `--typography-spacing-extra-wide` 1px → `--typography-spacing-3` 0.03em),
       `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-n1`), and a
       letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
-      part of the 008 skill (plan 014 phase 7). Remove the "outdated" comment from `tokens.css`.
-      Done in `51f51f1` except the 008 skill part, which waits for plan 014 phase 7.
+      part of the 009 skill (plan 015 phase 7). Remove the "outdated" comment from `tokens.css`.
+      Done in `51f51f1` except the 009 skill part, which waits for plan 015 phase 7.
 
 ## Production audit (2026-11-05)
 

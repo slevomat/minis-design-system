@@ -1,5 +1,5 @@
 ---
-id: 012
+id: 013
 title: registry.json — the single inventory of everything Mini*S has
 status: draft
 created: 2026-10-29
@@ -7,17 +7,17 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 012 — registry.json: the single inventory of everything Mini*S has
+# 013 — registry.json: the single inventory of everything Mini*S has
 
-> **Unblocks 003, 004 and 005**, which all assume a registry and its schema. Shares the
-> canonical-token-names question with 010 and 011: `meta.tokens` needs the same single name list.
+> **Unblocks 004, 005 and 006**, which all assume a registry and its schema. Shares the
+> canonical-token-names question with 011 and 012: `meta.tokens` needs the same single name list.
 
 ## Context
 
 Mini*S is being redefined as shared rules rather than a UI kit. Production runs on Nette/Latte;
 designers now vibe-code in the production repo; the web components here are reference and
 sandbox. `registry.json` is the shared source of truth about what exists: the AI in the Nette
-repo, the contribution skill (004) and CI all consult it **before building anything new**.
+repo, the contribution skill (005) and CI all consult it **before building anything new**.
 Three rules from the redefinition depend on it:
 
 - **Rule 4** — every item has a valid entry: purpose, when to use and when not, variants, tokens.
@@ -46,7 +46,7 @@ it builds new — and nothing can count uses or tell which platform has which pa
   that names invented tokens teaches agents to invent them (cf. `--color-border-default`).
 - **Production components are documented as-is first.** Facelift and re-applying Mini*S to them
   is a separate, later step; the registry records reality, not the target.
-- **The registry never promotes.** Tier changes come out of the monthly review (004's constraint).
+- **The registry never promotes.** Tier changes come out of the monthly review (005's constraint).
 
 ## Approach
 
@@ -119,13 +119,13 @@ reject them).
       (`shadcn mcp init --client claude`) in Claude Code. The consumer needs a `components.json`
       with a `registries` entry (`"@minis": "https://…/{name}.json"`) — the Nette repo would
       carry that file only for this.
-- [ ] **Phase 5 — Connect** to the contribution skill (004) and the monthly registry review.
+- [ ] **Phase 5 — Connect** to the contribution skill (005) and the monthly registry review.
 
 ## Dependencies
 
-- **004** contribution skill — the registry's main client (its open question 1 is answered by
-  this plan existing); **003** and **005** read the registry through it. Distribution: **009**.
-- **010** Stylelint and **011** token distribution — `meta.tokens` is checked against the same
+- **005** contribution skill — the registry's main client (its open question 1 is answered by
+  this plan existing); **004** and **006** read the registry through it. Distribution: **010**.
+- **011** Stylelint and **012** token distribution — `meta.tokens` is checked against the same
   canonical name list both are blocked on.
 
 ## Open questions
@@ -136,6 +136,6 @@ reject them).
    does the registry list webfont glyphs, `@minis/icons` names, or both with a mapping?
 3. **Platform keys.** Are "Web" and "Web FE B2C" separate platforms? Is the list closed?
 4. **Where does the registry live** — this repo, the Nette repo, or written here and published
-   to a URL? Ties to 004's question 2 (who can write a Local entry from the Nette repo).
+   to a URL? Ties to 005's question 2 (who can write a Local entry from the Nette repo).
 5. **Who maintains entries for production components** — the lead developer, the designer who
    registers them, or the monthly review?

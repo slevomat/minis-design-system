@@ -25,7 +25,7 @@ built yet**. Work resumes with Phase 0.5 (`<minis-sale-label>`) once the items b
 
 4. **Question 4** — are the sale / price labels used elsewhere on the site? (Being checked.)
 5. **Question 10** — the carousel container. Figma renamed card-grid `navigation-small` →
-   `Carousel` (2026-09-10); the code side still needs a decision and probably its own plan (003).
+   `Carousel` (2026-09-10); the code side still needs a decision and probably its own plan (not written yet).
    Blocks only the `usage="carousel"` stories.
 6. **Question 11** — which file are the `_Sale Label` / `_Price Label` sources in (to read
    `Highlight`, `Reverse`, `Just …`)?

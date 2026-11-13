@@ -1,5 +1,5 @@
 ---
-id: 014
+id: 015
 title: Responsive line height in Figma text styles
 status: in-progress
 created: 2026-11-05
@@ -7,7 +7,7 @@ updated: 2026-11-06
 owner: Lexislav
 ---
 
-# 014 — Responsive line height in Figma text styles
+# 015 — Responsive line height in Figma text styles
 
 > Touches two repos: the Figma file (`mfiAVMWkxiBRGnegjqLMNW`) and the exporter plugin
 > (`Figma plugins/minis-designtokens-exporter/`). Nothing in this repo's CSS changes.
@@ -120,9 +120,9 @@ fixes.
 - [x] **0a. Production audit first.** Done 2026-11-05. The results are in "Production audit" below.
 - [x] **0b. Decide** the remaining open questions. Done 2026-11-06, see "Answers".
 - [x] **1. Exporter: skip `-px`** and fix the resolved-mode line height. Done 2026-11-06:
-      exporter 1.1.0 (figma-plugins PR #1, merge `fed1340`), shipped together with plan 015 phase 2.
+      exporter 1.1.0 (figma-plugins PR #1, merge `fed1340`), shipped together with plan 016 phase 2.
       The owner ran a references-mode export of the real file, and the output was as expected apart from
-      two warnings: Brand lg/xl are still bound to `extra-wide`, which plan 015 phase 3 removes. Still
+      two warnings: Brand lg/xl are still bound to `extra-wide`, which plan 016 phase 3 removes. Still
       open: a **resolved-mode** export after phase 3, where heading lg must read `130%` and not
       `26px`. Also run production's Style Dictionary build once on the next export, to confirm the new
       `$metadata.exporterVersion` / `$metadata.settings` block produces no variables.
@@ -155,7 +155,7 @@ fixes.
             - body md 150 → 138 %, body sm 150 → 143 %, heading lg 125 → 130 %. Intended: this is
               production's base value, used below 360 px, so the audit's < 360 px bug is fixed.
             - **brand lg letter spacing 0.03em → 0.01em. Unintended.** The Figma style is bound to
-              `extra-wide` (see plan 015). **Don't hand an export to production before plan 015 phase 3**,
+              `extra-wide` (see plan 016). **Don't hand an export to production before plan 016 phase 3**,
               or brand lg loses its tracking until the next export.
       - [x] `tokens.css` unchanged by the line-height part (checked against the references export
             above). Storybook Tier values come from `tokens.json`, which hasn't been re-exported, so
@@ -181,9 +181,9 @@ fixes.
       "Typography in the export", and the portable `docs/ai-prompts/typography.md`.
 - [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
       (edit in Figma → Recalculate → export → check the `tokens.css` diff → both changelogs) as a
-      section of the token-update skill in plan 008, not as a separate skill or agent. A
+      section of the token-update skill in plan 009, not as a separate skill or agent. A
       typography change is a token change, and splitting the two procedures would let them drift.
-      008 is optional today; this step is the reason to do at least its typography part.
+      009 is optional today; this step is the reason to do at least its typography part.
 
 ## Production audit (2026-11-05)
 
@@ -220,7 +220,7 @@ The values this plan generates are therefore the production values.
    decision rather than part of this plan.
 3. **Brand heading xl is hand-written in production:** `font-size: clamp(32px, 7vw, 56px)` (fluid,
    not the 32 → 56 px step at 1480 px), and weight `700` (Mini*S says brand text is always 400).
-   This is outside this plan. It belongs to the porting rules (plan 013).
+   This is outside this plan. It belongs to the porting rules (plan 014).
 
 **Why phase 1 matters for production.** If the styles were bound to `-px` variables before the
 exporter changes, the next resolved export would hand production `line-height: 26px` for the
@@ -241,7 +241,7 @@ in `_variables.styl`. So phase 1 has to cover the Style Dictionary JSON, not onl
 - **Round to whole pixels** (owner). 23.94 → 24. Figma can differ from the browser by up
   to about 0.1 px, which is invisible, and the redlines show clean numbers. CSS is unaffected:
   it keeps computing size × ratio.
-- **Letter spacing** is split out into plan 015 (high priority).
+- **Letter spacing** is split out into plan 016 (high priority).
 - **A skill for future typography updates:** yes, as phase 7.
 
 ## Open questions

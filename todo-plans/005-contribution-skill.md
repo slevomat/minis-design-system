@@ -1,5 +1,5 @@
 ---
-id: 004
+id: 005
 title: Contribution skill — reuse, extend, or register as Local
 status: draft
 created: 2026-10-29
@@ -7,11 +7,11 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 004 — Contribution skill: reuse, extend, or register as Local
+# 005 — Contribution skill: reuse, extend, or register as Local
 
 > **Depends on the registry (`registry.json`).** It doesn't exist yet, nor does its schema. This
 > skill is the registry's main client and can't be written before the schema is settled.
-> Used by plans 003 and 005. Distribution: see plan 009.
+> Used by plans 004 and 006. Distribution: see plan 010.
 
 ## Context
 
@@ -35,7 +35,7 @@ the single list of what exists.
 - **Extending must not break existing users.** Adding a variant or a token is fine; changing a
   default or re-valuing a token is not a "small extension" (see 001 for why heritage values are
   untouchable).
-- One copy of the path. Other skills (003, 005) call this one instead of restating it.
+- One copy of the path. Other skills (004, 006) call this one instead of restating it.
 
 ## Approach
 
@@ -56,7 +56,7 @@ step (unsearchable, no record).
 - [ ] **Phase 0 — Prerequisite:** registry schema, tier definitions and review process agreed
       (probably a plan of its own — see question 1).
 - [ ] **Phase 1 — Write the path** with one worked example per step.
-- [ ] **Phase 2 — Wire it in:** 003 and 005 call this skill instead of carrying the logic.
+- [ ] **Phase 2 — Wire it in:** 004 and 006 call this skill instead of carrying the logic.
 - [ ] **Phase 3 — Pilot through one monthly review** and adjust what a registry entry must
       carry, based on what the review actually needed.
 
@@ -68,7 +68,7 @@ step (unsearchable, no record).
    in the Nette repo registers a Local item through a cross-repo PR — is that acceptable?
 3. **How are uses counted** — a field people bump by hand, a scan of the codebases, or the review
    counting by eye?
-4. **Where does a flagged gap go** — a GitHub issue (ties to 007), a `meta` field on the item, or
+4. **Where does a flagged gap go** — a GitHub issue (ties to 008), a `meta` field on the item, or
    the review agenda?
 5. **Is name + description search good enough**, or does the registry need tags/synonyms so
    "tile" finds "card"?

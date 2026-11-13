@@ -1,5 +1,5 @@
 ---
-id: 007
+id: 008
 title: Bug-reporting skill and /minis-bug command
 status: draft
 created: 2026-10-29
@@ -7,10 +7,10 @@ updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 007 — Bug-reporting skill and `/minis-bug` command
+# 008 — Bug-reporting skill and `/minis-bug` command
 
 > No hard dependency on the registry or Latte recipes, but the list of platforms a bug can be in
-> grows with them (see question 5). Distribution: see plan 009.
+> grows with them (see question 5). Distribution: see plan 010.
 
 ## The problem
 
@@ -53,7 +53,7 @@ tracking, nothing to link a fix to).
 - [ ] **Phase 2 — Write the skill** and the matching issue form (fields defined once, used by both).
 - [ ] **Phase 3 — Pilot** with two or three designers; check the issues are reproducible without
       follow-up questions.
-- [ ] **Phase 4 — Ship** through 009.
+- [ ] **Phase 4 — Ship** through 010.
 
 ## Open questions
 
@@ -64,5 +64,5 @@ tracking, nothing to link a fix to).
 3. **Screenshots:** hand off to the browser with `gh issue create --web` so the person pastes the
    image there, or upload it somewhere and link it?
 4. **Labels and triage:** a component label per issue? Who triages, and how fast?
-5. **Bugs in Latte recipes** — this repo, or the Nette repo? Depends on where recipes live (003,
+5. **Bugs in Latte recipes** — this repo, or the Nette repo? Depends on where recipes live (004,
    question 1).
