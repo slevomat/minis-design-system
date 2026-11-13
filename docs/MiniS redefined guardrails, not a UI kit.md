@@ -320,6 +320,14 @@ Sloupec todo-plans je porovnaný se složkou todo-plans/ v MiniS repozitáři ke
 
 Nic z toho nesplňuje žádnou položku z „Dalších kroků“. Práce slouží sekci „Skilly, které MiniS potřebuje“ a myšlence mantinelů a vrstvení tokenů: komponenty a dokumentace berou hodnoty z Foundation, ne z primitiv.
 
+- **Komponenty a tokeny.**
+  - **Nová komponenta Wheel of Fortune**, ve spolupráci s Jirkou.
+    - Ve Figmě: varianty default / broken / black-friday, jazyk CZ / SK, stav hover.
+    - Jako webová komponenta `<minis-wheel-of-fortune>` ve Storybooku (Components → Brand → Wheel of Fortune).
+    - Webová komponenta je zatím placeholder se zjednodušeným kolem. Nahradí ji skutečné animace, které Jirka tvoří v Rive. API zůstane stejné.
+  - `Alert/sucess` přejmenováno na `Alert/success`; breaking pro toho, kdo token používá přímo.
+  - Nový `Color/Surface/transparent` (`--color-surface-transparent`).
+  - Povrchy Accordion a ActionRow vedou přes Foundation; vizuálně beze změny.
 - **Dokumentace ve Figmě sjednocená.** Nový skill `minis-figma-docs` a interní docs kit ve Figmě: skryté proměnné `docs/*`, styly `.docs/*`, pomocné komponenty a šablona; nic z toho se nepublikuje do knihovny.
   - Dokumentace 20 komponent (Button, Tag, Accordion, Alert, Message…) má jednotný tvar: hlavní karta a pod ní samostatné karty changelogu, roadmapy a dev notes.
   - Texty jsou zkorigované, zkopírované chyby opravené, odkazy do Storybooku ověřené.
@@ -328,10 +336,6 @@ Nic z toho nesplňuje žádnou položku z „Dalších kroků“. Práce slouž�
   - 159 swatchů, které byly jen zkopírovaný hex, je teď navázaných na tokeny, takže už neukazují staré barvy.
   - Skripty `palette-refresh.js` a `palette-generate.js` ve skillu nahrazují Figma plugin Color docs generator (doporučení: plugin zmrazit).
   - Nové přehledy pro Theme a .Components.
-- **Tokeny v knihovně.**
-  - `Alert/sucess` přejmenováno na `Alert/success`; breaking pro toho, kdo token používá přímo.
-  - Nový `Color/Surface/transparent` (`--color-surface-transparent`).
-  - Povrchy Accordion a ActionRow vedou přes Foundation; vizuálně beze změny.
 - **Skilly jsou vidět.** Seznam skillů s cílovou skupinou je ve Storybooku (Vibe Coding Guide → Skills), v README, v `docs/ai-prompts/index.md` a na stránce READ-ME ve Figmě.
 - **Changelogy.** Pravidla, co a kde se ve Figmě zapisuje, jsou ve skillu. Automatizaci napříč Figmou, repozitářem a Storybookem popisuje plán 017 (draft).
 
