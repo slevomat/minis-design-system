@@ -9,7 +9,8 @@ owner: Lexislav
 
 # 003 — Mini*S redefinition: overview of the rollout and every plan in it
 
-> **This is a map, not a work plan.** It doesn't carry work of its own; it says which plan covers
+> **This is a map, not a work plan** (for *what to do in which order*, see "Recommended order"
+> below). It doesn't carry work of its own; it says which plan covers
 > which part of the redefinition, what is blocked on what, and what has no plan yet. The source of
 > truth for the *why* is the brief, `docs/MiniS redefined guardrails, not a UI kit.md` (Czech,
 > 23 Oct 2026, revised since). Keep this file current whenever a plan is added, moves status, or
@@ -82,6 +83,71 @@ not a production dependency (and are ready if the mobile app ever takes them).
 master, and Nette's Stylelint already guides AI in migrating variables to them. Phases 1–2 have
 effectively started on their side; this is why G1 is about writing the agreement down and naming
 the approval group, not about getting a first yes.
+
+## Recommended order — which plan to read and work on when
+
+Added 2026-11-13, when every gap got a plan. **Plan numbers say when a plan was written, not when
+to do it** (they're permanent; see `README.md`). This is the order that follows from the
+dependencies. Each step can start when the one before it has closed what it blocks, not when it's
+fully done.
+
+**Step 0 — Agreement (November).** Everything else waits for it.
+
+| # | Plan | Why here |
+|---|---|---|
+| 1 | **020** Team agreement | Names the approval group, says where Mini*S lives in the Nette repo, closes decisions 1–3 (decision 3 = canonical names, which blocks 011–014) |
+| — | inputs: **017** production audit, **005** "The production path" | The facts and the five questions to bring to the meeting |
+
+**Step 1 — Tokens everywhere, from one source (November–December).**
+
+| # | Plan | Why here |
+|---|---|---|
+| 2 | **024** Automatic token export (absorbs **009**) | Stops the copies from lagging; every later output regenerates from it |
+| 3 | **012** Token distribution | Versioned package + shared Style Dictionary source for production (and later mobile, 029) |
+| 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
+| — | finish **015**, **016** (in progress) | Typography foundation; already mostly done |
+
+**Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
+
+| # | Plan | Why here |
+|---|---|---|
+| 5 | **011** Stylelint "tokens only" | Rule 2 by machine; extends production's existing config |
+| 6 | **022** Accessibility checks | Rule 3 by machine: token-pair contrast, axe over Storybook |
+
+**Step 3 — Registry, review and the AI layer (January).**
+
+| # | Plan | Why here |
+|---|---|---|
+| 7 | **013** `registry.json` | Unblocks 004, 005, 006, 021, 025, 026 |
+| 8 | **021** Monthly review and approval | Rules 5 and 6; the first review is in step 4 |
+| 9 | **005** Contribution skill | The registry's main client; in production the KSS block is the registration |
+| 10 | **025** `AGENTS.md` and AI docs | Core rules for every tool (decision 4) |
+| 11 | **010** Skill distribution (production) · **019** vibe-coders (everything else) | How the skills reach people |
+| 12 | **006** `minis-app` registers Local · **026** rules hook | Built on the registry and the plugin |
+
+**Step 4 — Recipes and the first review (February).**
+
+| # | Plan | Why here |
+|---|---|---|
+| 13 | **014** Porting rules | The Latte guide the recipes follow |
+| 14 | **023** First three recipes (deal card from **002** next) | The foundation piece production uses directly |
+| 15 | **004** Latte UI-building skill | Needs recipes and the registry to point at |
+
+**Step 5 — Expansion (from March 2027).** Order by need, not dependency.
+
+| # | Plan | Why here |
+|---|---|---|
+| 16 | **027** Runtime tokens | Only after product confirms themes / dark mode are wanted |
+| 17 | **028** Icons to production | Hand-over packs for the webfonts |
+| 18 | **029** Mobile app tokens | Needs a mobile team contact |
+| 19 | **001** Colour ramps → curve | Long-term; gated by a production developer's review |
+
+**Any time, low priority:** **007** todo-plan skill, **008** bug-report skill, **018** changelog
+sync (useful as soon as 024 automates exports).
+
+**Can start now, without plan 020:** 017's script, 019 phases 0–1 (record the Claude design
+system, hosted runtime), 022 phases 0–1 (pair list, contrast script in this repo), 024 phases 0–1
+(verify options, manual one-command path), finishing 015 and 016. None of them touches production.
 
 ## Production → Mini*S: how Mini*S reaches production and how contributions come back
 

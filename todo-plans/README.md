@@ -72,6 +72,10 @@ collide in the index; on `master` the next number is always visible to everyone.
 
 ## Index
 
+Numbers say when a plan was written, not when to do it. **Start with plan 003**: it holds the
+overall picture of the Mini*S redefinition and, under "Recommended order", the order to read and
+work on the plans in.
+
 | # | Plan | Status | Updated |
 |---|---|---|---|
 | 001 | [Move the colour ramps onto a curve](001-colour-ramps-to-curve.md) | `draft` | 2026-08-11 |
