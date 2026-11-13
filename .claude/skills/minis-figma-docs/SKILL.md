@@ -146,11 +146,9 @@ easiest mistake to make here.
 - **No story yet** (a Figma-only component): link the closest page, e.g. the token story that
   covers it, and add "add a Storybook story" to the roadmap. Never leave the template's
   `REPLACE-ME` link.
-- **Set the link** with `textNode.hyperlink = {type:'URL', value:url}`. This works without
-  loading the pill's font.
-- **The label text can't be changed by script:** SF Mono isn't available to the scripting tool.
-  The template's pill already says `Storybook`, so keep it. If a card has an old `Docs` pill,
-  replace it with a clone of the template's pill.
+- **Set the link** with `textNode.hyperlink = {type:'URL', value:url}`.
+- **The label is always `Storybook`.** The template's pill already says it. If a card has an old
+  `Docs` or `Component` pill, replace it with a clone of the template's pill.
 
 Labels vs. titles: **fixed** sections (Functionality overview, Changelog, Roadmap, Dev notes)
 use `.docs/section-label`, which uppercases on its own, so type them in sentence case. **Content**
@@ -196,6 +194,29 @@ Light, brief and factual: a colleague's note, not a manual.
 5. **Report** the card's node ID and link to the user. If the card's changelog gained an entry that
    reflects a code change, remind them it belongs in `CHANGELOG.md` and the Storybook Changelog
    too (CLAUDE.md → Changelog rules). This skill doesn't write those.
+
+## Changelog
+
+**What counts.** Log changes that someone *using* the component would notice: variants,
+properties, sizes, states, tokens and bindings, visuals, renames, removals and breaking changes.
+Also log code-only behaviour changes from `CHANGELOG.md`. **Don't log docs-only edits:**
+proofreading, migrating a card to the docs kit, fixing a Storybook link, reordering cards.
+
+**Where it lives.** One changelog per component: the `changelog` card in that component's stack,
+directly below `main`. A foundation (typography, colours, spacing) follows the same stack pattern
+next to its intro card. Move it to a separate **Changelog card** only once the history is long.
+Never put changelog entries as loose text on the canvas, on another page, or in a hidden section.
+
+**When.** Write the entry the same day as the Figma change, dated the day of the change, not the
+day it was documented. Code-side entries keep the date from `CHANGELOG.md`.
+
+**Empty means absent.** If there is no real history, delete the changelog card rather than show
+placeholders, just as with an empty roadmap.
+
+**Other changelogs.** `CHANGELOG.md` and the Storybook Changelog story are written by whoever
+lands the code (CLAUDE.md → Changelog rules), never by this skill. Keeping all of them in sync is
+plan `todo-plans/017-changelog-sync-skill.md`. Until that exists, report any entry you add that
+the repo side lacks, or the reverse.
 
 ## READ-ME page and the skills list
 

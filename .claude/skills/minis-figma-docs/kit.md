@@ -9,7 +9,7 @@ and update this file.
 | Node | ID | Notes |
 |---|---|---|
 | `Docs card — template` | `6119:153` | **Clone this stack.** An auto-layout wrapper, no fill, gap `gap-stack`. Children: card `main` (`6113:142`, sections `header`, `overview`, `usage`, `construction`, `examples`, `status`) and cards `changelog`, `roadmap`, `dev-notes`, each wrapping one `content` frame |
-| `.link` | `3403:2913` | Storybook pill. Its label font is SF Mono, which the scripting runtime **can't load**, so you can't change the label by script. Always use the template's pill (`6113:150`, says `Storybook`). The URL is the label text's `hyperlink`; set it every time (see SKILL.md → "Storybook link") |
+| `.link` | `3403:2913` | Storybook pill (label: `.docs/pill`). Always use the template's pill (`6113:150`, says `Storybook`). The URL is the label text's `hyperlink`; set it every time (see SKILL.md → "Storybook link") |
 | `.badge` | `169:5318` | `type` = `info · warning · black`. WIP = warning |
 | `.message` | `160:2967` | Callout box. `type` = `info · warning`, `Size` = `large · small` |
 
@@ -53,7 +53,17 @@ and titles, text colour for everything else.
 | `.docs/section-title` | `S:dce7fd013f58bf405f43f3aa9b6d6f1927b5500c,` | Inter Bold 18/24 | Content sections |
 | `.docs/column-title` | `S:ac2e410ade5168b77baa10ccbdd0453b6f8fbbc7,` | Inter Bold 15/22 | Overview column heads |
 | `.docs/small` | `S:729639c8277d1449bc2dc0357227f63a987938a2,` | Inter Medium 15/22 | Column lists, footnotes, "for <Topic>" |
-| `.docs/annotation` | `S:0ade1f191cd335d040dfcd979a98ca8b6de277bd,` | PT Mono 14/16 | Captions under instances |
+| `.docs/annotation` | `S:0ade1f191cd335d040dfcd979a98ca8b6de277bd,` | Google Sans Code Regular 14/16 | Captions under instances |
+| `.docs/pill` | `S:40e875f5b23f2b3f68a5b20a537831592121d015,` | Google Sans Code Bold 16.5 | `.link` pill and `.badge` label |
+| `.docs/callout-title` | `S:817fc63fb5b90417a3294cebe9b5982206d13d04,` | Google Sans Code ExtraBold 24 | `.message` heading, Size=small |
+| `.docs/callout-title-lg` | `S:a09028d2e20560f2d0b27b092fb5bf6f9b4b10ce,` | Google Sans Code ExtraBold 38 | `.message` heading, Size=large |
+| `.docs/callout-body` | `S:3febe66d1eb2aeb62d5b07f97a85bdb3c20053f4,` | Google Sans Code Regular 20/34 | `.message` body |
+| `.docs/eyebrow` | `S:e3cd54f0af3f1a08a73218d0ed87c6e8c1ca3a98,` | Google Sans Code ExtraBold 28 | "Mini*S" eyebrow on READ-ME cards |
+| `.docs/code` | `S:6344af5298fece01030ebfd11cb8b79259ef0e7f,` | Google Sans Code Medium 20/28 | Terminal / code blocks; fills carry the syntax colours |
+
+**Mono font:** the whole docs kit uses **Google Sans Code** (cross-platform, loadable by
+`use_figma`). Never SF Mono (macOS-only; the scripting runtime can't load it) or PT Mono. This is
+docs-kit only. The product token `--typography-font-family-mono` is unaffected.
 
 ## Clone recipe
 
@@ -74,7 +84,7 @@ The first six sections are children of the `main` card. The last three are separ
 const tpl = await figma.getNodeByIdAsync('6119:153'); // the whole stack
 const page = await figma.getNodeByIdAsync('<TARGET_PAGE_ID>');
 await figma.setCurrentPageAsync(page);
-for (const f of [['Inter','Bold'],['Inter','Medium'],['PT Mono','Regular']]) await figma.loadFontAsync({family:f[0], style:f[1]});
+for (const f of [['Inter','Bold'],['Inter','Medium'],['Google Sans Code','Regular'],['Google Sans Code','Bold']]) await figma.loadFontAsync({family:f[0], style:f[1]});
 const card = tpl.clone();
 page.appendChild(card);
 card.name = '<Component> docs';
@@ -127,7 +137,7 @@ stack's `main`:
    - Inter Bold 18 → `section-label` for fixed sections, `section-title` for the rest
    - Inter Bold 15 → `column-title`
    - Inter 15 → `small`
-   - PT Mono → `annotation`
+   - PT Mono or a small mono caption → `annotation`; SF Mono pill/callout/eyebrow/code text → the matching mono style above
 
    Then bind every text fill (#172B4D → `heading`, everything else → `text`) and divider strokes.
 4. **Swap the pill:** replace the `.button` frame (or an old `.link`) with a clone of the

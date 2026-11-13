@@ -124,6 +124,8 @@ Dnes existuje jediný skill v repozitáři (minis-app); další znalosti jsou v 
 | Psaní todo plánů | Založení a aktualizace plánu v todo-plans/ podle zavedených konvencí (číslování, stavy, index); dnes je to jen mechanismus v CLAUDE.md, takže ho nikdo jiný nepoužije | Vlastník DS, kdokoli, kdo navrhuje větší změnu | Chybí |
 | Hlášení chyb | Provede člověka nahlášením chyby v MiniS a skončí založením issue v GitHub repozitáři MiniS; později jako slash command | Kdokoli, kdo narazí na chybu | Chybí |
 | Aktualizace tokenů (návrh) | Export z Figmy → tokens.json → CSS → build → changelog, včetně kontroly nastavení exportéru | Vlastník DS | Volitelné |
+| Dokumentace ve Figmě (minis-figma-docs) | Dokumentační karty v souboru MiniS DS: přehled, použití, changelog, roadmapa, dev notes; jen z interního docs kitu; obnova přehledů barevných palet skripty | DS tým | Existuje (12.–13. 11. 2026) |
+| Changelog napříč (minis-changelog) | Jedna změna zapsaná do CHANGELOG.md, Storybooku i changelogu karty ve Figmě; hlídá rozjíždění | Vlastník DS | Návrh, plán 017 |
 | Mod pro upozorňování na pravidla (hook) | Při úpravě CSS nebo Latte souboru zkontroluje změnu (tokeny, registr) a hned uživateli i AI vysvětlí, které pravidlo porušuje a co použít místo toho. Na začátku session krátce připomene základní pravidla. Doplňuje CI, nenahrazuje ho | Kdokoli, kdo staví s AI v Claude Code | Návrh |
 
 Aby skilly mohl používat kdokoli a v jakémkoli repozitáři, je potřeba je distribuovat mimo repozitář MiniS, ideálně jako jeden balíček (plugin pro Claude Code).
@@ -303,12 +305,31 @@ Návrh: změny zavádět po fázích, od dohody přes tokeny a kontroly k regist
 | --- | --- | --- | --- | --- |
 | 0. Dohoda | listopad 2026 | Projít brief s vedením designu a vývoje a potvrdit společnou odpovědnost; jmenovat schvalovací skupinu; dohodnout s Nette týmem, kde MiniS v jejich repozitáři žije; uzavřít rozhodnutí 1–3 | Závazek týmu potvrzený, schvalovací skupina jmenovaná, rozhodnutí 1–3 přijatá | Nový plán |
 | 1. Tokeny v Nette | listopad–prosinec | Automatický export tokenů místo ručního; distribuce jako verzovaný balíček a zdroj ve formátu Style Dictionary; přesměrovat barevné aliasy v colors.styl na MiniS; změřit baseline adopce | Export běží bez ruční práce; podíl MiniS roste z výchozích \~18 % \[cíl \_\_\_ %\] | 001 heritage (existuje); 011 distribuce tokenů (produkce už Style Dictionary používá); 014, 015 typografie |
-| 2. Kontroly | prosinec–leden | Kontrola tokenů pro Stylus s baseline, nejdřív varování a pak blokující; pravidlo pro fallbacky ve var(); a11y test v CI | CI blokuje nová porušení a počet stávajících klesá | Plán Stylelint (ověřit) |
-| 3. Registr a skilly | leden | registry.json ve formátu shadcn s JSON Schema pro meta; naplnit webovými komponentami a komponentami z produkce; kontrola registru v CI; AGENTS.md a skill pro přispívání v Nette repozitáři; skill minis-app s krokem registrace | AI session v Nette repozitáři najde existující prvek dřív, než postaví nový | Plány skillů (ověřit); registr: nový plán |
-| 4. Recepty a první revize | únor | Tři nejpoužívanější vzory jako recepty Latte + Stylus s AI popisem; návod portování pro Latte/Nette; první měsíční revize registru a první schválený návrh | První Local vzor prošel schválením a je v Základu | Nový plán |
+| 2. Kontroly | prosinec–leden | Kontrola tokenů pro Stylus s baseline, nejdřív varování a pak blokující; pravidlo pro fallbacky ve var(); a11y test v CI | CI blokuje nová porušení a počet stávajících klesá | 010 Stylelint |
+| 3. Registr a skilly | leden | registry.json ve formátu shadcn s JSON Schema pro meta; naplnit webovými komponentami a komponentami z produkce; kontrola registru v CI; AGENTS.md a skill pro přispívání v Nette repozitáři; skill minis-app s krokem registrace | AI session v Nette repozitáři najde existující prvek dřív, než postaví nový | 003–008 skilly, 009 distribuce skillů, 012 registr, 017 changelog |
+| 4. Recepty a první revize | únor | Tři nejpoužívanější vzory jako recepty Latte + Stylus s AI popisem; návod portování pro Latte/Nette; první měsíční revize registru a první schválený návrh | První Local vzor prošel schválením a je v Základu | 013 pravidla portování; recepty: nový plán |
 | 5. Rozšíření | od března 2027 | MiniS v Claude Design; dotažení typografie v produkci (základ hotový v listopadu, viz plány 014 a 015); tokeny za běhu pro témata a tmavý režim; názvy tokenů v mobilní aplikaci; ikony do produkčního webfontu | Podle samostatných plánů | 014, 015 (typografie); další nové plány |
 
-Sloupec todo-plans vychází z poznámek v tomto briefu, ne z aktuálního stavu repozitáře. Před startem je potřeba ho porovnat se složkou todo-plans/ v MiniS repozitáři.
+Sloupec todo-plans je porovnaný se složkou todo-plans/ v MiniS repozitáři ke 13. 11. 2026. Všechny uvedené plány jsou zatím ve stavu draft, kromě 014 a 015 (rozpracované).
+
+### Průběžný stav (12.–13. 11. 2026)
+
+Nic z toho nesplňuje žádnou položku z „Dalších kroků“. Práce slouží sekci „Skilly, které MiniS potřebuje“ a myšlence mantinelů a vrstvení tokenů: komponenty a dokumentace berou hodnoty z Foundation, ne z primitiv.
+
+- **Dokumentace ve Figmě sjednocená.** Nový skill `minis-figma-docs` a interní docs kit ve Figmě: skryté proměnné `docs/*`, styly `.docs/*`, pomocné komponenty a šablona; nic z toho se nepublikuje do knihovny.
+  - Dokumentace 20 komponent (Button, Tag, Accordion, Alert, Message…) má jednotný tvar: hlavní karta a pod ní samostatné karty changelogu, roadmapy a dev notes.
+  - Texty jsou zkorigované, zkopírované chyby opravené, odkazy do Storybooku ověřené.
+  - Mono písmo dokumentace je Google Sans Code místo SF Mono (funguje na všech systémech a jde upravovat skriptem).
+- **Barevné palety.** Pět stránek palet je převedených na docs kit.
+  - 159 swatchů, které byly jen zkopírovaný hex, je teď navázaných na tokeny, takže už neukazují staré barvy.
+  - Skripty `palette-refresh.js` a `palette-generate.js` ve skillu nahrazují Figma plugin Color docs generator (doporučení: plugin zmrazit).
+  - Nové přehledy pro Theme a .Components.
+- **Tokeny v knihovně.**
+  - `Alert/sucess` přejmenováno na `Alert/success`; breaking pro toho, kdo token používá přímo.
+  - Nový `Color/Surface/transparent` (`--color-surface-transparent`).
+  - Povrchy Accordion a ActionRow vedou přes Foundation; vizuálně beze změny.
+- **Skilly jsou vidět.** Seznam skillů s cílovou skupinou je ve Storybooku (Vibe Coding Guide → Skills), v README, v `docs/ai-prompts/index.md` a na stránce READ-ME ve Figmě.
+- **Changelogy.** Pravidla, co a kde se ve Figmě zapisuje, jsou ve skillu. Automatizaci napříč Figmou, repozitářem a Storybookem popisuje plán 017 (draft).
 
 ## Další kroky a otevřené otázky
 
@@ -320,10 +341,10 @@ Začít tam, kde teď designéři pracují: uvnitř Nette repozitáře.
 - [ ] Převést tři nejpoužívanější vzory na Latte recepty s AI popisy, začít snippety hlavního vývojáře
 - [ ] Sepsat jednostránkový návod portování pro Latte/Nette
 - [ ] Naplánovat první revizi registru s hlavním vývojářem
-- [ ] Analyzovat, jaký podíl tokenů MiniS je portovaný a skutečně používaný v Nette repozitáři, jako měřítko, jak úspěšná je adopce DS ve skutečnosti (výstup pro Ladislava Suchánka); hotovo 29. 10., viz Adopce tokenů v Nette repozitáři
-- [ ] Založit v todo-plans/ draft plány pro skilly ze sekce „Skilly, které MiniS potřebuje“ a pro jejich distribuci
-- [ ] Založit v todo-plans/ draft plán pro Stylelint (pravidlo „jen tokeny“): zkušební běh, sdílená konfigurace, nasazení v repozitáři MiniS a pak v Nette; závisí na rozhodnutích 2 a 3
-- [ ] Založit v todo-plans/ draft plán pro distribuci tokenů: verzovaný balíček a zdroj ve formátu Style Dictionary, ze kterého si Nette tým vygeneruje vlastní výstupy (Nette tým chce použít Style Dictionary)
+- [x] Analyzovat, jaký podíl tokenů MiniS je portovaný a skutečně používaný v Nette repozitáři, jako měřítko, jak úspěšná je adopce DS ve skutečnosti (výstup pro Ladislava Suchánka); hotovo 29. 10., viz Adopce tokenů v Nette repozitáři
+- [x] Založit v todo-plans/ draft plány pro skilly ze sekce „Skilly, které MiniS potřebuje“ a pro jejich distribuci (003–009, 017)
+- [x] Založit v todo-plans/ draft plán pro Stylelint (pravidlo „jen tokeny“): zkušební běh, sdílená konfigurace, nasazení v repozitáři MiniS a pak v Nette; závisí na rozhodnutích 2 a 3 (010)
+- [x] Založit v todo-plans/ draft plán pro distribuci tokenů: verzovaný balíček a zdroj ve formátu Style Dictionary, ze kterého si Nette tým vygeneruje vlastní výstupy (Nette tým chce použít Style Dictionary) (011)
 
 * [ ] Založit registry.json ve formátu shadcn a JSON Schema pro pole `meta`
 * [ ] Naplnit registr existujícími webovými komponentami, prvními Latte recepty a komponentami z produkce, které v MiniS zatím nejsou: nejdřív je zdokumentovat tak, jak jsou, pak případně faceliftovat a zpětně aplikovat
