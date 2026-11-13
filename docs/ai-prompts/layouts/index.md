@@ -10,6 +10,16 @@ These are **not** components — they are composition guides for AI agents to vi
 - [Deal Detail](./deal-detail.md) — Hotel/experience detail page: photo gallery, tabbed content, aside + main split
 - [Checkout (Košík)](./checkout.md) — Single-column checkout flow: narrow container, stacked cards, step tabs
 
+## Production Reference
+
+- [Production Reference (slevomat.cz)](./production-reference.md): how production builds its
+  layouts, measured on the live site on 2026-11-13. It covers the wide (1240px) and narrow
+  (1008px) containers, the ~700px reading/form column, the main + sidebar splits, and how all of
+  that compares with the Mini*S tokens below. **Read it before changing container tokens or
+  writing a new layout guide.** Two known differences: production container padding reaches 32px
+  at 1008px (Mini*S at 1256px), and Mini*S `variant="narrow"` (752px) matches production's reading
+  column, not its 1008px narrow container.
+
 ---
 
 ## Responsive Layout System

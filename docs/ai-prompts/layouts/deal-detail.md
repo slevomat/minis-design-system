@@ -4,6 +4,8 @@ A hotel/experience deal page on Slevomat. Breadcrumbs + save toggle, photo galle
 
 **Figma:** [Deal Page 2XL](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3569-1201)
 
+> **Production differs:** the live deal detail splits main/sidebar 779/357px (~2.2 : 1) with flexbox and a ~40px gap, and stacks below 1008px. This guide uses 8 + 4 columns, a 48px gap, and stacks below 768px. See [Production Reference](./production-reference.md#main--sidebar-each-component-does-its-own-split).
+
 ---
 
 ## Page Sections (top to bottom)

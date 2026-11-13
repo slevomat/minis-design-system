@@ -2,6 +2,8 @@
 
 Single-column checkout flow on Slevomat. Narrow container, stacked content cards, no aside. Used for cart, order summary, payment, and confirmation steps.
 
+> **Production differs:** the live cart sits in a 1008px container with a 704px content column (about 688px of usable text). `<minis-container variant="narrow">` (752px) matches that column, not the 1008px container. See [Production Reference](./production-reference.md#the-cart-a-narrow-container-plus-a-reading-column).
+
 ---
 
 ## Page Sections (top to bottom)
