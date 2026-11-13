@@ -9,80 +9,248 @@ owner: Lexislav
 
 # 003 — Mini*S redefinition: overview of the rollout and every plan in it
 
-> **This is a map, not a work plan** (for *what to do in which order*, see "Recommended order"
-> below). It doesn't carry work of its own; it says which plan covers
-> which part of the redefinition, what is blocked on what, and what has no plan yet. The source of
-> truth for the *why* is the brief, `docs/MiniS redefined guardrails, not a UI kit.md` (Czech,
-> 23 Oct 2026, revised since). Keep this file current whenever a plan is added, moves status, or
-> changes what it depends on (phase 1 below).
+> **Start here.** This file is the full picture of the Mini*S redefinition, written so it covers
+> everything in the presentation, and a map of the plans that carry it out: which plan covers which
+> part, what is blocked on what, and in which order to work ("Recommended order"). It carries no
+> work of its own. The source of truth for the *why* is the brief (Czech, 23 Oct 2026, revised
+> since). Keep this file current whenever a plan is added, moves status, or changes what it depends
+> on (phase 0 below).
 >
-> **Where things live.** Brief, live version (Czech, claude.ai chat project):
-> <https://claude.ai/artifact/1fwLit8Shd9Z2DtyMY7zk8>; deck, 15 slides (Czech):
-> <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka>; Figma `mfiAVMWkxiBRGnegjqLMNW`: deck mirror on page
-> "Mini*S 2.0 (WIP)", contribution diagram on READ-ME → "Contribution model". The chat handoff of
-> 2026-11-05 says to export the live brief before trusting the repo copy; the repo copy is newer
-> than that handoff's copy and has dropped its "floor" and "harvest" wording.
+> **Where things live.**
+>
+> | Source | Where | Language |
+> |---|---|---|
+> | Brief, repo copy (source of truth for the *why*) | `docs/MiniS redefined guardrails, not a UI kit.md` | Czech |
+> | Brief, live version | <https://claude.ai/artifact/1fwLit8Shd9Z2DtyMY7zk8> | Czech |
+> | Presentation, 15 slides | <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka> | Czech |
+> | Presentation in Figma (same 15 slides, frames "01 Cover" … "15 Co dál") | [MiniS DS → "MiniS re-fit – prezentace"](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5995-149) | Czech |
+> | Contribution diagram | Figma `mfiAVMWkxiBRGnegjqLMNW`, page READ-ME → "Contribution model" | — |
+>
+> The presentation is from 29 Oct 2026. Where this file and the presentation differ (adoption
+> numbers, what's already done), this file is newer. The chat handoff of 2026-11-05 says to export
+> the live brief before trusting the repo copy; the repo copy is newer than that handoff's copy and
+> has dropped its "floor" and "harvest" wording.
 >
 > **Numbering.** Plans 003–017 were renumbered to 004–018 on 2026-11-13 to make room for this
 > overview. Old numbers in git history, commit messages and the changelogs of that time are
 > decoded in the table at the end.
 
-## What the redefinition is
+## The redefinition in full
 
-Mini*S started as a UI kit: Lit web components, Storybook, Figma. After about a year the owner's
-conclusion is that this doesn't fit how Slevomat builds UI. Production is **Nette + Latte +
-Stylus** and doesn't use the web components; the lead developer designs straight in code; since
-late October designers may vibe-code on top of the production repo; everyone else prompts an AI
-somewhere else. **AI doesn't need the components, it needs the decisions.**
+This section follows the presentation slide by slide, in its four parts, and says for each part
+which plans carry it. Slide numbers refer to both the claude.ai deck and the Figma frames.
 
-So Mini*S is re-fitted as **shared rules and decisions anyone, human or AI, builds with** —
-"a garden, not Lego": land (tokens), tools (skills, Stylelint, registry), rules of care, and
-anyone may plant freely, just not on the path. The goals don't change (one experience, faster
-development, fewer duplicates, accessibility, one language, easy rebrand); the route does.
-Success is measured by consistency, not by how many components run in production. The brief's
-three measures (share of values from tokens, new items without a registry entry, Local items
-promoted) are reported by plan 017's script (measure 5) and reviewed monthly (plan 021).
+### Part 1 — Why Mini*S changes: what a year taught us (slides 1–6)
 
-**Foundation — five things every person and environment gets:** tokens · recipes (Latte + Stylus
-pairs) · skills · a contribution skill · porting rules.
+**The goals don't change, the route does** (slide 2):
 
-**Seven core rules** — checked by CI where a machine can, by the monthly registry review where
-judgement is needed:
-
-| # | Rule | Checked by |
+| Goal | What it means | Served by |
 |---|---|---|
-| 1 | Don't reinvent — search the registry, extend by variant or tokens, build new last | judgement: contribution skill + review |
-| 2 | Tokens only — no hardcoded hex, px or fonts | CI: Stylelint with a baseline |
-| 3 | Accessibility — WCAG 2.2 AA | CI: a11y test, token-pair contrast |
-| 4 | Every element has a description — a valid registry entry | CI: registry check |
-| 5 | New work starts as **Local** and is registered at once | CI: registry check |
-| 6 | Promotion on evidence and approval — 3+ uses, then approved | judgement: monthly review |
-| 7 | One reference — values from Mini*S tokens; behaviour from production Latte for now | judgement: porting rules |
+| One experience | Slevomat looks and behaves the same on the web, for partners and in the app | 012, 014, 023, 029 |
+| Faster development | Ready decisions and patterns instead of designing and coding from zero | 023, 004, 005, 019 |
+| Fewer duplicates, less debt | One pattern instead of five similar ones; fewer hardcoded values | 011, 013, 005, 017 |
+| Quality and accessibility | Proven patterns and WCAG as the default, not a later fix | 022, 023 |
+| One language | Design, development, product and AI use the same names for the same things | 003 decision 3, 013, 025 |
+| Easy changes | Rebrand, themes or dark mode by changing tokens, not hundreds of files | 012, 024, 027 |
 
-**Tiers:** Local → Recipe → Core. Nobody needs permission to build a Local; the monthly review
-promotes, merges or retires.
+**What a year taught us** (slide 3). For about a year Mini*S was built the classic way, as a UI
+kit: Lit web components, Storybook, Figma. The promise "a component library everyone imports"
+didn't come true here, for three reasons:
+
+- **Production runs on Nette** (Latte + Stylus). The Mini*S web components don't live there, and
+  nobody ever promised a move to React or Lit.
+- **The lead developer designs in code**, as he always has. His patterns are in production, not
+  in Mini*S.
+- **Designers vibe-code on production.** Since late October 2026 they may design with AI on top of
+  the production code.
+
+Measured by components in production, Mini*S would look like a failure; that phase was largely
+discovery.
+
+**The value moved, it didn't disappear** (slide 4): **AI doesn't need our components, it needs our
+decisions.** Down the stack, **tokens** are used by everyone, including people vibing with AI, and
+the mobile app already took their values; that's real adoption. Up the stack, **decisions**: when
+UI comes from prompts, someone has to say what the spacing is, which variants exist and what is
+not allowed. Without clear decisions every prompt produces a slightly different product.
+
+**A garden, not Lego** (slide 5). Lego is finished bricks from one factory; a garden is the
+conditions in which whatever anyone plants can grow. The analogy explains; the documents keep the
+plain terms (registry, review, Local).
+
+| In the garden | In Mini*S | Plans |
+|---|---|---|
+| Soil | Tokens, the foundation | 012, 024, 001, 015, 016 |
+| Tools | Skills, Stylelint, the registry | 005, 004, 006, 011, 013, 025, 026 |
+| Rules of care | The seven core rules | below; 011, 022, 021 |
+| Fence and beds | Guardrails: plant freely, just not on the path | 020, 011, 022 |
+| Seeds from anyone | New work as Local; the labels are registry entries | 005, 006, 013 |
+| A gardener who doesn't guard the gate | The registry review moves what took root into the main bed (Local → Recipe → Core) | 021 |
+
+*A garden, not a wilderness:* weeds will grow (duplicates, hardcoded values, copies with no
+registry entry). Weeding is part of the care, done regularly, automatically in CI and at the
+registry review.
+
+**Three conditions** (slide 6). A design system makes sense here only if:
+
+1. **It lives where UI is built**: in the Nette repo, as tokens, skills and the registry → 020,
+   010, 012, 025.
+2. **Its rules are checked by machines**; a design system that only advises is ignored → 011,
+   022, 013 phase 2, 026.
+3. **Success is UI consistency**, not the number of imported components → 017 measure 5.
+
+How we'll know: the share of values from tokens in the Nette repo (~18 % on 2026-10-29), new items
+built without a registry entry, and the number of Local patterns promoted. Plan 017's script
+reports all three (measure 5); the monthly review (021) looks at them.
+
+### Part 2 — What Mini*S is now and where it's used (slides 7–9)
+
+**An agreement, not a construction kit** (slide 7): a shared set of decisions, rules and recipes
+that let anyone, human or AI, build UI that looks and behaves like Slevomat, in any environment.
+Three principles:
+
+- **Rules instead of approval.** Nobody waits for a yes; the rules are the guardrails inside which
+  people build freely.
+- **Every rule comes with a helper:** a token, a recipe, a skill or a lint rule, so following the
+  rule is the easiest path. A rule without a helper is only a wish.
+- **Independent of environment.** Latte, web components, Figma and AI each get the decisions in
+  their own form (014).
 
 **Roles of the old pieces.** Figma stays the source of truth for tokens and a surface for design
-and review. The web components become the reference implementation and the vibe-coding sandbox,
-not a production dependency (and are ready if the mobile app ever takes them).
+and review (024, 018). The web components become the reference implementation and the vibe-coding
+sandbox, not a production dependency, and are ready if the mobile app takes them (019, 006, 029).
 
-**Where production stands** (two measurements that don't agree yet — plan 017 reconciles them):
+**Six platforms, each different** (slide 8):
 
-| | Nette team analysis, 2026-10-29 | First look at the clone, 2026-11-05/06 (plan 017) |
+| Platform | Environment | How it gets Mini*S | Plans |
+|---|---|---|---|
+| Web | Nette/Latte (`slevomat/slevomat`) | Tokens through Style Dictionary → Stylus; recipes and skills in the Nette repo | 012, 023, 010, 017 |
+| Web FE for people (B2C) | unclear how it differs from "Web" (open question 5) | — | 013 platform keys |
+| Admin | Same Nette repo (`app/ui/Admin`, `index-admin.styl`), to confirm | Same token layer as the web | 017, 013 |
+| Slevomat for Partners | Same Nette repo (`app/ui/PartnerAdmin`, `index-partner.styl`, partner guide), to confirm | Same token layer as the web | 017, 013 |
+| Vibe-coding apps | Web components (sandbox) | Web components, tokens, the `minis-app` skill, the Claude design system | 019, 006 |
+| Mobile app | Its own code (released) | Took the token values; names and structure planned; production builds a `Tokens.kt` | 029 |
+
+*(The presentation says "zjišťujeme" for Admin and Partners. The production clone shows both live
+in the same repo with their own Stylus entry files and the shared `settings/` layer; the Nette
+team's 2026-10-29 analysis says the same.)*
+
+**Adoption is real, but far from the goal** (slide 9). The presentation shows the Nette team's
+numbers from 2026-10-29; plan 017 has measured since. Both, side by side:
+
+| | Nette team analysis, 2026-10-29 (in the presentation) | Plan 017, 2026-11-05/06 and 2026-11-13 |
 |---|---|---|
-| Share of variable uses from Mini*S | ~18 % (1,157 of 6,435) | colours "nearly all tokens", 64 % of colour refs are primitives |
+| Share of variable uses from Mini*S | ~18 % (1,157 of 6,435); 133 of 557 exported names used | colours "nearly all tokens", 64 % of colour refs are primitives |
 | Hardcoded values | ~1,300 hex · 14,400 px · 986 font sizes | 84 hex (besides `#fff`/`#000`) · 15,486 px · 59 `letter-spacing` |
-| Tokens at runtime | build-time only (Style Dictionary → Stylus → literal CSS) | same; `build/style-dictionary/` already exists |
-| Heritage colour aliases | 90 in `colors.styl` to redirect | **already retired by Nette on 2026-11-02** |
+| Tokens at runtime | build-time only (Style Dictionary → Stylus → literal CSS) | same, **but** dark mode switches at runtime through `light-dark()` and brand themes are custom properties |
+| Heritage colour aliases | 90 in `colors.styl` to redirect ("the fastest lever") | **already retired by Nette on 2026-11-02** |
 | Typography | 21 of 66 names used, "barely adopted" | used indirectly: `typo-*` classes in ~826 Latte files |
-| Token import | — | by hand (`build/style-dictionary/config.js`, no script target); last export 2026-08-12, so before plan 016's renames (017, 2026-11-13) |
-| AI layer | — | `AGENTS.md` + 33 skills in a passive-index format; **Copilot is the main agent** (184 vs 6 Claude trailers since August); Mini*S named in one skill only (017, 2026-11-13) |
+| Token import | — | by hand (`build/style-dictionary/config.js`, no script target); last export 2026-08-12, before plan 016's renames |
+| AI layer | — | `AGENTS.md` + 33 skills in a passive-index format; **Copilot is the main agent** (184 vs 6 Claude trailers since August); Mini*S named in one skill only |
+
+Another route to adoption (slide 9): **Mini*S in Claude Design and vibe-coded apps** built on the
+tokens and components. Adoption doesn't have to start in production code → plan 019.
+
+### Part 3 — How it works: foundation, registry, rules, contribution, roles (slides 10–14)
+
+**The foundation — what everyone gets** (slide 10):
+
+| Piece | What it is | Plans |
+|---|---|---|
+| Tokens | Colours, spacing, radius, typography, layout; from Figma as CSS variables (Stylus variables in production) | 012, 024, 001, 015, 016, 027, 029 |
+| Recipes | Proven patterns as Latte + Stylus (and HTML/CSS), with a note on when to use them | 023, 002 |
+| Skills | How to build Slevomat UI with Mini*S; `AGENTS.md` and skill files in the repo | 004, 025, 010, 019, 007, 008, 018 |
+| Contribution skill | The decision path, and registering new work as Local | 005, 006 |
+| Porting rules | How tokens and recipes move into Latte and web components, and which side wins | 014 |
+
+Above all of it, **`registry.json`**: the single list of what exists. Every tool looks there
+before anything new is built.
+
+**The registry: one list of everything that exists** (slide 11) → plan 013.
+
+- Before anything new is built, the AI in the Nette repo, the contribution skill and CI all look
+  there.
+- **shadcn format**, which AI tools know; Mini*S fields live in `meta` (`tier`, `aliases`,
+  `whenToUse` / `whenNotToUse`, `variants`, `tokens`, `usedIn`, `status`, `decision`,
+  `implementations`).
+- **Production components go in as they are**; a facelift is a separate, later step (decision 7).
+- **Implementation status per platform** for every pattern (proposal, decision 8).
+- Used for discovery (shadcn MCP server), not for installing anything into Nette.
+
+**Seven core rules** (slide 12). What a machine can check, CI checks on every PR; what needs
+judgement, the skills guide and the monthly registry review verifies. Automated checks take the
+personal edge out of the debate: nobody has to tell anyone they broke a rule, the build does.
+
+| # | Rule | What it means | Checked by | Plans |
+|---|---|---|---|---|
+| 1 | Don't reinvent the wheel | Registry → extend by variant or tokens → only then build new; never copy an existing item | judgement: contribution skill + review | 005, 013, 021 |
+| 2 | Tokens only | No hardcoded hex, px or fonts | CI: Stylelint with a baseline (new violations only) | 011, 026 |
+| 3 | Accessibility | WCAG 2.2 AA: contrast, focus, labels, keyboard | CI: a11y test, token-pair contrast | 022 |
+| 4 | Every element has a description | A valid registry entry | CI: registry check | 013 |
+| 5 | New starts as **Local** | Registered at once as Local | CI: registry check | 005, 006, 013 |
+| 6 | Promotion on evidence and approval | A proposal in the registry; to Recipe and Core only what's in 3+ places and approved | judgement: monthly review | 021 |
+| 7 | One reference | Values from Mini*S tokens; behaviour from production Latte for now, Mini*S long term | judgement: porting rules | 014 |
+
+**Tiers:** Local → Recipe → Core (names stay English). Nobody needs permission to build a Local;
+the monthly review promotes, merges or retires.
+
+**Contribution: build without approval, contribute with approval** (slide 13) → 005, 021.
+
+1. **Search the registry** — what already exists?
+2. **Extend by variant or tokens**, and report the gap.
+3. **Build as Local** and register it at once.
+4. **Recipe** — in 3+ places and an approved proposal.
+5. **Core** — the foundation everyone builds from next time.
+
+Proposals are recorded and decided: each is a registry item with `meta.status: proposed`; at the
+monthly review the DS owner with the lead developer and design (product as needed) approves,
+merges, returns or rejects it, and the decision and reason go into `meta.decision`. Work from any
+source goes through the same automated checks and starts as Local. In production, the KSS block
+production already requires is the registration (005, "The production path"). **Icons have their
+own path:** drawn in the Slevomat Icons Figma file, to production through the webfont → 028.
+
+**Roles: everyone contributes** (slide 14):
+
+| Role | Builds by | Gets from Mini*S | Owes back | Plans |
+|---|---|---|---|---|
+| Designer in the Nette repo | Prompting AI over production Latte | Skills and the contribution skill in the repo, Latte recipes, tokens | Keep the core rules; register Local work | 010, 023, 005, 025 |
+| Lead developer | Writing Latte by hand, often designing | Tokens, recipes, porting rules for Latte | Co-owns the registry review; his patterns are the first Recipe candidates | 014, 021, 023 |
+| Anyone with a prompt elsewhere | Vibe-coding in the web-component sandbox or Claude Design | Web components, skills, tokens, the design system | Treat the output as a proposal, not production | 019, 006 |
+| DS owner (Lexa) | Curating, not gatekeeping | The registry and its review, porting rules | Keep tokens, skills and descriptions current | 021, 024, 018 |
+
+The biggest shift is the first row: when designers work in the production repo, Latte recipes and
+skills inside that repo matter more than a library in Figma.
+
+**Shared responsibility** (brief, "Společná odpovědnost"; not in the presentation). The
+redefinition doesn't work without a commitment from everyone who builds Slevomat UI: keep the core
+rules even in a hurry and handle exceptions openly in the registry; search first and report gaps;
+register everything new; take part in the monthly review; treat a failed CI check as a bug to
+fix. Mini*S commits in return to keeping tokens, recipes, skills and the registry current, so the
+rules are the easiest path. Without it Mini*S falls back to "documentation nobody reads" → plan 020.
+
+### Part 4 — What's next and what's being decided (slide 15)
+
+**"We start in the Nette repo"** — the presentation's next steps, and where each stands now:
+
+| Next step (slide 15) | Plan | State on 2026-11-13 |
+|---|---|---|
+| Agree with the Nette team where Mini*S lives in their repo | 020 | Planned; step 0 of the recommended order |
+| `AGENTS.md` and the contribution skill in the Nette repo | 025, 005, 010 | Planned; production's format and channel known (017) |
+| Token check with a baseline, blocking only new violations | 011 | Planned; extends production's existing Stylelint |
+| Redirect the colour aliases in `colors.styl` to Mini*S | — | **Done by the Nette team on 2026-11-02** |
+| Automatic token export instead of manual | 024 | Planned |
+| The three most used patterns as Latte + Stylus recipes | 023 | Planned; button, message, tag proposed |
+| Set up `registry.json` and fill it | 013 | Planned; `status` and `decision` fields added |
+
+**Being decided** (slide 15): heritage colours as a token layer, only token fallbacks in `var()`,
+canonical token names, AI docs generated from the registry, no longer requiring Code Connect,
+implementation status per platform. These are decisions 1–5 and 8 in "Decisions waiting to be
+closed" below; decision 6 (mobile app) and 7 (production components as they are) are accepted.
 
 **Agreement so far** (from the chat handoff, 2026-11-05; the brief doesn't record it): on
 2026-11-02 the Nette lead developer accepted the redefinition, updated colours are on Nette
 master, and Nette's Stylelint already guides AI in migrating variables to them. Phases 1–2 have
-effectively started on their side; this is why G1 is about writing the agreement down and naming
-the approval group, not about getting a first yes.
+effectively started on their side; this is why plan 020 is about writing the agreement down and
+naming the approval group, not about getting a first yes.
 
 ## Recommended order — which plan to read and work on when
 
