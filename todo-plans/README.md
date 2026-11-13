@@ -95,3 +95,5 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 019 | [Mini*S for vibe-coders — one source, published to Claude Design, the Skill Hub and a plugin](019-minis-for-vibe-coders.md) | `draft` | 2026-11-13 |
 | 020 | [Team agreement — the commitment, the approval group and where Mini*S lives in the Nette repo](020-team-agreement.md) | `draft` | 2026-11-13 |
 | 021 | [Monthly registry review — proposals, approval and how decisions are recorded](021-review-and-approval.md) | `draft` | 2026-11-13 |
+| 022 | [Accessibility checks — token-pair contrast and an axe run, warning first](022-accessibility-checks.md) | `draft` | 2026-11-13 |
+| 023 | [The first three recipes — Latte + Stylus pairs with an AI description](023-latte-recipes.md) | `draft` | 2026-11-13 |

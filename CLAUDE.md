@@ -150,6 +150,10 @@ Current plans:
   approval group, where Mini*S lives in the Nette repo, decisions 1–3. Comes first; gates 011–014 and 021.
 - `todo-plans/021-review-and-approval.md` — gap G7 as a plan: the monthly registry review, its
   agenda, outcomes recorded in `meta.status` / `meta.decision` (plan 013), Markdown records until the registry exists.
+- `todo-plans/022-accessibility-checks.md` — gap G3 as a plan: token-pair contrast script and axe over
+  Storybook in CI (warning → blocking, with a baseline), an axe-in-BackstopJS proposal for production.
+- `todo-plans/023-latte-recipes.md` — gap G6 as a plan: a recipe = Latte partial (`{embedTemplate}`) + Stylus
+  partial with KSS + registry entry; first three proposed: button, message, tag (status info as warm-up).
 
 ## Changelog rules
 
