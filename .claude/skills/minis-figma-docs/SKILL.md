@@ -63,6 +63,8 @@ are in [kit.md](kit.md) → "Palette pages".
 - **Labels on a swatch** bind to `docs/colors/text` and the swatch frame sets the `.Helpers` mode:
   `inverted` (cream text) when the swatch's luminance is below 0.18, `default` (black) otherwise.
   Never hard-code white text.
+- **Non-opaque swatches** (transparent, `*-a` alphas) get a dashed `docs/colors/divider` outline
+  so their edge shows on cream, and print an 8-digit hex (`#FFFFFF00`), never a bare `#FFFFFF`.
 - **Header:** a `pills` row (Storybook pill, then the layer `.badge`), title in `.docs/heading-1`,
   one or two `.docs/description` paragraphs. Storybook: Foundation and Theme →
   `design-tokens--colors`, Primitives and Heritage → `design-tokens--palette`.

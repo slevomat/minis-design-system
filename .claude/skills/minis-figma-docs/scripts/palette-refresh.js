@@ -22,7 +22,7 @@ const BADGE_SOURCE = null;                  // id of a `.badge` instance to clon
 
 // ── KIT (kit.md) ───────────────────────────────────────────────────────────────────────
 const V = { surface: 'VariableID:166:8214', background: 'VariableID:166:8215', text: 'VariableID:169:1245',
-  heading: 'VariableID:379:5815', faded: 'VariableID:266:191', divider: 'VariableID:6111:142',
+  heading: 'VariableID:379:5815', faded: 'VariableID:266:191', divider: 'VariableID:6111:142', dw: 'VariableID:6111:153',
   info: 'VariableID:6111:143', radius: 'VariableID:166:8219', gapBlock: 'VariableID:6111:149' };
 const S = { h1: 'S:78dcfdc152d432dfb34fc5c90f4f7ed38b9bd197,', h3: 'S:ab956247a779047d8f131ffc46b9d99cbbb2d16f,',
   desc: 'S:fdf5339166966b1297958dd42b5353d765524b8b,', secTitle: 'S:dce7fd013f58bf405f43f3aa9b6d6f1927b5500c,',
@@ -53,6 +53,10 @@ const isBound = n => Array.isArray(n.fills) && n.fills[0] && n.fills[0].boundVar
 const inInstance = n => { for (let p = n.parent; p && p !== top; p = p.parent) if (p.type === 'INSTANCE') return true; return false; };
 const style = async (t, sid, v) => { const len = t.characters.length; if (len) t.setRangeFontName(0, len, { family: 'Inter', style: 'Medium' }); await t.setTextStyleIdAsync(sid); bindFill(t, v); };
 const hex = c => '#' + [c.r, c.g, c.b].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
+// printed hex: 8 digits (with alpha) when the colour isn't opaque, so a transparent swatch never reads #FFFFFF
+const hexA = c => hex(c) + (c.a !== undefined && c.a < 1 ? Math.round(c.a * 255).toString(16).padStart(2, '0').toUpperCase() : '');
+// non-opaque swatch: dashed kit outline so its edge shows on the cream card (the fill stays the real token)
+const outline = (sw, c) => { if (c.a !== undefined && c.a < 1) { sw.strokes = [paint(kv.divider)]; sw.setBoundVariable('strokeWeight', kv.dw); sw.strokeAlign = 'INSIDE'; sw.dashPattern = [6, 4]; } else { sw.strokes = []; sw.dashPattern = []; } };
 const lin = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 const oklch = c => { const r = lin(c.r), g = lin(c.g), b = lin(c.b);
   const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
@@ -108,8 +112,8 @@ for (const t of top.findAll(n => n.type === 'TEXT' && /^#[0-9A-Fa-f]{6}/.test(n.
   }
   if (!v) continue;
   const c = await resolve(v); if (!c || c.r === undefined) continue;
-  if (t.characters.slice(0, 7).toUpperCase() !== hex(c)) {
-    t.characters = hex(c);
+  if (t.characters.toUpperCase() !== hexA(c)) {
+    t.characters = hexA(c);
     for (const x of texts) { if (/^rgba?\(/.test(x.characters)) x.characters = x.characters.endsWith('%)') ? `rgba(${[c.r, c.g, c.b].map(y => Math.round(y * 255)).join(', ')}, ${Math.round(c.a * 100)}%)` : `rgba(${[c.r, c.g, c.b].map(y => Math.round(y * 255)).join(', ')}, ${+c.a.toFixed(2)})`;
       if (/^oklch\(/.test(x.characters)) x.characters = oklch(c); }
     report.refreshed.push(v.name);
@@ -119,6 +123,7 @@ for (const t of top.findAll(n => n.type === 'TEXT' && /^#[0-9A-Fa-f]{6}/.test(n.
   let end = v; while (rawVal(end) && rawVal(end).type === 'VARIABLE_ALIAS') end = await getV(rawVal(end).id);
   if (ref && raw && raw.type === 'VARIABLE_ALIAS') ref.characters = '→ ' + end.name;
   else if (ref) ref.characters = ref.characters.replace(/^🔗\s*/, '→ ');
+  outline(sw, c); // swatch frame, or the colour bar in row layouts
   if (!rect) { const dark = lum(c) < 0.18; box.setExplicitVariableModeForCollection(helpers, dark ? INVERTED : DEFAULT); if (dark) report.inverted++; }
 }
 const onSwatch = n => { for (let p = n.parent; p && p !== top; p = p.parent) if (swatchFrames.has(p)) return true; return false; };

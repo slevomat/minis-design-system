@@ -41,6 +41,10 @@ const resolve = async (v, modeId) => { const x = valIn(v, modeId); return x && x
 const endVar = async (v, modeId) => { let e = v; while (valIn(e, modeId) && valIn(e, modeId).type === 'VARIABLE_ALIAS') e = await getV(valIn(e, modeId).id); return e === v ? null : e; };
 const paint = v => figma.variables.setBoundVariableForPaint({ type: 'SOLID', color: { r: 0, g: 0, b: 0 } }, 'color', v);
 const hex = c => '#' + [c.r, c.g, c.b].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
+// printed hex: 8 digits (with alpha) when the colour isn't opaque, so a transparent swatch never reads #FFFFFF
+const hexA = c => hex(c) + (c.a !== undefined && c.a < 1 ? Math.round(c.a * 255).toString(16).padStart(2, '0').toUpperCase() : '');
+// non-opaque swatch: dashed kit outline so its edge shows on the cream card (the fill stays the real token)
+const outline = (sw, c) => { if (c.a !== undefined && c.a < 1) { sw.strokes = [paint(kv.divider)]; sw.setBoundVariable('strokeWeight', kv.dw); sw.strokeAlign = 'INSIDE'; sw.dashPattern = [6, 4]; } else { sw.strokes = []; sw.dashPattern = []; } };
 const lin = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 const oklch = c => { const r = lin(c.r), g = lin(c.g), b = lin(c.b);
   const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
@@ -84,7 +88,7 @@ for (const [g, list] of groups) {
       const sw = frame('VERTICAL', v.name.slice(g.length + 1) || v.name.split('/').pop(), 'gapList'); grid.appendChild(sw);
       sw.resize(SWATCH_W, SWATCH_H); sw.layoutSizingHorizontal = 'FIXED'; sw.layoutSizingVertical = 'FIXED';
       sw.fills = [paint(v)]; sw.paddingTop = sw.paddingBottom = sw.paddingLeft = sw.paddingRight = 24; // swatch padding is specimen geometry
-      sw.cornerRadius = 16;
+      sw.cornerRadius = 16; outline(sw, c);
       sw.setExplicitVariableModeForCollection(helpers, lum(c) < 0.18 ? INVERTED : DEFAULT);
       await text(sw, v.name.slice(g.length + 1) || v.name.split('/').pop(), S.desc, 'text', 'name');
       const e = await endVar(v, mode.modeId);
@@ -92,7 +96,7 @@ for (const [g, list] of groups) {
         ref.setExplicitVariableModeForCollection(helpers, DEFAULT); ref.paddingLeft = ref.paddingRight = 10; ref.paddingTop = ref.paddingBottom = 6; ref.cornerRadius = 6;
         await text(ref, '→ ' + e.name, S.ann, 'text'); }
       const spacer = frame('VERTICAL', 'spacer'); sw.appendChild(spacer); spacer.layoutSizingVertical = 'FILL';
-      await text(sw, hex(c), S.ann, 'text', 'hex');
+      await text(sw, hexA(c), S.ann, 'text', 'hex');
       await text(sw, `rgba(${[c.r, c.g, c.b].map(y => Math.round(y * 255)).join(', ')}, ${+c.a.toFixed(2)})`, S.ann, 'text', 'rgba');
       await text(sw, oklch(c), S.ann, 'text', 'oklch');
       count++;
