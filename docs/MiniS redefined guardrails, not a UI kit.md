@@ -314,6 +314,10 @@ Sloupec todo-plans je porovnaný se složkou todo-plans/ v MiniS repozitáři ke
 
 ### Průběžný stav (12.–13. 11. 2026)
 
+**MiniS směřuje k design systému řízenému AI.** Prvním krokem je skill pro samodokumentaci (`minis-figma-docs`), který už existuje a stane se součástí běžných workflow. AI s ním zakládá a aktualizuje dokumentaci přímo ve Figmě, podle stejných pravidel, ve stejném vzhledu a ze skutečných tokenů. Udržovat design systém a jeho Figma implementaci tak bude jednodušší a dokumentace nebude zaostávat za změnami.
+
+**Figma plugin Color docs generator** dnes částečně slouží k dokumentaci (generuje přehledy barevných palet). Tuto roli nejspíš převezme skill a plugin bude brzy zmrazený.
+
 Nic z toho nesplňuje žádnou položku z „Dalších kroků“. Práce slouží sekci „Skilly, které MiniS potřebuje“ a myšlence mantinelů a vrstvení tokenů: komponenty a dokumentace berou hodnoty z Foundation, ne z primitiv.
 
 - **Dokumentace ve Figmě sjednocená.** Nový skill `minis-figma-docs` a interní docs kit ve Figmě: skryté proměnné `docs/*`, styly `.docs/*`, pomocné komponenty a šablona; nic z toho se nepublikuje do knihovny.
