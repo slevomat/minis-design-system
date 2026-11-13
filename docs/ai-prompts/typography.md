@@ -5,8 +5,8 @@ copied as-is into another AI tool, a Claude project or another repo. It covers t
 CSS tokens, how Figma represents them, how the exporter turns Figma into code, and how production
 (the Slevomat Nette app) consumes them.
 
-The reasoning behind these rules is in `todo-plans/014-responsive-line-height-in-figma.md` and
-`todo-plans/015-letter-spacing-tokens.md`. The Figma file `MiniS DS` → page **TYPOGRAPHY** has a
+The reasoning behind these rules is in `todo-plans/015-responsive-line-height-in-figma.md` and
+`todo-plans/016-letter-spacing-tokens.md`. The Figma file `MiniS DS` → page **TYPOGRAPHY** has a
 visual explainer ("Typography tokens — Figma issues").
 
 ---
@@ -155,7 +155,7 @@ blocks. Don't paste a raw export over it.
 - Production uses Stylus variables, not CSS custom properties. When Figma Dev Mode shows
   `var(--typography-heading-lg-line-height)`, the production equivalent is the `typo-heading-lg`
   class or `$typo-heading-lg` mixin.
-- Known differences, to be settled by the porting rules (plan 013): production's brand heading xl
+- Known differences, to be settled by the porting rules (plan 014): production's brand heading xl
   uses a fluid `clamp(32px, 7vw, 56px)` and weight 700. Mini*S says 32 → 56 px at 1480 px and
   weight 400.
 

@@ -215,7 +215,7 @@ placeholders, just as with an empty roadmap.
 
 **Other changelogs.** `CHANGELOG.md` and the Storybook Changelog story are written by whoever
 lands the code (CLAUDE.md → Changelog rules), never by this skill. Keeping all of them in sync is
-plan `todo-plans/017-changelog-sync-skill.md`. Until that exists, report any entry you add that
+plan `todo-plans/018-changelog-sync-skill.md`. Until that exists, report any entry you add that
 the repo side lacks, or the reverse.
 
 ## READ-ME page and the skills list

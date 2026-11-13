@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-11-06
 
-### Tokens — letter spacing named by percentage (todo-plans/015)
+### Tokens — letter spacing named by percentage (todo-plans/016)
 
 The old `--typography-spacing-*` block was a February 2026 leftover: px values and names that no longer matched Figma or production (`wide` was 0.4px here but 0.8 in Figma). Letter spacing is now em, so it scales with the font size, and each name carries its percentage: `n` = minus, `_` = decimal point.
 
@@ -68,7 +68,7 @@ The old `--typography-spacing-*` block was a February 2026 leftover: px values a
 
 - `vibe-apps` app name: `-0.01em` → `--typography-spacing-n1`. Same value, no visual change.
 
-### Figma — line height follows the Layout modes (todo-plans/014)
+### Figma — line height follows the Layout modes (todo-plans/015)
 
 - Heading lg/md/sm and Body md/sm bind new Figma-only variables `typography/<role>/line-height-px` (rounded size × ratio per Layout mode), so their line height now changes with the mode, as font size already did. The exporter (≥ 1.1.0) skips them; `tokens.css` is unchanged.
 - The `-px` and the new `Typography/spacing/*` variables carry Web Code Syntax (`var(--typography-heading-lg-line-height)`, `var(--typography-spacing-n2)` …), so Dev Mode shows the CSS token instead of a pixel value.
