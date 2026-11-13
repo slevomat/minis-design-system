@@ -88,3 +88,4 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 014 | [Responsive line height in Figma text styles](014-responsive-line-height-in-figma.md) | `in-progress` | 2026-11-06 |
 | 015 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](015-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-06 |
 | 016 | [Production reference audit — what the Slevomat repo tells the refit](016-production-reference-audit.md) | `draft` | 2026-11-06 |
+| 017 | [Changelog sync skill — one change, every changelog](017-changelog-sync-skill.md) | `draft` | 2026-11-12 |

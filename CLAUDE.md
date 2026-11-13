@@ -137,6 +137,9 @@ Current plans:
 - `todo-plans/016-production-reference-audit.md` — a repeatable audit of the read-only production
   clone (`../slevomat`): component usage, primitive → semantic map, production's existing
   Stylelint/KSS/BackstopJS guardrails. Feeds 001, 010–013. Never write to the production repo.
+- `todo-plans/017-changelog-sync-skill.md` — a skill that writes one change to every changelog
+  (`CHANGELOG.md`, the Storybook Changelog, the Figma docs changelog cards) and reconciles drift
+  between them. Part of the MiniS redefinition; reuses `minis-figma-docs` for the Figma side.
 
 ## Changelog rules
 
