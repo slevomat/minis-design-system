@@ -602,6 +602,7 @@ const changelogHTML = `
       <h4>Tokens</h4>
       <ul>
         <li><code>--action-row-surface</code>: <code>var(--button-tertiary-surface)</code> → <code>var(--color-surface-transparent)</code>. It borrowed the Button's token instead of a Foundation one; the rendered value is unchanged (fully transparent). Figma: <code>.Components</code> → <code>ActionRow/default/surface</code> now aliases <code>Color/Surface/transparent</code> (was <code>Button/tertiary/default/surface</code>).</li>
+        <li><code>--action-row-hover-surface</code>: <code>var(--button-tertiary-hover-surface)</code> → <code>var(--color-interaction-tertiary-hover-surface)</code>, the Foundation token the Button resolves to anyway. Same value (blue-95 light, grey-20 dark). Figma: <code>ActionRow/hover/surface</code> now aliases <code>Color/Interaction/tertiary/hover/surface</code> (was <code>Button/tertiary/hover/surface</code>).</li>
       </ul>
 
       <h3>Alert</h3>

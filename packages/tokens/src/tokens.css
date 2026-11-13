@@ -791,7 +791,7 @@
   --action-row-surface: var(--color-surface-transparent);                    /* transparent */
   --action-row-text: var(--color-text-primary);                              /* primary text colour */
   --action-row-icon: var(--button-tertiary-text);                            /* leading icon colour (blue) */
-  --action-row-hover-surface: var(--button-tertiary-hover-surface);          /* #e6f7fc */
+  --action-row-hover-surface: var(--color-interaction-tertiary-hover-surface); /* #e6f7fc */
   --action-row-active-surface: var(--color-surface-faded);                   /* #f1f3f5 */
   --action-row-padding-x: var(--linear-sp-linear-2);                         /*  8px */
   --action-row-padding-y: var(--fibonachi-sp-fib-3);                         /*  3px */

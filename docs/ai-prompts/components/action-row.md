@@ -46,7 +46,7 @@ On `xs` the trailing action is a checkbox for `variant="checkbox"` and an `arrow
 Component-level tokens (defined in `@minis/tokens`):
 
 - `--action-row-border-radius` → 8px (`--border-radius-md`)
-- `--action-row-surface` → `--color-surface-transparent` (default, transparent), `--action-row-hover-surface` → #e6f7fc, `--action-row-active-surface` → #f1f3f5
+- `--action-row-surface` → `--color-surface-transparent` (default, transparent), `--action-row-hover-surface` → `--color-interaction-tertiary-hover-surface` (#e6f7fc light, grey-20 dark), `--action-row-active-surface` → #f1f3f5
 - `--action-row-text` → `--color-text-primary` (black in light / near-white in dark)
 - `--action-row-icon` → `--button-tertiary-text` (tertiary-action blue, `#006eb9` in light mode) — applied to the slotted `icon` slot
 - `--action-row-padding-x` (8px) / `--action-row-padding-y` (3px)

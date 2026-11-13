@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 #### Tokens
 
 - `--action-row-surface`: `var(--button-tertiary-surface)` → `var(--color-surface-transparent)`. It borrowed the Button's token instead of a Foundation one; the rendered value is unchanged (fully transparent). Figma: `.Components` → `ActionRow/default/surface` now aliases `Color/Surface/transparent` (was `Button/tertiary/default/surface`).
+- `--action-row-hover-surface`: `var(--button-tertiary-hover-surface)` → `var(--color-interaction-tertiary-hover-surface)`, the Foundation token the Button resolves to anyway. Same value (blue-95 light, grey-20 dark). Figma: `ActionRow/hover/surface` now aliases `Color/Interaction/tertiary/hover/surface` (was `Button/tertiary/hover/surface`).
 
 ### Alert
 
