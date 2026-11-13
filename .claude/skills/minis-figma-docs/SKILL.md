@@ -51,6 +51,38 @@ of the library never see it. So:
 | **Specimen / diagram** | Type specimens, breakpoint bars, colour ramps | Card shell + header only. The body shows real styles and tokens; it's the one place product tokens appear |
 | **Report** | One-off analyses ("why X doesn't work in Figma") | Card shell, `.docs/heading-2` title. Free layout. Use the skill for the shell only |
 
+## Palette / swatch pages
+
+Colour pages (Foundation, Theme, Primitives, Heritage, .Components) carry two kinds of card: a
+**swatch overview** (a wide Specimen card) and a **changelog card** next to it. Page and frame IDs
+are in [kit.md](kit.md) → "Palette pages".
+
+- **Chrome is kit, swatches are product.** Shell, header, section titles, dividers, legend chips and
+  every label use `docs/*` + `.docs/*`. Each swatch's fill is **bound to the variable it shows**;
+  a flat hex swatch is a bug, because it silently goes stale.
+- **Labels on a swatch** bind to `docs/colors/text` and the swatch frame sets the `.Helpers` mode:
+  `inverted` (cream text) when the swatch's luminance is below 0.18, `default` (black) otherwise.
+  Never hard-code white text.
+- **Header:** a `pills` row (Storybook pill, then the layer `.badge`), title in `.docs/heading-1`,
+  one or two `.docs/description` paragraphs. Storybook: Foundation and Theme →
+  `design-tokens--colors`, Primitives and Heritage → `design-tokens--palette`.
+- **Printed values** (hex, rgba, oklch, `→ primitive`) are plain text: Figma can't bind text to a
+  colour value. The `→` reference names the primitive at the **end** of the alias chain.
+- **Never edit swatches by hand.** Use the scripts in `scripts/` (paste into `use_figma`, fill
+  CONFIG):
+  - `palette-refresh.js` — migrates or refreshes one existing overview in place: rebinds unbound
+    swatches by name, rewrites stale values, restyles chrome. Run it on every overview of a
+    collection **after every token re-export**. Safe to re-run.
+  - `palette-generate.js` — builds a new overview card for a collection from the kit (one section
+    per group, one row per mode). Then use the refresh script to keep it current.
+- **Changelog card** = header + Changelog + Roadmap (the "Changelog card" type above). Follow
+  "Changelog" below: a swatch rebound to its variable or a corrected value is a visible change and
+  gets an entry; moving the card to the kit does not.
+
+The old **Mini*S Color docs generator** plugin (separate plugins repo) produced the existing
+overviews. Don't run it on these pages: it makes a new page each run, hard-codes the chrome and
+ignores the kit.
+
 ## Anatomy (component card)
 
 A component's docs are a **stack of cards**, separated by an 8 px gap (`docs/dimensioning/gap-stack`):

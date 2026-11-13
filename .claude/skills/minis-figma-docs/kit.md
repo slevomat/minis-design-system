@@ -139,6 +139,25 @@ stack's `main`:
 7. **Then proofread** (see SKILL.md → Voice). Fill empty Dev notes from the repo, and delete an
    empty Roadmap card.
 
+## Palette pages
+
+Verified 2026-11-12. Scripts: `scripts/palette-refresh.js`, `scripts/palette-generate.js`.
+
+| Page | ID | Collection | Swatch overviews | Changelog card |
+|---|---|---|---|---|
+| ↳ Foundation | `1148:3540` | `Foundation` | `2540:7918` (cards), `2545:1752` (columns) | `1148:6849` |
+| ↳ Themes | `2532:3848` | `Theme` (Classic / Gift) | `6158:142` (generated) | none yet |
+| ↳ .Components | `1150:3959` | `.Components` | none | `2633:3537` |
+| ↳ .heritige palette | `16:662` | `.Heritage` | `1984:3908` (cards), `1540:5653` (columns) | `1210:7689` |
+| ↳ .primitives | `16:2419` | `.Primitives` | `1536:16078` (cards), `1536:14737` (table) | `1210:7711` |
+
+- `.Helpers` modes: `default` = `166:2`, `inverted` = `263:0`. In `inverted`, `docs/colors/text`
+  and `heading` resolve to cream: that's how labels on dark swatches stay bound.
+- Old overviews draw dividers as 1 px **fills** (rectangles named `Separator`, state-header
+  lines). They're bound to `docs/colors/divider` like strokes; the API allows it even though the
+  variable is scoped to strokes.
+- Swatch radius (16) and padding (24) are specimen geometry, so they aren't bound.
+
 ## Audit snippet (run before reporting done)
 
 ```js
