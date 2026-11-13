@@ -3,7 +3,7 @@ id: 010
 title: Distributing Mini*S skills and commands
 status: draft
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-13
 owner: Lexislav
 ---
 
@@ -45,6 +45,19 @@ repo.
 
 Leaning **A**, with B as the fallback for the Nette repo if the production team prefers files they
 can review. Undecided.
+
+**Production facts that weigh on this (2026-11-13, plan 017):**
+
+- **Copilot is the main agent in the Nette repo**: 184 Copilot co-author trailers against 6 Claude
+  ones since August. A Claude Code plugin (A) doesn't reach those sessions, so for the Nette repo
+  **B is the primary channel, not the fallback**.
+- **Their skill format differs from ours.** `doc/ai/skills/*.md` is plain Markdown with no
+  frontmatter, listed in a Skills Index table in `AGENTS.md` (name, path, "Use when") that is
+  always in context (`doc/ai/skills/skill-creation.md`). A Mini*S skill for production is
+  that file plus that row; a `SKILL.md` with frontmatter would need translating.
+- **Slevomat already ships a Claude plugin**: `.github/workflows/publish-docs.yml` syncs
+  `doc/knowledge-base/` to `slevomat/claude-plugin-slevomat-documentation`. For Claude users
+  outside the repo, joining that plugin is cheaper than starting our own (question 5).
 
 ## Phases
 

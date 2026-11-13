@@ -72,12 +72,46 @@ not a production dependency (and are ready if the mobile app ever takes them).
 | Tokens at runtime | build-time only (Style Dictionary → Stylus → literal CSS) | same; `build/style-dictionary/` already exists |
 | Heritage colour aliases | 90 in `colors.styl` to redirect | **already retired by Nette on 2026-11-02** |
 | Typography | 21 of 66 names used, "barely adopted" | used indirectly: `typo-*` classes in ~826 Latte files |
+| Token import | — | by hand (`build/style-dictionary/config.js`, no script target); last export 2026-08-12, so before plan 016's renames (017, 2026-11-13) |
+| AI layer | — | `AGENTS.md` + 33 skills in a passive-index format; **Copilot is the main agent** (184 vs 6 Claude trailers since August); Mini*S named in one skill only (017, 2026-11-13) |
 
 **Agreement so far** (from the chat handoff, 2026-11-05; the brief doesn't record it): on
 2026-11-02 the Nette lead developer accepted the redefinition, updated colours are on Nette
 master, and Nette's Stylelint already guides AI in migrating variables to them. Phases 1–2 have
 effectively started on their side; this is why G1 is about writing the agreement down and naming
 the approval group, not about getting a first yes.
+
+## Production → Mini*S: how Mini*S reaches production and how contributions come back
+
+Added 2026-11-13 from a read of the production clone (plan 017, slice "AI layer, token pipeline
+and guardrails"). The point: **production already has a channel for each direction**, and the
+plans should use them instead of building new ones. Details and the step list are in plan 005,
+"The production path".
+
+| Direction | What travels | Channel production already has | Plan |
+|---|---|---|---|
+| Mini*S → production | Token values, new tokens | Mini*S exporter → `build/style-dictionary/tokens/*.json` → `_variables.styl` (manual today) | 012, G2 |
+| Mini*S → production | Renames, retired tokens | Stylelint `slevomat/no-deprecated-variable` rename map (51 entries, inline today) | 011 |
+| Mini*S → production | Rules for agents | One skill file in their format + a Skills Index row in `AGENTS.md`; notes in `stylus.md` / `figma.md`; or their Claude plugin repo (`claude-plugin-slevomat-documentation`) | 010, G4 |
+| Mini*S → production | Recipes | Latte + Stylus partial with a KSS block on an existing styleguide page, covered by BackstopJS | 004, 014, G6 |
+| production → Mini*S | A new component | The KSS block their own skill already requires is the registration; Mini*S harvests new partials and elements monthly and puts them on the review agenda | 005, 013, 017 |
+| production → Mini*S | Usage, adoption | The plan 017 scan (class counts, token families, guardrail inventory) | 017 |
+
+What it means for the lead developer and the vibe-coding designers: **no new step on their side**
+beyond what production already asks (a KSS block for a shared component). Everything Mini*S needs
+from them is harvested, and everything they need from Mini*S arrives through a file, a token import
+or a lint message.
+
+**Questions for the production developer**, to take into G1 (the same five are in plan 005; 017
+carries the measurement ones):
+
+1. Is a KSS block enough of a "registration" for new shared components? 49 of the 79 partials in
+   `app/stylus/components/` have none today.
+2. Mini*S agent rules: a file in `doc/ai/skills/` with an `AGENTS.md` row, or the Claude plugin
+   repo? Copilot doesn't read Claude plugins.
+3. Would your Stylelint config read a deprecation map Mini*S generates?
+4. Who runs the token import, and how often? Should G2 end in a PR to production as well?
+5. Should new production components land on the monthly review agenda automatically?
 
 ## Rollout phases and the plans behind them
 
@@ -116,7 +150,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 002 | Deal Card, Promo Card | draft | 4 / 28 | Phase 0 checks against production |
 | 003 | *this overview* | draft | — | — |
 | 004 | Latte UI-building skill | draft | 0 / 4 | recipes (G6) + registry (013) |
-| 005 | Contribution skill | draft | 0 / 4 | registry schema (013) |
+| 005 | Contribution skill | draft | 0 / 4 | registry schema (013); production path proposed 2026-11-13, needs the production developer |
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis-bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
@@ -128,7 +162,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
 | 015 | Responsive line height in Figma | **in-progress** | 10 / 4 | verify export; exporter command; typography procedure as a skill |
 | 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only the `page-header` docs row |
-| 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat` |
+| 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 
 **The three blockers that hold most of the rest:**
@@ -147,13 +181,13 @@ and takes the next free number (019 onwards).
 | Gap | What | Phase | Notes |
 |---|---|---|---|
 | **G1** | Team agreement: walkthrough of the brief, name the approval group, agree where Mini*S lives in the Nette repo, close decisions 1–3 (then 4, 5, 8) | 0 | Gates 011–014. Open: who signs off; tie-break in the approval group. |
-| **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
+| **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Production lags too: its import is manual and was last run 2026-08-12, and this repo's `tokens.rgb.json` is from 2026-03-13 (017). Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
 | **G3** | Accessibility in CI: contrast of token pairs (light, dark, Gift) and an axe run over Storybook, warning first | 2 | `@storybook/addon-a11y` exists but nothing fails a build; CI is build + typecheck + lint only. |
-| **G4** | `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. |
+| **G4** | `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. Their format is plain Markdown with an index row (no frontmatter), and Copilot is the main agent there, so a Claude-only channel misses most sessions (017). |
 | **G5** | Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config, and 011 itself should extend Nette's existing Stylelint config rather than add one (answered in 011, 2026-11-06). Complements CI. |
-| **G6** | The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). |
+| **G6** | The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). A recipe in production is a Latte + Stylus partial with a KSS block, so BackstopJS covers it for free. |
 | **G7** | Monthly registry review and the proposal/approval process (`proposed` → decision in `meta`) | 4 | Fields belong in 013's schema; could be folded into 013 or 005. |
-| **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. |
+| **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. Partly there already: dark mode switches at runtime through `light-dark()` and brand themes are CSS custom properties (017). |
 | **G9** | Mini*S in Claude Design | 5 | Mostly questions: what format it accepts, who can publish. |
 | **G10** | Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
 | **G11** | Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
@@ -212,7 +246,9 @@ Work for the redefinition that has no todo plan but should show up here:
    plan 017's audit, or a repeatable script (017 phase 0)?
 4. **Is the Czech brief or this file the one new people read first?** If this one, link it from
    the brief's opening.
-5. Open questions in the brief that no plan owns: vibe-coding output as PRs or hand-over; who
+5. Open questions in the brief that no plan owns: vibe-coding output as PRs or hand-over (partly
+   answered 2026-11-13: Claude-assisted UI commits already land on production master as ordinary
+   commits, see 017); who
    approves a CI-green PR that adds a Local; whether the mobile app takes the web components; what
    "Admin" and "Slevomat for Partners" run on; how "Web" differs from "Web FE B2C".
 

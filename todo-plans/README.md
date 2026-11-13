@@ -78,12 +78,12 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 002 | [Deal Card and Promo Card components](002-deal-card-and-promo-card.md) | `draft` | 2026-09-10 |
 | 003 | [Mini*S redefinition — overview of the rollout and every plan in it](003-minis-redefinition-overview.md) — **start here** | `draft` | 2026-11-13 |
 | 004 | [Latte UI-building skill for the Nette repo](004-latte-ui-skill.md) | `draft` | 2026-10-29 |
-| 005 | [Contribution skill — reuse, extend, or register as Local](005-contribution-skill.md) | `draft` | 2026-10-29 |
+| 005 | [Contribution skill — reuse, extend, or register as Local](005-contribution-skill.md) | `draft` | 2026-11-13 |
 | 006 | [minis-app — sandbox skill that registers new work as Local](006-minis-app-register-local.md) | `draft` | 2026-10-29 |
 | 007 | [Todo-plan writing skill](007-todo-plan-skill.md) | `draft` | 2026-10-29 |
 | 008 | [Bug-reporting skill and /minis-bug command](008-bug-report-skill.md) | `draft` | 2026-10-29 |
 | 009 | [Token-update skill (optional)](009-token-update-skill.md) | `draft` | 2026-11-06 |
-| 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-10-29 |
+| 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-11-13 |
 | 011 | [Enforce "tokens only" with Stylelint](011-stylelint-tokens-only.md) | `draft` | 2026-11-06 |
 | 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-06 |
 | 013 | [registry.json — the single inventory of everything Mini*S has](013-registry.md) | `draft` | 2026-10-29 |

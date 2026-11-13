@@ -38,6 +38,10 @@ than the brief assumes, and in places differently from how plans 011 and 014 ass
 - **Most colour references are primitives, not semantic tokens.** 2,619 of the 4,122 (64 %) are
   ramp steps (`$color-grey-90` alone 554×, `$color-blue-45` 196×), and 679 are explicit
   `$color-dark-*`. So dark mode is written out property by property, not carried by the token.
+  *(Refined 2026-11-13: the 66 paired aliases in `color-semantic.styl` compile to CSS
+  `light-dark()`, so where they are used the mode **is** carried by the value at runtime. The
+  explicit `$color-dark-*` uses are what is left. See the slice "AI layer, token pipeline and
+  guardrails" below.)*
 - **Guardrails already run there.** Stylelint parses Stylus (`postcss-styl` + `stylelint-stylus`).
   `scale-unlimited/declaration-strict-value` covers colour, `box-shadow`, `border-radius` and
   `font-weight`, and 10 custom plugins in `build/stylelint-plugins/` include
@@ -144,7 +148,8 @@ What the script measures:
   - [ ] A rule preferring semantic over primitive `$color-*` in `app/stylus/components/`.
   - [ ] Mini*S recipes as KSS entries on an existing styleguide page, so BackstopJS covers them
         with no new scenario (`doc/ai/skills/styleguide-documentation.md`).
-- [ ] **Phase 5 — Convention digest for plans 004 and 014.** One page summarising the production
+- [ ] **Phase 5 — Convention digest for plans 004 and 014.** (First draft: the skills table in
+      the slice "AI layer, token pipeline and guardrails" below.) One page summarising the production
       skills that constrain a Latte recipe: light-DOM components, KSS comments, no inline styles
       (506 `style="…"` still exist), Phing checks (`check-latte-fast`, `spell-check-fast`), brand
       themes. Links to their files, no copied text.
@@ -176,7 +181,17 @@ What the script measures:
 5. **Who reviews the results on the production side**, and is it the same person as for plan
    001?
 6. **How often to re-run?** On demand before each plan that needs production facts, or on a
-   schedule (e.g. monthly with the registry review the brief proposes)?
+   schedule (e.g. monthly with the registry review the brief proposes)? *(Proposal 2026-11-13:
+   monthly, the week before the registry review, so the KSS harvest below lands on its agenda.)*
+7. **Who runs the token import in production, and when?** `build/style-dictionary/config.js` has no
+   npm script or Phing target, all 13 commits touching it are the lead developer's, and the last
+   import is from 2026-08-12. Is a fresh import a step in G2 (automatic export), or does it stay
+   manual on their side?
+8. **Would production read a generated deprecation map?** `slevomat/no-deprecated-variable` takes
+   its 51 renames inline in `build/stylelint-options.cjs`. A JSON file that Mini*S generates and
+   their config `require()`s would turn every Mini*S token rename into a lint message there.
+9. **Should the KSS styleguide be the production half of the registry** (see the slice below and
+   plan 005), or only an input to it?
 
 ## Completed slices
 
@@ -231,3 +246,103 @@ Findings that matter beyond the layout guides:
 
 Not covered yet: pages behind login (user account, checkout after the cart), travel and partner
 pages.
+
+### AI layer, token pipeline and guardrails — 2026-11-13
+
+Done by hand with the layout slice, at the same production commit `bb1847f86e4` (2026-11-06; the
+clone was not refreshed). Layouts were the worked example for "can production answer a design
+question?"; this slice records what the repo offers in general and how to measure it again.
+
+**1. The AI layer and its format.** `AGENTS.md` (424 lines, since 2026-01-15) holds code style, the
+directory map, a Specifications Index (payment, AI chat, push notifications, 38 files in
+`doc/ai/spec/`) and a **Skills Index**: one table row per skill — name, path, "Use when". The 33
+skills in `doc/ai/skills/` are plain Markdown: **no frontmatter**, imperative voice, 1,000–3,000
+words, code from the repo, a closing checklist (`doc/ai/skills/skill-creation.md`). They are
+*passive context*: the index is always loaded and the agent opens the file when a row matches.
+Nothing depends on Claude Code's skill triggering, and that matters because **GitHub Copilot is the
+main agent there**: 184 `Co-authored-by: Copilot` trailers against 6 Claude ones in the 2,946
+commits since 2026-08-01. A Mini*S skill that reaches production has to be a file in this format
+plus an index row; a Claude Code plugin alone would miss most sessions (plan 010).
+
+Skills that matter for the design system:
+
+| Skill | What it teaches | What it means for Mini*S |
+|---|---|---|
+| `stylus.md` | Where a style belongs (owner file, partial vs entry), tokens from `settings/_variables.styl`, paired semantic aliases or `light-dark()` for theme colours, breakpoint and `+dark()` mixins, full BEM names, `bin/phing check-css` | The only production doc that names Mini*S ("use a semantic alias or a generated MiniS primitive"). The natural home for Mini*S token rules; no separate skill needed for them |
+| `styleguide-documentation.md` | Every shared component in `app/stylus/components/` gets a KSS block (`Markup:`, modifiers, `Style guide: Components.x`) on an existing styleguide page, so BackstopJS covers it with no new scenario | Production's own "register what you build" rule. The basis of the contribution path in plan 005 |
+| `figma.md` | Figma MCP, extract all facts in one pass, confirm the grid before coding when there is no frame, reuse branding patterns | Doesn't name the MiniS Figma file or how a Figma variable maps to a Stylus name. A one-paragraph addition would close that |
+| `brand-themes.md` | Ten-step checklist for a new `BrandColorScheme` across Stylus, banners, e-mails, Fortune wheel | Brand themes are already **runtime CSS custom properties** (`utilities/_brand-theme.styl`); relevant to G8 and to the Mini*S Wheel of Fortune |
+| `web-components.md` | Light-DOM custom elements, no Shadow DOM, no framework, self-registering | Confirms Mini*S Lit components don't drop in; recipes port, components don't |
+| `latte-controls.md` | Nette Controls: factory, NEON registration, `{control}`, signals | What a Latte recipe has to fit into (plans 004, 014) |
+| `modals.md`, `image-processing.md` | Overlay system and its modifiers; the image/SVG pipeline | Candidates for registry entries as-is (decision 7) |
+| `skill-creation.md` | The format above | The template any Mini*S skill for production follows |
+
+**2. The token pipeline, in detail.**
+
+- **Source:** five JSON files in `build/style-dictionary/tokens/` (colors, typography, layout,
+  scales, shadows; plus `fonts.json`). They are **resolved exports of the "MiniS DS" Figma file by
+  the Mini*S exporter** (`$metadata.exportDate` 2026-08-12, `cssName` fields), exported with
+  "Remove collection name" **off**. Style Dictionary 5.7.1 (`build/style-dictionary/config.js`)
+  then strips `-primitives|-theme|-default|-layout|-foundation` as plain substrings, which is
+  looser than the exporter's whole-segment "omit default" rule. No npm script or Phing target runs
+  it, and all 13 commits touching the pipeline are the lead developer's (2025-04-29 → 2026-08-12).
+- **Output:** `app/stylus/settings/_variables.styl` (729 variables, 40 carry a
+  `// Heritage reference:` comment) and `doc/tokens/kotlin/Tokens.kt` for the mobile app.
+- **Names against `tokens.css`:** 138 names are identical. Where they differ:
+  - semantic colours carry the mode in the name (`$color-light-surface-primary`,
+    `$color-dark-surface-primary`); the 66 paired aliases in `settings/color-semantic.styl` give
+    them Mini*S's names (`$color-surface-primary` → `light-dark(…)`);
+  - the linear scale has a prefix (`$scales-linear-sp-linear-1` vs `--linear-sp-linear-1`); the
+    Fibonacci and pixel scales and the `--breakpoint-*` tokens are absent (breakpoints live in
+    `plugins/media-queries.styl`);
+  - responsive layout values are one name per breakpoint tier (`$layout-sm-spacing-md`, 11 tiers ×
+    31), not one name that changes with the viewport;
+  - letter spacing sits inside the typography composites (`$typography-body-md-letter-spacing =
+    -0.003em`), from before plan 016's `--typography-spacing-*` names.
+- **Which side is behind can't be read from files.** This repo's own `tokens.rgb.json` is from
+  2026-03-13, older than production's export. The Figma file is the only reference; the audit
+  should compare both repos against a fresh export.
+- **Dark mode at runtime:** `light-dark()` (paired aliases) plus the `+dark()` mixin
+  (`.force-dark-mode` class or `prefers-color-scheme` with `.dark-mode`). So production already
+  has runtime switching for colour mode and brand themes; G8 is narrower than it looks.
+
+**3. Guardrails.** `build/stylelint-options.cjs`: `postcss-styl`, strict values for `/color$/`,
+`box-shadow`, `border-radius`, `font-weight`; 10 plugins in `build/stylelint-plugins/`.
+`slevomat/no-deprecated-variable` takes its rename map inline (51 entries, heritage → Mini*S
+primitive), which is the hook for a generated Mini*S deprecation list (open question 8). The KSS
+styleguide has **96 entries in 46 Stylus files**, in sections Brand, Content, Feedback, Guidance,
+Navigation, Selection, buttons, forms, colors, typography, icons, messages, lists, shadows. Only
+**30 of the 79** partials in `app/stylus/components/` carry a KSS block. BackstopJS has three
+config commands in `app/ui/BackstopJS/` (styleguide, key pages, cart); the styleguide one renders
+every section page plus the four icon-font demos at 1024px.
+
+**4. How fast production grows.** 11 new shared components since 2026-03 (6 Stylus partials in
+`app/stylus/components/`, 5 elements in `app/js/components/`), from 6 authors. The lead developer
+wrote 66 of about 115 commits touching `app/stylus/` since 2026-09-01. Claude-assisted UI commits
+appear since October (gift pages, cart gift services) from a contributor outside the regular
+Stylus committers, so AI-built UI already lands in production. Whether that author is one of the
+vibe-coding designers isn't visible from git. Two new components a month is few enough
+to find by scanning; nobody has to register anything by hand.
+
+**5. A distribution channel already exists.** `.github/workflows/publish-docs.yml` syncs
+`doc/knowledge-base/` (177 business docs) to `slevomat/claude-plugin-slevomat-documentation` on
+every push to master. Slevomat already ships a Claude plugin, so plan 010 can ask to join it
+instead of creating one.
+
+**Reusable method (code side).** Add to the Phase 0 script, next to the layout slice's method:
+
+1. **Pin the commit:** `git -C ../slevomat log -1 --format='%h %ad' --date=short`. Refresh only
+   with `git pull --ff-only`, and only when no other session is reading the clone.
+2. **AI layer:** list `doc/ai/skills/*.md` with word counts; parse the Skills Index table in
+   `AGENTS.md`; grep `doc/ai` and `AGENTS.md` for `MiniS` / `Mini*S`; count `Co-authored-by`
+   trailers per agent since the last run.
+3. **Token pipeline:** `$metadata.exportDate` of each file in `build/style-dictionary/tokens/`;
+   `git log` on that folder; parse `_variables.styl` (`^\$name = value`) and diff the names
+   against `packages/tokens/src/tokens.css` by family (color, typography, scales, layout).
+4. **Guardrails:** the plugin list and strict-value properties from `build/stylelint-options.cjs`;
+   the length of the `no-deprecated-variable` map; KSS blocks (`Style guide:` lines) per section;
+   which partials in `app/stylus/components/` have none; BackstopJS scenario labels.
+5. **New components since the last run:** `git log --diff-filter=A` on
+   `app/stylus/components/*.styl` and `app/js/components/*`. This list is the harvest input
+   for plan 005.
+6. **Record** the date and commit next to every number, as the layout slice does.
