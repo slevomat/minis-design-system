@@ -24,6 +24,7 @@ owner: Lexislav
 > | Brief, live version | <https://claude.ai/artifact/1fwLit8Shd9Z2DtyMY7zk8> | Czech |
 > | Presentation, 17 slides (16–17 added 2026-11-13) | <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka> | Czech |
 > | Presentation in Figma (same 17 slides, frames "01 Cover" … "17 Do produkce a zpět") | [MiniS DS → "MiniS re-fit – prezentace"](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5995-149) | Czech |
+> | The plans explained for the team agreement (8 frames: map of plans, what 020 closes, decisions 1–8, commitments, pattern path, questions for production, what can start now; added 2026-11-13) | [MiniS DS → "MiniS re-fit – plány k dohodě"](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=6247-302) | Czech |
 > | Contribution diagram | Figma `mfiAVMWkxiBRGnegjqLMNW`, page READ-ME → "Contribution model" | — |
 >
 > The presentation is from 29 Oct 2026, updated on 13 Nov 2026 (cover, platforms, adoption,
