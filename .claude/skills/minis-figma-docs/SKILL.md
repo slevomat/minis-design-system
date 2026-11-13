@@ -63,8 +63,16 @@ are in [kit.md](kit.md) → "Palette pages".
 - **Labels on a swatch** bind to `docs/colors/text` and the swatch frame sets the `.Helpers` mode:
   `inverted` (cream text) when the swatch's luminance is below 0.18, `default` (black) otherwise.
   Never hard-code white text.
-- **Non-opaque swatches** (transparent, `*-a` alphas) get a dashed `docs/colors/divider` outline
-  so their edge shows on cream, and print an 8-digit hex (`#FFFFFF00`), never a bare `#FFFFFF`.
+- **Hard-to-see swatches get a dashed outline.** A swatch is hard to see when it isn't opaque
+  (transparent, `*-a` alphas) or when it's nearly the cream card colour: OKLab distance below
+  0.025 (white, grey-95/98, blue-99, the palest `-95` tints, the Foundation background and
+  surfaces). Draw a dashed `docs/colors/divider` stroke (`divider-width`, inside, dash 6/4) and
+  keep the fill bound to the real token. Never fake visibility with a different fill, a shadow or a
+  darker card. The scripts decide this (`faint()`), so don't outline by eye.
+- **Non-opaque values print their alpha:** 8-digit hex (`#FFFFFF00`), never a bare `#FFFFFF`, and
+  rgba / oklch with the alpha (`rgba(0, 0, 0, 0.05)`, `oklch(0% 0.000 0 / 0.05)`).
+- The same problem on component cards is solved by the specimen surface (kit.md → "Specimens"):
+  put light or alpha instances on it instead of straight onto the cream card.
 - **Header:** a `pills` row (Storybook pill, then the layer `.badge`), title in `.docs/heading-1`,
   one or two `.docs/description` paragraphs. Storybook: Foundation and Theme →
   `design-tokens--colors`, Primitives and Heritage → `design-tokens--palette`.

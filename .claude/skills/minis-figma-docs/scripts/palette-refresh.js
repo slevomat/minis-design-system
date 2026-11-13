@@ -55,8 +55,13 @@ const style = async (t, sid, v) => { const len = t.characters.length; if (len) t
 const hex = c => '#' + [c.r, c.g, c.b].map(x => Math.round(x * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
 // printed hex: 8 digits (with alpha) when the colour isn't opaque, so a transparent swatch never reads #FFFFFF
 const hexA = c => hex(c) + (c.a !== undefined && c.a < 1 ? Math.round(c.a * 255).toString(16).padStart(2, '0').toUpperCase() : '');
-// non-opaque swatch: dashed kit outline so its edge shows on the cream card (the fill stays the real token)
-const outline = (sw, c) => { if (c.a !== undefined && c.a < 1) { sw.strokes = [paint(kv.divider)]; sw.setBoundVariable('strokeWeight', kv.dw); sw.strokeAlign = 'INSIDE'; sw.dashPattern = [6, 4]; } else { sw.strokes = []; sw.dashPattern = []; } };
+// hard-to-see swatch: not opaque, or so close to the cream card (OKLab distance < 0.025: white, grey-95/98,
+// blue-99, pale -95 tints) that its edge vanishes. It gets a dashed kit outline; the fill stays the real token.
+const okl = ([r, g, b]) => { [r, g, b] = [r, g, b].map(lin); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s]; };
+const CREAM = [0.984, 0.973, 0.953];
+const faint = c => { const a = c.a === undefined ? 1 : c.a; if (a < 1) return true; const p = okl([c.r, c.g, c.b]), q = okl(CREAM); return Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]) < 0.025; };
+const outline = (sw, c) => { if (faint(c)) { sw.strokes = [paint(kv.divider)]; sw.setBoundVariable('strokeWeight', kv.dw); sw.strokeAlign = 'INSIDE'; sw.dashPattern = [6, 4]; } else { sw.strokes = []; sw.dashPattern = []; } };
 const lin = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 const oklch = c => { const r = lin(c.r), g = lin(c.g), b = lin(c.b);
   const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
