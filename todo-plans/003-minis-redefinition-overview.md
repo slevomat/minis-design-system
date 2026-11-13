@@ -22,12 +22,13 @@ owner: Lexislav
 > |---|---|---|
 > | Brief, repo copy (source of truth for the *why*) | `docs/MiniS redefined guardrails, not a UI kit.md` | Czech |
 > | Brief, live version | <https://claude.ai/artifact/1fwLit8Shd9Z2DtyMY7zk8> | Czech |
-> | Presentation, 15 slides | <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka> | Czech |
-> | Presentation in Figma (same 15 slides, frames "01 Cover" … "15 Co dál") | [MiniS DS → "MiniS re-fit – prezentace"](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5995-149) | Czech |
+> | Presentation, 17 slides (16–17 added 2026-11-13) | <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka> | Czech |
+> | Presentation in Figma (same 17 slides, frames "01 Cover" … "17 Do produkce a zpět") | [MiniS DS → "MiniS re-fit – prezentace"](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=5995-149) | Czech |
 > | Contribution diagram | Figma `mfiAVMWkxiBRGnegjqLMNW`, page READ-ME → "Contribution model" | — |
 >
-> The presentation is from 29 Oct 2026. Where this file and the presentation differ (adoption
-> numbers, what's already done), this file is newer. The chat handoff of 2026-11-05 says to export
+> The presentation is from 29 Oct 2026, updated on 13 Nov 2026 (cover, platforms, adoption,
+> next steps, and two new slides: the rollout order and the paths into production). Where this
+> file and the presentation still differ, this file is newer. The chat handoff of 2026-11-05 says to export
 > the live brief before trusting the repo copy; the repo copy is newer than that handoff's copy and
 > has dropped its "floor" and "harvest" wording.
 >
