@@ -4203,18 +4203,18 @@
           "origin": null
         }
       },
-      "sucess": {
+      "success": {
         "color": {
           "border": {
             "value": "#088107",
             "type": "color",
-            "cssName": "--alert-sucess-color-border",
+            "cssName": "--alert-success-color-border",
             "origin": "--color-green-45"
           },
           "surface": {
             "value": "#e9fce9",
             "type": "color",
-            "cssName": "--alert-sucess-color-surface",
+            "cssName": "--alert-success-color-surface",
             "origin": "--color-green-95"
           }
         }

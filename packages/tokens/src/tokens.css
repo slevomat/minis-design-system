@@ -742,8 +742,8 @@
   --alert-color-surface: var(--color-feedback-info-light);
   --alert-error-color-border: var(--color-feedback-error);
   --alert-error-color-surface: var(--color-feedback-error-light);
-  --alert-sucess-color-border: var(--color-feedback-success);
-  --alert-sucess-color-surface: var(--color-feedback-success-light);
+  --alert-success-color-border: var(--color-feedback-success);
+  --alert-success-color-surface: var(--color-feedback-success-light);
   --alert-warning-color-border: var(--color-feedback-warning);
   --alert-warning-color-surface: var(--color-feedback-warning-light);
   --alert-padding-x: var(--spacing-layout-xs);

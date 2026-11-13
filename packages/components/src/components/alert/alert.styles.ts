@@ -34,14 +34,13 @@ export const alertStyles = css`
   }
 
   :host([variant="success"]) .alert {
-    /* token has a typo: "sucess" — matching exactly */
-    background: var(--alert-sucess-color-surface);
-    border-color: var(--alert-sucess-color-border);
+    background: var(--alert-success-color-surface);
+    border-color: var(--alert-success-color-border);
     color: var(--color-text-primary, #000);
   }
 
   :host([variant="success"]) .icon {
-    color: var(--alert-sucess-color-border);
+    color: var(--alert-success-color-border);
   }
 
   :host([variant="error"]) .alert {

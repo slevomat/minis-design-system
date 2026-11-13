@@ -578,6 +578,25 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-13 (Alert success token typo) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-13" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-13</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-13">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Alert</h3>
+      <h4>Tokens</h4>
+      <ul>
+        <li><strong>Renamed</strong> (typo fix): <code>--alert-sucess-color-border</code> → <code>--alert-success-color-border</code> (<code>var(--color-feedback-success)</code>), <code>--alert-sucess-color-surface</code> → <code>--alert-success-color-surface</code> (<code>var(--color-feedback-success-light)</code>). Values unchanged.</li>
+        <li>Figma: <code>.Components</code> → <code>Alert/sucess/color/*</code> renamed to <code>Alert/success/color/*</code>; same variable IDs, so every binding follows. <code>tokens.json</code> / <code>tokens.rgb.json</code> updated to match.</li>
+        <li><strong>Breaking</strong> for anyone who referenced the old names directly. <code>&lt;minis-alert variant="success"&gt;</code> now reads the new names; production never used them.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-12 (minis-figma-docs skill listed) -->
       <div class="cl-heading">
         <h2 id="2026-11-12" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-12</h2>

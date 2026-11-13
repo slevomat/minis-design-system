@@ -32,8 +32,8 @@
 |-------|-------------|
 | `--alert-color-border` | Notice variant border |
 | `--alert-color-surface` | Notice variant background |
-| `--alert-sucess-color-border` | Success variant border *(note: typo in token name)* |
-| `--alert-sucess-color-surface` | Success variant background |
+| `--alert-success-color-border` | Success variant border |
+| `--alert-success-color-surface` | Success variant background |
 | `--alert-error-color-border` | Error variant border |
 | `--alert-error-color-surface` | Error variant background |
 | `--alert-warning-color-border` | Warning variant border |

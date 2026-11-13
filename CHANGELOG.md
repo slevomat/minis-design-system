@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-13
+
+### Alert
+
+#### Tokens
+
+- **Renamed** (typo fix): `--alert-sucess-color-border` → `--alert-success-color-border` (`var(--color-feedback-success)`), `--alert-sucess-color-surface` → `--alert-success-color-surface` (`var(--color-feedback-success-light)`). Values unchanged.
+- Figma: `.Components` → `Alert/sucess/color/*` renamed to `Alert/success/color/*`; same variable IDs, so every binding follows. `tokens.json` / `tokens.rgb.json` updated to match.
+- **Breaking** for anyone who referenced the old names directly. `<minis-alert variant="success">` now reads the new names; production (`../slevomat`) never used them.
+
 ## 2026-11-12
 
 ### Wheel of Fortune — new placeholder component `<minis-wheel-of-fortune>`

@@ -1595,13 +1595,13 @@
     "oklch": "var(--spacing-layout-xs)",
     "heritage": ""
   },
-  "--alert-sucess-color-border": {
+  "--alert-success-color-border": {
     "hex": "#088107",
     "rgb": "rgb(8, 129, 7)",
     "oklch": "var(--color-feedback-success)",
     "heritage": ""
   },
-  "--alert-sucess-color-surface": {
+  "--alert-success-color-surface": {
     "hex": "#e9fce9",
     "rgb": "rgb(233, 252, 233)",
     "oklch": "var(--color-feedback-success-light)",
