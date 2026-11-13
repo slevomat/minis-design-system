@@ -82,7 +82,7 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 006 | [minis-app — sandbox skill that registers new work as Local](006-minis-app-register-local.md) | `draft` | 2026-11-13 |
 | 007 | [Todo-plan writing skill](007-todo-plan-skill.md) | `draft` | 2026-10-29 |
 | 008 | [Bug-reporting skill and /minis-bug command](008-bug-report-skill.md) | `draft` | 2026-10-29 |
-| 009 | [Token-update skill (optional)](009-token-update-skill.md) | `draft` | 2026-11-06 |
+| 009 | [Token-update skill (optional)](009-token-update-skill.md) | `draft` | 2026-11-13 |
 | 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-11-13 |
 | 011 | [Enforce "tokens only" with Stylelint](011-stylelint-tokens-only.md) | `draft` | 2026-11-13 |
 | 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-13 |
@@ -97,3 +97,9 @@ collide in the index; on `master` the next number is always visible to everyone.
 | 021 | [Monthly registry review — proposals, approval and how decisions are recorded](021-review-and-approval.md) | `draft` | 2026-11-13 |
 | 022 | [Accessibility checks — token-pair contrast and an axe run, warning first](022-accessibility-checks.md) | `draft` | 2026-11-13 |
 | 023 | [The first three recipes — Latte + Stylus pairs with an AI description](023-latte-recipes.md) | `draft` | 2026-11-13 |
+| 024 | [Automatic token export — Figma to a pull request, so no copy lags](024-automatic-token-export.md) | `draft` | 2026-11-13 |
+| 025 | [AGENTS.md and the AI-doc layer — core rules for every tool, parts per environment](025-agents-md-and-ai-docs.md) | `draft` | 2026-11-13 |
+| 026 | [Rules hook — explain the broken rule while the AI is still editing](026-rules-hook.md) | `draft` | 2026-11-13 |
+| 027 | [Runtime tokens in production — CSS custom properties for themes and dark mode](027-runtime-tokens.md) | `draft` | 2026-11-13 |
+| 028 | [Icons — one path from the Figma library to the production webfonts](028-icons-to-production.md) | `draft` | 2026-11-13 |
+| 029 | [Mobile app — Mini*S token names and structure as the third porting target](029-mobile-app-tokens.md) | `draft` | 2026-11-13 |

@@ -145,7 +145,7 @@ the same source later.
   - [ ] Who owns their config (open question 4) and how updates arrive: a pinned version and
         an upgrade PR per release.
   - [ ] Replace the copied values; plan 011's linter then measures against the installed list.
-- [ ] **Phase 5 — Later: the mobile app.** iOS and Android outputs from the same source and
+- [ ] **Phase 5 — Later: the mobile app** *(moved to plan 029 on 2026-11-13)*. iOS and Android outputs from the same source and
       config, with their own platforms added.
 
 ## Open questions

@@ -123,11 +123,11 @@ are set yet.
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
 | **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
-| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (optional) | **G2** automatic export |
+| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (optional) · 024 automatic export | — |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint · 022 accessibility checks | — |
-| **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync | **G4** AGENTS.md · **G5** rules hook |
+| **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync · 025 AGENTS.md · 026 rules hook | — |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval · 023 first recipes | — |
-| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) · 019 vibe-coders (G9, started early: the design system is already exported) | **G8** runtime tokens · **G10** icons · **G11** mobile app |
+| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) · 019 vibe-coders (G9, started early: the design system is already exported) · 027 runtime tokens · 028 icons · 029 mobile app | — |
 
 **Plans that fit no phase:**
 
@@ -139,8 +139,8 @@ are set yet.
   (G6), more than a new web component. **Keep, re-scope in plan 023 phase 5.**
 - **007 todo-plan skill, 008 bug report skill** — in the brief's skills table but in no rollout
   phase; low priority, ship through 010. **Keep.**
-- **009 token-update skill** — optional, and overlaps with G2 (automatic export) and with the
-  typography procedure its phase 7 carries. **Merge or close** once G2 is decided.
+- **009 token-update skill** — optional, and overlaps with plan 024 (automatic export, was G2), which takes it as its phase 1, and with the
+  typography procedure its phase 7 carries. **Merge or close** once 024 starts.
 
 ## All plans at a glance
 
@@ -156,7 +156,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis-bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (optional) | draft | 0 / 3 | decision to do it at all; overlaps G2 |
+| 009 | Token-update skill (optional) | draft | 0 / 3 | becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 0 / 4 | channel choice: plugin, copied files or package |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
@@ -171,6 +171,12 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 021 | Monthly review and approval | draft | 0 / 5 | 020 (approval group), 013 (`status`, `decision` added 2026-11-13) |
 | 022 | Accessibility checks | draft | 0 / 6 | pair list from design; ships with 011 in phase 2 |
 | 023 | First three recipes | draft | 0 / 6 | 020 (where files live, who merges); recipe format with the lead developer |
+| 024 | Automatic token export | draft | 0 / 5 | Figma plan's REST access; exporter network access; absorbs 009 |
+| 025 | `AGENTS.md` and the AI-doc layer | draft | 0 / 5 | decision 4 (020); registry (013) for generated docs |
+| 026 | Rules hook | draft | 0 / 5 | 011 config and 013 registry runnable per file; plugin (019) |
+| 027 | Runtime tokens in production | draft | 0 / 5 | product's requirement (themes, dark mode) |
+| 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
+| 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
 
 **The three blockers that hold most of the rest:**
 
@@ -183,21 +189,22 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 ## Gaps — work the brief asks for that has no plan yet
 
 None of these exists as a file. They are proposals; each becomes a plan when the owner says so,
-and takes the next free number (024 onwards).
+and takes the next free number (030 onwards). As of 2026-11-13 every gap
+below has a plan; the table stays as the record of where each plan came from.
 
 | Gap | What | Phase | Notes |
 |---|---|---|---|
 | ~~**G1**~~ | **Now plan 020** (2026-11-13). Team agreement: walkthrough of the brief, name the approval group, agree where Mini*S lives in the Nette repo, close decisions 1–3 (then 4, 5, 8) | 0 | Gates 011–014. Open: who signs off; tie-break in the approval group. |
-| **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Production lags too: its import is manual and was last run 2026-08-12, and this repo's `tokens.rgb.json` is from 2026-03-13 (017). Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
+| ~~**G2**~~ | **Now plan 024** (2026-11-13). Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Production lags too: its import is manual and was last run 2026-08-12, and this repo's `tokens.rgb.json` is from 2026-03-13 (017). Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
 | ~~**G3**~~ | **Now plan 022** (2026-11-13). Accessibility in CI: contrast of token pairs (light, dark, Gift) and an axe run over Storybook, warning first | 2 | `@storybook/addon-a11y` exists but nothing fails a build; CI is build + typecheck + lint only. |
-| **G4** | `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. Their format is plain Markdown with an index row (no frontmatter), and Copilot is the main agent there, so a Claude-only channel misses most sessions (017). |
-| **G5** | Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config, and 011 itself should extend Nette's existing Stylelint config rather than add one (answered in 011, 2026-11-06). Complements CI. |
+| ~~**G4**~~ | **Now plan 025** (2026-11-13). `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. Their format is plain Markdown with an index row (no frontmatter), and Copilot is the main agent there, so a Claude-only channel misses most sessions (017). |
+| ~~**G5**~~ | **Now plan 026** (2026-11-13). Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config, and 011 itself should extend Nette's existing Stylelint config rather than add one (answered in 011, 2026-11-06). Complements CI. |
 | ~~**G6**~~ | **Now plan 023** (2026-11-13). The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). A recipe in production is a Latte + Stylus partial with a KSS block, so BackstopJS covers it for free. |
 | ~~**G7**~~ | **Now plan 021** (2026-11-13). Monthly registry review and the proposal/approval process | 4 | `status` and `decision` added to 013's `meta` the same day. |
-| **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. Partly there already: dark mode switches at runtime through `light-dark()` and brand themes are CSS custom properties (017). |
+| ~~**G8**~~ | **Now plan 027** (2026-11-13). Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. Partly there already: dark mode switches at runtime through `light-dark()` and brand themes are CSS custom properties (017). |
 | ~~**G9**~~ | Mini*S in Claude Design | 5 | **Now plan 019** (2026-11-13), widened to every non-production channel: Claude Design, the Skill Hub, a Claude Code plugin, the AI Hub and a hosted runtime. |
-| **G10** | Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
-| **G11** | Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
+| ~~**G10**~~ | **Now plan 028** (2026-11-13). Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
+| ~~**G11**~~ | **Now plan 029** (2026-11-13). Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
 
 Dropped from an earlier gap list because things moved: *redirect `colors.styl` aliases* (Nette did
 it on 2026-11-02) and *typography adoption* (plans 015, 016 and 014 cover it; what is left is
@@ -239,8 +246,8 @@ Work for the redefinition that has no todo plan but should show up here:
       on every closed decision, update the tables above in the same commit.
 - [ ] **Phase 1 — Turn gaps into plans, one at a time**, in the owner's order. Suggested first: G1
       (it unblocks the most), then G6 and G7 (they unblock 004–006). *(2026-11-13: G1 → 020,
-      G7 → 021, G9 → 019, G3 → 022, G6 → 023. Gaps left: G2, G4, G5, G8, G10, G11.)*
-- [ ] **Phase 2 — Resolve the overlaps:** 009 vs G2; ~~G7 into 013 or its own plan~~ (own plan 021, fields in 013); 001 phase 5 vs
+      G7 → 021, G9 → 019, G3 → 022, G6 → 023. G2 → 024, G4 → 025, G5 → 026, G8 → 027, G10 → 028, G11 → 029. No gaps left.)*
+- [ ] **Phase 2 — Resolve the overlaps:** ~~009 vs G2~~ (009 is 024's phase 1); ~~G7 into 013 or its own plan~~ (own plan 021, fields in 013); 001 phase 5 vs
       decision 1; 017's measurement vs the Nette analysis.
 - [ ] **Phase 3 — Mirror into the brief.** Replace the brief's "todo-plans" column with a pointer
       to this file once the numbers are stable.

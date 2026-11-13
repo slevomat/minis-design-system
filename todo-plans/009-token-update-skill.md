@@ -3,11 +3,14 @@ id: 009
 title: Token-update skill (optional)
 status: draft
 created: 2026-10-29
-updated: 2026-11-06
+updated: 2026-11-13
 owner: Lexislav
 ---
 
 # 009 — Token-update skill (optional)
+
+> **2026-11-13: plan 024 (automatic token export) takes this skill as its phase 1**, the manual
+> export path. Merge or close this plan when 024 starts; until then it's kept for its reasoning.
 
 > **Optional.** Worth doing only if token updates are done by more than one or two people, or the
 > checklist in `CLAUDE.md` keeps getting missed. No dependency on the registry or Latte recipes.

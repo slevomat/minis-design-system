@@ -154,6 +154,18 @@ Current plans:
   Storybook in CI (warning → blocking, with a baseline), an axe-in-BackstopJS proposal for production.
 - `todo-plans/023-latte-recipes.md` — gap G6 as a plan: a recipe = Latte partial (`{embedTemplate}`) + Stylus
   partial with KSS + registry entry; first three proposed: button, message, tag (status info as warm-up).
+- `todo-plans/024-automatic-token-export.md` — gap G2: Figma export → PR in this repo (absorbs 009), with a
+  diff summary and a production-shaped artefact, so no copy of the tokens lags.
+- `todo-plans/025-agents-md-and-ai-docs.md` — gap G4 / decision 4: `AGENTS.md` with the core rules for every
+  tool, parts per environment, `CLAUDE.md` slimmed, component docs generated from the registry.
+- `todo-plans/026-rules-hook.md` — gap G5: Claude Code hooks that explain a broken rule in session, reusing
+  011's and 013's checks; shipped in the plugin. Copilot users rely on production's Stylelint.
+- `todo-plans/027-runtime-tokens.md` — gap G8: semantic tokens as CSS custom properties in production, after
+  product confirms the need; maps `.brand-theme--*` to Mini*S schemas.
+- `todo-plans/028-icons-to-production.md` — gap G10: one icon list (Figma, Mini*S, webfont names) and hand-over
+  packs for the IcoMoon webfonts; the 51 `figma-only` icons first.
+- `todo-plans/029-mobile-app-tokens.md` — gap G11 / decision 6: mobile outputs (Compose, maybe Swift) from the
+  shared build with canonical names; takes over 012 phase 5.
 
 ## Changelog rules
 
