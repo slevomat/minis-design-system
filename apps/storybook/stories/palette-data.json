@@ -1271,6 +1271,12 @@
     "oklch": "var(--theme-surface-primary)",
     "heritage": ""
   },
+  "--color-surface-transparent": {
+    "hex": "rgba(255, 255, 255, 0)",
+    "rgb": "rgba(255, 255, 255, 0)",
+    "oklch": "var(--color-core-transparent)",
+    "heritage": ""
+  },
   "--color-text-accent-attention": {
     "hex": "#ffd666",
     "rgb": "rgb(255, 214, 102)",

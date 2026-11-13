@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-11-13
 
+### Tokens — transparent surface
+
+- **Added** `--color-surface-transparent: var(--color-core-transparent)` (Foundation, same in light and dark mode). Figma: `Foundation` → `Color/Surface/transparent`, aliasing `Color/core/transparent` in both modes, scopes all fills + stroke like the other Surface tokens. In `tokens.json` / `tokens.rgb.json` under `color.foundation.{light,dark}.surface`.
+
+### Accordion
+
+#### Tokens
+
+- `--accordion-surface`: `var(--color-core-transparent)` → `var(--color-surface-transparent)`. It skipped the Foundation layer and pointed at a primitive; the rendered value is unchanged (fully transparent). Figma: `.Components` → `Accordion/default/surface` now aliases `Color/Surface/transparent`.
+
 ### Alert
 
 #### Tokens

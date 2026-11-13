@@ -1384,6 +1384,12 @@
             "type": "color",
             "cssName": "--color-surface-primary",
             "origin": "--color-core-white"
+          },
+          "transparent": {
+            "value": "rgba(255, 255, 255, 0)",
+            "type": "color",
+            "cssName": "--color-surface-transparent",
+            "origin": "--color-core-transparent"
           }
         },
         "text": {
@@ -1795,6 +1801,12 @@
             "type": "color",
             "cssName": "--color-surface-primary",
             "origin": "--color-grey-20"
+          },
+          "transparent": {
+            "value": "rgba(255, 255, 255, 0)",
+            "type": "color",
+            "cssName": "--color-surface-transparent",
+            "origin": "--color-core-transparent"
           }
         },
         "text": {

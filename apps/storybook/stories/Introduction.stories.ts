@@ -587,7 +587,18 @@ const changelogHTML = `
         </button>
       </div>
 
-      <h3 style="margin-top:1rem">Alert</h3>
+      <h3 style="margin-top:1rem">Tokens — transparent surface</h3>
+      <ul>
+        <li><strong>Added</strong> <code>--color-surface-transparent: var(--color-core-transparent)</code> (Foundation, same in light and dark mode). Figma: <code>Foundation</code> → <code>Color/Surface/transparent</code>, aliasing <code>Color/core/transparent</code> in both modes. In <code>tokens.json</code> / <code>tokens.rgb.json</code> under <code>color.foundation.{light,dark}.surface</code>.</li>
+      </ul>
+
+      <h3>Accordion</h3>
+      <h4>Tokens</h4>
+      <ul>
+        <li><code>--accordion-surface</code>: <code>var(--color-core-transparent)</code> → <code>var(--color-surface-transparent)</code>. It skipped the Foundation layer and pointed at a primitive; the rendered value is unchanged (fully transparent). Figma: <code>.Components</code> → <code>Accordion/default/surface</code> now aliases <code>Color/Surface/transparent</code>.</li>
+      </ul>
+
+      <h3>Alert</h3>
       <h4>Tokens</h4>
       <ul>
         <li><strong>Renamed</strong> (typo fix): <code>--alert-sucess-color-border</code> → <code>--alert-success-color-border</code> (<code>var(--color-feedback-success)</code>), <code>--alert-sucess-color-surface</code> → <code>--alert-success-color-surface</code> (<code>var(--color-feedback-success-light)</code>). Values unchanged.</li>

@@ -210,6 +210,7 @@ export const Colors: Story = {
           ${colorRow('--color-background', 'Page / app background')}
           ${colorRow('--color-surface-primary', 'Card / panel background')}
           ${colorRow('--color-surface-faded', 'Subtle / faded surface, e.g. table headers')}
+          ${colorRow('--color-surface-transparent', 'No fill: the component shows whatever it sits on, e.g. accordion rows')}
         </tbody>
       </table>
 

@@ -85,7 +85,7 @@ The event bubbles and is composed, so it can be listened for on `<minis-accordio
 
 Component-level tokens (defined in `@minis/tokens`):
 
-- `--accordion-surface` → transparent
+- `--accordion-surface` → `--color-surface-transparent` → `--color-core-transparent`
 - `--accordion-border-color` → `--separator-color` → `--color-separator` (black 5% light / white 35% dark — alpha, so the rule reads on any surface) · `--accordion-border-width` → `--separator-height` (1px). The two `--accordion-border-*` names stay as hooks for restyling a single accordion; by default they follow the shared separator rule, matching Figma where the divider is an unmodified `separator` instance.
 - `--accordion-padding-x` → 16px (`--linear-sp-linear-4`) — the `default` inset
 - `--accordion-compact-padding-x` → 0 (`--linear-sp-linear-0`) — the `size="compact"` inset · Figma `Accordion/compact/padding/x`

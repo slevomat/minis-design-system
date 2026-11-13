@@ -437,6 +437,7 @@
   --color-separator: var(--color-black-a-black-a5);
   --color-surface-faded: var(--theme-surface-faded);
   --color-surface-primary: var(--theme-surface-primary);
+  --color-surface-transparent: var(--color-core-transparent);
   --color-text-accent-attention: var(--color-yellow-25);
   --color-text-accent-danger: var(--color-red-45);
   --color-text-accent-link: var(--theme-text-accent-link);
@@ -820,7 +821,7 @@
   --tile-counter-text: var(--color-core-white);           /* pill text = white (both modes) */
 
   /* Accordion */
-  --accordion-surface: var(--color-core-transparent);
+  --accordion-surface: var(--color-surface-transparent);
   /* Divider between items — the Figma accordion-item consumes the separator
      instance's own tokens, so these alias the separator rule. They stay as
      named hooks so an accordion can still be restyled on its own. */
