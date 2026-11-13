@@ -147,7 +147,7 @@ Verified 2026-11-12. Scripts: `scripts/palette-refresh.js`, `scripts/palette-gen
 |---|---|---|---|---|
 | ↳ Foundation | `1148:3540` | `Foundation` | `2540:7918` (cards), `2545:1752` (columns) | `1148:6849` |
 | ↳ Themes | `2532:3848` | `Theme` (Classic / Gift) | `6158:142` (generated) | none yet |
-| ↳ .Components | `1150:3959` | `.Components` | none | `2633:3537` |
+| ↳ .Components | `1150:3959` | `.Components` | `6209:142` (generated, one section per component) | `2633:3537` |
 | ↳ .heritige palette | `16:662` | `.Heritage` | `1984:3908` (cards), `1540:5653` (columns) | `1210:7689` |
 | ↳ .primitives | `16:2419` | `.Primitives` | `1536:16078` (cards), `1536:14737` (table) | `1210:7711` |
 
