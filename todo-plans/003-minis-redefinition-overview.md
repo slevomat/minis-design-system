@@ -15,6 +15,13 @@ owner: Lexislav
 > 23 Oct 2026, revised since). Keep this file current whenever a plan is added, moves status, or
 > changes what it depends on (phase 1 below).
 >
+> **Where things live.** Brief, live version (Czech, claude.ai chat project):
+> <https://claude.ai/artifact/1fwLit8Shd9Z2DtyMY7zk8>; deck, 15 slides (Czech):
+> <https://claude.ai/artifact/W85J8tcMEBTgxbttnVHxka>; Figma `mfiAVMWkxiBRGnegjqLMNW`: deck mirror on page
+> "Mini*S 2.0 (WIP)", contribution diagram on READ-ME → "Contribution model". The chat handoff of
+> 2026-11-05 says to export the live brief before trusting the repo copy; the repo copy is newer
+> than that handoff's copy and has dropped its "floor" and "harvest" wording.
+>
 > **Numbering.** Plans 003–017 were renumbered to 004–018 on 2026-11-13 to make room for this
 > overview. Old numbers in git history, commit messages and the changelogs of that time are
 > decoded in the table at the end.
@@ -66,6 +73,12 @@ not a production dependency (and are ready if the mobile app ever takes them).
 | Heritage colour aliases | 90 in `colors.styl` to redirect | **already retired by Nette on 2026-11-02** |
 | Typography | 21 of 66 names used, "barely adopted" | used indirectly: `typo-*` classes in ~826 Latte files |
 
+**Agreement so far** (from the chat handoff, 2026-11-05; the brief doesn't record it): on
+2026-11-02 the Nette lead developer accepted the redefinition, updated colours are on Nette
+master, and Nette's Stylelint already guides AI in migrating variables to them. Phases 1–2 have
+effectively started on their side; this is why G1 is about writing the agreement down and naming
+the approval group, not about getting a first yes.
+
 ## Rollout phases and the plans behind them
 
 Phases and dates are from the brief ("Plán zavedení"); dates are indicative and no target numbers
@@ -78,7 +91,7 @@ are set yet.
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint | **G3** a11y in CI |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync | **G4** AGENTS.md · **G5** rules hook |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) | **G6** recipes · **G7** review process |
-| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) | **G8** runtime tokens · **G9** Claude Design · **G10** icons |
+| **5. Expansion** | from Mar 2027 | Claude Design, finish typography in production, runtime tokens, mobile token names, icons in the production webfont | 015, 016 (typography foundation done) · 012 phase 5 (mobile) | **G8** runtime tokens · **G9** Claude Design · **G10** icons · **G11** mobile app |
 
 **Plans that fit no phase:**
 
@@ -134,15 +147,16 @@ and takes the next free number (019 onwards).
 | Gap | What | Phase | Notes |
 |---|---|---|---|
 | **G1** | Team agreement: walkthrough of the brief, name the approval group, agree where Mini*S lives in the Nette repo, close decisions 1–3 (then 4, 5, 8) | 0 | Gates 011–014. Open: who signs off; tie-break in the approval group. |
-| **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan. |
+| **G2** | Automatic token export: Figma → PR in this repo, so tokens never lag | 1 | Exporter 1.2.1 already stamps version and settings into `$metadata`. Needs a check that the Figma REST API variables endpoint works on the Professional plan — it is likely Enterprise-only; fallback: the exporter plugin opens the PR through the GitHub API. |
 | **G3** | Accessibility in CI: contrast of token pairs (light, dark, Gift) and an axe run over Storybook, warning first | 2 | `@storybook/addon-a11y` exists but nothing fails a build; CI is build + typecheck + lint only. |
 | **G4** | `AGENTS.md` and the AI-doc layer (decision 4): core rules for all environments, `CLAUDE.md` slimmed, component docs generated from the registry | 3 | Production already has its own `AGENTS.md` and `doc/ai/skills/` — Mini*S joins them, it doesn't replace them. |
-| **G5** | Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config. Complements CI. |
+| **G5** | Rules hook: explain which rule an edit breaks, in session; reminds the rules at session start | 3 | Design-only today; needs 011's config, and 011 itself should extend Nette's existing Stylelint config rather than add one (answered in 011, 2026-11-06). Complements CI. |
 | **G6** | The first three Latte + Stylus recipes with AI descriptions, from the lead developer's snippets | 4 | Pick by usage in production; plan 017 gives the usage counts. Candidate: deal card (002). |
 | **G7** | Monthly registry review and the proposal/approval process (`proposed` → decision in `meta`) | 4 | Fields belong in 013's schema; could be folded into 013 or 005. |
 | **G8** | Runtime tokens in production (CSS custom properties for themes and dark mode) | 5 | First step is the decision whether product wants Gift or dark mode there at all. |
 | **G9** | Mini*S in Claude Design | 5 | Mostly questions: what format it accepts, who can publish. |
 | **G10** | Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
+| **G11** | Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
 
 Dropped from an earlier gap list because things moved: *redirect `colors.styl` aliases* (Nette did
 it on 2026-11-02) and *typography adoption* (plans 015, 016 and 014 cover it; what is left is
