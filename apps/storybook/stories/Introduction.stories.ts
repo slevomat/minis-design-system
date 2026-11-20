@@ -578,6 +578,49 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-20 (Figma exports re-exported with exporter 1.3) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-20" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-20</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-20">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens — Figma exports re-exported with exporter 1.3</h3>
+      <ul>
+        <li><code>tokens.json</code> (references, OKLCH, exporter 1.3.0) and <code>tokens.rgb.json</code> (resolved, HEX, exporter 1.3.1) re-exported from Figma, all collections, Light + Dark, naming settings on. The previous exports dated from 2026-05-22 and 2026-03-13. Both files now record <code>$metadata.exporterVersion</code> and <code>$metadata.settings</code>.</li>
+        <li><code>tokens.css</code> is <strong>not</strong> changed. Where Figma now differs from it (see "Figma ≠ tokens.css"), the CSS stays as it is until merged by hand. <code>palette-data.json</code> regenerated.</li>
+        <li>Checks: no <code>line-height-px</code> value; <code>--color-border</code>, <code>--color-separator</code>, <code>--color-interaction-primary-surface</code> present, <code>--color-border-default</code> absent; Layout line-height ratios match <code>tokens.css</code> in every mode.</li>
+      </ul>
+      <h4>Renamed in the export (now match tokens.css)</h4>
+      <ul>
+        <li><code>--typography-heading-large-*</code> → <code>--typography-heading-lg-*</code>, <code>-medium-*</code> → <code>-md-*</code>, <code>-small-*</code> → <code>-sm-*</code> (<code>-size</code>, <code>-line-height</code>), <code>--typography-mega-poster-size</code> → <code>--typography-heading-2xl-size</code>, <code>--typography-poster-size</code> → <code>--typography-heading-xl-size</code>. The aliases in <code>tier-tokens.ts</code> no longer match anything.</li>
+        <li>Heritage names that contained spaces: <code>--color-dark mode-*</code> → <code>--color-darkmode-*</code>, <code>--color-premium club-*</code> → <code>--color-premiumclub-*</code>.</li>
+      </ul>
+      <h4>Added to the export (already in tokens.css)</h4>
+      <ul>
+        <li>Typography collection: <code>--typography-font-family-*</code>, <code>--typography-size-*</code>, <code>--typography-weight-*</code>, <code>--typography-line-height-{90…157}</code>, letter spacing <code>--typography-spacing-{n2,n1,n0_3,0,3}</code> (<code>-0.02em</code>, <code>-0.01em</code>, <code>-0.003em</code>, <code>0</code>, <code>0.03em</code>).</li>
+        <li>Layout: <code>--typography-brand-{lg,xl}-{size,line-height}</code>, <code>--container-bleeding-edge-padding</code>, <code>--accordion-padding-y</code>.</li>
+        <li>Foundation: <code>--color-separator</code> (black-a5 light / white-a35 dark), <code>--color-branding-*</code>, <code>--color-schemas-{classic,gift}-*</code>, <code>--font-text-bold</code>; primitive <code>--color-white-a-white-a60</code>. Components: accordion, actionrow, tile, menuitem, <code>--separator-color</code>, <code>--separator-height</code>, <code>--tag-_togglestate</code> (Figma-only).</li>
+        <li>Text styles now carry letter spacing (headings <code>-0.02em</code>, heading lg <code>-0.01em</code>, body <code>-0.003em</code>); <code>--typography-heading-md</code> / <code>-sm</code> weight 500 → 600; line heights reference the Layout role tokens; <code>--typography-brand-heading-{lg,xl}</code> added.</li>
+      </ul>
+      <h4>Export caught up with tokens.css</h4>
+      <ul>
+        <li><code>--button-border-radius</code>: <code>var(--border-radius-sm)</code> → <code>var(--border-radius-md)</code> (4px → 8px). <code>--button-large-padding-x</code>: <code>var(--linear-sp-linear-4)</code> → <code>var(--linear-sp-linear-12)</code> (16px → 48px).</li>
+        <li><code>--theme-*</code> now reference <code>--color-schemas-*</code> (was <code>--schemas-*</code>). <code>tokens.rgb.json</code> only: dark <code>--color-background</code> <code>#000000</code> → <code>#1b1c20</code>, dark surfaces → <code>#363b3e</code>; body line heights <code>1.38</code> → <code>138%</code>.</li>
+      </ul>
+      <h4>Figma ≠ tokens.css (not merged)</h4>
+      <ul>
+        <li>Layout <code>--spacing-layout-*</code>: Figma <code>xs</code> (CSS base tier) <code>lg</code> 16px, <code>xl</code> 24px (CSS 20px, 32px); Figma <code>sm</code> (CSS 408px tier) <code>md</code> 16px, <code>lg</code> 20px, <code>xl</code> 32px (CSS 24px, 32px, 48px); Figma <code>md</code> <code>md</code> 20px, <code>lg</code> 24px, <code>xl</code> 32px (CSS 24px, 32px, 48px). The <strong>Tier</strong> toolbar follows the export, so its <code>2xs – xs</code> and <code>sm</code> tiers now show the Figma spacing.</li>
+        <li><code>--tag-padding-x</code>: Figma <code>var(--spacing-layout-sm)</code>, CSS <code>var(--spacing-layout-xs)</code>.</li>
+        <li>Dark mode: <code>--color-interaction-primary-{surface,border}</code> Figma blue-65 / CSS blue-45, <code>-hover-*</code> Figma blue-75 / CSS blue-35; <code>--color-interaction-secondary-border</code> Figma grey-70 / CSS grey-80; <code>--color-interaction-danger-surface</code> Figma <code>var(--color-surface-primary)</code> / CSS transparent; <code>--color-interaction-transparent-hover-border</code> Figma white / CSS blue-95.</li>
+        <li>Gift theme <code>--theme-background</code>: Figma <code>var(--color-schemas-classic-background)</code>, CSS <code>var(--schemas-gift-background)</code>. <code>--color-blue-10</code>: Figma hue 238, CSS 239.</li>
+        <li>Never copy into CSS: <code>--accordion-padding-y</code> in <code>.Components</code> is <code>var(--accordion-padding-y)</code> (exporter self-reference); <code>--typography-weight-*</code> / <code>--font-text-bold</code> are names (<code>Bold</code>), not numbers; <code>--button-icon-opacity*</code> are <code>100</code> / <code>75</code>; <code>--color-premiumclub-premium-gradient</code> is an SCSS string; brand text styles say weight 700 (CSS uses 400).</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-13 (Alert success token typo) -->
       <div class="cl-heading">
         <h2 id="2026-11-13" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-13</h2>
