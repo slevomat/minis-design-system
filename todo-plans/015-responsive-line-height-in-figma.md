@@ -3,7 +3,7 @@ id: 015
 title: Responsive line height in Figma text styles
 status: in-progress
 created: 2026-11-05
-updated: 2026-11-06
+updated: 2026-11-20
 owner: Lexislav
 ---
 
@@ -80,8 +80,8 @@ typography/<role>/  ─┘                                              │
    accident. `typography/body/md/line-height` is currently `ALL_SCOPES`.
 5. **A "Recalculate line heights" command** rewrites the `-px` variables from the current sizes
    and ratios. Run it after any size or ratio change. It lives in the exporter plugin, which
-   already knows the role ↔ variable mapping (see below). Until then, the same calculation can
-   be run as a one-off script through the Figma MCP.
+   already knows the role ↔ variable mapping (see below). Built in exporter 1.3.0 (phase 5) as
+   the **📏 Line heights** button; it replaces the one-off MCP script.
 
 ### Rejected alternatives
 
@@ -171,10 +171,26 @@ fixes.
             already carries `$metadata` (exportDate, exportMode, figmaFile) without trouble. New in it are
             `exporterVersion` and a nested `settings` object, so one build run is needed to confirm. That
             needs the production side.
-- [ ] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
+- [x] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
       It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
       for any new `-px` variable. Before building it, compare it with the community plugin "Unitless Line
       Height & Tokens" (linked from the article above).
+      Done 2026-11-20: exporter 1.3.0 (figma-plugins PR #4, merge `df6d969`), the **📏 Line heights**
+      button. It always runs a read-only check first and lists what is out of date; **Apply** writes
+      only those `-px` variables (value per Layout mode, scope `LINE_HEIGHT`, Code Syntax, a
+      "generated, don't edit by hand" description), then checks again. It never touches ratios,
+      primitives or text styles, and never binds. A new `-px` is created only when the ratio
+      changes between modes, so Brand lg/xl stay typed percentages. Body roles have no Layout size
+      variable, so their size comes from the font-size variable bound in the `Body/md|sm` style
+      (`Typography/size/md|sm`). In Dev Mode the check runs but Apply is disabled. Export output is
+      unchanged.
+      - A read-only dry run on the file (2026-11-20): 5 roles × 10 modes, every value already correct.
+        The only pending change is the five descriptions, which still carry the one-off script's text
+        (pointing to plan 014). The first Apply rewrites only those.
+      - The community plugin works differently: it applies a unitless number token to text layers as
+        a percentage and has its own export. It doesn't make per-mode pixel variables with Code Syntax.
+        The comparison is in the exporter's CHANGELOG (1.3.0).
+      - Still open: run Apply once in Figma, and publish 1.3.0 to the Community.
 - [x] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
       Done 2026-11-06: the Figma board, the exporter's own docs, `CLAUDE.md` → Token exports →
