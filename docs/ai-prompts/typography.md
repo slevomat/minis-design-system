@@ -136,9 +136,14 @@ required** for these rules:
   mobile (`default`-mode) ratio as a percentage (`130%`), never pixels. In **references** mode it exports
   `var(--typography-<role>-line-height)`.
 - Every export records the exporter version and settings in `$metadata` (and in the CSS header).
-- Known issue: in references mode, a text-style composite whose name equals its Layout variable
-  references itself (`--typography-heading-lg-line-height: var(--typography-heading-lg-line-height)`).
-  `tokens.css` is merged by hand and isn't affected.
+- **Version 1.3.1 or newer** for references mode: a text-style composite whose name equals its Layout
+  variable no longer references itself (it used to export
+  `--typography-heading-lg-line-height: var(--typography-heading-lg-line-height)`, a CSS cycle). The
+  composite line is left out, because the Layout variable already defines the name per mode; the same
+  goes for `.Components` aliases that get the same CSS name as their Layout variable
+  (`--accordion-padding-y`). The plugin window warns when it skips one. Brand styles
+  (`Brand/Heading/{lg,xl}`) now reference `--typography-brand-{lg,xl}-line-height`. Resolved mode is
+  unchanged. Older `tokens.json` exports can still contain the self-references: ignore those lines.
 
 `tokens.css` is **merged by hand** from the export: the Layout modes become `@media (min-width: …)`
 blocks. Don't paste a raw export over it.

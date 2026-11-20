@@ -167,6 +167,14 @@ fixes.
         `:root`, that is a CSS cycle and the value becomes invalid. `tokens.css` isn't affected,
         because it is merged by hand and has no composite block, and production consumes resolved JSON. But the
         exporter should skip a composite line that would reference its own name. Exporter follow-up.
+        **Fixed 2026-11-20 in exporter 1.3.1** (figma-plugins PR #5, merge `af88a1c`): the five
+        typography composite lines are left out (the Layout variable defines the name per mode),
+        and the `.Components` alias is skipped when collection names are removed and it gets the
+        same CSS name as its Layout variable. A UI warning lists what was skipped. Same release:
+        `Brand/Heading/{lg,xl}` now reference `--typography-brand-{lg,xl}-line-height` in references
+        mode (names unchanged; resolved mode byte-identical). Still to confirm in Figma:
+        `.Components/Accordion/padding-y` is an alias of a Layout variable (the accordion cause is
+        inferred, not read from the file).
       - [ ] Production's Style Dictionary build ignores the new `$metadata` block. Production's JSON
             already carries `$metadata` (exportDate, exportMode, figmaFile) without trouble. New in it are
             `exporterVersion` and a nested `settings` object, so one build run is needed to confirm. That
