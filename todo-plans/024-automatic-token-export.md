@@ -3,14 +3,14 @@ id: 024
 title: Automatic token export — Figma to a pull request, so no copy lags
 status: draft
 created: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-20
 owner: Lexislav
 ---
 
 # 024 — Automatic token export: Figma to a pull request, so no copy lags
 
 > **Gap G2 in plan 003, turned into a plan** (2026-11-13). Rollout phase 1 ("Tokens in Nette",
-> November–December 2026). Overlaps plan 009 (token-update skill, optional): 009 becomes this
+> November–December 2026). Overlaps plan 009 (token-update skill, typography first): 009 becomes this
 > plan's manual fallback (phase 1 below).
 
 ## Context
@@ -94,7 +94,10 @@ is their call (plan 020, question 4 of plan 003's production list).
 
 ## Dependencies
 
-- **009** — its manual skill is phase 1 here; close or merge it when this plan starts.
+- **009** — its manual skill is phase 1 here; close or merge it when this plan starts. The scripts
+  it plans (`check-export`, `diff-export` in `packages/tokens/scripts/`) are what phase 1 and
+  phase 2 call, so build them there first (revisited 2026-11-20; the typography reference file
+  stays part of the skill).
 - **012** — versioning and the production-shaped artefact; **018** — changelog entries.
 - **019** — the hosted runtime and design system regenerate on merge.
 - **003 decision 3** — canonical names, so the diff can call a change a rename.

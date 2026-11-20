@@ -272,10 +272,10 @@ fully done.
 
 | # | Plan | Why here |
 |---|---|---|
-| 2 | **024** Automatic token export (absorbs **009**) | Stops the copies from lagging; every later output regenerates from it |
+| 2 | **024** Automatic token export (absorbs **009**) | Stops the copies from lagging; every later output regenerates from it. 009's typography procedure is needed sooner and doesn't wait for 024 |
 | 3 | **012** Token distribution | Versioned package + shared Style Dictionary source for production (and later mobile, 029) |
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
-| — | finish **015**, **016** (in progress) | Typography foundation; already mostly done |
+| — | finish **015**, **016** (in progress) | Typography foundation; already mostly done. What is left is the typography procedure, which is plan 009's typography part (not blocked on 024) |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
 
@@ -359,7 +359,7 @@ are set yet.
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
 | **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
-| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (optional) · 024 automatic export | — |
+| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export | — |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint · 022 accessibility checks | — |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync · 025 AGENTS.md · 026 rules hook | — |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval · 023 first recipes | — |
@@ -375,8 +375,12 @@ are set yet.
   (G6), more than a new web component. **Keep, re-scope in plan 023 phase 5.**
 - **007 todo-plan skill, 008 bug report skill** — in the brief's skills table but in no rollout
   phase; low priority, ship through 010. **Keep.**
-- **009 token-update skill** — optional, and overlaps with plan 024 (automatic export, was G2), which takes it as its phase 1, and with the
-  typography procedure its phase 7 carries. **Merge or close** once 024 starts.
+- **009 token-update skill (typography first)** — revisited 2026-11-20: one skill, `minis-token-update`,
+  with the typography procedure as its reference file (the "how to change a size, ratio or spacing"
+  step of plans 015 and 016), the export checks as scripts in `packages/tokens/scripts/`, and this
+  repo only (plan 010). Its typography part is not optional (015, Answers); the rest is. It overlaps
+  with plan 024 (automatic export, was G2), which takes it as its phase 1, and the scripts are what
+  024 phase 1 calls. **Merge or close** once 024 starts; the typography part can't wait for it.
 
 ## All plans at a glance
 
@@ -392,14 +396,14 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis-bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (optional) | draft | 0 / 3 | becomes plan 024's phase 1 (manual export path) |
+| 009 | Token-update skill (typography first) | draft | 0 / 6 | owner's answers to its open questions (shape, script location, production's file shape); becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 0 / 4 | channel choice: plugin, copied files or package |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
-| 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | typography procedure as a skill. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
-| 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only the `page-header` docs row |
+| 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | phase 7, the typography procedure, now planned as plan 009's typography reference file. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
+| 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only phase 6's skill part (the `page-header`, `topbar` and `CLAUDE.md` docs are done); planned as plan 009's typography reference file |
 | 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
@@ -477,9 +481,10 @@ Work for the redefinition that has no todo plan but should show up here:
 - **Components and tokens**: Wheel of Fortune (placeholder until the Rive version), `Alert/success`
   rename (breaking), `--color-surface-transparent`, Accordion and ActionRow surfaces through
   Foundation.
-- **Typography method** — Figma, exporter 1.3.0 (1.2.1 for the export rules, 1.3.0 adds the
-  Line heights command) and CSS — is in plans 015 and 016 and
-  `docs/ai-prompts/typography.md`.
+- **Typography method** — Figma, exporter 1.3.1 (1.2.1 for the export rules, 1.3.0 adds the
+  Line heights command, 1.3.1 the references-mode fixes) and CSS — is in plans 015 and 016 and
+  `docs/ai-prompts/typography.md`. The step-by-step procedure for changing it is planned in
+  plan 009 (not built yet).
 
 ## Phases
 

@@ -151,7 +151,14 @@ components would have to become per-size px values.
       `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-n1`), and a
       letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
       part of the 009 skill (plan 015 phase 7). Remove the "outdated" comment from `tokens.css`.
-      Done in `51f51f1` except the 009 skill part, which waits for plan 015 phase 7.
+      Done in `51f51f1` except the 009 skill part (checked 2026-11-20: the page-header and topbar
+      docs, the `CLAUDE.md` line and the `tokens.css` comment are all in place). That part waits for
+      plan 015 phase 7. **Revisited 2026-11-20:** it is now plan 009's typography reference file
+      (`typography.md` of the `minis-token-update` skill). For letter spacing it covers: adding a
+      `Typography/spacing/N%` variable (name = percentage, comma for decimals, no scopes, Code Syntax),
+      typing the percentage in the style, the five-token check (`--typography-spacing-{n2,n1,n0_3,0,3}`),
+      the rename as a breaking change in both changelogs, and the note for production. Tick the
+      remaining part when 009 phase 2 (the skill is written) is done. Nothing is built yet.
 
 ## Production audit (2026-11-05)
 

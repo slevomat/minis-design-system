@@ -123,7 +123,9 @@ Current plans:
 - `todo-plans/006-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
 - `todo-plans/007-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
 - `todo-plans/008-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
-- `todo-plans/009-token-update-skill.md` — optional: Figma export → `tokens.css` → build → checks → changelogs.
+- `todo-plans/009-token-update-skill.md` — one skill for token updates, typography first (the procedure for
+  changing a size, line-height ratio, letter spacing or role): Figma export → validation scripts →
+  `tokens.css` diff → build → checks → changelogs. Planned, not built; plan 015 phase 7 and 016 phase 6 wait for it.
 - `todo-plans/010-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 004–009).
 - `todo-plans/011-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
 - `todo-plans/012-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 011).
@@ -132,11 +134,11 @@ Current plans:
 - `todo-plans/014-porting-rules.md` — one-page guides (common, Latte, web components, Figma) for
   carrying tokens and recipes into each environment, and which side wins when they diverge.
 - `todo-plans/015-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
-  Figma text styles follow Layout modes; needs exporter changes first (Figma treats every bound
-  line-height value as pixels).
+  Figma text styles follow Layout modes (Figma treats every bound line-height value as pixels).
+  Exporter 1.3.x is done; the open item is phase 7, the typography procedure as a skill (plan 009).
 - `todo-plans/016-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
-  (`--typography-spacing-n2` …). Phase 4 landed 2026-11-06; phases 5–6 (components, docs) mostly done
-  with it — check the plan for what is left.
+  (`--typography-spacing-n2` …). Landed 2026-11-06; what is left is phase 6's skill part, which is plan
+  009's typography procedure.
 - `todo-plans/017-production-reference-audit.md` — a repeatable audit of the read-only production
   clone (`../slevomat`): component usage, primitive → semantic map, production's existing
   Stylelint/KSS/BackstopJS guardrails. Feeds 001, 011–014. Never write to the production repo.

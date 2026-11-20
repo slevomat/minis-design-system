@@ -210,10 +210,15 @@ fixes.
       Done 2026-11-06: the Figma board, the exporter's own docs, `CLAUDE.md` → Token exports →
       "Typography in the export", and the portable `docs/ai-prompts/typography.md`.
 - [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
-      (edit in Figma → Recalculate → export → check the `tokens.css` diff → both changelogs) as a
-      section of the token-update skill in plan 009, not as a separate skill or agent. A
-      typography change is a token change, and splitting the two procedures would let them drift.
-      009 is optional today; this step is the reason to do at least its typography part.
+      (edit in Figma → **📏 Line heights** check and Apply → export with exporter ≥ 1.3.1 → validate
+      the export → review the `tokens.css` diff → both changelogs → hand-over note for production)
+      as part of the token-update skill in plan 009, not as a separate skill or agent. A typography
+      change is a token change, and two procedures would let the shared checks drift.
+      **Revisited 2026-11-20:** plan 009 now carries it, as the reference file `typography.md` of one
+      skill (`minis-token-update`), with the checks as scripts in `packages/tokens/scripts/` and the
+      full step list, "never" list and open questions in the plan. The skill's typography part is
+      no longer optional; the rest of 009 is. Tick this box when 009 phase 2 (the skill is written)
+      is done. Nothing is built yet.
 
 ## Production audit (2026-11-05)
 
@@ -272,7 +277,8 @@ in `_variables.styl`. So phase 1 has to cover the Style Dictionary JSON, not onl
   to about 0.1 px, which is invisible, and the redlines show clean numbers. CSS is unaffected:
   it keeps computing size × ratio.
 - **Letter spacing** is split out into plan 016 (high priority).
-- **A skill for future typography updates:** yes, as phase 7.
+- **A skill for future typography updates:** yes, as phase 7 (shape revisited 2026-11-20 in plan
+  009: one skill, typography as its reference file).
 
 ## Open questions
 
