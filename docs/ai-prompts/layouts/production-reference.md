@@ -181,6 +181,9 @@ There were two mismatches worth knowing about before writing guides. The first i
 
 ## 3. Recommendations and open questions
 
+The decisions and the guide work are tracked in plan
+[`todo-plans/030-layout-guides.md`](../../../todo-plans/030-layout-guides.md); record answers there too.
+
 These are **proposals for the Mini*S layout guides**. They describe what Mini*S could document or
 change. They are not production facts, and nothing here is decided.
 
