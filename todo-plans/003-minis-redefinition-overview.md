@@ -426,7 +426,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 
 None of these exists as a file. They are proposals; each becomes a plan when the owner says so,
 and takes the next free number (030 onwards). As of 2026-11-13 G1–G11 have a plan; the table
-stays as the record of where each plan came from. **G12 (added 2026-11-20) has no plan yet.**
+stays as the record of where each plan came from. **G12–G14 (added 2026-11-20) have no plan yet.**
 
 | Gap | What | Phase | Notes |
 |---|---|---|---|
@@ -442,6 +442,8 @@ stays as the record of where each plan came from. **G12 (added 2026-11-20) has n
 | ~~**G10**~~ | **Now plan 028** (2026-11-13). Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
 | ~~**G11**~~ | **Now plan 029** (2026-11-13). Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
 | **G12** | **No plan yet** (2026-11-20). Layout spacing: Figma's Layout collection and `tokens.css` disagree on `--spacing-layout-*`, and the Figma modes don't line up with the CSS tiers | 1 | Found in the 2026-11-20 re-export (commit `8941c96`, diffs in both changelogs). Figma `xs` (CSS base) `lg`/`xl` 16/24px vs CSS 20/32; Figma `sm` (CSS 408px tier) `md`/`lg`/`xl` 16/20/32 vs 24/32/48; Figma `md` 20/24/32 vs 24/32/48. Figma has 10 modes (`default`, `2xs` … `4xl`), CSS 7 tiers with no 600px step; `default` is not a breakpoint at all. `--container-width` caps at 1240px from Figma `2xl` (1480px) but from CSS 1256px. The Storybook Tier toolbar reads the export, so it shows Figma spacing today. Needs: which side is right per value, a mode ↔ tier mapping, then the merge (and the production check, 017). Not started. |
+| **G13** | **No plan yet** (2026-11-20). Figma ≠ `tokens.css` outside layout: decide per token which side is right, then merge into `tokens.css` or fix Figma | 1 | From the same re-export. Dark mode: `--color-interaction-primary-{surface,border}` Figma blue-65 / CSS blue-45, `-hover-{surface,border}` blue-75 / blue-35; `--color-interaction-secondary-border` grey-70 / grey-80; `--color-interaction-danger-surface` `var(--color-surface-primary)` / transparent; `--color-interaction-transparent-hover-border` white / blue-95. Light and dark: `--tag-padding-x` Figma `var(--spacing-layout-sm)` / CSS `var(--spacing-layout-xs)`; `--color-blue-10` hue 238 / 239. Fixed already: the Gift `Theme/background` and `Theme/Surface/*` aliases in Figma (2026-11-20), visible in `tokens.json` after the next export. Not started. |
+| **G14** | **No plan yet** (2026-11-20). Brand text (Kensington) weight and letter spacing: Mini*S vs production | 1 | Production (`../slevomat`): `$typography-brand-heading-{lg,xl}-font-weight = 700`, every Kensington and fallback `@font-face` (Impact, local Arial Narrow Bold) declared at 700, so nothing is synthesised; brand xl letter spacing `0.01em`. Figma text styles: weight 700, letter spacing `0.03em` (lg and xl). Mini*S `tokens.css`: `--typography-brand-weight: 400`, only because the public Bebas Neue fallback ships 400 and 700 would fake-bold it. Options: Mini*S at 700 with its own weight-700 `@font-face` for the fallback (production's approach); decide 0.01em vs 0.03em for xl. Touches CLAUDE.md's brand rule and plan 016. Not started. |
 
 Dropped from an earlier gap list because things moved: *redirect `colors.styl` aliases* (Nette did
 it on 2026-11-02) and *typography adoption* (plans 015, 016 and 014 cover it; what is left is
@@ -484,7 +486,7 @@ Work for the redefinition that has no todo plan but should show up here:
       on every closed decision, update the tables above in the same commit.
 - [ ] **Phase 1 — Turn gaps into plans, one at a time**, in the owner's order. Suggested first: G1
       (it unblocks the most), then G6 and G7 (they unblock 004–006). *(2026-11-13: G1 → 020,
-      G7 → 021, G9 → 019, G3 → 022, G6 → 023. G2 → 024, G4 → 025, G5 → 026, G8 → 027, G10 → 028, G11 → 029. 2026-11-20: G12 layout spacing added, no plan yet.)*
+      G7 → 021, G9 → 019, G3 → 022, G6 → 023. G2 → 024, G4 → 025, G5 → 026, G8 → 027, G10 → 028, G11 → 029. 2026-11-20: G12 layout spacing, G13 Figma ≠ tokens.css values, G14 brand text weight added, no plans yet.)*
 - [ ] **Phase 2 — Resolve the overlaps:** ~~009 vs G2~~ (009 is 024's phase 1); ~~G7 into 013 or its own plan~~ (own plan 021, fields in 013); 001 phase 5 vs
       decision 1; 017's measurement vs the Nette analysis.
 - [ ] **Phase 3 — Mirror into the brief.** Replace the brief's "todo-plans" column with a pointer
