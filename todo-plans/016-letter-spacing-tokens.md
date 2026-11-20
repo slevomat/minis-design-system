@@ -204,8 +204,11 @@ What this means:
    `normal`, `tight`, `tighter`, `ultra-wide` and `wide` and adds `n2`, `n1`, `n0_3`, `0` and `3`.
    A search of `app/**/*.styl` in the production clone on 2026-11-20 found no use of
    `$typography-spacing-*` outside the generated `_variables.styl`, so the removal should not break
-   the Stylus compile. **Open until the Nette developer's build run confirms it** (the same run
-   closes plan 015 phase 4). Record the result here.
+   the Stylus compile. **Build run done 2026-11-20:** the Nette developer ran the import with the
+   new files and reported that it worked (relayed by the owner; no log seen). He did not say
+   separately whether the app's Stylus compile ran with the seven names gone, so that part rests on
+   the search above. Close this when he confirms it, or when the first production build after the
+   next export passes.
 
 Answered earlier: CSS names for minus and decimal values (2026-11-06): a leading
 `-` becomes `n` and `.` becomes `_` (`--typography-spacing-n0_3`). An `n` prefix keeps the

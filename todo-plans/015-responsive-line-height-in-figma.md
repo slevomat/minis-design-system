@@ -139,7 +139,7 @@ fixes.
       Done 2026-11-06. Scopes set to none (hidden from every picker) on all 11
       `Typography/line-height/N%` primitives and all 7 Layout `typography/*/*/line-height` ratios,
       brand included. Existing bindings are untouched.
-- [ ] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export
+- [x] **4. Verify.** Specimens in `default`, `md` and `xl` frames show 26/30 px etc.; a full export
       produces the same `tokens.css`; Storybook Tier toolbar values are unchanged.
       - [x] Figma, 2026-11-06: all five styles × three modes read back the expected size and line
             height, and two lines measure exactly 2 × line height (15/15). The board's section 05
@@ -175,10 +175,14 @@ fixes.
         mode (names unchanged; resolved mode byte-identical). Confirmed in Figma (2026-11-20):
         `.Components/Accordion/padding-y` follows the Layout breakpoint modes, so it is the alias of
         the Layout variable and skipping it loses nothing.
-      - [ ] Production's Style Dictionary build ignores the new `$metadata` block. Production's JSON
+      - [x] Production's Style Dictionary build ignores the new `$metadata` block. Production's JSON
             already carries `$metadata` (exportDate, exportMode, figmaFile) without trouble. New in it are
             `exporterVersion` and a nested `settings` object, so one build run is needed to confirm. That
             needs the production side.
+            **Done 2026-11-20:** the Nette developer ran the import with the split `typography.json` and
+            `layout.json` (exporter 1.3.0) and reported that it worked. Reported to the owner, not seen
+            by us: no build log was shared. His CI artifacts for PR 104696 held only visual-test
+            reference screenshots and a PHP server log.
 - [x] **5. Exporter: "Recalculate line heights" command.** Replaces the one-off script.
       It must also create the Code Syntax (`var(--typography-<role>-line-height)`) and the description
       for any new `-px` variable. Before building it, compare it with the community plugin "Unitless Line

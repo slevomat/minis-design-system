@@ -398,7 +398,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
-| 015 | Responsive line height in Figma | **in-progress** | 11 / 3 | Style Dictionary build run on the new `$metadata` (production side); typography procedure as a skill. Exporter 1.3.0 "Line heights" command done 2026-11-20 |
+| 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | typography procedure as a skill. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
 | 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only the `page-header` docs row |
 | 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
