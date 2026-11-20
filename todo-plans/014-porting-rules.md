@@ -3,7 +3,7 @@ id: 014
 title: Porting rules — carrying tokens and recipes into each environment
 status: draft
 created: 2026-10-29
-updated: 2026-11-13
+updated: 2026-11-20
 owner: Lexislav
 ---
 
@@ -91,6 +91,11 @@ resolved JSON). Its structure (rules per environment plus "which side wins") is 
 `latte.md`. **Divergences to settle here:** production's Brand heading xl is hand-written as
 `font-size: clamp(32px, 7vw, 56px)` and `font-weight: 700`, while Mini*S says 32 → 56px at 1480px
 and weight 400 (plan 015 → "Production audit", item 3).
+**Brand weight, found 2026-11-20:** the exporter's resolved export of MiniS DS shows the Figma styles
+`Brand/Heading/lg` and `/xl` with `fontWeight` **700** and `uppercase`. So Figma and production agree on
+700, and only Mini*S (`--typography-brand-weight: 400`, `CLAUDE.md`, `docs/ai-prompts/typography.md`)
+says 400, on the grounds that Kensington and Bebas Neue are single-weight and 700 would synthesise a
+fake bold. Open question 5 asks which side wins.
 5. **Later: `mobile.md`** — iOS/Android outputs from the same source.
 
 **Rejected:** keeping the rules in CLAUDE.md (only Claude Code in this repo reads it; the Nette
@@ -120,3 +125,8 @@ environment's owner needs a page they can own).
 2. **Who owns `latte.md`** — the Nette lead developer, or Mini*S with their review?
 3. **Does the heritage → Mini*S mapping belong here or in plan 001?**
 4. **How is a divergence reported** — a registry status, a GitHub issue, or both?
+5. **Brand heading weight: 400 or 700?** Figma styles and production both use 700; Mini*S says 400
+   (single-weight fonts, no synthesised bold). Check what the real Kensington files provide. If it
+   has a real bold, 700 is right and the Mini*S docs and `--typography-brand-weight` change. If not,
+   Figma and production carry a fake bold. Settle it together with the Brand XL `clamp()` divergence
+   above, and record the answer in `docs/ai-prompts/typography.md`.

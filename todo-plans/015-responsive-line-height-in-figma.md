@@ -198,7 +198,7 @@ fixes.
       - The community plugin works differently: it applies a unitless number token to text layers as
         a percentage and has its own export. It doesn't make per-mode pixel variables with Code Syntax.
         The comparison is in the exporter's CHANGELOG (1.3.0).
-      - Still open: run Apply once in Figma.
+      - [x] Ran Apply once in Figma (2026-11-20).
       - [x] Published to the Figma Community as 1.3.1 (2026-11-20), which includes the 1.3.0
             command and the references-mode fixes.
 - [x] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to

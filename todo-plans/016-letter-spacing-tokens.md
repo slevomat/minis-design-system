@@ -3,7 +3,7 @@ id: 016
 title: Letter-spacing tokens — one meaning in Figma, the exporter and CSS
 status: in-progress
 created: 2026-11-05
-updated: 2026-11-06
+updated: 2026-11-20
 owner: Lexislav
 ---
 
@@ -199,7 +199,15 @@ What this means:
 
 ## Open questions
 
-None. The last one, CSS names for minus and decimal values, was answered on 2026-11-06: a leading
+1. **Does production's build accept the new `typography.json`?** The 2026-11-20 export (exporter
+   1.3.0, split into production's file shape) removes the seven old tokens `extra-wide`, `narrow`,
+   `normal`, `tight`, `tighter`, `ultra-wide` and `wide` and adds `n2`, `n1`, `n0_3`, `0` and `3`.
+   A search of `app/**/*.styl` in the production clone on 2026-11-20 found no use of
+   `$typography-spacing-*` outside the generated `_variables.styl`, so the removal should not break
+   the Stylus compile. **Open until the Nette developer's build run confirms it** (the same run
+   closes plan 015 phase 4). Record the result here.
+
+Answered earlier: CSS names for minus and decimal values (2026-11-06): a leading
 `-` becomes `n` and `.` becomes `_` (`--typography-spacing-n0_3`). An `n` prefix keeps the
 names short. An underscore is valid in a custom property name and visibly isn't a word
 separator, so `n0_3` can't be misread as 0 and 3.
