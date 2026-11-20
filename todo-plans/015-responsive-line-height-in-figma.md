@@ -172,9 +172,9 @@ fixes.
         and the `.Components` alias is skipped when collection names are removed and it gets the
         same CSS name as its Layout variable. A UI warning lists what was skipped. Same release:
         `Brand/Heading/{lg,xl}` now reference `--typography-brand-{lg,xl}-line-height` in references
-        mode (names unchanged; resolved mode byte-identical). Still to confirm in Figma:
-        `.Components/Accordion/padding-y` is an alias of a Layout variable (the accordion cause is
-        inferred, not read from the file).
+        mode (names unchanged; resolved mode byte-identical). Confirmed in Figma (2026-11-20):
+        `.Components/Accordion/padding-y` follows the Layout breakpoint modes, so it is the alias of
+        the Layout variable and skipping it loses nothing.
       - [ ] Production's Style Dictionary build ignores the new `$metadata` block. Production's JSON
             already carries `$metadata` (exportDate, exportMode, figmaFile) without trouble. New in it are
             `exporterVersion` and a nested `settings` object, so one build run is needed to confirm. That
