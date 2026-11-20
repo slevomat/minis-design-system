@@ -528,11 +528,12 @@
 /* ========================================
    LAYOUT (mobile-first — mirrors Figma Layout collection modes)
 
-   Breakpoint tiers (matching Figma modes 2xs / xs / sm / md / xl):
+   Breakpoint tiers (matching Figma modes 2xs / xs / sm / md / lg / xl):
      base  : ≤ 407px    (2xs/xs)  — smallest spacing, small type
      sm    : 408–767px  (sm)      — medium spacing, small type
-     md    : 768–1255px (md/lg)   — medium spacing, large type; narrow width caps at 752px
-     xl    : ≥ 1256px   (xl+)     — large container-padding, default width caps at 1240px
+     md    : 768–1007px (md)      — medium spacing, large type; narrow width caps at 752px
+     lg    : 1008–1255px (lg)     — large (32px) container-padding, as production
+     xl    : ≥ 1256px   (xl+)     — default width caps at 1240px
 
    NOTE — "100000px" in Figma tokens.json:
      Figma cannot mix % and px in the same variable collection mode, so unbounded
@@ -603,7 +604,7 @@
   }
 }
 
-/* md tier — 768px–1255px */
+/* md tier — 768px–1007px */
 @media (min-width: 768px) {
   :root {
     /* Spacing same as sm */
@@ -623,9 +624,11 @@
   }
 }
 
-/* lg tier — 1008px–1255px (bleeding-edge padding kicks in) */
+/* lg tier — 1008px–1255px (container padding reaches 32px, bleeding-edge padding kicks in) */
 @media (min-width: 1008px) {
   :root {
+    --container-padding:        var(--linear-sp-linear-8); /* 32px — matches production grid-wrap */
+    --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
     --container-bleeding-edge-padding: var(--linear-sp-linear-4); /* 16px */
     --page-width: var(--breakpoint-lg);
   }
@@ -634,8 +637,6 @@
 /* xl tier — 1256px+ */
 @media (min-width: 1256px) {
   :root {
-    --container-padding:        var(--linear-sp-linear-8); /* 32px */
-    --container-narrow-padding: var(--linear-sp-linear-8); /* 32px */
     --container-bleeding-edge-padding: var(--linear-sp-linear-8); /* 32px */
     --container-width: 1240px; /* default container caps here */
     --page-width: var(--breakpoint-xl);

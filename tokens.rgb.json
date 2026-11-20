@@ -3790,7 +3790,7 @@
         },
         "narrow": {
           "padding": {
-            "value": "16px",
+            "value": "32px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -3803,7 +3803,7 @@
           }
         },
         "padding": {
-          "value": "16px",
+          "value": "32px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null

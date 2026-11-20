@@ -587,6 +587,14 @@ const changelogHTML = `
         </button>
       </div>
 
+      <h3 style="margin-top:1rem">Tokens — container padding reaches 32px at 1008px</h3>
+      <ul>
+        <li><code>--container-padding</code> and <code>--container-narrow-padding</code>: the 1008–1255px tier (Figma Layout mode <code>lg</code>) changed from <code>var(--linear-sp-linear-4)</code> (16px) to <code>var(--linear-sp-linear-8)</code> (32px). The 32px value now starts at 1008px instead of 1256px, the same as the production <code>grid-wrap</code>. Other tiers are unchanged: 8px base, 16px from 408px, 32px from 1008px.</li>
+        <li>Changed in Figma (Layout collection, <code>lg</code> mode), <code>tokens.json</code>, <code>tokens.rgb.json</code> and <code>tokens.css</code>.</li>
+        <li>Effect: <code>&lt;minis-container&gt;</code> (both variants) and <code>&lt;minis-page-header&gt;</code> get 32px side padding between 1008 and 1255px. The narrow container keeps its 752px width, so its content area there is 688px (was 720px), which matches production's cart reading column.</li>
+        <li>Storybook: the Tier toolbar's <code>md / lg</code> tier is split into <code>md</code> (768–1007px, Figma mode <code>md</code>) and <code>lg</code> (1008–1255px, Figma mode <code>lg</code>), because the two tiers now differ.</li>
+      </ul>
+
       <h3 style="margin-top:1rem">Tokens — Figma exports re-exported with exporter 1.3</h3>
       <ul>
         <li><code>tokens.json</code> (references, OKLCH, exporter 1.3.0) and <code>tokens.rgb.json</code> (resolved, HEX, exporter 1.3.1) re-exported from Figma, all collections, Light + Dark, naming settings on. The previous exports dated from 2026-05-22 and 2026-03-13. Both files now record <code>$metadata.exporterVersion</code> and <code>$metadata.settings</code>.</li>

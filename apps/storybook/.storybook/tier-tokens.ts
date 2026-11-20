@@ -30,7 +30,7 @@ const CSS_NAME_ALIASES: Record<string, string> = {
 
 /**
  * Storybook Tier toolbar value → representative Figma Layout mode.
- * The toolbar groups the 10 Figma modes into 4 tiers; the representative
+ * The toolbar groups the 10 Figma modes into 5 tiers; the representative
  * mode is the one whose values match the tokens.css media-query tier.
  * ("xl – 4xl" uses the `2xl` mode because that is where the 1240px
  * container cap and large typography live.)
@@ -38,7 +38,8 @@ const CSS_NAME_ALIASES: Record<string, string> = {
 const TIER_MODE: Record<string, string> = {
   '2xs_xs': 'xs',
   sm: 'sm',
-  md_lg: 'lg',
+  md: 'md',
+  lg: 'lg',
   xl: '2xl',
 };
 

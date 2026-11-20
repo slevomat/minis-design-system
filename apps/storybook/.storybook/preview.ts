@@ -16,7 +16,8 @@ import { TIER_TOKENS } from './tier-tokens';
 function tierFromWidth(px: number): string {
   if (px <= 407) return '2xs_xs';
   if (px <= 767) return 'sm';
-  if (px <= 1255) return 'md_lg';
+  if (px <= 1007) return 'md';
+  if (px <= 1255) return 'lg';
   return 'xl';
 }
 
@@ -132,7 +133,8 @@ const preview: Preview = {
         items: [
           { value: '2xs_xs', title: '2xs / xs', right: '≤407px' },
           { value: 'sm',     title: 'sm',       right: '408–767px' },
-          { value: 'md_lg',  title: 'md / lg',  right: '768–1255px' },
+          { value: 'md',     title: 'md',       right: '768–1007px' },
+          { value: 'lg',     title: 'lg',       right: '1008–1255px' },
           { value: 'xl',     title: 'xl – 4xl', right: '≥1256px' },
         ],
         dynamicTitle: true,

@@ -27,7 +27,7 @@
 
 The component consumes responsive tokens defined in `@minis/tokens`. The tokens themselves change at media-query breakpoints — the component has no internal media queries.
 
-| Token | Description | Base | 408px+ | 1256px+ |
+| Token | Description | Base | 408px+ | 1008px+ |
 |-------|-------------|------|--------|---------|
 | `--container-padding` | Horizontal padding (default variant) | 8px | 16px | 32px |
 | `--container-narrow-padding` | Horizontal padding (narrow variant) | 8px | 16px | 32px |
@@ -90,4 +90,4 @@ The component consumes responsive tokens defined in `@minis/tokens`. The tokens 
 
 ---
 
-**Last updated:** 2026-03-19
+**Last updated:** 2026-11-20

@@ -16,9 +16,9 @@ These are **not** components — they are composition guides for AI agents to vi
   layouts, measured on the live site on 2026-11-13. It covers the wide (1240px) and narrow
   (1008px) containers, the ~700px reading/form column, the main + sidebar splits, and how all of
   that compares with the Mini*S tokens below. **Read it before changing container tokens or
-  writing a new layout guide.** Two known differences: production container padding reaches 32px
-  at 1008px (Mini*S at 1256px), and Mini*S `variant="narrow"` (752px) matches production's reading
-  column, not its 1008px narrow container.
+  writing a new layout guide.** Container padding now reaches 32px at 1008px, as in production
+  (changed 2026-11-20). One known difference remains: Mini*S `variant="narrow"` (752px) matches
+  production's reading column, not its 1008px narrow container.
 
 ---
 
@@ -33,7 +33,8 @@ All layout spacing and container padding is driven by CSS custom properties that
 |------|----------|---------------|
 | **base** | ≤ 407px | default values |
 | **sm** | 408–767px | `@media (min-width: 408px)` |
-| **md** | 768–1255px | `@media (min-width: 768px)` |
+| **md** | 768–1007px | `@media (min-width: 768px)` |
+| **lg** | 1008–1255px | `@media (min-width: 1008px)` (container padding only) |
 | **xl** | ≥ 1256px | `@media (min-width: 1256px)` |
 
 ### Layout Spacing Tokens
@@ -52,12 +53,12 @@ These tokens automatically scale with the viewport tier:
 
 ### Container Tokens
 
-| Token | base | sm | md | xl |
-|-------|------|----|----|----|
-| `--container-padding` | 8px | 16px | 16px | 32px |
-| `--container-narrow-padding` | 8px | 16px | 16px | 32px |
-| `--container-width` | 100% | 100% | 100% | 1240px |
-| `--container-narrow-width` | 100% | 100% | 752px | 752px |
+| Token | base | sm | md | lg (1008px+) | xl |
+|-------|------|----|----|----|----|
+| `--container-padding` | 8px | 16px | 16px | 32px | 32px |
+| `--container-narrow-padding` | 8px | 16px | 16px | 32px | 32px |
+| `--container-width` | 100% | 100% | 100% | 100% | 1240px |
+| `--container-narrow-width` | 100% | 100% | 752px | 752px | 752px |
 
 ### Responsive Typography (Headings)
 
@@ -223,4 +224,4 @@ Background: `var(--color-background, #fcfdff)` (the subtle off-white page backgr
 
 ---
 
-**Last updated:** 2026-03-20
+**Last updated:** 2026-11-20
