@@ -3,7 +3,7 @@ id: 017
 title: Production reference audit — what the Slevomat repo tells the refit
 status: draft
 created: 2026-11-06
-updated: 2026-11-13
+updated: 2026-11-20
 owner: Lexislav
 ---
 
@@ -221,9 +221,11 @@ Findings that matter beyond the layout guides:
 - **Three width levels.** The wide container (`grid-wrap--wide`, 1240px), the narrow container
   (`grid-wrap`, 1008px; login, cart) and a ~704px reading/form column (cart). Side padding is
   8 / 16 / 32px at 408 / 1008px.
-- **The token gap.** Mini*S `--container-padding` reaches 32px at 1256px, production at 1008px.
-  Mini*S `--container-narrow-width` (752px) matches production's reading column, and production's
-  1008px narrow container has no Mini*S equivalent. This is a candidate for plans 012 and 014.
+- **The token gap.** Mini*S `--container-padding` reached 32px at 1256px, production at 1008px;
+  **fixed 2026-11-20** (`a6b01d9`), both now at 1008px. Mini*S `--container-narrow-width` (752px)
+  matches production's reading column, and production's 1008px narrow container has no Mini*S
+  equivalent. The layout decisions and guide work now live in plan 030; the token side is still a
+  candidate for plans 012 and 014.
 - **Main + sidebar is per component, not a shared grid.** Each page component splits with flex
   (ratios 2.2 : 1 to 3 : 1, gaps 24–40px, sidebar on the right). The 12-column `_real-grid` loads
   only in the admin and partner bundles. The public site has ½ ⅓ ⅔ column classes (¼ ¾ as

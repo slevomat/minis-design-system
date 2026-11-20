@@ -166,6 +166,8 @@ Current plans:
   packs for the IcoMoon webfonts; the 51 `figma-only` icons first.
 - `todo-plans/029-mobile-app-tokens.md` — gap G11 / decision 6: mobile outputs (Compose, maybe Swift) from the
   shared build with canonical names; takes over 012 phase 5.
+- `todo-plans/030-layout-guides.md` — layout guides rebuilt on what production measures: three width levels, one
+  main + sidebar rule, the 12-column grid optional. Facts in `docs/ai-prompts/layouts/production-reference.md`.
 
 ## Changelog rules
 
