@@ -198,7 +198,9 @@ fixes.
       - The community plugin works differently: it applies a unitless number token to text layers as
         a percentage and has its own export. It doesn't make per-mode pixel variables with Code Syntax.
         The comparison is in the exporter's CHANGELOG (1.3.0).
-      - Still open: run Apply once in Figma, and publish 1.3.0 to the Community.
+      - Still open: run Apply once in Figma.
+      - [x] Published to the Figma Community as 1.3.1 (2026-11-20), which includes the 1.3.0
+            command and the references-mode fixes.
 - [x] **6. Docs.** Update the Figma TYPOGRAPHY page board and the exporter's `CLAUDE.md`. Add a line to
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
       Done 2026-11-06: the Figma board, the exporter's own docs, `CLAUDE.md` → Token exports →
