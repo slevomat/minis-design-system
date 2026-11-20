@@ -275,6 +275,8 @@ fully done.
 | 2 | **024** Automatic token export (absorbs **009**) | Stops the copies from lagging; every later output regenerates from it. 009's typography procedure is needed sooner and doesn't wait for 024 |
 | 3 | **012** Token distribution | Versioned package + shared Style Dictionary source for production (and later mobile, 029) |
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
+| — | **G12**, **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
+| — | **030** Layout guides | Design decisions on sidebar, gap and container levels; uses `--spacing-layout-*`, so after G12 (its question 5). No production change |
 | — | finish **015**, **016** (in progress) | Typography foundation; already mostly done. What is left is the typography procedure, which is plan 009's typography part (not blocked on 024) |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
@@ -359,7 +361,7 @@ are set yet.
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
 | **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
-| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export | — |
+| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export · 030 layout guides (after G12) | **G12** layout spacing · **G13** Figma ≠ `tokens.css` values · **G14** brand text weight |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint · 022 accessibility checks | — |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync · 025 AGENTS.md · 026 rules hook | — |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval · 023 first recipes | — |
@@ -384,7 +386,7 @@ are set yet.
 
 ## All plans at a glance
 
-Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
+Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 
 | # | Plan | Status | Phases (done / open) | Blocked on / waits for |
 |---|---|---|---|---|
@@ -404,7 +406,7 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
 | 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | phase 7, the typography procedure, now planned as plan 009's typography reference file. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
 | 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only phase 6's skill part (the `page-header`, `topbar` and `CLAUDE.md` docs are done); planned as plan 009's typography reference file |
-| 017 | Production reference audit | draft | 0 / 11 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
+| 017 | Production reference audit | draft | 0 / 12 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
 | 020 | Team agreement | draft | 0 / 5 | the walkthrough meeting; who signs off |
@@ -424,14 +426,15 @@ Status as of 2026-11-13. "Open" counts unticked phase checkboxes.
 1. **Canonical token names** (decision 3 = 011 question 2 = 012 question 1). Blocks 011, 012, 013
    and the final form of 014. First precedent already set: the exporter's letter-spacing naming
    rules (plan 016) apply equally to CSS, JSON and Style Dictionary keys.
-2. **The registry** (013). Blocks 004, 005, 006 and the review process (G7).
-3. **Where Mini*S lives in the Nette repo** (G1). Decides how 010, 011, 012 and 014 reach production.
+2. **The registry** (013). Blocks 004, 005, 006 and the review process (021).
+3. **Where Mini*S lives in the Nette repo** (020). Decides how 010, 011, 012 and 014 reach production.
 
-## Gaps — work the brief asks for that has no plan yet
+## Gaps — where each plan came from, and what still has none
 
-None of these exists as a file. They are proposals; each becomes a plan when the owner says so,
-and takes the next free number (030 onwards). As of 2026-11-13 G1–G11 have a plan; the table
-stays as the record of where each plan came from. **G12–G14 (added 2026-11-20) have no plan yet.**
+A gap is work the brief or a finding asks for that has no plan file. Each becomes a plan when the
+owner says so, and takes the next free number (031 onwards). G1–G11 got plans on 2026-11-13; their
+rows stay as the record of where each plan came from. **G12–G14 (added 2026-11-20) have no plan
+yet.**
 
 | Gap | What | Phase | Notes |
 |---|---|---|---|
