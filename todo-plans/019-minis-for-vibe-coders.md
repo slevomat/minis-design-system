@@ -102,8 +102,10 @@ One source, four generated outputs, one link target.
   should link to the hosted file.
 - **Publishing to npm first.** Not needed to link from a browser, and the package metadata isn't
   ready yet (missing `repository`, `NOTICE` not in `files`). Pages first, npm later with plan 012.
-- **One Mini*S plugin for everyone.** Copilot users in production can't load it (010), and
-  claude.ai users take skills from the Skill Hub, not from plugins.
+- **The plugin as the only channel.** The Mini*S Claude Code plugin is decided and carries every
+  Mini*S skill (plan 010, 2026-11-21), but Copilot users in production can't load it (010), and
+  claude.ai users take skills from the Skill Hub, not from plugins. So it's one important channel
+  next to the others in this plan, not a replacement for them.
 
 ## Phases
 

@@ -126,7 +126,9 @@ Current plans:
 - `todo-plans/009-token-update-skill.md` — one skill for token updates, typography first (the procedure for
   changing a size, line-height ratio, letter spacing or role): Figma export → validation scripts →
   `tokens.css` diff → build → checks → changelogs. Planned, not built; plan 015 phase 7 and 016 phase 6 wait for it.
-- `todo-plans/010-skill-distribution.md` — how skills and commands reach the Nette repo and other people (referenced by 004–009).
+- `todo-plans/010-skill-distribution.md` — how skills and commands reach people: a **Claude Code marketplace plugin**
+  carrying every Mini*S skill as a slash command (decided 2026-11-21; roster in the plan), plain files for Copilot in the
+  Nette repo. Referenced by 004–009 and 031.
 - `todo-plans/011-stylelint-tokens-only.md` — a shared Stylelint config enforcing "tokens only", dogfooded here, then rolled out to the Nette repo (blocked on fallback policy and canonical token names).
 - `todo-plans/012-token-distribution.md` — versioned `@minis/tokens` releases with a Style Dictionary source the Nette team builds from (blocked on canonical token names, shared with 011).
 - `todo-plans/013-registry.md` — `registry.json` in shadcn format with Mini*S fields in `meta`: the

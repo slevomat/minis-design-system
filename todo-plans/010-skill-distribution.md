@@ -3,7 +3,7 @@ id: 010
 title: Distributing Mini*S skills and commands
 status: draft
 created: 2026-10-29
-updated: 2026-11-13
+updated: 2026-11-21
 owner: Lexislav
 ---
 
@@ -28,14 +28,42 @@ repo.
 
 ## Constraints
 
-- **Different skills belong in different places:** 004 in the Nette repo; 006 wherever prototypes
-  are built; 007 and 008 everywhere; 009 in this repo only.
+- **Different skills work in different places:** 004 in the Nette repo; 006 wherever prototypes
+  are built; 007 and 008 everywhere; 009 and 018 only inside a Mini*S checkout. The plugin carries
+  them all (see "Decided"); a skill that needs a particular repo says so and stops outside it.
 - **Version coupling.** A skill describes a particular set of tokens, recipes and registry entries;
   a stale copy confidently gives wrong instructions.
 - **Access.** If this repo is private, every channel that pulls from it requires GitHub access.
 - The Nette repo belongs to the production team. Anything we put there is on their terms.
 
-## Approach — options, none chosen
+## Decided
+
+| Date | Decision | Why |
+|---|---|---|
+| 2026-11-21 | **Mini*S ships as a Claude Code plugin in a marketplace.** Every Mini*S skill is in it, so one install gives a person all of them as slash commands (e.g. `/minis-page-to-figma`, plan 031). It is a very important channel, not the main deliverable and not the only channel: Copilot users in the Nette repo still get plain files (option B), and claude.ai / Claude Design users get the Skill Hub (plan 019). | Owner's decision. Closes "leaning A, undecided" below. |
+
+### Plugin roster
+
+Every skill that exists or is planned, with its command. Command names are proposals until the
+skill is written; the skill's own plan has the details. **The plugin grows slowly, one command at a
+time, each added only once its skill works.** First wave: the two that exist (`/minis-app`,
+`/minis-figma-docs`) and `/minis-page-to-figma` (plan 031) as the first new one; the rest follow
+their plans' order (plan 003, "Recommended order").
+
+| Command | Skill | For whom | Plan | State |
+|---|---|---|---|---|
+| `/minis-app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Exists** (`.claude/skills/minis-app/`) |
+| `/minis-figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Exists** (`.claude/skills/minis-figma-docs/`) |
+| `/minis-page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | Planned — **first new command** |
+| `/minis-contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
+| `/minis-latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
+| `/minis-bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
+| `/minis-token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Planned |
+| `/minis-changelog` | One change written to every changelog | DS owner, inside a Mini*S checkout | 018 | Planned |
+| `/minis-todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
+| (hook, opt-in) | Explain a broken rule while editing | Anyone building with AI in Claude Code | 026 | Planned |
+
+## Approach — options
 
 | Option | For | Against |
 |---|---|---|
@@ -43,8 +71,9 @@ repo.
 | **B. Copied files** committed into each consuming repo's `.claude/skills/` | Simplest; works for everyone who clones the Nette repo | Drifts; someone has to re-sync |
 | **C. Part of a Mini*S package** (e.g. skills shipped with `@minis/tokens`) | Versioned with the tokens they describe | npm not published yet; writing into `.claude/` from a package is surprising |
 
-Leaning **A**, with B as the fallback for the Nette repo if the production team prefers files they
-can review. Undecided.
+**A is decided** (2026-11-21, see "Decided") for everyone on Claude Code. B stays the channel for
+the Nette repo, where Copilot does most of the work; its files are generated from the same skill
+sources, never maintained by hand.
 
 **Production facts that weigh on this (2026-11-13, plan 017):**
 
@@ -72,11 +101,21 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 
 ## Phases
 
-- [ ] **Phase 1 — Answer questions 1–4** and pick a channel.
-- [ ] **Phase 2 — Pilot with `minis-app`**, the one skill that exists, and replace its
-      "Using this skill outside the monorepo" section.
-- [ ] **Phase 3 — Add each new skill** (004–009) to the channel as it is written.
-- [ ] **Phase 4 — Staleness:** a way to tell a user their copy is out of date.
+- [x] **Phase 1 — Pick a channel.** Plugin in a marketplace for Claude Code, decided 2026-11-21;
+      plain files (B) for the Nette repo.
+- [ ] **Phase 2 — Plugin skeleton:** `plugin.json` and a marketplace entry, in this repo or a
+      separate one (question 5); install it once from a clean machine and check that the commands
+      appear.
+- [ ] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
+      replace `minis-app`'s "Using this skill outside the monorepo" section with the plugin install.
+      Shared with plan 019 phase 4.
+- [ ] **Phase 4 — First new command: `/minis-page-to-figma`** once plan 031 phase 6 has written
+      the skill.
+- [ ] **Phase 5 — Add the rest** from the roster one at a time, as each skill is written.
+- [ ] **Phase 6 — Versions and staleness:** plugin version tied to the token / registry release it
+      describes (question 4); a way to tell a user their copy is out of date.
+- [ ] **Phase 7 — Nette files (B)** generated from the same skill sources in production's
+      `doc/ai/skills/` format, with the `AGENTS.md` row, offered as a PR they merge (plan 020).
 
 ## Open questions
 
@@ -89,3 +128,8 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 4. **Version pinning:** how does a skill know which token/recipe/registry version it describes?
 5. **Where does the plugin live** — this repo, or a separate `minis-skills` repo?
 6. **Does `registry.json` travel through the same channel**, or is it fetched live?
+7. **Which marketplace?** A Slevomat org marketplace (private, needs GitHub access, question 1),
+   joining `claude-plugin-slevomat-documentation`'s marketplace, or a public one? Kensington and the
+   Slevomat marks can't ship publicly (`NOTICE`).
+8. **Repo-bound skills** (`/minis-token-update`, `/minis-changelog`) — in the plugin with a "needs a
+   Mini*S checkout" guard, or kept out of it?

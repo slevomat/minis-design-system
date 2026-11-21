@@ -14,7 +14,8 @@ owner: Lexislav
 > beside it, in docs-kit frames, what Mini*S is missing and where it conflicts with production. The
 > gaps show on the canvas instead of in a table. Reads production only, so it doesn't wait for plan
 > 020. Becomes a skill (working name `minis-page-to-figma`) once the method holds; distribution
-> through plan 010 (this repo only at first).
+> through plan 010: the skill ships in the Mini*S Claude Code plugin as `/minis-page-to-figma`,
+> one of its first commands.
 
 ## Problem
 
