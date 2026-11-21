@@ -420,7 +420,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
 | 030 | Layout guides | draft | 0 / 13 | decisions on sidebar ratio and gap, a 1008px container level, the stacking breakpoint (design call); pages behind login unmeasured; G12. Container padding decided 2026-11-20 |
-| 031 | Production page → Figma | draft | 0 / 6 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
+| 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 0 / 7 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
 
 **The three blockers that hold most of the rest:**
 

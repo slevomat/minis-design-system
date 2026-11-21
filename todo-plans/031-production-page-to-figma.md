@@ -10,8 +10,9 @@ owner: Lexislav
 # 031 — Production page → Figma: rebuild a live page from Mini*S tokens and components
 
 > The visual half of the production audit (plan 017): 017 counts what production uses, this plan
-> draws a production page in Figma from Mini*S library components and variables, so the gaps
-> show on the canvas instead of in a table. Reads production only, so it doesn't wait for plan
+> draws a production page in Figma from Mini*S library components and variables, and documents
+> beside it, in docs-kit frames, what Mini*S is missing and where it conflicts with production. The
+> gaps show on the canvas instead of in a table. Reads production only, so it doesn't wait for plan
 > 020. Becomes a skill (working name `minis-page-to-figma`) once the method holds; distribution
 > through plan 010 (this repo only at first).
 
@@ -57,7 +58,7 @@ A repeatable rebuild would serve four plans at once:
 
 ## Approach
 
-Three passes per page, each with its own output, so a run that stops halfway is still useful:
+Four passes per page, each with its own output, so a run that stops halfway is still useful:
 
 1. **Capture.** In Chrome, at the widths plan 030 measures (mobile, 768, 1008, 1240+): a
    screenshot, the landmark structure (header, main, sidebar, footer, repeated blocks), and for
@@ -72,6 +73,24 @@ Three passes per page, each with its own output, so a run that stops halfway is 
    frames with bound variables for the rest, gap blocks drawn with a clearly marked placeholder
    style, and a legend card (docs kit) with the coverage numbers and the date of capture. The
    screenshot sits next to it at the same width for comparison.
+4. **Document the findings, beside the page.** Next to each rebuilt width, a column of docs-kit
+   cards (`minis-figma-docs`) that says what Mini*S is missing and where it conflicts with
+   production. Every finding gets a numbered marker on the rebuilt frame and a row on a card, and
+   an id (`<page>-<width>-<nn>`) that later travels to the review and the registry.
+   - **Missing in Mini*S** — a production block with no Mini*S counterpart: screenshot crop, what
+     production uses (classes, the partial's path in `../slevomat`, measured values), the closest
+     Mini*S item if any, and the proposed kind of fix: new component, new variant, new token, or
+     a Local candidate.
+   - **Conflicts** — a block or value that exists on both sides but differs: Mini*S value vs
+     production value per property (radius, spacing, colour, type, behaviour such as stacking
+     width), with the source of each. Covers three kinds: Mini*S component ≠ production, Figma
+     variable ≠ `tokens.css` (G12 / G13), and production literal where a token exists (rule 2).
+   - **Summary** — the coverage numbers from pass 2, capture date and URL, the production commit
+     the page was measured against when known, and links to the plans each finding feeds.
+
+   The same findings are written to a plain list in the run folder (ids, kind, page, values,
+   suggestion; no screenshots or copied content), so 021 can put them on the review agenda and
+   013 can turn accepted ones into registry entries (`meta.status: proposed`).
 
 **Engine.** The Figma MCP's code-to-design path (`figma-generate-design` skill, `use_figma`) does
 the building; this plan adds the Mini*S rules on top: which page, which widths, how a block maps,
@@ -98,10 +117,15 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
       a gap. First mapping table for the pilot page, checked by hand.
 - [ ] **Phase 3 — Build the pilot page in Figma** with instances, variables and the legend; review
       with a designer: is it readable, does it show what we need?
-- [ ] **Phase 4 — Feed the other plans.** Gaps to 021's agenda, recipe candidates to 023,
-      layout misfits to 030, value mismatches to G12 / G13 in plan 003.
-- [ ] **Phase 5 — Skill.** Write `minis-page-to-figma` from phases 1–3, so any page can be rebuilt
-      on request; repeat the pilot pages after a token release to show progress.
+- [ ] **Phase 4 — Findings frames** for the pilot page: the "Missing in Mini*S", "Conflicts" and
+      "Summary" cards beside each width, numbered markers on the rebuild, and the plain findings
+      list in the run folder. Agree the card layout with a designer and add it to the docs kit as
+      a template, so every run looks the same.
+- [ ] **Phase 5 — Feed the other plans.** Missing items to 021's agenda, recipe candidates to 023,
+      layout misfits to 030, Figma ≠ `tokens.css` conflicts to G12 / G13 in plan 003.
+- [ ] **Phase 6 — Skill.** Write `minis-page-to-figma` from phases 1–4, so any page can be rebuilt
+      and documented on request; repeat the pilot pages after a token release to show progress
+      (findings closed since the last run).
 
 ## Dependencies
 
@@ -124,5 +148,9 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
 4. **How strict is a match?** Does a production button with a different radius count as a Mini*S
    button with a mismatch, or as a gap?
 5. **Re-run cadence** — after every token release, monthly with the review, or on request only?
-6. **Does the production team want to see it?** It could become the picture for the plan 020
+6. **Where do findings go after the Figma cards?** The plain list for the review (proposal), a
+   GitHub issue per finding (ties to plan 008), or registry entries straight away once 013 exists?
+7. **Does a conflict say which side should win?** The porting rules (014) decide that; should the
+   card only state the difference, or also carry a recommendation?
+8. **Does the production team want to see it?** It could become the picture for the plan 020
    walkthrough ("this is what's Mini*S today"), or stay an internal DS tool.

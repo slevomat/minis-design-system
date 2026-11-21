@@ -171,7 +171,8 @@ Current plans:
 - `todo-plans/030-layout-guides.md` — layout guides rebuilt on what production measures: three width levels, one
   main + sidebar rule, the 12-column grid optional. Facts in `docs/ai-prompts/layouts/production-reference.md`.
 - `todo-plans/031-production-page-to-figma.md` — rebuild a live production page in Figma from Mini*S library
-  instances and bound variables (capture in Chrome → map → build), so gaps and value mismatches show on the canvas;
+  instances and bound variables (capture in Chrome → map → build), with docs-kit frames beside it listing what Mini*S is
+  missing and where it conflicts with production;
   the visual half of 017, later the `minis-page-to-figma` skill. Read-only on production.
 
 ## Changelog rules
