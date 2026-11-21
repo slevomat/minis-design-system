@@ -68,6 +68,52 @@ their plans' order (plan 003, "Recommended order").
 | `/minis:todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
 | (hook, opt-in) | Explain a broken rule while editing | Anyone building with AI in Claude Code | 026 | Planned |
 
+### Candidates (not on the roster yet)
+
+Skills the other plans imply but don't name as commands (collected 2026-11-21). A candidate is not a
+decision: it joins the roster table above only when someone agrees to build it, and it still has to
+work as a skill before it ships. "Can start" says what each one waits for.
+
+**For the DS team, inside a Mini*S checkout**
+
+| Command | What it does | From | Can start |
+|---|---|---|---|
+| `/minis:new-component` | Scaffold a component with every file CLAUDE.md requires: `.ts`, `.styles.ts`, story, `.figma.ts`, `docs/ai-prompts` doc, `index.ts` export in the same commit, both changelogs, the Storybook dev-resource link in Figma; checks tag duplicates and size naming | CLAUDE.md conventions | **Now** |
+| `/minis:figma-check` | Compare Figma variables with `tokens.css` mode by mode; list every conflict | G12, G13, 024 | **Now** — wanted before 024 automates exports |
+| `/minis:audit` | Run the production audit and report the three success metrics, as a dated snapshot to compare against | 017 | When 017's script exists |
+| `/minis:review-prep` | Build the monthly review agenda (new Locals, proposals, items used in 3+ places, 031 findings, the metric); afterwards write the record | 021 | After 020 names the approval group |
+| `/minis:release` | Cut a versioned token release: semver from the diff, notes from the changelogs, regenerate downstream copies (Claude design system, Skill Hub, Nette files) | 012, 018, 019, 024 | After 012 |
+| `/minis:icon` | Add an icon: search icons and aliases, Figma grid rules, export to `packages/icons` + `registry.ts`, the webfont hand-over pack | 028 | Mostly now; the webfont step needs the lead developer |
+
+**For anyone building UI (designers, developers, vibe-coders)**
+
+| Command | What it does | From | Can start |
+|---|---|---|---|
+| `/minis:token` | "Which token is this?" — a hex, px or production Stylus variable in, the semantic Mini*S token out; never guesses names; the rules hook (026) reuses it | 011, 014, 017 | **Now**; better after 017 phase 3 (primitive → semantic map) |
+| `/minis:check` | Review a diff or PR against the seven core rules, mainly the judgement ones CI can't check (1, 6, 7); works on Nette PRs too | 011, 022, 005 | Partly now; complete with 013 |
+| `/minis:a11y` | Token-pair contrast plus the manual WCAG checklist for a component, recipe or page | 022 | After 022 phase 0 (the pair list) |
+| `/minis:migrate` | Rewrite a Stylus or CSS file from literals and primitives to semantic tokens; report what didn't map | 011, 017, 027 | After 017 phase 3 |
+| `/minis:handoff` | Turn a vibe-coded prototype into a hand-over: components used, Locals to register, gaps, matching recipes — a proposal for production, not code to paste | 006, 019, 005 | Partly now; better with 013 and 023 |
+| `/minis:brand-theme` | A new campaign or brand theme along production's 10-step `BrandColorScheme` checklist, mapped to a Mini*S schema | 027, 017 | After 027 phase 0 (product confirms) |
+
+**For the Nette repo**
+
+| Command | What it does | From | Can start |
+|---|---|---|---|
+| `/minis:recipe` | Turn a production partial into a recipe: Latte partial, Stylus with KSS, registry entry, a11y checklist; optionally the matching web component | 023, 014 | After 023 phase 0 (format agreed) |
+| `/minis:port` | Move a pattern between web component, Latte recipe and Figma; report where they diverge and which side wins | 014 | After 014's `common.md` |
+
+**Options of existing commands, not new commands** — to keep the roster slow:
+
+- `/minis:contribute search` — "does X exist?", step 1 of the contribution path without building.
+- Layout from the 030 guides — an option of `/minis:app` and `/minis:latte` once 030 decides.
+- `/minis:page-to-figma measure` — pass 1's fixed-width breakpoint measuring on its own.
+- Regenerating the Claude design system and Skill Hub copies — a step of `/minis:release`.
+
+**Suggested next after `/minis:page-to-figma`:** `/minis:new-component` (no dependencies, used
+constantly), `/minis:token` (the most useful one for designers and developers; 011 and 026 need
+the same lookup), `/minis:figma-check` (settles G12 / G13 before 024).
+
 ## Approach — options
 
 | Option | For | Against |
