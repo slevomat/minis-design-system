@@ -114,7 +114,7 @@ Pravidla portování drží vrstvy v souladu. Recept se zapíše jednou jako roz
 
 ### Skilly, které MiniS potřebuje
 
-Dnes existuje jediný skill v repozitáři (minis-app); další znalosti jsou v CLAUDE.md a docs/ai-prompts. Nový model potřebuje následující skilly. Každý skill jde v Claude Code spustit i jako slash command (např. `/minis-bug`).
+Dnes existuje jediný skill v repozitáři (minis-app); další znalosti jsou v CLAUDE.md a docs/ai-prompts. Nový model potřebuje následující skilly. Každý skill jde v Claude Code spustit i jako slash command (např. `/minis:bug`).
 
 | Skill | K čemu | Kdo ho používá | Stav |
 | --- | --- | --- | --- |

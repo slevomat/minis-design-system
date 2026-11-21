@@ -51,7 +51,7 @@ Each fix was manual detective work across the three sources.
 
 ## Approach (proposal)
 
-One skill, `minis-changelog` (also as a `/minis-changelog` command), with three modes:
+One skill, `minis-changelog` (also as a `/minis:changelog` command), with three modes:
 
 1. **Log a change.** Input: what changed. Free text, a diff or commit range, or a Figma node.
    Output:

@@ -13,8 +13,8 @@ owner: Lexislav
 > draws a production page in Figma from Mini*S library components and variables, and documents
 > beside it, in docs-kit frames, what Mini*S is missing and where it conflicts with production. The
 > gaps show on the canvas instead of in a table. Reads production only, so it doesn't wait for plan
-> 020. Becomes a skill (working name `minis-page-to-figma`) once the method holds; distribution
-> through plan 010: the skill ships in the Mini*S Claude Code plugin as `/minis-page-to-figma`,
+> 020. Becomes a skill (`page-to-figma` in the `minis` plugin) once the method holds; distribution
+> through plan 010: the skill ships in the Mini*S Claude Code plugin as `/minis:page-to-figma`,
 > one of its first commands.
 
 ## Problem
@@ -93,6 +93,13 @@ Four passes per page, each with its own output, so a run that stops halfway is s
    suggestion; no screenshots or copied content), so 021 can put them on the review agenda and
    013 can turn accepted ones into registry entries (`meta.status: proposed`).
 
+**Option `skip-audit`** (`/minis:page-to-figma <url> skip-audit`). Rebuild only: passes 1–3 run,
+pass 4 doesn't. No findings cards, no numbered markers, no findings list, no gap styling — blocks
+without a Mini*S component are still built from tokens, just not called out. For when someone wants
+the page in Figma to design on, not a report on Mini*S. The rules of pass 3 still hold (instances
+and bound variables only), so a skip-audit page is never a place where hardcoded values creep in.
+Default is the full run with findings.
+
 **Engine.** The Figma MCP's code-to-design path (`figma-generate-design` skill, `use_figma`) does
 the building; this plan adds the Mini*S rules on top: which page, which widths, how a block maps,
 what counts as a gap. A straight page capture into Figma gives raw layers with literal values, the
@@ -124,8 +131,9 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
       a template, so every run looks the same.
 - [ ] **Phase 5 — Feed the other plans.** Missing items to 021's agenda, recipe candidates to 023,
       layout misfits to 030, Figma ≠ `tokens.css` conflicts to G12 / G13 in plan 003.
-- [ ] **Phase 6 — Skill.** Write `minis-page-to-figma` from phases 1–4, so any page can be rebuilt
-      and documented on request; repeat the pilot pages after a token release to show progress
+- [ ] **Phase 6 — Skill.** Write `page-to-figma` for the `minis` plugin (`/minis:page-to-figma`,
+      plan 010) from phases 1–4, with the `skip-audit` option, so any page can be rebuilt, with or
+      without findings, on request; repeat the pilot pages after a token release to show progress
       (findings closed since the last run).
 
 ## Dependencies
@@ -155,3 +163,6 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
    card only state the difference, or also carry a recommendation?
 8. **Does the production team want to see it?** It could become the picture for the plan 020
    walkthrough ("this is what's Mini*S today"), or stay an internal DS tool.
+9. **`skip-audit` and gap blocks.** Without the audit, should unmatched blocks still look different
+   (a faint outline), or exactly like the rest? Invisible is cleaner to design on, but hides that
+   the block isn't Mini*S.

@@ -23,7 +23,7 @@ recipes, porting rules and a `registry.json`. The direction is agreed (the Nette
 
 Today there is one skill, `.claude/skills/minis-app/`, and the way to use it elsewhere is
 `cp -r` into `~/.claude/skills/` and re-copy after every change. That doesn't scale to six skills
-(004–009), a slash command (`/minis-bug`, 008), the Nette repo, and people who never clone this
+(004–009), a slash command (`/minis:bug`, 008), the Nette repo, and people who never clone this
 repo.
 
 ## Constraints
@@ -40,27 +40,32 @@ repo.
 
 | Date | Decision | Why |
 |---|---|---|
-| 2026-11-21 | **Mini*S ships as a Claude Code plugin in a marketplace.** Every Mini*S skill is in it, so one install gives a person all of them as slash commands (e.g. `/minis-page-to-figma`, plan 031). It is a very important channel, not the main deliverable and not the only channel: Copilot users in the Nette repo still get plain files (option B), and claude.ai / Claude Design users get the Skill Hub (plan 019). | Owner's decision. Closes "leaning A, undecided" below. |
+| 2026-11-21 | **Mini*S ships as a Claude Code plugin in a marketplace.** Every Mini*S skill is in it, so one install gives a person all of them as slash commands (e.g. `/minis:page-to-figma`, plan 031). It is a very important channel, not the main deliverable and not the only channel: Copilot users in the Nette repo still get plain files (option B), and claude.ai / Claude Design users get the Skill Hub (plan 019). | Owner's decision. Closes "leaning A, undecided" below. |
 
 ### Plugin roster
 
-Every skill that exists or is planned, with its command. Command names are proposals until the
+Every skill that exists or is planned, with its command. **Naming:** the plugin is called `minis`,
+so Claude Code namespaces each skill as `/minis:<skill>` (e.g. `/minis:page-to-figma`); skill
+folders inside the plugin drop the `minis-` prefix (`app`, `figma-docs`, `page-to-figma` …). In
+this repo the project skills keep their current names (`/minis-app`) until the plugin pilot
+(phase 3) moves them. Options go in the command's arguments (e.g. `/minis:page-to-figma
+skip-audit`, plan 031). Command names are proposals until the
 skill is written; the skill's own plan has the details. **The plugin grows slowly, one command at a
-time, each added only once its skill works.** First wave: the two that exist (`/minis-app`,
-`/minis-figma-docs`) and `/minis-page-to-figma` (plan 031) as the first new one; the rest follow
+time, each added only once its skill works.** First wave: the two that exist (`/minis:app`,
+`/minis:figma-docs`) and `/minis:page-to-figma` (plan 031) as the first new one; the rest follow
 their plans' order (plan 003, "Recommended order").
 
 | Command | Skill | For whom | Plan | State |
 |---|---|---|---|---|
-| `/minis-app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Exists** (`.claude/skills/minis-app/`) |
-| `/minis-figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Exists** (`.claude/skills/minis-figma-docs/`) |
-| `/minis-page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | Planned — **first new command** |
-| `/minis-contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
-| `/minis-latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
-| `/minis-bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
-| `/minis-token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Planned |
-| `/minis-changelog` | One change written to every changelog | DS owner, inside a Mini*S checkout | 018 | Planned |
-| `/minis-todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
+| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Exists** (`.claude/skills/minis-app/`) |
+| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Exists** (`.claude/skills/minis-figma-docs/`) |
+| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | Planned — **first new command** |
+| `/minis:contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
+| `/minis:latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
+| `/minis:bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
+| `/minis:token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Planned |
+| `/minis:changelog` | One change written to every changelog | DS owner, inside a Mini*S checkout | 018 | Planned |
+| `/minis:todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
 | (hook, opt-in) | Explain a broken rule while editing | Anyone building with AI in Claude Code | 026 | Planned |
 
 ## Approach — options
@@ -109,7 +114,7 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 - [ ] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
       replace `minis-app`'s "Using this skill outside the monorepo" section with the plugin install.
       Shared with plan 019 phase 4.
-- [ ] **Phase 4 — First new command: `/minis-page-to-figma`** once plan 031 phase 6 has written
+- [ ] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
       the skill.
 - [ ] **Phase 5 — Add the rest** from the roster one at a time, as each skill is written.
 - [ ] **Phase 6 — Versions and staleness:** plugin version tied to the token / registry release it
@@ -131,5 +136,5 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 7. **Which marketplace?** A Slevomat org marketplace (private, needs GitHub access, question 1),
    joining `claude-plugin-slevomat-documentation`'s marketplace, or a public one? Kensington and the
    Slevomat marks can't ship publicly (`NOTICE`).
-8. **Repo-bound skills** (`/minis-token-update`, `/minis-changelog`) — in the plugin with a "needs a
+8. **Repo-bound skills** (`/minis:token-update`, `/minis:changelog`) — in the plugin with a "needs a
    Mini*S checkout" guard, or kept out of it?

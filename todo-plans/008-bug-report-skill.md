@@ -1,13 +1,13 @@
 ---
 id: 008
-title: Bug-reporting skill and /minis-bug command
+title: Bug-reporting skill and /minis:bug command
 status: draft
 created: 2026-10-29
 updated: 2026-10-29
 owner: Lexislav
 ---
 
-# 008 — Bug-reporting skill and `/minis-bug` command
+# 008 — Bug-reporting skill and `/minis:bug` command
 
 > No hard dependency on the registry or Latte recipes, but the list of platforms a bug can be in
 > grows with them (see question 5). Distribution: see plan 010.
@@ -26,7 +26,7 @@ them know where to report one. The repo has no issue templates (`.github/` holds
 - **Screenshots from production or admin pages may contain customer data.** The skill warns before
   anything is attached.
 - Works both as a skill the agent picks up ("this button is broken") and as an explicit
-  `/minis-bug` command — in Claude Code a skill named `minis-bug` is invocable as `/minis-bug`.
+  `/minis:bug` command — in Claude Code a skill named `minis-bug` is invocable as `/minis:bug`.
 
 ## Approach
 

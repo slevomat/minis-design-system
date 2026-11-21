@@ -122,7 +122,7 @@ Current plans:
 - `todo-plans/005-contribution-skill.md` — search the registry → extend and flag the gap → build new as Local (needs registry).
 - `todo-plans/006-minis-app-register-local.md` — minis-app stays the sandbox; new work gets registered as Local (needs registry).
 - `todo-plans/007-todo-plan-skill.md` — the todo-plan conventions as a skill usable outside this repo.
-- `todo-plans/008-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis-bug`.
+- `todo-plans/008-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis:bug`.
 - `todo-plans/009-token-update-skill.md` — one skill for token updates, typography first (the procedure for
   changing a size, line-height ratio, letter spacing or role): Figma export → validation scripts →
   `tokens.css` diff → build → checks → changelogs. Planned, not built; plan 015 phase 7 and 016 phase 6 wait for it.
@@ -175,7 +175,8 @@ Current plans:
 - `todo-plans/031-production-page-to-figma.md` — rebuild a live production page in Figma from Mini*S library
   instances and bound variables (capture in Chrome → map → build), with docs-kit frames beside it listing what Mini*S is
   missing and where it conflicts with production;
-  the visual half of 017, later the `minis-page-to-figma` skill. Read-only on production.
+  the visual half of 017, later `/minis:page-to-figma` in the plugin (`skip-audit` = rebuild without findings).
+  Read-only on production.
 
 ## Changelog rules
 
