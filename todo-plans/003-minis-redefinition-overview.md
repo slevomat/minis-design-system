@@ -3,7 +3,7 @@ id: 003
 title: Mini*S redefinition — overview of the rollout and every plan in it
 status: draft
 created: 2026-11-13
-updated: 2026-11-20
+updated: 2026-11-21
 owner: Lexislav
 ---
 
@@ -317,7 +317,7 @@ fully done.
 **Any time, low priority:** **007** todo-plan skill, **008** bug-report skill, **018** changelog
 sync (useful as soon as 024 automates exports).
 
-**Can start now, without plan 020:** 017's script, 019 phases 0–1 (record the Claude design
+**Can start now, without plan 020:** 017's script, 031 phases 0–3 (rebuild a pilot production page in Figma), 019 phases 0–1 (record the Claude design
 system, hosted runtime), 022 phases 0–1 (pair list, contrast script in this repo), 024 phases 0–1
 (verify options, manual one-command path), finishing 015 and 016. None of them touches production.
 
@@ -361,7 +361,7 @@ are set yet.
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
 | **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
-| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export · 030 layout guides (after G12) | **G12** layout spacing · **G13** Figma ≠ `tokens.css` values · **G14** brand text weight |
+| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export · 030 layout guides (after G12) · 031 production page → Figma (with 017) | **G12** layout spacing · **G13** Figma ≠ `tokens.css` values · **G14** brand text weight |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint · 022 accessibility checks | — |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync · 025 AGENTS.md · 026 rules hook | — |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval · 023 first recipes | — |
@@ -420,6 +420,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
 | 030 | Layout guides | draft | 0 / 13 | decisions on sidebar ratio and gap, a 1008px container level, the stacking breakpoint (design call); pages behind login unmeasured; G12. Container padding decided 2026-11-20 |
+| 031 | Production page → Figma | draft | 0 / 6 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
 
 **The three blockers that hold most of the rest:**
 
@@ -432,7 +433,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 ## Gaps — where each plan came from, and what still has none
 
 A gap is work the brief or a finding asks for that has no plan file. Each becomes a plan when the
-owner says so, and takes the next free number (031 onwards). G1–G11 got plans on 2026-11-13; their
+owner says so, and takes the next free number (032 onwards). G1–G11 got plans on 2026-11-13; their
 rows stay as the record of where each plan came from. **G12–G14 (added 2026-11-20) have no plan
 yet.**
 

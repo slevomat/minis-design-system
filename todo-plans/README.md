@@ -108,3 +108,4 @@ work on the plans in.
 | 028 | [Icons — one path from the Figma library to the production webfonts](028-icons-to-production.md) | `draft` | 2026-11-13 |
 | 029 | [Mobile app — Mini*S token names and structure as the third porting target](029-mobile-app-tokens.md) | `draft` | 2026-11-13 |
 | 030 | [Layout guides — page layout rules grounded in production](030-layout-guides.md) | `draft` | 2026-11-20 |
+| 031 | [Production page → Figma — rebuild a live page from Mini*S tokens and components](031-production-page-to-figma.md) | `draft` | 2026-11-21 |
