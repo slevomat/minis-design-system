@@ -3,7 +3,7 @@ id: 003
 title: Mini*S redefinition — overview of the rollout and every plan in it
 status: draft
 created: 2026-11-13
-updated: 2026-11-21
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -420,7 +420,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
 | 030 | Layout guides | draft | 0 / 13 | decisions on sidebar ratio and gap, a 1008px container level, the stacking breakpoint (design call); pages behind login unmeasured; G12. Container padding decided 2026-11-20 |
-| 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 0 / 7 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
+| 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 5 / 7 | homepage pilot rebuilt and documented, skill `minis-page-to-figma` written; designer review of the rebuild and the findings-card template still to do; listings and deal detail next |
 
 **The three blockers that hold most of the rest:**
 
@@ -489,6 +489,22 @@ Work for the redefinition that has no todo plan but should show up here:
   Line heights command, 1.3.1 the references-mode fixes) and CSS — is in plans 015 and 016 and
   `docs/ai-prompts/typography.md`. The step-by-step procedure for changing it is planned in
   plan 009 (not built yet).
+
+### Findings from production rebuilds (plan 031)
+
+The homepage pilot (2026-11-26, `audits/page-to-figma/2026-11-26-homepage/findings.md`, ids
+`home-<width>-<nn>`) feeds these plans. Ids, not copies: the list is the source.
+
+- **021 review agenda:** all 20. Seven blocks with no Mini*S component (01–07), one missing variant
+  (08), and ten conflicts (11–20). Among the conflicts: danger text `#bc0000` vs `#d2381d` (11),
+  Deal Card name and height (13, 14), and two treatments of one inline prompt (18).
+- **023 recipes:** 04 magazine post, 05 point-of-interest card, 06 USP strip, 08 Message with
+  actions, 10 homepage grid, 15 Promo tile text over the photo.
+- **027 runtime tokens:** 09 brand-theme band surface (`.brand-theme--brand`, no semantic token).
+- **030 layout guides:** 10 grid with a 2 × 2 tile. Nothing contradicts the 2026-11-26 decisions:
+  container 1240 and padding 8 / 16 / 32 match production on the homepage.
+- **G12 / G13:** no finding on this page (Figma Layout values = production).
+- **Plan 009 / typography:** 17 Kensington headline sizes above `Brand/Heading/xl` (42, 48).
 
 ## Phases
 

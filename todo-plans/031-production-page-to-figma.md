@@ -3,7 +3,7 @@ id: 031
 title: Production page → Figma — rebuild a live page from Mini*S tokens and components
 status: draft
 created: 2026-11-21
-updated: 2026-11-21
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -116,12 +116,12 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
 
 ## Phases
 
-- [ ] **Phase 0 — Pick pages and widths.** Three public pages that cover the most components by
+- [x] **Phase 0 — Pick pages and widths.** Three public pages that cover the most components by
       plan 017's usage counts (proposal: home, a category listing, a deal detail); widths from
       plan 030. Agree the Figma page and the legend layout.
-- [ ] **Phase 1 — Capture script** for Chrome: structure, computed values, classes, per width;
+- [x] **Phase 1 — Capture script** for Chrome: structure, computed values, classes, per width;
       tested on one page.
-- [ ] **Phase 2 — Mapping rules** written down: block → component, value → variable, what makes
+- [x] **Phase 2 — Mapping rules** written down: block → component, value → variable, what makes
       a gap. First mapping table for the pilot page, checked by hand.
 - [ ] **Phase 3 — Build the pilot page in Figma** with instances, variables and the legend; review
       with a designer: is it readable, does it show what we need?
@@ -129,12 +129,31 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
       "Summary" cards beside each width, numbered markers on the rebuild, and the plain findings
       list in the run folder. Agree the card layout with a designer and add it to the docs kit as
       a template, so every run looks the same.
-- [ ] **Phase 5 — Feed the other plans.** Missing items to 021's agenda, recipe candidates to 023,
+- [x] **Phase 5 — Feed the other plans.** Missing items to 021's agenda, recipe candidates to 023,
       layout misfits to 030, Figma ≠ `tokens.css` conflicts to G12 / G13 in plan 003.
-- [ ] **Phase 6 — Skill.** Write `page-to-figma` for the `minis` plugin (`/minis:page-to-figma`,
+- [x] **Phase 6 — Skill.** Write `page-to-figma` for the `minis` plugin (`/minis:page-to-figma`,
       plan 010) from phases 1–4, with the `skip-audit` option, so any page can be rebuilt, with or
       without findings, on request; repeat the pilot pages after a token release to show progress
       (findings closed since the last run).
+
+**Progress, 2026-11-26.** Homepage pilot captured at 375 / 768 / 1280 (Chrome, logged out, light
+mode), mapped, rebuilt and documented:
+
+- Run folder `audits/page-to-figma/2026-11-26-homepage/`: `mapping.md` (coverage, block table),
+  `findings.md` (20 findings: 10 missing, 10 conflicts).
+- Figma MiniS DS, page **Production rebuilds** (`6462:142`): frames `6465:142` (1280), `6465:2363`
+  (768), `6465:4483` (375); findings stack `6466:5806`; markers beside the frames, never inside.
+- Skill `.claude/skills/minis-page-to-figma/` (SKILL.md, README, `capture.js` 1.4,
+  `build.homepage.js`, `fill-template.py`, `references/mapping.md`). Tested end to end: the pilot as
+  the full run, and a skip-audit rebuild from the committed script (no markers, no cards).
+- **Still open:** phase 3's designer review of the rebuild, and phase 4's step of agreeing the
+  card layout and adding it to the docs kit as a template (the stack is built from `Docs card —
+  template` today). Phase 6's re-run after a token release comes later.
+- **Method findings:** slevomat.cz's CSP blocks Figma's page capture, so images are placeholders
+  unless a Playwright MCP is available. Kensington can't be loaded by plugin scripts, so Promo
+  Card titles and `Brand/*` text can't be set (layer names ask for it by hand). Production renders
+  dark when the browser prefers it; the capture measures light. Lazy blocks only load when the
+  iframe is on screen; the capture scrolls an invisible one first.
 
 ## Dependencies
 
