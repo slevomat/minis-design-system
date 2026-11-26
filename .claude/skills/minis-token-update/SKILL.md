@@ -132,10 +132,14 @@ never from here).
 ### 9 — Hand-over to production (you draft, owner sends)
 
 Only when a token production consumes changed (typography, layout, scales, colours, shadows).
-Prepare, never send: the matching top-level group(s) of `tokens.rgb.json` as production's
-per-group files (`typography.json`, `layout.json`, … each with its `$metadata`; the exact recipe
-is plan 009 open question 4 — ask before assuming) and a short note: renamed, removed, re-valued
-and new names, and what to expect. Production's developer runs its own Style Dictionary build.
+**The skill does not make production's files.** Those are exporter output: the owner exports the
+group(s) production consumes (`typography.json`, `layout.json`, … one group per file, resolved
+mode) with the exporter plugin, the same way as in step 4. You only **draft the hand-over note**:
+renamed, removed, re-valued and new names (from the `tokens:diff` of the matching group), and what
+to expect. Prepare, never send. Production's developer runs its own Style Dictionary build.
+If the owner gives you such a file, read it, don't rewrite it. `tokens:check` can't fully check a
+single-group file yet (its Layout mode mapping needs the `breakpoints` group); say so instead of
+reporting a failure.
 
 ### 10 — Commit message (you draft)
 
