@@ -3,7 +3,7 @@ id: 009
 title: Token-update skill (typography first)
 status: draft
 created: 2026-10-29
-updated: 2026-11-20
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -24,6 +24,17 @@ owner: Lexislav
 > other Figma teams) exists, drafted in an earlier session and kept by the owner outside this repo.
 > This plan is only the Mini*S skill.
 > Distribution: see plan 010 (this skill stays in this repo only).
+>
+> **Intent, restated by the owner 2026-11-26: any change to typography takes this procedure.**
+> Keeping Figma's responsive text working (generated `-px` line heights, typed percentages,
+> exporter rules, the `@media` merge) is too complex to do by hand, so as much of it as possible is
+> automated. That is the purpose of the skill; the rest of the token-update checklist rides along.
+>
+> **Built 2026-11-26** (phases 0–2, uncommitted at the time of writing): `.claude/skills/minis-token-update/`
+> (`SKILL.md`, `typography.md`), `packages/tokens/scripts/{check-export,diff-export}.mjs` with
+> `lib/export-utils.mjs` and a test file, and the root scripts `pnpm tokens:check` / `pnpm tokens:diff`.
+> The open questions were answered with working defaults so the work could proceed; see "Working
+> answers" under Open questions. Status is still `draft`; moving it is the owner's call.
 
 ## The problem
 
@@ -177,12 +188,12 @@ the owner reviews), **script** (run it; a failing exit code stops the procedure)
 | 1 | **Preconditions in Figma.** Exporter ≥ 1.3.1 installed (the version string in the plugin window); the four settings ON on **this machine**. The skill asks; step 5 verifies. | manual | — |
 | 2 | **Edit in Figma.** Size: Layout `typography/<role>/size` (Heading) or `Typography/size/*` (Body, which has no Layout size). Ratio: alias the role's `typography/<role>/line-height` to a `Typography/line-height/N%` primitive (the name carries the meaning; comma for decimals). Letter spacing: a `Typography/spacing/N%` variable, no scopes, Code Syntax `var(--typography-spacing-…)`, typed percentage in the style. Never bind a ratio or spacing variable; never edit a `-px` variable by hand. | manual | The whole of it. See `docs/ai-prompts/typography.md` §3 and §6 |
 | 3 | **Recalculate line heights**: the plugin's **📏 Line heights** command. It runs a read-only check first and lists what is out of date; **Apply** rewrites only the out-of-date `-px` variables (design mode only, Apply is disabled in Dev Mode); then it checks again and must report nothing out of date. Look at a `default`, a `md` and an `xl` frame (26 → 30 px for Heading/lg, and so on). | manual | Skip if only an unrelated token changed. Brand lg/xl keep a typed percentage and are "not generated" by design |
-| 4 | **Export from Figma.** For this repo: `tokens.json` (references, OKLCH) and `tokens.rgb.json` (resolved, hex), all collections, Light + Dark, both from the same plugin version in the same session (**Export all**). For production: the resolved groups it consumes (`typography`, `layout`, and `scales` / `colors` / `shadows` when they changed), see step 9. | manual | Typography lives in the `typography` and `layout` groups |
+| 4 | **Export from Figma.** For this repo: `tokens.json` (references, OKLCH) and `tokens.rgb.json` (resolved, hex), all collections, Light + Dark, both from the same plugin version in the same session (**Export all**). For production: the owner exports the resolved groups it consumes (`typography`, `layout`, and `scales` / `colors` / `shadows` when they changed), one group per file, with the exporter too; see step 9. | manual | Typography lives in the `typography` and `layout` groups |
 | 5 | **Validate the exports** (`check-export`, then `diff-export` against `git show HEAD:…`). **Checks that stop the procedure:** `$metadata.exporterVersion` ≥ 1.3.1 and equal in both files; `$metadata.settings.naming` all true and `includeOriginReference` true; no `line-height-px` name anywhere; no value that is a `var()` of its own name; `--color-border`, `--color-separator`, `--color-interaction-primary-surface` present and `--color-border-default` absent; no token name that was in the old export and is now gone **without being listed as expected in step 0** (a removed name is an alarm, not a detail). **Typography checks:** the spacing set is exactly `--typography-spacing-{n2,n1,n0_3,0,3}` with the em values (or the set step 0 announced); every `-line-height` and `-size` per Layout mode is what step 0 announced; in `tokens.rgb.json` the composites carry the `default`-mode ratio as a percentage (`heading.lg` → `130%`), never pixels. **The diff is the report**: added, removed, renamed, re-valued, grouped by collection, with typography on top and known divergences (G12, G13, G14) listed but not judged. | script | — |
 | 6 | **Merge into `tokens.css`** (`packages/tokens/src/tokens.css`): Layout modes → the right `@media (min-width: …)` block, `100000px` → `100%`, translate any name the export still spells differently, keep every hand-maintained token, never paste a raw export over the file, never copy a `-px` value. The skill produces a **patch for review** and stops. | agent, owner reviews | The typography `@media` mapping; spacing tokens as em |
 | 7 | **Build and check against the merged `tokens.css`:** `pnpm --filter @minis/tokens build` (also regenerates `apps/storybook/stories/palette-data.json`, commit it), `pnpm typecheck`; `check-export` again in "css" mode: Layout line-height and size values per mode equal `tokens.css`; sentinel names and hand-maintained names present; the `--typography-spacing-*` set intact. **Tier:** the `layout` group of `tokens.json` is what feeds the Storybook Tier toolbar (`tier-tokens.ts`), so compare it with `git show HEAD:tokens.json`: unchanged unless step 0 said otherwise. Restart the Storybook dev server, then look at Design Tokens → Typography / Text Styles and at the components that use the role (page-header and topbar use the heading and spacing tokens, for example). | script + manual | The roles to look at, per changed token |
 | 8 | **Changelogs, same commit.** `CHANGELOG.md` and the Storybook Changelog story (newest date on top): CSS names, old → new, a "Tokens" sub-section. The skill drafts both from the diff; the owner reviews. **Figma docs changelog card:** hand over to the `minis-figma-docs` skill (Figma-only), or to plan 018's Log mode once it exists; never write it from this skill. | agent | Letter-spacing renames are breaking; say so |
-| 9 | **Hand-over to production**, only when a token production consumes changed. Prepare, never push: the files in production's shape (`typography.json`, `layout.json`, … = the matching top-level group of `tokens.rgb.json` with its `$metadata`, to be confirmed in open question 4) and a short note listing renamed, removed, re-valued and new names, plus what to expect (for typography: production's mixins start below 360 px from the composite, so the `default`-mode ratio matters; `build/style-dictionary/config.js` deletes `layout.default.typography`). Its developer runs the build. | agent drafts, owner sends | Typography is the case production lags on today |
+| 9 | **Hand-over to production**, only when a token production consumes changed. Prepare, never push: **a short note only** (the files themselves are exporter output, made by the owner in step 4, not by the skill; open question 4) listing renamed, removed, re-valued and new names, plus what to expect (for typography: production's mixins start below 360 px from the composite, so the `default`-mode ratio matters; `build/style-dictionary/config.js` deletes `layout.default.typography`). Its developer runs the build. | agent drafts, owner sends | Typography is the case production lags on today |
 | 10 | **Commit message.** One commit for the token files, `tokens.css`, the regenerated palette data and both changelogs; the owner commits and pushes. | agent drafts | — |
 
 **What is automated or verifiable by script** (phases 1 and 3 build it): step 5 (all of it), the
@@ -214,22 +225,61 @@ Figma frames.
 
 ## Phases
 
-- [ ] **Phase 0 — Decide the shape** (question 1) and the questions that block phases 1–2
-      (questions 2–5). The owner moves the status.
-- [ ] **Phase 1 — Checks as scripts.** `check-export.mjs` and `diff-export.mjs` in
-      `packages/tokens/scripts/`, with tests that use today's files as fixtures: they must **fail** on
-      the repo's current `tokens.json` (exporter 1.3.0: version mismatch and the
-      `--accordion-padding-y` self-reference) and **pass** on `tokens.rgb.json` (1.3.1). The
-      2026-11-20 re-export and its hand-made diff are the reference for what the diff must report.
-- [ ] **Phase 2 — Write the skill:** `SKILL.md` and `typography.md` from the table above; make
-      `CLAUDE.md` → Token exports and `docs/ai-prompts/typography.md` §6 point to it. **Tick plan 015
-      phase 7 and plan 016 phase 6 here.**
+- [x] **Phase 0 — Decide the shape** (question 1) and the questions that block phases 1–2
+      (questions 2–5). Done 2026-11-26 with working defaults (see "Working answers"); the owner
+      moves the status.
+- [x] **Phase 1 — Checks as scripts.** Done 2026-11-26: `check-export.mjs`, `diff-export.mjs` and
+      `lib/export-utils.mjs` in `packages/tokens/scripts/`, `pnpm tokens:check` / `pnpm tokens:diff`,
+      and `export-checks.test.mjs` (23 tests, `pnpm --filter @minis/tokens test`). Checked against the
+      real files: on the repo's `tokens.json` (exporter 1.3.0) `tokens:check` **fails** on the
+      version, the `--accordion-padding-y` self-reference and the version mismatch; on
+      `tokens.rgb.json` (1.3.1) it **passes**; `--css` confirms all 140 Layout size and line-height
+      values in `tokens.css` match the export in every mode, with 23 other Layout values (spacing,
+      `--page-width`) listed as the known G12/G13 divergences. `tokens:diff` against the commit
+      before the 1.3 re-export reproduces the old → new typography names (`heading-large` →
+      `heading-lg`, `poster` → `heading-xl`, the five spacing tokens). The tests use in-memory
+      fixtures, not the real exports, because `tokens.json` flips to passing at the next re-export.
+- [x] **Phase 2 — Write the skill:** `.claude/skills/minis-token-update/SKILL.md` and
+      `typography.md` written 2026-11-26; `CLAUDE.md` → Token exports and
+      `docs/ai-prompts/typography.md` §6 point to it. Plan 015 phase 7 and plan 016 phase 6 ticked.
+      The skill has not been run on a real change yet (phase 3).
 - [ ] **Phase 3 — Dry run on a no-op re-export** with exporter 1.3.1: it brings `tokens.json` up to
       1.3.1, shows the procedure on a change with an empty diff, and finds what the steps missed.
+      **Partly done 2026-11-26, without Figma** (a real re-export is a manual plugin run, so the
+      box stays unticked until one exists): steps 0, 5, 6, 7 and 10 were run on what is on disk.
+      The 2026-11-20 pre-change exports (`~/Downloads/tokens-ref.json`, `tokens-rgb-resolved.json`)
+      as "old" against the repo files as "new" gave exactly the known change (`--container-padding`
+      and `--container-narrow-padding`, mode `lg`, 16 → 32 px) and flagged the Storybook Tier;
+      `tokens:check --css` on the repo exports shows typography matching in all modes, and the build
+      leaves `palette-data.json` unchanged. **Found and fixed:** a simulated 1.3.1 `tokens.json`
+      (version bumped, the self-referencing `components` alias omitted, as docs §4 says 1.3.1 does)
+      failed `same-tokens`, because the check compared token positions. It now compares CSS names and
+      reports an omitted alias as information. **Still needed:** the real re-export with exporter
+      1.3.1 (steps 1–4 are manual); expect `tokens:check` to go green on `tokens.json` then. Step 1
+      (the plugin's version and settings) can only be confirmed by the owner.
 - [ ] **Phase 4 — Run it on the first real typography change** (a size, a ratio or a new role) and
       fix what it missed.
 - [ ] **Phase 5 — Hand over to plan 024 phase 1** (and to plan 018's Log mode for the changelog
       steps) when those start; close or merge this plan then.
+
+## Working answers (2026-11-26)
+
+The owner asked to stop discussing and get it built, so phases 0–2 went ahead on these defaults.
+Each stays open to change; edit here when one is overruled.
+
+| Q | Working answer | Status |
+|---|---|---|
+| 1 Shape, name | One skill, **`minis-token-update`**, with `typography.md` as a reference file. In the plugin (plan 010) it becomes `/minis:token-update`. | Built |
+| 2 Script location | `packages/tokens/scripts/`, run as `pnpm tokens:check` and `pnpm tokens:diff` (reusable by CI and plan 024). | Built |
+| 3 Who runs updates | The owner, on their machine. The skill asks for the plugin version and settings each time and the export's `$metadata` proves them. | Default |
+| 4 Production's per-group files | **Decided 2026-11-26 (owner): the exporter plugin makes them; the skill does not.** The skill drafts only the hand-over note and never rewrites a production file. Evidence: production's `typography.json` and `layout.json` are single-group, resolved-mode exports with their own `$metadata` (2026-06-04 and 2026-05-22, no `exporterVersion`), i.e. exporter output. Still to confirm with the Nette developer: what they want with a change (files, a note, or a PR). | Decided; one sub-question open |
+| 5 Re-export `tokens.json` with 1.3.1 | At the next token update. `pnpm tokens:check` fails on the current file until then, on purpose; both files must be from the same exporter version. | Default |
+| 6 Mode ↔ tier mapping | No hand-written table: a Layout mode's width is its entry in the export's own `breakpoints` group (`default` = 0). The CSS value at that width is the `:root` cascade of every `min-width` block up to it. A mode with no breakpoint fails the check. | Built |
+| 7 Canonical text for the method | `docs/ai-prompts/typography.md` §6 (portable); the skill links to it and adds only repo steps. | Built |
+| 8 Stale `CLAUDE.md` text and `tier-tokens.ts` aliases | Left as they are for now (confirmed stale on 2026-11-26: the aliases map names the export no longer has). The skill says not to encode them. Clean up with the dry run. | Open, small |
+| 9 Figma changelog card | The skill hands off to `minis-figma-docs`; plan 018 replaces that later. | Default |
+| 10 Figma MCP access | Not required. A person looks at the frames in Figma (step 3). | Default |
+| 11 Which groups production wants | Part of question 4. | Open |
 
 ## Open questions
 
@@ -243,11 +293,13 @@ Figma frames.
 3. **Who runs token updates, and on whose machine?** Today only the owner. The plugin settings are
    per machine and the Community version can differ from the repo's master, so a second person means
    a settings check on their machine. Does anyone else need the skill?
-4. **How does production's per-group file shape get made?** Is "split `tokens.rgb.json` by top-level
-   group, keep `$metadata`" the right recipe (the structure matches for `typography` and `layout`,
-   checked 2026-11-20), or does the developer export the collections himself, with different
-   `$metadata`? And what does production want with a change: the files, a note, or a PR (plan 024
-   question 5, plan 003 production question 4)? Needs the Nette developer.
+4. **~~How does production's per-group file shape get made?~~ Answered 2026-11-26 (owner): the
+   exporter plugin exports the groups; the skill never splits `tokens.rgb.json` and never writes a
+   production file.** Step 9 is a hand-over note only. **Still open (needs the Nette developer):**
+   what does production want with a change: the files, a note, or a PR (plan 024 question 5, plan 003
+   production question 4)? Which exporter setting makes a one-group file, and whether
+   `tokens:check` should accept a single-group file (its Layout mode mapping needs the `breakpoints`
+   group, so today it can't), are small follow-ups.
 5. **Re-export `tokens.json` with exporter 1.3.1 now, or with the next token update?** It is on
    1.3.0 and still has one self-reference line (`--accordion-padding-y`). Phase 1's check will fail
    on it until then. Related: should the check require both files to be from the same version, as

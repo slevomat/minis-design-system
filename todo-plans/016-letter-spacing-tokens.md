@@ -3,7 +3,7 @@ id: 016
 title: Letter-spacing tokens — one meaning in Figma, the exporter and CSS
 status: in-progress
 created: 2026-11-05
-updated: 2026-11-20
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -146,7 +146,7 @@ components would have to become per-size px values.
       `var(--typography-spacing-3)`, plus the raw `-0.02em` / `-0.003em`) and `topbar`
       (`-0.01em`) switch to the tokens. Done in `51f51f1`. Checked in Storybook: heading 0.96px at 32px,
       location −0.4px at 20px, text −0.048px at 16px, topbar app name −0.2px at 20px.
-- [ ] **6. Docs:** `docs/ai-prompts/components/page-header.md` (letter-spacing row:
+- [x] **6. Docs:** `docs/ai-prompts/components/page-header.md` (letter-spacing row:
       `--typography-spacing-extra-wide` 1px → `--typography-spacing-3` 0.03em),
       `docs/ai-prompts/components/topbar.md` (−1 % → `--typography-spacing-n1`), and a
       letter-spacing line in `CLAUDE.md` → Token naming. The procedure goes into the typography
@@ -157,8 +157,10 @@ components would have to become per-size px values.
       (`typography.md` of the `minis-token-update` skill). For letter spacing it covers: adding a
       `Typography/spacing/N%` variable (name = percentage, comma for decimals, no scopes, Code Syntax),
       typing the percentage in the style, the five-token check (`--typography-spacing-{n2,n1,n0_3,0,3}`),
-      the rename as a breaking change in both changelogs, and the note for production. Tick the
-      remaining part when 009 phase 2 (the skill is written) is done. Nothing is built yet.
+      the rename as a breaking change in both changelogs, and the note for production.
+      **Done 2026-11-26:** written in `typography.md` of the `minis-token-update` skill, and
+      `pnpm tokens:check` enforces the five-token set, the em values derived from the names and the
+      same in `tokens.css` (`--spacing-set` for a change that announces a different set).
 
 ## Production audit (2026-11-05)
 

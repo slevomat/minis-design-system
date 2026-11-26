@@ -166,6 +166,10 @@ blocks. Don't paste a raw export over it.
 
 ## 6. Changing typography
 
+> In the Mini*S repo this procedure is automated and enforced by the `minis-token-update` skill
+> (`.claude/skills/minis-token-update/`, with the checks as `pnpm tokens:check` and `pnpm tokens:diff`).
+> This section stays as the portable method.
+
 **Change a size or a ratio**
 1. In Figma, change the size or ratio variable (Layout or Typography collection).
 2. Recalculate the `-px` variables of the affected roles: `round(size × ratio)` for each Layout
