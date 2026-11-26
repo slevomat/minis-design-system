@@ -29,29 +29,24 @@ const CSS_NAME_ALIASES: Record<string, string> = {
 };
 
 /**
- * Storybook Tier toolbar value → representative Figma Layout mode.
- * The toolbar groups the 10 Figma modes into 5 tiers; the representative
- * mode is the one whose values match the tokens.css media-query tier.
- * ("xl – 4xl" uses the `2xl` mode because that is where the 1240px
- * container cap and large typography live.)
+ * Storybook Tier toolbar values = Figma Layout modes, one to one, named like
+ * the breakpoint each starts at (G12, decided 2026-11-26 — plan 030). tokens.css
+ * has one media query per mode, so every tier here is exactly one CSS tier.
+ * 3xl / 4xl only change --page-width, so the widest entry ("2xl+") uses `2xl`.
  */
-const TIER_MODE: Record<string, string> = {
-  '2xs_xs': 'xs',
-  sm: 'sm',
-  md: 'md',
-  lg: 'lg',
-  xl: '2xl',
-};
-
-/**
- * Brand (Kensington) heading composites are NOT part of the Figma Layout
- * collection — they exist only in tokens.css, scaling at the 1480px+ media
- * query. Injected for the xl tier so the simulation matches tokens.css.
- */
-const XL_BRAND_EXTRAS = [
-  '--typography-brand-lg-size: var(--typography-size-3xl)',
-  '--typography-brand-xl-size: var(--typography-size-5xl)',
+export const TIERS: { value: string; title: string; right: string; minWidth: number }[] = [
+  { value: 'default', title: 'default', right: '<360px', minWidth: 0 },
+  { value: '2xs', title: '2xs', right: '360–407px', minWidth: 360 },
+  { value: 'xs', title: 'xs', right: '408–599px', minWidth: 408 },
+  { value: 'sm', title: 'sm', right: '600–767px', minWidth: 600 },
+  { value: 'md', title: 'md', right: '768–1007px', minWidth: 768 },
+  { value: 'lg', title: 'lg', right: '1008–1255px', minWidth: 1008 },
+  { value: 'xl', title: 'xl', right: '1256–1479px', minWidth: 1256 },
+  { value: '2xl', title: '2xl – 4xl', right: '≥1480px', minWidth: 1480 },
 ];
+
+/** The widest tier: the default, and the one a manual Tier choice applies on top of. */
+export const WIDEST_TIER = '2xl';
 
 interface TokenLeaf {
   value: string;
@@ -83,9 +78,12 @@ const layoutModes = tokensJson.layout as unknown as Record<string, Record<string
 
 /** Tier name → CSS declaration list, injected on :root by preview.ts. */
 export const TIER_TOKENS: Record<string, string> = Object.fromEntries(
-  Object.entries(TIER_MODE).map(([tier, mode]) => {
-    const decls = collectMode(layoutModes[mode], []);
-    if (tier === 'xl') decls.push(...XL_BRAND_EXTRAS);
-    return [tier, decls.join(';\n')];
-  })
+  TIERS.map(({ value }) => [value, collectMode(layoutModes[value], []).join(';\n')])
 );
+
+/** Viewport width → tier, using the same breakpoints as the tokens.css media queries. */
+export function tierFromWidth(px: number): string {
+  let tier = TIERS[0].value;
+  for (const t of TIERS) if (px >= t.minWidth) tier = t.value;
+  return tier;
+}

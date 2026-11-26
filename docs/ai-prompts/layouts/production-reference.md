@@ -11,7 +11,8 @@ The page has three parts, and they are kept apart on purpose:
 2. **[Compared with Mini*S](#2-compared-with-minis)**: where the Mini*S tokens and guides match
    production and where they differ.
 3. **[Recommendations and open questions](#3-recommendations-and-open-questions)**: proposals for
-   the Mini*S layout guides. Only open question 2 (container padding) is decided so far.
+   the Mini*S layout guides. Questions 1–4 are decided (2026-11-20 and 2026-11-26); question 5
+   (pages behind login) is still open.
 
 The method and its limits are at the end, in [Evidence and method](#4-evidence-and-method).
 
@@ -131,7 +132,29 @@ On mobile all three stack into a single column.
 | `sliding-gallery__items` (deal gallery) | 3 | 4px |
 | `user-navigation__grid` (user menu) | 2 | 8px |
 
-### 1.4 The layout model production uses
+### 1.4 Layout spacing variables (the Figma Layout collection)
+
+Production carries an export of the Mini*S Figma Layout collection (2026-08-12) as Stylus variables
+in `app/stylus/settings/_variables.styl`: `$layout-spacing-*` for the `default` mode and
+`$layout-{2xs|xs|sm|md|lg|xl|2xl}-spacing-*`, `-container-*`, `-typography-*` for the others.
+`app/stylus/utilities/_spacing.styl` turns the spacing ones into `--layout-spacing-*` custom
+properties, one production breakpoint per Figma mode:
+
+| Figma mode | Production mixin | Viewport | `xs` | `sm` | `md` | `lg` | `xl` |
+|---|---|---|---|---|---|---|---|
+| `default` | `:root` | < 360 | 4 | 8 | 12 | 16 | 20 |
+| `2xs` | `+mobile-small()` | 360+ | 4 | 12 | 16 | 16 | 20 |
+| `xs` | `+mobile()` | 408+ | 4 | 12 | 16 | 16 | 24 |
+| `sm` | `+tablet()` | 600+ | 8 | 16 | 16 | 20 | 32 |
+| `md` | `+tablet-wide()` | 768+ | 8 | 16 | 20 | 24 | 32 |
+| `lg` | `+desktop()` | 1008+ | 8 | 16 | 24 | 32 | 48 |
+
+(px.) The values equal the Figma file's on 2026-11-20 in every cell. The page layout doesn't use
+them: `--layout-spacing-*` appears 17 times in production's Stylus, and the containers in 1.2 set
+their own padding. The exported container values are older than the live CSS (`lg` container
+padding 16px there, 32px in `grid-wrap`).
+
+### 1.5 The layout model production uses
 
 Taken together, production uses three width levels:
 
@@ -156,22 +179,23 @@ The Mini*S values come from `packages/tokens/src/tokens.css`, `<minis-container>
 | Topic | Production | Mini*S | Verdict |
 |---|---|---|---|
 | Breakpoints | 360 / 408 / 600 / 768 / 1008 / 1256 / 1480 | `--breakpoint-2xs` … `-2xl` = 360 / 408 / 600 / 768 / 1008 / 1256 / 1480 (+ 1920, 2560) | **Same scale** |
-| Wide container width | max 1240px | `--container-width`: 100% → 1240px at 1256px | **Same in practice** (production caps at a 1240px viewport, Mini*S at 1256px, so they differ only in a 16px band) |
+| Wide container width | max 1240px | `--container-width`: 1240px from 1008px (was from 1256px until 2026-11-26) | **Same** (renders identically at every width) |
 | Container padding | 8 → 16 (408px) → **32 (1008px)** | `--container-padding`: 8 → 16 (408px) → **32 (1008px)** | **Same** since 2026-11-20 (Mini*S reached 32px only at 1256px before) |
-| Narrow container | **1008px** box (944px content at 32px padding) | `--container-narrow-width` **752px** from 768px (720px content at 16px, 688px at 32px) | **Different level.** Mini*S "narrow" is production's *reading column*, not its narrow container |
+| Narrow container | **1008px** box (944px content at 32px padding) | `variant="medium"`: `--container-medium-width` 1008px from 1008px (since 2026-11-26) | **Same.** Mini*S calls it *medium*; Mini*S *narrow* is the reading column |
 | Reading/form column | 704px box, ~688px text | Mini*S narrow from 1008px: 752 − 2×32 = **688px** content | **Matches from 1008px**; at 768–1007px Mini*S gives 720px |
-| Page column system | ½ ⅓ ⅔ (¼ ¾ as placeholders), no 12-col grid on the public site | Guides prescribe a 12-column CSS grid | **Differs** |
-| Main + sidebar | Flex per component, ratio 2.2 : 1 to 3 : 1, gap 24–40px, sidebar on the right | Deal Detail: 8 + 4 columns (2 : 1), gap `--spacing-layout-xl` = 48px from 408px, aside on the right | **Same idea, different numbers.** Mini*S's 48px is wider than any production gap |
+| Page column system | ½ ⅓ ⅔ (¼ ¾ as placeholders), no 12-col grid on the public site | No page grid; `<minis-sidebar-layout>` + an optional CSS split (since 2026-11-26) | **Same idea** |
+| Main + sidebar | Flex per component, ratio 2.2 : 1 to 3 : 1, gap 24–40px, sidebar on the right, stacks below 1008px | `<minis-sidebar-layout>`: fluid main + 320px sidebar on the right, gap `--spacing-layout-lg` (32px), stacks below 1008px (since 2026-11-26) | **One rule** inside production's range (2.6 : 1 at 1240px) |
+| Layout spacing | `--layout-spacing-*` = the Figma Layout collection, one breakpoint per mode (1.4) | `--spacing-layout-*`: same values and tiers since 2026-11-26 (jumped to the desktop set at 408px before) | **Same** since 2026-11-26 |
 | Grids inside components | CSS grid, 4–16px gaps | `<minis-card-grid>` with container queries | **Same idea** |
-| Checkout | Narrow 1008px container + 704px column | [Checkout](./checkout.md): `<minis-container variant="narrow">` (752px) | Mini*S has **one level where production has two** |
+| Checkout | Narrow 1008px container + 704px column | [Checkout](./checkout.md): `variant="medium"` (1008px) for the steps + `variant="narrow"` (752px) for the cards | **Same two levels** (since 2026-11-26) |
 
-There were two mismatches worth knowing about before writing guides. The first is now fixed.
+There were two mismatches worth knowing about before writing guides. Both are fixed.
 
 - **The 1008–1255px band (fixed 2026-11-20).** Production switches to desktop layouts, including
   32px padding and side-by-side columns, at 1008px. Mini*S kept 16px padding until 1256px; its
-  container padding now also reaches 32px at 1008px. Side-by-side columns are still open
-  question 4.
-- **What "narrow" means.** Mini*S `variant="narrow"` is close to production's 704px
+  container padding now also reaches 32px at 1008px, and `<minis-sidebar-layout>` goes side by
+  side at 1008px (2026-11-26).
+- **What "narrow" means (fixed 2026-11-26 with `variant="medium"`).** Mini*S `variant="narrow"` is close to production's 704px
   reading/form column, and production's 1008px narrow container has no Mini*S counterpart. A
   checkout built with `variant="narrow"` matches the cart's text column, but anything production
   puts in the 1008px box outside that column (the step header and the full-width messages, for
@@ -185,7 +209,8 @@ The decisions and the guide work are tracked in plan
 [`todo-plans/030-layout-guides.md`](../../../todo-plans/030-layout-guides.md); record answers there too.
 
 These are **proposals for the Mini*S layout guides**. They describe what Mini*S could document or
-change. They are not production facts, and nothing here is decided.
+change. They are not production facts. The owner's decisions are marked **Resolved** with their
+date; the full record is in plan 030 → "Decided".
 
 ### Proposals
 
@@ -205,18 +230,21 @@ change. They are not production facts, and nothing here is decided.
 
 ### Open questions for the layout guide
 
-1. **Should Mini*S standardise the sidebar ratio and the gap?** If so, which ratio (2 : 1, 3 : 1,
-   or a fixed sidebar width such as 300–360px) and which gap token? Today's Deal Detail guide uses
-   `--spacing-layout-xl` (48px), wider than any measured production gap (24–40px).
+1. ~~**Should Mini*S standardise the sidebar ratio and the gap?**~~ **Resolved 2026-11-26: yes.**
+   A fixed **320px** sidebar (`--layout-sidebar-width`) on the right, a fluid main column, and the
+   gap `--spacing-layout-lg` (32px from 1008px). Inside the wide container that gives 592 + 32 + 320
+   at a 1008px viewport and 824 + 32 + 320 (2.6 : 1) from 1240px, in the middle of production's
+   2.2 : 1 – 3 : 1 range. Built as `<minis-sidebar-layout>`.
 2. ~~**Should Mini*S container padding reach 32px at 1008px, like production**, or stay at 1256px?~~
    **Resolved 2026-11-20: yes.** `--container-padding` and `--container-narrow-padding` are 32px
    from 1008px (Figma Layout mode `lg`), logged in `CHANGELOG.md`.
-3. **Does Mini*S need a 1008px container level?** For example, a third `<minis-container>`
-   variant, or renaming today's `narrow` (752px) to something like `reading`, with a new `narrow`
-   at 1008px. Renaming is an API change for `<minis-container>`.
-4. **Should the main + sidebar split switch at 1008px (production) or 768px?** The Deal Detail
-   guide stacks below 768px, so between 768 and 1007px it shows two columns where production shows
-   one.
+3. ~~**Does Mini*S need a 1008px container level?**~~ **Resolved 2026-11-26: yes, as
+   `<minis-container variant="medium">`** (max 1008px from 1008px, `--container-medium-width`,
+   944px content). Non-breaking: `variant="narrow"` (752px) stays and is documented as the
+   reading/form column.
+4. ~~**Should the main + sidebar split switch at 1008px (production) or 768px?**~~ **Resolved
+   2026-11-26: 1008px**, as production. `<minis-sidebar-layout>` goes side by side from a 1008px
+   viewport when its own width is at least 944px (what it gets inside a container there).
 5. **Are pages behind login (user account, checkout steps after the cart) built the same way?**
    They weren't measured. `layout-wrapper` (96 uses in the code) is most likely there.
 
@@ -250,4 +278,4 @@ change. They are not production facts, and nothing here is decided.
 
 ---
 
-**Last updated:** 2026-11-20
+**Last updated:** 2026-11-26

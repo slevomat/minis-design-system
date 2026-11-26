@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 
 ## 2026-11-26
 
+### Tokens — layout spacing follows Figma, one CSS tier per Figma mode (G12)
+
+- **Why:** Figma's Layout collection and `tokens.css` disagreed on `--spacing-layout-*` below 1008px (gap G12). Production's `app/stylus/settings/_variables.styl` carries the same Figma Layout collection, mode for mode, so Figma is right and `tokens.css` follows it (owner decision; plan 030 → "Decided", `docs/ai-prompts/layouts/production-reference.md` 1.4). From 1008px up nothing changes.
+- **Tiers:** `tokens.css` now has one media query per Figma Layout mode, named like the breakpoint it starts at: `default` < 360px (`:root`), `2xs` 360px (**new step**), `xs` 408px, `sm` 600px (**new step**), `md` 768px, `lg` 1008px, `xl` 1256px, `2xl` 1480px, `3xl` 1920px, `4xl` 2560px. Before, the 408px tier was called "sm" and there were no 360px and 600px steps.
+- `--spacing-layout-xs`: 408–599px `var(--linear-sp-linear-2)` (8px) → `var(--linear-sp-linear-1)` (4px).
+- `--spacing-layout-sm`: < 360px 12px → `var(--linear-sp-linear-2)` (8px); 408–599px 16px → `var(--linear-sp-linear-3)` (12px).
+- `--spacing-layout-md`: < 360px 16px → 12px; 408–767px 24px → 16px; 768–1007px 24px → `var(--linear-sp-linear-5)` (20px).
+- `--spacing-layout-lg`: < 600px 20px / 32px → `var(--linear-sp-linear-4)` (16px); 600–767px 32px → 20px; 768–1007px 32px → `var(--linear-sp-linear-6)` (24px).
+- `--spacing-layout-xl`: < 408px 32px → `var(--linear-sp-linear-5)` (20px); 408–599px 48px → 24px; 600–1007px 48px → `var(--linear-sp-linear-8)` (32px).
+- `--container-width`: the 1240px cap starts at 1008px (was 1256px). It renders like production's unconditional `max-width: 1240px`. Figma: `lg` and `xl` modes `100000px` → `1240`.
+- `--container-padding`, `--container-narrow-padding`: Figma only — `default` mode 32 → 8px (a leftover) and `xs` mode 8 → 16px (16px from 408px, as production and `tokens.css` already had). `tokens.css` values unchanged.
+- `--page-width`: 408–599px `var(--breakpoint-sm)` → `var(--breakpoint-xs)`, 600px+ `var(--breakpoint-sm)` (matches the Figma modes).
+- **New** `--container-medium-width`: `100%` below 1008px, `1008px` from 1008px (Figma `container/medium/width`). For `<minis-container variant="medium">`.
+- **New** `--layout-sidebar-width`: `320px` at every width (Figma `layout/sidebar/width`). For the main + sidebar layout.
+- **Effect on components between 360 and 1007px** (they get tighter, as in Figma): `<minis-alert>` padding and gap and `<minis-card-grid>` gap (`xs`) 8 → 4px at 408–599px; `<minis-tag>` padding (`xs` / `sm`) 8 → 4px and 16 → 12px at 408–599px; `<minis-page-header>` (`sm`, `lg`) `lg` 32px → 16 / 20 / 24px below 1008px.
+- **Storybook:** the Tier toolbar has one entry per Figma mode (`default`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl – 4xl`) instead of five grouped tiers; `.storybook/tier-tokens.ts` exports the tier list and `tierFromWidth()`. The hand-injected brand sizes for the widest tier are gone: the Figma `2xl` mode carries them.
+- **Export:** `tokens.json` and `tokens.rgb.json` re-exported with exporter 1.3.1 (`pnpm tokens:check` passes). Also in this export, not part of G12: the Gift theme `--theme-background`, `--theme-surface-faded`, `--theme-surface-primary` now reference `--color-schemas-gift-*` in the `gift` mode (was the classic values; fixed in Figma on 2026-11-20, `tokens.css` already had it). The `.Components` copy of `--accordion-padding-y`, which referenced itself, is no longer exported; the Layout token of the same name is unchanged.
+
+### Container — `variant="medium"` (1008px), and a Figma component
+
+- **New** `variant="medium"`: max width `--container-medium-width` (1008px from 1008px, full width below), padding `--container-padding`. For task pages (cart, login, checkout), matching production's 1008px `grid-wrap`. Non-breaking: `default` (1240px) and `narrow` (752px) are unchanged; `narrow` is now documented as the reading / form column. Owner decision, plan 030 question 2.
+- **Figma:** new `container` component set (Breakpoints & Containers page, node `6444:148`), `Variant` = `default | medium | narrow`, a `Content` slot, max width and padding bound to the Layout variables. New `container.figma.ts`; Storybook dev-resource link added. The Containers diagram on the same page gets a **Medium container** row, and all three rows describe when to use them.
+- Story: `Default vs Narrow` is replaced by `Width levels` (all three); the stories are now `layout: 'fullscreen'`, and the padding table follows the real tiers (8 / 16 from 408 / 32px from 1008).
+- `docs/ai-prompts/components/container.md`: the three width levels, which page type uses which.
+
+### Sidebar Layout — new `<minis-sidebar-layout>`
+
+- **New component** for main + sidebar pages (deal detail, listing with filters, magazine): default slot = main column (fluid), `slot="sidebar"` = right sidebar, fixed `--layout-sidebar-width` (320px), gap `--spacing-layout-lg`. Side by side from a 1008px viewport, and only when its own width is at least 944px (what it gets inside a container there); otherwise one column, main first. The viewport condition is a media query because container padding jumps 16 → 32px at 1008px, so the content box is wider at 1007px (975px) than at 1008px (944px) and a container query alone would switch at about 976px. CSS parts `main`, `sidebar`. Owner decisions, plan 030 questions 1 and 3.
+- **Figma:** `sidebar-layout` component set (node `6444:155`), `Layout` = `columns | stacked`, slots `Main` and `Sidebar`, bound to `layout/sidebar/width` and `spacing/layout/lg`. `sidebar-layout.figma.ts`, story, `docs/ai-prompts/components/sidebar-layout.md`, Storybook dev-resource link.
+
 ### Tooling — token-update skill and export checks
 
 - **New skill `minis-token-update`** (`.claude/skills/minis-token-update/`, with a `typography.md` reference file), for the design-system team: the one procedure for turning a Figma token export into repo changes (validate, diff, `tokens.css` merge, build, both changelogs, production hand-over note). **Every typography change goes through it** (a size, a line-height ratio, letter spacing, a new text role), because Figma's responsive text depends on generated `-px` line heights, typed percentages and exporter rules that are easy to get silently wrong by hand.
