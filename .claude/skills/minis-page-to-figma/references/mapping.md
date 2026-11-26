@@ -41,11 +41,12 @@ Decide in this order and stop at the first hit:
 | `.button` | `Button` `284:5283` | see Button table |
 | `.tags__item` (`_tags.styl`) | `tag` `2523:339` | `Variant=Clickable`, `State=Default` |
 | toggle filter tags | `tag/toggle` `3805:1161` | |
-| `.product-card`, `products-carousel` items | `Deal Card` `5495:768` | `Card usage=carousel` + `Content=Carousel HP` on the homepage, `list` + `Desktop`/`Mobile` on listings |
+| `article.product` (`ProductList/_product.latte`), `products-carousel` items | `Deal Card` `5495:768` | `Card usage=carousel` + `Content=Carousel HP` on the homepage, `list` + `Desktop`/`Mobile` on listings |
 | promo/branding tiles, magazine teasers with photo | `Promo Card` `5495:409` | `Breakpoint=Desktop|Mobile` |
-| `.dashboard-matrix` icon tiles | `Tile` `4208:4618` inside `card grid/navigation` `3729:5817` | `breakpoint` per width |
+| `.dashboard-matrix__item` (homepage grid: photo tiles with a text overlay, `HomepageGrid/`) | `Promo Card` `5495:409` | `Breakpoint=Desktop|Mobile`. Not `Tile` — checked on the 2026-11-26 capture |
+| icon + label shortcut grids | `Tile` `4208:4618` inside `card grid/navigation` `3729:5817` | `breakpoint` per width |
 | hero / campaign band with headline + controls | `PageHeader` `4642:396` | `Layout`, `Theme`, `Breakpoint` |
-| `.messages`, flash messages | `alert` `1751:351` / `Message/Message standalone` `2517:9568` | |
+| `.messages`, flash messages; `.municipality-note` (inline prompt with actions, closest) | `alert` `1751:351` / `Message/Message standalone` `2517:9568` | |
 | `.harmonica` (accordion) | `accordion` `5136:9716` / `accordion-item` `4984:9556` | `Size=default` |
 | counters in pills | `Pill_counter` `688:2895` | |
 | `.checkbox` inputs | `checkbox` `4192:5150` | |
@@ -54,7 +55,12 @@ Decide in this order and stop at the first hit:
 
 Not in Mini*S today (always a gap if met): site footer, USP strip (`.usps`), search banner /
 locality picker, rating stars, price block outside a Deal Card, breadcrumbs, pagination
-(`.button--paginator` is a Button, the paginator around it isn't), countdown banners.
+(`.button--paginator` is a Button, the paginator around it isn't), countdown banners, magazine
+post card (`.posts-grid__post`), point-of-interest card (`.point-of-interest__item`), branding
+banner (`.branding-banner`).
+
+Brand-theme bands (`.brand-theme--*`, e.g. the gifts band's purple) are token-built frames; their
+surface colour has no Mini*S semantic token (plan 027) → `no token`.
 
 ### Button
 
