@@ -15,6 +15,16 @@ All notable changes to this project will be documented in this file.
 - **Versioning:** plugin semver in `plugins/minis/.claude-plugin/plugin.json` only; releases are tagged `minis--v<version>` (`claude plugin tag`). Rules in `CLAUDE.md` → "Claude Code plugin".
 - Docs: `plugins/minis/README.md` (install, commands, update, project setup, requirements); README, `docs/vibe-coding-guide.md`, `docs/ai-prompts/index.md` and the Storybook Vibe Coding Guide → Skills ("Install the Mini*S plugin") point to the plugin instead of `cp -r`.
 
+### Tooling — token-update skill and export checks
+
+- **New skill `minis-token-update`** (`.claude/skills/minis-token-update/`, with a `typography.md` reference file), for the design-system team: the one procedure for turning a Figma token export into repo changes (validate, diff, `tokens.css` merge, build, both changelogs, production hand-over note). **Every typography change goes through it** (a size, a line-height ratio, letter spacing, a new text role), because Figma's responsive text depends on generated `-px` line heights, typed percentages and exporter rules that are easy to get silently wrong by hand.
+- **`pnpm tokens:check`** validates `tokens.json` and `tokens.rgb.json`: exporter version >= 1.3.1 and the same in both files, the four plugin settings on, no `line-height-px` token, no self-referencing value, sentinel names (`--color-border`, `--color-separator`, `--color-interaction-primary-surface` present, `--color-border-default` absent), the letter-spacing set `--typography-spacing-{n2,n1,n0_3,0,3}` with values matching their names, Layout line heights as percentages and sizes as px. `--css` also compares `tokens.css` with the export in every Layout mode (mode widths come from the export's `breakpoints` group); `--group-file <file>` checks a single-group file made for production and compares it with `tokens.rgb.json`. Exit code 1 on a failure, so CI can use it.
+- **`pnpm tokens:diff`** lists added, removed, renamed and re-valued tokens against `HEAD` (typography first, the Storybook Tier effect flagged) and fails when a token disappears that was not announced with `--expect-removed`.
+- **`pnpm --filter @minis/tokens test`**: 27 tests for both scripts, using in-memory fixtures.
+- No token or component changed. The current `tokens.json` (exporter 1.3.0) fails `tokens:check` until it is re-exported with exporter 1.3.1: it still holds the `--accordion-padding-y` self-reference and is one version behind `tokens.rgb.json`.
+- Docs: `CLAUDE.md` → Token exports and `docs/ai-prompts/typography.md` §6 point to the skill. Plans: 015 and 016 `done`, 009 `in-progress`.
+- **Vibe Coding Guide → Skills** (Storybook): a `minis-token-update` row (For: design-system team) and a "Where they live" note. Same listing in `README.md` (AI Skills table) and `docs/ai-prompts/index.md`.
+
 ## 2026-11-20
 
 ### Tokens — container padding reaches 32px at 1008px

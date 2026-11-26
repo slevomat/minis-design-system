@@ -578,7 +578,7 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
-      <!-- 2026-11-26 (minis plugin 0.1.0) -->
+      <!-- 2026-11-26 (minis plugin 0.1.0; token-update skill and export checks) -->
       <div class="cl-heading">
         <h2 id="2026-11-26" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-26</h2>
         <button class="cl-copy-btn" data-anchor="2026-11-26">
@@ -594,6 +594,17 @@ const changelogHTML = `
         <li><strong>Skills moved, not copied:</strong> their source is now <code>plugins/minis/skills/{app,figma-docs,page-to-figma}/</code>. <code>.claude/skills/minis-app</code>, <code>minis-figma-docs</code> and <code>minis-page-to-figma</code> are symlinks to them, so the old names keep working inside this repo (transition names).</li>
         <li><code>minis-app</code>: the <code>cp -r</code> instructions are replaced by the plugin install; with no checkout, step 1 offers to clone the public repo.</li>
         <li><strong>Versioning:</strong> the plugin has its own semver (<code>plugins/minis/.claude-plugin/plugin.json</code>); releases are tagged <code>minis--v&lt;version&gt;</code>.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Tooling — token-update skill and export checks</h3>
+      <ul>
+        <li><strong>New skill <code>minis-token-update</code></strong> (<code>.claude/skills/minis-token-update/</code>, with a <code>typography.md</code> reference file), for the design-system team: the one procedure for turning a Figma token export into repo changes (validate, diff, <code>tokens.css</code> merge, build, both changelogs, production hand-over note). <strong>Every typography change goes through it</strong> (a size, a line-height ratio, letter spacing, a new text role), because Figma's responsive text depends on generated <code>-px</code> line heights, typed percentages and exporter rules that are easy to get silently wrong by hand.</li>
+        <li><code>pnpm tokens:check</code> validates <code>tokens.json</code> and <code>tokens.rgb.json</code>: exporter version &gt;= 1.3.1 and the same in both files, the four plugin settings on, no <code>line-height-px</code> token, no self-referencing value, sentinel names (<code>--color-border</code>, <code>--color-separator</code>, <code>--color-interaction-primary-surface</code> present, <code>--color-border-default</code> absent), the letter-spacing set <code>--typography-spacing-{n2,n1,n0_3,0,3}</code> with values matching their names, Layout line heights as percentages and sizes as px. <code>--css</code> also compares <code>tokens.css</code> with the export in every Layout mode (mode widths come from the export's <code>breakpoints</code> group); <code>--group-file &lt;file&gt;</code> checks a single-group file made for production and compares it with <code>tokens.rgb.json</code>. Exit code 1 on a failure, so CI can use it.</li>
+        <li><code>pnpm tokens:diff</code> lists added, removed, renamed and re-valued tokens against <code>HEAD</code> (typography first, the Storybook Tier effect flagged) and fails when a token disappears that was not announced with <code>--expect-removed</code>.</li>
+        <li><code>pnpm --filter @minis/tokens test</code>: 27 tests for both scripts, using in-memory fixtures.</li>
+        <li>No token or component changed. The current <code>tokens.json</code> (exporter 1.3.0) fails <code>tokens:check</code> until it is re-exported with exporter 1.3.1: it still holds the <code>--accordion-padding-y</code> self-reference and is one version behind <code>tokens.rgb.json</code>.</li>
+        <li>Docs: <code>CLAUDE.md</code> → Token exports and <code>docs/ai-prompts/typography.md</code> §6 point to the skill. Plans: 015 and 016 <code>done</code>, 009 <code>in-progress</code>.</li>
+        <li><strong>Vibe Coding Guide → Skills</strong>: a <code>minis-token-update</code> row (For: design-system team) and a "Where they live" note. Same listing in <code>README.md</code> (AI Skills table) and <code>docs/ai-prompts/index.md</code>.</li>
       </ul>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
@@ -2512,6 +2523,12 @@ export const VibeCodingGuide: Story = {
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Rebuilds a live slevomat.cz page in the Mini*S Figma file from Mini*S components and bound variables (1280, 768 and 375 wide), with findings cards beside it: what Mini*S is missing and where it conflicts with production. Add <code>skip-audit</code> to get the rebuild only, to design on. Read-only on production.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Rebuild the slevomat.cz homepage in Figma"</em><br/><br/><code>/minis:page-to-figma /cestovani skip-audit</code></td>
           </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-token-update</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Turns a Figma token export into repo changes: checks the export, shows what changed, proposes the <code>tokens.css</code> merge for review, then drives the build, both changelogs and the note for production. <strong>Required for every typography change.</strong> It never edits Figma and never pushes.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"I re-exported the tokens from Figma, is it OK?"</em><br/><br/><em>"Heading/lg gets bigger on desktop — what do I need to do?"</em></td>
+          </tr>
         </tbody>
       </table>
 
@@ -2532,6 +2549,7 @@ export const VibeCodingGuide: Story = {
 
       <h3>Other skills</h3>
       <ul>
+        <li><strong><code>minis-token-update</code></strong> ships with this design system, at <code>.claude/skills/minis-token-update/</code>, and works inside this repo. Its checks are also plain commands you can run without an AI assistant: <code>pnpm tokens:check</code> and <code>pnpm tokens:diff</code>.</li>
         <li><strong><code>slevomat-design-principles</code></strong> is not shipped in this repo — it comes from the wider Slevomat AI setup. If your assistant doesn't know it, ask whoever set up your tooling.</li>
       </ul>
 
