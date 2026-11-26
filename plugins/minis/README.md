@@ -4,6 +4,9 @@ Every Mini*S skill as a slash command, in one install. The plugin lives in the d
 itself (`plugins/minis/`), and the repo is its own marketplace (`.claude-plugin/marketplace.json`),
 so a skill and the tokens and docs it describes always change in the same commit.
 
+> **Beta.** Every command is beta: it works and has been tested, but its steps and options may still
+> change between releases (0.x). Tell the design-system team when something goes wrong.
+
 ## Install
 
 In Claude Code:
@@ -25,11 +28,11 @@ and type `/minis:` to see the commands.
 
 ## Commands
 
-| Command | For | What it does | Needs |
-|---|---|---|---|
-| `/minis:app` | Anyone prototyping | Scaffolds an app or prototype on the Mini*S web components, picks the topbar variant, builds the screens from the component docs, checks the result in a browser (desktop, mobile, dark) | A checkout of this repo (the skill offers to clone it), Node 20+, pnpm |
-| `/minis:figma-docs` | Design-system team | Writes and updates the documentation cards in the MiniS DS Figma file from the internal docs kit | Figma MCP, edit access to the MiniS DS file |
-| `/minis:page-to-figma` | Design-system team, designers | Rebuilds a live slevomat.cz page in the MiniS DS Figma file from Mini*S library instances and bound variables (1280 / 768 / 375), with findings cards beside it: what Mini*S is missing, where it conflicts with production. `/minis:page-to-figma / skip-audit` = rebuild only. Read-only on production. Plan 031 | Claude in Chrome connected (the in-app browser can't open slevomat.cz), Figma MCP with edit access to MiniS DS |
+| Command | Status | For | What it does | Needs |
+|---|---|---|---|---|
+| `/minis:app` | Beta | Anyone prototyping | Scaffolds an app or prototype on the Mini*S web components, picks the topbar variant, builds the screens from the component docs, checks the result in a browser (desktop, mobile, dark) | A checkout of this repo (the skill offers to clone it), Node 20+, pnpm |
+| `/minis:figma-docs` | Beta | Design-system team | Writes and updates the documentation cards in the MiniS DS Figma file from the internal docs kit | Figma MCP, edit access to the MiniS DS file |
+| `/minis:page-to-figma` | Beta | Design-system team, designers | Rebuilds a live slevomat.cz page in the MiniS DS Figma file from Mini*S library instances and bound variables (1280 / 768 / 375), with findings cards beside it: what Mini*S is missing, where it conflicts with production. `/minis:page-to-figma / skip-audit` = rebuild only. Read-only on production. Plan 031 | Claude in Chrome connected (the in-app browser can't open slevomat.cz), Figma MCP with edit access to MiniS DS |
 
 You can also just describe the task ("build me an app for refund requests"); Claude picks the skill
 from its description. Options go after the command: `/minis:app a refund-requests admin tool`, `/minis:page-to-figma /cestovani skip-audit`.

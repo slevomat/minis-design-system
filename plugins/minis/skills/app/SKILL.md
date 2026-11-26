@@ -4,6 +4,8 @@ description: Scaffold and build an app or prototype with the Mini*S design syste
 
 # Build an app with Mini*S
 
+> **Beta.** This skill works and has been tested, but its steps and options may still change between plugin releases. Tell the design-system team when something goes wrong.
+
 Takes a request like *"an app for handling refund requests"* or *"a landing page for the summer campaign"* from nothing to a running, on-system page.
 
 ## Before anything else: two questions you must be able to answer

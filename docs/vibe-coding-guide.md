@@ -8,7 +8,7 @@ Build fully functional page prototypes using Mini*S components and an AI coding 
 
 ## Quick Start (5 minutes)
 
-> **Using Claude Code? The easiest way to start is the `/minis:app` command.** Install the Mini*S plugin once:
+> **Using Claude Code? The easiest way to start is the `/minis:app` command** (beta). Install the Mini*S plugin once:
 >
 > ```
 > /plugin marketplace add slevomat/minis-design-system

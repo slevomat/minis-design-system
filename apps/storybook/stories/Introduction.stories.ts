@@ -593,6 +593,7 @@ const changelogHTML = `
         <li><strong>Commands:</strong> <code>/minis:app</code> (scaffold and verify a prototype on the web components), <code>/minis:figma-docs</code> (documentation cards in the MiniS DS Figma file) and <code>/minis:page-to-figma</code> (rebuild a live slevomat.cz page in Figma from Mini*S instances and bound variables, with findings cards; <code>skip-audit</code> = rebuild only; plan 031).</li>
         <li><strong>Skills moved, not copied:</strong> their source is now <code>plugins/minis/skills/{app,figma-docs,page-to-figma}/</code>. <code>.claude/skills/minis-app</code>, <code>minis-figma-docs</code> and <code>minis-page-to-figma</code> are symlinks to them, so the old names keep working inside this repo (transition names).</li>
         <li><code>minis-app</code>: the <code>cp -r</code> instructions are replaced by the plugin install; with no checkout, step 1 offers to clone the public repo.</li>
+        <li><strong>Beta:</strong> every command, and <code>minis-token-update</code>, is marked beta in the docs, the Storybook Skills table and the Figma READ-ME card.</li>
         <li><strong>Versioning:</strong> the plugin has its own semver (<code>plugins/minis/.claude-plugin/plugin.json</code>); releases are tagged <code>minis--v&lt;version&gt;</code>.</li>
       </ul>
 
@@ -2489,7 +2490,7 @@ export const VibeCodingGuide: Story = {
       <!-- ═══════════════════════════════════════════════════════════════ -->
 
       <h2 id="skills" style="scroll-margin-top:1rem">Skills — shortcuts you can just ask for</h2>
-      <p>A <strong>skill</strong> is a set of instructions your AI assistant loads on demand. You don't run a command or read the file — you describe what you want in plain language, and the assistant picks the matching skill up automatically. You can also invoke one by name with a slash, e.g. <code>/minis:app</code>. In Claude Code, all Mini*S skills come in one install: the <strong><code>minis</code> plugin</strong> (below).</p>
+      <p>A <strong>skill</strong> is a set of instructions your AI assistant loads on demand. You don't run a command or read the file — you describe what you want in plain language, and the assistant picks the matching skill up automatically. You can also invoke one by name with a slash, e.g. <code>/minis:app</code>. In Claude Code, all Mini*S skills come in one install: the <strong><code>minis</code> plugin</strong> (below). All Mini*S skills are <strong>beta</strong>: they work and have been tested, but their steps and options may still change between releases.</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0">
         <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
@@ -2500,7 +2501,7 @@ export const VibeCodingGuide: Story = {
         </tr></thead>
         <tbody>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:app</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:app</code></strong> <span style="display:inline-block;margin-left:.25rem;padding:0 .4rem;border-radius:4px;font-size:.75rem;font-weight:600;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce)">Beta</span></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Anyone prototyping</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Builds a whole app or prototype from scratch: sets the project up, picks the right topbar variant, writes your screens with real Mini*S components and tokens, then checks the result in a browser (desktop, mobile and dark mode) before telling you it's done.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Build me an app for handling refund requests"</em><br/><br/><em>"Make a landing page for the summer campaign"</em></td>
@@ -2512,19 +2513,19 @@ export const VibeCodingGuide: Story = {
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Check this screen against our design principles"</em></td>
           </tr>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:figma-docs</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:figma-docs</code></strong> <span style="display:inline-block;margin-left:.25rem;padding:0 .4rem;border-radius:4px;font-size:.75rem;font-weight:600;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce)">Beta</span></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice. Builds only from the file's internal docs kit; it never touches the code docs.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Document the Tag component in Figma"</em><br/><br/><em>"Add today's change to the Checkbox changelog card"</em></td>
           </tr>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:page-to-figma</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:page-to-figma</code></strong> <span style="display:inline-block;margin-left:.25rem;padding:0 .4rem;border-radius:4px;font-size:.75rem;font-weight:600;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce)">Beta</span></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team, designers</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Rebuilds a live slevomat.cz page in the Mini*S Figma file from Mini*S components and bound variables (1280, 768 and 375 wide), with findings cards beside it: what Mini*S is missing and where it conflicts with production. Add <code>skip-audit</code> to get the rebuild only, to design on. Read-only on production.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Rebuild the slevomat.cz homepage in Figma"</em><br/><br/><code>/minis:page-to-figma /cestovani skip-audit</code></td>
           </tr>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-token-update</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-token-update</code></strong> <span style="display:inline-block;margin-left:.25rem;padding:0 .4rem;border-radius:4px;font-size:.75rem;font-weight:600;background:var(--color-surface-faded,#f1f3f5);border:1px solid var(--color-border,#cbccce)">Beta</span></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Turns a Figma token export into repo changes: checks the export, shows what changed, proposes the <code>tokens.css</code> merge for review, then drives the build, both changelogs and the note for production. <strong>Required for every typography change.</strong> It never edits Figma and never pushes.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"I re-exported the tokens from Figma, is it OK?"</em><br/><br/><em>"Heading/lg gets bigger on desktop — what do I need to do?"</em></td>

@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - **New skill `page-to-figma`** (plan 031, from branch `page-to-figma-031`): source `plugins/minis/skills/page-to-figma/`, symlinked as `.claude/skills/minis-page-to-figma`. A new page type's build body is saved in the repo's plugin folder (or the run folder outside the repo), never into an installed plugin's cache. The homepage pilot's mapping and findings are in `audits/page-to-figma/2026-11-26-homepage/`. The `name:` frontmatter is gone: the folder name decides the command.
 - `minis-app`: "Using this skill outside the monorepo" (`cp -r` into `~/.claude/skills/`) is replaced by the plugin install. Step 1 now offers to clone the public repo when there is no checkout.
 - `minis-figma-docs`: the palette scripts are referenced as `${CLAUDE_SKILL_DIR}/scripts/`; a note says what it needs to run outside the repo.
+- **Beta:** every command, and `minis-token-update`, is marked beta in the plugin README, the skills' own text, README, `docs/ai-prompts/index.md`, the Storybook Skills table and the Figma READ-ME card.
 - **Versioning:** plugin semver in `plugins/minis/.claude-plugin/plugin.json` only; releases are tagged `minis--v<version>` (`claude plugin tag`). Rules in `CLAUDE.md` → "Claude Code plugin".
 - Docs: `plugins/minis/README.md` (install, commands, update, project setup, requirements); README, `docs/vibe-coding-guide.md`, `docs/ai-prompts/index.md` and the Storybook Vibe Coding Guide → Skills ("Install the Mini*S plugin") point to the plugin instead of `cp -r`.
 

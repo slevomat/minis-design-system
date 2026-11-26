@@ -13,6 +13,8 @@ description: FIGMA ONLY — write or update a documentation card inside the Mini
 
 # Mini*S documentation cards in Figma
 
+> **Beta.** This skill works and has been tested, but its steps and options may still change between plugin releases. Tell the design-system team when something goes wrong.
+
 > **Runs anywhere** (as `/minis:figma-docs` from the `minis` plugin, or `/minis-figma-docs` inside
 > the design system repo). Needs the Figma MCP connected and edit access to the MiniS DS file. The
 > sources it reads — `CHANGELOG.md`, `docs/ai-prompts/` — come from a Mini*S checkout when you're in

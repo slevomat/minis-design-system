@@ -5,6 +5,8 @@ argument-hint: <url-or-path> [skip-audit]
 
 # Production page → Figma
 
+> **Beta.** This skill works and has been tested, but its steps and options may still change between plugin releases. Tell the design-system team when something goes wrong.
+
 Rebuilds one public slevomat.cz page in Figma, built from Mini*S components and variables. Next
 to the rebuild it adds findings cards that list what Mini*S lacks and where the page and Mini*S
 disagree.

@@ -8,7 +8,7 @@
     {
       "name": "minis",
       "source": "./plugins/minis",
-      "description": "Mini*S design system skills: /minis:app, /minis:figma-docs, /minis:page-to-figma.",
+      "description": "Mini*S design system skills (beta): /minis:app, /minis:figma-docs, /minis:page-to-figma.",
       "category": "design"
     }
   ]

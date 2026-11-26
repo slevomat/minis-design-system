@@ -356,6 +356,7 @@ The repo is its own marketplace (`.claude-plugin/marketplace.json`, name `minis-
 - `.claude/skills/minis-app`, `minis-figma-docs` and `minis-page-to-figma` are **symlinks** to the plugin folders (transition names `/minis-app`, `/minis-figma-docs`, `/minis-page-to-figma`). Never replace them with copies.
 - Bundled files are referenced as `${CLAUDE_SKILL_DIR}/…` (works both as plugin and project skill). Nothing outside the plugin folder is copied on install, so a skill must not read `../` paths from its own folder; repo files are read from the user's checkout.
 - A skill that only works in a Mini*S checkout checks for `packages/tokens` + `tokens.json` first and stops with a message elsewhere.
+- **Every command is beta** (plugin 0.x): marked in the plugin README, each `SKILL.md` (a `> **Beta.**` line under the H1), README, `docs/ai-prompts/index.md`, the Storybook Skills table and the Figma READ-ME card. Dropping the label is the owner's call, done in all of those at once.
 - A new command joins only once its skill works. Add it to the README's command table and the Storybook Vibe Coding Guide → Skills.
 - **Release:** bump `version` in `plugins/minis/.claude-plugin/plugin.json` only (never in `marketplace.json`; Claude Code caches by version, so an unbumped change never reaches users), log it in both changelogs under "Plugin", run `claude plugin validate plugins/minis` and `claude plugin validate .`, commit, then `claude plugin tag plugins/minis` (tag `minis--v<version>`). The owner pushes.
 
