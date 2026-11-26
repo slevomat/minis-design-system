@@ -1,7 +1,7 @@
 ---
 id: 009
 title: Token-update skill (typography first)
-status: draft
+status: in-progress
 created: 2026-10-29
 updated: 2026-11-26
 owner: Lexislav
@@ -34,7 +34,7 @@ owner: Lexislav
 > (`SKILL.md`, `typography.md`), `packages/tokens/scripts/{check-export,diff-export}.mjs` with
 > `lib/export-utils.mjs` and a test file, and the root scripts `pnpm tokens:check` / `pnpm tokens:diff`.
 > The open questions were answered with working defaults so the work could proceed; see "Working
-> answers" under Open questions. Status is still `draft`; moving it is the owner's call.
+> answers" under Open questions. **Moved to `in-progress` by the owner, 2026-11-26.**
 
 ## The problem
 

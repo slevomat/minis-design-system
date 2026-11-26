@@ -86,7 +86,7 @@ work on the plans in.
 | 006 | [minis-app — sandbox skill that registers new work as Local](006-minis-app-register-local.md) | `draft` | 2026-11-13 |
 | 007 | [Todo-plan writing skill](007-todo-plan-skill.md) | `draft` | 2026-10-29 |
 | 008 | [Bug-reporting skill and /minis:bug command](008-bug-report-skill.md) | `draft` | 2026-10-29 |
-| 009 | [Token-update skill (typography first)](009-token-update-skill.md) | `draft` | 2026-11-26 |
+| 009 | [Token-update skill (typography first)](009-token-update-skill.md) | `in-progress` | 2026-11-26 |
 | 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-11-13 |
 | 011 | [Enforce "tokens only" with Stylelint](011-stylelint-tokens-only.md) | `draft` | 2026-11-13 |
 | 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-13 |

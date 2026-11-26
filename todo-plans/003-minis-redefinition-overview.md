@@ -400,7 +400,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis:bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (typography first) | draft | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
+| 009 | Token-update skill (typography first) | **in-progress** | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 1 / 7 | Claude Code marketplace plugin decided 2026-11-21 (every skill as a slash command, added slowly; `/minis:page-to-figma` among the first; very important, not the only channel); 14 further command candidates listed; open: where it lives, which marketplace |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
