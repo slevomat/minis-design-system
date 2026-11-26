@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-26
+
+### Tokens — layout spacing follows Figma, one CSS tier per Figma mode (G12)
+
+- **Why:** Figma's Layout collection and `tokens.css` disagreed on `--spacing-layout-*` below 1008px (gap G12). Production's `app/stylus/settings/_variables.styl` carries the same Figma Layout collection, mode for mode, so Figma is right and `tokens.css` follows it (owner decision; plan 030 → "Decided", `docs/ai-prompts/layouts/production-reference.md` 1.4). From 1008px up nothing changes.
+- **Tiers:** `tokens.css` now has one media query per Figma Layout mode, named like the breakpoint it starts at: `default` < 360px (`:root`), `2xs` 360px (**new step**), `xs` 408px, `sm` 600px (**new step**), `md` 768px, `lg` 1008px, `xl` 1256px, `2xl` 1480px, `3xl` 1920px, `4xl` 2560px. Before, the 408px tier was called "sm" and there were no 360px and 600px steps.
+- `--spacing-layout-xs`: 408–599px `var(--linear-sp-linear-2)` (8px) → `var(--linear-sp-linear-1)` (4px).
+- `--spacing-layout-sm`: < 360px 12px → `var(--linear-sp-linear-2)` (8px); 408–599px 16px → `var(--linear-sp-linear-3)` (12px).
+- `--spacing-layout-md`: < 360px 16px → 12px; 408–767px 24px → 16px; 768–1007px 24px → `var(--linear-sp-linear-5)` (20px).
+- `--spacing-layout-lg`: < 600px 20px / 32px → `var(--linear-sp-linear-4)` (16px); 600–767px 32px → 20px; 768–1007px 32px → `var(--linear-sp-linear-6)` (24px).
+- `--spacing-layout-xl`: < 408px 32px → `var(--linear-sp-linear-5)` (20px); 408–599px 48px → 24px; 600–1007px 48px → `var(--linear-sp-linear-8)` (32px).
+- `--container-width`: the 1240px cap starts at 1008px (was 1256px). It renders like production's unconditional `max-width: 1240px`. Figma: `lg` and `xl` modes `100000px` → `1240`.
+- `--container-padding`, `--container-narrow-padding`: Figma only — `default` mode 32 → 8px (a leftover) and `xs` mode 8 → 16px (16px from 408px, as production and `tokens.css` already had). `tokens.css` values unchanged.
+- `--page-width`: 408–599px `var(--breakpoint-sm)` → `var(--breakpoint-xs)`, 600px+ `var(--breakpoint-sm)` (matches the Figma modes).
+- **New** `--container-medium-width`: `100%` below 1008px, `1008px` from 1008px (Figma `container/medium/width`). For `<minis-container variant="medium">`.
+- **New** `--layout-sidebar-width`: `320px` at every width (Figma `layout/sidebar/width`). For the main + sidebar layout.
+- **Effect on components between 360 and 1007px** (they get tighter, as in Figma): `<minis-alert>` padding and gap and `<minis-card-grid>` gap (`xs`) 8 → 4px at 408–599px; `<minis-tag>` padding (`xs` / `sm`) 8 → 4px and 16 → 12px at 408–599px; `<minis-page-header>` (`sm`, `lg`) `lg` 32px → 16 / 20 / 24px below 1008px.
+- **Storybook:** the Tier toolbar has one entry per Figma mode (`default`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl – 4xl`) instead of five grouped tiers; `.storybook/tier-tokens.ts` exports the tier list and `tierFromWidth()`. The hand-injected brand sizes for the widest tier are gone: the Figma `2xl` mode carries them.
+- **Export:** `tokens.json` and `tokens.rgb.json` re-exported with exporter 1.3.1 (`pnpm tokens:check` passes). Also in this export, not part of G12: the Gift theme `--theme-background`, `--theme-surface-faded`, `--theme-surface-primary` now reference `--color-schemas-gift-*` in the `gift` mode (was the classic values; fixed in Figma on 2026-11-20, `tokens.css` already had it). The `.Components` copy of `--accordion-padding-y`, which referenced itself, is no longer exported; the Layout token of the same name is unchanged.
+
 ## 2026-11-20
 
 ### Tokens — container padding reaches 32px at 1008px

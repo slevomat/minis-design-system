@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/web-components';
 import { html } from 'lit';
-import { TIER_TOKENS } from './tier-tokens';
+import { TIER_TOKENS, TIERS, WIDEST_TIER, tierFromWidth } from './tier-tokens';
 
 /**
  * Token overrides per Layout collection tier (mirrors Figma "Layout" variable
@@ -13,14 +13,6 @@ import { TIER_TOKENS } from './tier-tokens';
  * window.innerWidth directly and picks the matching tier (see below).
  */
 
-function tierFromWidth(px: number): string {
-  if (px <= 407) return '2xs_xs';
-  if (px <= 767) return 'sm';
-  if (px <= 1007) return 'md';
-  if (px <= 1255) return 'lg';
-  return 'xl';
-}
-
 function applyViewportTokens(tier: string) {
   const id = 'minis-viewport-tokens';
   let el = document.getElementById(id) as HTMLStyleElement | null;
@@ -29,7 +21,7 @@ function applyViewportTokens(tier: string) {
     el.id = id;
     document.head.appendChild(el);
   }
-  el.textContent = `:root { ${TIER_TOKENS[tier] ?? TIER_TOKENS['xl']} }`;
+  el.textContent = `:root { ${TIER_TOKENS[tier] ?? TIER_TOKENS[WIDEST_TIER]} }`;
 }
 
 function emitTierGlobal(tier: string) {
@@ -38,7 +30,7 @@ function emitTierGlobal(tier: string) {
 }
 
 // Track the Tier dropdown value so the resize listener can reference it.
-let _manualTier = 'xl';
+let _manualTier = WIDEST_TIER;
 // Prevents the decorator from treating a resize-triggered globals update as a user selection.
 let _resizeEmitting = false;
 
@@ -46,7 +38,7 @@ let _resizeEmitting = false;
 // Device presets take precedence (narrow wins); manual Tier dropdown wins when wide.
 window.addEventListener('resize', () => {
   const autoTier = tierFromWidth(window.innerWidth);
-  const tier = autoTier !== 'xl' ? autoTier : _manualTier;
+  const tier = autoTier !== WIDEST_TIER ? autoTier : _manualTier;
   applyViewportTokens(tier);
   _resizeEmitting = true;
   emitTierGlobal(tier);
@@ -62,14 +54,14 @@ const preview: Preview = {
         document.documentElement.removeAttribute('data-mode');
       }
 
-      const globalTier: string = context.globals.tier || 'xl';
+      const globalTier: string = context.globals.tier || WIDEST_TIER;
       if (_resizeEmitting) {
         _resizeEmitting = false; // globals update came from resize, not from Tier dropdown
       } else {
         _manualTier = globalTier; // user clicked the Tier dropdown — store their choice
       }
       const autoTier = tierFromWidth(window.innerWidth);
-      const tier = autoTier !== 'xl' ? autoTier : _manualTier;
+      const tier = autoTier !== WIDEST_TIER ? autoTier : _manualTier;
       applyViewportTokens(tier);
 
       // Fullscreen stories (e.g. page-header) must span the full iframe width —
@@ -127,16 +119,10 @@ const preview: Preview = {
     tier: {
       name: 'Tier',
       description: 'Simulate Layout collection tiers (mirrors Figma modes)',
-      defaultValue: 'xl',
+      defaultValue: WIDEST_TIER,
       toolbar: {
         icon: 'grid',
-        items: [
-          { value: '2xs_xs', title: '2xs / xs', right: '≤407px' },
-          { value: 'sm',     title: 'sm',       right: '408–767px' },
-          { value: 'md',     title: 'md',       right: '768–1007px' },
-          { value: 'lg',     title: 'lg',       right: '1008–1255px' },
-          { value: 'xl',     title: 'xl – 4xl', right: '≥1256px' },
-        ],
+        items: TIERS.map(({ value, title, right }) => ({ value, title, right })),
         dynamicTitle: true,
       },
     },

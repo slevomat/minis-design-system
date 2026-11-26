@@ -578,6 +578,35 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-26 (G12 layout spacing, layout guides) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-26" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-26</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-26">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tokens — layout spacing follows Figma, one CSS tier per Figma mode (G12)</h3>
+      <ul>
+        <li><strong>Why:</strong> Figma's Layout collection and <code>tokens.css</code> disagreed on <code>--spacing-layout-*</code> below 1008px. Production's <code>_variables.styl</code> carries the same Figma Layout collection, mode for mode, so Figma is right and <code>tokens.css</code> follows it. From 1008px up nothing changes.</li>
+        <li><strong>Tiers:</strong> one media query per Figma mode, named like its breakpoint: <code>default</code> &lt; 360px, <code>2xs</code> 360px (new step), <code>xs</code> 408px, <code>sm</code> 600px (new step), <code>md</code> 768px, <code>lg</code> 1008px, <code>xl</code> 1256px, <code>2xl</code> 1480px, <code>3xl</code>, <code>4xl</code>.</li>
+        <li><code>--spacing-layout-xs</code>: 408–599px 8px → 4px.</li>
+        <li><code>--spacing-layout-sm</code>: &lt; 360px 12px → 8px; 408–599px 16px → 12px.</li>
+        <li><code>--spacing-layout-md</code>: &lt; 360px 16px → 12px; 408–767px 24px → 16px; 768–1007px 24px → 20px.</li>
+        <li><code>--spacing-layout-lg</code>: &lt; 600px 20 / 32px → 16px; 600–767px 32px → 20px; 768–1007px 32px → 24px.</li>
+        <li><code>--spacing-layout-xl</code>: &lt; 408px 32px → 20px; 408–599px 48px → 24px; 600–1007px 48px → 32px.</li>
+        <li><code>--container-width</code>: the 1240px cap starts at 1008px (was 1256px), like production's <code>max-width: 1240px</code>. Figma <code>lg</code>/<code>xl</code> 100000px → 1240.</li>
+        <li><code>--container-padding</code>, <code>--container-narrow-padding</code>: Figma only — <code>default</code> mode 32 → 8px, <code>xs</code> mode 8 → 16px. <code>tokens.css</code> unchanged.</li>
+        <li><code>--page-width</code>: 408–599px <code>var(--breakpoint-sm)</code> → <code>var(--breakpoint-xs)</code>.</li>
+        <li><strong>New</strong> <code>--container-medium-width</code>: 100% below 1008px, 1008px from 1008px. <strong>New</strong> <code>--layout-sidebar-width</code>: 320px.</li>
+        <li><strong>Effect</strong> between 360 and 1007px (tighter, as in Figma): alert padding/gap and card-grid gap 8 → 4px at 408–599px; tag padding 8 → 4px and 16 → 12px at 408–599px; page-header <code>lg</code> 32px → 16 / 20 / 24px below 1008px.</li>
+        <li><strong>Storybook:</strong> the Tier toolbar has one entry per Figma mode (<code>default</code> … <code>2xl – 4xl</code>) instead of five grouped tiers.</li>
+        <li><strong>Export:</strong> re-exported with exporter 1.3.1, <code>pnpm tokens:check</code> passes. Also in it: Gift theme <code>--theme-background</code> / <code>-surface-faded</code> / <code>-surface-primary</code> now reference <code>--color-schemas-gift-*</code> (tokens.css already had it); the self-referencing <code>.Components</code> copy of <code>--accordion-padding-y</code> is no longer exported (the Layout token stays).</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-20 (Figma exports re-exported with exporter 1.3) -->
       <div class="cl-heading">
         <h2 id="2026-11-20" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-20</h2>

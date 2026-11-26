@@ -1496,7 +1496,7 @@
   "--accordion-padding-y": {
     "hex": "24px",
     "rgb": null,
-    "oklch": "var(--accordion-padding-y)",
+    "oklch": "var(--linear-sp-linear-6)",
     "heritage": ""
   },
   "--border-radius-full": {
@@ -1553,6 +1553,12 @@
     "oklch": "var(--linear-sp-linear-8)",
     "heritage": ""
   },
+  "--container-medium-width": {
+    "hex": "1008px",
+    "rgb": "rgb(16, 8, NaN)",
+    "oklch": "1008px",
+    "heritage": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width."
+  },
   "--container-narrow-padding": {
     "hex": "32px",
     "rgb": null,
@@ -1582,6 +1588,12 @@
     "rgb": null,
     "oklch": "0px",
     "heritage": ""
+  },
+  "--layout-sidebar-width": {
+    "hex": "320px",
+    "rgb": null,
+    "oklch": "320px",
+    "heritage": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width."
   },
   "--page-width": {
     "hex": "2560px",
@@ -3244,7 +3256,7 @@
       "fontFamily": "Kensington",
       "fontWeight": 700,
       "fontSize": "24px",
-      "lineHeight": "110%",
+      "lineHeight": "var(--typography-brand-lg-line-height)",
       "letterSpacing": "0.03em",
       "textDecoration": "none",
       "textTransform": "uppercase"
@@ -3266,7 +3278,7 @@
       "fontFamily": "Kensington",
       "fontWeight": 700,
       "fontSize": "32px",
-      "lineHeight": "110%",
+      "lineHeight": "var(--typography-brand-xl-line-height)",
       "letterSpacing": "0.03em",
       "textDecoration": "none",
       "textTransform": "uppercase"
@@ -3488,13 +3500,13 @@
   "--theme-surface-faded": {
     "hex": "#f1f3f5",
     "rgb": "rgb(241, 243, 245)",
-    "oklch": "var(--color-schemas-classic-surface-faded)",
+    "oklch": "var(--color-schemas-gift-surface-faded)",
     "heritage": ""
   },
   "--theme-surface-primary": {
     "hex": "#ffffff",
     "rgb": "rgb(255, 255, 255)",
-    "oklch": "var(--color-schemas-classic-surface-primary)",
+    "oklch": "var(--color-schemas-gift-surface-primary)",
     "heritage": ""
   },
   "--theme-text-accent-link": {
@@ -3504,9 +3516,9 @@
     "heritage": ""
   },
   "--theme-background": {
-    "hex": "#fcfdff",
-    "rgb": "rgb(252, 253, 255)",
-    "oklch": "var(--color-schemas-classic-background)",
+    "hex": "#ffffff",
+    "rgb": "rgb(255, 255, 255)",
+    "oklch": "var(--color-schemas-gift-background)",
     "heritage": ""
   },
   "--effect-background-blur-10": {

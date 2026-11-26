@@ -1,6 +1,6 @@
 {
   "$metadata": {
-    "exportDate": "2026-11-20T10:00:46.890Z",
+    "exportDate": "2026-11-26T15:08:50.601Z",
     "exportMode": "resolved",
     "figmaFile": "MiniS DS",
     "exporterVersion": "1.3.1",
@@ -2418,9 +2418,18 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "100000px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
-            "value": "32px",
+            "value": "8px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2433,7 +2442,7 @@
           }
         },
         "padding": {
-          "value": "32px",
+          "value": "8px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2450,6 +2459,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -2692,6 +2710,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "100000px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "8px",
@@ -2724,6 +2751,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -2966,9 +3002,18 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "100000px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
-            "value": "8px",
+            "value": "16px",
             "type": "float",
             "cssName": "--container-narrow-padding",
             "origin": null
@@ -2981,7 +3026,7 @@
           }
         },
         "padding": {
-          "value": "8px",
+          "value": "16px",
           "type": "float",
           "cssName": "--container-padding",
           "origin": null
@@ -2998,6 +3043,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -3240,6 +3294,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "100000px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "16px",
@@ -3272,6 +3335,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -3514,6 +3586,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "100000px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "16px",
@@ -3546,6 +3627,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -3788,6 +3878,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "1008px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "32px",
@@ -3809,7 +3908,7 @@
           "origin": null
         },
         "width": {
-          "value": "100000px",
+          "value": "1240px",
           "type": "float",
           "cssName": "--container-width",
           "origin": null
@@ -3820,6 +3919,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -4062,6 +4170,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "1008px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "32px",
@@ -4083,7 +4200,7 @@
           "origin": null
         },
         "width": {
-          "value": "100000px",
+          "value": "1240px",
           "type": "float",
           "cssName": "--container-width",
           "origin": null
@@ -4094,6 +4211,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -4336,6 +4462,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "1008px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "32px",
@@ -4368,6 +4503,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -4610,6 +4754,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "1008px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "32px",
@@ -4642,6 +4795,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -4884,6 +5046,15 @@
             "origin": null
           }
         },
+        "medium": {
+          "width": {
+            "value": "1008px",
+            "type": "float",
+            "cssName": "--container-medium-width",
+            "comment": "Medium container (task pages: cart, login, checkout). 100% (100000px) below lg; 1008px from lg (1008px). CSS --container-medium-width.",
+            "origin": null
+          }
+        },
         "narrow": {
           "padding": {
             "value": "32px",
@@ -4916,6 +5087,15 @@
           "value": "0px",
           "type": "float",
           "cssName": "--elevation-none",
+          "origin": null
+        }
+      },
+      "sidebar": {
+        "width": {
+          "value": "320px",
+          "type": "float",
+          "cssName": "--layout-sidebar-width",
+          "comment": "Fixed sidebar width of the main + sidebar layout (<minis-sidebar-layout>). Main column is fluid; stacks below 1008px. CSS --layout-sidebar-width.",
           "origin": null
         }
       },
@@ -7070,10 +7250,10 @@
         }
       },
       "background": {
-        "value": "#fcfdff",
+        "value": "#ffffff",
         "type": "color",
         "cssName": "--theme-background",
-        "origin": "--color-blue-99"
+        "origin": "--color-core-white"
       }
     }
   },
