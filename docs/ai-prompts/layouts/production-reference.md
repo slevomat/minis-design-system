@@ -243,8 +243,8 @@ date; the full record is in plan 030 → "Decided".
    944px content). Non-breaking: `variant="narrow"` (752px) stays and is documented as the
    reading/form column.
 4. ~~**Should the main + sidebar split switch at 1008px (production) or 768px?**~~ **Resolved
-   2026-11-26: 1008px**, as production. `<minis-sidebar-layout>` switches at 944px of its own
-   width, which is what it gets inside a container at a 1008px viewport.
+   2026-11-26: 1008px**, as production. `<minis-sidebar-layout>` goes side by side from a 1008px
+   viewport when its own width is at least 944px (what it gets inside a container there).
 5. **Are pages behind login (user account, checkout steps after the cart) built the same way?**
    They weren't measured. `layout-wrapper` (96 uses in the code) is most likely there.
 

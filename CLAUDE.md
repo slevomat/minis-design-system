@@ -31,7 +31,7 @@ docs/
 - **Primitive pixel scale**: `--pixel-px-{n}` (e.g. `--pixel-px-22` = 22px)
 - **Linear spacing**: `--linear-sp-linear-{n}` (e.g. `--linear-sp-linear-3` = 12px)
 - **Fibonacci spacing**: `--fibonachi-sp-fib-{n}` (e.g. `--fibonachi-sp-fib-8` = 34px)
-- **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values scale with the viewport breakpoint tier (e.g. `--spacing-layout-sm` = 12px mobile → 16px from 408px up). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`.
+- **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values follow the Figma Layout modes, one CSS tier per mode named like its breakpoint (`default` < 360, `2xs` 360, `xs` 408, `sm` 600, `md` 768, `lg` 1008, `xl` 1256, `2xl`+ 1480; e.g. `--spacing-layout-sm` = 8px → 12px from 360px → 16px from 600px). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`, `--container-medium-width`, `--container-narrow-width`, `--layout-sidebar-width` (320px).
 - **Border radius**: `--border-radius-{none|sm|md|lg|xl|full}` (0 / 4 / 8 / 12 / 16 / 9999px)
 - **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (`'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` — banner headlines only). **Kensington is Slevomat-proprietary and NOT in the repo** — Bebas Neue (Google Fonts) is the public fallback. Both faces are all-caps and single-weight, so brand text is always `text-transform: uppercase` at `--typography-brand-weight` (400) — never `--typography-weight-bold`, which synthesises a fake bold. To use the real font locally, see `packages/tokens/src/fonts/README.md`.
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
@@ -208,6 +208,7 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
+- Layout components (Breakpoints & Containers page `166:8121`): `container` component set `6444:148` (`Variant` = `default | medium | narrow`), `sidebar-layout` component set `6444:155` (`Layout` = `columns | stacked`). Both bound to Layout variables; the Containers diagram is frame `1970:14`.
 - Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator`, not `--color-border-subtle`)
 - **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (`.claude/skills/minis-figma-docs/`). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
@@ -363,6 +364,7 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/navigation.md`
 - `docs/ai-prompts/components/menu.md`
 - `docs/ai-prompts/components/container.md`
+- `docs/ai-prompts/components/sidebar-layout.md`
 - `docs/ai-prompts/components/topbar.md`
 - `docs/ai-prompts/components/checkbox.md`
 - `docs/ai-prompts/components/action-row.md`

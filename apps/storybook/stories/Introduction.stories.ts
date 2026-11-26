@@ -605,6 +605,19 @@ const changelogHTML = `
         <li><strong>Export:</strong> re-exported with exporter 1.3.1, <code>pnpm tokens:check</code> passes. Also in it: Gift theme <code>--theme-background</code> / <code>-surface-faded</code> / <code>-surface-primary</code> now reference <code>--color-schemas-gift-*</code> (tokens.css already had it); the self-referencing <code>.Components</code> copy of <code>--accordion-padding-y</code> is no longer exported (the Layout token stays).</li>
       </ul>
 
+      <h3 style="margin-top:1rem">Container — <code>variant="medium"</code> (1008px), and a Figma component</h3>
+      <ul>
+        <li><strong>New</strong> <code>variant="medium"</code>: max width <code>--container-medium-width</code> (1008px from 1008px), padding <code>--container-padding</code>. For task pages (cart, login, checkout), like production's 1008px <code>grid-wrap</code>. Non-breaking: <code>default</code> (1240px) and <code>narrow</code> (752px, now documented as the reading / form column) are unchanged.</li>
+        <li><strong>Figma:</strong> new <code>container</code> component set (Breakpoints &amp; Containers page), <code>Variant</code> = default | medium | narrow, a <code>Content</code> slot, bound to the Layout variables; <code>container.figma.ts</code>. The Containers diagram gets a Medium container row.</li>
+        <li>Story: <em>Default vs Narrow</em> is replaced by <em>Width levels</em>; the stories are fullscreen and the padding table follows the real tiers.</li>
+      </ul>
+
+      <h3 style="margin-top:1rem">Sidebar Layout — new <code>&lt;minis-sidebar-layout&gt;</code></h3>
+      <ul>
+        <li><strong>New component</strong> for main + sidebar pages: default slot = fluid main column, <code>slot="sidebar"</code> = fixed 320px right sidebar (<code>--layout-sidebar-width</code>), gap <code>--spacing-layout-lg</code>. Side by side from a 1008px viewport when its own width is at least 944px (media query + container-query guard); otherwise stacked, main first.</li>
+        <li><strong>Figma:</strong> <code>sidebar-layout</code> component set, <code>Layout</code> = columns | stacked, slots Main and Sidebar; <code>sidebar-layout.figma.ts</code>, docs, Storybook link.</li>
+      </ul>
+
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
       <!-- 2026-11-20 (Figma exports re-exported with exporter 1.3) -->

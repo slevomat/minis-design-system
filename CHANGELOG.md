@@ -22,6 +22,18 @@ All notable changes to this project will be documented in this file.
 - **Storybook:** the Tier toolbar has one entry per Figma mode (`default`, `2xs`, `xs`, `sm`, `md`, `lg`, `xl`, `2xl – 4xl`) instead of five grouped tiers; `.storybook/tier-tokens.ts` exports the tier list and `tierFromWidth()`. The hand-injected brand sizes for the widest tier are gone: the Figma `2xl` mode carries them.
 - **Export:** `tokens.json` and `tokens.rgb.json` re-exported with exporter 1.3.1 (`pnpm tokens:check` passes). Also in this export, not part of G12: the Gift theme `--theme-background`, `--theme-surface-faded`, `--theme-surface-primary` now reference `--color-schemas-gift-*` in the `gift` mode (was the classic values; fixed in Figma on 2026-11-20, `tokens.css` already had it). The `.Components` copy of `--accordion-padding-y`, which referenced itself, is no longer exported; the Layout token of the same name is unchanged.
 
+### Container — `variant="medium"` (1008px), and a Figma component
+
+- **New** `variant="medium"`: max width `--container-medium-width` (1008px from 1008px, full width below), padding `--container-padding`. For task pages (cart, login, checkout), matching production's 1008px `grid-wrap`. Non-breaking: `default` (1240px) and `narrow` (752px) are unchanged; `narrow` is now documented as the reading / form column. Owner decision, plan 030 question 2.
+- **Figma:** new `container` component set (Breakpoints & Containers page, node `6444:148`), `Variant` = `default | medium | narrow`, a `Content` slot, max width and padding bound to the Layout variables. New `container.figma.ts`; Storybook dev-resource link added. The Containers diagram on the same page gets a **Medium container** row, and all three rows describe when to use them.
+- Story: `Default vs Narrow` is replaced by `Width levels` (all three); the stories are now `layout: 'fullscreen'`, and the padding table follows the real tiers (8 / 16 from 408 / 32px from 1008).
+- `docs/ai-prompts/components/container.md`: the three width levels, which page type uses which.
+
+### Sidebar Layout — new `<minis-sidebar-layout>`
+
+- **New component** for main + sidebar pages (deal detail, listing with filters, magazine): default slot = main column (fluid), `slot="sidebar"` = right sidebar, fixed `--layout-sidebar-width` (320px), gap `--spacing-layout-lg`. Side by side from a 1008px viewport, and only when its own width is at least 944px (what it gets inside a container there); otherwise one column, main first. The viewport condition is a media query because container padding jumps 16 → 32px at 1008px, so the content box is wider at 1007px (975px) than at 1008px (944px) and a container query alone would switch at about 976px. CSS parts `main`, `sidebar`. Owner decisions, plan 030 questions 1 and 3.
+- **Figma:** `sidebar-layout` component set (node `6444:155`), `Layout` = `columns | stacked`, slots `Main` and `Sidebar`, bound to `layout/sidebar/width` and `spacing/layout/lg`. `sidebar-layout.figma.ts`, story, `docs/ai-prompts/components/sidebar-layout.md`, Storybook dev-resource link.
+
 ## 2026-11-20
 
 ### Tokens — container padding reaches 32px at 1008px

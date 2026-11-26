@@ -15,6 +15,11 @@ export const containerStyles = css`
     width: 100%;
   }
 
+  /* Medium shares the wide container's padding; only the cap differs. */
+  :host([variant="medium"]) .container {
+    max-width: var(--container-medium-width, 100%);
+  }
+
   :host([variant="narrow"]) .container {
     max-width: var(--container-narrow-width, 100%);
     padding-left: var(--container-narrow-padding, 8px);
