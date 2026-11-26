@@ -277,7 +277,7 @@ fully done.
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
 | — | **G12** (decided 2026-11-26, in 030), **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
 | — | **030** Layout guides | Design decisions on sidebar, gap and container levels; uses `--spacing-layout-*`, so after G12 (its question 5). No production change |
-| — | finish **015**, **016** (all phases done 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. What is left is moving both to `done` (the owner's call) and the skill's first real run (009 phase 4) |
+| — | ~~finish **015**, **016**~~ (both `done`, 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. 016 was closed with one open question carried: the Nette developer's confirmation that production's Stylus compile works with the seven old spacing names gone. The skill's first real run is 009 phase 4 |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
 
@@ -400,14 +400,14 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis:bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (typography first) | draft | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
+| 009 | Token-update skill (typography first) | **in-progress** | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 1 / 7 | Claude Code marketplace plugin decided 2026-11-21 (every skill as a slash command, added slowly; `/minis:page-to-figma` among the first; very important, not the only channel); 14 further command candidates listed; open: where it lives, which marketplace |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
-| 015 | Responsive line height in Figma | **in-progress** | 16 / 0 | all phases done; phase 7 (the typography procedure) landed 2026-11-26 as the `minis-token-update` skill. Moving it to `done` is the owner's call. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
-| 016 | Letter-spacing tokens (high priority) | **in-progress** | 12 / 0 | all phases done; phase 6's skill part landed 2026-11-26 in `minis-token-update`. Moving it to `done` is the owner's call |
+| 015 | Responsive line height in Figma | done | 16 / 0 | all phases done; phase 7 (the typography procedure) landed 2026-11-26 as the `minis-token-update` skill; moved to `done` by the owner 2026-11-26. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
+| 016 | Letter-spacing tokens (high priority) | done | 12 / 0 | all phases done; moved to `done` by the owner 2026-11-26 with one open question carried (does production's Stylus compile pass with the seven old spacing names gone? needs the Nette developer). Phase 6's skill part landed 2026-11-26 in `minis-token-update` |
 | 017 | Production reference audit | draft | 0 / 12 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
@@ -422,7 +422,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
 | 030 | Layout guides | draft | 12 / 15 | phases 1, 3, 4 done 2026-11-26 on branch `claude/layouts-030-35f511` (G12 tokens, `variant="medium"`, `<minis-sidebar-layout>`, guides, Figma templates); open: phase 2 (pages behind login, needs the owner's sign-in) and phase 5 (hand-over, needs 013/014) |
-| 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 0 / 7 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
+| 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 5 / 7 | homepage pilot rebuilt and documented, skill `minis-page-to-figma` written; designer review of the rebuild and the findings-card template still to do; listings and deal detail next |
 
 **The three blockers that hold most of the rest:**
 
@@ -491,6 +491,22 @@ Work for the redefinition that has no todo plan but should show up here:
   Line heights command, 1.3.1 the references-mode fixes) and CSS — is in plans 015 and 016 and
   `docs/ai-prompts/typography.md`. The step-by-step procedure for changing it is planned in
   plan 009 (`minis-token-update`, built 2026-11-26).
+
+### Findings from production rebuilds (plan 031)
+
+The homepage pilot (2026-11-26, `audits/page-to-figma/2026-11-26-homepage/findings.md`, ids
+`home-<width>-<nn>`) feeds these plans. Ids, not copies: the list is the source.
+
+- **021 review agenda:** all 20. Seven blocks with no Mini*S component (01–07), one missing variant
+  (08), and ten conflicts (11–20). Among the conflicts: danger text `#bc0000` vs `#d2381d` (11),
+  Deal Card name and height (13, 14), and two treatments of one inline prompt (18).
+- **023 recipes:** 04 magazine post, 05 point-of-interest card, 06 USP strip, 08 Message with
+  actions, 10 homepage grid, 15 Promo tile text over the photo.
+- **027 runtime tokens:** 09 brand-theme band surface (`.brand-theme--brand`, no semantic token).
+- **030 layout guides:** 10 grid with a 2 × 2 tile. Nothing contradicts the 2026-11-26 decisions:
+  container 1240 and padding 8 / 16 / 32 match production on the homepage.
+- **G12 / G13:** no finding on this page (Figma Layout values = production).
+- **Plan 009 / typography:** 17 Kensington headline sizes above `Brand/Heading/xl` (42, 48).
 
 ## Phases
 

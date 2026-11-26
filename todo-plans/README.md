@@ -86,14 +86,14 @@ work on the plans in.
 | 006 | [minis-app — sandbox skill that registers new work as Local](006-minis-app-register-local.md) | `draft` | 2026-11-13 |
 | 007 | [Todo-plan writing skill](007-todo-plan-skill.md) | `draft` | 2026-10-29 |
 | 008 | [Bug-reporting skill and /minis:bug command](008-bug-report-skill.md) | `draft` | 2026-10-29 |
-| 009 | [Token-update skill (typography first)](009-token-update-skill.md) | `draft` | 2026-11-26 |
+| 009 | [Token-update skill (typography first)](009-token-update-skill.md) | `in-progress` | 2026-11-26 |
 | 010 | [Distributing Mini*S skills and commands](010-skill-distribution.md) | `draft` | 2026-11-13 |
 | 011 | [Enforce "tokens only" with Stylelint](011-stylelint-tokens-only.md) | `draft` | 2026-11-13 |
 | 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-13 |
 | 013 | [registry.json — the single inventory of everything Mini*S has](013-registry.md) | `draft` | 2026-11-13 |
 | 014 | [Porting rules — carrying tokens and recipes into each environment](014-porting-rules.md) | `draft` | 2026-11-20 |
-| 015 | [Responsive line height in Figma text styles](015-responsive-line-height-in-figma.md) | `in-progress` | 2026-11-26 |
-| 016 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](016-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-26 |
+| 015 | [Responsive line height in Figma text styles](015-responsive-line-height-in-figma.md) | `done` | 2026-11-26 |
+| 016 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](016-letter-spacing-tokens.md) — **high priority** | `done` | 2026-11-26 |
 | 017 | [Production reference audit — what the Slevomat repo tells the refit](017-production-reference-audit.md) | `draft` | 2026-11-20 |
 | 018 | [Changelog sync skill — one change, every changelog](018-changelog-sync-skill.md) | `draft` | 2026-11-12 |
 | 019 | [Mini*S for vibe-coders — one source, published to Claude Design, the Skill Hub and a plugin](019-minis-for-vibe-coders.md) | `draft` | 2026-11-13 |
@@ -108,4 +108,4 @@ work on the plans in.
 | 028 | [Icons — one path from the Figma library to the production webfonts](028-icons-to-production.md) | `draft` | 2026-11-13 |
 | 029 | [Mobile app — Mini*S token names and structure as the third porting target](029-mobile-app-tokens.md) | `draft` | 2026-11-13 |
 | 030 | [Layout guides — page layout rules grounded in production](030-layout-guides.md) | `draft` | 2026-11-26 |
-| 031 | [Production page → Figma — rebuild a live page from Mini*S tokens and components](031-production-page-to-figma.md) | `draft` | 2026-11-21 |
+| 031 | [Production page → Figma — rebuild a live page from Mini*S tokens and components](031-production-page-to-figma.md) | `draft` | 2026-11-26 |

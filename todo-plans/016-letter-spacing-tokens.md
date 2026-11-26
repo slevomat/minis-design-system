@@ -1,7 +1,7 @@
 ---
 id: 016
 title: Letter-spacing tokens — one meaning in Figma, the exporter and CSS
-status: in-progress
+status: done
 created: 2026-11-05
 updated: 2026-11-26
 owner: Lexislav
@@ -9,6 +9,11 @@ owner: Lexislav
 
 # 016 — Letter-spacing tokens: one meaning in Figma, the exporter and CSS
 
+> **Done 2026-11-26** (moved by the owner). All phases are ticked. One question was still open when
+> the plan was closed: whether production's Stylus compile passes with the seven old spacing names
+> gone (Open questions, 1). It is carried, not answered. If the first production build after a
+> token export fails on `$typography-spacing-*`, this plan is where to look.
+>
 > **High priority** (owner, 2026-11-05). The next token export from Figma may rewrite
 > `--typography-spacing-*` in `tokens.css` with different names and units. **Until phase 1 is
 > decided, check the `--typography-spacing-*` lines of every export diff by hand before
@@ -207,6 +212,8 @@ What this means:
    by this plan. Done 2026-11-06; it isn't a token change, so it has no changelog entry.
 
 ## Open questions
+
+*Left open when the plan was closed on 2026-11-26.*
 
 1. **Does production's build accept the new `typography.json`?** The 2026-11-20 export (exporter
    1.3.0, split into production's file shape) removes the seven old tokens `extra-wide`, `narrow`,

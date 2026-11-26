@@ -3,7 +3,7 @@ id: 010
 title: Distributing Mini*S skills and commands
 status: draft
 created: 2026-10-29
-updated: 2026-11-21
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -41,6 +41,11 @@ repo.
 | Date | Decision | Why |
 |---|---|---|
 | 2026-11-21 | **Mini*S ships as a Claude Code plugin in a marketplace.** Every Mini*S skill is in it, so one install gives a person all of them as slash commands (e.g. `/minis:page-to-figma`, plan 031). It is a very important channel, not the main deliverable and not the only channel: Copilot users in the Nette repo still get plain files (option B), and claude.ai / Claude Design users get the Skill Hub (plan 019). | Owner's decision. Closes "leaning A, undecided" below. |
+| 2026-11-26 | **Q1 — the repo is public.** `gh repo view slevomat/minis-design-system` → `PUBLIC`. Installing needs no GitHub access. Whether every designer *has* a GitHub account stays open for 008 (filing issues). | Checked, not decided. |
+| 2026-11-26 | **Q5 — the plugin lives in this repo**, at `plugins/minis/`. Skill folders there are the single source; `.claude/skills/minis-*` are symlinks to them so `/minis-app` keeps working in this repo. | One source: a skill and the tokens/docs it describes change in one commit, no sync job. Owner's choice. |
+| 2026-11-26 | **Q7 — this repo is its own public marketplace** (`.claude-plugin/marketplace.json`, marketplace name `minis-design-system`): `/plugin marketplace add slevomat/minis-design-system`, `/plugin install minis@minis-design-system`. The plugin is text-only; Kensington is not in the repo and never ships, Slevomat marks stay under `NOTICE`. A Slevomat org marketplace can list it later. | The repo is already public; no access to wait for. Owner's choice. |
+| 2026-11-26 | **Q8 — repo-bound skills go in the plugin with a guard**: each checks for a Mini*S checkout (`packages/tokens` + `tokens.json`) first and stops with a clear message elsewhere. | One install gives the DS owner everything. Owner's choice. |
+| 2026-11-26 | **Q4 — the plugin has its own semver**, starting at 0.1.0, in `plugins/minis/.claude-plugin/plugin.json` only; released as the git tag `minis--v<version>` (`claude plugin tag`). Skills read tokens and docs from the checkout or Storybook at run time instead of embedding values. Tying the version to a token release waits for plan 012 (phase 6). | Claude Code caches a plugin by version, so a version is needed now; no token releases exist yet. Owner's choice. |
 
 ### Plugin roster
 
@@ -57,13 +62,13 @@ their plans' order (plan 003, "Recommended order").
 
 | Command | Skill | For whom | Plan | State |
 |---|---|---|---|---|
-| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Exists** (`.claude/skills/minis-app/`) |
-| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Exists** (`.claude/skills/minis-figma-docs/`) |
-| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | Planned — **first new command** |
+| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Shipped 0.1.0** (`plugins/minis/skills/app/`) |
+| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Shipped 0.1.0** (`plugins/minis/skills/figma-docs/`) |
+| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | **Shipped 0.1.0** (`plugins/minis/skills/page-to-figma/`) — first new command |
 | `/minis:contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
 | `/minis:latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
 | `/minis:bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
-| `/minis:token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Planned |
+| `/minis:token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Built as a project skill (`.claude/skills/minis-token-update/`); joins the plugin once 009 phase 3 has run it on a real change |
 | `/minis:changelog` | One change written to every changelog | DS owner, inside a Mini*S checkout | 018 | Planned |
 | `/minis:todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
 | (hook, opt-in) | Explain a broken rule while editing | Anyone building with AI in Claude Code | 026 | Planned |
@@ -154,14 +159,23 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 
 - [x] **Phase 1 — Pick a channel.** Plugin in a marketplace for Claude Code, decided 2026-11-21;
       plain files (B) for the Nette repo.
-- [ ] **Phase 2 — Plugin skeleton:** `plugin.json` and a marketplace entry, in this repo or a
+- [x] **Phase 2 — Plugin skeleton:** `plugin.json` and a marketplace entry, in this repo or a
       separate one (question 5); install it once from a clean machine and check that the commands
-      appear.
-- [ ] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
+      appear. *Done 2026-11-26:* `plugins/minis/` + `.claude-plugin/marketplace.json`, both pass
+      `claude plugin validate`. Clean install tested with a fresh `CLAUDE_CONFIG_DIR` from the branch
+      served over git HTTP: installed to the cache as 0.1.0, `minis:app` and `minis:figma-docs` listed
+      in the session's commands. Still to do after the push: the same install from
+      `slevomat/minis-design-system` on GitHub.
+- [x] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
       replace `minis-app`'s "Using this skill outside the monorepo" section with the plugin install.
-      Shared with plan 019 phase 4.
-- [ ] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
-      the skill.
+      Shared with plan 019 phase 4. *Done 2026-11-26:* moved to `plugins/minis/skills/{app,figma-docs}`;
+      `.claude/skills/minis-*` are symlinks (transition names). `/minis:app`'s steps (clone → install
+      → build → `create-prototype`) checked from a clean clone. A full model run of either command
+      wasn't possible headlessly here (the standalone CLI isn't logged in on this machine).
+- [x] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
+      the skill. *Done 2026-11-26:* merged from `page-to-figma-031` (bf397af), moved to
+      `plugins/minis/skills/page-to-figma/`, part of 0.1.0 (owner chose to wait for it rather than
+      ship it in 0.2.0). Clean install lists all three commands.
 - [ ] **Phase 5 — Add the rest** from the roster one at a time, as each skill is written.
 - [ ] **Phase 6 — Versions and staleness:** plugin version tied to the token / registry release it
       describes (question 4); a way to tell a user their copy is out of date.

@@ -1,7 +1,7 @@
 ---
 id: 009
 title: Token-update skill (typography first)
-status: draft
+status: in-progress
 created: 2026-10-29
 updated: 2026-11-26
 owner: Lexislav
@@ -34,7 +34,7 @@ owner: Lexislav
 > (`SKILL.md`, `typography.md`), `packages/tokens/scripts/{check-export,diff-export}.mjs` with
 > `lib/export-utils.mjs` and a test file, and the root scripts `pnpm tokens:check` / `pnpm tokens:diff`.
 > The open questions were answered with working defaults so the work could proceed; see "Working
-> answers" under Open questions. Status is still `draft`; moving it is the owner's call.
+> answers" under Open questions. **Moved to `in-progress` by the owner, 2026-11-26.**
 
 ## The problem
 
@@ -297,9 +297,10 @@ Each stays open to change; edit here when one is overruled.
    exporter plugin exports the groups; the skill never splits `tokens.rgb.json` and never writes a
    production file.** Step 9 is a hand-over note only. **Still open (needs the Nette developer):**
    what does production want with a change: the files, a note, or a PR (plan 024 question 5, plan 003
-   production question 4)? Which exporter setting makes a one-group file, and whether
-   `tokens:check` should accept a single-group file (its Layout mode mapping needs the `breakpoints`
-   group, so today it can't), are small follow-ups.
+   production question 4)? Which exporter setting makes a one-group file is a small follow-up.
+   `tokens:check --group-file <file>` (repeatable) now accepts a single-group file (2026-11-26):
+   it runs the checks that fit the groups present, takes Layout mode widths from `tokens.rgb.json`,
+   and fails if the group differs from the repo's own export.
 5. **Re-export `tokens.json` with exporter 1.3.1 now, or with the next token update?** It is on
    1.3.0 and still has one self-reference line (`--accordion-padding-y`). Phase 1's check will fail
    on it until then. Related: should the check require both files to be from the same version, as

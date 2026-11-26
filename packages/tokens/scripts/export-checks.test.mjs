@@ -7,7 +7,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkCss, checkExport, checkPair, exitCode } from './check-export.mjs';
+import { checkCss, checkExport, checkGroupFile, checkPair, exitCode } from './check-export.mjs';
 import { diffExports } from './diff-export.mjs';
 import { cascadeAt, compareVersions, readTokensCss, resolveVars, sameValue, spacingNameToEm } from './lib/export-utils.mjs';
 
@@ -140,6 +140,48 @@ test('exitCode: failures fail, warnings only with strict', () => {
   assert.equal(exitCode([{ level: 'warn' }]), 0);
   assert.equal(exitCode([{ level: 'warn' }], true), 1);
   assert.equal(exitCode([{ level: 'fail' }]), 1);
+});
+
+// ---- single-group files -------------------------------------------------------------------
+
+/** What the exporter makes for production: $metadata plus one group. */
+const groupFile = (full, group) => ({ $metadata: full.$metadata, [group]: structuredClone(full[group]) });
+
+test('group file: a typography-only and a layout-only file pass; colour sentinels are not demanded', () => {
+  const full = makeExport();
+  assert.deepEqual(failed(checkGroupFile(groupFile(full, 'typography'), { label: 'typography.json', repoResolved: full })), []);
+  assert.deepEqual(failed(checkGroupFile(groupFile(full, 'layout'), { label: 'layout.json', repoResolved: full })), []);
+});
+
+test('group file: Layout modes are mapped through the repo export when the file has no breakpoints', () => {
+  const full = makeExport();
+  assert.deepEqual(failed(checkGroupFile(groupFile(full, 'layout'), { label: 'layout.json', repoResolved: full })), []);
+  // with nothing to take the widths from, the modes can't be mapped
+  assert.deepEqual(failed(checkGroupFile(groupFile(full, 'layout'), { label: 'layout.json', repoResolved: null })), ['layout-modes']);
+});
+
+test('group file: the checks that apply still apply (old version, px line height, wrong spacing)', () => {
+  const full = makeExport();
+  const old = groupFile(makeExport({ version: '1.2.0' }), 'typography');
+  assert.ok(failed(checkGroupFile(old, { label: 't.json', repoResolved: full })).includes('exporter-version'));
+  const px = groupFile(full, 'layout');
+  px.layout.md.typography.heading.lg['line-height'].value = '30px';
+  assert.ok(failed(checkGroupFile(px, { label: 'l.json', repoResolved: full })).includes('typography-composites'));
+  const sp = groupFile(full, 'typography');
+  delete sp.typography.spacing[3];
+  assert.ok(failed(checkGroupFile(sp, { label: 't.json', repoResolved: full })).includes('letter-spacing'));
+});
+
+test('group file: a value or name that differs from tokens.rgb.json fails group-matches-repo', () => {
+  const full = makeExport();
+  const drift = groupFile(full, 'layout');
+  drift.layout.md.typography.heading.lg.size.value = '28px';
+  const res = checkGroupFile(drift, { label: 'layout.json', repoResolved: full });
+  assert.deepEqual(failed(res), ['group-matches-repo']);
+  assert.match(res.find((x) => x.check === 'group-matches-repo').details.join('\n'), /28px/);
+  const extra = groupFile(full, 'typography');
+  extra.typography.spacing.wide = leaf('--typography-spacing-wide', '0.05em');
+  assert.ok(failed(checkGroupFile(extra, { label: 't.json', repoResolved: full })).includes('group-matches-repo'));
 });
 
 // ---- tokens.css --------------------------------------------------------------------------
