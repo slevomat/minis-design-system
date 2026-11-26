@@ -421,7 +421,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 027 | Runtime tokens in production | draft | 0 / 5 | product's requirement (themes, dark mode) |
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
-| 030 | Layout guides | draft | 4 / 15 | phase 1 decided 2026-11-26 (G12 values and tiers, 320px sidebar, `variant="medium"` 1008px, stacking below 1008px, `<minis-sidebar-layout>`); tokens, components and guides in progress; pages behind login unmeasured |
+| 030 | Layout guides | draft | 12 / 15 | phases 1, 3, 4 done 2026-11-26 on branch `claude/layouts-030-35f511` (G12 tokens, `variant="medium"`, `<minis-sidebar-layout>`, guides, Figma templates); open: phase 2 (pages behind login, needs the owner's sign-in) and phase 5 (hand-over, needs 013/014) |
 | 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 0 / 7 | nothing blocking (reads production only); pages and widths to pick; Figma page for the rebuilds |
 
 **The three blockers that hold most of the rest:**

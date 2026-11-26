@@ -63,7 +63,7 @@ also what AI agents read first when they build a page, so the mismatch multiplie
 | 2026-11-26 | **Q1 — main + sidebar:** fixed sidebar **320px** (new token `--layout-sidebar-width`, Figma `layout/sidebar/width`), main column fluid, gap `--spacing-layout-lg` (32px from 1008). Sidebar on the right. At 1008px: 592 + 32 + 320; at 1240px+: 824 + 32 + 320 (2.6 : 1). | `production-reference.md` question 1 |
 | 2026-11-26 | **Q2 — 1008px level:** new `<minis-container variant="medium">`, max 1008px from 1008px (`--container-medium-width`, Figma `container/medium/width`), padding `--container-padding`. Non-breaking: `narrow` stays 752px as the reading/form column. Content at 1008px+: 944px. | `production-reference.md` question 3 |
 | 2026-11-26 | **Q3 — stacking:** main + sidebar is one column below 1008px, as production. | `production-reference.md` question 4 |
-| 2026-11-26 | **Primitive:** main + sidebar is a component, `<minis-sidebar-layout>` (default slot = main, `sidebar` slot). It switches with a container query on its own width at 944px (= the 1008px viewport minus 2 × 32px container padding). Full component set. | phase 3 |
+| 2026-11-26 | **Primitive:** main + sidebar is a component, `<minis-sidebar-layout>` (default slot = main, `sidebar` slot). Side by side needs a 1008px+ viewport (media query) **and** an own width of 944px+ (container-query guard). Implementation finding, same day: a container query alone can't express "below 1008px" — container padding jumps 16 → 32px at 1008px, so the content box is 975px at a 1007px viewport and 944px at 1008px. Full component set. | commit `a575d46`; `sidebar-layout.md` |
 
 **G12 values after the decision** (px; Figma = production = new `tokens.css`; **bold** = a change in
 `tokens.css`, *italic* = a change in Figma):
@@ -125,25 +125,28 @@ Rejected:
 
 ### Phase 3 — Tokens and component (only what phase 1 decides)
 
-- [ ] G12: Figma Layout collection fixes (`xs` and `default` container padding, `--container-width`
+- [x] G12: Figma Layout collection fixes (`xs` and `default` container padding, `--container-width`
       from `lg`), re-export, `tokens.css` on 1:1 tiers, Storybook Tier toolbar per mode, both changelogs
-- [ ] Sidebar token `--layout-sidebar-width` (320px) and the gap rule (`--spacing-layout-lg`, no new
+- [x] Sidebar token `--layout-sidebar-width` (320px) and the gap rule (`--spacing-layout-lg`, no new
       gap token): Figma Layout collection, exports, `tokens.css`, both changelogs
-- [ ] `<minis-container variant="medium">` (1008px): component, styles, `.figma.ts`, story,
+- [x] `<minis-container variant="medium">` (1008px): component, styles, `.figma.ts`, story,
       `docs/ai-prompts/components/container.md`, Figma component. Non-breaking, so no migration note
-- [ ] `<minis-sidebar-layout>`: component, styles, story, `.figma.ts`, doc, `index.ts` export, Figma
+- [x] `<minis-sidebar-layout>`: component, styles, story, `.figma.ts`, doc, `index.ts` export, Figma
       component — one commit
-- [ ] Storybook Tier toolbar and the Containers diagrams in Figma (Breakpoints & Containers page)
+- [x] Storybook Tier toolbar and the Containers diagrams in Figma (Breakpoints & Containers page)
       still match
 
 ### Phase 4 — Guides
 
-- [ ] `docs/ai-prompts/layouts/index.md`: the three-level model, the main + sidebar rule, the
+- [x] `docs/ai-prompts/layouts/index.md`: the three-level model, the main + sidebar rule, the
       12-column grid as an optional tool, the page structure diagram
-- [ ] `deal-detail.md` and `checkout.md` follow the decisions; their "Production differs" notes go
+- [x] `deal-detail.md` and `checkout.md` follow the decisions; their "Production differs" notes go
       once the difference is gone
-- [ ] Figma: the layout templates on the Layouts page (web and vibe-apps sections) match the
-      guides; close the questions on the report card
+- [x] Figma: the layout templates on the Layouts page (web and vibe-apps sections) match the
+      guides; close the questions on the report card. Done 2026-11-26: every main + aside GRID
+      frame (deal pages, homepage, blog; web and vibe-apps) is a `sidebar-layout` instance,
+      `columns` from LG, `stacked` below; the cart templates already used the narrow column.
+      Report card questions 1, 3, 4 resolved, 5 still open
 
 ### Phase 5 — Hand-over
 
