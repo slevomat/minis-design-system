@@ -133,7 +133,7 @@ A border defines an object's edge, so it needs an opaque colour that stays put a
 --pixel-px-{n}         /* e.g. --pixel-px-22 = 22px */
 
 /* Viewport-responsive layout scale (changes per breakpoint tier) */
---spacing-layout-{xs|sm|md|lg|xl}   /* e.g. sm = 12px mobile → 16px from 408px up */
+--spacing-layout-{xs|sm|md|lg|xl}   /* one tier per Figma Layout mode; e.g. sm = 8px → 12px (360px) → 16px (600px+) */
 ```
 > There is **no** bare numeric `--spacing-{n}` scale in this system — the only
 > `--spacing-*` tokens are the responsive `--spacing-layout-*` set above. For

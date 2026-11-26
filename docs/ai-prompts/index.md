@@ -19,7 +19,8 @@ Individual UI elements with props and variants.
 - [Menu](./components/menu.md) - Dropdown panel behind a labelled trigger; powers the navigation overflow
 - [Tag](./components/tag.md) - Compact pill label: static, clickable (with toggle), or dismissible
 - [Card Grid](./components/card-grid.md) - Responsive grid layouts: navigation (featured), navigation-small (uniform), photogallery (asymmetric)
-- [Container](./components/container.md) - Responsive layout wrapper with auto-centering and breakpoint-based padding
+- [Container](./components/container.md) - Responsive layout wrapper, three width levels: default 1240px, medium 1008px, narrow 752px
+- [Sidebar Layout](./components/sidebar-layout.md) - Main column + fixed 320px right sidebar, stacks below 1008px (container query)
 - [Topbar](./components/topbar.md) - The bar at the top of any Slevomat web page or vibe-coded app; `web` (logo, search, actions) + `vibe-apps` (logo + app name only) variants
 - [Checkbox](./components/checkbox.md) - Binary selection input with checked / unchecked states and hover
 - [Action Row](./components/action-row.md) - Interactive list row for vertical menus and filters (label · icon · checkbox + optional counter)

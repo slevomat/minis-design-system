@@ -31,13 +31,13 @@ docs/
 - **Primitive pixel scale**: `--pixel-px-{n}` (e.g. `--pixel-px-22` = 22px)
 - **Linear spacing**: `--linear-sp-linear-{n}` (e.g. `--linear-sp-linear-3` = 12px)
 - **Fibonacci spacing**: `--fibonachi-sp-fib-{n}` (e.g. `--fibonachi-sp-fib-8` = 34px)
-- **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values scale with the viewport breakpoint tier (e.g. `--spacing-layout-sm` = 12px mobile → 16px from 408px up). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`.
+- **Responsive layout spacing**: `--spacing-layout-{xs|sm|md|lg|xl}` — values follow the Figma Layout modes, one CSS tier per mode named like its breakpoint (`default` < 360, `2xs` 360, `xs` 408, `sm` 600, `md` 768, `lg` 1008, `xl` 1256, `2xl`+ 1480; e.g. `--spacing-layout-sm` = 8px → 12px from 360px → 16px from 600px). Related responsive tokens: `--container-padding`, `--container-narrow-padding`, `--container-width`, `--container-medium-width`, `--container-narrow-width`, `--layout-sidebar-width` (320px).
 - **Border radius**: `--border-radius-{none|sm|md|lg|xl|full}` (0 / 4 / 8 / 12 / 16 / 9999px)
 - **Typography family**: `--typography-font-family-sans` (Inter, all UI), `--typography-font-family-mono` (SF Mono), `--typography-font-family-brand` (`'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif` — banner headlines only). **Kensington is Slevomat-proprietary and NOT in the repo** — Bebas Neue (Google Fonts) is the public fallback. Both faces are all-caps and single-weight, so brand text is always `text-transform: uppercase` at `--typography-brand-weight` (400) — never `--typography-weight-bold`, which synthesises a fake bold. To use the real font locally, see `packages/tokens/src/fonts/README.md`.
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
 - **Typography letter spacing**: `--typography-spacing-{n2|n1|n0_3|0|3}` (em; the name is the percentage of the font size, `n` = minus, `_` = decimal point: `n0_3` = −0.3 % = `-0.003em`). In Figma they are `Typography/spacing/-2%` … `-0,3%` (Figma forbids `.` in names) and are **not bindable**: text styles type the percentage.
-- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
+- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+, also in the Figma Layout collection (`--typography-brand-weight` is a flat 400 and `tokens.css`-only).
 - **Figma `default` has no CSS suffix**: the exporter drops every path segment named `default`, so `Color/Border/default` → `--color-border` (grey-80) and `Interaction/primary/default/surface` → `--color-interaction-primary-surface`. **`--color-border-default` does not exist** — never guess a `-default` name from Figma. See "Token exports" → exporter settings.
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border` + `--color-border-{subtle|strong|focus|invalid|valid}`, `--color-separator` (alpha — black 5% light / white 35% dark, so rules read on any surface; `--separator-color` and the accordion divider both resolve to it), `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
@@ -208,6 +208,7 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - File key: `mfiAVMWkxiBRGnegjqLMNW`
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
+- Layout components (Breakpoints & Containers page `166:8121`): `container` component set `6444:148` (`Variant` = `default | medium | narrow`), `sidebar-layout` component set `6444:155` (`Layout` = `columns | stacked`). Both bound to Layout variables; the Containers diagram is frame `1970:14`.
 - Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator`, not `--color-border-subtle`)
 - **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (source `plugins/minis/skills/figma-docs/`, `/minis:figma-docs` from the plugin). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
@@ -333,7 +334,13 @@ Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the comp
 | `--typography-mega-poster-size` | `--typography-heading-2xl-size` |
 | `--typography-poster-size` | `--typography-heading-xl-size` |
 
-The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-brand-weight`, the `--typography-font-family-*` set, the hand-written `FONTS` comment block at the top of `tokens.css`, and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. **A Figma re-export must preserve them.** Only the `FONTS` comment block carries a `HAND-MAINTAINED` marker in the file; the token blocks themselves are unmarked, so check for each of them by name after a re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+Since the 2026-11-20 export, the brand (Kensington) composites `--typography-brand-{lg,xl}-{size,line-height}` (Layout collection, per mode: 24 / 32px, 32 / 56px from `2xl`), the `--typography-font-family-*` set (Typography collection) and `--container-bleeding-edge-padding` (Layout collection) **are in the export**, with values that match `tokens.css`. What a re-export must still not overwrite:
+
+- **`--typography-brand-weight`** (400) — not in Figma at all; exists only in `tokens.css` (gap G14 is about this weight).
+- **`--typography-font-family-brand`'s value** — the export says just `Kensington`; `tokens.css` keeps the full stack `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif`, because Kensington is not in the repo and Bebas Neue is the public fallback. Likewise `-sans` / `-mono` stay single names, never the system-stack comment the export carries.
+- **The hand-written `FONTS` comment block** at the top of `tokens.css` — the only part with a `HAND-MAINTAINED` marker.
+
+Check these by name after every re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
 
 ## Common pitfalls
 
@@ -376,6 +383,7 @@ Full component references with API tables, token lists, usage examples, and copy
 - `docs/ai-prompts/components/navigation.md`
 - `docs/ai-prompts/components/menu.md`
 - `docs/ai-prompts/components/container.md`
+- `docs/ai-prompts/components/sidebar-layout.md`
 - `docs/ai-prompts/components/topbar.md`
 - `docs/ai-prompts/components/checkbox.md`
 - `docs/ai-prompts/components/action-row.md`
