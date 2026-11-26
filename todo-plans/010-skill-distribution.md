@@ -159,12 +159,19 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
 
 - [x] **Phase 1 — Pick a channel.** Plugin in a marketplace for Claude Code, decided 2026-11-21;
       plain files (B) for the Nette repo.
-- [ ] **Phase 2 — Plugin skeleton:** `plugin.json` and a marketplace entry, in this repo or a
+- [x] **Phase 2 — Plugin skeleton:** `plugin.json` and a marketplace entry, in this repo or a
       separate one (question 5); install it once from a clean machine and check that the commands
-      appear.
-- [ ] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
+      appear. *Done 2026-11-26:* `plugins/minis/` + `.claude-plugin/marketplace.json`, both pass
+      `claude plugin validate`. Clean install tested with a fresh `CLAUDE_CONFIG_DIR` from the branch
+      served over git HTTP: installed to the cache as 0.1.0, `minis:app` and `minis:figma-docs` listed
+      in the session's commands. Still to do after the push: the same install from
+      `slevomat/minis-design-system` on GitHub.
+- [x] **Phase 3 — Pilot with the two skills that exist**, `minis-app` and `minis-figma-docs`;
       replace `minis-app`'s "Using this skill outside the monorepo" section with the plugin install.
-      Shared with plan 019 phase 4.
+      Shared with plan 019 phase 4. *Done 2026-11-26:* moved to `plugins/minis/skills/{app,figma-docs}`;
+      `.claude/skills/minis-*` are symlinks (transition names). `/minis:app`'s steps (clone → install
+      → build → `create-prototype`) checked from a clean clone. A full model run of either command
+      wasn't possible headlessly here (the standalone CLI isn't logged in on this machine).
 - [ ] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
       the skill.
 - [ ] **Phase 5 — Add the rest** from the roster one at a time, as each skill is written.

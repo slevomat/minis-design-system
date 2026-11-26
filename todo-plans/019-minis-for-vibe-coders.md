@@ -3,7 +3,7 @@ id: 019
 title: Mini*S for vibe-coders — one source, published to Claude Design, the Skill Hub and a plugin
 status: draft
 created: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -118,8 +118,9 @@ One source, four generated outputs, one link target.
       decide how a release triggers it (plan 018's changelog sync is the natural hook).
 - [ ] **Phase 3 — Skill Hub proposal.** Draft the skill(s) in `design-skills` format, pass its
       `validate.py`, and open a PR there with its owners.
-- [ ] **Phase 4 — Claude Code plugin** with `minis-app`; rewrite `minis-app`'s "outside the
-      monorepo" section to the plugin install. Shared with plan 010 phase 2.
+- [x] **Phase 4 — Claude Code plugin** with `minis-app`; rewrite `minis-app`'s "outside the
+      monorepo" section to the plugin install. Shared with plan 010 phase 2. *Done 2026-11-26:* the
+      `minis` plugin 0.1.0 (`plugins/minis/`), `/minis:app`; install in `plugins/minis/README.md`.
 - [ ] **Phase 5 — Point the copies at the source.** Offer `ux-design-playground` a PR replacing
       its copied tokens with the hosted link; add the AI Hub pointer.
 
