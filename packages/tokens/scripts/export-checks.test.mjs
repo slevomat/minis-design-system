@@ -129,6 +129,9 @@ test('checkPair: different exporter versions fail, different token sets fail', (
   const refs2 = makeExport({ kind: 'references' });
   delete refs2.color.border;
   assert.deepEqual(failed(checkPair(refs2, resolved)), ['same-tokens']);
+  // 1.3.1 leaves out an alias whose name another token (here a Layout one) already defines: fine
+  const alias = (j) => { j.components = { x: leaf('--typography-heading-lg-size', 'var(--typography-heading-lg-size)') }; return j; };
+  assert.deepEqual(failed(checkPair(makeExport({ kind: 'references' }), alias(makeExport()))), []);
   assert.deepEqual(failed(checkPair(makeExport({ kind: 'references' }), resolved)), []);
 });
 

@@ -188,16 +188,27 @@ export function checkPair(refs, resolved, labels = { refs: 'tokens.json', resolv
     r.push(fail('same-version', `${labels.refs} is exporter ${va} but ${labels.resolved} is ${vb}`, ['Export both files in the same plugin session ("Export all") from the same plugin version.']));
   else if (va && vb) r.push(pass('same-version', `both exports are exporter ${va}`));
 
-  const ka = new Set(collectLeaves(refs).map((l) => `${l.key}|${l.cssName}`));
-  const kb = new Set(collectLeaves(resolved).map((l) => `${l.key}|${l.cssName}`));
-  const onlyA = [...ka].filter((k) => !kb.has(k));
-  const onlyB = [...kb].filter((k) => !ka.has(k));
+  // Compare by CSS name, not by position. Exporter 1.3.1 leaves out, in references mode, a
+  // `.Components` alias whose CSS name equals its Layout variable's (`--accordion-padding-y`),
+  // because the Layout variable already defines that name. The resolved export keeps it. Same
+  // name, different position is fine; a name present in only one file is not.
+  const la = collectLeaves(refs);
+  const lb = collectLeaves(resolved);
+  const na = new Set(la.map((l) => l.cssName));
+  const nb = new Set(lb.map((l) => l.cssName));
+  const onlyA = [...na].filter((n) => !nb.has(n));
+  const onlyB = [...nb].filter((n) => !na.has(n));
   if (onlyA.length || onlyB.length)
-    r.push(fail('same-tokens', `${labels.refs} and ${labels.resolved} hold different tokens`, [
-      ...onlyA.slice(0, 10).map((k) => `only in ${labels.refs}: ${k}`),
-      ...onlyB.slice(0, 10).map((k) => `only in ${labels.resolved}: ${k}`),
+    r.push(fail('same-tokens', `${labels.refs} and ${labels.resolved} hold different token names`, [
+      ...onlyA.slice(0, 10).map((n) => `only in ${labels.refs}: ${n}`),
+      ...onlyB.slice(0, 10).map((n) => `only in ${labels.resolved}: ${n}`),
     ]));
-  else r.push(pass('same-tokens', `both files hold the same ${ka.size} tokens`));
+  else {
+    r.push(pass('same-tokens', `both files define the same ${na.size} token names`));
+    const ka = new Set(la.map((l) => `${l.key}|${l.cssName}`));
+    const omitted = lb.filter((l) => !ka.has(`${l.key}|${l.cssName}`)).map((l) => `${l.key}  ${l.cssName}`);
+    if (omitted.length) r.push(pass('same-tokens-omitted', `${labels.refs} omits ${omitted.length} alias(es) whose name another token already defines (exporter 1.3.1 behaviour)`));
+  }
   return r;
 }
 
