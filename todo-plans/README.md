@@ -92,7 +92,7 @@ work on the plans in.
 | 012 | [Distribute tokens as a versioned package with a Style Dictionary source](012-token-distribution.md) | `draft` | 2026-11-13 |
 | 013 | [registry.json — the single inventory of everything Mini*S has](013-registry.md) | `draft` | 2026-11-13 |
 | 014 | [Porting rules — carrying tokens and recipes into each environment](014-porting-rules.md) | `draft` | 2026-11-20 |
-| 015 | [Responsive line height in Figma text styles](015-responsive-line-height-in-figma.md) | `in-progress` | 2026-11-26 |
+| 015 | [Responsive line height in Figma text styles](015-responsive-line-height-in-figma.md) | `done` | 2026-11-26 |
 | 016 | [Letter-spacing tokens — one meaning in Figma, the exporter and CSS](016-letter-spacing-tokens.md) — **high priority** | `in-progress` | 2026-11-26 |
 | 017 | [Production reference audit — what the Slevomat repo tells the refit](017-production-reference-audit.md) | `draft` | 2026-11-20 |
 | 018 | [Changelog sync skill — one change, every changelog](018-changelog-sync-skill.md) | `draft` | 2026-11-12 |

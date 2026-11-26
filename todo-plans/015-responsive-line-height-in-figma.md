@@ -1,7 +1,7 @@
 ---
 id: 015
 title: Responsive line height in Figma text styles
-status: in-progress
+status: done
 created: 2026-11-05
 updated: 2026-11-26
 owner: Lexislav
@@ -9,6 +9,10 @@ owner: Lexislav
 
 # 015 — Responsive line height in Figma text styles
 
+> **Done 2026-11-26** (moved by the owner): all eight phases are ticked and there are no open
+> questions. Kept for the reasoning; the procedure it led to is the `minis-token-update` skill
+> (plan 009).
+>
 > Touches two repos: the Figma file (`mfiAVMWkxiBRGnegjqLMNW`) and the exporter plugin
 > (`Figma plugins/minis-designtokens-exporter/`). Nothing in this repo's CSS changes.
 > The audit behind it is on the Figma TYPOGRAPHY page → "Typography tokens — Figma issues".

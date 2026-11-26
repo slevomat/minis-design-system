@@ -138,7 +138,7 @@ Current plans:
   carrying tokens and recipes into each environment, and which side wins when they diverge.
 - `todo-plans/015-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
   Figma text styles follow Layout modes (Figma treats every bound line-height value as pixels).
-  All phases done; the typography procedure is the `minis-token-update` skill (plan 009).
+  **Done 2026-11-26**; the typography procedure it led to is the `minis-token-update` skill (plan 009).
 - `todo-plans/016-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
   (`--typography-spacing-n2` …). Landed 2026-11-06; all phases done, the skill part is in `minis-token-update`.
 - `todo-plans/017-production-reference-audit.md` — a repeatable audit of the read-only production
