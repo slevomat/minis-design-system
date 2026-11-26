@@ -125,7 +125,8 @@ Current plans:
 - `todo-plans/008-bug-report-skill.md` — guided bug report ending in a GitHub issue, also as `/minis:bug`.
 - `todo-plans/009-token-update-skill.md` — one skill for token updates, typography first (the procedure for
   changing a size, line-height ratio, letter spacing or role): Figma export → validation scripts →
-  `tokens.css` diff → build → checks → changelogs. Planned, not built; plan 015 phase 7 and 016 phase 6 wait for it.
+  `tokens.css` diff → build → checks → changelogs. **Built 2026-11-26** as `.claude/skills/minis-token-update/`
+  plus `pnpm tokens:check` / `pnpm tokens:diff`; not yet run on a real change (009 phase 3).
 - `todo-plans/010-skill-distribution.md` — how skills and commands reach people: a **Claude Code marketplace plugin**
   carrying every Mini*S skill as a slash command (decided 2026-11-21; roster in the plan), plain files for Copilot in the
   Nette repo. Referenced by 004–009 and 031.
@@ -137,10 +138,9 @@ Current plans:
   carrying tokens and recipes into each environment, and which side wins when they diverge.
 - `todo-plans/015-responsive-line-height-in-figma.md` — generated `-px` line-height variables so
   Figma text styles follow Layout modes (Figma treats every bound line-height value as pixels).
-  Exporter 1.3.x is done; the open item is phase 7, the typography procedure as a skill (plan 009).
+  All phases done; the typography procedure is the `minis-token-update` skill (plan 009).
 - `todo-plans/016-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
-  (`--typography-spacing-n2` …). Landed 2026-11-06; what is left is phase 6's skill part, which is plan
-  009's typography procedure.
+  (`--typography-spacing-n2` …). Landed 2026-11-06; all phases done, the skill part is in `minis-token-update`.
 - `todo-plans/017-production-reference-audit.md` — a repeatable audit of the read-only production
   clone (`../slevomat`): component usage, primitive → semantic map, production's existing
   Stylelint/KSS/BackstopJS guardrails. Feeds 001, 011–014. Never write to the production repo.

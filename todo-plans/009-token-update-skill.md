@@ -3,7 +3,7 @@ id: 009
 title: Token-update skill (typography first)
 status: draft
 created: 2026-10-29
-updated: 2026-11-20
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -24,6 +24,17 @@ owner: Lexislav
 > other Figma teams) exists, drafted in an earlier session and kept by the owner outside this repo.
 > This plan is only the Mini*S skill.
 > Distribution: see plan 010 (this skill stays in this repo only).
+>
+> **Intent, restated by the owner 2026-11-26: any change to typography takes this procedure.**
+> Keeping Figma's responsive text working (generated `-px` line heights, typed percentages,
+> exporter rules, the `@media` merge) is too complex to do by hand, so as much of it as possible is
+> automated. That is the purpose of the skill; the rest of the token-update checklist rides along.
+>
+> **Built 2026-11-26** (phases 0–2, uncommitted at the time of writing): `.claude/skills/minis-token-update/`
+> (`SKILL.md`, `typography.md`), `packages/tokens/scripts/{check-export,diff-export}.mjs` with
+> `lib/export-utils.mjs` and a test file, and the root scripts `pnpm tokens:check` / `pnpm tokens:diff`.
+> The open questions were answered with working defaults so the work could proceed; see "Working
+> answers" under Open questions. Status is still `draft`; moving it is the owner's call.
 
 ## The problem
 
@@ -214,22 +225,49 @@ Figma frames.
 
 ## Phases
 
-- [ ] **Phase 0 — Decide the shape** (question 1) and the questions that block phases 1–2
-      (questions 2–5). The owner moves the status.
-- [ ] **Phase 1 — Checks as scripts.** `check-export.mjs` and `diff-export.mjs` in
-      `packages/tokens/scripts/`, with tests that use today's files as fixtures: they must **fail** on
-      the repo's current `tokens.json` (exporter 1.3.0: version mismatch and the
-      `--accordion-padding-y` self-reference) and **pass** on `tokens.rgb.json` (1.3.1). The
-      2026-11-20 re-export and its hand-made diff are the reference for what the diff must report.
-- [ ] **Phase 2 — Write the skill:** `SKILL.md` and `typography.md` from the table above; make
-      `CLAUDE.md` → Token exports and `docs/ai-prompts/typography.md` §6 point to it. **Tick plan 015
-      phase 7 and plan 016 phase 6 here.**
+- [x] **Phase 0 — Decide the shape** (question 1) and the questions that block phases 1–2
+      (questions 2–5). Done 2026-11-26 with working defaults (see "Working answers"); the owner
+      moves the status.
+- [x] **Phase 1 — Checks as scripts.** Done 2026-11-26: `check-export.mjs`, `diff-export.mjs` and
+      `lib/export-utils.mjs` in `packages/tokens/scripts/`, `pnpm tokens:check` / `pnpm tokens:diff`,
+      and `export-checks.test.mjs` (23 tests, `pnpm --filter @minis/tokens test`). Checked against the
+      real files: on the repo's `tokens.json` (exporter 1.3.0) `tokens:check` **fails** on the
+      version, the `--accordion-padding-y` self-reference and the version mismatch; on
+      `tokens.rgb.json` (1.3.1) it **passes**; `--css` confirms all 140 Layout size and line-height
+      values in `tokens.css` match the export in every mode, with 23 other Layout values (spacing,
+      `--page-width`) listed as the known G12/G13 divergences. `tokens:diff` against the commit
+      before the 1.3 re-export reproduces the old → new typography names (`heading-large` →
+      `heading-lg`, `poster` → `heading-xl`, the five spacing tokens). The tests use in-memory
+      fixtures, not the real exports, because `tokens.json` flips to passing at the next re-export.
+- [x] **Phase 2 — Write the skill:** `.claude/skills/minis-token-update/SKILL.md` and
+      `typography.md` written 2026-11-26; `CLAUDE.md` → Token exports and
+      `docs/ai-prompts/typography.md` §6 point to it. Plan 015 phase 7 and plan 016 phase 6 ticked.
+      The skill has not been run on a real change yet (phase 3).
 - [ ] **Phase 3 — Dry run on a no-op re-export** with exporter 1.3.1: it brings `tokens.json` up to
       1.3.1, shows the procedure on a change with an empty diff, and finds what the steps missed.
 - [ ] **Phase 4 — Run it on the first real typography change** (a size, a ratio or a new role) and
       fix what it missed.
 - [ ] **Phase 5 — Hand over to plan 024 phase 1** (and to plan 018's Log mode for the changelog
       steps) when those start; close or merge this plan then.
+
+## Working answers (2026-11-26)
+
+The owner asked to stop discussing and get it built, so phases 0–2 went ahead on these defaults.
+Each stays open to change; edit here when one is overruled.
+
+| Q | Working answer | Status |
+|---|---|---|
+| 1 Shape, name | One skill, **`minis-token-update`**, with `typography.md` as a reference file. In the plugin (plan 010) it becomes `/minis:token-update`. | Built |
+| 2 Script location | `packages/tokens/scripts/`, run as `pnpm tokens:check` and `pnpm tokens:diff` (reusable by CI and plan 024). | Built |
+| 3 Who runs updates | The owner, on their machine. The skill asks for the plugin version and settings each time and the export's `$metadata` proves them. | Default |
+| 4 Production's per-group files | **Still open, needs the Nette developer.** The skill drafts them as "the top-level group of `tokens.rgb.json` with its `$metadata`" and says to ask before sending. | Open |
+| 5 Re-export `tokens.json` with 1.3.1 | At the next token update. `pnpm tokens:check` fails on the current file until then, on purpose; both files must be from the same exporter version. | Default |
+| 6 Mode ↔ tier mapping | No hand-written table: a Layout mode's width is its entry in the export's own `breakpoints` group (`default` = 0). The CSS value at that width is the `:root` cascade of every `min-width` block up to it. A mode with no breakpoint fails the check. | Built |
+| 7 Canonical text for the method | `docs/ai-prompts/typography.md` §6 (portable); the skill links to it and adds only repo steps. | Built |
+| 8 Stale `CLAUDE.md` text and `tier-tokens.ts` aliases | Left as they are for now (confirmed stale on 2026-11-26: the aliases map names the export no longer has). The skill says not to encode them. Clean up with the dry run. | Open, small |
+| 9 Figma changelog card | The skill hands off to `minis-figma-docs`; plan 018 replaces that later. | Default |
+| 10 Figma MCP access | Not required. A person looks at the frames in Figma (step 3). | Default |
+| 11 Which groups production wants | Part of question 4. | Open |
 
 ## Open questions
 

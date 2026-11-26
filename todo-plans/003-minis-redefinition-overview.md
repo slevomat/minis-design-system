@@ -3,7 +3,7 @@ id: 003
 title: Mini*S redefinition — overview of the rollout and every plan in it
 status: draft
 created: 2026-11-13
-updated: 2026-11-21
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -277,7 +277,7 @@ fully done.
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
 | — | **G12**, **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
 | — | **030** Layout guides | Design decisions on sidebar, gap and container levels; uses `--spacing-layout-*`, so after G12 (its question 5). No production change |
-| — | finish **015**, **016** (in progress) | Typography foundation; already mostly done. What is left is the typography procedure, which is plan 009's typography part (not blocked on 024) |
+| — | finish **015**, **016** (all phases done 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. What is left is moving both to `done` (the owner's call) and the skill's first real run (009 phase 4) |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
 
@@ -377,7 +377,9 @@ are set yet.
   (G6), more than a new web component. **Keep, re-scope in plan 023 phase 5.**
 - **007 todo-plan skill, 008 bug report skill** — in the brief's skills table but in no rollout
   phase; low priority, ship through 010. **Keep.**
-- **009 token-update skill (typography first)** — revisited 2026-11-20: one skill, `minis-token-update`,
+- **009 token-update skill (typography first)** — **built 2026-11-26** (phases 0–2; not yet run on a
+  real change): `.claude/skills/minis-token-update/` and `pnpm tokens:check` / `tokens:diff`; owner's
+  rule: any typography change takes it. Revisited 2026-11-20: one skill, `minis-token-update`,
   with the typography procedure as its reference file (the "how to change a size, ratio or spacing"
   step of plans 015 and 016), the export checks as scripts in `packages/tokens/scripts/`, and this
   repo only (plan 010). Its typography part is not optional (015, Answers); the rest is. It overlaps
@@ -398,14 +400,14 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis:bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (typography first) | draft | 0 / 6 | owner's answers to its open questions (shape, script location, production's file shape); becomes plan 024's phase 1 (manual export path) |
+| 009 | Token-update skill (typography first) | draft | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 1 / 7 | Claude Code marketplace plugin decided 2026-11-21 (every skill as a slash command, added slowly; `/minis:page-to-figma` among the first; very important, not the only channel); 14 further command candidates listed; open: where it lives, which marketplace |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
-| 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | phase 7, the typography procedure, now planned as plan 009's typography reference file. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
-| 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only phase 6's skill part (the `page-header`, `topbar` and `CLAUDE.md` docs are done); planned as plan 009's typography reference file |
+| 015 | Responsive line height in Figma | **in-progress** | 16 / 0 | all phases done; phase 7 (the typography procedure) landed 2026-11-26 as the `minis-token-update` skill. Moving it to `done` is the owner's call. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
+| 016 | Letter-spacing tokens (high priority) | **in-progress** | 12 / 0 | all phases done; phase 6's skill part landed 2026-11-26 in `minis-token-update`. Moving it to `done` is the owner's call |
 | 017 | Production reference audit | draft | 0 / 12 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
@@ -488,7 +490,7 @@ Work for the redefinition that has no todo plan but should show up here:
 - **Typography method** — Figma, exporter 1.3.1 (1.2.1 for the export rules, 1.3.0 adds the
   Line heights command, 1.3.1 the references-mode fixes) and CSS — is in plans 015 and 016 and
   `docs/ai-prompts/typography.md`. The step-by-step procedure for changing it is planned in
-  plan 009 (not built yet).
+  plan 009 (`minis-token-update`, built 2026-11-26).
 
 ## Phases
 
