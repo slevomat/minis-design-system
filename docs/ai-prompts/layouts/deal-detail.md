@@ -1,10 +1,17 @@
 # Deal Detail Page — AI Layout Reference
 
-A hotel/experience deal page on Slevomat. Breadcrumbs + save toggle, photo gallery, deal title, tabbed navigation, then a two-column layout with main content on the left and widgets/aside on the right.
+A hotel/experience deal page on Slevomat. Breadcrumbs + save toggle, photo gallery, deal title, tabbed navigation, then main content on the left and widgets on the right.
+
+**Width level:** browsing page → the **default (wide) container**, 1240px. **Main + sidebar:**
+`<minis-sidebar-layout>` — fluid main, fixed 320px sidebar, side by side from 1008px. See
+[Layouts → Three width levels](./index.md#three-width-levels).
 
 **Figma:** [Deal Page 2XL](https://www.figma.com/design/mfiAVMWkxiBRGnegjqLMNW/MiniS-DS?node-id=3569-1201)
 
-> **Production differs:** the live deal detail splits main/sidebar 779/357px (~2.2 : 1) with flexbox and a ~40px gap, and stacks below 1008px. This guide uses 8 + 4 columns, a 48px gap, and stacks below 768px. See [Production Reference](./production-reference.md#main--sidebar-each-component-does-its-own-split).
+> **Production:** the live deal detail splits 779 / 357px with a ~40px gap and stacks below
+> 1008px. Mini*S stacks at the same breakpoint and standardises the split on one rule for every
+> main + sidebar page: 824 + 32 + 320px at 1240px+ (decided 2026-11-26, plan 030). See
+> [Production Reference](./production-reference.md#main--sidebar-each-component-does-its-own-split).
 
 ---
 
@@ -143,16 +150,19 @@ The deal title sits inside the container, below the gallery.
 </div>
 ```
 
-### 6. Content Area (Main + Aside)
+### 6. Content Area (Main + Sidebar)
 
-Two-column layout using a 12-column CSS grid: **8 columns for main content** (left), **4 columns for aside/widgets** (right). The column gap uses the responsive `--spacing-layout-xl` token (32px base → 48px on xl).
+`<minis-sidebar-layout>` inside the container: **main content** in the default slot (fluid),
+**widgets** in `slot="sidebar"` (fixed 320px, right). Gap `--spacing-layout-lg` (32px from
+1008px). Below a 1008px viewport it stacks: main first, sidebar under it. No grid, no media
+queries of your own.
 
 ```html
 <minis-container>
-  <div class="deal-content">
+  <minis-sidebar-layout class="deal-content">
 
-    <!-- Main content: 8 columns (left) -->
-    <main class="deal-main">
+    <!-- Main content (left, fluid) -->
+    <main class="deal-stack">
       <div class="deal-card">
         <h2 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold);">
           Hotel Marvelous Spa & Wellness ****
@@ -170,8 +180,8 @@ Two-column layout using a 12-column CSS grid: **8 columns for main content** (le
       </div>
     </main>
 
-    <!-- Aside widgets: 4 columns (right) -->
-    <aside class="deal-aside">
+    <!-- Widgets (right, 320px) -->
+    <aside slot="sidebar" class="deal-stack">
       <div class="deal-card">
         <!-- Pricing widget, booking CTA -->
       </div>
@@ -180,41 +190,31 @@ Two-column layout using a 12-column CSS grid: **8 columns for main content** (le
       </div>
     </aside>
 
-  </div>
+  </minis-sidebar-layout>
 </minis-container>
 ```
 
 ---
 
-## CSS for the Content Grid
+## CSS for the Content Area
 
 ```css
 /* Page background */
 body {
-  background: var(--color-background, #fcfdff);
+  background: var(--color-background);
   margin: 0;
   font-family: var(--typography-font-family-sans, Inter, sans-serif);
   color: var(--color-text-primary, black);
 }
 
-/* 12-column content grid: 8 (main) + 4 (aside) */
+/* Vertical breathing room around the main + sidebar block */
 .deal-content {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--spacing-layout-xl);
   padding-top: var(--spacing-layout-md);
   padding-bottom: var(--spacing-layout-md);
 }
 
-.deal-main {
-  grid-column: 1 / span 8;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-layout-md);
-}
-
-.deal-aside {
-  grid-column: 9 / span 4;
+/* Cards stacked inside each column */
+.deal-stack {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-layout-md);
@@ -234,25 +234,7 @@ body {
   background: var(--color-surface-faded, #f1f3f5);
 }
 
-/* =====================
-   RESPONSIVE: mobile stacking
-   ===================== */
-@media (max-width: 767px) {
-  .deal-content {
-    grid-template-columns: 1fr;
-    column-gap: 0;
-  }
-
-  .deal-main {
-    grid-column: 1;
-    order: 1;
-  }
-
-  .deal-aside {
-    grid-column: 1;
-    order: 2; /* push aside below main on mobile */
-  }
-}
+/* No responsive rules needed: <minis-sidebar-layout> stacks below 1008px itself. */
 ```
 
 ---
@@ -288,26 +270,16 @@ body {
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body {
-      background: var(--color-background, #fcfdff);
+      background: var(--color-background);
       margin: 0;
       font-family: var(--typography-font-family-sans, Inter, sans-serif);
       color: var(--color-text-primary, black);
     }
     .deal-content {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      column-gap: var(--spacing-layout-xl);
       padding-top: var(--spacing-layout-md);
       padding-bottom: var(--spacing-layout-md);
     }
-    .deal-main {
-      grid-column: 1 / span 8;
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-layout-md);
-    }
-    .deal-aside {
-      grid-column: 9 / span 4;
+    .deal-stack {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-layout-md);
@@ -322,11 +294,6 @@ body {
     }
     .deal-card--faded {
       background: var(--color-surface-faded, #f1f3f5);
-    }
-    @media (max-width: 767px) {
-      .deal-content { grid-template-columns: 1fr; column-gap: 0; }
-      .deal-main { grid-column: 1; order: 1; }
-      .deal-aside { grid-column: 1; order: 2; }
     }
   </style>
 </head>
@@ -412,10 +379,10 @@ body {
     </minis-container>
   </div>
 
-  <!-- 6. Content: main (8 col) + aside (4 col) -->
+  <!-- 6. Content: main (fluid) + sidebar (320px), stacks below 1008px -->
   <minis-container>
-    <div class="deal-content">
-      <main class="deal-main">
+    <minis-sidebar-layout class="deal-content">
+      <main class="deal-stack">
         <div class="deal-card">
           <h2 style="font-size: var(--typography-heading-xl-size); font-weight: var(--typography-weight-bold);">
             Hotel Marvelous Spa & Wellness ****
@@ -428,11 +395,11 @@ body {
         </div>
         <div class="deal-card deal-card--faded">Secondary content</div>
       </main>
-      <aside class="deal-aside">
+      <aside slot="sidebar" class="deal-stack">
         <div class="deal-card">Pricing widget</div>
         <div class="deal-card deal-card--faded">Additional info</div>
       </aside>
-    </div>
+    </minis-sidebar-layout>
   </minis-container>
 
   <!-- Toggle tag: swap heart icon on press -->
@@ -455,11 +422,11 @@ body {
 
 1. **Tab navigation band** — `<minis-navigation variant="tabs">` is ALWAYS wrapped in a full-width `<div>` with `background: var(--color-surface-primary)` and `border: 1px solid var(--color-border-subtle)` on top and bottom. The `<minis-container>` goes inside that band.
 
-2. **Content grid** — 12-column CSS grid split **8 / 4** (main left, aside right). Column gap: `var(--spacing-layout-xl)` (32→48px responsive). On mobile (< 768px), stacks to single column with main first, aside second.
+2. **Main + sidebar** — `<minis-sidebar-layout>` inside the default `<minis-container>`: main left (fluid), sidebar right (320px), gap `--spacing-layout-lg`. Below 1008px it stacks, main first. Don't build a 12-column grid for it.
 
 3. **Breadcrumbs row** — Always between header band and photo gallery. Flexbox row with `justify-content: space-between`. Breadcrumbs left, save toggle right.
 
-4. **Section order** — Header → Breadcrumbs → Photo Gallery → Title → Tab Band → Content Grid.
+4. **Section order** — Header → Breadcrumbs → Photo Gallery → Title → Tab Band → Main + sidebar.
 
 5. **Navigation items** — In prototypes, omit `href` on `<minis-navigation-item>` so they render as `<button>` elements (no page refresh on click). Only add `href` when linking to real pages.
 
@@ -478,11 +445,10 @@ body {
 > 3. Photo gallery with `<minis-card-grid variant="photogallery">` (exactly 4 photos)
 > 4. Deal title as `<h1>` using `--typography-heading-xl-size`
 > 5. Tab navigation in a full-width surface-primary band with border-subtle borders: `<minis-navigation variant="tabs">` (Nabídka, Hodnocení, O hotelu, Tipy na výlet, Dotazy)
-> 6. 12-column content grid: 8-col main (left) + 4-col aside (right), gap `var(--spacing-layout-xl)`
-> Wrap everything in `<minis-container>`. Use `--spacing-layout-*` tokens for spacing.
+> 6. `<minis-sidebar-layout>`: main content in the default slot, price box and widgets in `slot="sidebar"` (320px, right). It stacks below 1008px by itself.
+> Wrap every band in the default `<minis-container>` (wide, 1240px — a browsing page). Use `--spacing-layout-*` tokens for spacing.
 > Background: `var(--color-background)`. Cards: `var(--color-surface-primary)` with `var(--border-radius-xl)`.
-> On mobile (< 768px), stack aside below main.
 
 ---
 
-**Last updated:** 2026-03-20
+**Last updated:** 2026-11-26

@@ -179,23 +179,23 @@ The Mini*S values come from `packages/tokens/src/tokens.css`, `<minis-container>
 | Topic | Production | Mini*S | Verdict |
 |---|---|---|---|
 | Breakpoints | 360 / 408 / 600 / 768 / 1008 / 1256 / 1480 | `--breakpoint-2xs` … `-2xl` = 360 / 408 / 600 / 768 / 1008 / 1256 / 1480 (+ 1920, 2560) | **Same scale** |
-| Wide container width | max 1240px | `--container-width`: 100% → 1240px at 1256px | **Same in practice** (production caps at a 1240px viewport, Mini*S at 1256px, so they differ only in a 16px band) |
+| Wide container width | max 1240px | `--container-width`: 1240px from 1008px (was from 1256px until 2026-11-26) | **Same** (renders identically at every width) |
 | Container padding | 8 → 16 (408px) → **32 (1008px)** | `--container-padding`: 8 → 16 (408px) → **32 (1008px)** | **Same** since 2026-11-20 (Mini*S reached 32px only at 1256px before) |
-| Narrow container | **1008px** box (944px content at 32px padding) | `--container-narrow-width` **752px** from 768px (720px content at 16px, 688px at 32px) | **Different level.** Mini*S "narrow" is production's *reading column*, not its narrow container |
+| Narrow container | **1008px** box (944px content at 32px padding) | `variant="medium"`: `--container-medium-width` 1008px from 1008px (since 2026-11-26) | **Same.** Mini*S calls it *medium*; Mini*S *narrow* is the reading column |
 | Reading/form column | 704px box, ~688px text | Mini*S narrow from 1008px: 752 − 2×32 = **688px** content | **Matches from 1008px**; at 768–1007px Mini*S gives 720px |
-| Page column system | ½ ⅓ ⅔ (¼ ¾ as placeholders), no 12-col grid on the public site | Guides prescribe a 12-column CSS grid | **Differs** |
-| Main + sidebar | Flex per component, ratio 2.2 : 1 to 3 : 1, gap 24–40px, sidebar on the right | Deal Detail: 8 + 4 columns (2 : 1), gap `--spacing-layout-xl` = 48px from 408px, aside on the right | **Same idea, different numbers.** Mini*S's 48px is wider than any production gap |
+| Page column system | ½ ⅓ ⅔ (¼ ¾ as placeholders), no 12-col grid on the public site | No page grid; `<minis-sidebar-layout>` + an optional CSS split (since 2026-11-26) | **Same idea** |
+| Main + sidebar | Flex per component, ratio 2.2 : 1 to 3 : 1, gap 24–40px, sidebar on the right, stacks below 1008px | `<minis-sidebar-layout>`: fluid main + 320px sidebar on the right, gap `--spacing-layout-lg` (32px), stacks below 1008px (since 2026-11-26) | **One rule** inside production's range (2.6 : 1 at 1240px) |
 | Layout spacing | `--layout-spacing-*` = the Figma Layout collection, one breakpoint per mode (1.4) | `--spacing-layout-*`: same values and tiers since 2026-11-26 (jumped to the desktop set at 408px before) | **Same** since 2026-11-26 |
 | Grids inside components | CSS grid, 4–16px gaps | `<minis-card-grid>` with container queries | **Same idea** |
-| Checkout | Narrow 1008px container + 704px column | [Checkout](./checkout.md): `<minis-container variant="narrow">` (752px) | Mini*S has **one level where production has two** |
+| Checkout | Narrow 1008px container + 704px column | [Checkout](./checkout.md): `variant="medium"` (1008px) for the steps + `variant="narrow"` (752px) for the cards | **Same two levels** (since 2026-11-26) |
 
-There were two mismatches worth knowing about before writing guides. The first is now fixed.
+There were two mismatches worth knowing about before writing guides. Both are fixed.
 
 - **The 1008–1255px band (fixed 2026-11-20).** Production switches to desktop layouts, including
   32px padding and side-by-side columns, at 1008px. Mini*S kept 16px padding until 1256px; its
-  container padding now also reaches 32px at 1008px. Side-by-side columns are still open
-  question 4.
-- **What "narrow" means.** Mini*S `variant="narrow"` is close to production's 704px
+  container padding now also reaches 32px at 1008px, and `<minis-sidebar-layout>` goes side by
+  side at 1008px (2026-11-26).
+- **What "narrow" means (fixed 2026-11-26 with `variant="medium"`).** Mini*S `variant="narrow"` is close to production's 704px
   reading/form column, and production's 1008px narrow container has no Mini*S counterpart. A
   checkout built with `variant="narrow"` matches the cart's text column, but anything production
   puts in the 1008px box outside that column (the step header and the full-width messages, for
