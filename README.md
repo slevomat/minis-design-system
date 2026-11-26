@@ -67,6 +67,7 @@ A **skill** is a set of instructions your AI assistant (Claude Code) loads on de
 | `minis-app` | Anyone prototyping | Builds a whole app or prototype from scratch: scaffolds the project, picks the right topbar variant, writes the screens with real Mini*S components and tokens, and verifies the result in a browser (desktop, mobile, dark mode) before reporting done. | *"Build me an app for handling refund requests"* |
 | `slevomat-design-principles` | Anyone designing a feature | Reviews a feature description or screenshot against the 7 Slevomat design principles. Not shipped in this repo — part of the wider Slevomat AI setup. | *"Check this screen against our design principles"* |
 | `minis-figma-docs` | Design-system team | Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice, built only from the file's internal docs kit. Figma only; it never writes the code docs. Needs the Figma MCP. | *"Document the Tag component in Figma"* |
+| `minis-page-to-figma` | Design-system team, designers | Rebuilds a live slevomat.cz page in the Mini*S Figma file from Mini*S components and bound variables (1280 / 768 / 375), with findings cards beside it: what Mini*S is missing and where it conflicts with production. `skip-audit` = rebuild only. Read-only on production. Needs Claude in Chrome and the Figma MCP. | *"Rebuild the slevomat.cz homepage in Figma"* |
 
 **Get them anywhere with the `minis` Claude Code plugin** — one install, every Mini*S skill as a `/minis:` command:
 
@@ -75,7 +76,7 @@ A **skill** is a set of instructions your AI assistant (Claude Code) loads on de
 /plugin install minis@minis-design-system
 ```
 
-Then `/minis:app` and `/minis:figma-docs`. Inside this repo `/minis-app` and `/minis-figma-docs` keep working without an install (transition names). Install, update and project setup: [`plugins/minis/README.md`](plugins/minis/README.md).
+Then `/minis:app`, `/minis:figma-docs` and `/minis:page-to-figma`. Inside this repo `/minis-app`, `/minis-figma-docs` and `/minis-page-to-figma` keep working without an install (transition names). Install, update and project setup: [`plugins/minis/README.md`](plugins/minis/README.md).
 
 Full details: the Storybook **Vibe Coding Guide → Skills**.
 

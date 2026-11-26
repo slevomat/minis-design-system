@@ -353,7 +353,7 @@ The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-
 The repo is its own marketplace (`.claude-plugin/marketplace.json`, name `minis-design-system`) for one plugin, `minis` (`plugins/minis/`, install docs in its README). Plan 010 has the roster and the decisions.
 
 - **Skill sources live in `plugins/minis/skills/<name>/`**, never in `.claude/skills/`. The folder name is the command (`skills/app` → `/minis:app`): no `minis-` prefix, and **no `name:` in the frontmatter**, so the symlinked project skill keeps its own name.
-- `.claude/skills/minis-app` and `.claude/skills/minis-figma-docs` are **symlinks** to the plugin folders (transition names `/minis-app`, `/minis-figma-docs`). Never replace them with copies.
+- `.claude/skills/minis-app`, `minis-figma-docs` and `minis-page-to-figma` are **symlinks** to the plugin folders (transition names `/minis-app`, `/minis-figma-docs`, `/minis-page-to-figma`). Never replace them with copies.
 - Bundled files are referenced as `${CLAUDE_SKILL_DIR}/…` (works both as plugin and project skill). Nothing outside the plugin folder is copied on install, so a skill must not read `../` paths from its own folder; repo files are read from the user's checkout.
 - A skill that only works in a Mini*S checkout checks for `packages/tokens` + `tokens.json` first and stops with a message elsewhere.
 - A new command joins only once its skill works. Add it to the README's command table and the Storybook Vibe Coding Guide → Skills.

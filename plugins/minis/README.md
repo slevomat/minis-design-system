@@ -29,10 +29,10 @@ and type `/minis:` to see the commands.
 |---|---|---|---|
 | `/minis:app` | Anyone prototyping | Scaffolds an app or prototype on the Mini*S web components, picks the topbar variant, builds the screens from the component docs, checks the result in a browser (desktop, mobile, dark) | A checkout of this repo (the skill offers to clone it), Node 20+, pnpm |
 | `/minis:figma-docs` | Design-system team | Writes and updates the documentation cards in the MiniS DS Figma file from the internal docs kit | Figma MCP, edit access to the MiniS DS file |
-| `/minis:page-to-figma` | Design-system team, designers | Rebuilds a live production page in Figma from Mini*S library instances, with findings frames (`skip-audit` = no findings). Plan 031 | **Not in this release** — added once its skill works |
+| `/minis:page-to-figma` | Design-system team, designers | Rebuilds a live slevomat.cz page in the MiniS DS Figma file from Mini*S library instances and bound variables (1280 / 768 / 375), with findings cards beside it: what Mini*S is missing, where it conflicts with production. `/minis:page-to-figma / skip-audit` = rebuild only. Read-only on production. Plan 031 | Claude in Chrome connected (the in-app browser can't open slevomat.cz), Figma MCP with edit access to MiniS DS |
 
 You can also just describe the task ("build me an app for refund requests"); Claude picks the skill
-from its description. Options go after the command: `/minis:app a refund-requests admin tool`.
+from its description. Options go after the command: `/minis:app a refund-requests admin tool`, `/minis:page-to-figma /cestovani skip-audit`.
 
 More commands join one at a time, each only once its skill works. The roster and the candidates are
 in [`todo-plans/010-skill-distribution.md`](../../todo-plans/010-skill-distribution.md). Skills that
@@ -74,11 +74,11 @@ Each person still trusts the folder and installs it once (`claude plugin install
 Ask the repo's owners first. The production (Nette) repo gets Mini*S rules as plain files instead,
 on its own terms (plan 010, phase 7).
 
-## Inside this repo: `/minis-app` still works
+## Inside this repo: `/minis-app` and friends still work
 
-`.claude/skills/minis-app` and `.claude/skills/minis-figma-docs` are symlinks to the plugin's skill
-folders, so `/minis-app` and `/minis-figma-docs` keep working here without an install. They are
-transition names: use `/minis:app` and `/minis:figma-docs` going forward. Don't copy a skill into
+`.claude/skills/minis-app`, `minis-figma-docs` and `minis-page-to-figma` are symlinks to the plugin's
+skill folders, so `/minis-app`, `/minis-figma-docs` and `/minis-page-to-figma` keep working here without
+an install. They are transition names: use the `/minis:` ones going forward. Don't copy a skill into
 `~/.claude/skills/` any more; a copy goes stale on the first token change.
 
 ## Working on the plugin
@@ -103,4 +103,4 @@ repo or the plugin; the Slevomat name and marks are not covered by the MIT licen
 
 | Version | Date | Commands |
 |---|---|---|
-| 0.1.0 | 2026-11-26 | `/minis:app`, `/minis:figma-docs` |
+| 0.1.0 | 2026-11-26 | `/minis:app`, `/minis:figma-docs`, `/minis:page-to-figma` |

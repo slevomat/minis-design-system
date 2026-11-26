@@ -88,8 +88,12 @@ decision.
    `python3 ${CLAUDE_SKILL_DIR}/scripts/fill-template.py ${CLAUDE_SKILL_DIR}/scripts/build.<page-type>.js <cache>/content.json "<Page>" 1280 xl <x>`.
    Paste the output into `use_figma`. A re-run replaces the frame of the same page and width.
    - **No body for this page type yet?** Copy the HELPERS part of `build.homepage.js` and write a
-     new PAGE BODY from your mapping table: the same helpers, in the page's block order. Save it as
-     `scripts/build.<page-type>.js` once it works.
+     new PAGE BODY from your mapping table: the same helpers, in the page's block order. Once it
+     works, save it as `build.<page-type>.js`: in the Mini*S repo at
+     `plugins/minis/skills/page-to-figma/scripts/` (commit it, so the next plugin release carries
+     it); anywhere else in the run folder, and tell the user to send it to the DS team. Never write
+     into `${CLAUDE_SKILL_DIR}` when it isn't the repo: an installed plugin is a cache that the next
+     update replaces. Then pass that file to `fill-template.py` instead of the bundled one.
 3. Check the result's `skipped` list (texts in a font the plugin can't load), then screenshot the
    frame (`get_screenshot`, `maxDimension` ~1600). Fix wrong text slots, sample copy left behind
    and anything clipped.

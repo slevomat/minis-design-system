@@ -590,8 +590,8 @@ const changelogHTML = `
       <h3 style="margin-top:1rem">Plugin — <code>minis</code> 0.1.0, the Mini*S plugin for Claude Code</h3>
       <ul>
         <li><strong>New Claude Code plugin <code>minis</code></strong> (<code>plugins/minis/</code>), with the repo as its own public marketplace (<code>minis-design-system</code>). Install: <code>/plugin marketplace add slevomat/minis-design-system</code>, then <code>/plugin install minis@minis-design-system</code>. See Vibe Coding Guide → <strong>Install the Mini*S plugin</strong>.</li>
-        <li><strong>Commands:</strong> <code>/minis:app</code> (scaffold and verify a prototype on the web components) and <code>/minis:figma-docs</code> (documentation cards in the MiniS DS Figma file).</li>
-        <li><strong>Skills moved, not copied:</strong> their source is now <code>plugins/minis/skills/app/</code> and <code>plugins/minis/skills/figma-docs/</code>. <code>.claude/skills/minis-app</code> and <code>minis-figma-docs</code> are symlinks to them, so <code>/minis-app</code> and <code>/minis-figma-docs</code> keep working inside this repo (transition names).</li>
+        <li><strong>Commands:</strong> <code>/minis:app</code> (scaffold and verify a prototype on the web components), <code>/minis:figma-docs</code> (documentation cards in the MiniS DS Figma file) and <code>/minis:page-to-figma</code> (rebuild a live slevomat.cz page in Figma from Mini*S instances and bound variables, with findings cards; <code>skip-audit</code> = rebuild only; plan 031).</li>
+        <li><strong>Skills moved, not copied:</strong> their source is now <code>plugins/minis/skills/{app,figma-docs,page-to-figma}/</code>. <code>.claude/skills/minis-app</code>, <code>minis-figma-docs</code> and <code>minis-page-to-figma</code> are symlinks to them, so the old names keep working inside this repo (transition names).</li>
         <li><code>minis-app</code>: the <code>cp -r</code> instructions are replaced by the plugin install; with no checkout, step 1 offers to clone the public repo.</li>
         <li><strong>Versioning:</strong> the plugin has its own semver (<code>plugins/minis/.claude-plugin/plugin.json</code>); releases are tagged <code>minis--v&lt;version&gt;</code>.</li>
       </ul>
@@ -2506,6 +2506,12 @@ export const VibeCodingGuide: Story = {
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice. Builds only from the file's internal docs kit; it never touches the code docs.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Document the Tag component in Figma"</em><br/><br/><em>"Add today's change to the Checkbox changelog card"</em></td>
           </tr>
+          <tr>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:page-to-figma</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team, designers</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Rebuilds a live slevomat.cz page in the Mini*S Figma file from Mini*S components and bound variables (1280, 768 and 375 wide), with findings cards beside it: what Mini*S is missing and where it conflicts with production. Add <code>skip-audit</code> to get the rebuild only, to design on. Read-only on production.</td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Rebuild the slevomat.cz homepage in Figma"</em><br/><br/><code>/minis:page-to-figma /cestovani skip-audit</code></td>
+          </tr>
         </tbody>
       </table>
 
@@ -2519,8 +2525,9 @@ export const VibeCodingGuide: Story = {
       <ul>
         <li><strong><code>/minis:app</code></strong> needs a checkout of the design system repo for its scaffolder; if you don't have one, it offers to clone it. You also need Node 20+ and pnpm.</li>
         <li><strong><code>/minis:figma-docs</code></strong> only works on the Mini*S Figma file and needs the Figma MCP connection described in <strong>AI &amp; Figma integration</strong>.</li>
-        <li><strong>Inside the design system repo</strong>, <code>/minis-app</code> and <code>/minis-figma-docs</code> keep working without the install. They are transition names; prefer the <code>/minis:</code> ones. Don't copy skills into <code>~/.claude/skills/</code> any more: a copy goes stale on the first token change.</li>
-        <li><strong>Coming next:</strong> <code>/minis:page-to-figma</code> (rebuild a production page in Figma, plan 031), added once its skill works. Full install, update and project-setup notes: <code>plugins/minis/README.md</code> in the repo.</li>
+        <li><strong><code>/minis:page-to-figma</code></strong> needs Claude in Chrome connected (the in-app browser can't open slevomat.cz) and the Figma MCP with edit access to the Mini*S file.</li>
+        <li><strong>Inside the design system repo</strong>, <code>/minis-app</code>, <code>/minis-figma-docs</code> and <code>/minis-page-to-figma</code> keep working without the install. They are transition names; prefer the <code>/minis:</code> ones. Don't copy skills into <code>~/.claude/skills/</code> any more: a copy goes stale on the first token change.</li>
+        <li>More commands join one at a time, each once its skill works. Full install, update and project-setup notes: <code>plugins/minis/README.md</code> in the repo.</li>
       </ul>
 
       <h3>Other skills</h3>

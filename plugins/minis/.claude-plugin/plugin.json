@@ -1,7 +1,7 @@
 {
   "name": "minis",
   "version": "0.1.0",
-  "description": "Mini*S design system skills for Claude Code: scaffold a prototype on the Mini*S web components (/minis:app) and write documentation cards in the MiniS DS Figma file (/minis:figma-docs).",
+  "description": "Mini*S design system skills for Claude Code: scaffold a prototype on the Mini*S web components (/minis:app), write documentation cards in the MiniS DS Figma file (/minis:figma-docs), and rebuild a production page in Figma with findings (/minis:page-to-figma).",
   "author": { "name": "Mini*S design system team", "url": "https://github.com/slevomat/minis-design-system" },
   "homepage": "https://github.com/slevomat/minis-design-system/tree/master/plugins/minis",
   "repository": "https://github.com/slevomat/minis-design-system",
