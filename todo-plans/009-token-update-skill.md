@@ -297,9 +297,10 @@ Each stays open to change; edit here when one is overruled.
    exporter plugin exports the groups; the skill never splits `tokens.rgb.json` and never writes a
    production file.** Step 9 is a hand-over note only. **Still open (needs the Nette developer):**
    what does production want with a change: the files, a note, or a PR (plan 024 question 5, plan 003
-   production question 4)? Which exporter setting makes a one-group file, and whether
-   `tokens:check` should accept a single-group file (its Layout mode mapping needs the `breakpoints`
-   group, so today it can't), are small follow-ups.
+   production question 4)? Which exporter setting makes a one-group file is a small follow-up.
+   `tokens:check --group-file <file>` (repeatable) now accepts a single-group file (2026-11-26):
+   it runs the checks that fit the groups present, takes Layout mode widths from `tokens.rgb.json`,
+   and fails if the group differs from the repo's own export.
 5. **Re-export `tokens.json` with exporter 1.3.1 now, or with the next token update?** It is on
    1.3.0 and still has one self-reference line (`--accordion-padding-y`). Phase 1's check will fail
    on it until then. Related: should the check require both files to be from the same version, as
