@@ -8,13 +8,15 @@ const C = __CONTENT__;
 const page = figma.root.children.find(p => p.name === 'Production rebuilds');
 if (!page) throw new Error('page "Production rebuilds" missing');
 await figma.setCurrentPageAsync(page);
+// Re-runs replace the frame of the same width.
+for (const n of page.children.filter(n => n.name.startsWith(`Homepage — ${WIDTH} `))) n.remove();
 
 const V = {};
 for (const v of await figma.variables.getLocalVariablesAsync()) V[v.name] = v;
 const need = n => { if (!V[n]) throw new Error('variable missing: ' + n); return V[n]; };
 const S = {};
 for (const s of await figma.getLocalTextStylesAsync()) S[s.name] = s;
-for (const s of Object.values(S)) if (/^(Heading|Body|Caption|Brand)\//.test(s.name)) { try { await figma.loadFontAsync(s.fontName); } catch (e) {} }
+for (const s of Object.values(S)) if (/^(Heading|Body|Caption)\//.test(s.name)) { try { await figma.loadFontAsync(s.fontName); } catch (e) {} }
 const cols = await figma.variables.getLocalVariableCollectionsAsync();
 const layoutCol = cols.find(c => c.name === 'Layout');
 const foundCol = cols.find(c => c.name === 'Foundation');
@@ -51,12 +53,17 @@ async function text(parent, chars, style, color = 'Color/Text/primary', name) {
   return t;
 }
 function wrapText(t) { t.layoutSizingHorizontal = 'FILL'; t.textAutoResize = 'HEIGHT'; }
+// Text overrides inside instances. A text in a font the plugin can't load (Kensington in MiniS DS)
+// is skipped and reported in `skipped`, never typed over in another font.
+const skipped = [];
 async function setTexts(inst, values) {
   const ts = inst.findAll(n => n.type === 'TEXT');
   for (const [i, v] of Object.entries(values)) {
     const t = ts[+i]; if (!t || v == null) continue;
-    for (const seg of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(seg.fontName);
-    t.characters = v;
+    try {
+      for (const seg of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(seg.fontName);
+      t.characters = v;
+    } catch (e) { skipped.push(inst.name.slice(0, 30) + ' › ' + t.name.slice(0, 30)); }
   }
 }
 const sets = {};
@@ -138,7 +145,8 @@ async function promoGrid(name, titles, heading) {
   for (const t of titles) {
     const p = await variant('5495:409', { Breakpoint: narrow ? 'Mobile' : 'Desktop' }); g.appendChild(p);
     p.resize(w, p.height);
-    await setTexts(p, { 0: t });
+    // Title (text 0) is Kensington: the captured title goes in the subtitle, the sample body is cleared.
+    await setTexts(p, { 1: t, 2: '' });
   }
 }
 async function headRow(parent, h, all) {
@@ -153,9 +161,12 @@ async function tagsRow(parent, tags) {
 }
 async function carousel(parent, cards) {
   const r = box('carousel', 'HORIZONTAL', parent); r.clipsContent = true; gap(r, 'linear/sp-linear-2');
-  for (const [name, info] of cards) {
+  // Deal Card texts in an instance: 0 name, 1 rating, 2 rating count, 3 price, 4 label, 5 place,
+  // 6 region. What the capture doesn't give is emptied and hidden, never left as sample copy.
+  for (const [name, info, price] of cards) {
     const d = await variant('5495:768', { Content: 'Carousel HP', Type: 'Default', 'Card usage': 'carousel' }); r.appendChild(d);
-    await setTexts(d, { 1: name, 4: info });
+    await setTexts(d, { 0: name, 1: '', 2: '', 3: price || '…', 4: '', 5: info, 6: '' });
+    for (const t of d.findAll(n => n.type === 'TEXT')) if (t.characters === '') t.visible = false;
   }
 }
 await promoGrid('homepage grid (Promo Cards)', C.grid1);
@@ -164,7 +175,9 @@ for (const b of C.blocks) {
   if (b.kind === 'gifts') {
     const band = box('gifts band — brand theme (no token: surface)', 'VERTICAL', main);
     pad(band, 'linear/sp-linear-8'); gap(band, 'linear/sp-linear-4'); fill(band, 'Color/Surface/faded'); radius(band, 'border/radius/lg');
-    const t = await text(band, b.h, 'Brand/Heading/xl'); t.textCase = 'UPPER';
+    // Kensington can't be loaded by plugin scripts in MiniS DS: Heading/xl stands in, the layer
+    // name says which style a designer should apply by hand.
+    const t = await text(band, b.h, 'Heading/xl', 'Color/Text/primary', 'title — apply Brand/Heading/xl by hand'); // no textCase override: it detaches the style
     await tagsRow(band, b.tags); await carousel(band, b.cards);
     await text(band, b.all, 'Body/sm', 'Color/Text/secondary');
   } else {
@@ -239,4 +252,4 @@ for (const t of C.foot) {
 }
 const legal = await text(foot, C.legal, 'Caption/xs', 'Color/Text/secondary'); wrapText(legal); legal.textAlignHorizontal = 'CENTER';
 
-return { root: root.id, h: Math.round(root.height), children: root.children.length };
+return { root: root.id, h: Math.round(root.height), children: root.children.length, skipped: [...new Set(skipped)] };
