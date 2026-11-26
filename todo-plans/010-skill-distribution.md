@@ -3,7 +3,7 @@ id: 010
 title: Distributing Mini*S skills and commands
 status: draft
 created: 2026-10-29
-updated: 2026-11-21
+updated: 2026-11-26
 owner: Lexislav
 ---
 
@@ -41,6 +41,11 @@ repo.
 | Date | Decision | Why |
 |---|---|---|
 | 2026-11-21 | **Mini*S ships as a Claude Code plugin in a marketplace.** Every Mini*S skill is in it, so one install gives a person all of them as slash commands (e.g. `/minis:page-to-figma`, plan 031). It is a very important channel, not the main deliverable and not the only channel: Copilot users in the Nette repo still get plain files (option B), and claude.ai / Claude Design users get the Skill Hub (plan 019). | Owner's decision. Closes "leaning A, undecided" below. |
+| 2026-11-26 | **Q1 — the repo is public.** `gh repo view slevomat/minis-design-system` → `PUBLIC`. Installing needs no GitHub access. Whether every designer *has* a GitHub account stays open for 008 (filing issues). | Checked, not decided. |
+| 2026-11-26 | **Q5 — the plugin lives in this repo**, at `plugins/minis/`. Skill folders there are the single source; `.claude/skills/minis-*` are symlinks to them so `/minis-app` keeps working in this repo. | One source: a skill and the tokens/docs it describes change in one commit, no sync job. Owner's choice. |
+| 2026-11-26 | **Q7 — this repo is its own public marketplace** (`.claude-plugin/marketplace.json`, marketplace name `minis-design-system`): `/plugin marketplace add slevomat/minis-design-system`, `/plugin install minis@minis-design-system`. The plugin is text-only; Kensington is not in the repo and never ships, Slevomat marks stay under `NOTICE`. A Slevomat org marketplace can list it later. | The repo is already public; no access to wait for. Owner's choice. |
+| 2026-11-26 | **Q8 — repo-bound skills go in the plugin with a guard**: each checks for a Mini*S checkout (`packages/tokens` + `tokens.json`) first and stops with a clear message elsewhere. | One install gives the DS owner everything. Owner's choice. |
+| 2026-11-26 | **Q4 — the plugin has its own semver**, starting at 0.1.0, in `plugins/minis/.claude-plugin/plugin.json` only; released as the git tag `minis--v<version>` (`claude plugin tag`). Skills read tokens and docs from the checkout or Storybook at run time instead of embedding values. Tying the version to a token release waits for plan 012 (phase 6). | Claude Code caches a plugin by version, so a version is needed now; no token releases exist yet. Owner's choice. |
 
 ### Plugin roster
 
