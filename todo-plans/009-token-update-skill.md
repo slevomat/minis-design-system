@@ -245,6 +245,18 @@ Figma frames.
       The skill has not been run on a real change yet (phase 3).
 - [ ] **Phase 3 — Dry run on a no-op re-export** with exporter 1.3.1: it brings `tokens.json` up to
       1.3.1, shows the procedure on a change with an empty diff, and finds what the steps missed.
+      **Partly done 2026-11-26, without Figma** (a real re-export is a manual plugin run, so the
+      box stays unticked until one exists): steps 0, 5, 6, 7 and 10 were run on what is on disk.
+      The 2026-11-20 pre-change exports (`~/Downloads/tokens-ref.json`, `tokens-rgb-resolved.json`)
+      as "old" against the repo files as "new" gave exactly the known change (`--container-padding`
+      and `--container-narrow-padding`, mode `lg`, 16 → 32 px) and flagged the Storybook Tier;
+      `tokens:check --css` on the repo exports shows typography matching in all modes, and the build
+      leaves `palette-data.json` unchanged. **Found and fixed:** a simulated 1.3.1 `tokens.json`
+      (version bumped, the self-referencing `components` alias omitted, as docs §4 says 1.3.1 does)
+      failed `same-tokens`, because the check compared token positions. It now compares CSS names and
+      reports an omitted alias as information. **Still needed:** the real re-export with exporter
+      1.3.1 (steps 1–4 are manual); expect `tokens:check` to go green on `tokens.json` then. Step 1
+      (the plugin's version and settings) can only be confirmed by the owner.
 - [ ] **Phase 4 — Run it on the first real typography change** (a size, a ratio or a new role) and
       fix what it missed.
 - [ ] **Phase 5 — Hand over to plan 024 phase 1** (and to plan 018's Log mode for the changelog
