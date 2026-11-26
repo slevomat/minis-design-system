@@ -1,4 +1,14 @@
+// minis-page-to-figma — pass 3, build. Paste into use_figma (MiniS DS) after replacing the
+// placeholders: __PAGE__ (frame name prefix, e.g. "Homepage"), __WIDTH__, __MODE__, __X__ and
+// __CONTENT__ (the run's content JSON, kept outside the repo). scripts/fill-template.py does it.
+//
+// Two parts: HELPERS (reusable for any page: binding, instances, text, placeholders) and PAGE BODY
+// (the block order of one page type — this file carries the homepage). For another page type,
+// keep HELPERS, write a new PAGE BODY from the run's mapping table, and save it next to this one
+// as build.<page-type>.js once it works.
+//
 // ==== per-run constants ====
+const PAGE = '__PAGE__';
 const WIDTH = __WIDTH__;           // 375 | 768 | 1280
 const MODE = '__MODE__';           // Layout mode name: 2xs | md | xl
 const X = __X__;                   // canvas x of the rebuild frame
@@ -9,7 +19,7 @@ const page = figma.root.children.find(p => p.name === 'Production rebuilds');
 if (!page) throw new Error('page "Production rebuilds" missing');
 await figma.setCurrentPageAsync(page);
 // Re-runs replace the frame of the same width.
-for (const n of page.children.filter(n => n.name.startsWith(`Homepage — ${WIDTH} `))) n.remove();
+for (const n of page.children.filter(n => n.name.startsWith(`${PAGE} — ${WIDTH} `))) n.remove();
 
 const V = {};
 for (const v of await figma.variables.getLocalVariablesAsync()) V[v.name] = v;
@@ -81,11 +91,12 @@ function placeholder(parent, name, h, rad = 'border/radius/md') {
 }
 
 const narrow = WIDTH < 600, desk = WIDTH >= 1008;
-const created = [];
+
+// ==== PAGE BODY — homepage ====
 
 // ---- page frame ----
 const root = figma.createAutoLayout('VERTICAL');
-root.name = `Homepage — ${WIDTH} (Layout ${MODE}) — rebuild`;
+root.name = `${PAGE} — ${WIDTH} (Layout ${MODE}) — rebuild`;
 root.resize(WIDTH, 100); root.layoutSizingVertical = 'HUG';
 root.counterAxisAlignItems = 'CENTER';
 root.x = X; root.y = 0;
@@ -93,7 +104,6 @@ page.appendChild(root);
 root.setExplicitVariableModeForCollection(layoutCol, modeId);
 root.setExplicitVariableModeForCollection(foundCol, lightId);
 fill(root, 'Color/background');
-created.push(root.id);
 
 // 1 TopBar, 2 Navigation (mandatory chrome)
 const top = await variant('5156:9287', { 'Property 1': 'web' }); root.appendChild(top); top.layoutSizingHorizontal = 'FILL';
