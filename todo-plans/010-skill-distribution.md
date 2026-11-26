@@ -46,6 +46,7 @@ repo.
 | 2026-11-26 | **Q7 — this repo is its own public marketplace** (`.claude-plugin/marketplace.json`, marketplace name `minis-design-system`): `/plugin marketplace add slevomat/minis-design-system`, `/plugin install minis@minis-design-system`. The plugin is text-only; Kensington is not in the repo and never ships, Slevomat marks stay under `NOTICE`. A Slevomat org marketplace can list it later. | The repo is already public; no access to wait for. Owner's choice. |
 | 2026-11-26 | **Q8 — repo-bound skills go in the plugin with a guard**: each checks for a Mini*S checkout (`packages/tokens` + `tokens.json`) first and stops with a clear message elsewhere. | One install gives the DS owner everything. Owner's choice. |
 | 2026-11-26 | **Q4 — the plugin has its own semver**, starting at 0.1.0, in `plugins/minis/.claude-plugin/plugin.json` only; released as the git tag `minis--v<version>` (`claude plugin tag`). Skills read tokens and docs from the checkout or Storybook at run time instead of embedding values. Tying the version to a token release waits for plan 012 (phase 6). | Claude Code caches a plugin by version, so a version is needed now; no token releases exist yet. Owner's choice. |
+| 2026-11-26 | **Every Mini*S skill is beta** for now, marked in all docs, each `SKILL.md` and the Figma READ-ME card. Dropping the label is the owner's call. | Owner's request. |
 
 ### Plugin roster
 
@@ -62,9 +63,9 @@ their plans' order (plan 003, "Recommended order").
 
 | Command | Skill | For whom | Plan | State |
 |---|---|---|---|---|
-| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Shipped 0.1.0** (`plugins/minis/skills/app/`) |
-| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Shipped 0.1.0** (`plugins/minis/skills/figma-docs/`) |
-| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | **Shipped 0.1.0** (`plugins/minis/skills/page-to-figma/`) — first new command |
+| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Shipped 0.1.0, beta** (`plugins/minis/skills/app/`) |
+| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Shipped 0.1.0, beta** (`plugins/minis/skills/figma-docs/`) |
+| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | **Shipped 0.1.0, beta** (`plugins/minis/skills/page-to-figma/`) — first new command |
 | `/minis:contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
 | `/minis:latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
 | `/minis:bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
