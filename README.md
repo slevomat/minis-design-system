@@ -68,11 +68,14 @@ A **skill** is a set of instructions your AI assistant (Claude Code) loads on de
 | `slevomat-design-principles` | Anyone designing a feature | Reviews a feature description or screenshot against the 7 Slevomat design principles. Not shipped in this repo — part of the wider Slevomat AI setup. | *"Check this screen against our design principles"* |
 | `minis-figma-docs` | Design-system team | Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice, built only from the file's internal docs kit. Figma only; it never writes the code docs. Needs the Figma MCP. | *"Document the Tag component in Figma"* |
 
-`minis-app` lives at `.claude/skills/minis-app/` and works automatically when your AI tool runs inside this repo. To use it from anywhere:
+**Get them anywhere with the `minis` Claude Code plugin** — one install, every Mini*S skill as a `/minis:` command:
 
-```bash
-cp -r .claude/skills/minis-app ~/.claude/skills/
 ```
+/plugin marketplace add slevomat/minis-design-system
+/plugin install minis@minis-design-system
+```
+
+Then `/minis:app` and `/minis:figma-docs`. Inside this repo `/minis-app` and `/minis-figma-docs` keep working without an install (transition names). Install, update and project setup: [`plugins/minis/README.md`](plugins/minis/README.md).
 
 Full details: the Storybook **Vibe Coding Guide → Skills**.
 

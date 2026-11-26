@@ -578,6 +578,26 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-26 (minis plugin 0.1.0) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-26" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-26</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-26">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Plugin — <code>minis</code> 0.1.0, the Mini*S plugin for Claude Code</h3>
+      <ul>
+        <li><strong>New Claude Code plugin <code>minis</code></strong> (<code>plugins/minis/</code>), with the repo as its own public marketplace (<code>minis-design-system</code>). Install: <code>/plugin marketplace add slevomat/minis-design-system</code>, then <code>/plugin install minis@minis-design-system</code>. See Vibe Coding Guide → <strong>Install the Mini*S plugin</strong>.</li>
+        <li><strong>Commands:</strong> <code>/minis:app</code> (scaffold and verify a prototype on the web components) and <code>/minis:figma-docs</code> (documentation cards in the MiniS DS Figma file).</li>
+        <li><strong>Skills moved, not copied:</strong> their source is now <code>plugins/minis/skills/app/</code> and <code>plugins/minis/skills/figma-docs/</code>. <code>.claude/skills/minis-app</code> and <code>minis-figma-docs</code> are symlinks to them, so <code>/minis-app</code> and <code>/minis-figma-docs</code> keep working inside this repo (transition names).</li>
+        <li><code>minis-app</code>: the <code>cp -r</code> instructions are replaced by the plugin install; with no checkout, step 1 offers to clone the public repo.</li>
+        <li><strong>Versioning:</strong> the plugin has its own semver (<code>plugins/minis/.claude-plugin/plugin.json</code>); releases are tagged <code>minis--v&lt;version&gt;</code>.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-20 (Figma exports re-exported with exporter 1.3) -->
       <div class="cl-heading">
         <h2 id="2026-11-20" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-20</h2>
@@ -2458,7 +2478,7 @@ export const VibeCodingGuide: Story = {
       <!-- ═══════════════════════════════════════════════════════════════ -->
 
       <h2 id="skills" style="scroll-margin-top:1rem">Skills — shortcuts you can just ask for</h2>
-      <p>A <strong>skill</strong> is a set of instructions your AI assistant loads on demand. You don't run a command or read the file — you describe what you want in plain language, and the assistant picks the matching skill up automatically. You can also invoke one by name with a slash, e.g. <code>/minis-app</code>.</p>
+      <p>A <strong>skill</strong> is a set of instructions your AI assistant loads on demand. You don't run a command or read the file — you describe what you want in plain language, and the assistant picks the matching skill up automatically. You can also invoke one by name with a slash, e.g. <code>/minis:app</code>. In Claude Code, all Mini*S skills come in one install: the <strong><code>minis</code> plugin</strong> (below).</p>
 
       <table style="width:100%;border-collapse:collapse;margin:1rem 0">
         <thead><tr style="background:var(--color-surface-faded,#f1f3f5)">
@@ -2469,7 +2489,7 @@ export const VibeCodingGuide: Story = {
         </tr></thead>
         <tbody>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-app</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:app</code></strong></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Anyone prototyping</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Builds a whole app or prototype from scratch: sets the project up, picks the right topbar variant, writes your screens with real Mini*S components and tokens, then checks the result in a browser (desktop, mobile and dark mode) before telling you it's done.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Build me an app for handling refund requests"</em><br/><br/><em>"Make a landing page for the summer campaign"</em></td>
@@ -2481,7 +2501,7 @@ export const VibeCodingGuide: Story = {
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Check this screen against our design principles"</em></td>
           </tr>
           <tr>
-            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>minis-figma-docs</code></strong></td>
+            <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><strong><code>/minis:figma-docs</code></strong></td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Design-system team</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top">Writes and updates the documentation cards in the Mini*S Figma file (overview, usage, changelog, roadmap, dev notes) in one look and one voice. Builds only from the file's internal docs kit; it never touches the code docs.</td>
             <td style="padding:.75rem 1rem;border:1px solid var(--color-border,#cbccce);vertical-align:top"><em>"Document the Tag component in Figma"</em><br/><br/><em>"Add today's change to the Checkbox changelog card"</em></td>
@@ -2489,12 +2509,22 @@ export const VibeCodingGuide: Story = {
         </tbody>
       </table>
 
-      <h3>Where they live</h3>
+      <h3 id="minis-plugin">Install the Mini*S plugin (Claude Code)</h3>
+      <p>The <code>minis</code> plugin carries every Mini*S skill as a <code>/minis:</code> command. The design system repo is public and is its own marketplace, so you need no GitHub access. In Claude Code:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;margin:.5rem 0"><code>/plugin marketplace add slevomat/minis-design-system
+/plugin install minis@minis-design-system</code></pre>
+      <p>Start a new session (or run <code>/reload-plugins</code>) and type <code>/minis:</code> to see the commands. To get a new release:</p>
+      <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;margin:.5rem 0"><code>/plugin marketplace update minis-design-system
+/plugin update minis@minis-design-system</code></pre>
       <ul>
-        <li><strong><code>minis-app</code></strong> ships with this design system, at <code>.claude/skills/minis-app/</code>. It works automatically when your AI tool runs inside the design system repo. To use it from another folder, copy it once:
-          <pre style="background:var(--color-surface-faded,#f1f3f5);padding:1rem;border-radius:4px;overflow-x:auto;margin:.5rem 0"><code>cp -r &lt;design-system-repo&gt;/.claude/skills/minis-app ~/.claude/skills/</code></pre>
-          Re-copy it after the design system changes, so the skill keeps matching the components.</li>
-        <li><strong><code>minis-figma-docs</code></strong> ships with this design system, at <code>.claude/skills/minis-figma-docs/</code>. It only works on the Mini*S Figma file and needs the Figma MCP connection described in <strong>AI &amp; Figma integration</strong>.</li>
+        <li><strong><code>/minis:app</code></strong> needs a checkout of the design system repo for its scaffolder; if you don't have one, it offers to clone it. You also need Node 20+ and pnpm.</li>
+        <li><strong><code>/minis:figma-docs</code></strong> only works on the Mini*S Figma file and needs the Figma MCP connection described in <strong>AI &amp; Figma integration</strong>.</li>
+        <li><strong>Inside the design system repo</strong>, <code>/minis-app</code> and <code>/minis-figma-docs</code> keep working without the install. They are transition names; prefer the <code>/minis:</code> ones. Don't copy skills into <code>~/.claude/skills/</code> any more: a copy goes stale on the first token change.</li>
+        <li><strong>Coming next:</strong> <code>/minis:page-to-figma</code> (rebuild a production page in Figma, plan 031), added once its skill works. Full install, update and project-setup notes: <code>plugins/minis/README.md</code> in the repo.</li>
+      </ul>
+
+      <h3>Other skills</h3>
+      <ul>
         <li><strong><code>slevomat-design-principles</code></strong> is not shipped in this repo — it comes from the wider Slevomat AI setup. If your assistant doesn't know it, ask whoever set up your tooling.</li>
       </ul>
 
@@ -2508,7 +2538,7 @@ export const VibeCodingGuide: Story = {
 
       <h2>Quick Start (5 minutes)</h2>
       <blockquote style="border-left:4px solid var(--color-interaction-primary-surface,#006eb9);padding:.5rem 1rem;margin:1rem 0;background:var(--color-surface-faded,#f1f3f5)">
-        <strong>Using Claude Code?</strong> Skip the manual steps — the <code>minis-app</code> skill (in the design system repo at <code>.claude/skills/minis-app/</code>) does all of this for you: it asks what you're building, scaffolds the project, picks the right topbar variant, builds your screens from the component docs, and checks the result in a browser. Just say what you want to build.
+        <strong>Using Claude Code?</strong> Skip the manual steps — the <code>/minis:app</code> command from the Mini*S plugin (see <strong>Install the Mini*S plugin</strong> above) does all of this for you: it asks what you're building, scaffolds the project, picks the right topbar variant, builds your screens from the component docs, and checks the result in a browser. Just say what you want to build.
       </blockquote>
       <p>Prefer to do it by hand, or using Cursor? Get a working prototype running in three steps.</p>
 
@@ -2918,7 +2948,7 @@ but use a narrow container and add tabs for Step 1, Step 2, Step 3."</code></pre
         <li><strong>Refine:</strong> <em>"Make it look more like the Slevomat deal page — add a sidebar with the price card on the right."</em></li>
         <li><strong>Done!</strong> Share the HTML file or keep iterating.</li>
       </ol>
-      <p>In Claude Code you can skip steps 1–3: ask the <code>minis-app</code> skill for <em>"a hotel deal page on the Slevomat website"</em> and continue from step 5.</p>
+      <p>In Claude Code you can skip steps 1–3: ask <code>/minis:app</code> for <em>"a hotel deal page on the Slevomat website"</em> and continue from step 5.</p>
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-26
+
+### Plugin — `minis` 0.1.0, the Mini*S plugin for Claude Code
+
+- **New Claude Code plugin `minis`** (`plugins/minis/`) with the repo as its own public marketplace (`.claude-plugin/marketplace.json`, name `minis-design-system`). Install: `/plugin marketplace add slevomat/minis-design-system`, then `/plugin install minis@minis-design-system`. Plan 010, phases 2–3; plan 019, phase 4.
+- **Commands:** `/minis:app` (scaffold and verify a prototype on the web components) and `/minis:figma-docs` (documentation cards in the MiniS DS Figma file).
+- **Skills moved, not copied:** `.claude/skills/minis-app/` → `plugins/minis/skills/app/`, `.claude/skills/minis-figma-docs/` → `plugins/minis/skills/figma-docs/`. `.claude/skills/minis-app` and `minis-figma-docs` are now symlinks to them, so `/minis-app` and `/minis-figma-docs` keep working inside this repo (transition names). The `name:` frontmatter is gone: the folder name decides the command.
+- `minis-app`: "Using this skill outside the monorepo" (`cp -r` into `~/.claude/skills/`) is replaced by the plugin install. Step 1 now offers to clone the public repo when there is no checkout.
+- `minis-figma-docs`: the palette scripts are referenced as `${CLAUDE_SKILL_DIR}/scripts/`; a note says what it needs to run outside the repo.
+- **Versioning:** plugin semver in `plugins/minis/.claude-plugin/plugin.json` only; releases are tagged `minis--v<version>` (`claude plugin tag`). Rules in `CLAUDE.md` → "Claude Code plugin".
+- Docs: `plugins/minis/README.md` (install, commands, update, project setup, requirements); README, `docs/vibe-coding-guide.md`, `docs/ai-prompts/index.md` and the Storybook Vibe Coding Guide → Skills ("Install the Mini*S plugin") point to the plugin instead of `cp -r`.
+
 ## 2026-11-20
 
 ### Tokens — container padding reaches 32px at 1008px

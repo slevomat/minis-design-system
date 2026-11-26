@@ -56,7 +56,7 @@ Anything generated with this design system — a prototype, a demo page, an inte
 
 Never hand-roll a header bar and never omit it. See `docs/ai-prompts/principles.md` → "Every prototype starts with the background token and a topbar".
 
-To scaffold and build a whole app from scratch, use the **`minis-app` skill** (`.claude/skills/minis-app/SKILL.md`) — it drives `pnpm create-prototype`, the topbar-variant choice, and browser verification.
+To scaffold and build a whole app from scratch, use the **`minis-app` skill** (`/minis:app` from the `minis` plugin, `/minis-app` in this repo; source `plugins/minis/skills/app/SKILL.md`) — it drives `pnpm create-prototype`, the topbar-variant choice, and browser verification.
 
 ## Component conventions
 
@@ -209,7 +209,7 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
 - Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator`, not `--color-border-subtle`)
-- **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (`.claude/skills/minis-figma-docs/`). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
+- **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (source `plugins/minis/skills/figma-docs/`, `/minis:figma-docs` from the plugin). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
 
 ## Figma Code Connect
@@ -347,6 +347,17 @@ The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-
 - **Avoid `disabled` unless interaction is structurally impossible** — prefer keeping components active and displaying a `<minis-alert>` or inline message that explains what the user must do first. Only use `disabled` when the action truly cannot be taken (e.g. a locked premium feature). See `docs/ai-prompts/principles.md`.
 - **Two responsive mechanisms — don't mix them up**: page-level spacing/typography respond to the *viewport* (media-query-driven tokens in `tokens.css`); components that rearrange their own internals (page-header, card-grid) use *container queries* on their own width. New layout-switching components must use container queries with the breakpoint hardcoded from the `--breakpoint-*` scale + a comment (CSS custom properties cannot be used in `@container`/`@media` conditions). See `docs/ai-prompts/layouts/index.md` → "Two Responsive Mechanisms".
 - **`100000px` in `tokens.json` means "full width" (100%)** — Figma cannot mix `%` and `px` in the same variable collection, so unbounded widths are encoded as `100000px`. Always translate to `100%` in CSS. Only actual numeric values (e.g. `752px`, `1240px`) represent real constraints.
+
+## Claude Code plugin (`plugins/minis/`)
+
+The repo is its own marketplace (`.claude-plugin/marketplace.json`, name `minis-design-system`) for one plugin, `minis` (`plugins/minis/`, install docs in its README). Plan 010 has the roster and the decisions.
+
+- **Skill sources live in `plugins/minis/skills/<name>/`**, never in `.claude/skills/`. The folder name is the command (`skills/app` → `/minis:app`): no `minis-` prefix, and **no `name:` in the frontmatter**, so the symlinked project skill keeps its own name.
+- `.claude/skills/minis-app` and `.claude/skills/minis-figma-docs` are **symlinks** to the plugin folders (transition names `/minis-app`, `/minis-figma-docs`). Never replace them with copies.
+- Bundled files are referenced as `${CLAUDE_SKILL_DIR}/…` (works both as plugin and project skill). Nothing outside the plugin folder is copied on install, so a skill must not read `../` paths from its own folder; repo files are read from the user's checkout.
+- A skill that only works in a Mini*S checkout checks for `packages/tokens` + `tokens.json` first and stops with a message elsewhere.
+- A new command joins only once its skill works. Add it to the README's command table and the Storybook Vibe Coding Guide → Skills.
+- **Release:** bump `version` in `plugins/minis/.claude-plugin/plugin.json` only (never in `marketplace.json`; Claude Code caches by version, so an unbumped change never reaches users), log it in both changelogs under "Plugin", run `claude plugin validate plugins/minis` and `claude plugin validate .`, commit, then `claude plugin tag plugins/minis` (tag `minis--v<version>`). The owner pushes.
 
 ## AI-agent docs
 

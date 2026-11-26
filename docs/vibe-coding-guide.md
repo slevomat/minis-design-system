@@ -8,13 +8,14 @@ Build fully functional page prototypes using Mini*S components and an AI coding 
 
 ## Quick Start (5 minutes)
 
-> **Using Claude Code? The easiest way to start is the `minis-app` skill.** Open Claude Code in the design system repo and just say what you want — for example *"Build me an app for handling refund requests"* or *"Make a landing page for the summer campaign"*. The skill asks what you're building, sets up the project, picks the right topbar, builds your screens from the component docs, and checks the result in a browser (desktop, mobile and dark mode) before telling you it's done. You can also call it by name: `/minis-app`.
+> **Using Claude Code? The easiest way to start is the `/minis:app` command.** Install the Mini*S plugin once:
 >
-> The skill lives in the design system repo at `.claude/skills/minis-app/`. To use it from any other folder, copy it once (and again whenever the design system changes):
->
-> ```bash
-> cp -r <design-system-repo>/.claude/skills/minis-app ~/.claude/skills/
 > ```
+> /plugin marketplace add slevomat/minis-design-system
+> /plugin install minis@minis-design-system
+> ```
+>
+> Then just say what you want — for example *"Build me an app for handling refund requests"* or *"Make a landing page for the summer campaign"* — or call it by name: `/minis:app`. The skill asks what you're building, sets up the project (it offers to clone the design system repo if you don't have it), picks the right topbar, builds your screens from the component docs, and checks the result in a browser (desktop, mobile and dark mode) before telling you it's done. Inside the design system repo, `/minis-app` works without the install. More: [`plugins/minis/README.md`](../plugins/minis/README.md).
 
 Prefer to do it by hand, or using Cursor? Get a working prototype running in three steps.
 
@@ -282,7 +283,7 @@ Here's a typical 15-minute session building a deal detail page:
 8. **Refine:** *"Make it look more like the Slevomat deal page — add a sidebar with the price card on the right."*
 9. **Done!** Share the HTML file or keep iterating.
 
-In Claude Code you can skip steps 1–3: ask the `minis-app` skill for *"a hotel deal page on the Slevomat website"* and continue from step 5.
+In Claude Code you can skip steps 1–3: ask `/minis:app` for *"a hotel deal page on the Slevomat website"* and continue from step 5.
 
 ---
 
