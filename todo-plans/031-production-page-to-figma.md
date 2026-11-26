@@ -146,6 +146,25 @@ opposite of what this plan needs, so it is at most the starting point for pass 1
 - **`minis-figma-docs`** — Figma scripting rules and the docs kit for the legend card.
 - **021** review — consumes the gap list.
 
+## Answers
+
+Owner's answers, 2026-11-26 (questions 1, 3, 4 and 9; the others stay open):
+
+- **Q1 — pilot page: the homepage.** Listings and deal pages are where the skill will be used most
+  often, so they come next, once the method holds on the homepage.
+- **Q3 — where rebuilds live: wherever colleagues need them.** Designers will grab a rebuilt
+  production page into their own files to work on it or document it. So the **rebuild frame is
+  portable**: it uses only published library components and published variables, never the
+  hidden docs kit, and nothing in it points at the findings cards. Runs land on a "Production
+  rebuilds" page in MiniS DS, where the findings cards (docs kit, MiniS DS only) sit beside the
+  rebuild as separate frames; a colleague copies the rebuild frame alone into their file.
+- **Q4 — how strict a match is: role first, differences as notes.** A production block that plays
+  the role of a Mini*S component (a button with another radius) is built as that Mini*S
+  component, and the differences go on a conflict note. In skip-audit ("quiet") mode the notes are
+  left out. Gap = no Mini*S component plays that role, or a needed variant is missing.
+- **Q9 — skip-audit and gap blocks: layer name only.** Unmatched blocks look like the rest, but
+  their layer is named `not Mini*S — <what it is>`, so anyone inspecting the frame can tell.
+
 ## Open questions
 
 1. **Which pages first?** Home, category listing and deal detail are the proposal; is checkout
