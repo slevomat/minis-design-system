@@ -1,5 +1,4 @@
 ---
-name: minis-figma-docs
 description: FIGMA ONLY — write or update a documentation card inside the Mini*S Figma file (MiniS DS, mfiAVMWkxiBRGnegjqLMNW) — the cream "docs" cards that sit next to a component, foundation or token page (title, description, functionality overview, usage, examples, changelog, roadmap, dev notes). Use when the user asks to document a component or foundation in Figma, add a changelog entry or roadmap item to a Figma card, create a docs card for a new component, or tidy an existing card. NOT for code-side docs — Storybook stories/MDX, docs/ai-prompts/*.md, CHANGELOG.md, READMEs — and not for other Figma files. Builds only from the internal docs kit (`docs/*` variables, `.docs/*` text styles, `.helpers` components), which is never published.
 ---
 
@@ -13,6 +12,11 @@ description: FIGMA ONLY — write or update a documentation card inside the Mini
 >   or the code docs.
 
 # Mini*S documentation cards in Figma
+
+> **Runs anywhere** (as `/minis:figma-docs` from the `minis` plugin, or `/minis-figma-docs` inside
+> the design system repo). Needs the Figma MCP connected and edit access to the MiniS DS file. The
+> sources it reads — `CHANGELOG.md`, `docs/ai-prompts/` — come from a Mini*S checkout when you're in
+> one; elsewhere read them from https://github.com/slevomat/minis-design-system (public).
 
 Every component and foundation page in the Mini*S Figma file (`mfiAVMWkxiBRGnegjqLMNW`) carries a
 **docs card**: a cream, rounded frame that says what the thing is, what it can do, how it changed
@@ -78,8 +82,8 @@ are in [kit.md](kit.md) → "Palette pages".
   `design-tokens--colors`, Primitives and Heritage → `design-tokens--palette`.
 - **Printed values** (hex, rgba, oklch, `→ primitive`) are plain text: Figma can't bind text to a
   colour value. The `→` reference names the primitive at the **end** of the alias chain.
-- **Never edit swatches by hand.** Use the scripts in `scripts/` (paste into `use_figma`, fill
-  CONFIG):
+- **Never edit swatches by hand.** Use the scripts in `${CLAUDE_SKILL_DIR}/scripts/` (read the file,
+  paste it into `use_figma`, fill CONFIG):
   - `palette-refresh.js` — migrates or refreshes one existing overview in place: rebinds unbound
     swatches by name, rewrites stale values, restyles chrome. Run it on every overview of a
     collection **after every token re-export**. Safe to re-run.

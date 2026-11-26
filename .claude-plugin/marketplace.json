@@ -1,0 +1,15 @@
+{
+  "name": "minis-design-system",
+  "owner": { "name": "Mini*S design system team", "url": "https://github.com/slevomat/minis-design-system" },
+  "metadata": {
+    "description": "Claude Code plugins of the Mini*S design system (Slevomat)."
+  },
+  "plugins": [
+    {
+      "name": "minis",
+      "source": "./plugins/minis",
+      "description": "Mini*S design system skills: /minis:app, /minis:figma-docs.",
+      "category": "design"
+    }
+  ]
+}

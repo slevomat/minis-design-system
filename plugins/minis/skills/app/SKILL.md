@@ -1,5 +1,4 @@
 ---
-name: minis-app
 description: Scaffold and build an app or prototype with the Mini*S design system — Slevomat web pages, internal tools, dashboards, admin UIs, client-facing apps. Use when the user wants to create, start, or vibe-code a new app, prototype, page, or demo with Mini*S / minis- components, or asks to "make me an app for X" in this design system. Handles project scaffolding, the mandatory topbar + background rules, building the screens from the component docs, and verifying the result in a browser.
 ---
 
@@ -22,10 +21,18 @@ If the user's request doesn't make both clear, ask once, briefly, then proceed. 
 
 ## Step 1 — Locate the design system
 
-The scaffolder lives in the Mini*S monorepo. Find it:
+The scaffolder (`pnpm create-prototype`) lives in the Mini*S monorepo, so this skill needs a checkout of it — even when it runs from the `minis` plugin. Find one, in this order:
 
-- If the current directory is the monorepo (`packages/create-minis/` exists), use it.
-- Otherwise ask the user for the path, or look for `~/Projekty/Slevomat/minis-design-system`.
+1. The current directory is the monorepo (`packages/create-minis/` exists) → use it.
+2. A checkout the user already has — ask for the path, or look for `~/Projekty/Slevomat/minis-design-system`.
+3. None → offer to clone the public repo (ask first; it's a download):
+
+   ```bash
+   git clone https://github.com/slevomat/minis-design-system.git ~/minis-design-system
+   cd ~/minis-design-system && pnpm install
+   ```
+
+Needs Node 20+ and pnpm (`corepack enable` if `pnpm` is missing). In an existing checkout, `git pull` first so the components match the docs this skill sends you to.
 
 ## Step 2 — Scaffold
 
@@ -93,12 +100,18 @@ Before reporting done:
 
 If the app needs a component that doesn't exist (there is no input, select, modal, table or avatar component yet), build it from tokens in the prototype's own CSS, and **tell the user it is prototype-local, not design system** — so it doesn't get mistaken for an on-system pattern later. Don't add components to the monorepo as a side effect of building an app.
 
-## Using this skill outside the monorepo
+## Where this skill comes from
 
-It is committed at `.claude/skills/minis-app/` in the design system repo so it stays in sync with the components. To use it from any project on this machine:
+The source is `plugins/minis/skills/app/` in the design system repo — the `minis` Claude Code plugin. Two ways to call it:
 
-```bash
-cp -r <monorepo>/.claude/skills/minis-app ~/.claude/skills/
-```
+- **Anywhere** — install the plugin once, then use `/minis:app`:
 
-Re-copy after the design system changes — or symlink it instead to track the repo automatically.
+  ```
+  /plugin marketplace add slevomat/minis-design-system
+  /plugin install minis@minis-design-system
+  ```
+
+  Update with `/plugin marketplace update minis-design-system`, then `/reload-plugins`.
+- **Inside the design system repo** — `/minis-app` keeps working without an install (`.claude/skills/minis-app` is a symlink to the plugin folder). It is the transition name and will go once everyone is on the plugin.
+
+Don't `cp -r` the skill into `~/.claude/skills/` any more: a copy goes stale on the first token change.
