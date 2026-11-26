@@ -1,14 +1,18 @@
 ---
 id: 015
 title: Responsive line height in Figma text styles
-status: in-progress
+status: done
 created: 2026-11-05
-updated: 2026-11-20
+updated: 2026-11-26
 owner: Lexislav
 ---
 
 # 015 — Responsive line height in Figma text styles
 
+> **Done 2026-11-26** (moved by the owner): all eight phases are ticked and there are no open
+> questions. Kept for the reasoning; the procedure it led to is the `minis-token-update` skill
+> (plan 009).
+>
 > Touches two repos: the Figma file (`mfiAVMWkxiBRGnegjqLMNW`) and the exporter plugin
 > (`Figma plugins/minis-designtokens-exporter/`). Nothing in this repo's CSS changes.
 > The audit behind it is on the Figma TYPOGRAPHY page → "Typography tokens — Figma issues".
@@ -209,7 +213,7 @@ fixes.
       this repo's `CLAUDE.md` → Token exports ("`-px` line-height variables are Figma-only").
       Done 2026-11-06: the Figma board, the exporter's own docs, `CLAUDE.md` → Token exports →
       "Typography in the export", and the portable `docs/ai-prompts/typography.md`.
-- [ ] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
+- [x] **7. Typography-update procedure as a skill.** Write down "how to change a size or ratio"
       (edit in Figma → **📏 Line heights** check and Apply → export with exporter ≥ 1.3.1 → validate
       the export → review the `tokens.css` diff → both changelogs → hand-over note for production)
       as part of the token-update skill in plan 009, not as a separate skill or agent. A typography
@@ -217,8 +221,11 @@ fixes.
       **Revisited 2026-11-20:** plan 009 now carries it, as the reference file `typography.md` of one
       skill (`minis-token-update`), with the checks as scripts in `packages/tokens/scripts/` and the
       full step list, "never" list and open questions in the plan. The skill's typography part is
-      no longer optional; the rest of 009 is. Tick this box when 009 phase 2 (the skill is written)
-      is done. Nothing is built yet.
+      no longer optional; the rest of 009 is.
+      **Done 2026-11-26:** the skill is written (`.claude/skills/minis-token-update/`, with
+      `typography.md`) and its checks run as `pnpm tokens:check` and `pnpm tokens:diff`. The owner's
+      rule: any typography change goes through it. It has not been run on a real change yet (009
+      phase 3), so expect small fixes from the first use.
 
 ## Production audit (2026-11-05)
 

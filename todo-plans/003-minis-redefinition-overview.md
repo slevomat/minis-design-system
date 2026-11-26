@@ -275,9 +275,9 @@ fully done.
 | 2 | **024** Automatic token export (absorbs **009**) | Stops the copies from lagging; every later output regenerates from it. 009's typography procedure is needed sooner and doesn't wait for 024 |
 | 3 | **012** Token distribution | Versioned package + shared Style Dictionary source for production (and later mobile, 029) |
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
-| — | **G12**, **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
+| — | **G12** (decided 2026-11-26, in 030), **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
 | — | **030** Layout guides | Design decisions on sidebar, gap and container levels; uses `--spacing-layout-*`, so after G12 (its question 5). No production change |
-| — | finish **015**, **016** (in progress) | Typography foundation; already mostly done. What is left is the typography procedure, which is plan 009's typography part (not blocked on 024) |
+| — | ~~finish **015**, **016**~~ (both `done`, 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. 016 was closed with one open question carried: the Nette developer's confirmation that production's Stylus compile works with the seven old spacing names gone. The skill's first real run is 009 phase 4 |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
 
@@ -361,7 +361,7 @@ are set yet.
 | Phase | When | What | Plans | Gap — no plan yet |
 |---|---|---|---|---|
 | **0. Agreement** | Nov 2026 | Team commitment, approval group, where Mini*S lives in the Nette repo, close decisions 1–3 | 020 team agreement | — |
-| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export · 030 layout guides (after G12) · 031 production page → Figma (with 017) | **G12** layout spacing · **G13** Figma ≠ `tokens.css` values · **G14** brand text weight |
+| **1. Tokens in Nette** | Nov–Dec | Automatic export, versioned package + Style Dictionary source, baseline of adoption | 012 distribution · 001 heritage/curve · 016 letter spacing (in progress) · 015 line height (in progress) · 017 production audit · 009 token-update skill (typography part first, the rest optional) · 024 automatic export · 030 layout guides (G12 decided 2026-11-26) · 031 production page → Figma (with 017) | **G12** layout spacing · **G13** Figma ≠ `tokens.css` values · **G14** brand text weight |
 | **2. Checks** | Dec–Jan | Stylus-aware "tokens only" with baseline, `var()` fallback rule, a11y in CI | 011 Stylelint · 022 accessibility checks | — |
 | **3. Registry and skills** | Jan | `registry.json` + schema, `AGENTS.md`, contribution skill, minis-app registers Local, distribution | 013 registry · 005 contribution · 006 minis-app · 010 distribution · 007 todo-plan skill · 008 bug report · 018 changelog sync · 025 AGENTS.md · 026 rules hook | — |
 | **4. Recipes and first review** | Feb | Three Latte + Stylus recipes, porting guide for Latte/Nette, first monthly review | 014 porting rules · 004 Latte skill (needs recipes) · 021 review and approval · 023 first recipes | — |
@@ -377,7 +377,9 @@ are set yet.
   (G6), more than a new web component. **Keep, re-scope in plan 023 phase 5.**
 - **007 todo-plan skill, 008 bug report skill** — in the brief's skills table but in no rollout
   phase; low priority, ship through 010. **Keep.**
-- **009 token-update skill (typography first)** — revisited 2026-11-20: one skill, `minis-token-update`,
+- **009 token-update skill (typography first)** — **built 2026-11-26** (phases 0–2; not yet run on a
+  real change): `.claude/skills/minis-token-update/` and `pnpm tokens:check` / `tokens:diff`; owner's
+  rule: any typography change takes it. Revisited 2026-11-20: one skill, `minis-token-update`,
   with the typography procedure as its reference file (the "how to change a size, ratio or spacing"
   step of plans 015 and 016), the export checks as scripts in `packages/tokens/scripts/`, and this
   repo only (plan 010). Its typography part is not optional (015, Answers); the rest is. It overlaps
@@ -398,14 +400,14 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 006 | minis-app registers Local | draft | 0 / 3 | 005, registry |
 | 007 | Todo-plan skill | draft | 0 / 4 | nothing; ships via 010 |
 | 008 | Bug-report skill, `/minis:bug` | draft | 0 / 4 | who can open GitHub issues (its Q1–2) |
-| 009 | Token-update skill (typography first) | draft | 0 / 6 | owner's answers to its open questions (shape, script location, production's file shape); becomes plan 024's phase 1 (manual export path) |
+| 009 | Token-update skill (typography first) | **in-progress** | 3 / 3 | phases 0–2 done 2026-11-26 (skill + scripts); open: the dry run (phase 3), the first real change (phase 4), production's file shape (question 4); becomes plan 024's phase 1 (manual export path) |
 | 010 | Skill distribution | draft | 1 / 7 | Claude Code marketplace plugin decided 2026-11-21 (every skill as a slash command, added slowly; `/minis:page-to-figma` among the first; very important, not the only channel); 14 further command candidates listed; open: where it lives, which marketplace |
 | 011 | Stylelint "tokens only" | draft | 0 / 14 | **decisions 2 and 3** (fallbacks, canonical names); Stylus support |
 | 012 | Token distribution, Style Dictionary | draft | 0 / 16 | **decision 3**; production already builds with Style Dictionary |
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
-| 015 | Responsive line height in Figma | **in-progress** | 15 / 1 | phase 7, the typography procedure, now planned as plan 009's typography reference file. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
-| 016 | Letter-spacing tokens (high priority) | **in-progress** | 11 / 1 | only phase 6's skill part (the `page-header`, `topbar` and `CLAUDE.md` docs are done); planned as plan 009's typography reference file |
+| 015 | Responsive line height in Figma | done | 16 / 0 | all phases done; phase 7 (the typography procedure) landed 2026-11-26 as the `minis-token-update` skill; moved to `done` by the owner 2026-11-26. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
+| 016 | Letter-spacing tokens (high priority) | done | 12 / 0 | all phases done; moved to `done` by the owner 2026-11-26 with one open question carried (does production's Stylus compile pass with the seven old spacing names gone? needs the Nette developer). Phase 6's skill part landed 2026-11-26 in `minis-token-update` |
 | 017 | Production reference audit | draft | 0 / 12 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
@@ -419,7 +421,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 027 | Runtime tokens in production | draft | 0 / 5 | product's requirement (themes, dark mode) |
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
-| 030 | Layout guides | draft | 0 / 13 | decisions on sidebar ratio and gap, a 1008px container level, the stacking breakpoint (design call); pages behind login unmeasured; G12. Container padding decided 2026-11-20 |
+| 030 | Layout guides | draft | 12 / 15 | phases 1, 3, 4 done 2026-11-26 on branch `claude/layouts-030-35f511` (G12 tokens, `variant="medium"`, `<minis-sidebar-layout>`, guides, Figma templates); open: phase 2 (pages behind login, needs the owner's sign-in) and phase 5 (hand-over, needs 013/014) |
 | 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 5 / 7 | homepage pilot rebuilt and documented, skill `minis-page-to-figma` written; designer review of the rebuild and the findings-card template still to do; listings and deal detail next |
 
 **The three blockers that hold most of the rest:**
@@ -450,7 +452,7 @@ yet.**
 | ~~**G9**~~ | Mini*S in Claude Design | 5 | **Now plan 019** (2026-11-13), widened to every non-production channel: Claude Design, the Skill Hub, a Claude Code plugin, the AI Hub and a hosted runtime. |
 | ~~**G10**~~ | **Now plan 028** (2026-11-13). Icons into the production webfont; icon path in the contribution skill | 5 | 51 `figma-only` icons are missing in production; nobody owns the webfont step. |
 | ~~**G11**~~ | **Now plan 029** (2026-11-13). Mobile app: take over MiniS token names and structure (decision 6, accepted) | 5 | Only a late phase of 012 today. Values are already taken over, and Style Dictionary already writes `Tokens.kt`. Open whether the app also takes the web components. |
-| **G12** | **No plan yet** (2026-11-20). Layout spacing: Figma's Layout collection and `tokens.css` disagree on `--spacing-layout-*`, and the Figma modes don't line up with the CSS tiers | 1 | Found in the 2026-11-20 re-export (commit `8941c96`, diffs in both changelogs). Figma `xs` (CSS base) `lg`/`xl` 16/24px vs CSS 20/32; Figma `sm` (CSS 408px tier) `md`/`lg`/`xl` 16/20/32 vs 24/32/48; Figma `md` 20/24/32 vs 24/32/48. Figma has 10 modes (`default`, `2xs` … `4xl`), CSS 7 tiers with no 600px step; `default` is not a breakpoint at all. `--container-width` caps at 1240px from Figma `2xl` (1480px) but from CSS 1256px. The Storybook Tier toolbar reads the export, so it shows Figma spacing today. Needs: which side is right per value, a mode ↔ tier mapping, then the merge (and the production check, 017). Not started. Plan 030 (layout guides) depends on it. |
+| **G12** | **Decided 2026-11-26, carried out under plan 030** (phase 3). Layout spacing: Figma's Layout collection and `tokens.css` disagreed on `--spacing-layout-*`, and the Figma modes didn't line up with the CSS tiers | 1 | ~~Found in the 2026-11-20 re-export (commit `8941c96`).~~ Settled: production's `_variables.styl` carries the same Figma Layout collection mode for mode (`$layout-{mode}-spacing-*`, `+mobile-small()` = `2xs` … `+desktop()` = `lg`), so **Figma is right and `tokens.css` follows it**; CSS tiers map 1:1 to the modes, named like the breakpoints (`default` < 360, `2xs` 360, `xs` 408, `sm` 600, `md` 768, `lg` 1008, `xl` 1256, `2xl`+); container padding 16px from 408px (Figma `xs` fixed), Figma `default` container padding 32 → 8; `--container-width` 1240px from `lg`. Decisions and the per-value table in plan 030 → "Decided". |
 | **G13** | **No plan yet** (2026-11-20). Figma ≠ `tokens.css` outside layout: decide per token which side is right, then merge into `tokens.css` or fix Figma | 1 | From the same re-export. Dark mode: `--color-interaction-primary-{surface,border}` Figma blue-65 / CSS blue-45, `-hover-{surface,border}` blue-75 / blue-35; `--color-interaction-secondary-border` grey-70 / grey-80; `--color-interaction-danger-surface` `var(--color-surface-primary)` / transparent; `--color-interaction-transparent-hover-border` white / blue-95. Light and dark: `--tag-padding-x` Figma `var(--spacing-layout-sm)` / CSS `var(--spacing-layout-xs)`; `--color-blue-10` hue 238 / 239. Fixed already: the Gift `Theme/background` and `Theme/Surface/*` aliases in Figma (2026-11-20), visible in `tokens.json` after the next export. Not started. |
 | **G14** | **No plan yet** (2026-11-20). Brand text (Kensington) weight and letter spacing: Mini*S vs production | 1 | Production (`../slevomat`): `$typography-brand-heading-{lg,xl}-font-weight = 700`, every Kensington and fallback `@font-face` (Impact, local Arial Narrow Bold) declared at 700, so nothing is synthesised; brand xl letter spacing `0.01em`. Figma text styles: weight 700, letter spacing `0.03em` (lg and xl). Mini*S `tokens.css`: `--typography-brand-weight: 400`, only because the public Bebas Neue fallback ships 400 and 700 would fake-bold it. Options: Mini*S at 700 with its own weight-700 `@font-face` for the fallback (production's approach); decide 0.01em vs 0.03em for xl. Touches CLAUDE.md's brand rule and plan 016. Not started. |
 
@@ -488,7 +490,7 @@ Work for the redefinition that has no todo plan but should show up here:
 - **Typography method** — Figma, exporter 1.3.1 (1.2.1 for the export rules, 1.3.0 adds the
   Line heights command, 1.3.1 the references-mode fixes) and CSS — is in plans 015 and 016 and
   `docs/ai-prompts/typography.md`. The step-by-step procedure for changing it is planned in
-  plan 009 (not built yet).
+  plan 009 (`minis-token-update`, built 2026-11-26).
 
 ### Findings from production rebuilds (plan 031)
 
