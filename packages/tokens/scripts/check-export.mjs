@@ -4,6 +4,7 @@
 //   pnpm tokens:check                      checks tokens.json + tokens.rgb.json  (procedure step 5)
 //   pnpm tokens:check --css                also checks packages/tokens/src/tokens.css (step 7)
 //   pnpm tokens:check --refs none          check only tokens.rgb.json
+//   pnpm tokens:check --group-file typography.json   a single-group file made for production
 //   node packages/tokens/scripts/check-export.mjs --help
 //
 // Exit code 1 when any check fails. A failure stops the token-update procedure
@@ -60,7 +61,12 @@ const fail = (check, message, details = []) => ({ level: 'fail', check, message,
 // Checks on one export file
 // ---------------------------------------------------------------------------------------
 
-export function checkExport(json, { label, kind, minVersion = MIN_EXPORTER_VERSION, spacingSet = DEFAULT_SPACING_SET }) {
+/**
+ * `partial: true` is a single-group file (production's `typography.json`, `layout.json`, …):
+ * the checks for groups it doesn't hold are skipped instead of failing. `breakpoints` is where a
+ * Layout mode's width comes from when the file has no `breakpoints` group of its own.
+ */
+export function checkExport(json, { label, kind, minVersion = MIN_EXPORTER_VERSION, spacingSet = DEFAULT_SPACING_SET, partial = false, breakpoints = null }) {
   const r = [];
   const meta = json.$metadata;
 
@@ -96,6 +102,10 @@ export function checkExport(json, { label, kind, minVersion = MIN_EXPORTER_VERSI
     return r;
   }
 
+  const groups = new Set(leaves.map((l) => l.group));
+  const need = (g) => !partial || groups.has(g);
+  if (partial) r.push(pass('scope', `${label}: single-group file (${[...groups].join(', ')}); checks for other groups are skipped`));
+
   // 2. no Figma-only -px variable may leave Figma
   const px = leaves.filter((l) => /line-height-px$/.test(l.cssName) || l.path.includes('line-height-px'));
   if (px.length) r.push(fail('no-line-height-px', `${label}: ${px.length} "line-height-px" token(s) in the export; they are Figma-only and the exporter must skip them`, px.slice(0, 10).map((l) => `${l.key}  ${l.cssName}`)));
@@ -106,72 +116,76 @@ export function checkExport(json, { label, kind, minVersion = MIN_EXPORTER_VERSI
   if (selfRef.length) r.push(fail('self-reference', `${label}: ${selfRef.length} token(s) that reference themselves`, selfRef.map((l) => `${l.cssName}: ${l.value}`)));
   else r.push(pass('self-reference', `${label}: no self-referencing value`));
 
-  // 4. sentinel names
+  // 4. sentinel names (colour names: only meaningful where the colour group is)
   const names = new Set(leaves.map((l) => l.cssName));
-  const missing = SENTINELS_PRESENT.filter((n) => !names.has(n));
+  const missing = need('color') ? SENTINELS_PRESENT.filter((n) => !names.has(n)) : [];
   const forbidden = SENTINELS_ABSENT.filter((n) => names.has(n));
   if (missing.length || forbidden.length)
     r.push(fail('sentinel-names', `${label}: naming settings look wrong`, [
       ...missing.map((n) => `missing: ${n}`),
       ...forbidden.map((n) => `must not exist: ${n}`),
     ]));
-  else r.push(pass('sentinel-names', `${label}: sentinel names present, none forbidden`));
+  else r.push(pass('sentinel-names', `${label}: ${need('color') ? 'sentinel names present, none forbidden' : 'no forbidden name (the colour sentinels need the colour group)'}`));
 
-  // 5. letter spacing: exactly the announced set, value derived from the name
-  const spacing = leaves.filter((l) => l.cssName.startsWith('--typography-spacing-'));
-  const gotSet = spacing.map((l) => l.cssName.replace('--typography-spacing-', '')).sort();
-  const wantSet = [...spacingSet].sort();
-  const spacingProblems = [];
-  if (JSON.stringify(gotSet) !== JSON.stringify(wantSet))
-    spacingProblems.push(`set is {${gotSet.join(', ')}}, expected {${wantSet.join(', ')}}`);
-  for (const l of spacing) {
-    const em = spacingNameToEm(l.cssName);
-    const parsed = parseNumeric(l.value);
-    if (em === null) spacingProblems.push(`${l.cssName}: name doesn't follow the percentage convention`);
-    else if (!parsed || (parsed.n !== 0 && parsed.unit !== 'em') || Math.abs(parsed.n - em) > 1e-9)
-      spacingProblems.push(`${l.cssName}: value ${l.value}, the name says ${em}em`);
-  }
-  if (spacingProblems.length) r.push(fail('letter-spacing', `${label}: letter-spacing tokens are off`, spacingProblems));
-  else r.push(pass('letter-spacing', `${label}: letter-spacing set {${gotSet.join(', ')}} with values matching the names`));
-
-  // 6. line-height ratio primitives: the value is the percentage in the name
-  const ratioProblems = leaves
-    .filter((l) => /^--typography-line-height-\d+$/.test(l.cssName))
-    .filter((l) => l.value !== `${l.cssName.split('-').pop()}%`)
-    .map((l) => `${l.cssName}: ${l.value}`);
-  if (ratioProblems.length) r.push(fail('line-height-ratios', `${label}: ratio value doesn't match its name`, ratioProblems));
-  else r.push(pass('line-height-ratios', `${label}: line-height ratio values match their names`));
-
-  // 7. Layout composites: ratios stay ratios, sizes stay px, in every mode
-  const layout = leaves.filter((l) => l.group === 'layout');
-  const compProblems = [];
-  for (const l of layout) {
-    if (/^--typography-[\w-]+-line-height$/.test(l.cssName)) {
-      const ok = kind === 'resolved' ? /^\d+(\.\d+)?%$/.test(l.value) : /^var\(--typography-line-height-\d+\)$/.test(l.value);
-      if (!ok) compProblems.push(`${l.key}: ${l.cssName} = ${l.value} (a ratio must be ${kind === 'resolved' ? 'a percentage' : 'a ratio primitive reference'}, never pixels)`);
-    } else if (/^--typography-[\w-]+-size$/.test(l.cssName) && kind === 'resolved' && !/^\d+(\.\d+)?px$/.test(l.value)) {
-      compProblems.push(`${l.key}: ${l.cssName} = ${l.value} (a size must be px)`);
+  if (need('typography')) {
+    // 5. letter spacing: exactly the announced set, value derived from the name
+    const spacing = leaves.filter((l) => l.cssName.startsWith('--typography-spacing-'));
+    const gotSet = spacing.map((l) => l.cssName.replace('--typography-spacing-', '')).sort();
+    const wantSet = [...spacingSet].sort();
+    const spacingProblems = [];
+    if (JSON.stringify(gotSet) !== JSON.stringify(wantSet))
+      spacingProblems.push(`set is {${gotSet.join(', ')}}, expected {${wantSet.join(', ')}}`);
+    for (const l of spacing) {
+      const em = spacingNameToEm(l.cssName);
+      const parsed = parseNumeric(l.value);
+      if (em === null) spacingProblems.push(`${l.cssName}: name doesn't follow the percentage convention`);
+      else if (!parsed || (parsed.n !== 0 && parsed.unit !== 'em') || Math.abs(parsed.n - em) > 1e-9)
+        spacingProblems.push(`${l.cssName}: value ${l.value}, the name says ${em}em`);
     }
-  }
-  if (compProblems.length) r.push(fail('typography-composites', `${label}: Layout typography composites have the wrong kind of value`, compProblems.slice(0, 20)));
-  else r.push(pass('typography-composites', `${label}: Layout line heights are percentages${kind === 'resolved' ? ', sizes are px' : ' (primitive references)'} in every mode`));
+    if (spacingProblems.length) r.push(fail('letter-spacing', `${label}: letter-spacing tokens are off`, spacingProblems));
+    else r.push(pass('letter-spacing', `${label}: letter-spacing set {${gotSet.join(', ')}} with values matching the names`));
 
-  // 8. every Layout mode can be mapped to a width, and has the same typography names
-  const modes = [...new Set(layout.map(modeOf))];
-  const bp = Object.keys(json.breakpoints ?? {});
-  const unmapped = modes.filter((m) => m !== 'default' && !bp.includes(m));
-  if (unmapped.length) r.push(fail('layout-modes', `${label}: Layout mode(s) with no matching breakpoint: ${unmapped.join(', ')}`, ['The css check maps a mode to a width through the "breakpoints" group; it cannot compare a mode it can\'t map.']));
-  else r.push(pass('layout-modes', `${label}: ${modes.length} Layout modes, all mapped through "breakpoints"`));
-
-  const typoByMode = new Map(modes.map((m) => [m, new Set()]));
-  for (const l of layout) if (l.cssName.startsWith('--typography-')) typoByMode.get(modeOf(l)).add(l.cssName);
-  const union = new Set([...typoByMode.values()].flatMap((s) => [...s]));
-  const uneven = [];
-  for (const [m, s] of typoByMode) {
-    const gone = [...union].filter((n) => !s.has(n));
-    if (gone.length) uneven.push(`${m}: lacks ${gone.join(', ')}`);
+    // 6. line-height ratio primitives: the value is the percentage in the name
+    const ratioProblems = leaves
+      .filter((l) => /^--typography-line-height-\d+$/.test(l.cssName))
+      .filter((l) => l.value !== `${l.cssName.split('-').pop()}%`)
+      .map((l) => `${l.cssName}: ${l.value}`);
+    if (ratioProblems.length) r.push(fail('line-height-ratios', `${label}: ratio value doesn't match its name`, ratioProblems));
+    else r.push(pass('line-height-ratios', `${label}: line-height ratio values match their names`));
   }
-  if (uneven.length) r.push(warn('layout-modes-even', `${label}: typography names differ between Layout modes`, uneven));
+
+  if (need('layout')) {
+    // 7. Layout composites: ratios stay ratios, sizes stay px, in every mode
+    const layout = leaves.filter((l) => l.group === 'layout');
+    const compProblems = [];
+    for (const l of layout) {
+      if (/^--typography-[\w-]+-line-height$/.test(l.cssName)) {
+        const ok = kind === 'resolved' ? /^\d+(\.\d+)?%$/.test(l.value) : /^var\(--typography-line-height-\d+\)$/.test(l.value);
+        if (!ok) compProblems.push(`${l.key}: ${l.cssName} = ${l.value} (a ratio must be ${kind === 'resolved' ? 'a percentage' : 'a ratio primitive reference'}, never pixels)`);
+      } else if (/^--typography-[\w-]+-size$/.test(l.cssName) && kind === 'resolved' && !/^\d+(\.\d+)?px$/.test(l.value)) {
+        compProblems.push(`${l.key}: ${l.cssName} = ${l.value} (a size must be px)`);
+      }
+    }
+    if (compProblems.length) r.push(fail('typography-composites', `${label}: Layout typography composites have the wrong kind of value`, compProblems.slice(0, 20)));
+    else r.push(pass('typography-composites', `${label}: Layout line heights are percentages${kind === 'resolved' ? ', sizes are px' : ' (primitive references)'} in every mode`));
+
+    // 8. every Layout mode can be mapped to a width, and has the same typography names
+    const modes = [...new Set(layout.map(modeOf))];
+    const bp = Object.keys(json.breakpoints ?? breakpoints ?? {});
+    const unmapped = modes.filter((m) => m !== 'default' && !bp.includes(m));
+    if (unmapped.length) r.push(fail('layout-modes', `${label}: Layout mode(s) with no matching breakpoint: ${unmapped.join(', ')}`, ['The css check maps a mode to a width through the "breakpoints" group; it cannot compare a mode it can\'t map.']));
+    else r.push(pass('layout-modes', `${label}: ${modes.length} Layout modes, all mapped through "breakpoints"`));
+
+    const typoByMode = new Map(modes.map((m) => [m, new Set()]));
+    for (const l of layout) if (l.cssName.startsWith('--typography-')) typoByMode.get(modeOf(l)).add(l.cssName);
+    const union = new Set([...typoByMode.values()].flatMap((s) => [...s]));
+    const uneven = [];
+    for (const [m, s] of typoByMode) {
+      const gone = [...union].filter((n) => !s.has(n));
+      if (gone.length) uneven.push(`${m}: lacks ${gone.join(', ')}`);
+    }
+    if (uneven.length) r.push(warn('layout-modes-even', `${label}: typography names differ between Layout modes`, uneven));
+  }
 
   return r;
 }
@@ -209,6 +223,40 @@ export function checkPair(refs, resolved, labels = { refs: 'tokens.json', resolv
     const omitted = lb.filter((l) => !ka.has(`${l.key}|${l.cssName}`)).map((l) => `${l.key}  ${l.cssName}`);
     if (omitted.length) r.push(pass('same-tokens-omitted', `${labels.refs} omits ${omitted.length} alias(es) whose name another token already defines (exporter 1.3.1 behaviour)`));
   }
+  return r;
+}
+
+// ---------------------------------------------------------------------------------------
+// A single-group file (production's typography.json, layout.json, …)
+// ---------------------------------------------------------------------------------------
+
+/**
+ * Checks one exporter file that holds one top-level group, in resolved mode. Runs the checks
+ * that apply to the groups it has, takes Layout mode widths from `repoResolved.breakpoints`
+ * when the file has no `breakpoints` of its own, and checks the group **equals the repo's own
+ * export of it**: a production file that differs from `tokens.rgb.json` means production and
+ * this repo are about to disagree, which is what the token-update procedure exists to prevent.
+ */
+export function checkGroupFile(json, { label, repoResolved = null, minVersion = MIN_EXPORTER_VERSION, spacingSet = DEFAULT_SPACING_SET }) {
+  const r = checkExport(json, { label, kind: 'resolved', minVersion, spacingSet, partial: true, breakpoints: repoResolved?.breakpoints ?? null });
+  if (!repoResolved) {
+    r.push(warn('group-matches-repo', `${label}: no tokens.rgb.json to compare the group with`));
+    return r;
+  }
+  const mine = collectLeaves(json);
+  const groups = new Set(mine.map((l) => l.group));
+  const theirs = collectLeaves(repoResolved).filter((l) => groups.has(l.group));
+  const byKey = (leaves) => new Map(leaves.map((l) => [`${l.key}|${l.cssName}`, l.value]));
+  const a = byKey(mine);
+  const b = byKey(theirs);
+  const problems = [];
+  for (const [k, v] of a) {
+    if (!b.has(k)) problems.push(`only in ${label}: ${k}`);
+    else if (!sameValue(String(v), String(b.get(k)))) problems.push(`${k}: ${label} ${v}  tokens.rgb.json ${b.get(k)}`);
+  }
+  for (const k of b.keys()) if (!a.has(k)) problems.push(`only in tokens.rgb.json: ${k}`);
+  if (problems.length) r.push(fail('group-matches-repo', `${label}: differs from tokens.rgb.json in ${problems.length} place(s) (export the group in the same session as the repo files)`, problems.slice(0, 15).concat(problems.length > 15 ? [`… and ${problems.length - 15} more`] : [])));
+  else r.push(pass('group-matches-repo', `${label}: identical to the ${[...groups].join(', ')} group of tokens.rgb.json (${a.size} tokens)`));
   return r;
 }
 
@@ -301,6 +349,10 @@ const HELP = `check-export — validate a Figma token export
 
   --refs <file|none>      references export (default: tokens.json)
   --resolved <file|none>  resolved export (default: tokens.rgb.json)
+  --group-file <file>     a single-group exporter file (production's typography.json, layout.json, …);
+                          repeatable. Checked on its own terms and compared with tokens.rgb.json.
+                          When given alone, tokens.json / tokens.rgb.json are not checked
+                          (pass --refs / --resolved to check them too)
   --css [file]            also check the merged tokens.css against the resolved export
   --min-version <x.y.z>   oldest acceptable exporter (default ${MIN_EXPORTER_VERSION})
   --spacing-set <a,b,…>   the letter-spacing names a change announced (default ${DEFAULT_SPACING_SET.join(',')})
@@ -309,12 +361,13 @@ const HELP = `check-export — validate a Figma token export
   --json                  machine-readable output`;
 
 function parseArgs(argv) {
-  const o = { refs: DEFAULT_REFS, resolved: DEFAULT_RESOLVED, css: null, minVersion: MIN_EXPORTER_VERSION, spacingSet: DEFAULT_SPACING_SET };
+  const o = { refs: DEFAULT_REFS, resolved: DEFAULT_RESOLVED, css: null, minVersion: MIN_EXPORTER_VERSION, spacingSet: DEFAULT_SPACING_SET, groupFiles: [], explicit: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = () => argv[++i];
-    if (a === '--refs') o.refs = next();
-    else if (a === '--resolved') o.resolved = next();
+    if (a === '--refs') { o.refs = next(); o.explicit = true; }
+    else if (a === '--resolved') { o.resolved = next(); o.explicit = true; }
+    else if (a === '--group-file') o.groupFiles.push(next());
     else if (a === '--css') o.css = argv[i + 1] && !argv[i + 1].startsWith('--') ? next() : DEFAULT_CSS;
     else if (a === '--min-version') o.minVersion = next();
     else if (a === '--spacing-set') o.spacingSet = next().split(',').map((s) => s.trim()).filter(Boolean);
@@ -329,6 +382,7 @@ function parseArgs(argv) {
 
 export function runChecks(o) {
   const results = [];
+  const groupOnly = o.groupFiles.length > 0 && !o.explicit;
   const load = (file, kind, label) => {
     if (!file || file === 'none') return null;
     const p = path.resolve(file);
@@ -337,9 +391,20 @@ export function runChecks(o) {
     results.push(...checkExport(json, { label, kind, minVersion: o.minVersion, spacingSet: o.spacingSet }));
     return json;
   };
-  const refs = load(o.refs, 'references', path.basename(o.refs ?? 'tokens.json'));
-  const resolved = load(o.resolved, 'resolved', path.basename(o.resolved ?? 'tokens.rgb.json'));
-  if (refs && resolved) results.push(...checkPair(refs, resolved, { refs: path.basename(o.refs), resolved: path.basename(o.resolved) }));
+  let refs = null;
+  let resolved = null;
+  if (!groupOnly) {
+    refs = load(o.refs, 'references', path.basename(o.refs ?? 'tokens.json'));
+    resolved = load(o.resolved, 'resolved', path.basename(o.resolved ?? 'tokens.rgb.json'));
+    if (refs && resolved) results.push(...checkPair(refs, resolved, { refs: path.basename(o.refs), resolved: path.basename(o.resolved) }));
+  } else if (fs.existsSync(path.resolve(o.resolved))) {
+    resolved = readJson(path.resolve(o.resolved)); // the reference for breakpoints and the match check
+  }
+  for (const file of o.groupFiles) {
+    const p = path.resolve(file);
+    if (!fs.existsSync(p)) { results.push(fail('file', `${path.basename(file)}: ${p} does not exist`)); continue; }
+    results.push(...checkGroupFile(readJson(p), { label: path.basename(file), repoResolved: resolved, minVersion: o.minVersion, spacingSet: o.spacingSet }));
+  }
   if (o.css) {
     if (!resolved) results.push(fail('css', 'the css check needs the resolved export (tokens.rgb.json)'));
     else results.push(...checkCss(resolved, fs.readFileSync(path.resolve(o.css), 'utf8'), { spacingSet: o.spacingSet }));

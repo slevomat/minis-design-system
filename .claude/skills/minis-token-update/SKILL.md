@@ -137,9 +137,16 @@ group(s) production consumes (`typography.json`, `layout.json`, … one group pe
 mode) with the exporter plugin, the same way as in step 4. You only **draft the hand-over note**:
 renamed, removed, re-valued and new names (from the `tokens:diff` of the matching group), and what
 to expect. Prepare, never send. Production's developer runs its own Style Dictionary build.
-If the owner gives you such a file, read it, don't rewrite it. `tokens:check` can't fully check a
-single-group file yet (its Layout mode mapping needs the `breakpoints` group); say so instead of
-reporting a failure.
+If the owner gives you such a file, read it, don't rewrite it, and check it:
+
+```bash
+pnpm tokens:check --group-file <path>/typography.json --group-file <path>/layout.json
+```
+
+It applies the checks that fit the groups the file holds, takes Layout mode widths from
+`tokens.rgb.json` when the file has no `breakpoints`, and fails if the group differs from the
+repo's own `tokens.rgb.json` in any name or value (export it in the same session as the repo
+files).
 
 ### 10 — Commit message (you draft)
 
