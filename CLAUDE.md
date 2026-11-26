@@ -37,7 +37,7 @@ docs/
 - **Typography size**: `--typography-size-{3xs|2xs|xs|sm|md|lg|xl|2xl|3xl|4xl|5xl}` (`sm` = 14px, `3xs` = 8px, `5xl` = 56px)
 - **Typography weight**: `--typography-weight-{light|regular|medium|semibold|bold|black}`
 - **Typography letter spacing**: `--typography-spacing-{n2|n1|n0_3|0|3}` (em; the name is the percentage of the font size, `n` = minus, `_` = decimal point: `n0_3` = −0.3 % = `-0.003em`). In Figma they are `Typography/spacing/-2%` … `-0,3%` (Figma forbids `.` in names) and are **not bindable**: text styles type the percentage.
-- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+ (`--typography-brand-weight` is a flat 400).
+- **Typography line-height**: `--typography-line-height-{90|100|110|125|130|133|138|140|143|150|157}` (value is a percentage, e.g. `138%`). Responsive composites `--typography-{heading-lg,heading-md,heading-sm,body-md,body-sm}-line-height` reference this scale and change per breakpoint. Brand composites `--typography-brand-{lg,xl}-{size,line-height}` scale at 1480px+, also in the Figma Layout collection (`--typography-brand-weight` is a flat 400 and `tokens.css`-only).
 - **Figma `default` has no CSS suffix**: the exporter drops every path segment named `default`, so `Color/Border/default` → `--color-border` (grey-80) and `Interaction/primary/default/surface` → `--color-interaction-primary-surface`. **`--color-border-default` does not exist** — never guess a `-default` name from Figma. See "Token exports" → exporter settings.
 - **Color**: `--color-text-*`, `--color-surface-*`, `--color-border` + `--color-border-{subtle|strong|focus|invalid|valid}`, `--color-separator` (alpha — black 5% light / white 35% dark, so rules read on any surface; `--separator-color` and the accordion divider both resolve to it), `--color-interaction-{variant}-{surface|accent|border}` + `-hover-` variants
 - **Component tokens**: `--{component}-{variant}-{state}-{property}` (e.g. `--button-primary-hover-surface`)
@@ -333,7 +333,13 @@ Some `cssName`s in `tokens.json` differ from the names `tokens.css` and the comp
 | `--typography-mega-poster-size` | `--typography-heading-2xl-size` |
 | `--typography-poster-size` | `--typography-heading-xl-size` |
 
-The brand (Kensington) composites `--typography-brand-{lg,xl}-*`, `--typography-brand-weight`, the `--typography-font-family-*` set, the hand-written `FONTS` comment block at the top of `tokens.css`, and `--container-bleeding-edge-padding` exist **only** in `tokens.css` — they are not in the Figma Layout collection. **A Figma re-export must preserve them.** Only the `FONTS` comment block carries a `HAND-MAINTAINED` marker in the file; the token blocks themselves are unmarked, so check for each of them by name after a re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+Since the 2026-11-20 export, the brand (Kensington) composites `--typography-brand-{lg,xl}-{size,line-height}` (Layout collection, per mode: 24 / 32px, 32 / 56px from `2xl`), the `--typography-font-family-*` set (Typography collection) and `--container-bleeding-edge-padding` (Layout collection) **are in the export**, with values that match `tokens.css`. What a re-export must still not overwrite:
+
+- **`--typography-brand-weight`** (400) — not in Figma at all; exists only in `tokens.css` (gap G14 is about this weight).
+- **`--typography-font-family-brand`'s value** — the export says just `Kensington`; `tokens.css` keeps the full stack `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif`, because Kensington is not in the repo and Bebas Neue is the public fallback. Likewise `-sans` / `-mono` stay single names, never the system-stack comment the export carries.
+- **The hand-written `FONTS` comment block** at the top of `tokens.css` — the only part with a `HAND-MAINTAINED` marker.
+
+Check these by name after every re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
 
 ## Common pitfalls
 
