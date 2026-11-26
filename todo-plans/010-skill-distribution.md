@@ -62,13 +62,13 @@ their plans' order (plan 003, "Recommended order").
 
 | Command | Skill | For whom | Plan | State |
 |---|---|---|---|---|
-| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Exists** (`.claude/skills/minis-app/`) |
-| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Exists** (`.claude/skills/minis-figma-docs/`) |
-| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | Planned — **first new command** |
+| `/minis:app` | Scaffold and verify a prototype on the web components | Anyone prototyping outside production | 006, 019 | **Shipped 0.1.0** (`plugins/minis/skills/app/`) |
+| `/minis:figma-docs` | Documentation cards in the MiniS DS Figma file | DS team, designers | — | **Shipped 0.1.0** (`plugins/minis/skills/figma-docs/`) |
+| `/minis:page-to-figma` | Rebuild a production page in Figma, with findings frames | DS team, designers | 031 | **Shipped 0.1.0** (`plugins/minis/skills/page-to-figma/`) — first new command |
 | `/minis:contribute` | Search the registry → extend → build as Local | Anyone building with AI | 005 | Planned (needs 013) |
 | `/minis:latte` | Build UI from Latte recipes | Designers and developers in the Nette repo | 004 | Planned (needs 023, 013); Copilot gets the same rules as plain files (B) |
 | `/minis:bug` | Guided bug report → GitHub issue | Anyone | 008 | Planned |
-| `/minis:token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Planned |
+| `/minis:token-update` | Figma export → checks → `tokens.css` → changelogs, typography first | DS owner, inside a Mini*S checkout | 009 | Built as a project skill (`.claude/skills/minis-token-update/`); joins the plugin once 009 phase 3 has run it on a real change |
 | `/minis:changelog` | One change written to every changelog | DS owner, inside a Mini*S checkout | 018 | Planned |
 | `/minis:todo-plan` | Write and update todo plans by the conventions | Anyone proposing larger work | 007 | Planned |
 | (hook, opt-in) | Explain a broken rule while editing | Anyone building with AI in Claude Code | 026 | Planned |
@@ -172,8 +172,10 @@ component bundle) move to **plan 019**. Its phase 4 is this plan's phase 2.
       `.claude/skills/minis-*` are symlinks (transition names). `/minis:app`'s steps (clone → install
       → build → `create-prototype`) checked from a clean clone. A full model run of either command
       wasn't possible headlessly here (the standalone CLI isn't logged in on this machine).
-- [ ] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
-      the skill.
+- [x] **Phase 4 — First new command: `/minis:page-to-figma`** once plan 031 phase 6 has written
+      the skill. *Done 2026-11-26:* merged from `page-to-figma-031` (bf397af), moved to
+      `plugins/minis/skills/page-to-figma/`, part of 0.1.0 (owner chose to wait for it rather than
+      ship it in 0.2.0). Clean install lists all three commands.
 - [ ] **Phase 5 — Add the rest** from the roster one at a time, as each skill is written.
 - [ ] **Phase 6 — Versions and staleness:** plugin version tied to the token / registry release it
       describes (question 4); a way to tell a user their copy is out of date.
