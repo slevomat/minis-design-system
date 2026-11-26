@@ -140,7 +140,7 @@ Current plans:
   Figma text styles follow Layout modes (Figma treats every bound line-height value as pixels).
   **Done 2026-11-26**; the typography procedure it led to is the `minis-token-update` skill (plan 009).
 - `todo-plans/016-letter-spacing-tokens.md` — letter spacing as em tokens named by percentage
-  (`--typography-spacing-n2` …). Landed 2026-11-06; all phases done, the skill part is in `minis-token-update`.
+  (`--typography-spacing-n2` …). **Done 2026-11-26**; the skill part is in `minis-token-update`. One question carried: does production's Stylus compile pass with the seven old spacing names gone?
 - `todo-plans/017-production-reference-audit.md` — a repeatable audit of the read-only production
   clone (`../slevomat`): component usage, primitive → semantic map, production's existing
   Stylelint/KSS/BackstopJS guardrails. Feeds 001, 011–014. Never write to the production repo.

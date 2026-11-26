@@ -277,7 +277,7 @@ fully done.
 | 4 | **017** Production audit script | The adoption baseline and the three success metrics, before anything changes |
 | — | **G12**, **G13**, **G14** (no plans yet) | Figma and `tokens.css` disagree; settle which side is right before 024 automates the export, or it automates the disagreement |
 | — | **030** Layout guides | Design decisions on sidebar, gap and container levels; uses `--spacing-layout-*`, so after G12 (its question 5). No production change |
-| — | finish **016** (**015** is done, 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. 016 has all phases done but one open question: the Nette developer's confirmation that production's Stylus compile works with the seven old spacing names gone. Then it moves to `done`; the skill's first real run is 009 phase 4 |
+| — | ~~finish **015**, **016**~~ (both `done`, 2026-11-26) | Typography foundation; the typography procedure landed as plan 009's skill. 016 was closed with one open question carried: the Nette developer's confirmation that production's Stylus compile works with the seven old spacing names gone. The skill's first real run is 009 phase 4 |
 
 **Step 2 — Checks (December–January).** Ship together, both warning-first with a baseline.
 
@@ -407,7 +407,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 013 | `registry.json` | draft | 0 / 6 | `meta` fields, production tier, platform keys |
 | 014 | Porting rules | draft | 0 / 5 | decision 3, registry; Latte part needs the lead developer |
 | 015 | Responsive line height in Figma | done | 16 / 0 | all phases done; phase 7 (the typography procedure) landed 2026-11-26 as the `minis-token-update` skill; moved to `done` by the owner 2026-11-26. Exporter 1.3.0 "Line heights" command and the production import check done 2026-11-20 |
-| 016 | Letter-spacing tokens (high priority) | **in-progress** | 12 / 0 | all phases done; stays open on its one open question (does production's Stylus compile pass with the seven old spacing names gone? needs the Nette developer). Phase 6's skill part landed 2026-11-26 in `minis-token-update` |
+| 016 | Letter-spacing tokens (high priority) | done | 12 / 0 | all phases done; moved to `done` by the owner 2026-11-26 with one open question carried (does production's Stylus compile pass with the seven old spacing names gone? needs the Nette developer). Phase 6's skill part landed 2026-11-26 in `minis-token-update` |
 | 017 | Production reference audit | draft | 0 / 12 | where the audit script lives; read-only clone `../slevomat`. Two hand-made slices done (layout; AI layer and tokens), 2026-11-13 |
 | 018 | Changelog sync skill | draft | 0 / 6 | Figma-side contract in `minis-figma-docs` |
 | 019 | Mini*S for vibe-coders | draft | 0 / 6 | access to two Slevomat repos (asked 2026-11-13); link of the existing Claude design system; Skill Hub owners |
