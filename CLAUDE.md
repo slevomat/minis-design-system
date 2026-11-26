@@ -289,6 +289,20 @@ When tokens are updated in Figma, they are exported to two JSON files at the rep
 
 These are the primary source of truth for token discovery. Alternatively, use the Figma MCP (`mcp__figma__get_variable_defs`) to query variables directly from the Figma file.
 
+### Updating tokens: use the `minis-token-update` skill
+
+Any change that starts in Figma — and **every typography change without exception** (size, line-height
+ratio, letter spacing, a new text role) — goes through `.claude/skills/minis-token-update/`. Figma's
+responsive text depends on generated `-px` variables, typed percentages and exporter rules, which is
+too easy to get silently wrong by hand. The checks are scripts, so they also run without Claude:
+
+```bash
+pnpm tokens:check            # validate tokens.json + tokens.rgb.json (exit 1 = stop)
+pnpm tokens:check --css      # …and tokens.css against the export, mode by mode
+pnpm tokens:diff             # what changed vs HEAD: added / removed / renamed / re-valued
+pnpm --filter @minis/tokens test
+```
+
 ### Exporter settings (must be ON for every export)
 
 The export comes from the in-house Figma plugin `minis-designtokens-exporter` (separate repo). Two of its settings shape every CSS name and are **OFF by default**, stored per machine in Figma `clientStorage` — an export from a fresh install renames every token:
