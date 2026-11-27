@@ -158,7 +158,8 @@ that needs no sign-in. Nothing in this plan waits for it.
 - [x] Layouts page examples (web and vibe-apps sections) replaced by template instances
 - [x] Exporter 1.3.2 skips the `figma-only/` group (exporter repo, branch `feat/figma-only-group`);
       `pnpm tokens:check` fails on a `figma-only` token
-- [ ] Exporter 1.3.2 released and installed; next export checked with `tokens:check`
+- [x] Exporter 1.3.2 merged (slevomat/figma-plugins#7, 2026-11-27) and installed
+- [ ] Next token export (made with 1.3.2) passes `pnpm tokens:check`, with no `figma-only` token
 - [ ] The page-to-figma skill (plan 031) fills a template instance instead of building frames
 - [ ] Missing pieces the templates show: site footer, breadcrumbs, TopBar mobile variant,
       PageHeader following the Layout mode
