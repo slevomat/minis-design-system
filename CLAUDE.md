@@ -177,6 +177,9 @@ Current plans:
   missing and where it conflicts with production;
   the visual half of 017, later `/minis:page-to-figma` in the plugin (`skip-audit` = rebuild without findings).
   Read-only on production.
+- `todo-plans/032-logged-in-page-layouts.md` — **nice to have, not scheduled**: check that the 030 layout rules hold
+  on pages behind login (account, later checkout steps, `layout-wrapper`); code-only pass first, live measuring only
+  with the owner's sign-in.
 
 ## Changelog rules
 
@@ -209,6 +212,7 @@ Every change to components or tokens **must** be recorded in two places, in the 
 - Button component: node `284:5283` · Button docs/overview: node `378:4416`
 - Accordion: page `4977:145` · `accordion-item` component set `4984:9556` · `accordion` list container **component set** `5136:9716` (its `Size=default` variant is the original component `4984:9557`). Both sets carry `Size` = `default | compact`. The item's divider is an unmodified `separator` instance — no colour/height override.
 - Layout components (Breakpoints & Containers page `166:8121`): `container` component set `6444:148` (`Variant` = `default | medium | narrow`), `sidebar-layout` component set `6444:155` (`Layout` = `columns | stacked`). Both bound to Layout variables; the Containers diagram is frame `1970:14`.
+- Page templates: page `↳ Page templates` (`6483:146`) · `page template/{listing,deal detail,cart,homepage,magazine,vibe app}` components (`6483:147`, `6483:342`, `6483:532`, `6483:689`, `6483:811`, `6483:943`), one slot per section, responsive through the Layout mode alone. Docs card `6485:7617`. See `docs/ai-prompts/layouts/index.md` → "Figma Page Templates".
 - Separator: page `4977:346` · `separator` component `4987:147` (Figma only — no Lit component yet; colour is the alpha `--color-separator`, not `--color-border-subtle`)
 - **Docs cards** (the cream documentation frames next to each component/foundation): use the **`minis-figma-docs` skill** (source `plugins/minis/skills/figma-docs/`, `/minis:figma-docs` from the plugin). Cards build only from the internal, never-published docs kit: `docs/*` variables (`.Helpers` collection), `.docs/*` text styles, `.link` / `.badge` / `.message` and the `Docs card — template` stack (`6119:153`) on the `.helpers` page. The docs kit is Figma-only, so changes to it don't go in `CHANGELOG.md`.
 - MCP setup: `claude mcp add --transport http figma https://mcp.figma.com/mcp --scope user`
@@ -340,7 +344,9 @@ Since the 2026-11-20 export, the brand (Kensington) composites `--typography-bra
 - **`--typography-font-family-brand`'s value** — the export says just `Kensington`; `tokens.css` keeps the full stack `'Kensington', 'Bebas Neue', 'Arial Narrow', sans-serif`, because Kensington is not in the repo and Bebas Neue is the public fallback. Likewise `-sans` / `-mono` stay single names, never the system-stack comment the export carries.
 - **The hand-written `FONTS` comment block** at the top of `tokens.css` — the only part with a `HAND-MAINTAINED` marker.
 
-Check these by name after every re-export. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
+Check these by name after every re-export.
+
+**The `figma-only/` group (Layout collection) is never exported** (exporter ≥ 1.3.2): helpers that only make Figma layouts work, e.g. `figma-only/sidebar/width` for the page templates. `pnpm tokens:check` fails if a `--figma-only-*` token reaches an export or `tokens.css`. An export from exporter 1.3.1 would carry it, so update the plugin first. `apps/storybook/.storybook/tier-tokens.ts` maintains the same alias table for the Storybook Tier simulation; update both if the export naming changes.
 
 ## Common pitfalls
 

@@ -3,7 +3,7 @@ id: 031
 title: Production page → Figma — rebuild a live page from Mini*S tokens and components
 status: draft
 created: 2026-11-21
-updated: 2026-11-26
+updated: 2026-11-27
 owner: Lexislav
 ---
 
@@ -164,6 +164,90 @@ mode), mapped, rebuilt and documented:
   disagreements the rebuild will hit.
 - **`minis-figma-docs`** — Figma scripting rules and the docs kit for the legend card.
 - **021** review — consumes the gap list.
+
+## Next iterations (backlog from the pilot, 2026-11-27)
+
+The pilot session is archived; these are for the follow-up sessions. The ordering is a suggestion,
+and each item can be its own session. State at hand-over: the skill is on master at
+`.claude/skills/minis-page-to-figma/` (PR #33). The **move into the plugin**
+(`plugins/minis/skills/page-to-figma/` + symlink, plan 010) **has not landed**: there's no
+`plugins/minis/` on master, and the plugin session ended in a failed state. Check that first.
+
+1. **Owner review** of the homepage rebuild and the findings stack (phases 3 and 4). Figma MiniS
+   DS → "Production rebuilds" `6462:142`: frames `6465:142` / `6465:2363` / `6465:4483`, stack
+   `6466:5806`, markers `6466:5910` / `6466:5947`. Agree the card layout, then save it to the docs
+   kit as a findings template (phase 4).
+2. **Build into the Figma page templates instead of from scratch** (asked by the layouts session,
+   approved by the owner, 2026-11-27). MiniS DS page `↳ Page templates` (`6483:146`) has one
+   component per page type: `page template/listing` `6483:147`, `/deal detail` `6483:342`,
+   `/cart` `6483:532`, `/homepage` `6483:689`, `/magazine` `6483:811`, `/vibe app` `6483:943`
+   (docs card `6485:7617`). They're responsive by Layout mode only, with no variant to switch.
+   - **Per captured width:** one template instance with the instance's Layout mode set
+     (375 → `2xs`, 768 → `md`, 1008 → `lg`, 1280 → `xl`, 1500 → `2xl`). Width, containers,
+     padding and main + sidebar stacking follow from the mode.
+   - **Slots:** one SLOT per section, each holding a `placeholder` frame. Slot names per template
+     are in the template docs card. To fill one:
+     `instance.findAllWithCriteria({types:['SLOT']}).find(s => s.name === '<Slot>')`, remove the
+     placeholder, append the content.
+   - **Gotcha:** `layoutSizingHorizontal = 'FILL'` on a slot child in an instance doesn't take.
+     Resize the child to `slot.width` (FIXED) instead.
+   - **Fixed parts:** header (TopBar + main nav) and the `not Mini*S — site footer` band are
+     already inside the template. Never detach.
+   - **Done when:**
+     - SKILL.md pass 3 and `references/mapping.md` say: pick the template for the page type, one
+       instance per width at the matching mode, fill the slots with the mapped blocks.
+     - `build.homepage.js` (or a successor) fills `page template/homepage` (slots Hero, Shortcuts,
+       Sections). The homepage is re-run, compared with the 2026-11-26 rebuild and screenshotted.
+     - Width derivation by cloning (item 4) mostly goes away: set the mode on a new instance.
+   - **Findings:** gaps the templates expose (footer, breadcrumbs, mobile TopBar, PageHeader's
+     Breakpoint variant) stay findings.
+   - **Context:** repo side of the templates is on branch `claude/page-templates` (commit
+     `0dcd29c`: `docs/ai-prompts/layouts/index.md` "Figma Page Templates", CLAUDE.md node ids).
+     Plan 030 phase 6 lists this as an open box. The sidebar width uses the Figma-only
+     `figma-only/sidebar/width`, which exporter 1.3.2 skips; that exporter version isn't released
+     yet.
+3. **Second and third page types: a category listing and a deal detail** (owner, Q1: where the
+   skill will be used most). With item 2 they fill `page template/listing` and `/deal detail`. Each needs its own PAGE BODY today (`scripts/build.<type>.js`).
+   Better: make the body data-driven. The mapping table becomes a block-spec JSON (block kind,
+   component, variant, texts), and one generic builder reads it, so a new page type needs no new
+   code.
+4. **Codify what the pilot did by hand in the session.** Each of these is a one-off script in the
+   transcript today, not a file in the skill:
+   - `__p2f.content()` — content extraction per block kind (the pilot used ad-hoc queries)
+   - `derive-widths.js` — clone the wide frame to 768 / 375: Layout mode, Promo Card `Breakpoint`,
+     Message `Layout`, grid columns, fixed widths for mobile scroll rows
+   - `findings-cards.js` + `markers.js` — the stack from `Docs card — template` and the numbered markers
+   - `match-values.py` — capture stats vs `tokens.rgb.json` → the coverage table (counted by hand
+     in the pilot)
+5. **Images.** Placeholders today. slevomat.cz's CSP blocks Figma's page capture script and there
+   is no Playwright MCP. Options to test: a Playwright MCP (strip the CSP, as the
+   `generate_figma_design` instructions show), or the Figma MCP's `upload_assets` with per-block
+   crops from Chrome screenshots, set as image fills on the placeholder frames.
+6. **Kensington in scripts.** Plugin scripts can't load it, so Promo Card titles and `Brand/*`
+   styles can't be set (the pilot uses the subtitle, and a layer name asks for the style by hand).
+   Ask whether the font can be uploaded to the Figma organisation as a shared font. If it can,
+   remove both workarounds from `build.homepage.js` and SKILL.md.
+7. **Accuracy gaps seen in the pilot:**
+   - The homepage grid is drawn as equal Promo Cards (production has one 2 × 2 tile, finding 10).
+   - TopBar `web` doesn't adapt at 375 (finding 20).
+   - Gifts band padding at 375 isn't measured.
+   - Footer columns carry titles only.
+   - POI cards say "Město" for every card (the captured category text wasn't extracted).
+8. **Re-run after a token release** (phase 6). Diff the new `findings.md` against the last run
+   and show which findings closed.
+9. **Findings to the review** (plan 021): put the 20 homepage findings on the first agenda once
+   021 runs. Plan 003 → "Findings from production rebuilds" lists who gets what.
+
+**Method facts worth keeping** (also in SKILL.md):
+- The Chrome tool cuts results at ~1,000 characters and refuses results that look like cookies or
+  query strings (`k=v;` pairs, URLs with parameters). That's why the readers print `k:v` and paths
+  only.
+- Production's dark mode is a body class set from a cookie or the system preference; the capture
+  removes it inside its own iframe.
+- Lazy blocks load against the top-level viewport, so the iframe has to be on screen (invisible)
+  while it scrolls.
+- In a Deal Card instance the text order is name, rating, count, price, label, place, region. A
+  `textCase` override detaches a text style.
 
 ## Answers
 

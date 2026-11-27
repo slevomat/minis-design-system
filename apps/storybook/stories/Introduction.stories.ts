@@ -578,6 +578,24 @@ const changelogHTML = `
 
       <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
 
+      <!-- 2026-11-27 (tokens:check figma-only, Figma page templates) -->
+      <div class="cl-heading">
+        <h2 id="2026-11-27" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-27</h2>
+        <button class="cl-copy-btn" data-anchor="2026-11-27">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="copy-label">Copy link</span>
+        </button>
+      </div>
+
+      <h3 style="margin-top:1rem">Tooling — <code>tokens:check</code> rejects the <code>figma-only/</code> group</h3>
+      <ul>
+        <li>New check <code>no-figma-only</code>: an export with a <code>figma-only/</code> token fails, like <code>line-height-px</code>; <code>tokens:check --css</code> also fails on a <code>--figma-only-*</code> token in <code>tokens.css</code>.</li>
+        <li>Why: Figma's Layout collection has <code>figma-only/sidebar/width</code>, a helper that lets the new Figma page templates stack their sidebar by Layout mode alone. No CSS meaning; the token exporter skips the group from 1.3.2. No token in <code>tokens.css</code> changed.</li>
+        <li>Figma: six page template components (listing, deal detail, cart, homepage, magazine, vibe app) on the new <em>Page templates</em> page.</li>
+      </ul>
+
+      <hr style="border:none;border-top:1px solid var(--color-border,#cbccce);margin:2rem 0"/>
+
       <!-- 2026-11-26 (minis plugin 0.1.0; G12 layout spacing, layout guides; token-update skill and export checks) -->
       <div class="cl-heading">
         <h2 id="2026-11-26" style="font-size:1.25rem;margin-bottom:.25rem;margin-top:0">2026-11-26</h2>

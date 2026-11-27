@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026-11-27
+
+### Tooling — `tokens:check` rejects the `figma-only/` group
+
+- New check `no-figma-only`: an export that contains a `figma-only/` token (path segment `figma-only` or a `--figma-only-*` name) fails, like `line-height-px`. `tokens:check --css` also fails on a `--figma-only-*` token in `tokens.css`. 3 new tests (30 in all).
+- Why: the Figma Layout collection now has `figma-only/sidebar/width`, a helper that lets the new Figma page templates stack their sidebar by Layout mode alone (the container content width per mode below `lg`, 320px from `lg`). It has no CSS meaning; the token exporter skips the group from 1.3.2. No token in `tokens.css` changed.
+- Figma: six page template components (listing, deal detail, cart, homepage, magazine, vibe app) on the new `↳ Page templates` page, documented in `docs/ai-prompts/layouts/index.md` → "Figma Page Templates".
+
 ## 2026-11-26
 
 ### Plugin — `minis` 0.1.0, the Mini*S plugin for Claude Code

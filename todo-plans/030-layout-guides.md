@@ -3,7 +3,7 @@ id: 030
 title: Layout guides — page layout rules grounded in production
 status: draft
 created: 2026-11-20
-updated: 2026-11-26
+updated: 2026-11-27
 owner: Lexislav
 ---
 
@@ -64,6 +64,8 @@ also what AI agents read first when they build a page, so the mismatch multiplie
 | 2026-11-26 | **Q2 — 1008px level:** new `<minis-container variant="medium">`, max 1008px from 1008px (`--container-medium-width`, Figma `container/medium/width`), padding `--container-padding`. Non-breaking: `narrow` stays 752px as the reading/form column. Content at 1008px+: 944px. | `production-reference.md` question 3 |
 | 2026-11-26 | **Q3 — stacking:** main + sidebar is one column below 1008px, as production. | `production-reference.md` question 4 |
 | 2026-11-26 | **Primitive:** main + sidebar is a component, `<minis-sidebar-layout>` (default slot = main, `sidebar` slot). Side by side needs a 1008px+ viewport (media query) **and** an own width of 944px+ (container-query guard). Implementation finding, same day: a container query alone can't express "below 1008px" — container padding jumps 16 → 32px at 1008px, so the content box is 975px at a 1007px viewport and 944px at 1008px. Full component set. | commit `a575d46`; `sidebar-layout.md` |
+| 2026-11-27 | **Figma page templates:** responsive page template components with one slot per section, switched **only by the Layout mode** in the appearance panel (no Breakpoint variant). First batch: listing (like /cestovani), deal detail, cart / checkout, homepage, magazine, vibe-app shell. Own page `↳ Page templates`; the Layouts page examples become instances. | phase 6 |
+| 2026-11-27 | **Sidebar stacking in Figma** uses a Figma-only helper, `figma-only/sidebar/width` (container content width per mode below `lg`, 320px from `lg`), bound to the Sidebar slot's min and max width. The exporter skips the reserved `figma-only/` group (1.3.2) instead of exporting it as a CSS token. | phase 6 |
 
 **G12 values after the decision** (px; Figma = production = new `tokens.css`; **bold** = a change in
 `tokens.css`, *italic* = a change in Figma):
@@ -117,11 +119,11 @@ Rejected:
 - [x] Open question 3: stacking breakpoint for main + sidebar
 - [x] Record each answer here under "Decided" and in `production-reference.md` section 3
 
-### Phase 2 — Measure what's missing
+### Phase 2 — Measure what's missing (moved to plan 032)
 
-- [ ] Pages behind login and the checkout steps after the cart, with the method in plan 017
-      ("Layout — 2026-11-13"). The user signs in; Claude never enters credentials.
-- [ ] Add the results to `production-reference.md` and to the Figma report card
+Moved out on 2026-11-27: the owner doesn't want pages behind login measured now. Plan
+[032](032-logged-in-page-layouts.md) keeps it as a nice-to-have, starting with a code-only pass
+that needs no sign-in. Nothing in this plan waits for it.
 
 ### Phase 3 — Tokens and component (only what phase 1 decides)
 
@@ -148,6 +150,22 @@ Rejected:
       `columns` from LG, `stacked` below; the cart templates already used the narrow column.
       Report card questions 1, 3, 4 resolved, 5 still open
 
+### Phase 6 — Figma page templates (added 2026-11-27)
+
+- [x] `figma-only/sidebar/width` in the Layout collection; six `page template/*` components with
+      slots on `↳ Page templates`, width bound to `page/width`, containers and spacing bound to the
+      Layout variables; responsive preview at `lg` / `md` / `2xs`; docs card
+- [x] Layouts page examples (web and vibe-apps sections) replaced by template instances
+- [x] Exporter 1.3.2 skips the `figma-only/` group (exporter repo, branch `feat/figma-only-group`);
+      `pnpm tokens:check` fails on a `figma-only` token
+- [x] Exporter 1.3.2 merged (slevomat/figma-plugins#7, 2026-11-27) and installed
+- [x] Next token export (made with 1.3.2) passes `pnpm tokens:check`, with no `figma-only` token —
+      checked 2026-11-27 on the references export (`tokens.json`, 12:10): all checks pass, no token
+      changed against the committed export, so nothing was committed
+- [ ] The page-to-figma skill (plan 031) fills a template instance instead of building frames
+- [ ] Missing pieces the templates show: site footer, breadcrumbs, TopBar mobile variant,
+      PageHeader following the Layout mode
+
 ### Phase 5 — Hand-over
 
 - [ ] Porting note for production (plan 014) and registry entries for the layout rules (plan 013),
@@ -158,7 +176,7 @@ Rejected:
 The numbering here is this plan's. The matching question in `production-reference.md` section 3
 is given in brackets.
 
-Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is still open.
+Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 moved to plan 032 on 2026-11-27.
 
 1. ~~**Should Mini*S standardise the sidebar ratio and the gap?**~~ Decided: fixed 320px sidebar, `--spacing-layout-lg` gap. (reference question 1) Candidates:
    2 : 1 (8 + 4 of 12, or `2fr 1fr`), 3 : 1, or a fixed sidebar of 300–360px. And which gap token:
@@ -170,8 +188,8 @@ Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is
 3. ~~**Should main + sidebar stack below 1008px (production) or below 768px (today's guide)?**~~ Decided: below 1008px.
    (reference question 4) Between 768 and 1007px the guide shows two columns where production
    shows one.
-4. **Are pages behind login built the same way?** (reference question 5) Not measured.
-   `layout-wrapper` (96 uses in the code) most likely lives there.
+4. ~~**Are pages behind login built the same way?**~~ Moved to plan 032 (nice to have).
+   (reference question 5) Not measured. `layout-wrapper` (96 uses in the code) most likely lives there.
 5. ~~**Does G12 have to land first?**~~ Yes, and it did: G12 decided 2026-11-26 and lands before the guides. The guides use `--spacing-layout-*` for gaps, and Figma and
    `tokens.css` disagree on those values today (plan 003, gap G12). Writing guides on values that
    are about to change means rewriting them.
@@ -182,3 +200,4 @@ Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is
 - **003** Gap G12 — layout spacing values and the Figma mode ↔ CSS tier mapping
 - **014** Porting rules — which side wins when Mini*S and production differ
 - **013** Registry — where the layout rules get registered
+- **032** Logged-in page layouts — the former phase 2 and question 4, as a nice-to-have
