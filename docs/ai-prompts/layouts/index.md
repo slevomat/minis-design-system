@@ -89,6 +89,27 @@ measured page needed more than main + sidebar. Use:
 }
 ```
 
+## Figma Page Templates
+
+The same rules exist in Figma as **page template components** on the `↳ Page templates` page of
+the Mini*S file (added 2026-11-27): `page template/listing`, `/deal detail`, `/cart`, `/homepage`,
+`/magazine` and `/vibe app`.
+
+- **One instance, any breakpoint.** Set the instance's **Layout** mode in the appearance panel
+  (`default` … `4xl`). Width (`page/width`), container widths and padding, spacing and the main +
+  sidebar stacking all follow; nothing else to switch.
+- **Slots per section** (Breadcrumbs, Hero, Gallery, Title, Tabs, Main, Sidebar…), each inside the
+  right container level. Header (TopBar + main nav) and footer are fixed. Fill the slots with Mini*S
+  instances; the placeholders name what goes there.
+- **The sidebar** stacks below `lg` through `figma-only/sidebar/width`, a Figma-only helper (the
+  content width per mode below `lg`, 320px from `lg`). The token exporter (≥ 1.3.2) never exports
+  the `figma-only/` group, and `pnpm tokens:check` fails if it ever shows up. Code needs no token:
+  `<minis-sidebar-layout>` stacks with a media query.
+- **Known gaps:** no footer, breadcrumbs or mobile TopBar component yet; PageHeader still has a
+  Breakpoint variant to set by hand.
+
+The Layouts page examples (web and vibe-apps sections) are instances of these templates.
+
 ---
 
 ## Responsive Layout System
@@ -289,4 +310,4 @@ Background: `var(--color-background)` (the page background token; never a hardco
 
 ---
 
-**Last updated:** 2026-11-26
+**Last updated:** 2026-11-27
