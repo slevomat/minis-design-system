@@ -1,3 +1,6 @@
 node_modules/
 dist/
 storybook-static/
+# Skill helper scripts: pasted into Figma (use_figma) or the browser, not repo code.
+# They use the Figma plugin globals (figma, __WIDTH__ …), which ESLint doesn't know.
+plugins/*/skills/*/scripts/
