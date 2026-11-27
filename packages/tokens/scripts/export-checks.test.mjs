@@ -77,6 +77,21 @@ test('a line-height-px token fails, however it is named or nested', () => {
   assert.ok(failed(run(j)).includes('no-line-height-px'));
 });
 
+test('a figma-only/ helper token fails, by name or by path', () => {
+  const j = makeExport();
+  j.layout.md['figma-only'] = { sidebar: { width: leaf('--figma-only-sidebar-width', '736px') } };
+  assert.ok(failed(run(j)).includes('no-figma-only'));
+  const k = makeExport();
+  k.layout.md['figma-only'] = { sidebar: { width: leaf('--renamed-width', '736px') } };
+  assert.ok(failed(run(k)).includes('no-figma-only'));
+});
+
+test('a token named like figma-only but not in the group passes', () => {
+  const j = makeExport();
+  j.layout.md.layout = { 'figma-onlyish': leaf('--layout-figma-onlyish', '1px') };
+  assert.ok(!failed(run(j)).includes('no-figma-only'));
+});
+
 test('a token that references itself fails', () => {
   const j = makeExport({ kind: 'references' });
   j.color.border.value = 'var(--color-border)';
@@ -247,6 +262,10 @@ test('css check: losing a hand-maintained token, the FONTS marker or a sentinel 
   assert.deepEqual(failed(checkCss(makeExport(), CSS.replace('--typography-brand-weight: 400;', ''))), ['css-hand-maintained']);
   assert.deepEqual(failed(checkCss(makeExport(), CSS.replace('HAND-MAINTAINED', 'x'))), ['css-hand-maintained']);
   assert.deepEqual(failed(checkCss(makeExport(), CSS.replace('--color-separator:', '--color-sep:'))), ['css-hand-maintained']);
+});
+
+test('css check: a figma-only token in tokens.css fails', () => {
+  assert.ok(failed(checkCss(makeExport(), CSS + '\n:root { --figma-only-sidebar-width: 736px; }')).includes('css-no-figma-only'));
 });
 
 test('css check: a pasted -px value fails', () => {

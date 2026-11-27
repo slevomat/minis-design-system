@@ -111,6 +111,11 @@ export function checkExport(json, { label, kind, minVersion = MIN_EXPORTER_VERSI
   if (px.length) r.push(fail('no-line-height-px', `${label}: ${px.length} "line-height-px" token(s) in the export; they are Figma-only and the exporter must skip them`, px.slice(0, 10).map((l) => `${l.key}  ${l.cssName}`)));
   else r.push(pass('no-line-height-px', `${label}: no "line-height-px" token`));
 
+  // 2b. nor may the reserved figma-only/ group (Figma layout helpers, exporter >= 1.3.2 skips it)
+  const fo = leaves.filter((l) => /^--figma-only-/.test(l.cssName) || l.path.includes('figma-only'));
+  if (fo.length) r.push(fail('no-figma-only', `${label}: ${fo.length} "figma-only" token(s) in the export; they are Figma layout helpers and the exporter (>= 1.3.2) must skip them`, fo.slice(0, 10).map((l) => `${l.key}  ${l.cssName}`)));
+  else r.push(pass('no-figma-only', `${label}: no "figma-only" token`));
+
   // 3. self-references (exporter < 1.3.1 in references mode)
   const selfRef = leaves.filter((l) => typeof l.value === 'string' && l.value.replace(/\s/g, '') === `var(${l.cssName})`);
   if (selfRef.length) r.push(fail('self-reference', `${label}: ${selfRef.length} token(s) that reference themselves`, selfRef.map((l) => `${l.cssName}: ${l.value}`)));
@@ -277,6 +282,8 @@ export function checkCss(resolved, cssText, { spacingSet = DEFAULT_SPACING_SET }
 
   if (/line-height-px/.test(cssText)) r.push(fail('css-no-px', 'tokens.css mentions "line-height-px"; those variables are Figma-only'));
   else r.push(pass('css-no-px', 'tokens.css has no "line-height-px"'));
+  if (/--figma-only-/.test(cssText)) r.push(fail('css-no-figma-only', 'tokens.css defines a "--figma-only-" token; the figma-only/ group is Figma layout helpers only'));
+  else r.push(pass('css-no-figma-only', 'tokens.css has no "--figma-only-" token'));
 
   const declared = cssDeclaredNames(css);
   const lost = [...HAND_MAINTAINED_NAMES, ...SENTINELS_PRESENT].filter((n) => !declared.has(n));
