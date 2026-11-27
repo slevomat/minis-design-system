@@ -64,6 +64,8 @@ also what AI agents read first when they build a page, so the mismatch multiplie
 | 2026-11-26 | **Q2 — 1008px level:** new `<minis-container variant="medium">`, max 1008px from 1008px (`--container-medium-width`, Figma `container/medium/width`), padding `--container-padding`. Non-breaking: `narrow` stays 752px as the reading/form column. Content at 1008px+: 944px. | `production-reference.md` question 3 |
 | 2026-11-26 | **Q3 — stacking:** main + sidebar is one column below 1008px, as production. | `production-reference.md` question 4 |
 | 2026-11-26 | **Primitive:** main + sidebar is a component, `<minis-sidebar-layout>` (default slot = main, `sidebar` slot). Side by side needs a 1008px+ viewport (media query) **and** an own width of 944px+ (container-query guard). Implementation finding, same day: a container query alone can't express "below 1008px" — container padding jumps 16 → 32px at 1008px, so the content box is 975px at a 1007px viewport and 944px at 1008px. Full component set. | commit `a575d46`; `sidebar-layout.md` |
+| 2026-11-27 | **Figma page templates:** responsive page template components with one slot per section, switched **only by the Layout mode** in the appearance panel (no Breakpoint variant). First batch: listing (like /cestovani), deal detail, cart / checkout, homepage, magazine, vibe-app shell. Own page `↳ Page templates`; the Layouts page examples become instances. | phase 6 |
+| 2026-11-27 | **Sidebar stacking in Figma** uses a Figma-only helper, `figma-only/sidebar/width` (container content width per mode below `lg`, 320px from `lg`), bound to the Sidebar slot's min and max width. The exporter skips the reserved `figma-only/` group (1.3.2) instead of exporting it as a CSS token. | phase 6 |
 
 **G12 values after the decision** (px; Figma = production = new `tokens.css`; **bold** = a change in
 `tokens.css`, *italic* = a change in Figma):
@@ -147,6 +149,19 @@ that needs no sign-in. Nothing in this plan waits for it.
       frame (deal pages, homepage, blog; web and vibe-apps) is a `sidebar-layout` instance,
       `columns` from LG, `stacked` below; the cart templates already used the narrow column.
       Report card questions 1, 3, 4 resolved, 5 still open
+
+### Phase 6 — Figma page templates (added 2026-11-27)
+
+- [x] `figma-only/sidebar/width` in the Layout collection; six `page template/*` components with
+      slots on `↳ Page templates`, width bound to `page/width`, containers and spacing bound to the
+      Layout variables; responsive preview at `lg` / `md` / `2xs`; docs card
+- [x] Layouts page examples (web and vibe-apps sections) replaced by template instances
+- [x] Exporter 1.3.2 skips the `figma-only/` group (exporter repo, branch `feat/figma-only-group`);
+      `pnpm tokens:check` fails on a `figma-only` token
+- [ ] Exporter 1.3.2 released and installed; next export checked with `tokens:check`
+- [ ] The page-to-figma skill (plan 031) fills a template instance instead of building frames
+- [ ] Missing pieces the templates show: site footer, breadcrumbs, TopBar mobile variant,
+      PageHeader following the Layout mode
 
 ### Phase 5 — Hand-over
 
