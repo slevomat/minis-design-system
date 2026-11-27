@@ -159,7 +159,9 @@ that needs no sign-in. Nothing in this plan waits for it.
 - [x] Exporter 1.3.2 skips the `figma-only/` group (exporter repo, branch `feat/figma-only-group`);
       `pnpm tokens:check` fails on a `figma-only` token
 - [x] Exporter 1.3.2 merged (slevomat/figma-plugins#7, 2026-11-27) and installed
-- [ ] Next token export (made with 1.3.2) passes `pnpm tokens:check`, with no `figma-only` token
+- [x] Next token export (made with 1.3.2) passes `pnpm tokens:check`, with no `figma-only` token —
+      checked 2026-11-27 on the references export (`tokens.json`, 12:10): all checks pass, no token
+      changed against the committed export, so nothing was committed
 - [ ] The page-to-figma skill (plan 031) fills a template instance instead of building frames
 - [ ] Missing pieces the templates show: site footer, breadcrumbs, TopBar mobile variant,
       PageHeader following the Layout mode

@@ -421,7 +421,7 @@ Status as of 2026-11-20. "Open" counts unticked phase checkboxes.
 | 027 | Runtime tokens in production | draft | 0 / 5 | product's requirement (themes, dark mode) |
 | 028 | Icons to production | draft | 0 / 4 | lead developer's IcoMoon workflow; registry icon question |
 | 029 | Mobile app tokens | draft | 0 / 5 | a mobile team contact; takes over 012 phase 5 |
-| 030 | Layout guides | draft | 16 / 20 | phases 1, 3, 4 done and merged 2026-11-26 (PR #32); phase 6 Figma page templates built 2026-11-27 (six templates, Layout-mode driven, exporter 1.3.2 skips `figma-only/`); open: next export checked with exporter 1.3.2 (merged 2026-11-27), page-to-figma filling templates, footer / breadcrumbs / mobile TopBar, phase 5 hand-over |
+| 030 | Layout guides | draft | 17 / 20 | phases 1, 3, 4 done and merged 2026-11-26 (PR #32); phase 6 Figma page templates built 2026-11-27 (six templates, Layout-mode driven, exporter 1.3.2 skips `figma-only/`); open: page-to-figma filling templates (exporter 1.3.2 merged and its first export checked 2026-11-27), footer / breadcrumbs / mobile TopBar, phase 5 hand-over |
 | 031 | Production page → Figma (with findings frames: missing in Mini*S, conflicts) | draft | 5 / 7 | homepage pilot rebuilt and documented, skill `minis-page-to-figma` written; designer review of the rebuild and the findings-card template still to do; listings and deal detail next |
 | 032 | Logged-in page layouts (nice to have) | draft | 0 / 6 | not scheduled; split from 030 phase 2 on 2026-11-27; code-only pass first, live measurement only with the owner's sign-in |
 
