@@ -3,7 +3,7 @@ id: 030
 title: Layout guides — page layout rules grounded in production
 status: draft
 created: 2026-11-20
-updated: 2026-11-26
+updated: 2026-11-27
 owner: Lexislav
 ---
 
@@ -117,11 +117,11 @@ Rejected:
 - [x] Open question 3: stacking breakpoint for main + sidebar
 - [x] Record each answer here under "Decided" and in `production-reference.md` section 3
 
-### Phase 2 — Measure what's missing
+### Phase 2 — Measure what's missing (moved to plan 032)
 
-- [ ] Pages behind login and the checkout steps after the cart, with the method in plan 017
-      ("Layout — 2026-11-13"). The user signs in; Claude never enters credentials.
-- [ ] Add the results to `production-reference.md` and to the Figma report card
+Moved out on 2026-11-27: the owner doesn't want pages behind login measured now. Plan
+[032](032-logged-in-page-layouts.md) keeps it as a nice-to-have, starting with a code-only pass
+that needs no sign-in. Nothing in this plan waits for it.
 
 ### Phase 3 — Tokens and component (only what phase 1 decides)
 
@@ -158,7 +158,7 @@ Rejected:
 The numbering here is this plan's. The matching question in `production-reference.md` section 3
 is given in brackets.
 
-Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is still open.
+Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 moved to plan 032 on 2026-11-27.
 
 1. ~~**Should Mini*S standardise the sidebar ratio and the gap?**~~ Decided: fixed 320px sidebar, `--spacing-layout-lg` gap. (reference question 1) Candidates:
    2 : 1 (8 + 4 of 12, or `2fr 1fr`), 3 : 1, or a fixed sidebar of 300–360px. And which gap token:
@@ -170,8 +170,8 @@ Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is
 3. ~~**Should main + sidebar stack below 1008px (production) or below 768px (today's guide)?**~~ Decided: below 1008px.
    (reference question 4) Between 768 and 1007px the guide shows two columns where production
    shows one.
-4. **Are pages behind login built the same way?** (reference question 5) Not measured.
-   `layout-wrapper` (96 uses in the code) most likely lives there.
+4. ~~**Are pages behind login built the same way?**~~ Moved to plan 032 (nice to have).
+   (reference question 5) Not measured. `layout-wrapper` (96 uses in the code) most likely lives there.
 5. ~~**Does G12 have to land first?**~~ Yes, and it did: G12 decided 2026-11-26 and lands before the guides. The guides use `--spacing-layout-*` for gaps, and Figma and
    `tokens.css` disagree on those values today (plan 003, gap G12). Writing guides on values that
    are about to change means rewriting them.
@@ -182,3 +182,4 @@ Questions 1–3 and 5 were answered on 2026-11-26 (see "Decided"); question 4 is
 - **003** Gap G12 — layout spacing values and the Figma mode ↔ CSS tier mapping
 - **014** Porting rules — which side wins when Mini*S and production differ
 - **013** Registry — where the layout rules get registered
+- **032** Logged-in page layouts — the former phase 2 and question 4, as a nice-to-have

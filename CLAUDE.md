@@ -177,6 +177,9 @@ Current plans:
   missing and where it conflicts with production;
   the visual half of 017, later `/minis:page-to-figma` in the plugin (`skip-audit` = rebuild without findings).
   Read-only on production.
+- `todo-plans/032-logged-in-page-layouts.md` — **nice to have, not scheduled**: check that the 030 layout rules hold
+  on pages behind login (account, later checkout steps, `layout-wrapper`); code-only pass first, live measuring only
+  with the owner's sign-in.
 
 ## Changelog rules
 
